@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use miette::{LabeledSpan, NamedSource, Result, bail, miette};
+use miette::{IntoDiagnostic, LabeledSpan, NamedSource, Result, bail, miette};
 use winnow::{prelude::*, stream::TokenSlice};
 
 use crate::lexer::{Token, TokenKind};
@@ -13,6 +13,13 @@ pub struct Program {
 #[derive(Debug)]
 pub enum Expression {
     Constant(i32),
+    UnaryOperation(UnaryOperator, Box<Expression>),
+}
+
+#[derive(Debug)]
+pub enum UnaryOperator {
+    Minus,
+    Complement,
 }
 
 #[derive(Debug)]
@@ -85,17 +92,56 @@ fn parse_program<'i>(source: &str, tokens: &mut Tokens<'i>) -> Result<Program> {
     tokens.expect(TokenKind::Void)?;
     tokens.expect(TokenKind::RParen)?;
     tokens.expect(TokenKind::LBrace)?;
-    tokens.expect(TokenKind::Return)?;
-    let constant: i32 = tokens.parse(TokenKind::Constant, source)?;
-    tokens.expect(TokenKind::Semicolon)?;
+    let statement = parse_statement(source, tokens)?;
     tokens.expect(TokenKind::RBrace)?;
 
     Ok(Program {
         function: Function {
             identifier: name.to_string(),
-            statement: Statement::Return(Expression::Constant(constant)),
+            statement,
         },
     })
+}
+
+fn parse_statement<'i>(source: &str, tokens: &mut Tokens<'i>) -> Result<Statement> {
+    match tokens.next_token() {
+        Some(token) => match token.kind {
+            TokenKind::Return => Ok(Statement::Return(parse_expression(source, tokens)?)),
+            _ => bail!("expected statement"),
+        },
+        None => bail!("unexpected EOF"),
+    }
+    .and_then(|s| {
+        tokens.expect(TokenKind::Semicolon)?;
+        Ok(s)
+    })
+}
+
+fn parse_expression<'i>(source: &str, tokens: &mut Tokens<'i>) -> Result<Expression> {
+    match tokens.next_token() {
+        Some(token) => match token.kind {
+            TokenKind::Constant => token
+                .source(source)
+                .parse()
+                .into_diagnostic()
+                .map(Expression::Constant),
+            TokenKind::Hypen => parse_expression(source, tokens)
+                .map(|e| Expression::UnaryOperation(UnaryOperator::Minus, Box::new(e))),
+            TokenKind::Tilde => parse_expression(source, tokens)
+                .map(|e| Expression::UnaryOperation(UnaryOperator::Complement, Box::new(e))),
+
+            TokenKind::LParen => parse_expression(source, tokens).and_then(|e| {
+                tokens.expect(TokenKind::RParen)?;
+                Ok(e)
+            }),
+
+            _ => bail!(
+                labels = vec![LabeledSpan::at(token.location, "here")],
+                "expected expression"
+            ),
+        },
+        None => bail!("unexpected EOF"),
+    }
 }
 
 #[cfg(test)]

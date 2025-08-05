@@ -1,4 +1,4 @@
-use miette::{Context, IntoDiagnostic, Result};
+use miette::{Context, IntoDiagnostic, Result, bail};
 use std::{
     fs::{self, File, read_to_string},
     io::Write,
@@ -20,17 +20,14 @@ mod assembly_gen;
 mod code_emission;
 mod lexer;
 mod parser;
+mod tacky;
 
-struct OwnedPath(PathBuf);
+struct OwnedPath(PathBuf, bool);
 impl Drop for OwnedPath {
     fn drop(&mut self) {
-        let _ = fs::remove_file(&self.0);
-    }
-}
-
-impl From<PathBuf> for OwnedPath {
-    fn from(value: PathBuf) -> Self {
-        Self(value)
+        if !self.1 {
+            let _ = fs::remove_file(&self.0);
+        }
     }
 }
 
@@ -61,6 +58,9 @@ struct Driver {
     codegen: bool,
     #[clap(long)]
     validate: bool,
+
+    #[clap(long, hide = true)]
+    keep_artifacts: bool,
 }
 
 impl Driver {
@@ -81,31 +81,38 @@ impl Driver {
             return Ok(());
         }
 
-        let program = generate_assembly(&program);
+        let tacky = tacky::lower(&program);
+
+        let program = generate_assembly(&tacky);
         if self.codegen {
             return Ok(());
         }
 
         let assembly = self.emit_asm(&program)?;
 
-        self.assemble(assembly)?;
+        println!("{}", read_to_string(assembly.as_ref()).unwrap());
+
+        self.assemble(assembly).context("Assembling failed")?;
 
         Ok(())
     }
 
     fn preprocess(&self) -> Result<OwnedPath> {
         let path = self.input.with_extension("i");
-        Command::new("gcc")
+        let result = Command::new("gcc")
             .arg("-E")
             .arg("-P")
             .arg(&self.input)
             .arg("-o")
             .arg(&path)
             .spawn()
-            .into_diagnostic()?
-            .wait()
+            .and_then(|mut c| c.wait())
             .into_diagnostic()?;
-        Ok(path.into())
+        if result.success() {
+            Ok(OwnedPath(path, self.keep_artifacts))
+        } else {
+            bail!("preprocessing {} failed", path.display())
+        }
     }
 
     fn emit_asm(&self, program: &Program) -> Result<OwnedPath> {
@@ -113,24 +120,32 @@ impl Driver {
         let mut f = File::create(&path).into_diagnostic()?;
         emit_asm(program, &f).into_diagnostic()?;
         f.flush().into_diagnostic()?;
-        Ok(path.into())
+        Ok(OwnedPath(path, self.keep_artifacts))
     }
 
     fn assemble(&self, assembly: OwnedPath) -> Result<()> {
-        Command::new("gcc")
-            .arg(&assembly.0)
-            .arg("-o")
-            .arg(
-                self.output
-                    .clone()
-                    .unwrap_or_else(|| self.input.with_extension("")),
-            )
-            .spawn()
-            .into_diagnostic()?
-            .wait()
-            .into_diagnostic()?;
+        #[cfg(target_os = "macos")]
+        let mut cmd = {
+            let mut c = Command::new("arch");
+            c.arg("-x86_64").arg("gcc");
+            c
+        };
+        #[cfg(not(target_os = "macos"))]
+        let mut cmd = Command::new("gcc");
 
-        Ok(())
+        cmd.arg(assembly.as_path()).arg("-o").arg(
+            self.output
+                .clone()
+                .unwrap_or_else(|| self.input.with_extension("")),
+        );
+
+        let status = cmd.spawn().into_diagnostic()?.wait().into_diagnostic()?;
+
+        if status.success() {
+            Ok(())
+        } else {
+            bail!("{cmd:?}")
+        }
     }
 }
 

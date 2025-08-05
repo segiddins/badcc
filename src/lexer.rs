@@ -13,6 +13,9 @@ pub enum TokenKind {
     Return,
     Semicolon,
     Whitespace,
+    Tilde,
+    Hypen,
+    Decrement,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -83,6 +86,9 @@ fn lex_token(pos: usize, source: &str) -> Result<Token> {
     pat!(r"\d+\b", TokenKind::Constant);
     pat!(r";", TokenKind::Semicolon);
     pat!(r"\s+", TokenKind::Whitespace);
+    pat!(r"--", TokenKind::Decrement);
+    pat!(r"-", TokenKind::Hypen);
+    pat!(r"~", TokenKind::Tilde);
     bail!(
         // Those fields are optional
         severity = Severity::Error,
