@@ -1,3 +1,5 @@
+#![feature(assert_matches)]
+
 use miette::{Context, IntoDiagnostic, Result, bail};
 use std::{
     fs::{self, File, read_to_string},

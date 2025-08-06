@@ -45,6 +45,13 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
             UnaryOperator::Not => write!(w, "notl {}", operand(op)),
         }?,
         Instruction::AllocateStack(offset) => write!(w, "subq ${offset}, %rsp")?,
+        Instruction::Binary(binary_operator, op, operand1) => match binary_operator {
+            BinaryOperator::Add => write!(w, "addl {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::Sub => write!(w, "subl {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::Mult => write!(w, "imull {}, {}", operand(op), operand(operand1)),
+        }?,
+        Instruction::Idiv(op) => write!(w, "idivl {}", operand(op))?,
+        Instruction::Cdq => write!(w, "cdq")?,
     }
     writeln!(w)?;
     Ok(())

@@ -1,6 +1,6 @@
 use miette::{LabeledSpan, NamedSource, Result, Severity, SourceSpan, bail};
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum TokenKind {
     Identifier,
     Constant,
@@ -16,6 +16,10 @@ pub enum TokenKind {
     Tilde,
     Hypen,
     Decrement,
+    Plus,
+    Asterisk,
+    FSlash,
+    Percent,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -89,6 +93,10 @@ fn lex_token(pos: usize, source: &str) -> Result<Token> {
     pat!(r"--", TokenKind::Decrement);
     pat!(r"-", TokenKind::Hypen);
     pat!(r"~", TokenKind::Tilde);
+    pat!(r"\+", TokenKind::Plus);
+    pat!(r"\*", TokenKind::Asterisk);
+    pat!(r"/", TokenKind::FSlash);
+    pat!(r"%", TokenKind::Percent);
     bail!(
         // Those fields are optional
         severity = Severity::Error,

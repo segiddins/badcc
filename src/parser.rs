@@ -13,13 +13,23 @@ pub struct Program {
 #[derive(Debug)]
 pub enum Expression {
     Constant(i32),
-    UnaryOperation(UnaryOperator, Box<Expression>),
+    Unary(UnaryOperator, Box<Expression>),
+    Binary(BinaryOperator, Box<Expression>, Box<Expression>),
 }
 
 #[derive(Debug)]
 pub enum UnaryOperator {
     Minus,
     Complement,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub enum BinaryOperator {
+    Add,
+    Subtract,
+    Multiply,
+    Divide,
+    Remainder,
 }
 
 #[derive(Debug)]
@@ -111,37 +121,80 @@ fn parse_statement<'i>(source: &str, tokens: &mut Tokens<'i>) -> Result<Statemen
         },
         None => bail!("unexpected EOF"),
     }
-    .and_then(|s| {
+    .and_then(|s: Statement| {
         tokens.expect(TokenKind::Semicolon)?;
         Ok(s)
     })
 }
 
 fn parse_expression<'i>(source: &str, tokens: &mut Tokens<'i>) -> Result<Expression> {
-    match tokens.next_token() {
-        Some(token) => match token.kind {
-            TokenKind::Constant => token
-                .source(source)
-                .parse()
-                .into_diagnostic()
-                .map(Expression::Constant),
-            TokenKind::Hypen => parse_expression(source, tokens)
-                .map(|e| Expression::UnaryOperation(UnaryOperator::Minus, Box::new(e))),
-            TokenKind::Tilde => parse_expression(source, tokens)
-                .map(|e| Expression::UnaryOperation(UnaryOperator::Complement, Box::new(e))),
+    parse_expression_bp(source, tokens, 0)
+}
 
-            TokenKind::LParen => parse_expression(source, tokens).and_then(|e| {
-                tokens.expect(TokenKind::RParen)?;
-                Ok(e)
-            }),
+fn parse_expression_bp<'i>(
+    source: &str,
+    tokens: &mut Tokens<'i>,
+    min_bp: u8,
+) -> Result<Expression> {
+    let Some(token) = tokens.next_token() else {
+        bail!("unexpected eof")
+    };
+    let mut lhs = match token.kind {
+        TokenKind::Constant => token
+            .source(source)
+            .parse()
+            .map(Expression::Constant)
+            .into_diagnostic(),
 
-            _ => bail!(
+        TokenKind::LParen => parse_expression_bp(source, tokens, 0).and_then(|e| {
+            tokens.expect(TokenKind::RParen)?;
+            Ok(e)
+        }),
+        TokenKind::Hypen => parse_expression_bp(source, tokens, 60).map(|e| Expression::Unary(UnaryOperator::Minus, Box::new(e))),
+        TokenKind::Tilde => parse_expression_bp(source, tokens, 60).map(|e| Expression::Unary(UnaryOperator::Complement, Box::new(e))),
+        _ => {
+            bail!(
                 labels = vec![LabeledSpan::at(token.location, "here")],
                 "expected expression"
-            ),
-        },
-        None => bail!("unexpected EOF"),
+            )
+        }
+    }?;
+
+    loop {
+        let (op, r_bp) = match tokens.peek_token() {
+            Some(Token {
+                kind: TokenKind::Plus,
+                ..
+            }) => (BinaryOperator::Add, 45),
+            Some(Token {
+                kind: TokenKind::Hypen,
+                ..
+            }) => (BinaryOperator::Subtract, 45),
+            Some(Token {
+                kind: TokenKind::Asterisk,
+                ..
+            }) => (BinaryOperator::Multiply, 50),
+            Some(Token {
+                kind: TokenKind::FSlash,
+                ..
+            }) => (BinaryOperator::Divide, 50),
+            Some(Token {
+                kind: TokenKind::Percent,
+                ..
+            }) => (BinaryOperator::Remainder, 50),
+            _ => break,
+        };
+        if r_bp < min_bp {
+            break;
+        }
+        tokens.next_token();
+        lhs = Expression::Binary(
+            op,
+            Box::new(lhs),
+            Box::new(parse_expression_bp(source, tokens, r_bp + 1)?),
+        );
     }
+    Ok(lhs)
 }
 
 #[cfg(test)]

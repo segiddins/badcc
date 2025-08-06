@@ -1,3 +1,4 @@
+pub use crate::parser::BinaryOperator;
 use crate::parser::{self, Expression, Statement};
 
 #[derive(Debug)]
@@ -17,6 +18,12 @@ pub enum Instruction {
     Unary {
         op: UnaryOperator,
         src: Val,
+        dst: Val,
+    },
+    Binary {
+        op: BinaryOperator,
+        lhs: Val,
+        rhs: Val,
         dst: Val,
     },
 }
@@ -52,7 +59,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
     fn walk(expr: &Expression, instructions: &mut Vec<Instruction>, temps: &mut u32) -> Val {
         match expr {
             Expression::Constant(val) => Val::Constant(*val),
-            Expression::UnaryOperation(unary_operator, expression) => match unary_operator {
+            Expression::Unary(unary_operator, expression) => match unary_operator {
                 parser::UnaryOperator::Minus => {
                     let src = walk(expression, instructions, temps);
                     let dst = var(temps);
@@ -74,6 +81,18 @@ pub fn lower_function(function: &parser::Function) -> Function {
                     dst
                 }
             },
+            Expression::Binary(op, lhs, rhs) => {
+                let lhs = walk(lhs, instructions, temps);
+                let rhs = walk(rhs, instructions, temps);
+                let dst = var(temps);
+                instructions.push(Instruction::Binary {
+                    op: *op,
+                    lhs,
+                    rhs,
+                    dst,
+                });
+                dst
+            }
         }
     }
 

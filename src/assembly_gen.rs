@@ -1,4 +1,4 @@
-use crate::tacky;
+use crate::tacky::{self};
 
 #[derive(Debug)]
 pub struct Program {
@@ -18,6 +18,9 @@ pub enum Instruction {
         destination: Operand,
     },
     Unary(UnaryOperator, Operand),
+    Binary(BinaryOperator, Operand, Operand),
+    Idiv(Operand),
+    Cdq,
     AllocateStack(u32),
     Ret,
 }
@@ -33,12 +36,26 @@ impl Instruction {
     fn unary(op: impl Into<UnaryOperator>, dst: impl Into<Operand>) -> Self {
         Self::Unary(op.into(), dst.into())
     }
+
+    fn binary(
+        op: impl Into<BinaryOperator>,
+        lhs: impl Into<Operand>,
+        rhs: impl Into<Operand>,
+    ) -> Self {
+        Self::Binary(op.into(), lhs.into(), rhs.into())
+    }
 }
 
 #[derive(Debug)]
 pub enum UnaryOperator {
     Neg,
     Not,
+}
+#[derive(Debug)]
+pub enum BinaryOperator {
+    Add,
+    Sub,
+    Mult,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -52,14 +69,18 @@ pub enum Operand {
 #[derive(Debug, Clone, Copy)]
 pub enum Reg {
     AX,
+    DX,
     R10,
+    R11,
 }
 
 impl AsRef<str> for Reg {
     fn as_ref(&self) -> &'static str {
         match self {
             Reg::AX => "eax",
+            Reg::DX => "edx",
             Reg::R10 => "r10d",
+            Reg::R11 => "r11d",
         }
     }
 }
@@ -89,6 +110,17 @@ impl From<&tacky::UnaryOperator> for UnaryOperator {
         }
     }
 }
+impl From<&tacky::BinaryOperator> for BinaryOperator {
+    fn from(value: &tacky::BinaryOperator) -> Self {
+        match value {
+            tacky::BinaryOperator::Add => BinaryOperator::Add,
+            tacky::BinaryOperator::Subtract => BinaryOperator::Sub,
+            tacky::BinaryOperator::Multiply => BinaryOperator::Mult,
+            tacky::BinaryOperator::Divide => unreachable!(),
+            tacky::BinaryOperator::Remainder => unreachable!(),
+        }
+    }
+}
 
 impl From<&tacky::Val> for Operand {
     fn from(value: &tacky::Val) -> Self {
@@ -107,18 +139,38 @@ impl From<Reg> for Operand {
 
 impl From<&tacky::Instruction> for Vec<Instruction> {
     fn from(insn: &tacky::Instruction) -> Self {
-        let mut insns: Vec<Instruction> = vec![];
         match insn {
             tacky::Instruction::Return(val) => {
-                insns.push(Instruction::mov(val, Reg::AX));
-                insns.push(Instruction::Ret);
+                vec![Instruction::mov(val, Reg::AX), Instruction::Ret]
             }
             tacky::Instruction::Unary { op, src, dst } => {
-                insns.push(Instruction::mov(src, dst));
-                insns.push(Instruction::unary(op, dst));
+                vec![Instruction::mov(src, dst), Instruction::unary(op, dst)]
             }
+            tacky::Instruction::Binary { op, lhs, rhs, dst } => match op {
+                tacky::BinaryOperator::Divide => {
+                    vec![
+                        Instruction::mov(lhs, Reg::AX),
+                        Instruction::Cdq,
+                        Instruction::Idiv(rhs.into()),
+                        Instruction::mov(Reg::AX, dst),
+                    ]
+                }
+                tacky::BinaryOperator::Remainder => {
+                    vec![
+                        Instruction::mov(lhs, Reg::AX),
+                        Instruction::Cdq,
+                        Instruction::Idiv(rhs.into()),
+                        Instruction::mov(Reg::DX, dst),
+                    ]
+                }
+                op => {
+                    vec![
+                        Instruction::mov(lhs, dst),
+                        Instruction::binary(op, rhs, dst),
+                    ]
+                }
+            },
         }
-        insns
     }
 }
 
@@ -141,6 +193,9 @@ fn replace_pseudo(instructions: impl Iterator<Item = Vec<Instruction>>) -> u32 {
             Instruction::Unary(_, operand) => m(&operand),
             Instruction::AllocateStack(_) => unreachable!(),
             Instruction::Ret => 0,
+            Instruction::Binary(_, operand, operand1) => m(&operand).max(m(&operand1)),
+            Instruction::Idiv(operand) => m(&operand),
+            Instruction::Cdq => 0,
         })
         .max()
         .unwrap_or_default()
@@ -165,6 +220,30 @@ fn lower_instructions(instructions: &[tacky::Instruction]) -> Vec<Instruction> {
                     Instruction::mov(Reg::R10, destination),
                 ]
             }
+            Instruction::Binary(BinaryOperator::Mult, src, dst)
+                if matches!(dst, Operand::Psuedo(_)) =>
+            {
+                vec![
+                    Instruction::mov(dst, Reg::R11),
+                    Instruction::binary(BinaryOperator::Mult, src, Reg::R11),
+                    Instruction::mov(Reg::R11, dst),
+                ]
+            }
+            Instruction::Binary(op, src, dst)
+                if matches!(src, Operand::Psuedo(_)) && matches!(dst, Operand::Psuedo(_)) =>
+            {
+                vec![
+                    Instruction::mov(src, Reg::R10),
+                    Instruction::binary(op, Reg::R10, dst),
+                ]
+            }
+            Instruction::Idiv(Operand::Immediate(val)) => {
+                vec![
+                    Instruction::mov(Operand::Immediate(val), Reg::R10),
+                    Instruction::Idiv(Reg::R10.into()),
+                ]
+            }
+
             _ => vec![i],
         })
         .collect()
