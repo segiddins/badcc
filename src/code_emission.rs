@@ -49,6 +49,27 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
             BinaryOperator::Add => write!(w, "addl {}, {}", operand(op), operand(operand1)),
             BinaryOperator::Sub => write!(w, "subl {}, {}", operand(op), operand(operand1)),
             BinaryOperator::Mult => write!(w, "imull {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::And => write!(w, "andl {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::Or => write!(w, "orl {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::Xor => write!(w, "xorl {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::LeftShift => write!(
+                w,
+                "sall {}, {}",
+                match op {
+                    Operand::Register(Reg::CL) => "%cl".to_string(),
+                    op => operand(op),
+                },
+                operand(operand1)
+            ),
+            BinaryOperator::RightShift => write!(
+                w,
+                "sarl {}, {}",
+                match op {
+                    Operand::Register(Reg::CL) => "%cl".to_string(),
+                    op => operand(op),
+                },
+                operand(operand1)
+            ),
         }?,
         Instruction::Idiv(op) => write!(w, "idivl {}", operand(op))?,
         Instruction::Cdq => write!(w, "cdq")?,

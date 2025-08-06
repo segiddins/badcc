@@ -92,8 +92,6 @@ impl Driver {
 
         let assembly = self.emit_asm(&program)?;
 
-        println!("{}", read_to_string(assembly.as_ref()).unwrap());
-
         self.assemble(assembly).context("Assembling failed")?;
 
         Ok(())

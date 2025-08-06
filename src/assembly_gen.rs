@@ -56,6 +56,11 @@ pub enum BinaryOperator {
     Add,
     Sub,
     Mult,
+    And,
+    Or,
+    Xor,
+    LeftShift,
+    RightShift,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -71,6 +76,7 @@ pub enum Reg {
     DX,
     R10,
     R11,
+    CL,
 }
 
 impl AsRef<str> for Reg {
@@ -80,6 +86,7 @@ impl AsRef<str> for Reg {
             Reg::DX => "edx",
             Reg::R10 => "r10d",
             Reg::R11 => "r11d",
+            Reg::CL => "ecx",
         }
     }
 }
@@ -117,6 +124,11 @@ impl From<&tacky::BinaryOperator> for BinaryOperator {
             tacky::BinaryOperator::Multiply => BinaryOperator::Mult,
             tacky::BinaryOperator::Divide => unreachable!(),
             tacky::BinaryOperator::Remainder => unreachable!(),
+            tacky::BinaryOperator::LeftShift => BinaryOperator::LeftShift,
+            tacky::BinaryOperator::RightShift => BinaryOperator::RightShift,
+            tacky::BinaryOperator::BitwiseOr => BinaryOperator::Or,
+            tacky::BinaryOperator::BitwiseAnd => BinaryOperator::And,
+            tacky::BinaryOperator::Xor => BinaryOperator::Xor,
         }
     }
 }
@@ -218,12 +230,27 @@ fn lower_instructions(instructions: &[tacky::Instruction]) -> Vec<Instruction> {
                     Instruction::mov(Reg::R10, destination),
                 ]
             }
-            Instruction::Binary(BinaryOperator::Mult, src, dst)
-                if matches!(dst, Operand::Psuedo(_)) =>
+            Instruction::Binary(op, src, dst)
+                if matches!(op, BinaryOperator::LeftShift | BinaryOperator::RightShift)
+                    && matches!(src, Operand::Psuedo(_))
+                    && matches!(dst, Operand::Psuedo(_)) =>
             {
                 vec![
                     Instruction::mov(dst, Reg::R11),
-                    Instruction::binary(BinaryOperator::Mult, src, Reg::R11),
+                    Instruction::mov(src, Reg::CL),
+                    Instruction::binary(op, Reg::CL, Reg::R11),
+                    Instruction::mov(Reg::R11, dst),
+                ]
+            }
+            Instruction::Binary(op, src, dst)
+                if matches!(
+                    op,
+                    BinaryOperator::Mult | BinaryOperator::LeftShift | BinaryOperator::RightShift
+                ) && matches!(dst, Operand::Psuedo(_)) =>
+            {
+                vec![
+                    Instruction::mov(dst, Reg::R11),
+                    Instruction::binary(op, src, Reg::R11),
                     Instruction::mov(Reg::R11, dst),
                 ]
             }

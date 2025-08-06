@@ -20,6 +20,11 @@ pub enum TokenKind {
     Asterisk,
     FSlash,
     Percent,
+    Ampersand,
+    Pipe,
+    Caret,
+    ShLeft,
+    ShRight,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -97,6 +102,11 @@ fn lex_token(pos: usize, source: &str) -> Result<Token> {
     pat!(r"\*", TokenKind::Asterisk);
     pat!(r"/", TokenKind::FSlash);
     pat!(r"%", TokenKind::Percent);
+    pat!(r"&", TokenKind::Ampersand);
+    pat!(r"\^", TokenKind::Caret);
+    pat!(r"<<", TokenKind::ShLeft);
+    pat!(r">>", TokenKind::ShRight);
+    pat!(r"\|", TokenKind::Pipe);
     bail!(
         // Those fields are optional
         severity = Severity::Error,

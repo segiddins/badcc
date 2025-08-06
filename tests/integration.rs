@@ -161,3 +161,50 @@ fn test_unop_add() {
 
     temp.close().unwrap();
 }
+
+#[test]
+fn test_shifts() {
+    let temp = assert_fs::TempDir::new().unwrap();
+    let input_file = temp.child("return_1.c");
+    input_file
+        .write_str("int main(void) { return (1 << 2) >> 1 >> (1+0); }")
+        .unwrap();
+
+    badcc().arg(input_file.as_os_str()).assert().success();
+
+    // ... do something with input_file ...
+    assert_snapshot!(read_to_string(temp.child("return_1.s")).unwrap(), @r"
+    	.globl _main
+    _main:
+    	pushq %rbp
+    	movq %rsp, %rbp
+    	subq $16, %rsp
+    	movl $1, -4(%rbp)
+    	movl -4(%rbp), %r11d
+    	sall $2, %r11d
+    	movl %r11d, -4(%rbp)
+    	movl -4(%rbp), %r10d
+    	movl %r10d, -8(%rbp)
+    	movl -8(%rbp), %r11d
+    	sarl $1, %r11d
+    	movl %r11d, -8(%rbp)
+    	movl $1, -12(%rbp)
+    	addl $0, -12(%rbp)
+    	movl -8(%rbp), %r10d
+    	movl %r10d, -16(%rbp)
+    	movl -16(%rbp), %r11d
+    	movl -12(%rbp), %ecx
+    	sarl %cl, %r11d
+    	movl %r11d, -16(%rbp)
+    	movl -16(%rbp), %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
+    ");
+
+    Command::new(temp.child("return_1").as_os_str())
+        .assert()
+        .code(1);
+
+    temp.close().unwrap();
+}

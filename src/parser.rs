@@ -27,6 +27,11 @@ pub enum BinaryOperator {
     Multiply,
     Divide,
     Remainder,
+    LeftShift,
+    RightShift,
+    BitwiseOr,
+    BitwiseAnd,
+    Xor,
 }
 
 #[derive(Debug)]
@@ -155,27 +160,17 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
     }?;
 
     loop {
-        let (op, r_bp) = match lexer.peek_token() {
-            Some(Token {
-                kind: TokenKind::Plus,
-                ..
-            }) => (BinaryOperator::Add, 45),
-            Some(Token {
-                kind: TokenKind::Hypen,
-                ..
-            }) => (BinaryOperator::Subtract, 45),
-            Some(Token {
-                kind: TokenKind::Asterisk,
-                ..
-            }) => (BinaryOperator::Multiply, 50),
-            Some(Token {
-                kind: TokenKind::FSlash,
-                ..
-            }) => (BinaryOperator::Divide, 50),
-            Some(Token {
-                kind: TokenKind::Percent,
-                ..
-            }) => (BinaryOperator::Remainder, 50),
+        let (op, r_bp) = match lexer.peek_token().map(|t| t.kind) {
+            Some(TokenKind::Pipe) => (BinaryOperator::BitwiseOr, 25),
+            Some(TokenKind::Caret) => (BinaryOperator::Xor, 30),
+            Some(TokenKind::Ampersand) => (BinaryOperator::BitwiseAnd, 35),
+            Some(TokenKind::ShRight) => (BinaryOperator::RightShift, 40),
+            Some(TokenKind::ShLeft) => (BinaryOperator::LeftShift, 40),
+            Some(TokenKind::Plus) => (BinaryOperator::Add, 45),
+            Some(TokenKind::Hypen) => (BinaryOperator::Subtract, 45),
+            Some(TokenKind::Asterisk) => (BinaryOperator::Multiply, 50),
+            Some(TokenKind::FSlash) => (BinaryOperator::Divide, 50),
+            Some(TokenKind::Percent) => (BinaryOperator::Remainder, 50),
             _ => break,
         };
         if r_bp < min_bp {
