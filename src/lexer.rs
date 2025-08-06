@@ -1,29 +1,75 @@
-use miette::{LabeledSpan, NamedSource, Result, Severity, SourceSpan, bail};
+use miette::{Diagnostic, NamedSource, Result, SourceSpan};
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+use logos::Logos;
+
+#[derive(Debug, Diagnostic, thiserror::Error, PartialEq, Clone, Default)]
+pub enum LexingError {
+    #[error("expected a valid token")]
+    UnknownToken {
+        #[label("here")]
+        span: SourceSpan,
+    },
+    #[default]
+    #[error("Something went wrong")]
+    Other,
+}
+
+impl LexingError {
+    fn from_lexer<'src>(lex: &mut logos::Lexer<'src, TokenKind>) -> Self {
+        LexingError::UnknownToken {
+            span: lex.span().into(),
+        }
+    }
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy, Logos)]
+#[logos(error(LexingError, LexingError::from_lexer))]
 pub enum TokenKind {
+    #[regex(r"[a-zA-Z_]\w*")]
     Identifier,
+    #[regex(r"\d+")]
     Constant,
+    #[token("(")]
     LParen,
+    #[token(")")]
     RParen,
+    #[token("{")]
     LBrace,
+    #[token("}")]
     RBrace,
+    #[token("int")]
     Int,
+    #[token("void")]
     Void,
+    #[regex(r"return")]
     Return,
+    #[token(";")]
     Semicolon,
+    #[regex(r"\s+")]
     Whitespace,
+    #[token("~")]
     Tilde,
+    #[token("-")]
     Hypen,
+    #[token("--")]
     Decrement,
+    #[token("+")]
     Plus,
+    #[token("*")]
     Asterisk,
+    #[token("/")]
     FSlash,
+    #[token("%")]
     Percent,
+    #[token("&")]
     Ampersand,
+    #[token("|")]
     Pipe,
+    #[token("^")]
     Caret,
+    #[token("<<")]
     ShLeft,
+    #[token(">>")]
     ShRight,
 }
 
@@ -42,80 +88,29 @@ impl Token {
 }
 
 pub fn lex(source: impl AsRef<str>, name: impl AsRef<str>) -> Result<Vec<Token>> {
-    do_lex(source.as_ref()).map_err(|e| {
-        e.with_source_code(NamedSource::new(name, source.as_ref().to_string()).with_language("c"))
-    })
-}
-
-fn do_lex(source: &str) -> Result<Vec<Token>> {
-    let mut tokens = vec![];
-
-    let mut pos = 0usize;
-    let len = source.len();
-
-    while pos < len {
-        let token = lex_token(pos, source)?;
-        pos = token.location.offset() + token.location.len();
-        if matches!(
-            token,
-            Token {
-                kind: TokenKind::Whitespace,
-                ..
-            }
-        ) {
-            continue;
-        }
-        tokens.push(token);
-    }
-
-    Ok(tokens)
-}
-
-fn lex_token(pos: usize, source: &str) -> Result<Token> {
-    macro_rules! pat {
-        ($pattern:expr, $kind:expr) => {
-            if let Some(m) = regex::Regex::new($pattern).unwrap().find_at(source, pos)
-                && m.start() == pos
-            {
-                return Ok(Token {
-                    kind: $kind,
-                    location: m.range().into(),
-                });
-            }
-        };
-    }
-    pat!(r"int\b", TokenKind::Int);
-    pat!(r"void\b", TokenKind::Void);
-    pat!(r"return\b", TokenKind::Return);
-    pat!(r"\(", TokenKind::LParen);
-    pat!(r"\)", TokenKind::RParen);
-    pat!(r"\{", TokenKind::LBrace);
-    pat!(r"\}", TokenKind::RBrace);
-    pat!(r"[a-zA-Z_]\w*\b", TokenKind::Identifier);
-    pat!(r"\d+\b", TokenKind::Constant);
-    pat!(r";", TokenKind::Semicolon);
-    pat!(r"\s+", TokenKind::Whitespace);
-    pat!(r"--", TokenKind::Decrement);
-    pat!(r"-", TokenKind::Hypen);
-    pat!(r"~", TokenKind::Tilde);
-    pat!(r"\+", TokenKind::Plus);
-    pat!(r"\*", TokenKind::Asterisk);
-    pat!(r"/", TokenKind::FSlash);
-    pat!(r"%", TokenKind::Percent);
-    pat!(r"&", TokenKind::Ampersand);
-    pat!(r"\^", TokenKind::Caret);
-    pat!(r"<<", TokenKind::ShLeft);
-    pat!(r">>", TokenKind::ShRight);
-    pat!(r"\|", TokenKind::Pipe);
-    bail!(
-        // Those fields are optional
-        severity = Severity::Error,
-        code = "expected::token",
-        labels = vec![LabeledSpan::at_offset(pos, "here")],
-        // Rest of the arguments are passed to `format!`
-        // to form diagnostic message
-        "expected a token"
-    );
+    TokenKind::lexer(source.as_ref())
+        .spanned()
+        .map(|(kind, range)| {
+            kind.map(|kind| Token {
+                kind,
+                location: range.into(),
+            })
+            .map_err(|e| {
+                miette::Report::from(e).with_source_code(
+                    NamedSource::new(name.as_ref(), source.as_ref().to_string()).with_language("c"),
+                )
+            })
+        })
+        .filter(|t| {
+            !matches!(
+                t,
+                Ok(Token {
+                    kind: TokenKind::Whitespace,
+                    ..
+                })
+            )
+        })
+        .collect()
 }
 
 #[cfg(test)]
@@ -212,7 +207,7 @@ mod tests {
 
     #[test]
     fn test_lex_invalid_ident() {
-        lex("1foo", "example.c").expect_err("1foo should fail to lex");
+        lex("1foo$", "example.c").expect_err("1foo should fail to lex");
     }
 
     #[test]
