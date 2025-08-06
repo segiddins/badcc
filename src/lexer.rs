@@ -20,6 +20,10 @@ impl LexingError {
             span: lex.span().into(),
         }
     }
+
+    fn error<'src>(lex: &mut logos::Lexer<'src, TokenKind>) -> Result<(), Self> {
+        Err(Self::from_lexer(lex))
+    }
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy, Logos)]
@@ -29,6 +33,8 @@ pub enum TokenKind {
     Identifier,
     #[regex(r"\d+")]
     Constant,
+    #[regex(r"\d+[a-zA-Z_]", LexingError::error)]
+    InvalidIdentifier,
     #[token("(")]
     LParen,
     #[token(")")]
@@ -71,6 +77,24 @@ pub enum TokenKind {
     ShLeft,
     #[token(">>")]
     ShRight,
+    #[token("!")]
+    Exclamation,
+    #[token("==")]
+    DoubleEquals,
+    #[token("&&")]
+    DoubleAnd,
+    #[token("||")]
+    DoublePipe,
+    #[token("!=")]
+    NotEqual,
+    #[token("<")]
+    Less,
+    #[token(">")]
+    Greater,
+    #[token("<=")]
+    LessEqual,
+    #[token(">=")]
+    GreaterEqual,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

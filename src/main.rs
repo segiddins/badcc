@@ -36,6 +36,8 @@ struct Driver {
     codegen: bool,
     #[clap(long)]
     validate: bool,
+    #[clap(long)]
+    tacky: bool,
 
     #[clap(long, hide = true)]
     keep_artifacts: bool,
@@ -64,6 +66,10 @@ impl Driver {
         }
 
         let tacky = tacky::lower(&program);
+
+        if self.tacky {
+            return Ok(());
+        }
 
         let program = generate_assembly(&tacky);
         if self.codegen {

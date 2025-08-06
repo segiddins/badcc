@@ -18,6 +18,7 @@ pub enum Expression {
 pub enum UnaryOperator {
     Minus,
     Complement,
+    Not,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -32,6 +33,14 @@ pub enum BinaryOperator {
     BitwiseOr,
     BitwiseAnd,
     Xor,
+    Equals,
+    LessThan,
+    LessThanOrEqual,
+    GreaterThan,
+    GreaterThanOrEqual,
+    NotEqual,
+    And,
+    Or,
 }
 
 #[derive(Debug)]
@@ -151,6 +160,8 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             .map(|e| Expression::Unary(UnaryOperator::Minus, Box::new(e))),
         TokenKind::Tilde => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::Complement, Box::new(e))),
+        TokenKind::Exclamation => parse_expression_bp(lexer, 60)
+            .map(|e| Expression::Unary(UnaryOperator::Not, Box::new(e))),
         _ => {
             bail!(
                 labels = vec![LabeledSpan::at(token.location, "here")],
@@ -161,9 +172,17 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
 
     loop {
         let (op, r_bp) = match lexer.peek_token().map(|t| t.kind) {
+            Some(TokenKind::DoublePipe) => (BinaryOperator::Or, 5),
+            Some(TokenKind::DoubleAnd) => (BinaryOperator::And, 10),
             Some(TokenKind::Pipe) => (BinaryOperator::BitwiseOr, 25),
             Some(TokenKind::Caret) => (BinaryOperator::Xor, 30),
             Some(TokenKind::Ampersand) => (BinaryOperator::BitwiseAnd, 35),
+            Some(TokenKind::NotEqual) => (BinaryOperator::NotEqual, 36),
+            Some(TokenKind::DoubleEquals) => (BinaryOperator::Equals, 36),
+            Some(TokenKind::Less) => (BinaryOperator::LessThan, 38),
+            Some(TokenKind::LessEqual) => (BinaryOperator::LessThanOrEqual, 38),
+            Some(TokenKind::Greater) => (BinaryOperator::GreaterThan, 38),
+            Some(TokenKind::GreaterEqual) => (BinaryOperator::GreaterThanOrEqual, 38),
             Some(TokenKind::ShRight) => (BinaryOperator::RightShift, 40),
             Some(TokenKind::ShLeft) => (BinaryOperator::LeftShift, 40),
             Some(TokenKind::Plus) => (BinaryOperator::Add, 45),

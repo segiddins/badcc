@@ -70,9 +70,20 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
                 },
                 operand(operand1)
             ),
+            BinaryOperator::Equals => todo!(),
+            BinaryOperator::NotEquals => todo!(),
+            BinaryOperator::LessThan => todo!(),
+            BinaryOperator::LessThanOrEqual => todo!(),
+            BinaryOperator::GreaterThan => todo!(),
+            BinaryOperator::GreaterThanOrEqual => todo!(),
         }?,
         Instruction::Idiv(op) => write!(w, "idivl {}", operand(op))?,
         Instruction::Cdq => write!(w, "cdq")?,
+        Instruction::Cmp(lhs, rhs) => write!(w, "cmpl {}, {}", operand(lhs), operand(rhs))?,
+        Instruction::Jmp(label) => write!(w, "jmp L{label}")?,
+        Instruction::JmpCC(cond_code, label) => write!(w, "j{cond_code:?} L{label}")?,
+        Instruction::SetCC(cond_code, op) => write!(w, "set{cond_code:?} {}", operand(op))?,
+        Instruction::Label(label) => write!(w, "L{label}:")?,
     }
     writeln!(w)?;
     Ok(())
