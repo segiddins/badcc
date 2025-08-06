@@ -63,7 +63,6 @@ pub enum Operand {
     Immediate(i32),
     Register(Reg),
     Psuedo(u32),
-    Stack(u32),
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -180,7 +179,6 @@ fn replace_pseudo(instructions: impl Iterator<Item = Vec<Instruction>>) -> u32 {
             Operand::Immediate(_) => 0,
             Operand::Register(_) => 0,
             Operand::Psuedo(x) => *x,
-            Operand::Stack(_) => unreachable!(),
         }
     }
     instructions

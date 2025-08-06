@@ -62,6 +62,5 @@ fn operand(operand: &Operand) -> String {
         Operand::Immediate(val) => format!("${val}"),
         Operand::Register(name) => format!("%{}", name.as_ref()),
         Operand::Psuedo(offset) => format!("-{}(%rbp)", (offset + 1) * 4),
-        Operand::Stack(_) => todo!(),
     }
 }

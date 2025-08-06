@@ -78,7 +78,7 @@ impl Driver {
             return Ok(());
         }
 
-        let program = parse(src, &tokens, &pre.display().to_string())?;
+        let program = parse(src, tokens, &pre.display().to_string())?;
         if self.parse {
             return Ok(());
         }
