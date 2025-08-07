@@ -21,6 +21,10 @@ pub enum UnaryOperator {
     Minus,
     Complement,
     Not,
+    PrefixIncrement,
+    PrefixDecrement,
+    PostfixIncrement,
+    PostfixDecrement,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -229,6 +233,10 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
         TokenKind::Exclamation => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::Not, Box::new(e))),
         TokenKind::Identifier => Ok(Expression::Var(token.source(lexer.source).to_string())),
+        TokenKind::PlusPlus => parse_expression_bp(lexer, 0)
+            .map(|e| Expression::Unary(UnaryOperator::PrefixIncrement, Box::new(e))),
+        TokenKind::MinusMinus => parse_expression_bp(lexer, 0)
+            .map(|e| Expression::Unary(UnaryOperator::PrefixDecrement, Box::new(e))),
         _ => {
             bail!(
                 labels = vec![LabeledSpan::at(token.location, "here")],
@@ -238,31 +246,44 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
     }?;
 
     loop {
-        let (op, r_bp) = match lexer.peek_token().map(|t| t.kind) {
-            Some(TokenKind::Equals) if min_bp <= 1 => {
+        let Some(next) = lexer.peek_token() else {
+            break;
+        };
+        let (op, r_bp) = match next.kind {
+            TokenKind::Equals if min_bp <= 1 => {
                 lexer.next_token();
                 let rhs = parse_expression_bp(lexer, 1)?;
                 lhs = Expression::Assignment(Box::new(lhs), Box::new(rhs));
                 break;
             }
-            Some(TokenKind::DoublePipe) => (BinaryOperator::Or, 5),
-            Some(TokenKind::DoubleAnd) => (BinaryOperator::And, 10),
-            Some(TokenKind::Pipe) => (BinaryOperator::BitwiseOr, 25),
-            Some(TokenKind::Caret) => (BinaryOperator::Xor, 30),
-            Some(TokenKind::Ampersand) => (BinaryOperator::BitwiseAnd, 35),
-            Some(TokenKind::NotEqual) => (BinaryOperator::NotEqual, 36),
-            Some(TokenKind::DoubleEquals) => (BinaryOperator::Equals, 36),
-            Some(TokenKind::Less) => (BinaryOperator::LessThan, 38),
-            Some(TokenKind::LessEqual) => (BinaryOperator::LessThanOrEqual, 38),
-            Some(TokenKind::Greater) => (BinaryOperator::GreaterThan, 38),
-            Some(TokenKind::GreaterEqual) => (BinaryOperator::GreaterThanOrEqual, 38),
-            Some(TokenKind::ShRight) => (BinaryOperator::RightShift, 40),
-            Some(TokenKind::ShLeft) => (BinaryOperator::LeftShift, 40),
-            Some(TokenKind::Plus) => (BinaryOperator::Add, 45),
-            Some(TokenKind::Hypen) => (BinaryOperator::Subtract, 45),
-            Some(TokenKind::Asterisk) => (BinaryOperator::Multiply, 50),
-            Some(TokenKind::FSlash) => (BinaryOperator::Divide, 50),
-            Some(TokenKind::Percent) => (BinaryOperator::Remainder, 50),
+            TokenKind::PlusPlus => {
+                lexer.next_token();
+                lhs = Expression::Unary(UnaryOperator::PostfixIncrement, Box::new(lhs));
+                continue;
+            }
+            TokenKind::MinusMinus => {
+                lexer.next_token();
+                lhs = Expression::Unary(UnaryOperator::PostfixDecrement, Box::new(lhs));
+                continue;
+            }
+            TokenKind::DoublePipe => (BinaryOperator::Or, 5),
+            TokenKind::DoubleAnd => (BinaryOperator::And, 10),
+            TokenKind::Pipe => (BinaryOperator::BitwiseOr, 25),
+            TokenKind::Caret => (BinaryOperator::Xor, 30),
+            TokenKind::Ampersand => (BinaryOperator::BitwiseAnd, 35),
+            TokenKind::NotEqual => (BinaryOperator::NotEqual, 36),
+            TokenKind::DoubleEquals => (BinaryOperator::Equals, 36),
+            TokenKind::Less => (BinaryOperator::LessThan, 38),
+            TokenKind::LessEqual => (BinaryOperator::LessThanOrEqual, 38),
+            TokenKind::Greater => (BinaryOperator::GreaterThan, 38),
+            TokenKind::GreaterEqual => (BinaryOperator::GreaterThanOrEqual, 38),
+            TokenKind::ShRight => (BinaryOperator::RightShift, 40),
+            TokenKind::ShLeft => (BinaryOperator::LeftShift, 40),
+            TokenKind::Plus => (BinaryOperator::Add, 45),
+            TokenKind::Hypen => (BinaryOperator::Subtract, 45),
+            TokenKind::Asterisk => (BinaryOperator::Multiply, 50),
+            TokenKind::FSlash => (BinaryOperator::Divide, 50),
+            TokenKind::Percent => (BinaryOperator::Remainder, 50),
             _ => break,
         };
         if r_bp < min_bp {

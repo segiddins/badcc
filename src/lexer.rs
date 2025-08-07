@@ -57,8 +57,6 @@ pub enum TokenKind {
     Tilde,
     #[token("-")]
     Hypen,
-    #[token("--")]
-    Decrement,
     #[token("+")]
     Plus,
     #[token("*")]
@@ -97,6 +95,10 @@ pub enum TokenKind {
     GreaterEqual,
     #[token("=")]
     Equals,
+    #[token("++")]
+    PlusPlus,
+    #[token("--")]
+    MinusMinus,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

@@ -80,38 +80,78 @@ pub fn lower_function(function: &parser::Function) -> Function {
     fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
         match expr {
             Expression::Constant(val) => Val::Constant(*val),
-            Expression::Unary(unary_operator, expression) => match unary_operator {
-                parser::UnaryOperator::Minus => {
-                    let src = walk(expression, state);
-                    let dst = state.var();
-                    state.push(Instruction::Unary {
-                        op: UnaryOperator::Negate,
-                        src,
-                        dst,
-                    });
-                    dst
+            Expression::Unary(unary_operator, expression) => {
+                let src = walk(expression, state);
+                match unary_operator {
+                    parser::UnaryOperator::Minus => {
+                        let dst = state.var();
+                        state.push(Instruction::Unary {
+                            op: UnaryOperator::Negate,
+                            src,
+                            dst,
+                        });
+                        dst
+                    }
+                    parser::UnaryOperator::Complement => {
+                        let dst = state.var();
+                        state.push(Instruction::Unary {
+                            op: UnaryOperator::Complement,
+                            src,
+                            dst,
+                        });
+                        dst
+                    }
+                    parser::UnaryOperator::Not => {
+                        let dst = state.var();
+                        state.push(Instruction::Unary {
+                            op: UnaryOperator::Not,
+                            src,
+                            dst,
+                        });
+                        dst
+                    }
+                    parser::UnaryOperator::PrefixIncrement => {
+                        state.push(Instruction::Binary {
+                            op: BinaryOperator::Add,
+                            lhs: src,
+                            rhs: Val::Constant(1),
+                            dst: src,
+                        });
+                        src
+                    }
+                    parser::UnaryOperator::PrefixDecrement => {
+                        state.push(Instruction::Binary {
+                            op: BinaryOperator::Add,
+                            lhs: src,
+                            rhs: Val::Constant(-1),
+                            dst: src,
+                        });
+                        src
+                    }
+                    parser::UnaryOperator::PostfixIncrement => {
+                        let dst = state.var();
+                        state.push(Instruction::Copy { src, dst });
+                        state.push(Instruction::Binary {
+                            op: BinaryOperator::Add,
+                            lhs: src,
+                            rhs: Val::Constant(1),
+                            dst: src,
+                        });
+                        dst
+                    }
+                    parser::UnaryOperator::PostfixDecrement => {
+                        let dst = state.var();
+                        state.push(Instruction::Copy { src, dst });
+                        state.push(Instruction::Binary {
+                            op: BinaryOperator::Add,
+                            lhs: src,
+                            rhs: Val::Constant(-1),
+                            dst: src,
+                        });
+                        dst
+                    }
                 }
-                parser::UnaryOperator::Complement => {
-                    let src = walk(expression, state);
-                    let dst = state.var();
-                    state.push(Instruction::Unary {
-                        op: UnaryOperator::Complement,
-                        src,
-                        dst,
-                    });
-                    dst
-                }
-                parser::UnaryOperator::Not => {
-                    let src = walk(expression, state);
-                    let dst = state.var();
-                    state.push(Instruction::Unary {
-                        op: UnaryOperator::Not,
-                        src,
-                        dst,
-                    });
-                    dst
-                }
-            },
+            }
             Expression::Binary(BinaryOperator::And, lhs, rhs) => {
                 let phi = state.var();
                 let lhs = walk(lhs, state);

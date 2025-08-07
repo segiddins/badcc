@@ -15,7 +15,20 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
         vars: &mut HashMap<String, u8>,
     ) -> miette::Result<()> {
         match expression {
-            Expression::Unary(_, expression) => visit_expr(expression, vars)?,
+            Expression::Unary(op, expression) => {
+                visit_expr(expression, vars)?;
+                match op {
+                    UnaryOperator::PrefixIncrement
+                    | UnaryOperator::PrefixDecrement
+                    | UnaryOperator::PostfixIncrement
+                    | UnaryOperator::PostfixDecrement => {
+                        if !matches!(**expression, Expression::Var(_)) {
+                            bail!("Cannot assign to a non-lvalue")
+                        }
+                    }
+                    _ => {}
+                }
+            }
             Expression::Binary(_, lhs, rhs) => {
                 visit_expr(lhs, vars)?;
                 visit_expr(rhs, vars)?;
