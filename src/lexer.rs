@@ -119,6 +119,14 @@ pub enum TokenKind {
     ShiftRightEquals,
     #[token("<<=")]
     ShiftLeftEquals,
+    #[token("if")]
+    If,
+    #[token("else")]
+    Else,
+    #[token("?")]
+    Question,
+    #[token(":")]
+    Colon,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

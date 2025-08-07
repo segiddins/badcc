@@ -52,18 +52,40 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
                     }
                 }
             }
+            Expression::Ternary(cond, then, r#else) => {
+                visit_expr(cond, vars)?;
+                visit_expr(then, vars)?;
+                visit_expr(r#else, vars)?;
+            }
             Expression::Constant(_) => {}
         }
         Ok(())
     }
+
+    fn visit_statement(
+        statement: &mut Statement,
+        vars: &mut HashMap<String, u8>,
+    ) -> miette::Result<()> {
+        match statement {
+            Statement::Return(expression) | Statement::Expression(expression) => {
+                visit_expr(expression, vars)
+            }
+            Statement::Null => Ok(()),
+            Statement::If(cond, then, r#else) => {
+                visit_expr(cond, vars)?;
+                visit_statement(then, vars)?;
+                if let Some(r#else) = r#else {
+                    visit_statement(r#else, vars)
+                } else {
+                    Ok(())
+                }
+            }
+        }
+    }
+
     for item in program.function.body.iter_mut() {
         match item {
-            BlockItem::Statement(statement) => match statement {
-                Statement::Return(expression) | Statement::Expression(expression) => {
-                    visit_expr(expression, &mut vars)?
-                }
-                Statement::Null => {}
-            },
+            BlockItem::Statement(statement) => visit_statement(statement, &mut vars)?,
             BlockItem::Declaration(variable_declaration) => {
                 if vars.contains_key(&variable_declaration.name) {
                     bail!(

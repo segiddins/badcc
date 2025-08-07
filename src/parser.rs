@@ -15,6 +15,7 @@ pub enum Expression {
     Var(String),
     Assignment(Box<Expression>, Box<Expression>),
     CompoundAssignment(Box<Expression>, BinaryOperator, Box<Expression>),
+    Ternary(Box<Expression>, Box<Expression>, Box<Expression>),
 }
 
 #[derive(Debug)]
@@ -54,6 +55,7 @@ pub enum BinaryOperator {
 pub enum Statement {
     Return(Expression),
     Expression(Expression),
+    If(Expression, Box<Statement>, Option<Box<Statement>>),
     Null,
 }
 
@@ -196,16 +198,37 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
         Some(token) => match token.kind {
             TokenKind::Return => lexer
                 .expect(TokenKind::Return)
-                .and_then(|_| Ok(Statement::Return(parse_expression(lexer)?))),
-            TokenKind::Semicolon => Ok(Statement::Null),
-            _ => parse_expression(lexer).map(Statement::Expression),
+                .and_then(|_| Ok(Statement::Return(parse_expression(lexer)?)))
+                .and_then(|s| {
+                    lexer.expect(TokenKind::Semicolon)?;
+                    Ok(s)
+                }),
+            TokenKind::Semicolon => lexer.expect(TokenKind::Semicolon).map(|_| Statement::Null),
+            TokenKind::If => {
+                lexer.expect(TokenKind::If)?;
+                lexer.expect(TokenKind::LParen)?;
+                let cond = parse_expression(lexer)?;
+                lexer.expect(TokenKind::RParen)?;
+                let then = parse_statement(lexer)?;
+                let mut r#else = None;
+                if lexer
+                    .peek_token()
+                    .is_some_and(|t| t.kind == TokenKind::Else)
+                {
+                    lexer.expect(TokenKind::Else)?;
+                    r#else = Some(parse_statement(lexer)?);
+                }
+                Ok(Statement::If(cond, Box::new(then), r#else.map(Box::new)))
+            }
+            _ => parse_expression(lexer)
+                .map(Statement::Expression)
+                .and_then(|s| {
+                    lexer.expect(TokenKind::Semicolon)?;
+                    Ok(s)
+                }),
         },
         None => bail!("unexpected EOF"),
     }
-    .and_then(|s: Statement| {
-        lexer.expect(TokenKind::Semicolon)?;
-        Ok(s)
-    })
 }
 
 fn parse_expression(lexer: &mut Lexer) -> Result<Expression> {
@@ -234,9 +257,9 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
         TokenKind::Exclamation => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::Not, Box::new(e))),
         TokenKind::Identifier => Ok(Expression::Var(token.source(lexer.source).to_string())),
-        TokenKind::PlusPlus => parse_expression_bp(lexer, 0)
+        TokenKind::PlusPlus => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::PrefixIncrement, Box::new(e))),
-        TokenKind::MinusMinus => parse_expression_bp(lexer, 0)
+        TokenKind::MinusMinus => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::PrefixDecrement, Box::new(e))),
         _ => {
             bail!(
@@ -251,6 +274,14 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             break;
         };
         let (op, r_bp) = match next.kind {
+            TokenKind::Question if min_bp <= 3 => {
+                lexer.next_token();
+                let then = parse_expression_bp(lexer, 0)?;
+                lexer.expect(TokenKind::Colon)?;
+                let r#else = parse_expression_bp(lexer, 3)?;
+                lhs = Expression::Ternary(Box::new(lhs), Box::new(then), Box::new(r#else));
+                break;
+            }
             TokenKind::Equals if min_bp <= 1 => {
                 lexer.next_token();
                 let rhs = parse_expression_bp(lexer, 1)?;

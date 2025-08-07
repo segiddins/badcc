@@ -228,6 +228,51 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 });
                 lhs
             }
+            Expression::Ternary(cond, then, r#else) => {
+                let phi = state.var();
+                let else_label = format!("{}.{}.true", state.name, state.phis);
+                let end_label = format!("{}.{}.end", state.name, state.phis);
+                state.phis += 1;
+
+                let cond = walk(cond, state);
+                state.push(Instruction::JumpIfZero(cond, else_label.clone()));
+                let src = walk(then, state);
+                state.push(Instruction::Copy { src, dst: phi });
+                state.push(Instruction::Jump(end_label.clone()));
+                state.push(Instruction::Label(else_label));
+                let src = walk(r#else, state);
+                state.push(Instruction::Copy { src, dst: phi });
+                state.push(Instruction::Label(end_label));
+                phi
+            }
+        }
+    }
+
+    fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
+        match statement {
+            Statement::Return(expression) => {
+                let ret = walk(expression, state);
+                state.push(Instruction::Return(ret));
+            }
+            Statement::Expression(expression) => {
+                walk(expression, state);
+            }
+            Statement::If(cond, then, r#else) => {
+                let else_label = format!("{}.{}.true", state.name, state.phis);
+                let end_label = format!("{}.{}.end", state.name, state.phis);
+                state.phis += 1;
+
+                let cond = walk(cond, state);
+                state.push(Instruction::JumpIfZero(cond, else_label.clone()));
+                walk_statement(then, state);
+                state.push(Instruction::Jump(end_label.clone()));
+                state.push(Instruction::Label(else_label));
+                if let Some(r#else) = r#else {
+                    walk_statement(r#else, state);
+                }
+                state.push(Instruction::Label(end_label));
+            }
+            Statement::Null => {}
         }
     }
 
@@ -241,16 +286,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
 
     for item in function.body.iter() {
         match item {
-            BlockItem::Statement(statement) => match statement {
-                Statement::Return(expression) => {
-                    let ret = walk(expression, &mut state);
-                    state.push(Instruction::Return(ret));
-                }
-                Statement::Expression(expression) => {
-                    walk(expression, &mut state);
-                }
-                Statement::Null => {}
-            },
+            BlockItem::Statement(statement) => walk_statement(statement, &mut state),
             BlockItem::Declaration(VariableDeclaration { name, init }) => {
                 let var = state.var();
                 state.variables.insert(name.clone(), var);
