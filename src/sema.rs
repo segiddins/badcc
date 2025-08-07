@@ -38,7 +38,7 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
                     bail!("{name} used without being declared")
                 }
             }
-            Expression::Assignment(lhs, rhs) => {
+            Expression::Assignment(lhs, rhs) | Expression::CompoundAssignment(lhs, _, rhs) => {
                 visit_expr(rhs, vars)?;
                 match **lhs {
                     Expression::Var(ref name) => {

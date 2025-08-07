@@ -14,6 +14,7 @@ pub enum Expression {
     Binary(BinaryOperator, Box<Expression>, Box<Expression>),
     Var(String),
     Assignment(Box<Expression>, Box<Expression>),
+    CompoundAssignment(Box<Expression>, BinaryOperator, Box<Expression>),
 }
 
 #[derive(Debug)]
@@ -256,12 +257,42 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                 lhs = Expression::Assignment(Box::new(lhs), Box::new(rhs));
                 break;
             }
-            TokenKind::PlusPlus => {
+            TokenKind::PlusEquals
+            | TokenKind::MinusEquals
+            | TokenKind::TimesEquals
+            | TokenKind::DivEquals
+            | TokenKind::ModEquals
+            | TokenKind::AndEquals
+            | TokenKind::OrEquals
+            | TokenKind::XorEquals
+            | TokenKind::ShiftRightEquals
+            | TokenKind::ShiftLeftEquals
+                if min_bp <= 1 =>
+            {
+                let op = match next.kind {
+                    TokenKind::PlusEquals => BinaryOperator::Add,
+                    TokenKind::MinusEquals => BinaryOperator::Subtract,
+                    TokenKind::TimesEquals => BinaryOperator::Multiply,
+                    TokenKind::DivEquals => BinaryOperator::Divide,
+                    TokenKind::ModEquals => BinaryOperator::Remainder,
+                    TokenKind::AndEquals => BinaryOperator::BitwiseAnd,
+                    TokenKind::OrEquals => BinaryOperator::BitwiseOr,
+                    TokenKind::XorEquals => BinaryOperator::Xor,
+                    TokenKind::ShiftRightEquals => BinaryOperator::RightShift,
+                    TokenKind::ShiftLeftEquals => BinaryOperator::LeftShift,
+                    _ => unreachable!(),
+                };
+                lexer.next_token();
+                let rhs = parse_expression_bp(lexer, 1)?;
+                lhs = Expression::CompoundAssignment(Box::new(lhs), op, Box::new(rhs));
+                break;
+            }
+            TokenKind::PlusPlus if min_bp <= 60 => {
                 lexer.next_token();
                 lhs = Expression::Unary(UnaryOperator::PostfixIncrement, Box::new(lhs));
                 continue;
             }
-            TokenKind::MinusMinus => {
+            TokenKind::MinusMinus if min_bp <= 60 => {
                 lexer.next_token();
                 lhs = Expression::Unary(UnaryOperator::PostfixDecrement, Box::new(lhs));
                 continue;

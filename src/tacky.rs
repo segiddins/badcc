@@ -217,6 +217,17 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 state.push(Instruction::Copy { src: rhs, dst: lhs });
                 lhs
             }
+            Expression::CompoundAssignment(lhs, op, rhs) => {
+                let rhs = walk(rhs, state);
+                let lhs = walk(lhs, state);
+                state.push(Instruction::Binary {
+                    op: *op,
+                    lhs,
+                    rhs,
+                    dst: lhs,
+                });
+                lhs
+            }
         }
     }
 

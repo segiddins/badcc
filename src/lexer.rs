@@ -99,6 +99,26 @@ pub enum TokenKind {
     PlusPlus,
     #[token("--")]
     MinusMinus,
+    #[token("+=")]
+    PlusEquals,
+    #[token("-=")]
+    MinusEquals,
+    #[token("*=")]
+    TimesEquals,
+    #[token("/=")]
+    DivEquals,
+    #[token("%=")]
+    ModEquals,
+    #[token("&=")]
+    AndEquals,
+    #[token("|=")]
+    OrEquals,
+    #[token("^=")]
+    XorEquals,
+    #[token(">>=")]
+    ShiftRightEquals,
+    #[token("<<=")]
+    ShiftLeftEquals,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
