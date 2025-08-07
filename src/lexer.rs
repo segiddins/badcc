@@ -95,6 +95,8 @@ pub enum TokenKind {
     LessEqual,
     #[token(">=")]
     GreaterEqual,
+    #[token("=")]
+    Equals,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

@@ -1,6 +1,7 @@
+use std::collections::HashMap;
 
 pub use crate::parser::BinaryOperator;
-use crate::parser::{self, Expression, Statement};
+use crate::parser::{self, BlockItem, Expression, Statement, VariableDeclaration};
 
 #[derive(Debug)]
 pub struct Program {
@@ -62,6 +63,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
         instructions: Vec<Instruction>,
         phis: u32,
         name: &'i str,
+        variables: HashMap<String, Val>,
     }
     impl State<'_> {
         fn var(&mut self) -> Val {
@@ -168,6 +170,13 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 });
                 dst
             }
+            Expression::Var(name) => *state.variables.get(name).unwrap(),
+            Expression::Assignment(lhs, rhs) => {
+                let rhs = walk(rhs, state);
+                let lhs = walk(lhs, state);
+                state.push(Instruction::Copy { src: rhs, dst: lhs });
+                lhs
+            }
         }
     }
 
@@ -175,18 +184,37 @@ pub fn lower_function(function: &parser::Function) -> Function {
         temps: 0,
         instructions: vec![],
         phis: 0,
-        name: &function.identifier,
+        name: &function.name,
+        variables: Default::default(),
     };
 
-    match &function.statement {
-        Statement::Return(expression) => {
-            let ret = walk(expression, &mut state);
-            state.push(Instruction::Return(ret));
+    for item in function.body.iter() {
+        match item {
+            BlockItem::Statement(statement) => match statement {
+                Statement::Return(expression) => {
+                    let ret = walk(expression, &mut state);
+                    state.push(Instruction::Return(ret));
+                }
+                Statement::Expression(expression) => {
+                    walk(expression, &mut state);
+                }
+                Statement::Null => {}
+            },
+            BlockItem::Declaration(VariableDeclaration { name, init }) => {
+                let var = state.var();
+                state.variables.insert(name.clone(), var);
+                if let Some(init) = init {
+                    let rhs = walk(init, &mut state);
+                    state.push(Instruction::Copy { src: rhs, dst: var });
+                }
+            }
         }
     }
 
+    state.push(Instruction::Return(Val::Constant(0)));
+
     Function {
-        identifier: function.identifier.clone(),
+        identifier: function.name.clone(),
         instructions: state.instructions,
     }
 }
@@ -196,7 +224,7 @@ mod tests {
     use insta::assert_debug_snapshot;
 
     use crate::{
-        parser::{Function, Program, Statement},
+        parser::{BlockItem, Function, Program, Statement},
         tacky::lower,
     };
 
@@ -204,8 +232,10 @@ mod tests {
     fn test_basic() {
         let program = Program {
             function: Function {
-                identifier: "main".into(),
-                statement: Statement::Return(crate::parser::Expression::Constant(2)),
+                name: "main".into(),
+                body: vec![BlockItem::Statement(Statement::Return(
+                    crate::parser::Expression::Constant(2),
+                ))],
             },
         };
 

@@ -15,12 +15,14 @@ use crate::{
     code_emission::emit_asm,
     lexer::lex,
     parser::parse,
+    sema::validate,
 };
 
 mod assembly_gen;
 mod code_emission;
 mod lexer;
 mod parser;
+mod sema;
 mod tacky;
 
 #[derive(clap::Parser)]
@@ -60,8 +62,13 @@ impl Driver {
             return Ok(());
         }
 
-        let program = parse(src, tokens, &pre.display().to_string())?;
+        let mut program = parse(src, tokens, &pre.display().to_string())?;
         if self.parse {
+            return Ok(());
+        }
+
+        validate(&mut program)?;
+        if self.validate {
             return Ok(());
         }
 

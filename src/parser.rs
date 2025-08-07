@@ -12,6 +12,8 @@ pub enum Expression {
     Constant(i32),
     Unary(UnaryOperator, Box<Expression>),
     Binary(BinaryOperator, Box<Expression>, Box<Expression>),
+    Var(String),
+    Assignment(Box<Expression>, Box<Expression>),
 }
 
 #[derive(Debug)]
@@ -46,12 +48,27 @@ pub enum BinaryOperator {
 #[derive(Debug)]
 pub enum Statement {
     Return(Expression),
+    Expression(Expression),
+    Null,
+}
+
+#[derive(Debug)]
+
+pub struct VariableDeclaration {
+    pub name: String,
+    pub init: Option<Expression>,
+}
+
+#[derive(Debug)]
+pub enum BlockItem {
+    Statement(Statement),
+    Declaration(VariableDeclaration),
 }
 
 #[derive(Debug)]
 pub struct Function {
-    pub identifier: String,
-    pub statement: Statement,
+    pub name: String,
+    pub body: Vec<BlockItem>,
 }
 
 struct Lexer<'i> {
@@ -106,28 +123,77 @@ pub fn parse(source: impl AsRef<str>, mut tokens: Vec<Token>, filename: &str) ->
 }
 
 fn parse_program(lexer: &mut Lexer) -> Result<Program> {
+    Ok(Program {
+        function: parse_function(lexer)?,
+    })
+}
+
+fn parse_function(lexer: &mut Lexer) -> Result<Function> {
     lexer.expect(TokenKind::Int)?;
     let name = lexer.expect(TokenKind::Identifier)?.source(lexer.source);
     lexer.expect(TokenKind::LParen)?;
     lexer.expect(TokenKind::Void)?;
     lexer.expect(TokenKind::RParen)?;
     lexer.expect(TokenKind::LBrace)?;
-    let statement = parse_statement(lexer)?;
+    let mut body = vec![];
+    while !matches!(
+        lexer.peek_token(),
+        Some(Token {
+            kind: TokenKind::RBrace,
+            ..
+        })
+    ) {
+        body.push(parse_block_item(lexer)?);
+    }
     lexer.expect(TokenKind::RBrace)?;
 
-    Ok(Program {
-        function: Function {
-            identifier: name.to_string(),
-            statement,
-        },
+    Ok(Function {
+        name: name.to_owned(),
+        body,
+    })
+}
+
+fn parse_block_item(lexer: &mut Lexer) -> Result<BlockItem> {
+    match lexer.peek_token() {
+        Some(Token {
+            kind: TokenKind::Int,
+            ..
+        }) => parse_declaration(lexer).map(BlockItem::Declaration),
+        _ => parse_statement(lexer).map(BlockItem::Statement),
+    }
+}
+
+fn parse_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> {
+    lexer.expect(TokenKind::Int)?;
+    let name = lexer.expect(TokenKind::Identifier)?.source(lexer.source);
+
+    let init = match lexer.peek_token() {
+        Some(Token {
+            kind: TokenKind::Equals,
+            ..
+        }) => {
+            lexer.expect(TokenKind::Equals)?;
+            Some(parse_expression(lexer)?)
+        }
+        _ => None,
+    };
+
+    lexer.expect(TokenKind::Semicolon)?;
+
+    Ok(VariableDeclaration {
+        name: name.to_string(),
+        init,
     })
 }
 
 fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
-    match lexer.next_token() {
+    match lexer.peek_token() {
         Some(token) => match token.kind {
-            TokenKind::Return => Ok(Statement::Return(parse_expression(lexer)?)),
-            _ => bail!("expected statement"),
+            TokenKind::Return => lexer
+                .expect(TokenKind::Return)
+                .and_then(|_| Ok(Statement::Return(parse_expression(lexer)?))),
+            TokenKind::Semicolon => Ok(Statement::Null),
+            _ => parse_expression(lexer).map(Statement::Expression),
         },
         None => bail!("unexpected EOF"),
     }
@@ -162,6 +228,7 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             .map(|e| Expression::Unary(UnaryOperator::Complement, Box::new(e))),
         TokenKind::Exclamation => parse_expression_bp(lexer, 60)
             .map(|e| Expression::Unary(UnaryOperator::Not, Box::new(e))),
+        TokenKind::Identifier => Ok(Expression::Var(token.source(lexer.source).to_string())),
         _ => {
             bail!(
                 labels = vec![LabeledSpan::at(token.location, "here")],
@@ -172,6 +239,12 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
 
     loop {
         let (op, r_bp) = match lexer.peek_token().map(|t| t.kind) {
+            Some(TokenKind::Equals) if min_bp <= 1 => {
+                lexer.next_token();
+                let rhs = parse_expression_bp(lexer, 1)?;
+                lhs = Expression::Assignment(Box::new(lhs), Box::new(rhs));
+                break;
+            }
             Some(TokenKind::DoublePipe) => (BinaryOperator::Or, 5),
             Some(TokenKind::DoubleAnd) => (BinaryOperator::And, 10),
             Some(TokenKind::Pipe) => (BinaryOperator::BitwiseOr, 25),
@@ -217,12 +290,59 @@ mod tests {
         insta::assert_debug_snapshot!(program, @r#"
         Program {
             function: Function {
-                identifier: "main",
-                statement: Return(
-                    Constant(
-                        2,
+                name: "main",
+                body: [
+                    Statement(
+                        Return(
+                            Constant(
+                                2,
+                            ),
+                        ),
                     ),
-                ),
+                ],
+            },
+        }
+        "#);
+        Ok(())
+    }
+
+    #[test]
+    fn test_statement_types() -> miette::Result<()> {
+        let src = "int main(void) { 1+1; ; ; return 2; }";
+        let tokens = lex(src, "example.c")?;
+        let program = parse(src, tokens, "example.c")?;
+        insta::assert_debug_snapshot!(program, @r#"
+        Program {
+            function: Function {
+                name: "main",
+                body: [
+                    Statement(
+                        Expression(
+                            Binary(
+                                Add,
+                                Constant(
+                                    1,
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                    Statement(
+                        Null,
+                    ),
+                    Statement(
+                        Null,
+                    ),
+                    Statement(
+                        Return(
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    ),
+                ],
             },
         }
         "#);
