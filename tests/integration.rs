@@ -32,6 +32,10 @@ fn test_compiles() {
     	movq %rbp, %rsp
     	popq %rbp
     	ret
+    	movl $0, %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
     ");
 
     let exec = temp.child("return_2");
@@ -68,6 +72,10 @@ fn test_one_plus_one() {
     	movl $1, -4(%rbp)
     	addl $1, -4(%rbp)
     	movl -4(%rbp), %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
+    	movl $0, %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret
@@ -118,6 +126,10 @@ fn test_associativity_3() {
     	movq %rbp, %rsp
     	popq %rbp
     	ret
+    	movl $0, %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
     ");
 
     Command::new(temp.child("return_1").as_os_str())
@@ -150,6 +162,10 @@ fn test_unop_add() {
     	movl %r10d, -8(%rbp)
     	addl $3, -8(%rbp)
     	movl -8(%rbp), %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
+    	movl $0, %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret
@@ -197,6 +213,10 @@ fn test_shifts() {
     	sarl %cl, %r11d
     	movl %r11d, -16(%rbp)
     	movl -16(%rbp), %eax
+    	movq %rbp, %rsp
+    	popq %rbp
+    	ret
+    	movl $0, %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret

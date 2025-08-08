@@ -352,6 +352,11 @@ mod tests {
                             2,
                         ),
                     ),
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
                 ],
             },
         }

@@ -420,15 +420,17 @@ mod tests {
         Program {
             function: Function {
                 name: "main",
-                body: [
-                    Statement(
-                        Return(
-                            Constant(
-                                2,
+                body: Block {
+                    items: [
+                        Statement(
+                            Return(
+                                Constant(
+                                    2,
+                                ),
                             ),
                         ),
-                    ),
-                ],
+                    ],
+                },
             },
         }
         "#);
@@ -444,34 +446,36 @@ mod tests {
         Program {
             function: Function {
                 name: "main",
-                body: [
-                    Statement(
-                        Expression(
-                            Binary(
-                                Add,
-                                Constant(
-                                    1,
-                                ),
-                                Constant(
-                                    1,
+                body: Block {
+                    items: [
+                        Statement(
+                            Expression(
+                                Binary(
+                                    Add,
+                                    Constant(
+                                        1,
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
                                 ),
                             ),
                         ),
-                    ),
-                    Statement(
-                        Null,
-                    ),
-                    Statement(
-                        Null,
-                    ),
-                    Statement(
-                        Return(
-                            Constant(
-                                2,
+                        Statement(
+                            Null,
+                        ),
+                        Statement(
+                            Null,
+                        ),
+                        Statement(
+                            Return(
+                                Constant(
+                                    2,
+                                ),
                             ),
                         ),
-                    ),
-                ],
+                    ],
+                },
             },
         }
         "#);
