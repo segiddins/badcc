@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 pub use crate::parser::BinaryOperator;
-use crate::parser::{self, BlockItem, Expression, Statement, VariableDeclaration};
+use crate::parser::{self, Block, BlockItem, Expression, Statement, VariableDeclaration};
 
 #[derive(Debug)]
 pub struct Program {
@@ -279,7 +279,26 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 state.push(Instruction::Label(label.clone()));
                 walk_statement(statement, state);
             }
+            Statement::Compound(block) => {
+                walk_block(block, state);
+            }
             Statement::Null => {}
+        }
+    }
+
+    fn walk_block<'i>(block: &Block, state: &mut State<'i>) {
+        for item in block.items.iter() {
+            match &item {
+                BlockItem::Statement(statement) => walk_statement(statement, state),
+                BlockItem::Declaration(VariableDeclaration { name, init }) => {
+                    let var = state.var();
+                    state.variables.insert(name.clone(), var);
+                    if let Some(init) = init {
+                        let rhs = walk(init, state);
+                        state.push(Instruction::Copy { src: rhs, dst: var });
+                    }
+                }
+            }
         }
     }
 
@@ -291,19 +310,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
         variables: Default::default(),
     };
 
-    for item in function.body.iter() {
-        match item {
-            BlockItem::Statement(statement) => walk_statement(statement, &mut state),
-            BlockItem::Declaration(VariableDeclaration { name, init }) => {
-                let var = state.var();
-                state.variables.insert(name.clone(), var);
-                if let Some(init) = init {
-                    let rhs = walk(init, &mut state);
-                    state.push(Instruction::Copy { src: rhs, dst: var });
-                }
-            }
-        }
-    }
+    walk_block(&function.body, &mut state);
 
     state.push(Instruction::Return(Val::Constant(0)));
 
@@ -318,7 +325,7 @@ mod tests {
     use insta::assert_debug_snapshot;
 
     use crate::{
-        parser::{BlockItem, Function, Program, Statement},
+        parser::{Block, BlockItem, Function, Program, Statement},
         tacky::lower,
     };
 
@@ -327,9 +334,11 @@ mod tests {
         let program = Program {
             function: Function {
                 name: "main".into(),
-                body: vec![BlockItem::Statement(Statement::Return(
-                    crate::parser::Expression::Constant(2),
-                ))],
+                body: Block {
+                    items: vec![BlockItem::Statement(Statement::Return(
+                        crate::parser::Expression::Constant(2),
+                    ))],
+                },
             },
         };
 

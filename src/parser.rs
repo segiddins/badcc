@@ -58,7 +58,13 @@ pub enum Statement {
     If(Expression, Box<Statement>, Option<Box<Statement>>),
     Labeled(String, Box<Statement>),
     Goto(String),
+    Compound(Block),
     Null,
+}
+
+#[derive(Debug)]
+pub struct Block {
+    pub items: Vec<BlockItem>,
 }
 
 #[derive(Debug)]
@@ -77,7 +83,7 @@ pub enum BlockItem {
 #[derive(Debug)]
 pub struct Function {
     pub name: String,
-    pub body: Vec<BlockItem>,
+    pub body: Block,
 }
 
 struct Lexer<'i> {
@@ -149,8 +155,18 @@ fn parse_function(lexer: &mut Lexer) -> Result<Function> {
     lexer.expect(TokenKind::LParen)?;
     lexer.expect(TokenKind::Void)?;
     lexer.expect(TokenKind::RParen)?;
+
+    let body = parse_block(lexer)?;
+
+    Ok(Function {
+        name: name.to_owned(),
+        body,
+    })
+}
+
+fn parse_block(lexer: &mut Lexer) -> Result<Block> {
     lexer.expect(TokenKind::LBrace)?;
-    let mut body = vec![];
+    let mut items = vec![];
     while !matches!(
         lexer.peek_token(),
         Some(Token {
@@ -158,14 +174,10 @@ fn parse_function(lexer: &mut Lexer) -> Result<Function> {
             ..
         })
     ) {
-        body.push(parse_block_item(lexer)?);
+        items.push(parse_block_item(lexer)?);
     }
     lexer.expect(TokenKind::RBrace)?;
-
-    Ok(Function {
-        name: name.to_owned(),
-        body,
-    })
+    Ok(Block { items })
 }
 
 fn parse_block_item(lexer: &mut Lexer) -> Result<BlockItem> {
@@ -246,6 +258,7 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                         Ok(s)
                     })
             }
+            TokenKind::LBrace => parse_block(lexer).map(Statement::Compound),
             _ => parse_expression(lexer)
                 .and_then(|s| {
                     lexer.expect(TokenKind::Semicolon)?;

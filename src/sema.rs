@@ -1,6 +1,9 @@
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+    ops::DerefMut,
+};
 
-use miette::bail;
+use miette::{bail, miette};
 
 use crate::parser::*;
 
@@ -10,12 +13,23 @@ pub fn validate(program: &mut Program) -> miette::Result<()> {
 }
 
 fn resolve_labels(program: &mut Program) -> miette::Result<()> {
+    fn visit_block(block: &Block, labels: &mut HashSet<String>, error: bool) -> miette::Result<()> {
+        for item in block.items.iter() {
+            match item {
+                BlockItem::Statement(statement) => visit_statement(statement, labels, error)?,
+                BlockItem::Declaration(_) => {}
+            }
+        }
+
+        Ok(())
+    }
     fn visit_statement(
         statement: &Statement,
         labels: &mut HashSet<String>,
         error: bool,
     ) -> miette::Result<()> {
         match statement {
+            Statement::Compound(block) => visit_block(block, labels, error)?,
             Statement::Return(_) => {}
             Statement::Expression(_) => {}
             Statement::Null => {}
@@ -43,31 +57,62 @@ fn resolve_labels(program: &mut Program) -> miette::Result<()> {
     {
         let function = &program.function;
         let mut labels = HashSet::new();
-        for item in function.body.iter() {
-            match item {
-                BlockItem::Statement(statement) => visit_statement(statement, &mut labels, false)?,
-                BlockItem::Declaration(_) => {}
-            }
-        }
-        for item in function.body.iter() {
-            match item {
-                BlockItem::Statement(statement) => visit_statement(statement, &mut labels, true)?,
-                BlockItem::Declaration(_) => {}
-            }
-        }
+
+        visit_block(&function.body, &mut labels, false)?;
+        visit_block(&function.body, &mut labels, true)?;
     }
     Ok(())
 }
 
 fn resolve_variables(program: &mut Program) -> miette::Result<()> {
-    let mut vars: HashMap<String, u8> = HashMap::new();
-    fn visit_expr(
-        expression: &mut Expression,
-        vars: &mut HashMap<String, u8>,
-    ) -> miette::Result<()> {
+    #[derive(Default)]
+    struct Scope {
+        vars: Vec<HashMap<String, String>>,
+        idx: u32,
+    }
+
+    impl Scope {
+        fn declare(&mut self, name: &str) -> miette::Result<&String> {
+            if self.vars.last().unwrap().contains_key(name) {
+                bail!("duplicate definition of {}", name)
+            }
+
+            let unique = self
+                .vars
+                .last_mut()
+                .unwrap()
+                .entry(name.to_string())
+                .or_insert(format!("{name}.{}", self.idx));
+
+            self.idx += 1;
+
+            Ok(unique)
+        }
+
+        fn get(&self, name: &str) -> Option<&String> {
+            self.vars.iter().rev().find_map(|s| s.get(name))
+        }
+
+        fn nest(&mut self, f: impl FnOnce(&mut Self) -> miette::Result<()>) -> miette::Result<()> {
+            self.push();
+            f(self)?;
+            self.pop();
+            Ok(())
+        }
+
+        fn push(&mut self) {
+            self.vars.push(Default::default())
+        }
+
+        fn pop(&mut self) {
+            self.vars.pop().unwrap();
+        }
+    }
+
+    fn visit_expr(expression: &mut Expression, scope: &mut Scope) -> miette::Result<()> {
         match expression {
             Expression::Unary(op, expression) => {
-                visit_expr(expression, vars)?;
+                visit_expr(expression, scope)?;
                 match op {
                     UnaryOperator::PrefixIncrement
                     | UnaryOperator::PrefixDecrement
@@ -81,77 +126,76 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
                 }
             }
             Expression::Binary(_, lhs, rhs) => {
-                visit_expr(lhs, vars)?;
-                visit_expr(rhs, vars)?;
+                visit_expr(lhs, scope)?;
+                visit_expr(rhs, scope)?;
             }
             Expression::Var(name) => {
-                if !vars.contains_key(name) {
-                    bail!("{name} used without being declared")
-                }
+                *name = scope
+                    .get(name)
+                    .ok_or_else(|| miette!("{name} used without being declared"))?
+                    .clone();
             }
             Expression::Assignment(lhs, rhs) | Expression::CompoundAssignment(lhs, _, rhs) => {
-                visit_expr(rhs, vars)?;
-                match **lhs {
-                    Expression::Var(ref name) => {
-                        if !vars.contains_key(name) {
-                            bail!("{name} assigned without being declared")
-                        }
-                        visit_expr(rhs, vars)?;
+                match lhs.deref_mut() {
+                    Expression::Var(name) => {
+                        *name = scope
+                            .get(name)
+                            .ok_or_else(|| miette!("{name} assigned without being declared"))?
+                            .into();
                     }
                     _ => {
                         bail!("Cannot assign to non-variable {lhs:?}")
                     }
                 }
+                visit_expr(rhs, scope)?;
             }
             Expression::Ternary(cond, then, r#else) => {
-                visit_expr(cond, vars)?;
-                visit_expr(then, vars)?;
-                visit_expr(r#else, vars)?;
+                visit_expr(cond, scope)?;
+                visit_expr(then, scope)?;
+                visit_expr(r#else, scope)?;
             }
             Expression::Constant(_) => {}
         }
         Ok(())
     }
 
-    fn visit_statement(
-        statement: &mut Statement,
-        vars: &mut HashMap<String, u8>,
-    ) -> miette::Result<()> {
+    fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> miette::Result<()> {
         match statement {
             Statement::Return(expression) | Statement::Expression(expression) => {
-                visit_expr(expression, vars)
+                visit_expr(expression, scope)
             }
             Statement::Null | Statement::Goto(_) => Ok(()),
             Statement::If(cond, then, r#else) => {
-                visit_expr(cond, vars)?;
-                visit_statement(then, vars)?;
+                visit_expr(cond, scope)?;
+                visit_statement(then, scope)?;
                 if let Some(r#else) = r#else {
-                    visit_statement(r#else, vars)
+                    visit_statement(r#else, scope)
                 } else {
                     Ok(())
                 }
             }
-            Statement::Labeled(_, statement) => visit_statement(statement, vars),
+            Statement::Labeled(_, statement) => visit_statement(statement, scope),
+            Statement::Compound(block) => visit_block(block, scope),
         }
     }
 
-    for item in program.function.body.iter_mut() {
-        match item {
-            BlockItem::Statement(statement) => visit_statement(statement, &mut vars)?,
-            BlockItem::Declaration(variable_declaration) => {
-                if vars.contains_key(&variable_declaration.name) {
-                    bail!(
-                        "duplicate definition of {} in {}",
-                        variable_declaration.name,
-                        program.function.name
-                    )
-                }
-                vars.insert(variable_declaration.name.clone(), vars.len() as u8);
-                if let Some(init) = variable_declaration.init.as_mut() {
-                    visit_expr(init, &mut vars)?;
+    fn visit_block(block: &mut Block, scope: &mut Scope) -> miette::Result<()> {
+        scope.nest(|scope| {
+            for item in block.items.iter_mut() {
+                match item {
+                    BlockItem::Statement(statement) => visit_statement(statement, scope)?,
+                    BlockItem::Declaration(variable_declaration) => {
+                        variable_declaration.name =
+                            scope.declare(&variable_declaration.name)?.clone();
+                        if let Some(init) = variable_declaration.init.as_mut() {
+                            visit_expr(init, scope)?;
+                        }
+                    }
                 }
             }
-        }
+            Ok(())
+        })
     }
-    Ok(())
+
+    visit_block(&mut program.function.body, &mut Scope::default())
 }
