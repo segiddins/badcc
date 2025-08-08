@@ -59,6 +59,17 @@ pub enum Statement {
     Labeled(String, Box<Statement>),
     Goto(String),
     Compound(Block),
+    Break(Option<String>),
+    Continue(Option<String>),
+    While(Expression, Box<Statement>, Option<String>),
+    DoWhile(Box<Statement>, Expression, Option<String>),
+    For {
+        init: ForInit,
+        condition: Option<Expression>,
+        post: Option<Expression>,
+        body: Box<Statement>,
+        label: Option<String>,
+    },
     Null,
 }
 
@@ -68,7 +79,12 @@ pub struct Block {
 }
 
 #[derive(Debug)]
+pub enum ForInit {
+    Decl(VariableDeclaration),
+    Expr(Option<Expression>),
+}
 
+#[derive(Debug)]
 pub struct VariableDeclaration {
     pub name: String,
     pub init: Option<Expression>,
@@ -213,6 +229,25 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> {
     })
 }
 
+fn parse_optional_expression(lexer: &mut Lexer, end: TokenKind) -> Result<Option<Expression>> {
+    if lexer.peek_token().is_some_and(|t| t.kind == end) {
+        lexer.next_token();
+        return Ok(None);
+    }
+
+    let expression = parse_expression(lexer)?;
+    lexer.expect(end)?;
+    Ok(Some(expression))
+}
+
+fn parse_for_init(lexer: &mut Lexer) -> Result<ForInit> {
+    if lexer.peek_token().is_some_and(|t| t.kind == TokenKind::Int) {
+        parse_declaration(lexer).map(ForInit::Decl)
+    } else {
+        parse_optional_expression(lexer, TokenKind::Semicolon).map(ForInit::Expr)
+    }
+}
+
 fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
     match lexer.peek_token() {
         Some(token) => match token.kind {
@@ -259,6 +294,48 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                     })
             }
             TokenKind::LBrace => parse_block(lexer).map(Statement::Compound),
+            TokenKind::Break => {
+                lexer.next_token();
+                lexer.expect(TokenKind::Semicolon)?;
+                Ok(Statement::Break(None))
+            }
+            TokenKind::Continue => {
+                lexer.next_token();
+                lexer.expect(TokenKind::Semicolon)?;
+                Ok(Statement::Continue(None))
+            }
+            TokenKind::While => {
+                lexer.next_token();
+                lexer.expect(TokenKind::LParen)?;
+                let exp = parse_expression(lexer)?;
+                lexer.expect(TokenKind::RParen)?;
+                parse_statement(lexer).map(|s| Statement::While(exp, s.into(), None))
+            }
+            TokenKind::Do => {
+                lexer.next_token();
+                let body = parse_statement(lexer)?;
+                lexer.expect(TokenKind::While)?;
+                lexer.expect(TokenKind::LParen)?;
+                let cond = parse_expression(lexer)?;
+                lexer.expect(TokenKind::RParen)?;
+                lexer.expect(TokenKind::Semicolon)?;
+                Ok(Statement::DoWhile(body.into(), cond, None))
+            }
+            TokenKind::For => {
+                lexer.next_token();
+                lexer.expect(TokenKind::LParen)?;
+                let init = parse_for_init(lexer)?;
+                let condition = parse_optional_expression(lexer, TokenKind::Semicolon)?;
+                let post = parse_optional_expression(lexer, TokenKind::RParen)?;
+                let body = parse_statement(lexer)?;
+                Ok(Statement::For {
+                    init,
+                    condition,
+                    post,
+                    body: body.into(),
+                    label: None,
+                })
+            }
             _ => parse_expression(lexer)
                 .and_then(|s| {
                     lexer.expect(TokenKind::Semicolon)?;

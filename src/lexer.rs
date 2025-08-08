@@ -129,6 +129,16 @@ pub enum TokenKind {
     Colon,
     #[token("goto")]
     Goto,
+    #[token("for")]
+    For,
+    #[token("while")]
+    While,
+    #[token("do")]
+    Do,
+    #[token("break")]
+    Break,
+    #[token("continue")]
+    Continue,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
