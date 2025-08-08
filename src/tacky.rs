@@ -272,6 +272,13 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 }
                 state.push(Instruction::Label(end_label));
             }
+            Statement::Goto(label) => {
+                state.push(Instruction::Jump(label.clone()));
+            }
+            Statement::Labeled(label, statement) => {
+                state.push(Instruction::Label(label.clone()));
+                walk_statement(statement, state);
+            }
             Statement::Null => {}
         }
     }

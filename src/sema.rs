@@ -1,11 +1,62 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use miette::bail;
 
 use crate::parser::*;
 
 pub fn validate(program: &mut Program) -> miette::Result<()> {
-    resolve_variables(program)
+    resolve_variables(program)?;
+    resolve_labels(program)
+}
+
+fn resolve_labels(program: &mut Program) -> miette::Result<()> {
+    fn visit_statement(
+        statement: &Statement,
+        labels: &mut HashSet<String>,
+        error: bool,
+    ) -> miette::Result<()> {
+        match statement {
+            Statement::Return(_) => {}
+            Statement::Expression(_) => {}
+            Statement::Null => {}
+
+            Statement::If(_, statement, statement1) => {
+                visit_statement(statement, labels, error)?;
+                if let Some(statement) = statement1 {
+                    visit_statement(statement, labels, error)?;
+                }
+            }
+            Statement::Labeled(label, statement) => {
+                if !labels.insert(label.clone()) && !error {
+                    bail!("Label {label} repeated in function")
+                }
+                visit_statement(statement, labels, error)?
+            }
+            Statement::Goto(label) => {
+                if !labels.contains(label) && error {
+                    bail!("Cannot jump to unknown label {label:?}")
+                }
+            }
+        }
+        Ok(())
+    }
+    {
+        let function = &program.function;
+        let mut labels = HashSet::new();
+        for item in function.body.iter() {
+            match item {
+                BlockItem::Statement(statement) => visit_statement(statement, &mut labels, false)?,
+                BlockItem::Declaration(_) => {}
+            }
+        }
+        for item in function.body.iter() {
+            match item {
+                BlockItem::Statement(statement) => visit_statement(statement, &mut labels, true)?,
+                BlockItem::Declaration(_) => {}
+            }
+        }
+    }
+    Ok(())
 }
 
 fn resolve_variables(program: &mut Program) -> miette::Result<()> {
@@ -70,7 +121,7 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
             Statement::Return(expression) | Statement::Expression(expression) => {
                 visit_expr(expression, vars)
             }
-            Statement::Null => Ok(()),
+            Statement::Null | Statement::Goto(_) => Ok(()),
             Statement::If(cond, then, r#else) => {
                 visit_expr(cond, vars)?;
                 visit_statement(then, vars)?;
@@ -80,6 +131,7 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
                     Ok(())
                 }
             }
+            Statement::Labeled(_, statement) => visit_statement(statement, vars),
         }
     }
 

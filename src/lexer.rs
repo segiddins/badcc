@@ -127,6 +127,8 @@ pub enum TokenKind {
     Question,
     #[token(":")]
     Colon,
+    #[token("goto")]
+    Goto,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
