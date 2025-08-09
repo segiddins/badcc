@@ -58,6 +58,9 @@ fn resolve_labels(program: &mut Program) -> miette::Result<()> {
             Statement::While(_, statement, _) => visit_statement(statement, labels, error)?,
             Statement::DoWhile(statement, _, _) => visit_statement(statement, labels, error)?,
             Statement::For { body, .. } => visit_statement(body, labels, error)?,
+            Statement::Switch(_, cases, _) => visit_statement(cases, labels, error)?,
+            Statement::Case(_, statement, _) => visit_statement(statement, labels, error)?,
+            Statement::Default(statement, _) => visit_statement(statement, labels, error)?,
         }
         Ok(())
     }
@@ -195,7 +198,6 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
             }
             Statement::Labeled(_, statement) => visit_statement(statement, scope),
             Statement::Compound(block) => visit_block(block, scope),
-
             Statement::While(expression, statement, _) => {
                 visit_expr(expression, scope)?;
                 visit_statement(statement, scope)
@@ -221,6 +223,15 @@ fn resolve_variables(program: &mut Program) -> miette::Result<()> {
                 visit_optional_expression(post, scope)?;
                 visit_statement(body, scope)
             }),
+            Statement::Switch(expression, cases, _) => {
+                visit_expr(expression, scope)?;
+                visit_statement(cases, scope)
+            }
+            Statement::Case(expression, statement, _) => {
+                visit_expr(expression, scope)?;
+                visit_statement(statement, scope)
+            }
+            Statement::Default(statement, _) => visit_statement(statement, scope),
         }
     }
 

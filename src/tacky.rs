@@ -64,6 +64,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
         phis: u32,
         name: &'i str,
         variables: HashMap<String, Val>,
+        switch_cases: HashMap<String, Vec<Option<i32>>>,
     }
     impl State<'_> {
         fn var(&mut self) -> Val {
@@ -355,6 +356,62 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 state.push(Instruction::Jump(cond_label));
                 state.push(Instruction::Label(end_label));
             }
+            Statement::Switch(expression, switch_cases, label) => {
+                let label = label.as_ref().unwrap();
+                let start = format!("{label}.cases");
+                let value = walk(expression, state);
+                let cmp = state.var();
+                state.push(Instruction::Jump(start.clone()));
+                state.switch_cases.insert(label.clone(), Default::default());
+
+                walk_statement(switch_cases, state);
+                state.push(Instruction::Jump(label.clone()));
+
+                state.push(Instruction::Label(start));
+                let cases = state.switch_cases.get(label).unwrap().clone();
+                for case in cases {
+                    match case {
+                        Some(case) => {
+                            state.push(Instruction::Binary {
+                                op: BinaryOperator::Equals,
+                                lhs: Val::Constant(case),
+                                rhs: value,
+                                dst: cmp,
+                            });
+                            state.push(Instruction::JumpIfNotZero(cmp, format!("{label}.{case}")));
+                        }
+                        None => state.push(Instruction::Jump(format!("{label}.default"))),
+                    }
+                }
+                state.push(Instruction::Label(label.clone()));
+            }
+            Statement::Case(expression, statement, label) => {
+                let Val::Constant(c) = walk(expression, state) else {
+                    unreachable!()
+                };
+                state.push(Instruction::Label(format!(
+                    "{}.{c}",
+                    label.as_ref().unwrap()
+                )));
+                state
+                    .switch_cases
+                    .get_mut(label.as_ref().unwrap())
+                    .unwrap_or_else(|| panic!("no switch cases registed for {label:?}",))
+                    .push(Some(c));
+                walk_statement(statement, state);
+            }
+            Statement::Default(statement, label) => {
+                state.push(Instruction::Label(format!(
+                    "{}.default",
+                    label.as_ref().unwrap()
+                )));
+                state
+                    .switch_cases
+                    .get_mut(label.as_ref().unwrap())
+                    .unwrap()
+                    .push(None);
+                walk_statement(statement, state);
+            }
         }
     }
 
@@ -381,6 +438,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
         phis: 0,
         name: &function.name,
         variables: Default::default(),
+        switch_cases: Default::default(),
     };
 
     walk_block(&function.body, &mut state);

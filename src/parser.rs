@@ -70,6 +70,9 @@ pub enum Statement {
         body: Box<Statement>,
         label: Option<String>,
     },
+    Switch(Expression, Box<Statement>, Option<String>),
+    Case(Expression, Box<Statement>, Option<String>),
+    Default(Box<Statement>, Option<String>),
     Null,
 }
 
@@ -293,7 +296,30 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                         Ok(s)
                     })
             }
+            TokenKind::Switch => {
+                lexer.next_token();
+                lexer.expect(TokenKind::LParen)?;
+                let expr = parse_expression(lexer)?;
+                lexer.expect(TokenKind::RParen)?;
+
+                Ok(Statement::Switch(
+                    expr,
+                    parse_statement(lexer)?.into(),
+                    None,
+                ))
+            }
             TokenKind::LBrace => parse_block(lexer).map(Statement::Compound),
+            TokenKind::Case => {
+                lexer.next_token();
+                let expr = parse_expression(lexer)?;
+                lexer.expect(TokenKind::Colon)?;
+                Ok(Statement::Case(expr, parse_statement(lexer)?.into(), None))
+            }
+            TokenKind::Default => {
+                lexer.next_token();
+                lexer.expect(TokenKind::Colon)?;
+                Ok(Statement::Default(parse_statement(lexer)?.into(), None))
+            }
             TokenKind::Break => {
                 lexer.next_token();
                 lexer.expect(TokenKind::Semicolon)?;

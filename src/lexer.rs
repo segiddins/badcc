@@ -139,6 +139,12 @@ pub enum TokenKind {
     Break,
     #[token("continue")]
     Continue,
+    #[token("switch")]
+    Switch,
+    #[token("case")]
+    Case,
+    #[token("default")]
+    Default,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
