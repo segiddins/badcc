@@ -2,8 +2,8 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $1, -4(%rbp)
+	subq $16, %rsp
+	movl $1, -12(%rbp)
 	jmp Lswitch.0.cases
 	Lswitch.0.default:
 	movl $1, %eax

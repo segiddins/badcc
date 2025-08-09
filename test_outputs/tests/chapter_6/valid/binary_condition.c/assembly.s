@@ -2,13 +2,13 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $8, %rsp
-	movl $1, -4(%rbp)
-	addl $2, -4(%rbp)
-	cmpl $3, -4(%rbp)
-	movl $0, -8(%rbp)
-	setE -8(%rbp)
-	cmpl $0, -8(%rbp)
+	subq $16, %rsp
+	movl $1, -12(%rbp)
+	addl $2, -12(%rbp)
+	cmpl $3, -12(%rbp)
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jE Lmain.0.true
 	movl $5, %eax
 	movq %rbp, %rsp

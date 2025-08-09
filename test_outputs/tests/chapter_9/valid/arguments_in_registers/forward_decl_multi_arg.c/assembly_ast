@@ -1,0 +1,145 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        SI,
+                        Four,
+                    ),
+                },
+                Call(
+                    "foo",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "foo",
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Register(
+                        DI,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        SI,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Sub,
+                    Register(
+                        R10,
+                        Four,
+                    ),
+                    Stack(
+                        20,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+}

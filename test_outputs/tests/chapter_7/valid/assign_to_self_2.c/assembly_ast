@@ -1,60 +1,66 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                8,
-            ),
-            Move {
-                source: Immediate(
-                    3,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    16,
                 ),
-                destination: Psuedo(
-                    0,
-                ),
-            },
-            Move {
-                source: Immediate(
-                    4,
-                ),
-                destination: Psuedo(
-                    1,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    1,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    1,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

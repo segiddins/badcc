@@ -2,14 +2,14 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $8, -4(%rbp)
-	movl -4(%rbp), %eax
+	subq $16, %rsp
+	movl $8, -12(%rbp)
+	movl -12(%rbp), %eax
 	cdq
 	movl $4, %r10d
 	idivl %r10d
-	movl %eax, -4(%rbp)
-	movl -4(%rbp), %eax
+	movl %eax, -12(%rbp)
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

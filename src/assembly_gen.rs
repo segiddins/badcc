@@ -1,8 +1,10 @@
-use crate::tacky::{self};
+use std::{collections::HashMap, iter::empty};
+
+use crate::tacky;
 
 #[derive(Debug)]
 pub struct Program {
-    pub function_definition: Function,
+    pub definitions: Vec<Function>,
 }
 
 #[derive(Debug)]
@@ -37,6 +39,9 @@ pub enum Instruction {
     SetCC(CondCode, Operand),
     Label(String),
     AllocateStack(u32),
+    DeallocateStack(u32),
+    Push(Operand),
+    Call(String),
     Ret,
 }
 
@@ -87,44 +92,76 @@ pub enum BinaryOperator {
 #[derive(Debug, Clone, Copy)]
 pub enum Operand {
     Immediate(i32),
-    Register(Reg),
+    Register(Reg, Width),
     Psuedo(u32),
+    Stack(i32),
+}
+
+impl Operand {
+    pub const fn width(&self) -> Width {
+        match self {
+            Operand::Immediate(_) => Width::Four,
+            Operand::Register(_, width) => *width,
+            Operand::Psuedo(_) | Operand::Stack(_) => Width::Four,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Copy)]
 pub enum Reg {
     AX,
     DX,
+    CX,
+    DI,
+    SI,
+    R8,
+    R9,
     R10,
     R11,
-    CL,
 }
 
-impl AsRef<str> for Reg {
-    fn as_ref(&self) -> &'static str {
-        match self {
-            Reg::AX => "eax",
-            Reg::DX => "edx",
-            Reg::R10 => "r10d",
-            Reg::R11 => "r11d",
-            Reg::CL => "ecx",
+impl Reg {
+    const fn wide(self) -> Operand {
+        Operand::Register(self, Width::Eight)
+    }
+    const fn quad(self) -> Operand {
+        Operand::Register(self, Width::Four)
+    }
+    const fn word(self) -> Operand {
+        Operand::Register(self, Width::One)
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Width {
+    One,
+    Four,
+    Eight,
+}
+
+impl From<Width> for u32 {
+    fn from(value: Width) -> Self {
+        match value {
+            Width::One => 1,
+            Width::Four => 4,
+            Width::Eight => 8,
         }
     }
 }
 
 impl From<&tacky::Program> for Program {
     fn from(value: &tacky::Program) -> Self {
-        Program {
-            function_definition: (&value.function_definition).into(),
-        }
+        let definitions = value.functions.iter().map(|func| func.into()).collect();
+        Program { definitions }
     }
 }
 
 impl From<&tacky::Function> for Function {
     fn from(value: &tacky::Function) -> Self {
+        let instructions = lower_instructions(&value.params, &value.instructions);
         Function {
             name: value.identifier.clone(),
-            instructions: lower_instructions(&value.instructions),
+            instructions,
         }
     }
 }
@@ -190,9 +227,14 @@ impl From<&tacky::Val> for Operand {
     }
 }
 
-impl From<Reg> for Operand {
-    fn from(value: Reg) -> Self {
-        Self::Register(value)
+impl From<(Reg, Width)> for Operand {
+    fn from((reg, width): (Reg, Width)) -> Self {
+        Self::Register(reg, width)
+    }
+}
+impl From<(&Reg, Width)> for Operand {
+    fn from((reg, width): (&Reg, Width)) -> Self {
+        (*reg, width).into()
     }
 }
 
@@ -202,11 +244,20 @@ impl From<i32> for Operand {
     }
 }
 
+const REG_ARGS: [Operand; 6] = [
+    Reg::DI.quad(),
+    Reg::SI.quad(),
+    Reg::DX.quad(),
+    Reg::CX.quad(),
+    Reg::R8.quad(),
+    Reg::R9.quad(),
+];
+
 impl From<&tacky::Instruction> for Vec<Instruction> {
     fn from(insn: &tacky::Instruction) -> Self {
         match insn {
             tacky::Instruction::Return(val) => {
-                vec![Instruction::mov(val, Reg::AX), Instruction::Ret]
+                vec![Instruction::mov(val, Reg::AX.quad()), Instruction::Ret]
             }
             tacky::Instruction::Unary { op, src, dst } => match op {
                 tacky::UnaryOperator::Not => {
@@ -221,18 +272,18 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
             tacky::Instruction::Binary { op, lhs, rhs, dst } => match op {
                 tacky::BinaryOperator::Divide => {
                     vec![
-                        Instruction::mov(lhs, Reg::AX),
+                        Instruction::mov(lhs, Reg::AX.quad()),
                         Instruction::Cdq,
                         Instruction::Idiv(rhs.into()),
-                        Instruction::mov(Reg::AX, dst),
+                        Instruction::mov(Reg::AX.quad(), dst),
                     ]
                 }
                 tacky::BinaryOperator::Remainder => {
                     vec![
-                        Instruction::mov(lhs, Reg::AX),
+                        Instruction::mov(lhs, Reg::AX.quad()),
                         Instruction::Cdq,
                         Instruction::Idiv(rhs.into()),
-                        Instruction::mov(Reg::DX, dst),
+                        Instruction::mov(Reg::DX.quad(), dst),
                     ]
                 }
                 tacky::BinaryOperator::And
@@ -267,110 +318,186 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                 Instruction::JmpCC(CondCode::NE, target.into()),
             ],
             tacky::Instruction::Label(label) => vec![Instruction::Label(label.clone())],
+            tacky::Instruction::Call(func, args, ret) => {
+                let mut instructions = vec![];
+
+                let stack_args = args.iter().skip(REG_ARGS.len()).rev();
+                let stack_args_len = stack_args.len() as u32;
+                let stack_padding = (stack_args_len * 8) % 16;
+                if !stack_padding.is_multiple_of(16) {
+                    instructions.push(Instruction::AllocateStack(stack_padding))
+                };
+
+                for (param, reg) in args.iter().zip(&REG_ARGS) {
+                    instructions.push(Instruction::mov(param, *reg));
+                }
+
+                for param in stack_args {
+                    let param: Operand = param.into();
+                    match param {
+                        Operand::Immediate(_) | Operand::Register(_, _) => {
+                            instructions.push(Instruction::Push(param))
+                        }
+                        Operand::Psuedo(_) => {
+                            instructions.push(Instruction::mov(param, Reg::AX.quad()));
+                            instructions.push(Instruction::Push(Reg::AX.wide()));
+                        }
+                        Operand::Stack(_) => unreachable!(),
+                    }
+                }
+
+                instructions.push(Instruction::Call(func.clone()));
+
+                let bytes_to_remove = (8 * stack_args_len) + stack_padding;
+                if bytes_to_remove != 0 {
+                    instructions.push(Instruction::DeallocateStack(bytes_to_remove));
+                }
+
+                instructions.push(Instruction::mov(Reg::AX.quad(), ret));
+                instructions
+            }
         }
     }
 }
 
-fn replace_pseudo(instructions: impl Iterator<Item = Vec<Instruction>>) -> u32 {
-    fn m(op: &Operand) -> u32 {
+/// Returns the size of stack that needs to be allocated
+fn replace_pseudo(instructions: &mut [Instruction]) -> u32 {
+    let mut max = 8;
+    let mut mapping: HashMap<u32, i32> = Default::default();
+    let mut m = |op: &mut Operand| {
         match op {
-            Operand::Immediate(_) => 0,
-            Operand::Register(_) => 0,
-            Operand::Psuedo(x) => *x,
-        }
-    }
-    instructions
-        .flatten()
-        .map(|i| match i {
+            Operand::Immediate(_) | Operand::Register(_, _) => {}
+            Operand::Psuedo(x) => {
+                let stack = *mapping.entry(*x).or_insert_with(|| max + 4);
+                *op = Operand::Stack(stack);
+                max = max.max(stack);
+            }
+            Operand::Stack(x) => max = max.max(*x),
+        };
+    };
+
+    for i in instructions {
+        match i {
             Instruction::Move {
                 source,
                 destination,
-            } => m(&source).max(m(&destination)),
-            Instruction::Unary(_, operand) => m(&operand),
-            Instruction::AllocateStack(_) => unreachable!(),
-            Instruction::Ret => 0,
-            Instruction::Binary(_, operand, operand1) => m(&operand).max(m(&operand1)),
-            Instruction::Idiv(operand) => m(&operand),
-            Instruction::Cdq => 0,
-            Instruction::Cmp(operand, operand1) => m(&operand).max(m(&operand1)),
-            Instruction::Jmp(_) => 0,
-            Instruction::JmpCC(_, _) => 0,
-            Instruction::SetCC(_, operand) => m(&operand),
-            Instruction::Label(_) => 0,
-        })
-        .max()
-        .unwrap_or_default()
+            } => {
+                m(source);
+                m(destination);
+            }
+            Instruction::Unary(_, operand) => m(operand),
+            Instruction::Binary(_, operand, operand1) => {
+                m(operand);
+                m(operand1);
+            }
+            Instruction::Idiv(operand) => m(operand),
+            Instruction::Cmp(operand, operand1) => {
+                m(operand);
+                m(operand1);
+            }
+            Instruction::SetCC(_, operand) => m(operand),
+            Instruction::Push(operand) => {
+                m(operand);
+            }
+            Instruction::AllocateStack(_)
+            | Instruction::Ret
+            | Instruction::Cdq
+            | Instruction::Jmp(_)
+            | Instruction::JmpCC(_, _)
+            | Instruction::Label(_)
+            | Instruction::DeallocateStack(_)
+            | Instruction::Call(_) => {}
+        }
+    }
+    (max as u32).next_multiple_of(16)
 }
 
-fn lower_instructions(instructions: &[tacky::Instruction]) -> Vec<Instruction> {
-    let mut v: Vec<_> = instructions.iter().flat_map(Into::<Vec<_>>::into).collect();
-    v.insert(
-        0,
-        Instruction::AllocateStack(replace_pseudo(instructions.iter().map(|i| i.into())) * 4 + 4),
-    );
+fn lower_instructions(
+    params: &[tacky::Val],
+    instructions: &[tacky::Instruction],
+) -> Vec<Instruction> {
+    let mut v: Vec<Instruction> = empty()
+        .chain(
+            params
+                .iter()
+                .zip(REG_ARGS)
+                .map(|(var, reg)| Instruction::mov(reg, var)),
+        )
+        .chain(
+            params
+                .iter()
+                .skip(6)
+                .enumerate()
+                .map(|(i, param)| Instruction::mov(Operand::Stack(i as i32 * -8 - 16), param)),
+        )
+        .chain(instructions.iter().flat_map(Into::<Vec<_>>::into))
+        .collect();
+
+    let alloc_stack = Instruction::AllocateStack(replace_pseudo(&mut v));
+    v.insert(0, alloc_stack);
     v.into_iter()
         .flat_map(|i| match i {
             Instruction::Move {
                 source,
                 destination,
-            } if matches!(source, Operand::Psuedo(_))
-                && matches!(destination, Operand::Psuedo(_)) =>
+            } if matches!(source, Operand::Stack(_))
+                && matches!(destination, Operand::Stack(_)) =>
             {
                 vec![
-                    Instruction::mov(source, Reg::R10),
-                    Instruction::mov(Reg::R10, destination),
+                    Instruction::mov(source, Reg::R10.quad()),
+                    Instruction::mov(Reg::R10.quad(), destination),
                 ]
             }
             Instruction::Binary(op, src, dst)
                 if matches!(op, BinaryOperator::LeftShift | BinaryOperator::RightShift)
-                    && matches!(src, Operand::Psuedo(_))
-                    && matches!(dst, Operand::Psuedo(_)) =>
+                    && matches!(src, Operand::Stack(_))
+                    && matches!(dst, Operand::Stack(_)) =>
             {
                 vec![
-                    Instruction::mov(dst, Reg::R11),
-                    Instruction::mov(src, Reg::CL),
-                    Instruction::binary(op, Reg::CL, Reg::R11),
-                    Instruction::mov(Reg::R11, dst),
+                    Instruction::mov(dst, Reg::R11.quad()),
+                    Instruction::mov(src, Reg::CX.quad()),
+                    Instruction::binary(op, Reg::CX.word(), Reg::R11.quad()),
+                    Instruction::mov(Reg::R11.quad(), dst),
                 ]
             }
             Instruction::Binary(op, src, dst)
                 if matches!(
                     op,
                     BinaryOperator::Mult | BinaryOperator::LeftShift | BinaryOperator::RightShift
-                ) && matches!(dst, Operand::Psuedo(_)) =>
+                ) && matches!(dst, Operand::Stack(_)) =>
             {
                 vec![
-                    Instruction::mov(dst, Reg::R11),
-                    Instruction::binary(op, src, Reg::R11),
-                    Instruction::mov(Reg::R11, dst),
+                    Instruction::mov(dst, Reg::R11.quad()),
+                    Instruction::binary(op, src, Reg::R11.quad()),
+                    Instruction::mov(Reg::R11.quad(), dst),
                 ]
             }
             Instruction::Binary(op, src, dst)
-                if matches!(src, Operand::Psuedo(_)) && matches!(dst, Operand::Psuedo(_)) =>
+                if matches!(src, Operand::Stack(_)) && matches!(dst, Operand::Stack(_)) =>
             {
                 vec![
-                    Instruction::mov(src, Reg::R10),
-                    Instruction::binary(op, Reg::R10, dst),
+                    Instruction::mov(src, Reg::R10.quad()),
+                    Instruction::binary(op, Reg::R10.quad(), dst),
                 ]
             }
             Instruction::Cmp(lhs, rhs)
-                if matches!(lhs, Operand::Psuedo(_)) && matches!(rhs, Operand::Psuedo(_)) =>
+                if matches!(lhs, Operand::Stack(_)) && matches!(rhs, Operand::Stack(_)) =>
             {
                 vec![
-                    Instruction::mov(lhs, Reg::R10),
-                    Instruction::Cmp(Reg::R10.into(), rhs),
+                    Instruction::mov(lhs, Reg::R10.quad()),
+                    Instruction::Cmp(Reg::R10.quad(), rhs),
                 ]
             }
             Instruction::Cmp(lhs, rhs) if matches!(rhs, Operand::Immediate(_)) => {
                 vec![
-                    Instruction::mov(rhs, Reg::R11),
-                    Instruction::Cmp(lhs, Reg::R11.into()),
+                    Instruction::mov(rhs, Reg::R11.quad()),
+                    Instruction::Cmp(lhs, Reg::R11.quad()),
                 ]
             }
             Instruction::Idiv(Operand::Immediate(val)) => {
                 vec![
-                    Instruction::mov(Operand::Immediate(val), Reg::R10),
-                    Instruction::Idiv(Reg::R10.into()),
+                    Instruction::mov(Operand::Immediate(val), Reg::R10.quad()),
+                    Instruction::Idiv(Reg::R10.quad()),
                 ]
             }
 

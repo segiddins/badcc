@@ -1,8 +1,17 @@
-  × expected RParen
-   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_3/invalid_parse/imbalanced_paren.i:2:18]
+  × while parsing parse_block_item
+  ╰─▶   × expected one of [RParen], found Semicolon
+         ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_3/invalid_parse/imbalanced_paren.i:2:18]
+       1 │ int main(void) {
+       2 │     return 1 + (2;
+         ·                  ┬
+         ·                  ╰── here
+       3 │ }
+         ╰────
+      
+   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_3/invalid_parse/imbalanced_paren.i:2:5]
  1 │ int main(void) {
  2 │     return 1 + (2;
-   ·                  ┬
-   ·                  ╰── unexpected: Semicolon
+   ·     ───┬──
+   ·        ╰── starting here
  3 │ }
    ╰────

@@ -1,37 +1,40 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    3,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: LeftShift,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Binary {
-                op: LeftShift,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    3,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

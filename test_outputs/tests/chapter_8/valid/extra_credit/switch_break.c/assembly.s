@@ -2,31 +2,31 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $8, %rsp
-	movl $5, -4(%rbp)
+	subq $16, %rsp
+	movl $5, -12(%rbp)
 	jmp Lswitch.0.cases
 	Lswitch.0.5:
-	movl $10, -4(%rbp)
+	movl $10, -12(%rbp)
 	jmp Lswitch.0
 	Lswitch.0.6:
-	movl $0, -4(%rbp)
+	movl $0, -12(%rbp)
 	jmp Lswitch.0
 	jmp Lswitch.0
 	Lswitch.0.cases:
 	movl $5, %r11d
-	cmpl -4(%rbp), %r11d
-	movl $0, -8(%rbp)
-	setE -8(%rbp)
-	cmpl $0, -8(%rbp)
+	cmpl -12(%rbp), %r11d
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jNE Lswitch.0.5
 	movl $6, %r11d
-	cmpl -4(%rbp), %r11d
-	movl $0, -8(%rbp)
-	setE -8(%rbp)
-	cmpl $0, -8(%rbp)
+	cmpl -12(%rbp), %r11d
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jNE Lswitch.0.6
 	Lswitch.0:
-	movl -4(%rbp), %eax
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

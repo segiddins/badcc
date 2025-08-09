@@ -1,16 +1,19 @@
 use std::collections::HashMap;
 
 pub use crate::parser::BinaryOperator;
-use crate::parser::{self, Block, BlockItem, Expression, Statement, VariableDeclaration};
+use crate::parser::{
+    self, Block, BlockItem, Declaration, Expression, Statement, VariableDeclaration,
+};
 
 #[derive(Debug)]
 pub struct Program {
-    pub function_definition: Function,
+    pub functions: Vec<Function>,
 }
 
 #[derive(Debug)]
 pub struct Function {
     pub identifier: String,
+    pub params: Vec<Val>,
     pub instructions: Vec<Instruction>,
 }
 
@@ -36,6 +39,7 @@ pub enum Instruction {
     JumpIfZero(Val, String),
     JumpIfNotZero(Val, String),
     Label(String),
+    Call(String, Vec<Val>, Val),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -51,32 +55,68 @@ pub enum UnaryOperator {
     Not,
 }
 
-pub fn lower(program: &parser::Program) -> Program {
-    Program {
-        function_definition: lower_function(&program.function),
+struct State<'i> {
+    temps: u32,
+    instructions: Vec<Instruction>,
+    phis: u32,
+    name: &'i str,
+    variables: HashMap<String, Val>,
+    switch_cases: HashMap<String, Vec<Option<i32>>>,
+}
+impl<'i> State<'i> {
+    fn var(&mut self) -> Val {
+        let v = Val::Var(self.temps);
+        self.temps += 1;
+        v
+    }
+
+    fn push(&mut self, instruction: Instruction) {
+        self.instructions.push(instruction);
+    }
+
+    fn new(name: &'i str) -> Self {
+        Self {
+            temps: 0,
+            instructions: vec![],
+            phis: 0,
+            name,
+            variables: Default::default(),
+            switch_cases: Default::default(),
+        }
+    }
+
+    fn function(&mut self, name: &'i str) -> Self {
+        self.variables.insert(name.to_string(), Val::Constant(0));
+        Self {
+            temps: 0,
+            instructions: vec![],
+            phis: 0,
+            name,
+            variables: self.variables.clone(),
+            switch_cases: Default::default(),
+        }
     }
 }
 
-pub fn lower_function(function: &parser::Function) -> Function {
-    struct State<'i> {
-        temps: u32,
-        instructions: Vec<Instruction>,
-        phis: u32,
-        name: &'i str,
-        variables: HashMap<String, Val>,
-        switch_cases: HashMap<String, Vec<Option<i32>>>,
-    }
-    impl State<'_> {
-        fn var(&mut self) -> Val {
-            let v = Val::Var(self.temps);
-            self.temps += 1;
-            v
-        }
+pub fn lower(program: &parser::Program) -> Program {
+    let mut state = State::new("global");
+    let functions = program
+        .declarations
+        .iter()
+        .filter_map(|decl| match decl {
+            Declaration::Variable(_) => None,
+            Declaration::Function(function) => lower_function(function, &mut state),
+        })
+        .collect();
+    Program { functions }
+}
 
-        fn push(&mut self, instruction: Instruction) {
-            self.instructions.push(instruction);
-        }
-    }
+fn lower_function<'a>(
+    function: &'a parser::FunctionDeclaration,
+    state: &mut State<'a>,
+) -> Option<Function> {
+    let body = function.body.as_ref()?;
+    let mut state = state.function(&function.identifier);
 
     fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
         match expr {
@@ -211,7 +251,10 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 });
                 dst
             }
-            Expression::Var(name) => *state.variables.get(name).unwrap(),
+            Expression::Var(name) => *state
+                .variables
+                .get(name)
+                .unwrap_or_else(|| panic!("no var named {name} in {}", state.name)),
             Expression::Assignment(lhs, rhs) => {
                 let rhs = walk(rhs, state);
                 let lhs = walk(lhs, state);
@@ -246,6 +289,20 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 state.push(Instruction::Label(end_label));
                 phi
             }
+            Expression::FunctionCall(ident, expressions) => {
+                let params = expressions
+                    .iter()
+                    .map(|e| walk(e, state))
+                    .collect::<Vec<_>>();
+                match ident.as_ref() {
+                    Expression::Var(name) => {
+                        let dst = state.var();
+                        state.push(Instruction::Call(name.clone(), params, dst));
+                        dst
+                    }
+                    _ => unreachable!(),
+                }
+            }
         }
     }
 
@@ -278,10 +335,10 @@ pub fn lower_function(function: &parser::Function) -> Function {
                 state.push(Instruction::Label(end_label));
             }
             Statement::Goto(label) => {
-                state.push(Instruction::Jump(label.clone()));
+                state.push(Instruction::Jump(format!("{}.{label}", state.name)));
             }
             Statement::Labeled(label, statement) => {
-                state.push(Instruction::Label(label.clone()));
+                state.push(Instruction::Label(format!("{}.{label}", state.name)));
                 walk_statement(statement, state);
             }
             Statement::Compound(block) => {
@@ -335,7 +392,7 @@ pub fn lower_function(function: &parser::Function) -> Function {
 
                 match init {
                     parser::ForInit::Decl(variable_declaration) => {
-                        walk_declaration(variable_declaration, state)
+                        walk_variable_declaration(variable_declaration, state)
                     }
                     parser::ForInit::Expr(expression) => {
                         walk_optional(expression, state);
@@ -415,11 +472,18 @@ pub fn lower_function(function: &parser::Function) -> Function {
         }
     }
 
-    fn walk_declaration<'i>(decl: &VariableDeclaration, state: &mut State<'i>) {
+    fn walk_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<'i>) {
         let var = state.var();
         state.variables.insert(decl.name.clone(), var);
         if let Some(rhs) = walk_optional(&decl.init, state) {
             state.push(Instruction::Copy { src: rhs, dst: var })
+        }
+    }
+
+    fn walk_declaration<'i>(decl: &Declaration, state: &mut State<'i>) {
+        match decl {
+            Declaration::Variable(decl) => walk_variable_declaration(decl, state),
+            Declaration::Function(_) => {}
         }
     }
 
@@ -432,65 +496,23 @@ pub fn lower_function(function: &parser::Function) -> Function {
         }
     }
 
-    let mut state = State {
-        temps: 0,
-        instructions: vec![],
-        phis: 0,
-        name: &function.name,
-        variables: Default::default(),
-        switch_cases: Default::default(),
-    };
+    let params = function
+        .params
+        .iter()
+        .map(|param| {
+            let var = state.var();
+            state.variables.insert(param.clone(), var);
+            var
+        })
+        .collect();
 
-    walk_block(&function.body, &mut state);
+    walk_block(body, &mut state);
 
     state.push(Instruction::Return(Val::Constant(0)));
 
-    Function {
-        identifier: function.name.clone(),
+    Some(Function {
+        identifier: function.identifier.clone(),
+        params,
         instructions: state.instructions,
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use insta::assert_debug_snapshot;
-
-    use crate::{
-        parser::{Block, BlockItem, Function, Program, Statement},
-        tacky::lower,
-    };
-
-    #[test]
-    fn test_basic() {
-        let program = Program {
-            function: Function {
-                name: "main".into(),
-                body: Block {
-                    items: vec![BlockItem::Statement(Statement::Return(
-                        crate::parser::Expression::Constant(2),
-                    ))],
-                },
-            },
-        };
-
-        assert_debug_snapshot!(lower(&program), @r#"
-        Program {
-            function_definition: Function {
-                identifier: "main",
-                instructions: [
-                    Return(
-                        Constant(
-                            2,
-                        ),
-                    ),
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ],
-            },
-        }
-        "#);
-    }
+    })
 }

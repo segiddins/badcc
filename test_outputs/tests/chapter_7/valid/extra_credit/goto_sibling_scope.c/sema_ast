@@ -1,165 +1,178 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "sum.0",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                If(
+                                    Constant(
+                                        1,
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Declaration(
+                                                    Variable(
+                                                        VariableDeclaration {
+                                                            name: "a.2",
+                                                            init: Some(
+                                                                Constant(
+                                                                    5,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Goto(
+                                                        "other_if",
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "sum.1",
+                                                            ),
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Labeled(
+                                                        "first_if",
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "a.2",
+                                                                ),
+                                                                Constant(
+                                                                    5,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "sum.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "sum.1",
+                                                                ),
+                                                                Var(
+                                                                    "a.2",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Constant(
+                                        0,
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Labeled(
+                                                        "other_if",
+                                                        Null,
+                                                    ),
+                                                ),
+                                                Declaration(
+                                                    Variable(
+                                                        VariableDeclaration {
+                                                            name: "a.3",
+                                                            init: Some(
+                                                                Constant(
+                                                                    6,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "sum.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "sum.1",
+                                                                ),
+                                                                Var(
+                                                                    "a.3",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Goto(
+                                                        "first_if",
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "sum.1",
+                                                            ),
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "sum.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    If(
-                        Constant(
-                            1,
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Declaration(
-                                        VariableDeclaration {
-                                            name: "a.1",
-                                            init: Some(
-                                                Constant(
-                                                    5,
-                                                ),
-                                            ),
-                                        },
-                                    ),
-                                    Statement(
-                                        Goto(
-                                            "other_if",
-                                        ),
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "sum.0",
-                                                ),
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        Labeled(
-                                            "first_if",
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "a.1",
-                                                    ),
-                                                    Constant(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "sum.0",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "sum.0",
-                                                    ),
-                                                    Var(
-                                                        "a.1",
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    If(
-                        Constant(
-                            0,
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Labeled(
-                                            "other_if",
-                                            Null,
-                                        ),
-                                    ),
-                                    Declaration(
-                                        VariableDeclaration {
-                                            name: "a.2",
-                                            init: Some(
-                                                Constant(
-                                                    6,
-                                                ),
-                                            ),
-                                        },
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "sum.0",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "sum.0",
-                                                    ),
-                                                    Var(
-                                                        "a.2",
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        Goto(
-                                            "first_if",
-                                        ),
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "sum.0",
-                                                ),
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "sum.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

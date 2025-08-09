@@ -1,123 +1,132 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "sum.0",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i.1",
-                                init: Some(
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
-                            },
-                        ),
-                        condition: None,
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i.1",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                        ),
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Labeled(
-                                            "lbl",
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "sum.0",
-                                                    ),
-                                                    Binary(
-                                                        Add,
-                                                        Var(
-                                                            "sum.0",
-                                                        ),
-                                                        Constant(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
                                             ),
                                         ),
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "i.1",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "i.1",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        If(
-                                            Binary(
-                                                GreaterThan,
-                                                Var(
-                                                    "i.1",
-                                                ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i.2",
+                                            init: Some(
                                                 Constant(
-                                                    10,
+                                                    0,
                                                 ),
                                             ),
-                                            Break(
-                                                Some(
-                                                    "loop.0",
-                                                ),
+                                        },
+                                    ),
+                                    condition: None,
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i.2",
                                             ),
-                                            None,
+                                            Constant(
+                                                0,
+                                            ),
                                         ),
                                     ),
-                                    Statement(
-                                        Goto(
-                                            "lbl",
-                                        ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Labeled(
+                                                        "lbl",
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "sum.1",
+                                                                ),
+                                                                Binary(
+                                                                    Add,
+                                                                    Var(
+                                                                        "sum.1",
+                                                                    ),
+                                                                    Constant(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "i.2",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "i.2",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    If(
+                                                        Binary(
+                                                            GreaterThan,
+                                                            Var(
+                                                                "i.2",
+                                                            ),
+                                                            Constant(
+                                                                10,
+                                                            ),
+                                                        ),
+                                                        Break(
+                                                            Some(
+                                                                "loop.0",
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Goto(
+                                                        "lbl",
+                                                    ),
+                                                ),
+                                            ],
+                                        },
                                     ),
-                                ],
-                            },
-                        ),
-                        label: Some(
-                            "loop.0",
-                        ),
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "sum.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "sum.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

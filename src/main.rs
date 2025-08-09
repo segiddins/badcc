@@ -45,6 +45,12 @@ struct Driver {
     #[clap(long)]
     tacky: bool,
 
+    #[clap(short = 'c', help = "Only run preprocess, compile, and assemble steps")]
+    skip_linking: bool,
+
+    #[clap(long, hide = true)]
+    print_ast: bool,
+
     #[clap(long, hide = true)]
     keep_artifacts: bool,
 
@@ -72,6 +78,10 @@ impl Driver {
             return Ok(());
         }
         self.write_test_output("ast", || format!("{program:#?}"));
+
+        if self.print_ast {
+            println!("{program:#?}");
+        }
 
         validate(&mut program)?;
         self.write_test_output("sema_ast", || format!("{program:#?}"));
@@ -137,11 +147,16 @@ impl Driver {
         #[cfg(not(target_os = "macos"))]
         let mut cmd = Command::new("gcc");
 
-        cmd.arg(assembly.as_ref()).arg("-o").arg(
-            self.output
-                .clone()
-                .unwrap_or_else(|| self.input.with_extension("")),
-        );
+        if self.skip_linking {
+            cmd.arg("-c");
+        }
+
+        cmd.arg(assembly.as_ref())
+            .arg("-o")
+            .arg(self.output.clone().unwrap_or_else(|| {
+                self.input
+                    .with_extension(if self.skip_linking { "o" } else { "" })
+            }));
 
         let status = cmd.spawn().into_diagnostic()?.wait().into_diagnostic()?;
 

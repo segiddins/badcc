@@ -1,0 +1,194 @@
+Program {
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Call(
+                    "fib",
+                    [
+                        Constant(
+                            4,
+                        ),
+                    ],
+                    Var(
+                        1,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        7,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Call(
+                    "fib",
+                    [
+                        Constant(
+                            6,
+                        ),
+                    ],
+                    Var(
+                        4,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Call(
+                    "multiply_many_args",
+                    [
+                        Var(
+                            0,
+                        ),
+                        Constant(
+                            2,
+                        ),
+                        Constant(
+                            3,
+                        ),
+                        Constant(
+                            4,
+                        ),
+                        Constant(
+                            5,
+                        ),
+                        Constant(
+                            6,
+                        ),
+                        Var(
+                            2,
+                        ),
+                        Var(
+                            3,
+                        ),
+                    ],
+                    Var(
+                        6,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        6,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        7,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        7,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        5,
+                    ),
+                    rhs: Constant(
+                        589680,
+                    ),
+                    dst: Var(
+                        8,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        8,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: Remainder,
+                    lhs: Var(
+                        5,
+                    ),
+                    rhs: Constant(
+                        256,
+                    ),
+                    dst: Var(
+                        9,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        9,
+                    ),
+                    dst: Var(
+                        10,
+                    ),
+                },
+                Return(
+                    Var(
+                        10,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

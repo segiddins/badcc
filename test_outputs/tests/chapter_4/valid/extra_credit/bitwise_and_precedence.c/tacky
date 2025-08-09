@@ -1,41 +1,44 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Binary {
-                op: Equals,
-                lhs: Constant(
-                    7,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        7,
+                    ),
+                    rhs: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: BitwiseAnd,
+                    lhs: Constant(
+                        5,
+                    ),
+                    rhs: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-                rhs: Constant(
-                    5,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Binary {
-                op: BitwiseAnd,
-                lhs: Constant(
-                    5,
-                ),
-                rhs: Var(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

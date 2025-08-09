@@ -1,209 +1,212 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    4,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        9,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            Copy {
-                src: Constant(
-                    9,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    1,
+                Copy {
+                    src: Constant(
+                        7,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-            },
-            Copy {
-                src: Constant(
-                    0,
+                Jump(
+                    "switch.0.cases",
                 ),
-                dst: Var(
-                    2,
+                Label(
+                    "switch.0.0",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    0,
+                Return(
+                    Constant(
+                        5,
+                    ),
                 ),
-                "main.0.true",
-            ),
-            Copy {
-                src: Var(
-                    1,
+                Label(
+                    "switch.0.7",
                 ),
-                dst: Var(
-                    3,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Label(
+                    "switch.0.9",
                 ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    7,
+                Copy {
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Label(
+                    "switch.0.1",
                 ),
-                dst: Var(
-                    3,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        5,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Jump(
+                    "switch.0",
                 ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Jump(
-                "switch.0.cases",
-            ),
-            Label(
-                "switch.0.0",
-            ),
-            Return(
-                Constant(
-                    5,
+                Label(
+                    "switch.0.cases",
                 ),
-            ),
-            Label(
-                "switch.0.7",
-            ),
-            Copy {
-                src: Constant(
-                    1,
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        0,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        4,
+                    ),
+                    "switch.0.0",
                 ),
-                dst: Var(
-                    2,
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        7,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        4,
+                    ),
+                    "switch.0.7",
                 ),
-            },
-            Label(
-                "switch.0.9",
-            ),
-            Copy {
-                src: Constant(
-                    2,
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        9,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        4,
+                    ),
+                    "switch.0.9",
                 ),
-                dst: Var(
-                    2,
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        4,
+                    ),
+                    "switch.0.1",
                 ),
-            },
-            Label(
-                "switch.0.1",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    2,
+                Label(
+                    "switch.0",
                 ),
-                rhs: Constant(
-                    4,
+                Return(
+                    Var(
+                        2,
+                    ),
                 ),
-                dst: Var(
-                    5,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Copy {
-                src: Var(
-                    5,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Jump(
-                "switch.0",
-            ),
-            Label(
-                "switch.0.cases",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Constant(
-                    0,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    4,
-                ),
-                "switch.0.0",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Constant(
-                    7,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    4,
-                ),
-                "switch.0.7",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Constant(
-                    9,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    4,
-                ),
-                "switch.0.9",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Constant(
-                    1,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    4,
-                ),
-                "switch.0.1",
-            ),
-            Label(
-                "switch.0",
-            ),
-            Return(
-                Var(
-                    2,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

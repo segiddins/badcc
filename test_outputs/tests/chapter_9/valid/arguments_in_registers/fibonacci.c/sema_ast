@@ -1,0 +1,141 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "fib",
+                params: [
+                    "n.1",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        Or,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "n.1",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "n.1",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Var(
+                                                            "n.1",
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    Some(
+                                        Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Return(
+                                                            Binary(
+                                                                Add,
+                                                                FunctionCall(
+                                                                    Var(
+                                                                        "fib",
+                                                                    ),
+                                                                    [
+                                                                        Binary(
+                                                                            Subtract,
+                                                                            Var(
+                                                                                "n.1",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                                FunctionCall(
+                                                                    Var(
+                                                                        "fib",
+                                                                    ),
+                                                                    [
+                                                                        Binary(
+                                                                            Subtract,
+                                                                            Var(
+                                                                                "n.1",
+                                                                            ),
+                                                                            Constant(
+                                                                                2,
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "n.3",
+                                        init: Some(
+                                            Constant(
+                                                6,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "fib",
+                                        ),
+                                        [
+                                            Var(
+                                                "n.3",
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

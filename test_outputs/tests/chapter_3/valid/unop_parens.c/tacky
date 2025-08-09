@@ -1,38 +1,41 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Binary {
-                op: Add,
-                lhs: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Unary {
+                    op: Complement,
+                    src: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-                rhs: Constant(
-                    1,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Unary {
-                op: Complement,
-                src: Var(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

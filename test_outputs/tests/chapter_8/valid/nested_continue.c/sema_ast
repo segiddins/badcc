@@ -1,163 +1,176 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "x.0",
-                        init: Some(
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "acc.1",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    While(
-                        Binary(
-                            GreaterThanOrEqual,
-                            Var(
-                                "x.0",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Declaration(
-                                        VariableDeclaration {
-                                            name: "i.2",
-                                            init: Some(
-                                                Var(
-                                                    "x.0",
-                                                ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x.1",
+                                        init: Some(
+                                            Constant(
+                                                5,
                                             ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "acc.2",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                While(
+                                    Binary(
+                                        GreaterThanOrEqual,
+                                        Var(
+                                            "x.1",
+                                        ),
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Declaration(
+                                                    Variable(
+                                                        VariableDeclaration {
+                                                            name: "i.3",
+                                                            init: Some(
+                                                                Var(
+                                                                    "x.1",
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    While(
+                                                        Binary(
+                                                            LessThanOrEqual,
+                                                            Var(
+                                                                "i.3",
+                                                            ),
+                                                            Constant(
+                                                                10,
+                                                            ),
+                                                        ),
+                                                        Compound(
+                                                            Block {
+                                                                items: [
+                                                                    Statement(
+                                                                        Expression(
+                                                                            Assignment(
+                                                                                Var(
+                                                                                    "i.3",
+                                                                                ),
+                                                                                Binary(
+                                                                                    Add,
+                                                                                    Var(
+                                                                                        "i.3",
+                                                                                    ),
+                                                                                    Constant(
+                                                                                        1,
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                    Statement(
+                                                                        If(
+                                                                            Binary(
+                                                                                Remainder,
+                                                                                Var(
+                                                                                    "i.3",
+                                                                                ),
+                                                                                Constant(
+                                                                                    2,
+                                                                                ),
+                                                                            ),
+                                                                            Continue(
+                                                                                Some(
+                                                                                    "loop.1",
+                                                                                ),
+                                                                            ),
+                                                                            None,
+                                                                        ),
+                                                                    ),
+                                                                    Statement(
+                                                                        Expression(
+                                                                            Assignment(
+                                                                                Var(
+                                                                                    "acc.2",
+                                                                                ),
+                                                                                Binary(
+                                                                                    Add,
+                                                                                    Var(
+                                                                                        "acc.2",
+                                                                                    ),
+                                                                                    Constant(
+                                                                                        1,
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ],
+                                                            },
+                                                        ),
+                                                        Some(
+                                                            "loop.1",
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "x.1",
+                                                            ),
+                                                            Binary(
+                                                                Subtract,
+                                                                Var(
+                                                                    "x.1",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
                                         },
                                     ),
-                                    Statement(
-                                        While(
-                                            Binary(
-                                                LessThanOrEqual,
-                                                Var(
-                                                    "i.2",
-                                                ),
-                                                Constant(
-                                                    10,
-                                                ),
-                                            ),
-                                            Compound(
-                                                Block {
-                                                    items: [
-                                                        Statement(
-                                                            Expression(
-                                                                Assignment(
-                                                                    Var(
-                                                                        "i.2",
-                                                                    ),
-                                                                    Binary(
-                                                                        Add,
-                                                                        Var(
-                                                                            "i.2",
-                                                                        ),
-                                                                        Constant(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            If(
-                                                                Binary(
-                                                                    Remainder,
-                                                                    Var(
-                                                                        "i.2",
-                                                                    ),
-                                                                    Constant(
-                                                                        2,
-                                                                    ),
-                                                                ),
-                                                                Continue(
-                                                                    Some(
-                                                                        "loop.1",
-                                                                    ),
-                                                                ),
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Expression(
-                                                                Assignment(
-                                                                    Var(
-                                                                        "acc.1",
-                                                                    ),
-                                                                    Binary(
-                                                                        Add,
-                                                                        Var(
-                                                                            "acc.1",
-                                                                        ),
-                                                                        Constant(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ],
-                                                },
-                                            ),
-                                            Some(
-                                                "loop.1",
-                                            ),
-                                        ),
+                                    Some(
+                                        "loop.0",
                                     ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "x.0",
-                                                ),
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "x.0",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "acc.2",
                                     ),
-                                ],
-                            },
-                        ),
-                        Some(
-                            "loop.0",
-                        ),
-                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "acc.1",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

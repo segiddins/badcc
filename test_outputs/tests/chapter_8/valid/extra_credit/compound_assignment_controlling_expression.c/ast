@@ -1,79 +1,90 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "i",
-                        init: Some(
-                            Constant(
-                                100,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i",
+                                        init: Some(
+                                            Constant(
+                                                100,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                DoWhile(
+                                    Expression(
+                                        CompoundAssignment(
+                                            Var(
+                                                "sum",
+                                            ),
+                                            Add,
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    CompoundAssignment(
+                                        Var(
+                                            "i",
+                                        ),
+                                        Subtract,
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "i",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "sum",
+                                            ),
+                                            Constant(
+                                                200,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "sum",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    DoWhile(
-                        Expression(
-                            CompoundAssignment(
-                                Var(
-                                    "sum",
-                                ),
-                                Add,
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                        CompoundAssignment(
-                            Var(
-                                "i",
-                            ),
-                            Subtract,
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "sum",
-                                ),
-                                Constant(
-                                    200,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

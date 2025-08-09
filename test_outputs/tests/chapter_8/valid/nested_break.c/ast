@@ -1,152 +1,161 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "ans",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i",
-                                init: Some(
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
-                            },
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        body: For {
-                            init: Decl(
-                                VariableDeclaration {
-                                    name: "j",
-                                    init: Some(
-                                        Constant(
-                                            0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "ans",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
                                         ),
-                                    ),
-                                },
-                            ),
-                            condition: Some(
-                                Binary(
-                                    LessThan,
-                                    Var(
-                                        "j",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
+                                    },
                                 ),
                             ),
-                            post: Some(
-                                Assignment(
-                                    Var(
-                                        "j",
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i",
+                                            init: Some(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                        },
                                     ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "j",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            body: If(
-                                Binary(
-                                    Equals,
-                                    Binary(
-                                        Multiply,
+                                    condition: Some(
                                         Binary(
-                                            Divide,
+                                            LessThan,
                                             Var(
                                                 "i",
                                             ),
                                             Constant(
-                                                2,
+                                                10,
                                             ),
                                         ),
-                                        Constant(
-                                            2,
-                                        ),
                                     ),
-                                    Var(
-                                        "i",
-                                    ),
-                                ),
-                                Break(
-                                    None,
-                                ),
-                                Some(
-                                    Expression(
+                                    post: Some(
                                         Assignment(
                                             Var(
-                                                "ans",
+                                                "i",
                                             ),
                                             Binary(
                                                 Add,
                                                 Var(
-                                                    "ans",
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    body: For {
+                                        init: Decl(
+                                            VariableDeclaration {
+                                                name: "j",
+                                                init: Some(
+                                                    Constant(
+                                                        0,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                        condition: Some(
+                                            Binary(
+                                                LessThan,
+                                                Var(
+                                                    "j",
+                                                ),
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                        ),
+                                        post: Some(
+                                            Assignment(
+                                                Var(
+                                                    "j",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "j",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                        body: If(
+                                            Binary(
+                                                Equals,
+                                                Binary(
+                                                    Multiply,
+                                                    Binary(
+                                                        Divide,
+                                                        Var(
+                                                            "i",
+                                                        ),
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
                                                 ),
                                                 Var(
                                                     "i",
                                                 ),
                                             ),
+                                            Break(
+                                                None,
+                                            ),
+                                            Some(
+                                                Expression(
+                                                    Assignment(
+                                                        Var(
+                                                            "ans",
+                                                        ),
+                                                        Binary(
+                                                            Add,
+                                                            Var(
+                                                                "ans",
+                                                            ),
+                                                            Var(
+                                                                "i",
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
                                         ),
+                                        label: None,
+                                    },
+                                    label: None,
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "ans",
                                     ),
                                 ),
                             ),
-                            label: None,
-                        },
-                        label: None,
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "ans",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

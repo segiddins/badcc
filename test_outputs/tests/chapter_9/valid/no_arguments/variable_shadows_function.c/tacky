@@ -1,0 +1,106 @@
+Program {
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        1,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "main.0.true",
+                ),
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Var(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "foo",
+            params: [],
+            instructions: [
+                Return(
+                    Constant(
+                        4,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

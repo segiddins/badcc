@@ -1,21 +1,28 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    Goto(
-                        "label",
-                    ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Goto(
+                                    "label",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

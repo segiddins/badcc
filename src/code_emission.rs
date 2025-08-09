@@ -4,7 +4,9 @@ use crate::assembly_gen::*;
 
 pub fn emit_asm(program: &Program, w: impl io::Write) -> io::Result<()> {
     let mut w = BufWriter::new(w);
-    function_definition(&program.function_definition, &mut w)?;
+    for definition in program.definitions.iter() {
+        function_definition(definition, &mut w)?;
+    }
     w.flush()
 }
 
@@ -38,7 +40,13 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
         Instruction::Move {
             source,
             destination,
-        } => write!(w, "movl {}, {}", operand(source), operand(destination))?,
+        } => write!(
+            w,
+            "mov{} {}, {}",
+            width(source, destination),
+            operand(source),
+            operand(destination)
+        )?,
         Instruction::Ret => write!(w, "movq %rbp, %rsp\n\tpopq %rbp\n\tret")?,
         Instruction::Unary(unary_operator, op) => match unary_operator {
             UnaryOperator::Neg => write!(w, "negl {}", operand(op)),
@@ -52,24 +60,8 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
             BinaryOperator::And => write!(w, "andl {}, {}", operand(op), operand(operand1)),
             BinaryOperator::Or => write!(w, "orl {}, {}", operand(op), operand(operand1)),
             BinaryOperator::Xor => write!(w, "xorl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::LeftShift => write!(
-                w,
-                "sall {}, {}",
-                match op {
-                    Operand::Register(Reg::CL) => "%cl".to_string(),
-                    op => operand(op),
-                },
-                operand(operand1)
-            ),
-            BinaryOperator::RightShift => write!(
-                w,
-                "sarl {}, {}",
-                match op {
-                    Operand::Register(Reg::CL) => "%cl".to_string(),
-                    op => operand(op),
-                },
-                operand(operand1)
-            ),
+            BinaryOperator::LeftShift => write!(w, "sall {}, {}", operand(op), operand(operand1)),
+            BinaryOperator::RightShift => write!(w, "sarl {}, {}", operand(op), operand(operand1)),
             BinaryOperator::Equals => todo!(),
             BinaryOperator::NotEquals => todo!(),
             BinaryOperator::LessThan => todo!(),
@@ -84,6 +76,9 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
         Instruction::JmpCC(cond_code, label) => write!(w, "j{cond_code:?} L{label}")?,
         Instruction::SetCC(cond_code, op) => write!(w, "set{cond_code:?} {}", operand(op))?,
         Instruction::Label(label) => write!(w, "L{label}:")?,
+        Instruction::DeallocateStack(offset) => write!(w, "addq ${offset}, %rsp")?,
+        Instruction::Push(op) => write!(w, "pushq {}", operand(op))?,
+        Instruction::Call(func) => write!(w, "call _{func}")?,
     }
     writeln!(w)?;
     Ok(())
@@ -92,7 +87,45 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
 fn operand(operand: &Operand) -> String {
     match operand {
         Operand::Immediate(val) => format!("${val}"),
-        Operand::Register(name) => format!("%{}", name.as_ref()),
-        Operand::Psuedo(offset) => format!("-{}(%rbp)", (offset + 1) * 4),
+        Operand::Register(name, width) => match (name, width) {
+            (Reg::AX, Width::One) => "%al",
+            (Reg::AX, Width::Four) => "%eax",
+            (Reg::AX, Width::Eight) => "%rax",
+            (Reg::CX, Width::One) => "%cl",
+            (Reg::CX, Width::Four) => "%ecx",
+            (Reg::CX, Width::Eight) => "%rcx",
+            (Reg::DI, Width::One) => "%dil",
+            (Reg::DI, Width::Four) => "%edi",
+            (Reg::DI, Width::Eight) => "%rdi",
+            (Reg::DX, Width::One) => "%dl",
+            (Reg::DX, Width::Four) => "%edx",
+            (Reg::DX, Width::Eight) => "%rdx",
+            (Reg::R10, Width::One) => "%r10b",
+            (Reg::R10, Width::Four) => "%r10d",
+            (Reg::R10, Width::Eight) => "%r10",
+            (Reg::R11, Width::One) => "%r11b",
+            (Reg::R11, Width::Four) => "%r11d",
+            (Reg::R11, Width::Eight) => "%r11",
+            (Reg::R8, Width::One) => "%r8b",
+            (Reg::R8, Width::Four) => "%r8d",
+            (Reg::R8, Width::Eight) => "%r8",
+            (Reg::R9, Width::One) => "%r9b",
+            (Reg::R9, Width::Four) => "%r9d",
+            (Reg::R9, Width::Eight) => "%r9",
+            (Reg::SI, Width::One) => "%sil",
+            (Reg::SI, Width::Four) => "%esi",
+            (Reg::SI, Width::Eight) => "%rsi",
+        }
+        .into(),
+        Operand::Psuedo(_) => unreachable!(),
+        Operand::Stack(offset) => format!("{}(%rbp)", -offset),
+    }
+}
+
+fn width(op1: &Operand, op2: &Operand) -> &'static str {
+    match op1.width().max(op2.width()) {
+        Width::One => "w",
+        Width::Four => "l",
+        Width::Eight => "q",
     }
 }

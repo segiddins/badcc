@@ -1,140 +1,151 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "i.0",
-                        init: Some(
-                            Constant(
-                                100,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "count.1",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    While(
-                        Unary(
-                            PostfixDecrement,
-                            Var(
-                                "i.0",
-                            ),
-                        ),
-                        Expression(
-                            Unary(
-                                PostfixIncrement,
-                                Var(
-                                    "count.1",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i.1",
+                                        init: Some(
+                                            Constant(
+                                                100,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                        Some(
-                            "loop.0",
-                        ),
-                    ),
-                ),
-                Statement(
-                    If(
-                        Binary(
-                            NotEqual,
-                            Var(
-                                "count.1",
-                            ),
-                            Constant(
-                                100,
-                            ),
-                        ),
-                        Return(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "i.0",
-                            ),
-                            Constant(
-                                100,
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "count.1",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    While(
-                        Unary(
-                            PrefixDecrement,
-                            Var(
-                                "i.0",
-                            ),
-                        ),
-                        Expression(
-                            Unary(
-                                PostfixIncrement,
-                                Var(
-                                    "count.1",
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "count.2",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                        Some(
-                            "loop.1",
-                        ),
-                    ),
-                ),
-                Statement(
-                    If(
-                        Binary(
-                            NotEqual,
-                            Var(
-                                "count.1",
+                            Statement(
+                                While(
+                                    Unary(
+                                        PostfixDecrement,
+                                        Var(
+                                            "i.1",
+                                        ),
+                                    ),
+                                    Expression(
+                                        Unary(
+                                            PostfixIncrement,
+                                            Var(
+                                                "count.2",
+                                            ),
+                                        ),
+                                    ),
+                                    Some(
+                                        "loop.0",
+                                    ),
+                                ),
                             ),
-                            Constant(
-                                99,
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "count.2",
+                                        ),
+                                        Constant(
+                                            100,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                    None,
+                                ),
                             ),
-                        ),
-                        Return(
-                            Constant(
-                                0,
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "i.1",
+                                        ),
+                                        Constant(
+                                            100,
+                                        ),
+                                    ),
+                                ),
                             ),
-                        ),
-                        None,
-                    ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "count.2",
+                                        ),
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                While(
+                                    Unary(
+                                        PrefixDecrement,
+                                        Var(
+                                            "i.1",
+                                        ),
+                                    ),
+                                    Expression(
+                                        Unary(
+                                            PostfixIncrement,
+                                            Var(
+                                                "count.2",
+                                            ),
+                                        ),
+                                    ),
+                                    Some(
+                                        "loop.1",
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "count.2",
+                                        ),
+                                        Constant(
+                                            99,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            1,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

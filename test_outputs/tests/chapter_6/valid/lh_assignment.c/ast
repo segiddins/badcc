@@ -1,79 +1,90 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "x",
-                        init: Some(
-                            Constant(
-                                10,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x",
+                                        init: Some(
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "y",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "y",
+                                        ),
+                                        Ternary(
+                                            Assignment(
+                                                Var(
+                                                    "x",
+                                                ),
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                            Var(
+                                                "x",
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "x",
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "y",
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "y",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "y",
-                            ),
-                            Ternary(
-                                Assignment(
-                                    Var(
-                                        "x",
-                                    ),
-                                    Constant(
-                                        5,
-                                    ),
-                                ),
-                                Var(
-                                    "x",
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "x",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "y",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,0 +1,54 @@
+Program {
+    functions: [
+        Function {
+            identifier: "foo",
+            params: [],
+            instructions: [
+                Jump(
+                    "foo.foo",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Label(
+                    "foo.foo",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        0,
+                    ),
+                ),
+                Return(
+                    Var(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

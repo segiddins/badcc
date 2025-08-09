@@ -2,8 +2,8 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	Lunused:
+	subq $16, %rsp
+	Lmain.unused:
 	movl $0, %eax
 	movq %rbp, %rsp
 	popq %rbp

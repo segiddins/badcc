@@ -1,32 +1,41 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    If(
-                        Constant(
-                            1,
-                        ),
-                        Return(
-                            Var(
-                                "c",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Constant(
+                                        1,
+                                    ),
+                                    Return(
+                                        Var(
+                                            "c",
+                                        ),
+                                    ),
+                                    None,
+                                ),
                             ),
-                        ),
-                        None,
-                    ),
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "c",
-                        init: Some(
-                            Constant(
-                                0,
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "c",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                        ],
                     },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

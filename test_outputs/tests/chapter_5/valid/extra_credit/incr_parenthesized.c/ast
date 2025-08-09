@@ -1,113 +1,128 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Constant(
-                                2,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "c",
-                        init: Some(
-                            Unary(
-                                Minus,
-                                Unary(
-                                    PrefixIncrement,
-                                    Var(
-                                        "a",
-                                    ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "d",
-                        init: Some(
-                            Unary(
-                                Not,
-                                Unary(
-                                    PostfixDecrement,
-                                    Var(
-                                        "b",
-                                    ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                And,
-                                Binary(
-                                    And,
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "c",
+                                        init: Some(
+                                            Unary(
+                                                Minus,
+                                                Unary(
+                                                    PrefixIncrement,
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "d",
+                                        init: Some(
+                                            Unary(
+                                                Not,
+                                                Unary(
+                                                    PostfixDecrement,
+                                                    Var(
+                                                        "b",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
                                     Binary(
-                                        Equals,
-                                        Var(
-                                            "a",
+                                        And,
+                                        Binary(
+                                            And,
+                                            Binary(
+                                                And,
+                                                Binary(
+                                                    Equals,
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                ),
+                                                Binary(
+                                                    Equals,
+                                                    Var(
+                                                        "b",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                            Binary(
+                                                Equals,
+                                                Var(
+                                                    "c",
+                                                ),
+                                                Unary(
+                                                    Minus,
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                ),
+                                            ),
                                         ),
-                                        Constant(
-                                            2,
-                                        ),
-                                    ),
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "b",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "c",
-                                    ),
-                                    Unary(
-                                        Minus,
-                                        Constant(
-                                            2,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "d",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
                                         ),
                                     ),
                                 ),
                             ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "d",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                        ),
-                    ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,142 +1,157 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                16,
-            ),
-            Move {
-                source: Immediate(
-                    1,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    32,
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Mult,
+                    Stack(
+                        16,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Move {
-                source: Immediate(
-                    0,
+                Move {
+                    source: Register(
+                        R11,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Register(
+                        R10,
+                        Four,
+                    ),
+                    Stack(
+                        24,
+                    ),
                 ),
-                destination: Psuedo(
-                    1,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    1,
-                ),
-            },
-            Move {
-                source: Immediate(
-                    3,
-                ),
-                destination: Psuedo(
-                    2,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    2,
-                ),
-                destination: Register(
-                    R11,
-                ),
-            },
-            Binary(
-                Mult,
-                Psuedo(
-                    1,
-                ),
-                Register(
-                    R11,
-                ),
-            ),
-            Move {
-                source: Register(
-                    R11,
-                ),
-                destination: Psuedo(
-                    2,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    2,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    0,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    3,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    1,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Binary(
-                Add,
-                Register(
-                    R10,
-                ),
-                Psuedo(
-                    3,
-                ),
-            ),
-            Move {
-                source: Psuedo(
-                    3,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

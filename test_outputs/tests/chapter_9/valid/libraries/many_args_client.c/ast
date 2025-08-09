@@ -1,0 +1,204 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "fib",
+                params: [
+                    "a",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "multiply_many_args",
+                params: [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "fib",
+                                                ),
+                                                [
+                                                    Constant(
+                                                        4,
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "seven",
+                                        init: Some(
+                                            Constant(
+                                                7,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "eight",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "fib",
+                                                ),
+                                                [
+                                                    Constant(
+                                                        6,
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "y",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "multiply_many_args",
+                                                ),
+                                                [
+                                                    Var(
+                                                        "x",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                    Constant(
+                                                        3,
+                                                    ),
+                                                    Constant(
+                                                        4,
+                                                    ),
+                                                    Constant(
+                                                        5,
+                                                    ),
+                                                    Constant(
+                                                        6,
+                                                    ),
+                                                    Var(
+                                                        "seven",
+                                                    ),
+                                                    Var(
+                                                        "eight",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "x",
+                                        ),
+                                        Constant(
+                                            3,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "y",
+                                        ),
+                                        Constant(
+                                            589680,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "x",
+                                        ),
+                                        Binary(
+                                            Remainder,
+                                            Var(
+                                                "y",
+                                            ),
+                                            Constant(
+                                                256,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

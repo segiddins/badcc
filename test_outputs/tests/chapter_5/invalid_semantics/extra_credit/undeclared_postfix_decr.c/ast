@@ -1,26 +1,33 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    Expression(
-                        Unary(
-                            PostfixDecrement,
-                            Var(
-                                "a",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PostfixDecrement,
+                                        Var(
+                                            "a",
+                                        ),
+                                    ),
+                                ),
                             ),
-                        ),
-                    ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,104 +1,107 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Unary {
+                    op: Not,
+                    src: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        1,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Binary {
+                    op: Divide,
+                    lhs: Constant(
+                        3,
+                    ),
+                    rhs: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "main.1.true",
                 ),
-            },
-            Unary {
-                op: Not,
-                src: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.1.end",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "main.1.true",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    1,
+                Binary {
+                    op: Divide,
+                    lhs: Constant(
+                        8,
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.1.end",
                 ),
-                "main.0.true",
-            ),
-            Binary {
-                op: Divide,
-                lhs: Constant(
-                    3,
+                Jump(
+                    "main.0.end",
                 ),
-                rhs: Constant(
-                    4,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    2,
+                Label(
+                    "main.0.end",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    2,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                "main.1.true",
-            ),
-            Copy {
-                src: Constant(
-                    3,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Binary {
-                op: Divide,
-                lhs: Constant(
-                    8,
-                ),
-                rhs: Constant(
-                    2,
-                ),
-                dst: Var(
-                    3,
-                ),
-            },
-            Copy {
-                src: Var(
-                    3,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Label(
-                "main.1.end",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

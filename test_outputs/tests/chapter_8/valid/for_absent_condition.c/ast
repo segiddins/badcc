@@ -1,58 +1,65 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i",
-                                init: Some(
-                                    Constant(
-                                        400,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i",
+                                            init: Some(
+                                                Constant(
+                                                    400,
+                                                ),
+                                            ),
+                                        },
                                     ),
-                                ),
-                            },
-                        ),
-                        condition: None,
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i",
-                                ),
-                                Binary(
-                                    Subtract,
-                                    Var(
-                                        "i",
+                                    condition: None,
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i",
+                                            ),
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    100,
+                                                ),
+                                            ),
+                                        ),
                                     ),
-                                    Constant(
-                                        100,
+                                    body: If(
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "i",
+                                            ),
+                                            Constant(
+                                                100,
+                                            ),
+                                        ),
+                                        Return(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        None,
                                     ),
-                                ),
+                                    label: None,
+                                },
                             ),
-                        ),
-                        body: If(
-                            Binary(
-                                Equals,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    100,
-                                ),
-                            ),
-                            Return(
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                            None,
-                        ),
-                        label: None,
+                        ],
                     },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

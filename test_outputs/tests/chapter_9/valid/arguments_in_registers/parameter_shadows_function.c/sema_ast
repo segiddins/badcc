@@ -1,0 +1,79 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "a",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "b",
+                params: [
+                    "a.2",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a.2",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        FunctionCall(
+                                            Var(
+                                                "a",
+                                            ),
+                                            [],
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "b",
+                                            ),
+                                            [
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

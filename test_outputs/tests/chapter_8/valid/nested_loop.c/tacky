@@ -1,192 +1,195 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        100,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
                 ),
-                dst: Var(
-                    0,
+                JumpIfZero(
+                    Var(
+                        1,
+                    ),
+                    "loop.0",
                 ),
-            },
-            Copy {
-                src: Constant(
-                    100,
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        1,
+                    ),
+                    rhs: Var(
+                        2,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Label(
+                    "loop.1.start",
                 ),
-                dst: Var(
-                    1,
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "loop.1",
                 ),
-            },
-            Label(
-                "loop.0.start",
-            ),
-            JumpIfZero(
-                Var(
-                    1,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        5,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Jump(
+                    "loop.1.start",
                 ),
-                "loop.0",
-            ),
-            Copy {
-                src: Constant(
-                    10,
+                Label(
+                    "loop.1",
                 ),
-                dst: Var(
-                    2,
+                Jump(
+                    "loop.0.start",
                 ),
-            },
-            Binary {
-                op: Subtract,
-                lhs: Var(
-                    1,
+                Label(
+                    "loop.0",
                 ),
-                rhs: Var(
-                    2,
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        100,
+                    ),
+                    dst: Var(
+                        7,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        7,
+                    ),
+                    "main.0.false",
                 ),
-                dst: Var(
-                    3,
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        1,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        8,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        8,
+                    ),
+                    "main.0.false",
                 ),
-            },
-            Copy {
-                src: Var(
-                    3,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        6,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "main.0.false",
                 ),
-            },
-            Label(
-                "loop.1.start",
-            ),
-            JumpIfZero(
-                Var(
-                    2,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        6,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-                "loop.1",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Return(
+                    Var(
+                        6,
+                    ),
                 ),
-                rhs: Constant(
-                    1,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    4,
-                ),
-            },
-            Copy {
-                src: Var(
-                    4,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Binary {
-                op: Subtract,
-                lhs: Var(
-                    2,
-                ),
-                rhs: Constant(
-                    1,
-                ),
-                dst: Var(
-                    5,
-                ),
-            },
-            Copy {
-                src: Var(
-                    5,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Jump(
-                "loop.1.start",
-            ),
-            Label(
-                "loop.1",
-            ),
-            Jump(
-                "loop.0.start",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    100,
-                ),
-                dst: Var(
-                    7,
-                ),
-            },
-            JumpIfZero(
-                Var(
-                    7,
-                ),
-                "main.0.false",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    1,
-                ),
-                rhs: Constant(
-                    0,
-                ),
-                dst: Var(
-                    8,
-                ),
-            },
-            JumpIfZero(
-                Var(
-                    8,
-                ),
-                "main.0.false",
-            ),
-            Copy {
-                src: Constant(
-                    1,
-                ),
-                dst: Var(
-                    6,
-                ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.false",
-            ),
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    6,
-                ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    6,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

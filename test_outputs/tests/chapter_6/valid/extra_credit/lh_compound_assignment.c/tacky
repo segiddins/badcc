@@ -1,92 +1,95 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    10,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Binary {
+                    op: Divide,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            Binary {
-                op: Subtract,
-                lhs: Var(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-                rhs: Constant(
-                    1,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    0,
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Return(
+                    Var(
+                        2,
+                    ),
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                "main.0.true",
-            ),
-            Binary {
-                op: Divide,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    2,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Copy {
-                src: Var(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    4,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Return(
-                Var(
-                    2,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

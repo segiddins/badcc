@@ -1,48 +1,51 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "switch.0.cases",
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "switch.0.default",
                 ),
-            },
-            Jump(
-                "switch.0.cases",
-            ),
-            Label(
-                "switch.0.default",
-            ),
-            Return(
-                Constant(
-                    1,
+                Return(
+                    Constant(
+                        1,
+                    ),
                 ),
-            ),
-            Jump(
-                "switch.0",
-            ),
-            Label(
-                "switch.0.cases",
-            ),
-            Jump(
-                "switch.0.default",
-            ),
-            Label(
-                "switch.0",
-            ),
-            Return(
-                Constant(
-                    0,
+                Jump(
+                    "switch.0",
                 ),
-            ),
-            Return(
-                Constant(
-                    0,
+                Label(
+                    "switch.0.cases",
                 ),
-            ),
-        ],
-    },
+                Jump(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
 }

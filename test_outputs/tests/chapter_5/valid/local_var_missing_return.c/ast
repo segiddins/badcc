@@ -1,37 +1,46 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                3,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "a",
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "a",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "a",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

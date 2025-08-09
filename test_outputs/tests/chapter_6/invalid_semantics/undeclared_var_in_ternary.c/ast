@@ -1,40 +1,49 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    Return(
-                        Ternary(
-                            Binary(
-                                GreaterThan,
-                                Var(
-                                    "a",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Ternary(
+                                        Binary(
+                                            GreaterThan,
+                                            Var(
+                                                "a",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
                                 ),
-                                Constant(
-                                    0,
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                    ),
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                5,
-                            ),
-                        ),
+                        ],
                     },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

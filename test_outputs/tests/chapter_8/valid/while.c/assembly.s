@@ -2,22 +2,22 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $12, %rsp
-	movl $0, -4(%rbp)
+	subq $32, %rsp
+	movl $0, -12(%rbp)
 	Lloop.0.start:
-	cmpl $5, -4(%rbp)
-	movl $0, -8(%rbp)
-	setL -8(%rbp)
-	cmpl $0, -8(%rbp)
+	cmpl $5, -12(%rbp)
+	movl $0, -16(%rbp)
+	setL -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jE Lloop.0
-	movl -4(%rbp), %r10d
-	movl %r10d, -12(%rbp)
-	addl $2, -12(%rbp)
 	movl -12(%rbp), %r10d
-	movl %r10d, -4(%rbp)
+	movl %r10d, -20(%rbp)
+	addl $2, -20(%rbp)
+	movl -20(%rbp), %r10d
+	movl %r10d, -12(%rbp)
 	jmp Lloop.0.start
 	Lloop.0:
-	movl -4(%rbp), %eax
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

@@ -2,17 +2,17 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $12, %rsp
-	movl $1234, -4(%rbp)
-	movl $0, -8(%rbp)
-	movl -4(%rbp), %r10d
-	movl %r10d, -12(%rbp)
-	movl -12(%rbp), %r11d
-	sarl $4, %r11d
-	movl %r11d, -12(%rbp)
+	subq $32, %rsp
+	movl $1234, -12(%rbp)
+	movl $0, -16(%rbp)
 	movl -12(%rbp), %r10d
-	movl %r10d, -8(%rbp)
-	movl -8(%rbp), %eax
+	movl %r10d, -20(%rbp)
+	movl -20(%rbp), %r11d
+	sarl $4, %r11d
+	movl %r11d, -20(%rbp)
+	movl -20(%rbp), %r10d
+	movl %r10d, -16(%rbp)
+	movl -16(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

@@ -1,0 +1,118 @@
+Program {
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        3,
+                    ),
+                    "main.0.true",
+                ),
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        4,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Return(
+                    Var(
+                        5,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "foo",
+            params: [],
+            instructions: [
+                Return(
+                    Constant(
+                        8,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

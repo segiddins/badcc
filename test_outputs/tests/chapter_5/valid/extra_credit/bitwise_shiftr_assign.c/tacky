@@ -1,53 +1,56 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    1234,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        1234,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: RightShift,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Binary {
-                op: RightShift,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    4,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Copy {
-                src: Var(
-                    2,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

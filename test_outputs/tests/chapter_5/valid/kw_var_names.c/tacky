@@ -1,45 +1,48 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    3,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Return(
+                    Var(
+                        2,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Copy {
-                src: Constant(
-                    2,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Var(
-                    1,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Return(
-                Var(
-                    2,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

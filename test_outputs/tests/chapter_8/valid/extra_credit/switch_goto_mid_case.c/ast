@@ -1,91 +1,100 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Goto(
-                        "mid_case",
-                    ),
-                ),
-                Statement(
-                    Switch(
-                        Constant(
-                            4,
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Case(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
                                             Constant(
-                                                4,
+                                                0,
                                             ),
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "a",
-                                                    ),
-                                                    Constant(
-                                                        5,
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Goto(
+                                    "mid_case",
+                                ),
+                            ),
+                            Statement(
+                                Switch(
+                                    Constant(
+                                        4,
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            4,
+                                                        ),
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "a",
+                                                                ),
+                                                                Constant(
+                                                                    5,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
                                                     ),
                                                 ),
-                                            ),
-                                            None,
-                                        ),
-                                    ),
-                                    Statement(
-                                        Labeled(
-                                            "mid_case",
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "a",
+                                                Statement(
+                                                    Labeled(
+                                                        "mid_case",
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "a",
+                                                                ),
+                                                                Binary(
+                                                                    Add,
+                                                                    Var(
+                                                                        "a",
+                                                                    ),
+                                                                    Constant(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
                                                     ),
-                                                    Binary(
-                                                        Add,
+                                                ),
+                                                Statement(
+                                                    Return(
                                                         Var(
                                                             "a",
                                                         ),
-                                                        Constant(
-                                                            1,
-                                                        ),
                                                     ),
                                                 ),
-                                            ),
-                                        ),
+                                            ],
+                                        },
                                     ),
-                                    Statement(
-                                        Return(
-                                            Var(
-                                                "a",
-                                            ),
-                                        ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        100,
                                     ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            100,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

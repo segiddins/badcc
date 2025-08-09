@@ -1,46 +1,55 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "x",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    If(
-                        Constant(
-                            0,
-                        ),
-                        Null,
-                        Some(
-                            Expression(
-                                Assignment(
-                                    Var(
-                                        "x",
-                                    ),
+                            Statement(
+                                If(
                                     Constant(
-                                        1,
+                                        0,
+                                    ),
+                                    Null,
+                                    Some(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "x",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
-                        ),
-                    ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "x",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "x",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

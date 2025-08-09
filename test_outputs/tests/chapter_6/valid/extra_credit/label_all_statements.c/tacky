@@ -1,101 +1,104 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.label_if",
                 ),
-                dst: Var(
-                    0,
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-            },
-            Label(
-                "label_if",
-            ),
-            JumpIfZero(
-                Var(
-                    0,
+                Jump(
+                    "main.label_expression",
                 ),
-                "main.0.true",
-            ),
-            Jump(
-                "label_expression",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Jump(
-                "label_empty",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Label(
-                "label_goto",
-            ),
-            Jump(
-                "label_return",
-            ),
-            JumpIfZero(
-                Constant(
-                    0,
+                Jump(
+                    "main.0.end",
                 ),
-                "main.1.true",
-            ),
-            Label(
-                "label_expression",
-            ),
-            Copy {
-                src: Constant(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "main.label_empty",
                 ),
-            },
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Jump(
-                "label_if",
-            ),
-            Label(
-                "label_return",
-            ),
-            Return(
-                Var(
-                    0,
+                Label(
+                    "main.0.end",
                 ),
-            ),
-            Label(
-                "label_empty",
-            ),
-            Copy {
-                src: Constant(
-                    100,
+                Label(
+                    "main.label_goto",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "main.label_return",
                 ),
-            },
-            Jump(
-                "label_goto",
-            ),
-            Return(
-                Constant(
-                    0,
+                JumpIfZero(
+                    Constant(
+                        0,
+                    ),
+                    "main.1.true",
                 ),
-            ),
-        ],
-    },
+                Label(
+                    "main.label_expression",
+                ),
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Jump(
+                    "main.label_if",
+                ),
+                Label(
+                    "main.label_return",
+                ),
+                Return(
+                    Var(
+                        0,
+                    ),
+                ),
+                Label(
+                    "main.label_empty",
+                ),
+                Copy {
+                    src: Constant(
+                        100,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.label_goto",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
 }

@@ -1,241 +1,244 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
                 ),
-                dst: Var(
-                    0,
+                JumpIfZero(
+                    Constant(
+                        1,
+                    ),
+                    "loop.0",
                 ),
-            },
-            Label(
-                "loop.0.start",
-            ),
-            JumpIfZero(
-                Constant(
-                    1,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "main.0.true",
                 ),
-                "loop.0",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Jump(
+                    "loop.0",
                 ),
-                rhs: Constant(
-                    1,
+                Jump(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "main.0.true",
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                Label(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "loop.0.start",
                 ),
-            },
-            Binary {
-                op: GreaterThan,
-                lhs: Var(
-                    0,
+                Label(
+                    "loop.0",
                 ),
-                rhs: Constant(
-                    10,
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Label(
+                    "loop.1.start",
                 ),
-                dst: Var(
-                    2,
+                JumpIfZero(
+                    Constant(
+                        1,
+                    ),
+                    "loop.1",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    2,
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        3,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        3,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        5,
+                    ),
+                    "main.1.true",
                 ),
-                "main.0.true",
-            ),
-            Jump(
-                "loop.0",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Jump(
-                "loop.0.start",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Copy {
-                src: Constant(
-                    10,
+                Jump(
+                    "loop.1",
                 ),
-                dst: Var(
-                    3,
+                Jump(
+                    "main.1.end",
                 ),
-            },
-            Label(
-                "loop.1.start",
-            ),
-            JumpIfZero(
-                Constant(
-                    1,
+                Label(
+                    "main.1.true",
                 ),
-                "loop.1",
-            ),
-            Binary {
-                op: Subtract,
-                lhs: Var(
-                    3,
+                Label(
+                    "main.1.end",
                 ),
-                rhs: Constant(
-                    1,
+                Jump(
+                    "loop.1.start",
                 ),
-                dst: Var(
-                    4,
+                Label(
+                    "loop.1",
                 ),
-            },
-            Copy {
-                src: Var(
-                    4,
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        8,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        3,
+                    ),
+                    rhs: Var(
+                        8,
+                    ),
+                    dst: Var(
+                        9,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        9,
+                    ),
+                    "main.2.false",
                 ),
-                dst: Var(
-                    3,
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        11,
+                    ),
+                    dst: Var(
+                        10,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        10,
+                    ),
+                    "main.2.false",
                 ),
-            },
-            Binary {
-                op: LessThan,
-                lhs: Var(
-                    3,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        7,
+                    ),
+                },
+                Jump(
+                    "main.2.end",
                 ),
-                rhs: Constant(
-                    0,
+                Label(
+                    "main.2.false",
                 ),
-                dst: Var(
-                    5,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        7,
+                    ),
+                },
+                Label(
+                    "main.2.end",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    5,
+                Copy {
+                    src: Var(
+                        7,
+                    ),
+                    dst: Var(
+                        6,
+                    ),
+                },
+                Return(
+                    Var(
+                        6,
+                    ),
                 ),
-                "main.1.true",
-            ),
-            Jump(
-                "loop.1",
-            ),
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Jump(
-                "loop.1.start",
-            ),
-            Label(
-                "loop.1",
-            ),
-            Unary {
-                op: Negate,
-                src: Constant(
-                    1,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    8,
-                ),
-            },
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    3,
-                ),
-                rhs: Var(
-                    8,
-                ),
-                dst: Var(
-                    9,
-                ),
-            },
-            JumpIfZero(
-                Var(
-                    9,
-                ),
-                "main.2.false",
-            ),
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    11,
-                ),
-                dst: Var(
-                    10,
-                ),
-            },
-            JumpIfZero(
-                Var(
-                    10,
-                ),
-                "main.2.false",
-            ),
-            Copy {
-                src: Constant(
-                    1,
-                ),
-                dst: Var(
-                    7,
-                ),
-            },
-            Jump(
-                "main.2.end",
-            ),
-            Label(
-                "main.2.false",
-            ),
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    7,
-                ),
-            },
-            Label(
-                "main.2.end",
-            ),
-            Copy {
-                src: Var(
-                    7,
-                ),
-                dst: Var(
-                    6,
-                ),
-            },
-            Return(
-                Var(
-                    6,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

@@ -1,157 +1,160 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Unary {
-                op: Negate,
-                src: Constant(
-                    2147483647,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        2147483647,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
                 ),
-                dst: Var(
-                    1,
+                Binary {
+                    op: Remainder,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        3,
+                    ),
+                    "loop.0",
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "loop.0.cond",
                 ),
-            },
-            Label(
-                "loop.0.cond",
-            ),
-            Binary {
-                op: Remainder,
-                lhs: Var(
-                    0,
+                Label(
+                    "loop.0",
                 ),
-                rhs: Constant(
-                    5,
+                Binary {
+                    op: Remainder,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        6,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        6,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    2,
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        7,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        7,
+                    ),
+                    "main.0.true",
                 ),
-            },
-            Binary {
-                op: NotEqual,
-                lhs: Var(
-                    2,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-                rhs: Constant(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    3,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    3,
+                Return(
+                    Var(
+                        5,
+                    ),
                 ),
-                "loop.0",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                rhs: Constant(
-                    1,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            Copy {
-                src: Var(
-                    4,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Label(
-                "loop.0.start",
-            ),
-            Jump(
-                "loop.0.cond",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Binary {
-                op: Remainder,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    5,
-                ),
-                dst: Var(
-                    6,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    6,
-                ),
-                "main.0.true",
-            ),
-            Binary {
-                op: GreaterThan,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Constant(
-                    0,
-                ),
-                dst: Var(
-                    7,
-                ),
-            },
-            JumpIfNotZero(
-                Var(
-                    7,
-                ),
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    5,
-                ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    1,
-                ),
-                dst: Var(
-                    5,
-                ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    5,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

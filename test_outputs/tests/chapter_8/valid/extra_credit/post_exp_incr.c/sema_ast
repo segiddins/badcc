@@ -1,86 +1,95 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "product.0",
-                        init: Some(
-                            Constant(
-                                1,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "product.1",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i.1",
-                                init: Some(
-                                    Constant(
-                                        0,
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i.2",
+                                            init: Some(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                        },
                                     ),
-                                ),
-                            },
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i.1",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            Unary(
-                                PostfixIncrement,
-                                Var(
-                                    "i.1",
-                                ),
-                            ),
-                        ),
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "product.0",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "product.0",
-                                                    ),
-                                                    Constant(
-                                                        2,
-                                                    ),
-                                                ),
+                                    condition: Some(
+                                        Binary(
+                                            LessThan,
+                                            Var(
+                                                "i.2",
+                                            ),
+                                            Constant(
+                                                10,
                                             ),
                                         ),
                                     ),
-                                ],
-                            },
-                        ),
-                        label: Some(
-                            "loop.0",
-                        ),
+                                    post: Some(
+                                        Unary(
+                                            PostfixIncrement,
+                                            Var(
+                                                "i.2",
+                                            ),
+                                        ),
+                                    ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "product.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "product.1",
+                                                                ),
+                                                                Constant(
+                                                                    2,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "product.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "product.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

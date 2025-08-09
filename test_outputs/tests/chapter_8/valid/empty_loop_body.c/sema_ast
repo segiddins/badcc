@@ -1,54 +1,63 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "i.0",
-                        init: Some(
-                            Constant(
-                                2147483642,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i.1",
+                                        init: Some(
+                                            Constant(
+                                                2147483642,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                DoWhile(
+                                    Null,
+                                    Binary(
+                                        GreaterThanOrEqual,
+                                        Assignment(
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                        ),
+                                        Constant(
+                                            256,
+                                        ),
+                                    ),
+                                    Some(
+                                        "loop.0",
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "i.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    DoWhile(
-                        Null,
-                        Binary(
-                            GreaterThanOrEqual,
-                            Assignment(
-                                Var(
-                                    "i.0",
-                                ),
-                                Binary(
-                                    Subtract,
-                                    Var(
-                                        "i.0",
-                                    ),
-                                    Constant(
-                                        5,
-                                    ),
-                                ),
-                            ),
-                            Constant(
-                                256,
-                            ),
-                        ),
-                        Some(
-                            "loop.0",
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "i.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

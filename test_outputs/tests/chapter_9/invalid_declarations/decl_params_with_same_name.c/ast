@@ -1,0 +1,71 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "a",
+                    "a",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [
+                                            Constant(
+                                                1,
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "a",
+                    "b",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "a",
+                                        ),
+                                        Var(
+                                            "b",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

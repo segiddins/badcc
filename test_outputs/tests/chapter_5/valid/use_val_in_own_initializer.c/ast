@@ -1,32 +1,41 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Binary(
-                                And,
-                                Constant(
-                                    0,
-                                ),
-                                Var(
-                                    "a",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Binary(
+                                                And,
+                                                Constant(
+                                                    0,
+                                                ),
+                                                Var(
+                                                    "a",
+                                                ),
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "a",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

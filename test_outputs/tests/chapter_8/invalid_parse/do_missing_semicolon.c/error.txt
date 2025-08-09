@@ -1,8 +1,17 @@
-  × expected Semicolon
-   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_8/invalid_parse/do_missing_semicolon.i:5:5]
- 4 │     } while(1)
- 5 │     return 0;
-   ·     ───┬──
-   ·        ╰── unexpected: Return
- 6 │ }
+  × while parsing parse_block_item
+  ╰─▶   × expected one of [Semicolon], found Return
+         ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_8/invalid_parse/do_missing_semicolon.i:5:5]
+       4 │     } while(1)
+       5 │     return 0;
+         ·     ───┬──
+         ·        ╰── here
+       6 │ }
+         ╰────
+      
+   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_8/invalid_parse/do_missing_semicolon.i:2:5]
+ 1 │ int main(void) {
+ 2 │     do {
+   ·     ─┬
+   ·      ╰── starting here
+ 3 │         4;
    ╰────

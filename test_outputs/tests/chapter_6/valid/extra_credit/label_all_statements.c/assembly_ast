@@ -1,132 +1,138 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                4,
-            ),
-            Move {
-                source: Immediate(
-                    1,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    16,
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Label(
+                    "main.label_if",
                 ),
-            },
-            Label(
-                "label_if",
-            ),
-            Cmp(
-                Immediate(
-                    0,
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        12,
+                    ),
                 ),
-                Psuedo(
-                    0,
+                JmpCC(
+                    E,
+                    "main.0.true",
                 ),
-            ),
-            JmpCC(
-                E,
-                "main.0.true",
-            ),
-            Jmp(
-                "label_expression",
-            ),
-            Jmp(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Jmp(
-                "label_empty",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Label(
-                "label_goto",
-            ),
-            Jmp(
-                "label_return",
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Jmp(
+                    "main.label_expression",
                 ),
-                destination: Register(
-                    R11,
+                Jmp(
+                    "main.0.end",
                 ),
-            },
-            Cmp(
-                Immediate(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-                Register(
-                    R11,
+                Jmp(
+                    "main.label_empty",
                 ),
-            ),
-            JmpCC(
-                E,
-                "main.1.true",
-            ),
-            Label(
-                "label_expression",
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Label(
+                    "main.0.end",
                 ),
-                destination: Psuedo(
-                    0,
+                Label(
+                    "main.label_goto",
                 ),
-            },
-            Jmp(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Jmp(
-                "label_if",
-            ),
-            Label(
-                "label_return",
-            ),
-            Move {
-                source: Psuedo(
-                    0,
+                Jmp(
+                    "main.label_return",
                 ),
-                destination: Register(
-                    AX,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Ret,
-            Label(
-                "label_empty",
-            ),
-            Move {
-                source: Immediate(
-                    100,
+                JmpCC(
+                    E,
+                    "main.1.true",
                 ),
-                destination: Psuedo(
-                    0,
+                Label(
+                    "main.label_expression",
                 ),
-            },
-            Jmp(
-                "label_goto",
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "main.1.end",
                 ),
-                destination: Register(
-                    AX,
+                Label(
+                    "main.1.true",
                 ),
-            },
-            Ret,
-        ],
-    },
+                Label(
+                    "main.1.end",
+                ),
+                Jmp(
+                    "main.label_if",
+                ),
+                Label(
+                    "main.label_return",
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "main.label_empty",
+                ),
+                Move {
+                    source: Immediate(
+                        100,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "main.label_goto",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

@@ -1,47 +1,50 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Unary {
-                op: Negate,
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Return(
+                    Var(
+                        2,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Unary {
-                op: Negate,
-                src: Constant(
-                    2,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Binary {
-                op: NotEqual,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Var(
-                    1,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Return(
-                Var(
-                    2,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

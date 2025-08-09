@@ -1,48 +1,59 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                15,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Binary(
-                                Xor,
-                                Var(
-                                    "a",
-                                ),
-                                Constant(
-                                    5,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                15,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Binary(
+                                                Xor,
+                                                Var(
+                                                    "a",
+                                                ),
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        BitwiseOr,
+                                        Constant(
+                                            1,
+                                        ),
+                                        Var(
+                                            "b",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Binary(
-                            BitwiseOr,
-                            Constant(
-                                1,
-                            ),
-                            Var(
-                                "b",
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

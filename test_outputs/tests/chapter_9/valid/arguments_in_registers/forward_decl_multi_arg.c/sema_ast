@@ -1,0 +1,71 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "a.1",
+                    "b.2",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [
+                                            Constant(
+                                                2,
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "x.5",
+                    "y.6",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Subtract,
+                                        Var(
+                                            "x.5",
+                                        ),
+                                        Var(
+                                            "y.6",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

@@ -1,46 +1,55 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a.0",
-                        init: Some(
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Switch(
-                        Var(
-                            "a.0",
-                        ),
-                        Default(
-                            Return(
-                                Constant(
-                                    1,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.1",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                            Some(
-                                "switch.0",
+                            Statement(
+                                Switch(
+                                    Var(
+                                        "a.1",
+                                    ),
+                                    Default(
+                                        Return(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                        Some(
+                                            "switch.0",
+                                        ),
+                                    ),
+                                    Some(
+                                        "switch.0",
+                                    ),
+                                ),
                             ),
-                        ),
-                        Some(
-                            "switch.0",
-                        ),
-                    ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

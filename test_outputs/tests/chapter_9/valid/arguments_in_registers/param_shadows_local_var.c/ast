@@ -1,0 +1,80 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "f",
+                                        params: [
+                                            "a",
+                                        ],
+                                        body: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "f",
+                                        ),
+                                        [
+                                            Var(
+                                                "a",
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "f",
+                params: [
+                    "a",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Multiply,
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

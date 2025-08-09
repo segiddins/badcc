@@ -1,48 +1,51 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Constant(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            JumpIfZero(
-                Constant(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-                "main.0.true",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    1,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

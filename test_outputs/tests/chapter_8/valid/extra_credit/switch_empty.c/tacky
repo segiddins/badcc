@@ -1,89 +1,92 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    10,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "switch.0.cases",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "switch.0",
                 ),
-            },
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Label(
+                    "switch.0.cases",
                 ),
-                rhs: Constant(
-                    1,
+                Label(
+                    "switch.0",
                 ),
-                dst: Var(
-                    1,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "switch.1.cases",
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                Jump(
+                    "switch.1",
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "switch.1.cases",
                 ),
-            },
-            Jump(
-                "switch.0.cases",
-            ),
-            Jump(
-                "switch.0",
-            ),
-            Label(
-                "switch.0.cases",
-            ),
-            Label(
-                "switch.0",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Label(
+                    "switch.1",
                 ),
-                rhs: Constant(
-                    1,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    3,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Copy {
-                src: Var(
-                    3,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Jump(
-                "switch.1.cases",
-            ),
-            Jump(
-                "switch.1",
-            ),
-            Label(
-                "switch.1.cases",
-            ),
-            Label(
-                "switch.1",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

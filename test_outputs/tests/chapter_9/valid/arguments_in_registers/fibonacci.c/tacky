@@ -1,0 +1,198 @@
+Program {
+    functions: [
+        Function {
+            identifier: "fib",
+            params: [
+                Var(
+                    0,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        2,
+                    ),
+                    "fib.1.true",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        3,
+                    ),
+                    "fib.1.true",
+                ),
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "fib.1.end",
+                ),
+                Label(
+                    "fib.1.true",
+                ),
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Label(
+                    "fib.1.end",
+                ),
+                JumpIfZero(
+                    Var(
+                        1,
+                    ),
+                    "fib.0.true",
+                ),
+                Return(
+                    Var(
+                        0,
+                    ),
+                ),
+                Jump(
+                    "fib.0.end",
+                ),
+                Label(
+                    "fib.0.true",
+                ),
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Call(
+                    "fib",
+                    [
+                        Var(
+                            4,
+                        ),
+                    ],
+                    Var(
+                        5,
+                    ),
+                ),
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        6,
+                    ),
+                },
+                Call(
+                    "fib",
+                    [
+                        Var(
+                            6,
+                        ),
+                    ],
+                    Var(
+                        7,
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        5,
+                    ),
+                    rhs: Var(
+                        7,
+                    ),
+                    dst: Var(
+                        8,
+                    ),
+                },
+                Return(
+                    Var(
+                        8,
+                    ),
+                ),
+                Label(
+                    "fib.0.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        6,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Call(
+                    "fib",
+                    [
+                        Var(
+                            0,
+                        ),
+                    ],
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

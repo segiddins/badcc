@@ -1,236 +1,247 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "acc",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "acc",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "ctr",
-                        init: Some(
-                            Constant(
-                                0,
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "ctr",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i",
-                                init: Some(
-                                    Constant(
-                                        0,
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i",
+                                            init: Some(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                        },
                                     ),
-                                ),
-                            },
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Switch(
+                                    condition: Some(
+                                        Binary(
+                                            LessThan,
                                             Var(
                                                 "i",
                                             ),
-                                            Compound(
-                                                Block {
-                                                    items: [
-                                                        Statement(
-                                                            Case(
-                                                                Constant(
-                                                                    0,
-                                                                ),
-                                                                Expression(
-                                                                    Assignment(
-                                                                        Var(
-                                                                            "acc",
-                                                                        ),
-                                                                        Constant(
-                                                                            2,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                                None,
-                                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    ),
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i",
+                                            ),
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Switch(
+                                                        Var(
+                                                            "i",
                                                         ),
-                                                        Statement(
-                                                            Break(
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Case(
-                                                                Constant(
-                                                                    1,
-                                                                ),
-                                                                Expression(
-                                                                    Assignment(
-                                                                        Var(
-                                                                            "acc",
-                                                                        ),
-                                                                        Binary(
-                                                                            Multiply,
-                                                                            Var(
-                                                                                "acc",
-                                                                            ),
+                                                        Compound(
+                                                            Block {
+                                                                items: [
+                                                                    Statement(
+                                                                        Case(
                                                                             Constant(
-                                                                                3,
+                                                                                0,
                                                                             ),
+                                                                            Expression(
+                                                                                Assignment(
+                                                                                    Var(
+                                                                                        "acc",
+                                                                                    ),
+                                                                                    Constant(
+                                                                                        2,
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                            None,
                                                                         ),
                                                                     ),
-                                                                ),
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Break(
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Case(
-                                                                Constant(
-                                                                    2,
-                                                                ),
-                                                                Expression(
-                                                                    Assignment(
-                                                                        Var(
-                                                                            "acc",
-                                                                        ),
-                                                                        Binary(
-                                                                            Multiply,
-                                                                            Var(
-                                                                                "acc",
-                                                                            ),
-                                                                            Constant(
-                                                                                4,
-                                                                            ),
+                                                                    Statement(
+                                                                        Break(
+                                                                            None,
                                                                         ),
                                                                     ),
-                                                                ),
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Break(
-                                                                None,
-                                                            ),
-                                                        ),
-                                                        Statement(
-                                                            Default(
-                                                                Expression(
-                                                                    Assignment(
-                                                                        Var(
-                                                                            "acc",
-                                                                        ),
-                                                                        Binary(
-                                                                            Add,
-                                                                            Var(
-                                                                                "acc",
-                                                                            ),
+                                                                    Statement(
+                                                                        Case(
                                                                             Constant(
                                                                                 1,
                                                                             ),
+                                                                            Expression(
+                                                                                Assignment(
+                                                                                    Var(
+                                                                                        "acc",
+                                                                                    ),
+                                                                                    Binary(
+                                                                                        Multiply,
+                                                                                        Var(
+                                                                                            "acc",
+                                                                                        ),
+                                                                                        Constant(
+                                                                                            3,
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                            None,
                                                                         ),
                                                                     ),
+                                                                    Statement(
+                                                                        Break(
+                                                                            None,
+                                                                        ),
+                                                                    ),
+                                                                    Statement(
+                                                                        Case(
+                                                                            Constant(
+                                                                                2,
+                                                                            ),
+                                                                            Expression(
+                                                                                Assignment(
+                                                                                    Var(
+                                                                                        "acc",
+                                                                                    ),
+                                                                                    Binary(
+                                                                                        Multiply,
+                                                                                        Var(
+                                                                                            "acc",
+                                                                                        ),
+                                                                                        Constant(
+                                                                                            4,
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                            None,
+                                                                        ),
+                                                                    ),
+                                                                    Statement(
+                                                                        Break(
+                                                                            None,
+                                                                        ),
+                                                                    ),
+                                                                    Statement(
+                                                                        Default(
+                                                                            Expression(
+                                                                                Assignment(
+                                                                                    Var(
+                                                                                        "acc",
+                                                                                    ),
+                                                                                    Binary(
+                                                                                        Add,
+                                                                                        Var(
+                                                                                            "acc",
+                                                                                        ),
+                                                                                        Constant(
+                                                                                            1,
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                            None,
+                                                                        ),
+                                                                    ),
+                                                                ],
+                                                            },
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "ctr",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "ctr",
                                                                 ),
-                                                                None,
+                                                                Constant(
+                                                                    1,
+                                                                ),
                                                             ),
                                                         ),
-                                                    ],
-                                                },
-                                            ),
-                                            None,
-                                        ),
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "ctr",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "ctr",
-                                                    ),
-                                                    Constant(
-                                                        1,
                                                     ),
                                                 ),
+                                            ],
+                                        },
+                                    ),
+                                    label: None,
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "ctr",
+                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "acc",
+                                            ),
+                                            Constant(
+                                                31,
                                             ),
                                         ),
                                     ),
-                                ],
-                            },
-                        ),
-                        label: None,
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "ctr",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "acc",
-                                ),
-                                Constant(
-                                    31,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

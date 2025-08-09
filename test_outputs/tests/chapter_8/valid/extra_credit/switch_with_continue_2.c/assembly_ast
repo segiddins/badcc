@@ -1,268 +1,286 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                28,
-            ),
-            Move {
-                source: Immediate(
-                    0,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    48,
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
                 ),
-            },
-            Move {
-                source: Immediate(
-                    0,
+                Cmp(
+                    Immediate(
+                        10,
+                    ),
+                    Stack(
+                        16,
+                    ),
                 ),
-                destination: Psuedo(
-                    1,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                SetCC(
+                    L,
+                    Stack(
+                        20,
+                    ),
                 ),
-            },
-            Label(
-                "loop.0.cond",
-            ),
-            Cmp(
-                Immediate(
-                    10,
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        20,
+                    ),
                 ),
-                Psuedo(
-                    1,
+                JmpCC(
+                    E,
+                    "loop.0",
                 ),
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Cdq,
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Idiv(
+                    Register(
+                        R10,
+                        Four,
+                    ),
                 ),
-                destination: Psuedo(
-                    2,
+                Move {
+                    source: Register(
+                        DX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Jmp(
+                    "switch.1.cases",
                 ),
-            },
-            SetCC(
-                L,
-                Psuedo(
-                    2,
+                Label(
+                    "switch.1.0",
                 ),
-            ),
-            Cmp(
-                Immediate(
-                    0,
+                Jmp(
+                    "loop.0.start",
                 ),
-                Psuedo(
-                    2,
+                Label(
+                    "switch.1.default",
                 ),
-            ),
-            JmpCC(
-                E,
-                "loop.0",
-            ),
-            Move {
-                source: Psuedo(
-                    1,
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        28,
+                    ),
                 ),
-                destination: Register(
-                    AX,
+                Move {
+                    source: Stack(
+                        28,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "switch.1",
                 ),
-            },
-            Cdq,
-            Move {
-                source: Immediate(
-                    2,
+                Label(
+                    "switch.1.cases",
                 ),
-                destination: Register(
-                    R10,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Stack(
+                        24,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Idiv(
-                Register(
-                    R10,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        32,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        32,
+                    ),
                 ),
-            ),
-            Move {
-                source: Register(
-                    DX,
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        32,
+                    ),
                 ),
-                destination: Psuedo(
-                    3,
+                JmpCC(
+                    NE,
+                    "switch.1.0",
                 ),
-            },
-            Jmp(
-                "switch.1.cases",
-            ),
-            Label(
-                "switch.1.0",
-            ),
-            Jmp(
-                "loop.0.start",
-            ),
-            Label(
-                "switch.1.default",
-            ),
-            Move {
-                source: Psuedo(
-                    0,
+                Jmp(
+                    "switch.1.default",
                 ),
-                destination: Register(
-                    R10,
+                Label(
+                    "switch.1",
                 ),
-            },
-            Move {
-                source: Register(
-                    R10,
+                Label(
+                    "loop.0.start",
                 ),
-                destination: Psuedo(
-                    5,
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        36,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        36,
+                    ),
                 ),
-            },
-            Binary(
-                Add,
-                Immediate(
-                    1,
+                Move {
+                    source: Stack(
+                        36,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Jmp(
+                    "loop.0.cond",
                 ),
-                Psuedo(
-                    5,
+                Label(
+                    "loop.0",
                 ),
-            ),
-            Move {
-                source: Psuedo(
-                    5,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    0,
-                ),
-            },
-            Jmp(
-                "switch.1",
-            ),
-            Label(
-                "switch.1.cases",
-            ),
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    R11,
-                ),
-            },
-            Cmp(
-                Psuedo(
-                    3,
-                ),
-                Register(
-                    R11,
-                ),
-            ),
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Psuedo(
-                    4,
-                ),
-            },
-            SetCC(
-                E,
-                Psuedo(
-                    4,
-                ),
-            ),
-            Cmp(
-                Immediate(
-                    0,
-                ),
-                Psuedo(
-                    4,
-                ),
-            ),
-            JmpCC(
-                NE,
-                "switch.1.0",
-            ),
-            Jmp(
-                "switch.1.default",
-            ),
-            Label(
-                "switch.1",
-            ),
-            Label(
-                "loop.0.start",
-            ),
-            Move {
-                source: Psuedo(
-                    1,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    6,
-                ),
-            },
-            Binary(
-                Add,
-                Immediate(
-                    1,
-                ),
-                Psuedo(
-                    6,
-                ),
-            ),
-            Move {
-                source: Psuedo(
-                    6,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    1,
-                ),
-            },
-            Jmp(
-                "loop.0.cond",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

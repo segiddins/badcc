@@ -1,222 +1,225 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.do_label",
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Jump(
-                "do_label",
-            ),
-            Return(
-                Constant(
-                    0,
+                Label(
+                    "main.do_label",
                 ),
-            ),
-            Label(
-                "do_label",
-            ),
-            Label(
-                "loop.0.head",
-            ),
-            Copy {
-                src: Constant(
-                    1,
+                Label(
+                    "loop.0.head",
                 ),
-                dst: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.while_label",
                 ),
-            },
-            Jump(
-                "while_label",
-            ),
-            Label(
-                "loop.0.start",
-            ),
-            JumpIfNotZero(
-                Constant(
-                    1,
+                Label(
+                    "loop.0.start",
                 ),
-                "loop.0.head",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Label(
-                "while_label",
-            ),
-            Label(
-                "loop.1.start",
-            ),
-            JumpIfZero(
-                Constant(
-                    1,
+                JumpIfNotZero(
+                    Constant(
+                        1,
+                    ),
+                    "loop.0.head",
                 ),
-                "loop.1",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Label(
+                    "loop.0",
                 ),
-                rhs: Constant(
-                    1,
+                Label(
+                    "main.while_label",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "loop.1.start",
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                JumpIfZero(
+                    Constant(
+                        1,
+                    ),
+                    "loop.1",
                 ),
-                dst: Var(
-                    0,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.break_label",
                 ),
-            },
-            Jump(
-                "break_label",
-            ),
-            Return(
-                Constant(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            ),
-            Label(
-                "break_label",
-            ),
-            Jump(
-                "loop.1",
-            ),
-            Jump(
-                "loop.1.start",
-            ),
-            Label(
-                "loop.1",
-            ),
-            Jump(
-                "for_label",
-            ),
-            Return(
-                Constant(
-                    0,
+                Label(
+                    "main.break_label",
                 ),
-            ),
-            Label(
-                "for_label",
-            ),
-            Copy {
-                src: Constant(
-                    0,
+                Jump(
+                    "loop.1",
                 ),
-                dst: Var(
-                    2,
+                Jump(
+                    "loop.1.start",
                 ),
-            },
-            Label(
-                "loop.2.cond",
-            ),
-            Binary {
-                op: LessThan,
-                lhs: Var(
-                    2,
+                Label(
+                    "loop.1",
                 ),
-                rhs: Constant(
-                    10,
+                Jump(
+                    "main.for_label",
                 ),
-                dst: Var(
-                    3,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    3,
+                Label(
+                    "main.for_label",
                 ),
-                "loop.2",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Label(
+                    "loop.2.cond",
                 ),
-                rhs: Constant(
-                    1,
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        3,
+                    ),
+                    "loop.2",
                 ),
-                dst: Var(
-                    4,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.continue_label",
                 ),
-            },
-            Copy {
-                src: Var(
-                    4,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "main.continue_label",
                 ),
-            },
-            Jump(
-                "continue_label",
-            ),
-            Return(
-                Constant(
-                    0,
+                Jump(
+                    "loop.2.start",
                 ),
-            ),
-            Label(
-                "continue_label",
-            ),
-            Jump(
-                "loop.2.start",
-            ),
-            Return(
-                Constant(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            ),
-            Label(
-                "loop.2.start",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    2,
+                Label(
+                    "loop.2.start",
                 ),
-                rhs: Constant(
-                    1,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        5,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Jump(
+                    "loop.2.cond",
                 ),
-                dst: Var(
-                    5,
+                Label(
+                    "loop.2",
                 ),
-            },
-            Copy {
-                src: Var(
-                    5,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    2,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Jump(
-                "loop.2.cond",
-            ),
-            Label(
-                "loop.2",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

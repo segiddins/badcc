@@ -1,0 +1,71 @@
+Program {
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Call(
+                    "f",
+                    [
+                        Var(
+                            0,
+                        ),
+                    ],
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "f",
+            params: [
+                Var(
+                    0,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

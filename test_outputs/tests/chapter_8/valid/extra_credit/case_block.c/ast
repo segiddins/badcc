@@ -1,104 +1,117 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                4,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Switch(
-                        Constant(
-                            2,
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Case(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
                                             Constant(
-                                                2,
+                                                4,
                                             ),
-                                            Compound(
-                                                Block {
-                                                    items: [
-                                                        Declaration(
-                                                            VariableDeclaration {
-                                                                name: "a",
-                                                                init: Some(
-                                                                    Constant(
-                                                                        8,
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Switch(
+                                    Constant(
+                                        2,
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                        Compound(
+                                                            Block {
+                                                                items: [
+                                                                    Declaration(
+                                                                        Variable(
+                                                                            VariableDeclaration {
+                                                                                name: "a",
+                                                                                init: Some(
+                                                                                    Constant(
+                                                                                        8,
+                                                                                    ),
+                                                                                ),
+                                                                            },
+                                                                        ),
                                                                     ),
-                                                                ),
+                                                                    Statement(
+                                                                        Expression(
+                                                                            Assignment(
+                                                                                Var(
+                                                                                    "b",
+                                                                                ),
+                                                                                Var(
+                                                                                    "a",
+                                                                                ),
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ],
                                                             },
                                                         ),
-                                                        Statement(
-                                                            Expression(
-                                                                Assignment(
-                                                                    Var(
-                                                                        "b",
-                                                                    ),
-                                                                    Var(
-                                                                        "a",
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ],
-                                                },
+                                                        None,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "a",
                                             ),
-                                            None,
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "b",
+                                            ),
+                                            Constant(
+                                                8,
+                                            ),
                                         ),
                                     ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "a",
-                                ),
-                                Constant(
-                                    4,
                                 ),
                             ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "b",
-                                ),
-                                Constant(
-                                    8,
-                                ),
-                            ),
-                        ),
-                    ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

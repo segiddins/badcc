@@ -1,79 +1,88 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Switch(
-                        Var(
-                            "a",
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Case(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
                                             Constant(
                                                 0,
                                             ),
-                                            Return(
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                            None,
                                         ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Switch(
+                                    Var(
+                                        "a",
                                     ),
-                                    Statement(
-                                        Default(
-                                            Return(
-                                                Constant(
-                                                    1,
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            0,
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
                                                 ),
-                                            ),
-                                            None,
-                                        ),
-                                    ),
-                                    Statement(
-                                        Case(
-                                            Constant(
-                                                2,
-                                            ),
-                                            Return(
-                                                Constant(
-                                                    2,
+                                                Statement(
+                                                    Default(
+                                                        Return(
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
                                                 ),
-                                            ),
-                                            None,
-                                        ),
-                                    ),
-                                    Statement(
-                                        Default(
-                                            Return(
-                                                Constant(
-                                                    2,
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                2,
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
                                                 ),
-                                            ),
-                                            None,
-                                        ),
+                                                Statement(
+                                                    Default(
+                                                        Return(
+                                                            Constant(
+                                                                2,
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
                                     ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
+                                    None,
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,66 +1,73 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    For {
-                        init: Expr(
-                            Some(
-                                Assignment(
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Return(
-                                            Constant(
-                                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                For {
+                                    init: Expr(
+                                        Some(
+                                            Assignment(
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                     ),
-                                ],
-                            },
-                        ),
-                        label: None,
+                                    condition: Some(
+                                        Binary(
+                                            LessThan,
+                                            Var(
+                                                "i",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i",
+                                            ),
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            0,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    label: None,
+                                },
+                            ),
+                        ],
                     },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

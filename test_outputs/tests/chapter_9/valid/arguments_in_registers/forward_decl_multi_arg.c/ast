@@ -1,0 +1,71 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "a",
+                    "b",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [
+                                            Constant(
+                                                2,
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "x",
+                    "y",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Subtract,
+                                        Var(
+                                            "x",
+                                        ),
+                                        Var(
+                                            "y",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

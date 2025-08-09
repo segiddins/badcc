@@ -2,12 +2,12 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $1000, -4(%rbp)
-	movl -4(%rbp), %r11d
+	subq $16, %rsp
+	movl $1000, -12(%rbp)
+	movl -12(%rbp), %r11d
 	sarl $4, %r11d
-	movl %r11d, -4(%rbp)
-	movl -4(%rbp), %eax
+	movl %r11d, -12(%rbp)
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

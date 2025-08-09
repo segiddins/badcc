@@ -1,0 +1,63 @@
+Program {
+    functions: [
+        Function {
+            identifier: "foo",
+            params: [],
+            instructions: [
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        1,
+                    ),
+                ),
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Return(
+                    Var(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

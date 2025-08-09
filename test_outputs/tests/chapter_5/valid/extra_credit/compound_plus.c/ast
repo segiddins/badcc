@@ -1,39 +1,48 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "to_add",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "to_add",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Expression(
+                                    CompoundAssignment(
+                                        Var(
+                                            "to_add",
+                                        ),
+                                        Add,
+                                        Constant(
+                                            4,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "to_add",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Expression(
-                        CompoundAssignment(
-                            Var(
-                                "to_add",
-                            ),
-                            Add,
-                            Constant(
-                                4,
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "to_add",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

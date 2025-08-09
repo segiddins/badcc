@@ -1,37 +1,44 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    If(
-                        Constant(
-                            0,
-                        ),
-                        Labeled(
-                            "label",
-                            Return(
-                                Constant(
-                                    5,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Constant(
+                                        0,
+                                    ),
+                                    Labeled(
+                                        "label",
+                                        Return(
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
                                 ),
                             ),
-                        ),
-                        None,
-                    ),
+                            Statement(
+                                Goto(
+                                    "label",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Goto(
-                        "label",
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,0 +1,191 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        16,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        20,
+                    ),
+                ),
+                AllocateStack(
+                    8,
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        SI,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Register(
+                        DX,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Register(
+                        CX,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        5,
+                    ),
+                    destination: Register(
+                        R8,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        6,
+                    ),
+                    destination: Register(
+                        R9,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Push(
+                    Register(
+                        AX,
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Push(
+                    Register(
+                        AX,
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Push(
+                    Register(
+                        AX,
+                        Eight,
+                    ),
+                ),
+                Call(
+                    "f",
+                ),
+                DeallocateStack(
+                    32,
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+}

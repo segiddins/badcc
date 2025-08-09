@@ -1,62 +1,71 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "result.0",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Goto(
-                        "label",
-                    ),
-                ),
-                Statement(
-                    While(
-                        Constant(
-                            0,
-                        ),
-                        Labeled(
-                            "label",
-                            Compound(
-                                Block {
-                                    items: [
-                                        Statement(
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "result.0",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "result.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
                                             ),
                                         ),
-                                    ],
-                                },
+                                    },
+                                ),
                             ),
-                        ),
-                        Some(
-                            "loop.0",
-                        ),
-                    ),
+                            Statement(
+                                Goto(
+                                    "label",
+                                ),
+                            ),
+                            Statement(
+                                While(
+                                    Constant(
+                                        0,
+                                    ),
+                                    Labeled(
+                                        "label",
+                                        Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "result.1",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                    ),
+                                    Some(
+                                        "loop.0",
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "result.1",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "result.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,86 +1,95 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Switch(
-                        Var(
-                            "a",
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Case(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
                                             Constant(
                                                 5,
                                             ),
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "a",
-                                                    ),
-                                                    Constant(
-                                                        10,
-                                                    ),
-                                                ),
-                                            ),
-                                            None,
                                         ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Switch(
+                                    Var(
+                                        "a",
                                     ),
-                                    Statement(
-                                        Break(
-                                            None,
-                                        ),
-                                    ),
-                                    Statement(
-                                        Case(
-                                            Constant(
-                                                6,
-                                            ),
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "a",
-                                                    ),
-                                                    Constant(
-                                                        0,
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            5,
+                                                        ),
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "a",
+                                                                ),
+                                                                Constant(
+                                                                    10,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
                                                     ),
                                                 ),
-                                            ),
-                                            None,
-                                        ),
+                                                Statement(
+                                                    Break(
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            6,
+                                                        ),
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "a",
+                                                                ),
+                                                                Constant(
+                                                                    0,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Break(
+                                                        None,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
                                     ),
-                                    Statement(
-                                        Break(
-                                            None,
-                                        ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a",
                                     ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "a",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

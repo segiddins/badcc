@@ -1,0 +1,88 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "bar",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Constant(
+                                        9,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Multiply,
+                                        Constant(
+                                            2,
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "bar",
+                                            ),
+                                            [],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        FunctionCall(
+                                            Var(
+                                                "foo",
+                                            ),
+                                            [],
+                                        ),
+                                        Binary(
+                                            Divide,
+                                            FunctionCall(
+                                                Var(
+                                                    "bar",
+                                                ),
+                                                [],
+                                            ),
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

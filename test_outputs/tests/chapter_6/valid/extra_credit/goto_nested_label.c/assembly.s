@@ -2,10 +2,10 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	jmp LlabelB
-	LlabelA:
-	LlabelB:
+	subq $16, %rsp
+	jmp Lmain.labelB
+	Lmain.labelA:
+	Lmain.labelB:
 	movl $5, %eax
 	movq %rbp, %rsp
 	popq %rbp

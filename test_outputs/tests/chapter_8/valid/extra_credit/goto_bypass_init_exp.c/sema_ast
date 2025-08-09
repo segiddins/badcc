@@ -1,97 +1,106 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "i.0",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Goto(
-                        "target",
-                    ),
-                ),
-                Statement(
-                    For {
-                        init: Expr(
-                            Some(
-                                Assignment(
-                                    Var(
-                                        "i.0",
-                                    ),
-                                    Constant(
-                                        5,
-                                    ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i.0",
-                                ),
-                                Constant(
-                                    10,
+                            Statement(
+                                Goto(
+                                    "target",
                                 ),
                             ),
-                        ),
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i.0",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i.0",
+                            Statement(
+                                For {
+                                    init: Expr(
+                                        Some(
+                                            Assignment(
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                        ),
                                     ),
-                                    Constant(
-                                        1,
+                                    condition: Some(
+                                        Binary(
+                                            LessThan,
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
                                     ),
-                                ),
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    body: Labeled(
+                                        "target",
+                                        If(
+                                            Binary(
+                                                Equals,
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            Return(
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
                             ),
-                        ),
-                        body: Labeled(
-                            "target",
-                            If(
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "i.0",
-                                    ),
+                            Statement(
+                                Return(
                                     Constant(
                                         0,
                                     ),
                                 ),
-                                Return(
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                                None,
                             ),
-                        ),
-                        label: Some(
-                            "loop.0",
-                        ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

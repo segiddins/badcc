@@ -2,13 +2,13 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	jmp L_main
+	subq $16, %rsp
+	jmp Lmain._main
 	movl $0, %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret
-	L_main:
+	Lmain._main:
 	movl $1, %eax
 	movq %rbp, %rsp
 	popq %rbp

@@ -1,0 +1,47 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "putchar",
+                params: [
+                    "c",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "incr_and_print",
+                params: [
+                    "b",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "putchar",
+                                        ),
+                                        [
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "b",
+                                                ),
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

@@ -1,40 +1,49 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Return(
+                                    Ternary(
+                                        Unary(
+                                            PrefixIncrement,
+                                            Var(
+                                                "a",
+                                            ),
+                                        ),
+                                        Unary(
+                                            PrefixIncrement,
+                                            Var(
+                                                "a",
+                                            ),
+                                        ),
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Ternary(
-                            Unary(
-                                PrefixIncrement,
-                                Var(
-                                    "a",
-                                ),
-                            ),
-                            Unary(
-                                PrefixIncrement,
-                                Var(
-                                    "a",
-                                ),
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,46 +1,55 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a.0",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a.1",
+                                        ),
+                                        Ternary(
+                                            Constant(
+                                                1,
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "a.0",
-                            ),
-                            Ternary(
-                                Constant(
-                                    1,
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                                Constant(
-                                    3,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "a.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

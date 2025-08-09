@@ -1,93 +1,96 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "loop.0.head",
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "main.while_start",
                 ),
-            },
-            Label(
-                "loop.0.head",
-            ),
-            Label(
-                "while_start",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "main.0.true",
                 ),
-                rhs: Constant(
-                    1,
+                Jump(
+                    "main.while_start",
                 ),
-                dst: Var(
-                    1,
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "main.0.end",
                 ),
-            },
-            Binary {
-                op: LessThan,
-                lhs: Var(
-                    0,
+                Label(
+                    "loop.0.start",
                 ),
-                rhs: Constant(
-                    10,
+                JumpIfNotZero(
+                    Constant(
+                        0,
+                    ),
+                    "loop.0.head",
                 ),
-                dst: Var(
-                    2,
+                Label(
+                    "loop.0",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    2,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                "main.0.true",
-            ),
-            Jump(
-                "while_start",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Label(
-                "loop.0.start",
-            ),
-            JumpIfNotZero(
-                Constant(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                "loop.0.head",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

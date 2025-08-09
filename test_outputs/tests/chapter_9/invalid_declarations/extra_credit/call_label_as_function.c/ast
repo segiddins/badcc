@@ -1,0 +1,66 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "a",
+                                    Expression(
+                                        Assignment(
+                                            Var(
+                                                "x",
+                                            ),
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "x",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    FunctionCall(
+                                        Var(
+                                            "a",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "x",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

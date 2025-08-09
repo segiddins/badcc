@@ -1,107 +1,118 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Expression(
-                        Unary(
-                            PostfixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Unary(
-                            PrefixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Unary(
-                            PrefixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Unary(
-                            PostfixDecrement,
-                            Var(
-                                "b",
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Unary(
-                            PrefixDecrement,
-                            Var(
-                                "b",
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "a",
-                                ),
-                                Constant(
-                                    3,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "b",
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
                                 ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        2,
+                            ),
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PostfixIncrement,
+                                        Var(
+                                            "a",
+                                        ),
                                     ),
                                 ),
                             ),
-                        ),
-                    ),
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PrefixIncrement,
+                                        Var(
+                                            "a",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PrefixIncrement,
+                                        Var(
+                                            "a",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PostfixDecrement,
+                                        Var(
+                                            "b",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Unary(
+                                        PrefixDecrement,
+                                        Var(
+                                            "b",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "a",
+                                            ),
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "b",
+                                            ),
+                                            Unary(
+                                                Minus,
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

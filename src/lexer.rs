@@ -145,6 +145,8 @@ pub enum TokenKind {
     Case,
     #[token("default")]
     Default,
+    #[token(",")]
+    Comma,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

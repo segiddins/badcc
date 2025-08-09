@@ -1,40 +1,49 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a.0",
-                        init: None,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.1",
+                                        init: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a.1",
+                                        ),
+                                        Binary(
+                                            Or,
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "a.0",
-                            ),
-                            Binary(
-                                Or,
-                                Constant(
-                                    0,
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "a.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

@@ -1,58 +1,71 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                3,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "c",
-                        init: Some(
-                            Constant(
-                                8,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            BitwiseOr,
-                            Binary(
-                                BitwiseAnd,
-                                Var(
-                                    "a",
-                                ),
-                                Var(
-                                    "b",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                            Var(
-                                "c",
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "c",
+                                        init: Some(
+                                            Constant(
+                                                8,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        BitwiseOr,
+                                        Binary(
+                                            BitwiseAnd,
+                                            Var(
+                                                "a",
+                                            ),
+                                            Var(
+                                                "b",
+                                            ),
+                                        ),
+                                        Var(
+                                            "c",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

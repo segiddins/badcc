@@ -1,29 +1,36 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    Expression(
-                        CompoundAssignment(
-                            Var(
-                                "a",
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Expression(
+                                    CompoundAssignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Add,
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
                             ),
-                            Add,
-                            Constant(
-                                1,
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
                             ),
-                        ),
-                    ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

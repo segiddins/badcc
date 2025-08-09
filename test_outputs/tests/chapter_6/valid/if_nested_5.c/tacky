@@ -1,79 +1,82 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Constant(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                JumpIfZero(
+                    Constant(
+                        0,
+                    ),
+                    "main.1.true",
                 ),
-            },
-            JumpIfZero(
-                Constant(
-                    0,
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.1.end",
                 ),
-                "main.0.true",
-            ),
-            JumpIfZero(
-                Constant(
-                    0,
+                Label(
+                    "main.1.true",
                 ),
-                "main.1.true",
-            ),
-            Copy {
-                src: Constant(
-                    3,
+                Copy {
+                    src: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.1.end",
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Copy {
-                src: Constant(
-                    4,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-            },
-            Label(
-                "main.1.end",
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    1,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

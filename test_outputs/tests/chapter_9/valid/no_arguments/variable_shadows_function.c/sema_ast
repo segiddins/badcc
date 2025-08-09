@@ -1,0 +1,116 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "foo",
+                                        params: [],
+                                        body: None,
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x.2",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "foo",
+                                                ),
+                                                [],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        GreaterThan,
+                                        Var(
+                                            "x.2",
+                                        ),
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Declaration(
+                                                    Variable(
+                                                        VariableDeclaration {
+                                                            name: "foo.3",
+                                                            init: Some(
+                                                                Constant(
+                                                                    3,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "x.2",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "x.2",
+                                                                ),
+                                                                Var(
+                                                                    "foo.3",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "x.2",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Constant(
+                                        4,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

@@ -1,88 +1,91 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-            },
-            Copy {
-                src: Constant(
-                    1,
+                Label(
+                    "main.0.true",
                 ),
-                dst: Var(
-                    1,
+                Unary {
+                    op: Complement,
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "main.1.true",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "main.1.end",
                 ),
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    1,
+                Label(
+                    "main.1.true",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "main.1.end",
                 ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Unary {
-                op: Complement,
-                src: Var(
-                    1,
+                Label(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    2,
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    2,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                "main.1.true",
-            ),
-            Copy {
-                src: Constant(
-                    2,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

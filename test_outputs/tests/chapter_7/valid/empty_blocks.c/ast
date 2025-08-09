@@ -1,70 +1,81 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "ten",
-                        init: Some(
-                            Constant(
-                                10,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Compound(
-                        Block {
-                            items: [],
-                        },
-                    ),
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "twenty",
-                        init: Some(
-                            Binary(
-                                Multiply,
-                                Constant(
-                                    10,
-                                ),
-                                Constant(
-                                    2,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "ten",
+                                        init: Some(
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    },
                                 ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Compound(
-                        Block {
-                            items: [
-                                Statement(
-                                    Compound(
-                                        Block {
-                                            items: [],
-                                        },
+                            Statement(
+                                Compound(
+                                    Block {
+                                        items: [],
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "twenty",
+                                        init: Some(
+                                            Binary(
+                                                Multiply,
+                                                Constant(
+                                                    10,
+                                                ),
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Compound(
+                                    Block {
+                                        items: [
+                                            Statement(
+                                                Compound(
+                                                    Block {
+                                                        items: [],
+                                                    },
+                                                ),
+                                            ),
+                                        ],
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "ten",
+                                        ),
+                                        Var(
+                                            "twenty",
+                                        ),
                                     ),
                                 ),
-                            ],
-                        },
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            Add,
-                            Var(
-                                "ten",
                             ),
-                            Var(
-                                "twenty",
-                            ),
-                        ),
-                    ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

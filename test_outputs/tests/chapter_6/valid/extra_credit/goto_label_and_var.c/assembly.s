@@ -2,15 +2,15 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $5, -4(%rbp)
-	jmp Lident
+	subq $16, %rsp
+	movl $5, -12(%rbp)
+	jmp Lmain.ident
 	movl $0, %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret
-	Lident:
-	movl -4(%rbp), %eax
+	Lmain.ident:
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

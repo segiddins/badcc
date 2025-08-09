@@ -2,18 +2,18 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $12, %rsp
+	subq $32, %rsp
 	movl $5, %r11d
 	cmpl $0, %r11d
-	movl $0, -4(%rbp)
-	setGE -4(%rbp)
-	cmpl $1, -4(%rbp)
-	movl $0, -8(%rbp)
-	setG -8(%rbp)
-	cmpl $0, -8(%rbp)
 	movl $0, -12(%rbp)
-	setLE -12(%rbp)
-	movl -12(%rbp), %eax
+	setGE -12(%rbp)
+	cmpl $1, -12(%rbp)
+	movl $0, -16(%rbp)
+	setG -16(%rbp)
+	cmpl $0, -16(%rbp)
+	movl $0, -20(%rbp)
+	setLE -20(%rbp)
+	movl -20(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

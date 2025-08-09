@@ -1,64 +1,75 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Compound(
-                        Block {
-                            items: [
-                                Statement(
-                                    If(
-                                        Binary(
-                                            NotEqual,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                0,
-                                            ),
-                                        ),
-                                        Labeled(
-                                            "return_a",
-                                            Return(
-                                                Var(
-                                                    "a",
-                                                ),
-                                            ),
-                                        ),
-                                        None,
-                                    ),
-                                ),
-                                Declaration(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
                                     VariableDeclaration {
                                         name: "a",
                                         init: Some(
                                             Constant(
-                                                4,
+                                                0,
                                             ),
                                         ),
                                     },
                                 ),
-                                Statement(
-                                    Goto(
-                                        "return_a",
-                                    ),
+                            ),
+                            Statement(
+                                Compound(
+                                    Block {
+                                        items: [
+                                            Statement(
+                                                If(
+                                                    Binary(
+                                                        NotEqual,
+                                                        Var(
+                                                            "a",
+                                                        ),
+                                                        Constant(
+                                                            0,
+                                                        ),
+                                                    ),
+                                                    Labeled(
+                                                        "return_a",
+                                                        Return(
+                                                            Var(
+                                                                "a",
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    None,
+                                                ),
+                                            ),
+                                            Declaration(
+                                                Variable(
+                                                    VariableDeclaration {
+                                                        name: "a",
+                                                        init: Some(
+                                                            Constant(
+                                                                4,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                            ),
+                                            Statement(
+                                                Goto(
+                                                    "return_a",
+                                                ),
+                                            ),
+                                        ],
+                                    },
                                 ),
-                            ],
-                        },
-                    ),
+                            ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

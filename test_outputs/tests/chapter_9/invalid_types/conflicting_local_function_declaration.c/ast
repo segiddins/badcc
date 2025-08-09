@@ -1,0 +1,98 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "bar",
+                params: [],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "foo",
+                                        params: [
+                                            "a",
+                                        ],
+                                        body: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        FunctionCall(
+                                            Var(
+                                                "bar",
+                                            ),
+                                            [],
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "foo",
+                                            ),
+                                            [
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "bar",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "foo",
+                                        params: [
+                                            "a",
+                                            "b",
+                                        ],
+                                        body: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [
+                                            Constant(
+                                                1,
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

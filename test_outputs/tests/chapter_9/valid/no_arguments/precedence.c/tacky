@@ -1,0 +1,52 @@
+Program {
+    functions: [
+        Function {
+            identifier: "three",
+            params: [],
+            instructions: [
+                Return(
+                    Constant(
+                        3,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Call(
+                    "three",
+                    [],
+                    Var(
+                        0,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,79 +1,85 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                4,
-            ),
-            Move {
-                source: Immediate(
-                    0,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    16,
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "main.label",
                 ),
-            },
-            Jmp(
-                "label",
-            ),
-            Label(
-                "loop.0.start",
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Label(
+                    "loop.0.start",
                 ),
-                destination: Register(
-                    R11,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Cmp(
-                Immediate(
-                    0,
+                JmpCC(
+                    E,
+                    "loop.0",
                 ),
-                Register(
-                    R11,
+                Label(
+                    "main.label",
                 ),
-            ),
-            JmpCC(
-                E,
-                "loop.0",
-            ),
-            Label(
-                "label",
-            ),
-            Move {
-                source: Immediate(
-                    1,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "loop.0.start",
                 ),
-                destination: Psuedo(
-                    0,
+                Label(
+                    "loop.0",
                 ),
-            },
-            Jmp(
-                "loop.0.start",
-            ),
-            Label(
-                "loop.0",
-            ),
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

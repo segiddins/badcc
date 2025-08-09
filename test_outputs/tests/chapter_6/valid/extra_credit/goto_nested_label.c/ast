@@ -1,34 +1,41 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Statement(
-                    Goto(
-                        "labelB",
-                    ),
-                ),
-                Statement(
-                    Labeled(
-                        "labelA",
-                        Labeled(
-                            "labelB",
-                            Return(
-                                Constant(
-                                    5,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Goto(
+                                    "labelB",
                                 ),
                             ),
-                        ),
-                    ),
+                            Statement(
+                                Labeled(
+                                    "labelA",
+                                    Labeled(
+                                        "labelB",
+                                        Return(
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

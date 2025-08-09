@@ -2,9 +2,9 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $0, -4(%rbp)
-	cmpl $0, -4(%rbp)
+	subq $16, %rsp
+	movl $0, -12(%rbp)
+	cmpl $0, -12(%rbp)
 	jE Lmain.0.true
 	movl $1, %eax
 	movq %rbp, %rsp

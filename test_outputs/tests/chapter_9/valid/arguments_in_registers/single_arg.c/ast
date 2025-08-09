@@ -1,0 +1,57 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "twice",
+                params: [
+                    "x",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Multiply,
+                                        Constant(
+                                            2,
+                                        ),
+                                        Var(
+                                            "x",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "twice",
+                                        ),
+                                        [
+                                            Constant(
+                                                3,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

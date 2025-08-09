@@ -1,155 +1,166 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "sum.0",
-                        init: Some(
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "counter.1",
-                        init: None,
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Decl(
-                            VariableDeclaration {
-                                name: "i.2",
-                                init: Some(
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
-                            },
-                        ),
-                        condition: Some(
-                            Binary(
-                                LessThanOrEqual,
-                                Var(
-                                    "i.2",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            Assignment(
-                                Var(
-                                    "i.2",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i.2",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "counter.1",
-                                                ),
-                                                Var(
-                                                    "i.2",
-                                                ),
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
                                             ),
                                         ),
-                                    ),
-                                    Statement(
-                                        If(
-                                            Binary(
-                                                Equals,
-                                                Binary(
-                                                    Remainder,
-                                                    Var(
-                                                        "i.2",
-                                                    ),
-                                                    Constant(
-                                                        2,
-                                                    ),
-                                                ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "counter.2",
+                                        init: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i.3",
+                                            init: Some(
                                                 Constant(
                                                     0,
                                                 ),
                                             ),
-                                            Continue(
-                                                Some(
-                                                    "loop.0",
-                                                ),
+                                        },
+                                    ),
+                                    condition: Some(
+                                        Binary(
+                                            LessThanOrEqual,
+                                            Var(
+                                                "i.3",
                                             ),
-                                            None,
+                                            Constant(
+                                                10,
+                                            ),
                                         ),
                                     ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i.3",
+                                            ),
+                                            Binary(
+                                                Add,
                                                 Var(
-                                                    "sum.0",
+                                                    "i.3",
                                                 ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "sum.0",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
+                                                Constant(
+                                                    1,
                                                 ),
                                             ),
                                         ),
                                     ),
-                                ],
-                            },
-                        ),
-                        label: Some(
-                            "loop.0",
-                        ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "counter.2",
+                                                            ),
+                                                            Var(
+                                                                "i.3",
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    If(
+                                                        Binary(
+                                                            Equals,
+                                                            Binary(
+                                                                Remainder,
+                                                                Var(
+                                                                    "i.3",
+                                                                ),
+                                                                Constant(
+                                                                    2,
+                                                                ),
+                                                            ),
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                        Continue(
+                                                            Some(
+                                                                "loop.0",
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "sum.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "sum.1",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        And,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "sum.1",
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "counter.2",
+                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "sum.0",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "counter.1",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

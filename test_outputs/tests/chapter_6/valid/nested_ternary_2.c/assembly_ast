@@ -1,297 +1,322 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                28,
-            ),
-            Move {
-                source: Immediate(
-                    1,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    48,
                 ),
-                destination: Register(
-                    R11,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Cmp(
-                Immediate(
-                    0,
+                JmpCC(
+                    E,
+                    "main.0.true",
                 ),
-                Register(
-                    R11,
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            ),
-            JmpCC(
-                E,
-                "main.0.true",
-            ),
-            Move {
-                source: Immediate(
-                    2,
+                JmpCC(
+                    E,
+                    "main.1.true",
                 ),
-                destination: Register(
-                    R11,
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "main.1.end",
                 ),
-            },
-            Cmp(
-                Immediate(
-                    0,
+                Label(
+                    "main.1.true",
                 ),
-                Register(
-                    R11,
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Label(
+                    "main.1.end",
                 ),
-            ),
-            JmpCC(
-                E,
-                "main.1.true",
-            ),
-            Move {
-                source: Immediate(
-                    3,
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Jmp(
+                    "main.0.end",
                 ),
-                destination: Psuedo(
-                    2,
+                Label(
+                    "main.0.true",
                 ),
-            },
-            Jmp(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Move {
-                source: Immediate(
-                    4,
+                Move {
+                    source: Immediate(
+                        5,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Label(
+                    "main.0.end",
                 ),
-                destination: Psuedo(
-                    2,
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Label(
-                "main.1.end",
-            ),
-            Move {
-                source: Psuedo(
-                    2,
+                JmpCC(
+                    E,
+                    "main.2.true",
                 ),
-                destination: Register(
-                    R10,
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Move {
-                source: Register(
-                    R10,
+                JmpCC(
+                    E,
+                    "main.3.true",
                 ),
-                destination: Psuedo(
-                    1,
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Jmp(
+                    "main.3.end",
                 ),
-            },
-            Jmp(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Move {
-                source: Immediate(
-                    5,
+                Label(
+                    "main.3.true",
                 ),
-                destination: Psuedo(
-                    1,
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Label(
+                    "main.3.end",
                 ),
-            },
-            Label(
-                "main.0.end",
-            ),
-            Move {
-                source: Psuedo(
-                    1,
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Jmp(
+                    "main.2.end",
                 ),
-                destination: Register(
-                    R10,
+                Label(
+                    "main.2.true",
                 ),
-            },
-            Move {
-                source: Register(
-                    R10,
+                Move {
+                    source: Immediate(
+                        5,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Label(
+                    "main.2.end",
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Stack(
+                        28,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        32,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        36,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        36,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Mult,
+                    Stack(
+                        32,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
                 ),
-            },
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    R11,
-                ),
-            },
-            Cmp(
-                Immediate(
-                    0,
-                ),
-                Register(
-                    R11,
-                ),
-            ),
-            JmpCC(
-                E,
-                "main.2.true",
-            ),
-            Move {
-                source: Immediate(
-                    2,
-                ),
-                destination: Register(
-                    R11,
-                ),
-            },
-            Cmp(
-                Immediate(
-                    0,
-                ),
-                Register(
-                    R11,
-                ),
-            ),
-            JmpCC(
-                E,
-                "main.3.true",
-            ),
-            Move {
-                source: Immediate(
-                    3,
-                ),
-                destination: Psuedo(
-                    5,
-                ),
-            },
-            Jmp(
-                "main.3.end",
-            ),
-            Label(
-                "main.3.true",
-            ),
-            Move {
-                source: Immediate(
-                    4,
-                ),
-                destination: Psuedo(
-                    5,
-                ),
-            },
-            Label(
-                "main.3.end",
-            ),
-            Move {
-                source: Psuedo(
-                    5,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    4,
-                ),
-            },
-            Jmp(
-                "main.2.end",
-            ),
-            Label(
-                "main.2.true",
-            ),
-            Move {
-                source: Immediate(
-                    5,
-                ),
-                destination: Psuedo(
-                    4,
-                ),
-            },
-            Label(
-                "main.2.end",
-            ),
-            Move {
-                source: Psuedo(
-                    4,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    3,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    0,
-                ),
-                destination: Register(
-                    R10,
-                ),
-            },
-            Move {
-                source: Register(
-                    R10,
-                ),
-                destination: Psuedo(
-                    6,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    6,
-                ),
-                destination: Register(
-                    R11,
-                ),
-            },
-            Binary(
-                Mult,
-                Psuedo(
-                    3,
-                ),
-                Register(
-                    R11,
-                ),
-            ),
-            Move {
-                source: Register(
-                    R11,
-                ),
-                destination: Psuedo(
-                    6,
-                ),
-            },
-            Move {
-                source: Psuedo(
-                    6,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
-                ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Register(
+                        R11,
+                        Four,
+                    ),
+                    destination: Stack(
+                        36,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        36,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

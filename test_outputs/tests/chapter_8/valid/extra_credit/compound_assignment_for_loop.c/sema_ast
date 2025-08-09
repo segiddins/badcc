@@ -1,84 +1,93 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "i.0",
-                        init: Some(
-                            Constant(
-                                1,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i.1",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    For {
-                        init: Expr(
-                            Some(
-                                CompoundAssignment(
-                                    Var(
-                                        "i.0",
+                            Statement(
+                                For {
+                                    init: Expr(
+                                        Some(
+                                            CompoundAssignment(
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Multiply,
+                                                Unary(
+                                                    Minus,
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
                                     ),
-                                    Multiply,
-                                    Unary(
-                                        Minus,
-                                        Constant(
-                                            1,
+                                    condition: Some(
+                                        Binary(
+                                            GreaterThanOrEqual,
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Unary(
+                                                Minus,
+                                                Constant(
+                                                    100,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    post: Some(
+                                        CompoundAssignment(
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Subtract,
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                    ),
+                                    body: Null,
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "i.1",
+                                        ),
+                                        Unary(
+                                            Minus,
+                                            Constant(
+                                                103,
+                                            ),
                                         ),
                                     ),
                                 ),
                             ),
-                        ),
-                        condition: Some(
-                            Binary(
-                                GreaterThanOrEqual,
-                                Var(
-                                    "i.0",
-                                ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        100,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        post: Some(
-                            CompoundAssignment(
-                                Var(
-                                    "i.0",
-                                ),
-                                Subtract,
-                                Constant(
-                                    3,
-                                ),
-                            ),
-                        ),
-                        body: Null,
-                        label: Some(
-                            "loop.0",
-                        ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Binary(
-                            Equals,
-                            Var(
-                                "i.0",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    103,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

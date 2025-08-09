@@ -1,53 +1,56 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Binary {
-                op: Add,
-                lhs: Constant(
-                    4,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Constant(
+                        4,
+                    ),
+                    rhs: Constant(
+                        12,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: LeftShift,
+                    lhs: Constant(
+                        40,
+                    ),
+                    rhs: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: RightShift,
+                    lhs: Var(
+                        1,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Return(
+                    Var(
+                        2,
+                    ),
                 ),
-                rhs: Constant(
-                    12,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Binary {
-                op: LeftShift,
-                lhs: Constant(
-                    40,
-                ),
-                rhs: Var(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Binary {
-                op: RightShift,
-                lhs: Var(
-                    1,
-                ),
-                rhs: Constant(
-                    1,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Return(
-                Var(
-                    2,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

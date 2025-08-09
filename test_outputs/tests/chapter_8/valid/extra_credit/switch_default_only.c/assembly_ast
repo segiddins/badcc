@@ -1,63 +1,68 @@
 Program {
-    function_definition: Function {
-        name: "main",
-        instructions: [
-            AllocateStack(
-                4,
-            ),
-            Move {
-                source: Immediate(
-                    1,
+    definitions: [
+        Function {
+            name: "main",
+            instructions: [
+                AllocateStack(
+                    16,
                 ),
-                destination: Psuedo(
-                    0,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "switch.0.cases",
                 ),
-            },
-            Jmp(
-                "switch.0.cases",
-            ),
-            Label(
-                "switch.0.default",
-            ),
-            Move {
-                source: Immediate(
-                    1,
+                Label(
+                    "switch.0.default",
                 ),
-                destination: Register(
-                    AX,
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "switch.0",
                 ),
-            },
-            Ret,
-            Jmp(
-                "switch.0",
-            ),
-            Label(
-                "switch.0.cases",
-            ),
-            Jmp(
-                "switch.0.default",
-            ),
-            Label(
-                "switch.0",
-            ),
-            Move {
-                source: Immediate(
-                    0,
+                Label(
+                    "switch.0.cases",
                 ),
-                destination: Register(
-                    AX,
+                Jmp(
+                    "switch.0.default",
                 ),
-            },
-            Ret,
-            Move {
-                source: Immediate(
-                    0,
+                Label(
+                    "switch.0",
                 ),
-                destination: Register(
-                    AX,
-                ),
-            },
-            Ret,
-        ],
-    },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
 }

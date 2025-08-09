@@ -2,7 +2,7 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $8, %rsp
+	subq $16, %rsp
 	jmp Lswitch.0.cases
 	Lswitch.0.0:
 	movl $0, %eax
@@ -30,15 +30,15 @@ _main:
 	Lswitch.1.cases:
 	movl $3, %r11d
 	cmpl $4, %r11d
-	movl $0, -8(%rbp)
-	setE -8(%rbp)
-	cmpl $0, -8(%rbp)
+	movl $0, -12(%rbp)
+	setE -12(%rbp)
+	cmpl $0, -12(%rbp)
 	jNE Lswitch.1.3
 	movl $4, %r11d
 	cmpl $4, %r11d
-	movl $0, -8(%rbp)
-	setE -8(%rbp)
-	cmpl $0, -8(%rbp)
+	movl $0, -12(%rbp)
+	setE -12(%rbp)
+	cmpl $0, -12(%rbp)
 	jNE Lswitch.1.4
 	jmp Lswitch.1.default
 	Lswitch.1:
@@ -56,21 +56,21 @@ _main:
 	Lswitch.0.cases:
 	movl $0, %r11d
 	cmpl $3, %r11d
-	movl $0, -4(%rbp)
-	setE -4(%rbp)
-	cmpl $0, -4(%rbp)
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jNE Lswitch.0.0
 	movl $3, %r11d
 	cmpl $3, %r11d
-	movl $0, -4(%rbp)
-	setE -4(%rbp)
-	cmpl $0, -4(%rbp)
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jNE Lswitch.0.3
 	movl $4, %r11d
 	cmpl $3, %r11d
-	movl $0, -4(%rbp)
-	setE -4(%rbp)
-	cmpl $0, -4(%rbp)
+	movl $0, -16(%rbp)
+	setE -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jNE Lswitch.0.4
 	jmp Lswitch.0.default
 	Lswitch.0:

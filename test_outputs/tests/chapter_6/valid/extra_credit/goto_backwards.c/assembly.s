@@ -2,11 +2,11 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
+	subq $16, %rsp
 	movl $0, %r11d
 	cmpl $0, %r11d
 	jE Lmain.0.true
-	Llabel:
+	Lmain.label:
 	movl $5, %eax
 	movq %rbp, %rsp
 	popq %rbp
@@ -14,7 +14,7 @@ _main:
 	jmp Lmain.0.end
 	Lmain.0.true:
 	Lmain.0.end:
-	jmp Llabel
+	jmp Lmain.label
 	movl $0, %eax
 	movq %rbp, %rsp
 	popq %rbp

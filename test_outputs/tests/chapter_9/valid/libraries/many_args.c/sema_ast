@@ -1,0 +1,187 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "fib",
+                params: [
+                    "n.1",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        Or,
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "n.1",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Binary(
+                                            Equals,
+                                            Var(
+                                                "n.1",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Var(
+                                                            "n.1",
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    Some(
+                                        Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Return(
+                                                            Binary(
+                                                                Add,
+                                                                FunctionCall(
+                                                                    Var(
+                                                                        "fib",
+                                                                    ),
+                                                                    [
+                                                                        Binary(
+                                                                            Subtract,
+                                                                            Var(
+                                                                                "n.1",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                                FunctionCall(
+                                                                    Var(
+                                                                        "fib",
+                                                                    ),
+                                                                    [
+                                                                        Binary(
+                                                                            Subtract,
+                                                                            Var(
+                                                                                "n.1",
+                                                                            ),
+                                                                            Constant(
+                                                                                2,
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "multiply_many_args",
+                params: [
+                    "a.3",
+                    "b.4",
+                    "c.5",
+                    "d.6",
+                    "e.7",
+                    "f.8",
+                    "g.9",
+                    "h.10",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Multiply,
+                                        Binary(
+                                            Multiply,
+                                            Binary(
+                                                Multiply,
+                                                Binary(
+                                                    Multiply,
+                                                    Binary(
+                                                        Multiply,
+                                                        Binary(
+                                                            Multiply,
+                                                            Binary(
+                                                                Multiply,
+                                                                Var(
+                                                                    "a.3",
+                                                                ),
+                                                                Var(
+                                                                    "b.4",
+                                                                ),
+                                                            ),
+                                                            Var(
+                                                                "c.5",
+                                                            ),
+                                                        ),
+                                                        Var(
+                                                            "d.6",
+                                                        ),
+                                                    ),
+                                                    Var(
+                                                        "e.7",
+                                                    ),
+                                                ),
+                                                Var(
+                                                    "f.8",
+                                                ),
+                                            ),
+                                            FunctionCall(
+                                                Var(
+                                                    "fib",
+                                                ),
+                                                [
+                                                    Var(
+                                                        "g.9",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "fib",
+                                            ),
+                                            [
+                                                Var(
+                                                    "h.10",
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

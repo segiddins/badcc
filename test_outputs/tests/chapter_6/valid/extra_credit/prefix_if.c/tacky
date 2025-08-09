@@ -1,98 +1,101 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Unary {
-                op: Negate,
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    1,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Copy {
-                src: Var(
-                    1,
+                Jump(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    0,
+                Label(
+                    "main.0.true",
                 ),
-            },
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        0,
+                    ),
+                    "main.1.true",
                 ),
-                rhs: Constant(
-                    1,
+                Return(
+                    Constant(
+                        1,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Jump(
+                    "main.1.end",
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    0,
+                Label(
+                    "main.1.true",
                 ),
-                "main.0.true",
-            ),
-            Return(
-                Constant(
-                    0,
+                Label(
+                    "main.1.end",
                 ),
-            ),
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Label(
+                    "main.0.end",
                 ),
-                rhs: Constant(
-                    1,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            JumpIfZero(
-                Var(
-                    0,
-                ),
-                "main.1.true",
-            ),
-            Return(
-                Constant(
-                    1,
-                ),
-            ),
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

@@ -2,18 +2,18 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $4, %rsp
-	movl $0, -4(%rbp)
-	jmp Llabel
+	subq $16, %rsp
+	movl $0, -12(%rbp)
+	jmp Lmain.label
 	Lloop.0.start:
 	movl $0, %r11d
 	cmpl $0, %r11d
 	jE Lloop.0
-	Llabel:
-	movl $1, -4(%rbp)
+	Lmain.label:
+	movl $1, -12(%rbp)
 	jmp Lloop.0.start
 	Lloop.0:
-	movl -4(%rbp), %eax
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

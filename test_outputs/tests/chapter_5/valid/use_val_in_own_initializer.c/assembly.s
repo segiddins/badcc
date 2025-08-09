@@ -2,20 +2,20 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $8, %rsp
+	subq $16, %rsp
 	movl $0, %r11d
 	cmpl $0, %r11d
 	jE Lmain.0.false
-	cmpl $0, -4(%rbp)
+	cmpl $0, -12(%rbp)
 	jE Lmain.0.false
-	movl $1, -8(%rbp)
+	movl $1, -16(%rbp)
 	jmp Lmain.0.end
 	Lmain.0.false:
-	movl $0, -8(%rbp)
+	movl $0, -16(%rbp)
 	Lmain.0.end:
-	movl -8(%rbp), %r10d
-	movl %r10d, -4(%rbp)
-	movl -4(%rbp), %eax
+	movl -16(%rbp), %r10d
+	movl %r10d, -12(%rbp)
+	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

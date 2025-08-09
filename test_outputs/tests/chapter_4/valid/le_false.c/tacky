@@ -1,38 +1,41 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Unary {
-                op: Negate,
-                src: Constant(
-                    1,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Binary {
+                    op: LessThanOrEqual,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Var(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Return(
+                    Var(
+                        1,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Binary {
-                op: LessThanOrEqual,
-                lhs: Constant(
-                    1,
-                ),
-                rhs: Var(
-                    0,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Return(
-                Var(
-                    1,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

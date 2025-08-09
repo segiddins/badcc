@@ -1,0 +1,233 @@
+Program {
+    functions: [
+        Function {
+            identifier: "lots_of_args",
+            params: [
+                Var(
+                    0,
+                ),
+                Var(
+                    1,
+                ),
+                Var(
+                    2,
+                ),
+                Var(
+                    3,
+                ),
+                Var(
+                    4,
+                ),
+                Var(
+                    5,
+                ),
+                Var(
+                    6,
+                ),
+                Var(
+                    7,
+                ),
+                Var(
+                    8,
+                ),
+                Var(
+                    9,
+                ),
+                Var(
+                    10,
+                ),
+                Var(
+                    11,
+                ),
+                Var(
+                    12,
+                ),
+                Var(
+                    13,
+                ),
+                Var(
+                    14,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        11,
+                    ),
+                    rhs: Var(
+                        14,
+                    ),
+                    dst: Var(
+                        15,
+                    ),
+                },
+                Return(
+                    Var(
+                        15,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        1,
+                    ),
+                    rhs: Constant(
+                        10000000,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        2,
+                    ),
+                    "loop.0",
+                ),
+                Call(
+                    "lots_of_args",
+                    [
+                        Constant(
+                            1,
+                        ),
+                        Constant(
+                            2,
+                        ),
+                        Constant(
+                            3,
+                        ),
+                        Constant(
+                            4,
+                        ),
+                        Constant(
+                            5,
+                        ),
+                        Constant(
+                            6,
+                        ),
+                        Constant(
+                            7,
+                        ),
+                        Constant(
+                            8,
+                        ),
+                        Constant(
+                            9,
+                        ),
+                        Constant(
+                            10,
+                        ),
+                        Constant(
+                            11,
+                        ),
+                        Var(
+                            0,
+                        ),
+                        Constant(
+                            13,
+                        ),
+                        Constant(
+                            14,
+                        ),
+                        Constant(
+                            15,
+                        ),
+                    ],
+                    Var(
+                        3,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        1,
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Constant(
+                        150000000,
+                    ),
+                    dst: Var(
+                        5,
+                    ),
+                },
+                Return(
+                    Var(
+                        5,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

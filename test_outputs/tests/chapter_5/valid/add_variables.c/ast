@@ -1,42 +1,53 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "first_variable",
-                        init: Some(
-                            Constant(
-                                1,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "first_variable",
+                                        init: Some(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "second_variable",
+                                        init: Some(
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "first_variable",
+                                        ),
+                                        Var(
+                                            "second_variable",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "second_variable",
-                        init: Some(
-                            Constant(
-                                2,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Return(
-                        Binary(
-                            Add,
-                            Var(
-                                "first_variable",
-                            ),
-                            Var(
-                                "second_variable",
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

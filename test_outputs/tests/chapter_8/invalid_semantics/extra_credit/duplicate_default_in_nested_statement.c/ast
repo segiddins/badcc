@@ -1,130 +1,139 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                10,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Switch(
-                        Var(
-                            "a",
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Case(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
                                             Constant(
-                                                1,
+                                                10,
                                             ),
-                                            For {
-                                                init: Decl(
-                                                    VariableDeclaration {
-                                                        name: "i",
-                                                        init: Some(
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Switch(
+                                    Var(
+                                        "a",
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                        For {
+                                                            init: Decl(
+                                                                VariableDeclaration {
+                                                                    name: "i",
+                                                                    init: Some(
+                                                                        Constant(
+                                                                            0,
+                                                                        ),
+                                                                    ),
+                                                                },
+                                                            ),
+                                                            condition: Some(
+                                                                Binary(
+                                                                    LessThan,
+                                                                    Var(
+                                                                        "i",
+                                                                    ),
+                                                                    Constant(
+                                                                        10,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                            post: Some(
+                                                                Assignment(
+                                                                    Var(
+                                                                        "i",
+                                                                    ),
+                                                                    Binary(
+                                                                        Add,
+                                                                        Var(
+                                                                            "i",
+                                                                        ),
+                                                                        Constant(
+                                                                            1,
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                            body: Compound(
+                                                                Block {
+                                                                    items: [
+                                                                        Statement(
+                                                                            Continue(
+                                                                                None,
+                                                                            ),
+                                                                        ),
+                                                                        Statement(
+                                                                            While(
+                                                                                Constant(
+                                                                                    1,
+                                                                                ),
+                                                                                Default(
+                                                                                    Null,
+                                                                                    None,
+                                                                                ),
+                                                                                None,
+                                                                            ),
+                                                                        ),
+                                                                    ],
+                                                                },
+                                                            ),
+                                                            label: None,
+                                                        },
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                        Return(
                                                             Constant(
                                                                 0,
                                                             ),
                                                         ),
-                                                    },
-                                                ),
-                                                condition: Some(
-                                                    Binary(
-                                                        LessThan,
-                                                        Var(
-                                                            "i",
-                                                        ),
-                                                        Constant(
-                                                            10,
-                                                        ),
+                                                        None,
                                                     ),
                                                 ),
-                                                post: Some(
-                                                    Assignment(
-                                                        Var(
-                                                            "i",
-                                                        ),
-                                                        Binary(
-                                                            Add,
-                                                            Var(
-                                                                "i",
-                                                            ),
-                                                            Constant(
-                                                                1,
-                                                            ),
-                                                        ),
+                                                Statement(
+                                                    Default(
+                                                        Null,
+                                                        None,
                                                     ),
                                                 ),
-                                                body: Compound(
-                                                    Block {
-                                                        items: [
-                                                            Statement(
-                                                                Continue(
-                                                                    None,
-                                                                ),
-                                                            ),
-                                                            Statement(
-                                                                While(
-                                                                    Constant(
-                                                                        1,
-                                                                    ),
-                                                                    Default(
-                                                                        Null,
-                                                                        None,
-                                                                    ),
-                                                                    None,
-                                                                ),
-                                                            ),
-                                                        ],
-                                                    },
-                                                ),
-                                                label: None,
-                                            },
-                                            None,
-                                        ),
+                                            ],
+                                        },
                                     ),
-                                    Statement(
-                                        Case(
-                                            Constant(
-                                                2,
-                                            ),
-                                            Return(
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                            None,
-                                        ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
                                     ),
-                                    Statement(
-                                        Default(
-                                            Null,
-                                            None,
-                                        ),
-                                    ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
+                                ),
+                            ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

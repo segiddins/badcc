@@ -2,15 +2,15 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $8, %rsp
-	movl $1, -8(%rbp)
-	negl -8(%rbp)
-	movl -8(%rbp), %r10d
-	movl %r10d, -4(%rbp)
-	movl -4(%rbp), %r10d
-	movl %r10d, -4(%rbp)
-	addl $1, -4(%rbp)
-	cmpl $0, -4(%rbp)
+	subq $16, %rsp
+	movl $1, -12(%rbp)
+	negl -12(%rbp)
+	movl -12(%rbp), %r10d
+	movl %r10d, -16(%rbp)
+	movl -16(%rbp), %r10d
+	movl %r10d, -16(%rbp)
+	addl $1, -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jE Lmain.0.true
 	movl $0, %eax
 	movq %rbp, %rsp
@@ -18,10 +18,10 @@ _main:
 	ret
 	jmp Lmain.0.end
 	Lmain.0.true:
-	movl -4(%rbp), %r10d
-	movl %r10d, -4(%rbp)
-	addl $1, -4(%rbp)
-	cmpl $0, -4(%rbp)
+	movl -16(%rbp), %r10d
+	movl %r10d, -16(%rbp)
+	addl $1, -16(%rbp)
+	cmpl $0, -16(%rbp)
 	jE Lmain.1.true
 	movl $1, %eax
 	movq %rbp, %rsp

@@ -1,77 +1,86 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                For {
+                                    init: Expr(
+                                        None,
+                                    ),
+                                    condition: None,
+                                    post: None,
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "a",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "a",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    If(
+                                                        Binary(
+                                                            GreaterThan,
+                                                            Var(
+                                                                "a",
+                                                            ),
+                                                            Constant(
+                                                                3,
+                                                            ),
+                                                        ),
+                                                        Break(
+                                                            None,
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    label: None,
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    For {
-                        init: Expr(
-                            None,
-                        ),
-                        condition: None,
-                        post: None,
-                        body: Compound(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "a",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "a",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        If(
-                                            Binary(
-                                                GreaterThan,
-                                                Var(
-                                                    "a",
-                                                ),
-                                                Constant(
-                                                    3,
-                                                ),
-                                            ),
-                                            Break(
-                                                None,
-                                            ),
-                                            None,
-                                        ),
-                                    ),
-                                ],
-                            },
-                        ),
-                        label: None,
-                    },
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "a",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

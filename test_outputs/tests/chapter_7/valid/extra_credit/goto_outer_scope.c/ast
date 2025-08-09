@@ -1,110 +1,123 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a",
-                        init: Some(
-                            Constant(
-                                10,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Declaration(
-                    VariableDeclaration {
-                        name: "b",
-                        init: Some(
-                            Constant(
-                                0,
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "b",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    If(
-                        Var(
-                            "a",
-                        ),
-                        Compound(
-                            Block {
-                                items: [
-                                    Declaration(
-                                        VariableDeclaration {
-                                            name: "a",
-                                            init: Some(
+                            Statement(
+                                If(
+                                    Var(
+                                        "a",
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Declaration(
+                                                    Variable(
+                                                        VariableDeclaration {
+                                                            name: "a",
+                                                            init: Some(
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "b",
+                                                            ),
+                                                            Var(
+                                                                "a",
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Goto(
+                                                        "end",
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            9,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "end",
+                                    Return(
+                                        Binary(
+                                            And,
+                                            Binary(
+                                                Equals,
+                                                Var(
+                                                    "a",
+                                                ),
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                            Binary(
+                                                Equals,
+                                                Var(
+                                                    "b",
+                                                ),
                                                 Constant(
                                                     1,
                                                 ),
                                             ),
-                                        },
-                                    ),
-                                    Statement(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "b",
-                                                ),
-                                                Var(
-                                                    "a",
-                                                ),
-                                            ),
                                         ),
-                                    ),
-                                    Statement(
-                                        Goto(
-                                            "end",
-                                        ),
-                                    ),
-                                ],
-                            },
-                        ),
-                        None,
-                    ),
-                ),
-                Statement(
-                    Expression(
-                        Assignment(
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                9,
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Labeled(
-                        "end",
-                        Return(
-                            Binary(
-                                And,
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "b",
-                                    ),
-                                    Constant(
-                                        1,
                                     ),
                                 ),
                             ),
-                        ),
-                    ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

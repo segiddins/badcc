@@ -129,8 +129,21 @@ fn visit_block(block: &mut Block, scope: &mut Scope) -> Result<(), miette::Error
     Ok(())
 }
 
-pub(super) fn run(program: &mut Program) -> Result<()> {
-    let function = &mut program.function;
+fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result<()> {
+    match decl {
+        Declaration::Variable(_) => Ok(()),
+        Declaration::Function(function_declaration) => {
+            if let Some(block) = function_declaration.body.as_mut() {
+                visit_block(block, scope)?;
+            }
+            Ok(())
+        }
+    }
+}
 
-    visit_block(&mut function.body, &mut Scope::default())
+pub(super) fn run(program: &mut Program) -> Result<()> {
+    for decl in program.declarations.iter_mut() {
+        visit_decl(decl, &mut Scope::default())?
+    }
+    Ok(())
 }

@@ -1,42 +1,174 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "sum",
-                        init: Some(
-                            Constant(
-                                0,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Goto(
-                        "do_label",
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-                Statement(
-                    Labeled(
-                        "do_label",
-                        DoWhile(
-                            Compound(
-                                Block {
-                                    items: [
-                                        Statement(
-                                            Expression(
-                                                Assignment(
+                            Statement(
+                                Goto(
+                                    "do_label",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "do_label",
+                                    DoWhile(
+                                        Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "sum",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Goto(
+                                                            "while_label",
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                        None,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "while_label",
+                                    While(
+                                        Constant(
+                                            1,
+                                        ),
+                                        Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "sum",
+                                                                ),
+                                                                Binary(
+                                                                    Add,
+                                                                    Var(
+                                                                        "sum",
+                                                                    ),
+                                                                    Constant(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Goto(
+                                                            "break_label",
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Return(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Labeled(
+                                                            "break_label",
+                                                            Break(
+                                                                None,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
+                                        ),
+                                        None,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Null,
+                            ),
+                            Statement(
+                                Goto(
+                                    "for_label",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "for_label",
+                                    For {
+                                        init: Decl(
+                                            VariableDeclaration {
+                                                name: "i",
+                                                init: Some(
+                                                    Constant(
+                                                        0,
+                                                    ),
+                                                ),
+                                            },
+                                        ),
+                                        condition: Some(
+                                            Binary(
+                                                LessThan,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                        ),
+                                        post: Some(
+                                            Assignment(
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Binary(
+                                                    Add,
                                                     Var(
-                                                        "sum",
+                                                        "i",
                                                     ),
                                                     Constant(
                                                         1,
@@ -44,195 +176,72 @@ Program {
                                                 ),
                                             ),
                                         ),
-                                        Statement(
-                                            Goto(
-                                                "while_label",
-                                            ),
-                                        ),
-                                    ],
-                                },
-                            ),
-                            Constant(
-                                1,
-                            ),
-                            None,
-                        ),
-                    ),
-                ),
-                Statement(
-                    Labeled(
-                        "while_label",
-                        While(
-                            Constant(
-                                1,
-                            ),
-                            Compound(
-                                Block {
-                                    items: [
-                                        Statement(
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "sum",
-                                                    ),
-                                                    Binary(
-                                                        Add,
-                                                        Var(
-                                                            "sum",
-                                                        ),
-                                                        Constant(
-                                                            1,
+                                        body: Compound(
+                                            Block {
+                                                items: [
+                                                    Statement(
+                                                        Expression(
+                                                            Assignment(
+                                                                Var(
+                                                                    "sum",
+                                                                ),
+                                                                Binary(
+                                                                    Add,
+                                                                    Var(
+                                                                        "sum",
+                                                                    ),
+                                                                    Constant(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            ),
                                                         ),
                                                     ),
-                                                ),
-                                            ),
+                                                    Statement(
+                                                        Goto(
+                                                            "continue_label",
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Return(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Labeled(
+                                                            "continue_label",
+                                                            Continue(
+                                                                None,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    Statement(
+                                                        Return(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ],
+                                            },
                                         ),
-                                        Statement(
-                                            Goto(
-                                                "break_label",
-                                            ),
-                                        ),
-                                        Statement(
-                                            Return(
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        Statement(
-                                            Labeled(
-                                                "break_label",
-                                                Break(
-                                                    None,
-                                                ),
-                                            ),
-                                        ),
-                                    ],
-                                },
+                                        label: None,
+                                    },
+                                ),
                             ),
-                            None,
-                        ),
-                    ),
-                ),
-                Statement(
-                    Null,
-                ),
-                Statement(
-                    Goto(
-                        "for_label",
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Constant(
-                            0,
-                        ),
-                    ),
-                ),
-                Statement(
-                    Labeled(
-                        "for_label",
-                        For {
-                            init: Decl(
-                                VariableDeclaration {
-                                    name: "i",
-                                    init: Some(
-                                        Constant(
-                                            0,
-                                        ),
-                                    ),
-                                },
-                            ),
-                            condition: Some(
-                                Binary(
-                                    LessThan,
+                            Statement(
+                                Return(
                                     Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        10,
+                                        "sum",
                                     ),
                                 ),
                             ),
-                            post: Some(
-                                Assignment(
-                                    Var(
-                                        "i",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            body: Compound(
-                                Block {
-                                    items: [
-                                        Statement(
-                                            Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "sum",
-                                                    ),
-                                                    Binary(
-                                                        Add,
-                                                        Var(
-                                                            "sum",
-                                                        ),
-                                                        Constant(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        Statement(
-                                            Goto(
-                                                "continue_label",
-                                            ),
-                                        ),
-                                        Statement(
-                                            Return(
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        Statement(
-                                            Labeled(
-                                                "continue_label",
-                                                Continue(
-                                                    None,
-                                                ),
-                                            ),
-                                        ),
-                                        Statement(
-                                            Return(
-                                                Constant(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                    ],
-                                },
-                            ),
-                            label: None,
-                        },
-                    ),
+                        ],
+                    },
                 ),
-                Statement(
-                    Return(
-                        Var(
-                            "sum",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

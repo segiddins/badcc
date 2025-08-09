@@ -1,0 +1,204 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "fib",
+                params: [
+                    "a.1",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "multiply_many_args",
+                params: [
+                    "a.3",
+                    "b.4",
+                    "c.5",
+                    "d.6",
+                    "e.7",
+                    "f.8",
+                    "g.9",
+                    "h.10",
+                ],
+                body: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x.12",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "fib",
+                                                ),
+                                                [
+                                                    Constant(
+                                                        4,
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "seven.13",
+                                        init: Some(
+                                            Constant(
+                                                7,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "eight.14",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "fib",
+                                                ),
+                                                [
+                                                    Constant(
+                                                        6,
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "y.15",
+                                        init: Some(
+                                            FunctionCall(
+                                                Var(
+                                                    "multiply_many_args",
+                                                ),
+                                                [
+                                                    Var(
+                                                        "x.12",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                    Constant(
+                                                        3,
+                                                    ),
+                                                    Constant(
+                                                        4,
+                                                    ),
+                                                    Constant(
+                                                        5,
+                                                    ),
+                                                    Constant(
+                                                        6,
+                                                    ),
+                                                    Var(
+                                                        "seven.13",
+                                                    ),
+                                                    Var(
+                                                        "eight.14",
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "x.12",
+                                        ),
+                                        Constant(
+                                            3,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "y.15",
+                                        ),
+                                        Constant(
+                                            589680,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "x.12",
+                                        ),
+                                        Binary(
+                                            Remainder,
+                                            Var(
+                                                "y.15",
+                                            ),
+                                            Constant(
+                                                256,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+            },
+        ),
+    ],
+}

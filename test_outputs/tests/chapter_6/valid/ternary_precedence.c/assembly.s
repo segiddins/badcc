@@ -2,26 +2,26 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $12, %rsp
-	movl $10, -4(%rbp)
-	cmpl $0, -4(%rbp)
+	subq $32, %rsp
+	movl $10, -12(%rbp)
+	cmpl $0, -12(%rbp)
 	jNE Lmain.1.true
 	movl $0, %r11d
 	cmpl $0, %r11d
 	jNE Lmain.1.true
-	movl $0, -12(%rbp)
+	movl $0, -16(%rbp)
 	jmp Lmain.1.end
 	Lmain.1.true:
-	movl $1, -12(%rbp)
+	movl $1, -16(%rbp)
 	Lmain.1.end:
-	cmpl $0, -12(%rbp)
+	cmpl $0, -16(%rbp)
 	jE Lmain.0.true
-	movl $20, -8(%rbp)
+	movl $20, -20(%rbp)
 	jmp Lmain.0.end
 	Lmain.0.true:
-	movl $0, -8(%rbp)
+	movl $0, -20(%rbp)
 	Lmain.0.end:
-	movl -8(%rbp), %eax
+	movl -20(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

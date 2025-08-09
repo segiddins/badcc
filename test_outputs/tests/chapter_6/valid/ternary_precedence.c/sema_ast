@@ -1,40 +1,49 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "a.0",
-                        init: Some(
-                            Constant(
-                                10,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.1",
+                                        init: Some(
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Return(
+                                    Ternary(
+                                        Binary(
+                                            Or,
+                                            Var(
+                                                "a.1",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Constant(
+                                            20,
+                                        ),
+                                        Constant(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Return(
-                        Ternary(
-                            Binary(
-                                Or,
-                                Var(
-                                    "a.0",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                            Constant(
-                                20,
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

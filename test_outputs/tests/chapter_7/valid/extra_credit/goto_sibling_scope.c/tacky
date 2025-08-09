@@ -1,147 +1,150 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Copy {
-                src: Constant(
-                    0,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                JumpIfZero(
+                    Constant(
+                        1,
+                    ),
+                    "main.0.true",
                 ),
-                dst: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Jump(
+                    "main.other_if",
                 ),
-            },
-            JumpIfZero(
-                Constant(
-                    1,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Label(
+                    "main.first_if",
                 ),
-                "main.0.true",
-            ),
-            Copy {
-                src: Constant(
-                    5,
+                Copy {
+                    src: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        2,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    1,
+                Label(
+                    "main.0.true",
                 ),
-            },
-            Jump(
-                "other_if",
-            ),
-            Copy {
-                src: Constant(
-                    0,
+                Label(
+                    "main.0.end",
                 ),
-                dst: Var(
-                    0,
+                JumpIfZero(
+                    Constant(
+                        0,
+                    ),
+                    "main.1.true",
                 ),
-            },
-            Label(
-                "first_if",
-            ),
-            Copy {
-                src: Constant(
-                    5,
+                Label(
+                    "main.other_if",
                 ),
-                dst: Var(
-                    1,
+                Copy {
+                    src: Constant(
+                        6,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        4,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.first_if",
                 ),
-            },
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Jump(
+                    "main.1.end",
                 ),
-                rhs: Var(
-                    1,
+                Label(
+                    "main.1.true",
                 ),
-                dst: Var(
-                    2,
+                Label(
+                    "main.1.end",
                 ),
-            },
-            Copy {
-                src: Var(
-                    2,
+                Return(
+                    Var(
+                        0,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Jump(
-                "main.0.end",
-            ),
-            Label(
-                "main.0.true",
-            ),
-            Label(
-                "main.0.end",
-            ),
-            JumpIfZero(
-                Constant(
-                    0,
-                ),
-                "main.1.true",
-            ),
-            Label(
-                "other_if",
-            ),
-            Copy {
-                src: Constant(
-                    6,
-                ),
-                dst: Var(
-                    3,
-                ),
-            },
-            Binary {
-                op: Add,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            Copy {
-                src: Var(
-                    4,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Jump(
-                "first_if",
-            ),
-            Copy {
-                src: Constant(
-                    0,
-                ),
-                dst: Var(
-                    0,
-                ),
-            },
-            Jump(
-                "main.1.end",
-            ),
-            Label(
-                "main.1.true",
-            ),
-            Label(
-                "main.1.end",
-            ),
-            Return(
-                Var(
-                    0,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

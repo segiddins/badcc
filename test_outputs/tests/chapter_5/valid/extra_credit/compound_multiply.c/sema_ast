@@ -1,39 +1,48 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "to_multiply.0",
-                        init: Some(
-                            Constant(
-                                4,
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "to_multiply.1",
+                                        init: Some(
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                    },
+                                ),
                             ),
-                        ),
+                            Statement(
+                                Expression(
+                                    CompoundAssignment(
+                                        Var(
+                                            "to_multiply.1",
+                                        ),
+                                        Multiply,
+                                        Constant(
+                                            3,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "to_multiply.1",
+                                    ),
+                                ),
+                            ),
+                        ],
                     },
                 ),
-                Statement(
-                    Expression(
-                        CompoundAssignment(
-                            Var(
-                                "to_multiply.0",
-                            ),
-                            Multiply,
-                            Constant(
-                                3,
-                            ),
-                        ),
-                    ),
-                ),
-                Statement(
-                    Return(
-                        Var(
-                            "to_multiply.0",
-                        ),
-                    ),
-                ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }

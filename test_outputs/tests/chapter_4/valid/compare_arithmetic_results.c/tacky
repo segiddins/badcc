@@ -1,71 +1,74 @@
 Program {
-    function_definition: Function {
-        identifier: "main",
-        instructions: [
-            Unary {
-                op: Complement,
-                src: Constant(
-                    2,
+    functions: [
+        Function {
+            identifier: "main",
+            params: [],
+            instructions: [
+                Unary {
+                    op: Complement,
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        0,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        1,
+                    ),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        0,
+                    ),
+                    rhs: Var(
+                        1,
+                    ),
+                    dst: Var(
+                        2,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        3,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        2,
+                    ),
+                    rhs: Var(
+                        3,
+                    ),
+                    dst: Var(
+                        4,
+                    ),
+                },
+                Return(
+                    Var(
+                        4,
+                    ),
                 ),
-                dst: Var(
-                    0,
+                Return(
+                    Constant(
+                        0,
+                    ),
                 ),
-            },
-            Unary {
-                op: Negate,
-                src: Constant(
-                    2,
-                ),
-                dst: Var(
-                    1,
-                ),
-            },
-            Binary {
-                op: Multiply,
-                lhs: Var(
-                    0,
-                ),
-                rhs: Var(
-                    1,
-                ),
-                dst: Var(
-                    2,
-                ),
-            },
-            Binary {
-                op: Add,
-                lhs: Constant(
-                    1,
-                ),
-                rhs: Constant(
-                    5,
-                ),
-                dst: Var(
-                    3,
-                ),
-            },
-            Binary {
-                op: Equals,
-                lhs: Var(
-                    2,
-                ),
-                rhs: Var(
-                    3,
-                ),
-                dst: Var(
-                    4,
-                ),
-            },
-            Return(
-                Var(
-                    4,
-                ),
-            ),
-            Return(
-                Constant(
-                    0,
-                ),
-            ),
-        ],
-    },
+            ],
+        },
+    ],
 }

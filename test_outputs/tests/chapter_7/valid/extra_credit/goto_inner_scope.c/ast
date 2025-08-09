@@ -1,64 +1,75 @@
 Program {
-    function: Function {
-        name: "main",
-        body: Block {
-            items: [
-                Declaration(
-                    VariableDeclaration {
-                        name: "x",
-                        init: Some(
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    },
-                ),
-                Statement(
-                    Goto(
-                        "inner",
-                    ),
-                ),
-                Statement(
-                    Compound(
-                        Block {
-                            items: [
-                                Declaration(
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
                                     VariableDeclaration {
                                         name: "x",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                5,
                                             ),
                                         ),
                                     },
                                 ),
-                                Statement(
-                                    Labeled(
-                                        "inner",
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "x",
-                                                ),
-                                                Constant(
-                                                    1,
+                            ),
+                            Statement(
+                                Goto(
+                                    "inner",
+                                ),
+                            ),
+                            Statement(
+                                Compound(
+                                    Block {
+                                        items: [
+                                            Declaration(
+                                                Variable(
+                                                    VariableDeclaration {
+                                                        name: "x",
+                                                        init: Some(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    },
                                                 ),
                                             ),
-                                        ),
-                                    ),
+                                            Statement(
+                                                Labeled(
+                                                    "inner",
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "x",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                            Statement(
+                                                Return(
+                                                    Var(
+                                                        "x",
+                                                    ),
+                                                ),
+                                            ),
+                                        ],
+                                    },
                                 ),
-                                Statement(
-                                    Return(
-                                        Var(
-                                            "x",
-                                        ),
-                                    ),
-                                ),
-                            ],
-                        },
-                    ),
+                            ),
+                        ],
+                    },
                 ),
-            ],
-        },
-    },
+            },
+        ),
+    ],
 }
