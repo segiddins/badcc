@@ -1,0 +1,96 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "x",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    If(
+                        Var(
+                            "x",
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "x",
+                                                ),
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Goto(
+                                            "l",
+                                        ),
+                                    ),
+                                    Statement(
+                                        Return(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Labeled(
+                                            "l",
+                                            Return(
+                                                Var(
+                                                    "x",
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        Some(
+                            Compound(
+                                Block {
+                                    items: [
+                                        Statement(
+                                            Goto(
+                                                "l",
+                                            ),
+                                        ),
+                                        Statement(
+                                            Return(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                        ),
+                                        Statement(
+                                            Labeled(
+                                                "l",
+                                                Return(
+                                                    Var(
+                                                        "x",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

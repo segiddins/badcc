@@ -1,0 +1,173 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "i.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    While(
+                        Constant(
+                            1,
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "i.0",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "i.0",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        If(
+                                            Binary(
+                                                GreaterThan,
+                                                Var(
+                                                    "i.0",
+                                                ),
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                            Break(
+                                                Some(
+                                                    "loop.0",
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        Some(
+                            "loop.0",
+                        ),
+                    ),
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "j.1",
+                        init: Some(
+                            Constant(
+                                10,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    While(
+                        Constant(
+                            1,
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "j.1",
+                                                ),
+                                                Binary(
+                                                    Subtract,
+                                                    Var(
+                                                        "j.1",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        If(
+                                            Binary(
+                                                LessThan,
+                                                Var(
+                                                    "j.1",
+                                                ),
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            Break(
+                                                Some(
+                                                    "loop.1",
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        Some(
+                            "loop.1",
+                        ),
+                    ),
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "result.2",
+                        init: Some(
+                            Binary(
+                                And,
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "j.1",
+                                    ),
+                                    Unary(
+                                        Minus,
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Constant(
+                                        11,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "result.2",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

@@ -1,0 +1,113 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b.1",
+                        init: Some(
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "c.2",
+                        init: Some(
+                            Unary(
+                                Minus,
+                                Unary(
+                                    PrefixIncrement,
+                                    Var(
+                                        "a.0",
+                                    ),
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "d.3",
+                        init: Some(
+                            Unary(
+                                Not,
+                                Unary(
+                                    PostfixDecrement,
+                                    Var(
+                                        "b.1",
+                                    ),
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    And,
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "a.0",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "b.1",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "c.2",
+                                    ),
+                                    Unary(
+                                        Minus,
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "d.3",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

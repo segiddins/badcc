@@ -1,0 +1,100 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    If(
+                        Var(
+                            "a",
+                        ),
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                        ),
+                        Some(
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "a",
+                                    ),
+                                    Constant(
+                                        3,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    If(
+                        Var(
+                            "b",
+                        ),
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "b",
+                                ),
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                        ),
+                        Some(
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "b",
+                                    ),
+                                    Constant(
+                                        5,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Add,
+                            Var(
+                                "a",
+                            ),
+                            Var(
+                                "b",
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

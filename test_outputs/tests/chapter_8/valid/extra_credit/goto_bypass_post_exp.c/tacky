@@ -1,0 +1,129 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Label(
+                "loop.0.cond",
+            ),
+            Label(
+                "lbl",
+            ),
+            Binary {
+                op: Add,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    1,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Copy {
+                src: Var(
+                    2,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Binary {
+                op: Add,
+                lhs: Var(
+                    1,
+                ),
+                rhs: Constant(
+                    1,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            Copy {
+                src: Var(
+                    3,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Binary {
+                op: GreaterThan,
+                lhs: Var(
+                    1,
+                ),
+                rhs: Constant(
+                    10,
+                ),
+                dst: Var(
+                    4,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    4,
+                ),
+                "main.0.true",
+            ),
+            Jump(
+                "loop.0",
+            ),
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Jump(
+                "lbl",
+            ),
+            Label(
+                "loop.0.start",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Jump(
+                "loop.0.cond",
+            ),
+            Label(
+                "loop.0",
+            ),
+            Return(
+                Var(
+                    0,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

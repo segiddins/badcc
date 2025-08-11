@@ -1,0 +1,65 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Assignment(
+                            Var(
+                                "a",
+                            ),
+                            Binary(
+                                Multiply,
+                                Constant(
+                                    3,
+                                ),
+                                Assignment(
+                                    Var(
+                                        "b",
+                                    ),
+                                    Var(
+                                        "a",
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Add,
+                            Var(
+                                "a",
+                            ),
+                            Var(
+                                "b",
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

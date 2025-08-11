@@ -1,0 +1,155 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                12,
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Label(
+                "loop.0.head",
+            ),
+            Label(
+                "while_start",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Binary(
+                Add,
+                Immediate(
+                    1,
+                ),
+                Psuedo(
+                    1,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    1,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    10,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            SetCC(
+                L,
+                Psuedo(
+                    2,
+                ),
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    2,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.true",
+            ),
+            Jmp(
+                "while_start",
+            ),
+            Jmp(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Label(
+                "loop.0.start",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            JmpCC(
+                NE,
+                "loop.0.head",
+            ),
+            Label(
+                "loop.0",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

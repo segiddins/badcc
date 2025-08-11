@@ -1,0 +1,42 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PrefixIncrement,
+                            Binary(
+                                Add,
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

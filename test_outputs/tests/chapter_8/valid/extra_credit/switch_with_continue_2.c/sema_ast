@@ -1,0 +1,136 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "sum.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i.1",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i.1",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i.1",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i.1",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Switch(
+                                            Binary(
+                                                Remainder,
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                            Compound(
+                                                Block {
+                                                    items: [
+                                                        Statement(
+                                                            Case(
+                                                                Constant(
+                                                                    0,
+                                                                ),
+                                                                Continue(
+                                                                    Some(
+                                                                        "loop.0",
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Default(
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "sum.0",
+                                                                        ),
+                                                                        Binary(
+                                                                            Add,
+                                                                            Var(
+                                                                                "sum.0",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            Some(
+                                                "switch.1",
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "sum.0",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

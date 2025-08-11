@@ -1,0 +1,93 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                12,
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            SetCC(
+                NE,
+                Psuedo(
+                    1,
+                ),
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    1,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.true",
+            ),
+            Label(
+                "return_a",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Jmp(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Move {
+                source: Immediate(
+                    4,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Jmp(
+                "return_a",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

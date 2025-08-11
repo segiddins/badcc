@@ -1,0 +1,87 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i",
+                                init: Some(
+                                    Unary(
+                                        Minus,
+                                        Constant(
+                                            100,
+                                        ),
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThanOrEqual,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Expression(
+                            Assignment(
+                                Var(
+                                    "a",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "a",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "a",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

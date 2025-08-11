@@ -1,0 +1,121 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            JumpIfZero(
+                Constant(
+                    0,
+                ),
+                "main.0.false",
+            ),
+            JumpIfZero(
+                Constant(
+                    1,
+                ),
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Unary {
+                op: Complement,
+                src: Var(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            JumpIfNotZero(
+                Constant(
+                    4,
+                ),
+                "main.1.true",
+            ),
+            JumpIfNotZero(
+                Constant(
+                    3,
+                ),
+                "main.1.true",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Jump(
+                "main.1.end",
+            ),
+            Label(
+                "main.1.true",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Label(
+                "main.1.end",
+            ),
+            Unary {
+                op: Negate,
+                src: Var(
+                    2,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            Binary {
+                op: Subtract,
+                lhs: Var(
+                    1,
+                ),
+                rhs: Var(
+                    3,
+                ),
+                dst: Var(
+                    4,
+                ),
+            },
+            Return(
+                Var(
+                    4,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

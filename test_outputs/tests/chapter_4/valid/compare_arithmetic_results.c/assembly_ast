@@ -1,0 +1,144 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                20,
+            ),
+            Move {
+                source: Immediate(
+                    2,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Unary(
+                Not,
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    2,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Unary(
+                Neg,
+                Psuedo(
+                    1,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    2,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Binary(
+                Mult,
+                Psuedo(
+                    1,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            Move {
+                source: Register(
+                    R11,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    3,
+                ),
+            },
+            Binary(
+                Add,
+                Immediate(
+                    5,
+                ),
+                Psuedo(
+                    3,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    3,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Cmp(
+                Register(
+                    R10,
+                ),
+                Psuedo(
+                    2,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    4,
+                ),
+            },
+            SetCC(
+                E,
+                Psuedo(
+                    4,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    4,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

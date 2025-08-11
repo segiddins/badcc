@@ -1,0 +1,63 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                4,
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "switch.0.cases",
+            ),
+            Label(
+                "switch.0.default",
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Jmp(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.cases",
+            ),
+            Jmp(
+                "switch.0.default",
+            ),
+            Label(
+                "switch.0",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

@@ -1,0 +1,129 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "switch.0.cases",
+            ),
+            Label(
+                "switch.0.0",
+            ),
+            Return(
+                Constant(
+                    10,
+                ),
+            ),
+            Label(
+                "switch.0.1",
+            ),
+            Binary {
+                op: Multiply,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    2,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Copy {
+                src: Var(
+                    2,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.default",
+            ),
+            Copy {
+                src: Constant(
+                    99,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.cases",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Constant(
+                    0,
+                ),
+                rhs: Var(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            JumpIfNotZero(
+                Var(
+                    1,
+                ),
+                "switch.0.0",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Constant(
+                    1,
+                ),
+                rhs: Var(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            JumpIfNotZero(
+                Var(
+                    1,
+                ),
+                "switch.0.1",
+            ),
+            Jump(
+                "switch.0.default",
+            ),
+            Label(
+                "switch.0",
+            ),
+            Return(
+                Var(
+                    0,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

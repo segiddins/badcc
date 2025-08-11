@@ -1,0 +1,60 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "x",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "y",
+                        init: Some(
+                            CompoundAssignment(
+                                Var(
+                                    "x",
+                                ),
+                                Add,
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "x",
+                                ),
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "y",
+                                ),
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

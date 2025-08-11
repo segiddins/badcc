@@ -1,0 +1,127 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                12,
+            ),
+            Move {
+                source: Immediate(
+                    4,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Binary(
+                Add,
+                Immediate(
+                    12,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    40,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    1,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    CL,
+                ),
+            },
+            Binary(
+                LeftShift,
+                Register(
+                    CL,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            Move {
+                source: Register(
+                    R11,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    1,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    2,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Binary(
+                RightShift,
+                Immediate(
+                    1,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            Move {
+                source: Register(
+                    R11,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    2,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

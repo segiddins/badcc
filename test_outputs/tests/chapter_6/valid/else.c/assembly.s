@@ -1,0 +1,23 @@
+	.globl _main
+_main:
+	pushq %rbp
+	movq %rsp, %rbp
+	subq $4, %rsp
+	movl $0, -4(%rbp)
+	cmpl $0, -4(%rbp)
+	jE Lmain.0.true
+	movl $1, %eax
+	movq %rbp, %rsp
+	popq %rbp
+	ret
+	jmp Lmain.0.end
+	Lmain.0.true:
+	movl $2, %eax
+	movq %rbp, %rsp
+	popq %rbp
+	ret
+	Lmain.0.end:
+	movl $0, %eax
+	movq %rbp, %rsp
+	popq %rbp
+	ret

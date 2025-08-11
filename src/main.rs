@@ -2,7 +2,7 @@
 
 use miette::{Context, IntoDiagnostic, Result, bail};
 use std::{
-    fs::{File, read_to_string},
+    fs::{File, create_dir_all, read_to_string},
     io::Write,
     path::{Path, PathBuf},
     process::Command,
@@ -38,6 +38,10 @@ struct Driver {
     codegen: bool,
     #[clap(long)]
     validate: bool,
+
+    #[clap(long, hide = true)]
+    test_output_dir: Option<PathBuf>,
+
     #[clap(long)]
     tacky: bool,
 
@@ -49,7 +53,7 @@ struct Driver {
 }
 
 impl Driver {
-    fn run(mut self) -> Result<()> {
+    fn run(&mut self) -> Result<()> {
         let pre = self.preprocess()?;
         self.artifacts.push(pre.clone());
 
@@ -58,6 +62,7 @@ impl Driver {
             .with_context(|| format!("failed to read {}", pre.display()))?;
 
         let tokens = lex(&src, pre.display().to_string())?;
+        self.write_test_output("tokens", || format!("{tokens:#?}"));
         if self.lex {
             return Ok(());
         }
@@ -66,19 +71,23 @@ impl Driver {
         if self.parse {
             return Ok(());
         }
+        self.write_test_output("ast", || format!("{program:#?}"));
 
         validate(&mut program)?;
+        self.write_test_output("sema_ast", || format!("{program:#?}"));
         if self.validate {
             return Ok(());
         }
 
         let tacky = tacky::lower(&program);
+        self.write_test_output("tacky", || format!("{tacky:#?}"));
 
         if self.tacky {
             return Ok(());
         }
 
         let program = generate_assembly(&tacky);
+        self.write_test_output("assembly_ast", || format!("{program:#?}"));
         if self.codegen {
             return Ok(());
         }
@@ -114,6 +123,7 @@ impl Driver {
         let mut f = File::create(&path).into_diagnostic()?;
         emit_asm(program, &f).into_diagnostic()?;
         f.flush().into_diagnostic()?;
+        self.write_test_output("assembly.s", || read_to_string(&path).unwrap());
         Ok(path)
     }
 
@@ -141,6 +151,25 @@ impl Driver {
             bail!("{cmd:?}")
         }
     }
+
+    fn write_test_output<F, S: AsRef<str>>(&self, file: impl AsRef<Path>, contents: F)
+    where
+        F: FnOnce() -> S,
+    {
+        let Some(test_output_dir) = self.test_output_dir.as_ref() else {
+            return;
+        };
+
+        let mut output_file = test_output_dir.clone();
+        output_file.extend(
+            self.input
+                .components()
+                .skip_while(|comp| comp.as_os_str() != "tests"),
+        );
+        output_file.push(file);
+        create_dir_all(output_file.parent().unwrap()).unwrap();
+        std::fs::write(output_file, contents().as_ref()).unwrap();
+    }
 }
 
 impl Drop for Driver {
@@ -154,7 +183,13 @@ impl Drop for Driver {
 }
 
 fn main() -> Result<()> {
-    let driver = Driver::parse();
+    let mut driver = Driver::parse();
 
-    driver.run()
+    match driver.run() {
+        Ok(_) => Ok(()),
+        Err(err) => {
+            driver.write_test_output("error.txt", || format!("{err:?}"));
+            Err(err)
+        }
+    }
 }

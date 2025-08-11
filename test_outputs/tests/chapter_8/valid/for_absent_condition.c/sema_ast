@@ -1,0 +1,60 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i.0",
+                                init: Some(
+                                    Constant(
+                                        400,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: None,
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i.0",
+                                ),
+                                Binary(
+                                    Subtract,
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Constant(
+                                        100,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: If(
+                            Binary(
+                                Equals,
+                                Var(
+                                    "i.0",
+                                ),
+                                Constant(
+                                    100,
+                                ),
+                            ),
+                            Return(
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                            None,
+                        ),
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+            ],
+        },
+    },
+}

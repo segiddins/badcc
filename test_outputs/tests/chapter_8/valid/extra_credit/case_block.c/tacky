@@ -1,0 +1,143 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    4,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Jump(
+                "switch.0.cases",
+            ),
+            Label(
+                "switch.0.2",
+            ),
+            Copy {
+                src: Constant(
+                    8,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            Copy {
+                src: Var(
+                    3,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Jump(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.cases",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Constant(
+                    2,
+                ),
+                rhs: Constant(
+                    2,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            JumpIfNotZero(
+                Var(
+                    2,
+                ),
+                "switch.0.2",
+            ),
+            Label(
+                "switch.0",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    4,
+                ),
+                dst: Var(
+                    5,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    5,
+                ),
+                "main.0.false",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Var(
+                    1,
+                ),
+                rhs: Constant(
+                    8,
+                ),
+                dst: Var(
+                    6,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    6,
+                ),
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    4,
+                ),
+            },
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    4,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Return(
+                Var(
+                    4,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

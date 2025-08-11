@@ -1,0 +1,61 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                4,
+            ),
+            Move {
+                source: Immediate(
+                    35,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Binary(
+                LeftShift,
+                Immediate(
+                    2,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            Move {
+                source: Register(
+                    R11,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

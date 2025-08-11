@@ -1,0 +1,112 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "sum",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: None,
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "i",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        If(
+                                            Binary(
+                                                Remainder,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                            Continue(
+                                                None,
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "sum",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "sum",
+                                                    ),
+                                                    Var(
+                                                        "i",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "sum",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

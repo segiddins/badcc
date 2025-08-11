@@ -1,0 +1,54 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "var_to_shift.0",
+                        init: Some(
+                            Constant(
+                                1234,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "x.1",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Assignment(
+                            Var(
+                                "x.1",
+                            ),
+                            Binary(
+                                RightShift,
+                                Var(
+                                    "var_to_shift.0",
+                                ),
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "x.1",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

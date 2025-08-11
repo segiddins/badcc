@@ -1,0 +1,228 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                24,
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Unary(
+                Neg,
+                Psuedo(
+                    1,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Binary(
+                Mult,
+                Psuedo(
+                    1,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            Move {
+                source: Register(
+                    R11,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Label(
+                "loop.0.cond",
+            ),
+            Move {
+                source: Immediate(
+                    100,
+                ),
+                destination: Psuedo(
+                    2,
+                ),
+            },
+            Unary(
+                Neg,
+                Psuedo(
+                    2,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    2,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Cmp(
+                Register(
+                    R10,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    3,
+                ),
+            },
+            SetCC(
+                GE,
+                Psuedo(
+                    3,
+                ),
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    3,
+                ),
+            ),
+            JmpCC(
+                E,
+                "loop.0",
+            ),
+            Label(
+                "loop.0.start",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Binary(
+                Sub,
+                Immediate(
+                    3,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Jmp(
+                "loop.0.cond",
+            ),
+            Label(
+                "loop.0",
+            ),
+            Move {
+                source: Immediate(
+                    103,
+                ),
+                destination: Psuedo(
+                    4,
+                ),
+            },
+            Unary(
+                Neg,
+                Psuedo(
+                    4,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    4,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Cmp(
+                Register(
+                    R10,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    5,
+                ),
+            },
+            SetCC(
+                E,
+                Psuedo(
+                    5,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    5,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

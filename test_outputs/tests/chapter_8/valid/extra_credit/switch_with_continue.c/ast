@@ -1,0 +1,157 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Statement(
+                    Switch(
+                        Constant(
+                            4,
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                0,
+                                            ),
+                                            Return(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                4,
+                                            ),
+                                            Compound(
+                                                Block {
+                                                    items: [
+                                                        Declaration(
+                                                            VariableDeclaration {
+                                                                name: "acc",
+                                                                init: Some(
+                                                                    Constant(
+                                                                        0,
+                                                                    ),
+                                                                ),
+                                                            },
+                                                        ),
+                                                        Statement(
+                                                            For {
+                                                                init: Decl(
+                                                                    VariableDeclaration {
+                                                                        name: "i",
+                                                                        init: Some(
+                                                                            Constant(
+                                                                                0,
+                                                                            ),
+                                                                        ),
+                                                                    },
+                                                                ),
+                                                                condition: Some(
+                                                                    Binary(
+                                                                        LessThan,
+                                                                        Var(
+                                                                            "i",
+                                                                        ),
+                                                                        Constant(
+                                                                            10,
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                post: Some(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "i",
+                                                                        ),
+                                                                        Binary(
+                                                                            Add,
+                                                                            Var(
+                                                                                "i",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                body: Compound(
+                                                                    Block {
+                                                                        items: [
+                                                                            Statement(
+                                                                                If(
+                                                                                    Binary(
+                                                                                        Remainder,
+                                                                                        Var(
+                                                                                            "i",
+                                                                                        ),
+                                                                                        Constant(
+                                                                                            2,
+                                                                                        ),
+                                                                                    ),
+                                                                                    Continue(
+                                                                                        None,
+                                                                                    ),
+                                                                                    None,
+                                                                                ),
+                                                                            ),
+                                                                            Statement(
+                                                                                Expression(
+                                                                                    Assignment(
+                                                                                        Var(
+                                                                                            "acc",
+                                                                                        ),
+                                                                                        Binary(
+                                                                                            Add,
+                                                                                            Var(
+                                                                                                "acc",
+                                                                                            ),
+                                                                                            Constant(
+                                                                                                1,
+                                                                                            ),
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                        ],
+                                                                    },
+                                                                ),
+                                                                label: None,
+                                                            },
+                                                        ),
+                                                        Statement(
+                                                            Return(
+                                                                Var(
+                                                                    "acc",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        None,
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

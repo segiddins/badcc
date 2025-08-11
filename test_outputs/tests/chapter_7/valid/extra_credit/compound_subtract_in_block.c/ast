@@ -1,0 +1,102 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                5,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    If(
+                        Binary(
+                            GreaterThan,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                4,
+                            ),
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            CompoundAssignment(
+                                                Var(
+                                                    "a",
+                                                ),
+                                                Subtract,
+                                                Constant(
+                                                    4,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Declaration(
+                                        VariableDeclaration {
+                                            name: "a",
+                                            init: Some(
+                                                Constant(
+                                                    5,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    Statement(
+                                        If(
+                                            Binary(
+                                                GreaterThan,
+                                                Var(
+                                                    "a",
+                                                ),
+                                                Constant(
+                                                    4,
+                                                ),
+                                            ),
+                                            Compound(
+                                                Block {
+                                                    items: [
+                                                        Statement(
+                                                            Expression(
+                                                                CompoundAssignment(
+                                                                    Var(
+                                                                        "a",
+                                                                    ),
+                                                                    Subtract,
+                                                                    Constant(
+                                                                        4,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        None,
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "a",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

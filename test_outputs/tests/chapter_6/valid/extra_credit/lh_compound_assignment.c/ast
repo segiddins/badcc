@@ -1,0 +1,59 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "x",
+                        init: Some(
+                            Constant(
+                                10,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Ternary(
+                            CompoundAssignment(
+                                Var(
+                                    "x",
+                                ),
+                                Subtract,
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                            CompoundAssignment(
+                                Var(
+                                    "x",
+                                ),
+                                Divide,
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Equals,
+                            Var(
+                                "x",
+                            ),
+                            Constant(
+                                4,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

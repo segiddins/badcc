@@ -1,0 +1,74 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b.1",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    If(
+                        Var(
+                            "a.0",
+                        ),
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "b.1",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                        Some(
+                            If(
+                                Unary(
+                                    Complement,
+                                    Var(
+                                        "b.1",
+                                    ),
+                                ),
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "b.1",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                                None,
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "b.1",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

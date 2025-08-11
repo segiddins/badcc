@@ -1,0 +1,69 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Labeled(
+                        "label",
+                        Switch(
+                            Var(
+                                "a",
+                            ),
+                            Compound(
+                                Block {
+                                    items: [
+                                        Statement(
+                                            Case(
+                                                Constant(
+                                                    1,
+                                                ),
+                                                Return(
+                                                    Constant(
+                                                        0,
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                        ),
+                                        Statement(
+                                            Default(
+                                                Labeled(
+                                                    "label",
+                                                    Return(
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                        ),
+                                    ],
+                                },
+                            ),
+                            None,
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

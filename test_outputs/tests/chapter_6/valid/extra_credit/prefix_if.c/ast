@@ -1,0 +1,60 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Unary(
+                                Minus,
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    If(
+                        Unary(
+                            PrefixIncrement,
+                            Var(
+                                "a",
+                            ),
+                        ),
+                        Return(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                        Some(
+                            If(
+                                Unary(
+                                    PrefixIncrement,
+                                    Var(
+                                        "a",
+                                    ),
+                                ),
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                                None,
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

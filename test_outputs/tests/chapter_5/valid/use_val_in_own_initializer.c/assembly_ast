@@ -1,0 +1,101 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                8,
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.false",
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.false",
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Jmp(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.false",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Move {
+                source: Psuedo(
+                    1,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

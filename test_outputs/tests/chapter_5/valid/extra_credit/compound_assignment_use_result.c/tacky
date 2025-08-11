@@ -1,0 +1,106 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Binary {
+                op: Add,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    3,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Copy {
+                src: Var(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Binary {
+                op: Equals,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    4,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    3,
+                ),
+                "main.0.false",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Var(
+                    1,
+                ),
+                rhs: Constant(
+                    4,
+                ),
+                dst: Var(
+                    4,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    4,
+                ),
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.false",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Return(
+                Var(
+                    2,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

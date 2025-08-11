@@ -1,0 +1,52 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b",
+                        init: Some(
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Assignment(
+                            Var(
+                                "a",
+                            ),
+                            Assignment(
+                                Binary(
+                                    Multiply,
+                                    Constant(
+                                        3,
+                                    ),
+                                    Var(
+                                        "b",
+                                    ),
+                                ),
+                                Var(
+                                    "a",
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

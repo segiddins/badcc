@@ -1,0 +1,94 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b",
+                        init: Some(
+                            Binary(
+                                Add,
+                                Constant(
+                                    3,
+                                ),
+                                Unary(
+                                    PostfixIncrement,
+                                    Var(
+                                        "a",
+                                    ),
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "c",
+                        init: Some(
+                            Binary(
+                                Add,
+                                Constant(
+                                    4,
+                                ),
+                                Unary(
+                                    PrefixIncrement,
+                                    Var(
+                                        "b",
+                                    ),
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "a",
+                                    ),
+                                    Constant(
+                                        3,
+                                    ),
+                                ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "b",
+                                    ),
+                                    Constant(
+                                        6,
+                                    ),
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "c",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

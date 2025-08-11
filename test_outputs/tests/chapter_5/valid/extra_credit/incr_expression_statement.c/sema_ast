@@ -1,0 +1,107 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b.1",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PostfixIncrement,
+                            Var(
+                                "a.0",
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PrefixIncrement,
+                            Var(
+                                "a.0",
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PrefixIncrement,
+                            Var(
+                                "a.0",
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PostfixDecrement,
+                            Var(
+                                "b.1",
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Expression(
+                        Unary(
+                            PrefixDecrement,
+                            Var(
+                                "b.1",
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "a.0",
+                                ),
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "b.1",
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        2,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

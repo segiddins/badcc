@@ -1,0 +1,120 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "shadow",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "acc",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "shadow",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "shadow",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "shadow",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "shadow",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "acc",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "acc",
+                                                    ),
+                                                    Var(
+                                                        "shadow",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "acc",
+                                ),
+                                Constant(
+                                    45,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "shadow",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

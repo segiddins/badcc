@@ -1,0 +1,86 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "product.0",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i.1",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i.1",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Unary(
+                                PostfixIncrement,
+                                Var(
+                                    "i.1",
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "product.0",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "product.0",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "product.0",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

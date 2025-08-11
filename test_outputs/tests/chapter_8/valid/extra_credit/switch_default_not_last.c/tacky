@@ -1,0 +1,89 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    7,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Copy {
+                src: Var(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Binary {
+                op: Add,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Var(
+                    1,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Jump(
+                "switch.0.cases",
+            ),
+            Label(
+                "switch.0.default",
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+            Label(
+                "switch.0.2",
+            ),
+            Return(
+                Constant(
+                    1,
+                ),
+            ),
+            Jump(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.cases",
+            ),
+            Jump(
+                "switch.0.default",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Constant(
+                    2,
+                ),
+                rhs: Var(
+                    2,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            JumpIfNotZero(
+                Var(
+                    3,
+                ),
+                "switch.0.2",
+            ),
+            Label(
+                "switch.0",
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

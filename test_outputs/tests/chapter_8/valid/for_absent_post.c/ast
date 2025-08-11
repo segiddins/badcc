@@ -1,0 +1,97 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Unary(
+                                Minus,
+                                Constant(
+                                    2147483647,
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Expr(
+                            None,
+                        ),
+                        condition: Some(
+                            Binary(
+                                NotEqual,
+                                Binary(
+                                    Remainder,
+                                    Var(
+                                        "a",
+                                    ),
+                                    Constant(
+                                        5,
+                                    ),
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                        post: None,
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "a",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Or,
+                            Binary(
+                                Remainder,
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    5,
+                                ),
+                            ),
+                            Binary(
+                                GreaterThan,
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

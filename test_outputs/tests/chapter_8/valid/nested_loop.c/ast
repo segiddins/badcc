@@ -1,0 +1,146 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "acc",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "x",
+                        init: Some(
+                            Constant(
+                                100,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    While(
+                        Var(
+                            "x",
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Declaration(
+                                        VariableDeclaration {
+                                            name: "y",
+                                            init: Some(
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                        },
+                                    ),
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "x",
+                                                ),
+                                                Binary(
+                                                    Subtract,
+                                                    Var(
+                                                        "x",
+                                                    ),
+                                                    Var(
+                                                        "y",
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        While(
+                                            Var(
+                                                "y",
+                                            ),
+                                            Compound(
+                                                Block {
+                                                    items: [
+                                                        Statement(
+                                                            Expression(
+                                                                Assignment(
+                                                                    Var(
+                                                                        "acc",
+                                                                    ),
+                                                                    Binary(
+                                                                        Add,
+                                                                        Var(
+                                                                            "acc",
+                                                                        ),
+                                                                        Constant(
+                                                                            1,
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Expression(
+                                                                Assignment(
+                                                                    Var(
+                                                                        "y",
+                                                                    ),
+                                                                    Binary(
+                                                                        Subtract,
+                                                                        Var(
+                                                                            "y",
+                                                                        ),
+                                                                        Constant(
+                                                                            1,
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        None,
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "acc",
+                                ),
+                                Constant(
+                                    100,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "x",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

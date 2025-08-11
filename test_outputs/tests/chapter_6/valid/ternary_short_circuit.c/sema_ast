@@ -1,0 +1,61 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b.1",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Expression(
+                        Ternary(
+                            Var(
+                                "a.0",
+                            ),
+                            Assignment(
+                                Var(
+                                    "b.1",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                            Assignment(
+                                Var(
+                                    "b.1",
+                                ),
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "b.1",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

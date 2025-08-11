@@ -1,0 +1,151 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "sum",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "counter",
+                        init: None,
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThanOrEqual,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "counter",
+                                                ),
+                                                Var(
+                                                    "i",
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        If(
+                                            Binary(
+                                                Equals,
+                                                Binary(
+                                                    Remainder,
+                                                    Var(
+                                                        "i",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                ),
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            Continue(
+                                                None,
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "sum",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "sum",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "sum",
+                                ),
+                                Constant(
+                                    5,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "counter",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

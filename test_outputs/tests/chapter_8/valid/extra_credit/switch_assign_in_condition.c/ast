@@ -1,0 +1,102 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Switch(
+                        Assignment(
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                1,
+                            ),
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                0,
+                                            ),
+                                            Return(
+                                                Constant(
+                                                    10,
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                1,
+                                            ),
+                                            Expression(
+                                                Assignment(
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Binary(
+                                                        Multiply,
+                                                        Var(
+                                                            "a",
+                                                        ),
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Break(
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Default(
+                                            Expression(
+                                                Assignment(
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Constant(
+                                                        99,
+                                                    ),
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        None,
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "a",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

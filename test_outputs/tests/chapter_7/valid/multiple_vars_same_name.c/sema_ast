@@ -1,0 +1,92 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Compound(
+                        Block {
+                            items: [
+                                Declaration(
+                                    VariableDeclaration {
+                                        name: "b.1",
+                                        init: Some(
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                                Statement(
+                                    Expression(
+                                        Assignment(
+                                            Var(
+                                                "a.0",
+                                            ),
+                                            Var(
+                                                "b.1",
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ),
+                Statement(
+                    Compound(
+                        Block {
+                            items: [
+                                Declaration(
+                                    VariableDeclaration {
+                                        name: "b.2",
+                                        init: Some(
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                                Statement(
+                                    Expression(
+                                        Assignment(
+                                            Var(
+                                                "a.0",
+                                            ),
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "a.0",
+                                                ),
+                                                Var(
+                                                    "b.2",
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "a.0",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

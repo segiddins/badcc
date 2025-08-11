@@ -1,0 +1,142 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                16,
+            ),
+            Move {
+                source: Immediate(
+                    10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            Binary(
+                Add,
+                Immediate(
+                    1,
+                ),
+                Psuedo(
+                    1,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    1,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "switch.0.cases",
+            ),
+            Jmp(
+                "switch.0",
+            ),
+            Label(
+                "switch.0.cases",
+            ),
+            Label(
+                "switch.0",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    3,
+                ),
+            },
+            Binary(
+                Add,
+                Immediate(
+                    1,
+                ),
+                Psuedo(
+                    3,
+                ),
+            ),
+            Move {
+                source: Psuedo(
+                    3,
+                ),
+                destination: Register(
+                    R10,
+                ),
+            },
+            Move {
+                source: Register(
+                    R10,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "switch.1.cases",
+            ),
+            Jmp(
+                "switch.1",
+            ),
+            Label(
+                "switch.1.cases",
+            ),
+            Label(
+                "switch.1",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

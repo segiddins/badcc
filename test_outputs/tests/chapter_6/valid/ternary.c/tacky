@@ -1,0 +1,77 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Unary {
+                op: Negate,
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Binary {
+                op: GreaterThan,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Var(
+                    2,
+                ),
+                dst: Var(
+                    3,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    3,
+                ),
+                "main.0.true",
+            ),
+            Copy {
+                src: Constant(
+                    4,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Copy {
+                src: Constant(
+                    5,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Return(
+                Var(
+                    1,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

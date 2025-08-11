@@ -1,0 +1,124 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                8,
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.true",
+            ),
+            Cmp(
+                Immediate(
+                    1,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    1,
+                ),
+            },
+            SetCC(
+                E,
+                Psuedo(
+                    1,
+                ),
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    1,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.1.true",
+            ),
+            Move {
+                source: Immediate(
+                    3,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "main.1.end",
+            ),
+            Label(
+                "main.1.true",
+            ),
+            Move {
+                source: Immediate(
+                    4,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Label(
+                "main.1.end",
+            ),
+            Jmp(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

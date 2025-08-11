@@ -1,0 +1,97 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "i.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Goto(
+                        "target",
+                    ),
+                ),
+                Statement(
+                    For {
+                        init: Expr(
+                            Some(
+                                Assignment(
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Constant(
+                                        5,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i.0",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i.0",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Labeled(
+                            "target",
+                            If(
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                                None,
+                            ),
+                        ),
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

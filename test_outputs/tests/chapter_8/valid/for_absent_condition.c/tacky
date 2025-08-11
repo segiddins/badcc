@@ -1,0 +1,84 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            Copy {
+                src: Constant(
+                    400,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Label(
+                "loop.0.cond",
+            ),
+            Binary {
+                op: Equals,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    100,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            JumpIfZero(
+                Var(
+                    1,
+                ),
+                "main.0.true",
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Label(
+                "loop.0.start",
+            ),
+            Binary {
+                op: Subtract,
+                lhs: Var(
+                    0,
+                ),
+                rhs: Constant(
+                    100,
+                ),
+                dst: Var(
+                    2,
+                ),
+            },
+            Copy {
+                src: Var(
+                    2,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "loop.0.cond",
+            ),
+            Label(
+                "loop.0",
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

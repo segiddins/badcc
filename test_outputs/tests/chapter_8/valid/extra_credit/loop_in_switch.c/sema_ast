@@ -1,0 +1,171 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "cond.0",
+                        init: Some(
+                            Constant(
+                                10,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Switch(
+                        Var(
+                            "cond.0",
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                1,
+                                            ),
+                                            Return(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            Some(
+                                                "switch.0",
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                10,
+                                            ),
+                                            For {
+                                                init: Decl(
+                                                    VariableDeclaration {
+                                                        name: "i.1",
+                                                        init: Some(
+                                                            Constant(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                    },
+                                                ),
+                                                condition: Some(
+                                                    Binary(
+                                                        LessThan,
+                                                        Var(
+                                                            "i.1",
+                                                        ),
+                                                        Constant(
+                                                            5,
+                                                        ),
+                                                    ),
+                                                ),
+                                                post: Some(
+                                                    Assignment(
+                                                        Var(
+                                                            "i.1",
+                                                        ),
+                                                        Binary(
+                                                            Add,
+                                                            Var(
+                                                                "i.1",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                body: Compound(
+                                                    Block {
+                                                        items: [
+                                                            Statement(
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "cond.0",
+                                                                        ),
+                                                                        Binary(
+                                                                            Subtract,
+                                                                            Var(
+                                                                                "cond.0",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                            Statement(
+                                                                If(
+                                                                    Binary(
+                                                                        Equals,
+                                                                        Var(
+                                                                            "cond.0",
+                                                                        ),
+                                                                        Constant(
+                                                                            8,
+                                                                        ),
+                                                                    ),
+                                                                    Break(
+                                                                        Some(
+                                                                            "loop.1",
+                                                                        ),
+                                                                    ),
+                                                                    None,
+                                                                ),
+                                                            ),
+                                                        ],
+                                                    },
+                                                ),
+                                                label: Some(
+                                                    "loop.1",
+                                                ),
+                                            },
+                                            Some(
+                                                "switch.0",
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Return(
+                                            Constant(
+                                                123,
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Default(
+                                            Return(
+                                                Constant(
+                                                    2,
+                                                ),
+                                            ),
+                                            Some(
+                                                "switch.0",
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        Some(
+                            "switch.0",
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            3,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

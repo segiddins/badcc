@@ -1,0 +1,82 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "i",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Expr(
+                            Some(
+                                CompoundAssignment(
+                                    Var(
+                                        "i",
+                                    ),
+                                    Multiply,
+                                    Unary(
+                                        Minus,
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                        condition: Some(
+                            Binary(
+                                GreaterThanOrEqual,
+                                Var(
+                                    "i",
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        100,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            CompoundAssignment(
+                                Var(
+                                    "i",
+                                ),
+                                Subtract,
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ),
+                        body: Null,
+                        label: None,
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Equals,
+                            Var(
+                                "i",
+                            ),
+                            Unary(
+                                Minus,
+                                Constant(
+                                    103,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

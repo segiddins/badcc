@@ -1,0 +1,254 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "acc.0",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "ctr.1",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Decl(
+                            VariableDeclaration {
+                                name: "i.2",
+                                init: Some(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            },
+                        ),
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i.2",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i.2",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i.2",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Switch(
+                                            Var(
+                                                "i.2",
+                                            ),
+                                            Compound(
+                                                Block {
+                                                    items: [
+                                                        Statement(
+                                                            Case(
+                                                                Constant(
+                                                                    0,
+                                                                ),
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "acc.0",
+                                                                        ),
+                                                                        Constant(
+                                                                            2,
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Break(
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Case(
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "acc.0",
+                                                                        ),
+                                                                        Binary(
+                                                                            Multiply,
+                                                                            Var(
+                                                                                "acc.0",
+                                                                            ),
+                                                                            Constant(
+                                                                                3,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Break(
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Case(
+                                                                Constant(
+                                                                    2,
+                                                                ),
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "acc.0",
+                                                                        ),
+                                                                        Binary(
+                                                                            Multiply,
+                                                                            Var(
+                                                                                "acc.0",
+                                                                            ),
+                                                                            Constant(
+                                                                                4,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Break(
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        Statement(
+                                                            Default(
+                                                                Expression(
+                                                                    Assignment(
+                                                                        Var(
+                                                                            "acc.0",
+                                                                        ),
+                                                                        Binary(
+                                                                            Add,
+                                                                            Var(
+                                                                                "acc.0",
+                                                                            ),
+                                                                            Constant(
+                                                                                1,
+                                                                            ),
+                                                                        ),
+                                                                    ),
+                                                                ),
+                                                                Some(
+                                                                    "switch.1",
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ],
+                                                },
+                                            ),
+                                            Some(
+                                                "switch.1",
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "ctr.1",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "ctr.1",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "ctr.1",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "acc.0",
+                                ),
+                                Constant(
+                                    31,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

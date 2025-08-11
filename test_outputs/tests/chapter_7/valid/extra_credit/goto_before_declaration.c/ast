@@ -1,0 +1,64 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Compound(
+                        Block {
+                            items: [
+                                Statement(
+                                    If(
+                                        Binary(
+                                            NotEqual,
+                                            Var(
+                                                "a",
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        Labeled(
+                                            "return_a",
+                                            Return(
+                                                Var(
+                                                    "a",
+                                                ),
+                                            ),
+                                        ),
+                                        None,
+                                    ),
+                                ),
+                                Declaration(
+                                    VariableDeclaration {
+                                        name: "a",
+                                        init: Some(
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                    },
+                                ),
+                                Statement(
+                                    Goto(
+                                        "return_a",
+                                    ),
+                                ),
+                            ],
+                        },
+                    ),
+                ),
+            ],
+        },
+    },
+}

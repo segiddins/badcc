@@ -1,0 +1,85 @@
+Program {
+    function_definition: Function {
+        identifier: "main",
+        instructions: [
+            JumpIfZero(
+                Constant(
+                    0,
+                ),
+                "main.0.true",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Jump(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            JumpIfNotZero(
+                Constant(
+                    0,
+                ),
+                "main.1.true",
+            ),
+            JumpIfNotZero(
+                Constant(
+                    2,
+                ),
+                "main.1.true",
+            ),
+            Copy {
+                src: Constant(
+                    0,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Jump(
+                "main.1.end",
+            ),
+            Label(
+                "main.1.true",
+            ),
+            Copy {
+                src: Constant(
+                    1,
+                ),
+                dst: Var(
+                    1,
+                ),
+            },
+            Label(
+                "main.1.end",
+            ),
+            Copy {
+                src: Var(
+                    1,
+                ),
+                dst: Var(
+                    0,
+                ),
+            },
+            Label(
+                "main.0.end",
+            ),
+            Return(
+                Var(
+                    0,
+                ),
+            ),
+            Return(
+                Constant(
+                    0,
+                ),
+            ),
+        ],
+    },
+}

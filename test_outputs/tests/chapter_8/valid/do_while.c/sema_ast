@@ -1,0 +1,66 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a.0",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    DoWhile(
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "a.0",
+                                                ),
+                                                Binary(
+                                                    Multiply,
+                                                    Var(
+                                                        "a.0",
+                                                    ),
+                                                    Constant(
+                                                        2,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        Binary(
+                            LessThan,
+                            Var(
+                                "a.0",
+                            ),
+                            Constant(
+                                11,
+                            ),
+                        ),
+                        Some(
+                            "loop.0",
+                        ),
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Var(
+                            "a.0",
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

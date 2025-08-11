@@ -1,0 +1,104 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "b",
+                        init: Some(
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "c",
+                        init: Some(
+                            Unary(
+                                PrefixIncrement,
+                                Var(
+                                    "a",
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Declaration(
+                    VariableDeclaration {
+                        name: "d",
+                        init: Some(
+                            Unary(
+                                PrefixDecrement,
+                                Var(
+                                    "b",
+                                ),
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    And,
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "b",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "c",
+                                    ),
+                                    Constant(
+                                        2,
+                                    ),
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "d",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

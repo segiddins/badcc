@@ -1,0 +1,132 @@
+Program {
+    function_definition: Function {
+        name: "main",
+        instructions: [
+            AllocateStack(
+                4,
+            ),
+            Move {
+                source: Immediate(
+                    1,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Label(
+                "label_if",
+            ),
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Psuedo(
+                    0,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.0.true",
+            ),
+            Jmp(
+                "label_expression",
+            ),
+            Jmp(
+                "main.0.end",
+            ),
+            Label(
+                "main.0.true",
+            ),
+            Jmp(
+                "label_empty",
+            ),
+            Label(
+                "main.0.end",
+            ),
+            Label(
+                "label_goto",
+            ),
+            Jmp(
+                "label_return",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    R11,
+                ),
+            },
+            Cmp(
+                Immediate(
+                    0,
+                ),
+                Register(
+                    R11,
+                ),
+            ),
+            JmpCC(
+                E,
+                "main.1.true",
+            ),
+            Label(
+                "label_expression",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "main.1.end",
+            ),
+            Label(
+                "main.1.true",
+            ),
+            Label(
+                "main.1.end",
+            ),
+            Jmp(
+                "label_if",
+            ),
+            Label(
+                "label_return",
+            ),
+            Move {
+                source: Psuedo(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+            Label(
+                "label_empty",
+            ),
+            Move {
+                source: Immediate(
+                    100,
+                ),
+                destination: Psuedo(
+                    0,
+                ),
+            },
+            Jmp(
+                "label_goto",
+            ),
+            Move {
+                source: Immediate(
+                    0,
+                ),
+                destination: Register(
+                    AX,
+                ),
+            },
+            Ret,
+        ],
+    },
+}

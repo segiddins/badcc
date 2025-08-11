@@ -1,0 +1,91 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "a",
+                        init: Some(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    Goto(
+                        "mid_case",
+                    ),
+                ),
+                Statement(
+                    Switch(
+                        Constant(
+                            4,
+                        ),
+                        Compound(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Case(
+                                            Constant(
+                                                4,
+                                            ),
+                                            Expression(
+                                                Assignment(
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Constant(
+                                                        5,
+                                                    ),
+                                                ),
+                                            ),
+                                            None,
+                                        ),
+                                    ),
+                                    Statement(
+                                        Labeled(
+                                            "mid_case",
+                                            Expression(
+                                                Assignment(
+                                                    Var(
+                                                        "a",
+                                                    ),
+                                                    Binary(
+                                                        Add,
+                                                        Var(
+                                                            "a",
+                                                        ),
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Statement(
+                                        Return(
+                                            Var(
+                                                "a",
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
+                        ),
+                        None,
+                    ),
+                ),
+                Statement(
+                    Return(
+                        Constant(
+                            100,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}

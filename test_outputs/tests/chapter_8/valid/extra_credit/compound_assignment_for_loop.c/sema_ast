@@ -1,0 +1,84 @@
+Program {
+    function: Function {
+        name: "main",
+        body: Block {
+            items: [
+                Declaration(
+                    VariableDeclaration {
+                        name: "i.0",
+                        init: Some(
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    },
+                ),
+                Statement(
+                    For {
+                        init: Expr(
+                            Some(
+                                CompoundAssignment(
+                                    Var(
+                                        "i.0",
+                                    ),
+                                    Multiply,
+                                    Unary(
+                                        Minus,
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                        condition: Some(
+                            Binary(
+                                GreaterThanOrEqual,
+                                Var(
+                                    "i.0",
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        100,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            CompoundAssignment(
+                                Var(
+                                    "i.0",
+                                ),
+                                Subtract,
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ),
+                        body: Null,
+                        label: Some(
+                            "loop.0",
+                        ),
+                    },
+                ),
+                Statement(
+                    Return(
+                        Binary(
+                            Equals,
+                            Var(
+                                "i.0",
+                            ),
+                            Unary(
+                                Minus,
+                                Constant(
+                                    103,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
+    },
+}
