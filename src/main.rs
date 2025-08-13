@@ -19,8 +19,10 @@ use crate::{
 };
 
 mod assembly_gen;
+mod ast;
 mod code_emission;
 mod lexer;
+mod located;
 mod parser;
 mod sema;
 mod tacky;

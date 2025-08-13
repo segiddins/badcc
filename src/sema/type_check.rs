@@ -207,6 +207,11 @@ impl Checker {
                 }
             }
             Expression::Constant(_) => Ok(&Ty::Int),
+            Expression::Parenthesized {
+                lparen_span,
+                expr,
+                rparen_span,
+            } => self.visit_expression(expression),
         }
     }
 }

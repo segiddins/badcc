@@ -1,8 +1,9 @@
 use std::{borrow::Borrow, num::ParseIntError};
 
-use miette::{NamedSource, SourceSpan};
+use miette::NamedSource;
 
-use crate::lexer::{Token, TokenKind};
+pub use crate::ast::*;
+use crate::{lexer::TokenKind, located::Span};
 
 impl Borrow<dyn miette::Diagnostic + 'static> for Box<ParserError> {
     fn borrow(&self) -> &(dyn miette::Diagnostic + 'static) {
@@ -14,6 +15,7 @@ impl Borrow<dyn miette::Diagnostic + 'static> for Box<ParserError> {
 #[error("Failed to parse")]
 enum ParserError {
     #[error("while parsing {kind}")]
+    #[allow(dead_code)]
     Nested {
         #[source]
         #[diagnostic_source]
@@ -21,7 +23,7 @@ enum ParserError {
 
         kind: &'static str,
         #[label("starting here")]
-        start: SourceSpan,
+        start: Span,
     },
 
     #[error("unexpectedly encountered the end of the file")]
@@ -32,13 +34,13 @@ enum ParserError {
         options: Vec<TokenKind>,
         kind: TokenKind,
         #[label("here")]
-        span: SourceSpan,
+        span: Span,
     },
 
     #[error("found extra tokens at the end of the program")]
     ExtraToken {
         #[label("here")]
-        span: SourceSpan,
+        span: Span,
     },
 
     #[error("integer constant is out of range")]
@@ -47,197 +49,61 @@ enum ParserError {
         error: ParseIntError,
 
         #[label("here")]
-        span: SourceSpan,
+        span: Span,
     },
 }
 
 type Result<T> = std::result::Result<T, ParserError>;
 
-#[derive(Debug)]
-pub struct Program {
-    pub declarations: Vec<Declaration>,
-}
-
-#[derive(Debug)]
-pub enum Expression {
-    Constant(i32),
-    Unary(UnaryOperator, Box<Expression>),
-    Binary(BinaryOperator, Box<Expression>, Box<Expression>),
-    Var(String),
-    Assignment(Box<Expression>, Box<Expression>),
-    CompoundAssignment(Box<Expression>, BinaryOperator, Box<Expression>),
-    Ternary(Box<Expression>, Box<Expression>, Box<Expression>),
-    FunctionCall(Box<Expression>, Vec<Expression>),
-}
-
-#[derive(Debug)]
-pub enum UnaryOperator {
-    Minus,
-    Complement,
-    Not,
-    PrefixIncrement,
-    PrefixDecrement,
-    PostfixIncrement,
-    PostfixDecrement,
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum BinaryOperator {
-    Add,
-    Subtract,
-    Multiply,
-    Divide,
-    Remainder,
-    LeftShift,
-    RightShift,
-    BitwiseOr,
-    BitwiseAnd,
-    Xor,
-    Equals,
-    LessThan,
-    LessThanOrEqual,
-    GreaterThan,
-    GreaterThanOrEqual,
-    NotEqual,
-    And,
-    Or,
-}
-
-#[derive(Debug)]
-pub enum Statement {
-    Return(Expression),
-    Expression(Expression),
-    If(Expression, Box<Statement>, Option<Box<Statement>>),
-    Labeled(String, Box<Statement>),
-    Goto(String),
-    Compound(Block),
-    Break(Option<String>),
-    Continue(Option<String>),
-    While(Expression, Box<Statement>, Option<String>),
-    DoWhile(Box<Statement>, Expression, Option<String>),
-    For {
-        init: ForInit,
-        condition: Option<Expression>,
-        post: Option<Expression>,
-        body: Box<Statement>,
-        label: Option<String>,
-    },
-    Switch(Expression, Box<Statement>, Option<String>),
-    Case(Expression, Box<Statement>, Option<String>),
-    Default(Box<Statement>, Option<String>),
-    Null,
-}
-
-#[derive(Debug)]
-pub struct Block {
-    pub items: Vec<BlockItem>,
-}
-
-#[derive(Debug)]
-pub enum ForInit {
-    Decl(VariableDeclaration),
-    Expr(Option<Expression>),
-}
-
-#[derive(Debug)]
-pub enum Declaration {
-    Variable(VariableDeclaration),
-    Function(FunctionDeclaration),
-}
-
-#[derive(Debug)]
-pub struct FunctionDeclaration {
-    pub identifier: String,
-    pub params: Vec<String>,
-    pub body: Option<Block>,
-}
-
-#[derive(Debug)]
-pub struct VariableDeclaration {
-    pub name: String,
-    pub init: Option<Expression>,
-}
-
-#[derive(Debug)]
-pub enum BlockItem {
-    Statement(Statement),
-    Declaration(Declaration),
-}
-
 struct Lexer<'i> {
     source: &'i str,
-    tokens: Vec<Token>,
+    tokens: Vec<(Span, TokenKind)>,
 }
 
 impl Lexer<'_> {
-    #[allow(dead_code)]
-    fn mark(&self) -> SourceSpan {
-        self.peek_token()
-            .map(|t| t.location)
-            .unwrap_or_else(|| (self.source.len() - 1, 0).into())
-    }
-
-    #[inline]
-    #[allow(dead_code)]
-    fn marked<O>(
-        &mut self,
-        kind: &'static str,
-        parser: impl FnOnce(&mut Self) -> Result<O>,
-    ) -> Result<O> {
-        let mark = self.mark();
-        parser(self).map_err(|e| ParserError::Nested {
-            nested: Box::new(e),
-            kind,
-            start: mark,
-        })
-    }
-
-    fn next_token(&mut self) -> Option<Token> {
+    fn next_token(&mut self) -> Option<(Span, TokenKind)> {
         self.tokens.pop()
     }
-    fn peek_token(&self) -> Option<&Token> {
-        self.tokens.last()
+    fn peek_token(&self) -> Option<TokenKind> {
+        self.tokens.last().map(|t| t.1)
     }
-    fn peek_n(&self, n: usize) -> Option<&Token> {
+    fn peek_n(&self, n: usize) -> Option<TokenKind> {
         if n > self.tokens.len() {
             return None;
         }
-        self.tokens.get(self.tokens.len() - n)
+        self.tokens.get(self.tokens.len() - n).map(|t| t.1)
     }
 
     fn expect_identifier(&mut self) -> Result<String> {
         self.expect(TokenKind::Identifier)
-            .map(|t| t.source(self.source).to_string())
+            .map(|span| self.source[span.range()].to_string())
     }
 
-    fn expect(&mut self, kind: TokenKind) -> Result<Token> {
+    fn expect(&mut self, kind: TokenKind) -> Result<Span> {
         if self.tokens.is_empty() {
             return Err(ParserError::UnexpectedEOF);
         }
-        self.tokens.pop_if(|t| t.kind == kind).ok_or_else(|| {
-            let token = self.peek_token().unwrap();
-            ParserError::Expected {
-                options: vec![kind],
-                kind: token.kind,
-                span: token.location,
-            }
-        })
+        self.tokens
+            .pop_if(|(_, t)| *t == kind)
+            .ok_or_else(|| {
+                let token = self.tokens.last().unwrap();
+                ParserError::Expected {
+                    options: vec![kind],
+                    kind: token.1,
+                    span: token.0.clone().into(),
+                }
+            })
+            .map(|(span, _)| span)
     }
 
     fn peek_kind(&self, kind: TokenKind) -> bool {
-        self.peek_token().is_some_and(|t| t.kind == kind)
+        self.peek_token().is_some_and(|t| t == kind)
     }
-}
-
-macro_rules! parse {
-    ($fn:ident, $lexer:expr) => {
-        $lexer.marked(stringify!($fn), $fn)
-    };
 }
 
 pub fn parse(
     source: impl AsRef<str>,
-    mut tokens: Vec<Token>,
+    mut tokens: Vec<(Span, TokenKind)>,
     filename: &str,
 ) -> miette::Result<Program> {
     tokens.reverse();
@@ -248,7 +114,7 @@ pub fn parse(
     parse_program(&mut lexer)
         .and_then(|program| {
             if let Some(tok) = lexer.next_token() {
-                return Err(ParserError::ExtraToken { span: tok.location });
+                return Err(ParserError::ExtraToken { span: tok.0 });
             }
             Ok(program)
         })
@@ -263,20 +129,18 @@ fn parse_program(lexer: &mut Lexer) -> Result<Program> {
     while lexer.peek_token().is_some() {
         declarations.push(parse_declaration(lexer)?);
     }
-    Ok(Program { declarations })
+    Ok(Program {
+        declarations,
+        file_name: "".to_string(),
+        contents: lexer.source.into(),
+    })
 }
 
 fn parse_block(lexer: &mut Lexer) -> Result<Block> {
     lexer.expect(TokenKind::LBrace)?;
     let mut items = vec![];
-    while !matches!(
-        lexer.peek_token(),
-        Some(Token {
-            kind: TokenKind::RBrace,
-            ..
-        })
-    ) {
-        items.push(parse!(parse_block_item, lexer)?);
+    while !matches!(lexer.peek_token(), Some(TokenKind::RBrace)) {
+        items.push(parse_block_item(lexer)?);
     }
     lexer.expect(TokenKind::RBrace)?;
     Ok(Block { items })
@@ -294,10 +158,7 @@ fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> 
     let name = lexer.expect_identifier()?;
 
     let init = match lexer.peek_token() {
-        Some(Token {
-            kind: TokenKind::Equals,
-            ..
-        }) => {
+        Some(TokenKind::Equals) => {
             lexer.expect(TokenKind::Equals)?;
             Some(parse_expression(lexer)?)
         }
@@ -315,7 +176,7 @@ fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> 
 fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
     if lexer
         .peek_n(3)
-        .is_some_and(|t| t.kind == TokenKind::Semicolon || t.kind == TokenKind::Equals)
+        .is_some_and(|t| t == TokenKind::Semicolon || t == TokenKind::Equals)
     {
         return parse_variable_declaration(lexer).map(Declaration::Variable);
     }
@@ -325,10 +186,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
     lexer.expect(TokenKind::LParen)?;
 
     let mut params = vec![];
-    if lexer
-        .peek_token()
-        .is_some_and(|t| t.kind == TokenKind::Void)
-    {
+    if lexer.peek_token().is_some_and(|t| t == TokenKind::Void) {
         lexer.next_token();
     } else if lexer.peek_kind(TokenKind::RParen) {
     } else {
@@ -356,7 +214,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
 }
 
 fn parse_optional_expression(lexer: &mut Lexer, end: TokenKind) -> Result<Option<Expression>> {
-    if lexer.peek_token().is_some_and(|t| t.kind == end) {
+    if lexer.peek_token().is_some_and(|t| t == end) {
         lexer.next_token();
         return Ok(None);
     }
@@ -367,16 +225,16 @@ fn parse_optional_expression(lexer: &mut Lexer, end: TokenKind) -> Result<Option
 }
 
 fn parse_for_init(lexer: &mut Lexer) -> Result<ForInit> {
-    if lexer.peek_token().is_some_and(|t| t.kind == TokenKind::Int) {
-        parse!(parse_variable_declaration, lexer).map(ForInit::Decl)
+    if lexer.peek_token().is_some_and(|t| t == TokenKind::Int) {
+        parse_variable_declaration(lexer).map(ForInit::Decl)
     } else {
         parse_optional_expression(lexer, TokenKind::Semicolon).map(ForInit::Expr)
     }
 }
 
 fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
-    match lexer.peek_token() {
-        Some(token) => match token.kind {
+    match lexer.tokens.last().cloned() {
+        Some((_, token)) => match token {
             TokenKind::Return => lexer
                 .expect(TokenKind::Return)
                 .and_then(|_| Ok(Statement::Return(parse_expression(lexer)?)))
@@ -392,19 +250,16 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 lexer.expect(TokenKind::RParen)?;
                 let then = parse_statement(lexer)?;
                 let mut r#else = None;
-                if lexer
-                    .peek_token()
-                    .is_some_and(|t| t.kind == TokenKind::Else)
-                {
+                if lexer.peek_token().is_some_and(|t| t == TokenKind::Else) {
                     lexer.expect(TokenKind::Else)?;
                     r#else = Some(parse_statement(lexer)?);
                 }
                 Ok(Statement::If(cond, Box::new(then), r#else.map(Box::new)))
             }
-            TokenKind::Identifier if lexer.peek_n(2).map(|t| t.kind) == Some(TokenKind::Colon) => {
+            TokenKind::Identifier if lexer.peek_n(2).map(|t| t) == Some(TokenKind::Colon) => {
                 let label = lexer
                     .expect(TokenKind::Identifier)
-                    .map(|t| t.source(lexer.source).to_string())?;
+                    .map(|span| lexer.source[span.range()].to_string())?;
                 lexer.expect(TokenKind::Colon)?;
                 let statement = parse_statement(lexer)?;
                 Ok(Statement::Labeled(label, statement.into()))
@@ -413,7 +268,7 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 lexer.expect(TokenKind::Goto)?;
                 lexer
                     .expect(TokenKind::Identifier)
-                    .map(|t| Statement::Goto(t.source(lexer.source).to_string()))
+                    .map(|span| Statement::Goto(lexer.source[span.range()].to_string()))
                     .and_then(|s| {
                         lexer.expect(TokenKind::Semicolon)?;
                         Ok(s)
@@ -501,23 +356,23 @@ fn parse_expression(lexer: &mut Lexer) -> Result<Expression> {
 }
 
 fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
-    let Some(token) = lexer.next_token() else {
+    let Some((span, kind)) = lexer.next_token() else {
         return Err(ParserError::UnexpectedEOF);
     };
-    let mut lhs = match token.kind {
-        TokenKind::Constant => token
-            .source(lexer.source)
+    let mut lhs = match kind {
+        TokenKind::Constant => lexer.source[span.range()]
             .parse()
             .map(Expression::Constant)
-            .map_err(|e| ParserError::ConstantOutOfRange {
-                error: e,
-                span: token.location,
-            }),
-        TokenKind::Identifier => Ok(Expression::Var(token.source(lexer.source).into())),
+            .map_err(|e| ParserError::ConstantOutOfRange { error: e, span }),
+        TokenKind::Identifier => Ok(Expression::Var(lexer.source[span.range()].into())),
 
-        TokenKind::LParen => parse_expression_bp(lexer, 0).and_then(|e| {
-            lexer.expect(TokenKind::RParen)?;
-            Ok(e)
+        TokenKind::LParen => parse_expression_bp(lexer, 0).and_then(|expr| {
+            let rparen_span = lexer.expect(TokenKind::RParen)?;
+            Ok(Expression::Parenthesized {
+                lparen_span: span,
+                expr: Box::new(expr),
+                rparen_span,
+            })
         }),
 
         // Prefix operators
@@ -536,16 +391,16 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             return Err(ParserError::Expected {
                 options: vec![],
                 kind,
-                span: token.location,
+                span,
             });
         }
     }?;
 
     loop {
-        let Some(next) = lexer.peek_token() else {
+        let Some((span, next)) = lexer.tokens.last() else {
             break;
         };
-        let (op, r_bp) = match next.kind {
+        let (op, r_bp) = match next {
             // Ternary
             TokenKind::Question if min_bp <= 3 => {
                 lexer.next_token();
@@ -574,7 +429,7 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             | TokenKind::ShiftLeftEquals
                 if min_bp <= 1 =>
             {
-                let op = match next.kind {
+                let op = match next {
                     TokenKind::PlusEquals => BinaryOperator::Add,
                     TokenKind::MinusEquals => BinaryOperator::Subtract,
                     TokenKind::TimesEquals => BinaryOperator::Multiply,
@@ -628,7 +483,7 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                     return Err(ParserError::Expected {
                         options: vec![TokenKind::Identifier],
                         kind: TokenKind::InvalidIdentifier,
-                        span: token.location,
+                        span: span.clone(),
                     });
                 }
                 lhs = {
@@ -672,20 +527,27 @@ mod tests {
         let program = parse(src, tokens, "example.c")?;
         insta::assert_debug_snapshot!(program, @r#"
         Program {
-            function: Function {
-                name: "main",
-                body: Block {
-                    items: [
-                        Statement(
-                            Return(
-                                Constant(
-                                    2,
-                                ),
-                            ),
+            declarations: [
+                Function(
+                    FunctionDeclaration {
+                        identifier: "main",
+                        params: [],
+                        body: Some(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Return(
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
                         ),
-                    ],
-                },
-            },
+                    },
+                ),
+            ],
         }
         "#);
         Ok(())
@@ -698,39 +560,46 @@ mod tests {
         let program = parse(src, tokens, "example.c")?;
         insta::assert_debug_snapshot!(program, @r#"
         Program {
-            function: Function {
-                name: "main",
-                body: Block {
-                    items: [
-                        Statement(
-                            Expression(
-                                Binary(
-                                    Add,
-                                    Constant(
-                                        1,
+            declarations: [
+                Function(
+                    FunctionDeclaration {
+                        identifier: "main",
+                        params: [],
+                        body: Some(
+                            Block {
+                                items: [
+                                    Statement(
+                                        Expression(
+                                            Binary(
+                                                Add,
+                                                Constant(
+                                                    1,
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
                                     ),
-                                    Constant(
-                                        1,
+                                    Statement(
+                                        Null,
                                     ),
-                                ),
-                            ),
+                                    Statement(
+                                        Null,
+                                    ),
+                                    Statement(
+                                        Return(
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            },
                         ),
-                        Statement(
-                            Null,
-                        ),
-                        Statement(
-                            Null,
-                        ),
-                        Statement(
-                            Return(
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                    ],
-                },
-            },
+                    },
+                ),
+            ],
         }
         "#);
         Ok(())

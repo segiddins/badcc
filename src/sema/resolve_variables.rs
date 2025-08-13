@@ -122,6 +122,11 @@ fn visit_expr(expression: &mut Expression, scope: &mut Scope) -> Result {
                 visit_expr(expr, scope)?;
             }
         }
+        Expression::Parenthesized {
+            lparen_span,
+            expr,
+            rparen_span,
+        } => visit_expr(expr, scope)?,
     }
     Ok(())
 }

@@ -303,6 +303,11 @@ fn lower_function<'a>(
                     _ => unreachable!(),
                 }
             }
+            Expression::Parenthesized {
+                lparen_span: _,
+                expr,
+                rparen_span: _,
+            } => walk(expr, state),
         }
     }
 
