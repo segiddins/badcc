@@ -1,7 +1,15 @@
 Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a.1",
+            global: false,
+            init: 0,
+        },
+    ],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 JumpIfNotZero(
@@ -21,7 +29,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -35,7 +43,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -43,15 +51,15 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

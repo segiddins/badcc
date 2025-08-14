@@ -1,46 +1,48 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "fib",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "n.1",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         0,
                     ),
                     dst: Var(
-                        2,
+                        "fib.tmp.1",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        2,
+                        "fib.tmp.1",
                     ),
                     "fib.1.true",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        3,
+                        "fib.tmp.2",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "fib.tmp.2",
                     ),
                     "fib.1.true",
                 ),
@@ -49,7 +51,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                 },
                 Jump(
@@ -63,7 +65,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                 },
                 Label(
@@ -71,13 +73,13 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                     "fib.0.true",
                 ),
                 Return(
                     Var(
-                        0,
+                        "n.1",
                     ),
                 ),
                 Jump(
@@ -89,64 +91,64 @@ Program {
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        4,
+                        "fib.tmp.3",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            4,
+                            "fib.tmp.3",
                         ),
                     ],
                     Var(
-                        5,
+                        "fib.tmp.4",
                     ),
                 ),
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        6,
+                        "fib.tmp.5",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            6,
+                            "fib.tmp.5",
                         ),
                     ],
                     Var(
-                        7,
+                        "fib.tmp.6",
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
-                        5,
+                        "fib.tmp.4",
                     ),
                     rhs: Var(
-                        7,
+                        "fib.tmp.6",
                     ),
                     dst: Var(
-                        8,
+                        "fib.tmp.7",
                     ),
                 },
                 Return(
                     Var(
-                        8,
+                        "fib.tmp.7",
                     ),
                 ),
                 Label(
@@ -161,142 +163,143 @@ Program {
         },
         Function {
             identifier: "multiply_many_args",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.3",
                 ),
                 Var(
-                    1,
+                    "b.4",
                 ),
                 Var(
-                    2,
+                    "c.5",
                 ),
                 Var(
-                    3,
+                    "d.6",
                 ),
                 Var(
-                    4,
+                    "e.7",
                 ),
                 Var(
-                    5,
+                    "f.8",
                 ),
                 Var(
-                    6,
+                    "g.9",
                 ),
                 Var(
-                    7,
+                    "h.10",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.3",
                     ),
                     rhs: Var(
-                        1,
+                        "b.4",
                     ),
                     dst: Var(
-                        8,
+                        "multiply_many_args.tmp.0",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        8,
+                        "multiply_many_args.tmp.0",
                     ),
                     rhs: Var(
-                        2,
+                        "c.5",
                     ),
                     dst: Var(
-                        9,
+                        "multiply_many_args.tmp.1",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        9,
+                        "multiply_many_args.tmp.1",
                     ),
                     rhs: Var(
-                        3,
+                        "d.6",
                     ),
                     dst: Var(
-                        10,
+                        "multiply_many_args.tmp.2",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        10,
+                        "multiply_many_args.tmp.2",
                     ),
                     rhs: Var(
-                        4,
+                        "e.7",
                     ),
                     dst: Var(
-                        11,
+                        "multiply_many_args.tmp.3",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        11,
+                        "multiply_many_args.tmp.3",
                     ),
                     rhs: Var(
-                        5,
+                        "f.8",
                     ),
                     dst: Var(
-                        12,
-                    ),
-                },
-                Call(
-                    "fib",
-                    [
-                        Var(
-                            6,
-                        ),
-                    ],
-                    Var(
-                        13,
-                    ),
-                ),
-                Binary {
-                    op: Multiply,
-                    lhs: Var(
-                        12,
-                    ),
-                    rhs: Var(
-                        13,
-                    ),
-                    dst: Var(
-                        14,
+                        "multiply_many_args.tmp.4",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            7,
+                            "g.9",
                         ),
                     ],
                     Var(
-                        15,
+                        "multiply_many_args.tmp.5",
                     ),
                 ),
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        14,
+                        "multiply_many_args.tmp.4",
                     ),
                     rhs: Var(
-                        15,
+                        "multiply_many_args.tmp.5",
                     ),
                     dst: Var(
-                        16,
+                        "multiply_many_args.tmp.6",
+                    ),
+                },
+                Call(
+                    "fib",
+                    [
+                        Var(
+                            "h.10",
+                        ),
+                    ],
+                    Var(
+                        "multiply_many_args.tmp.7",
+                    ),
+                ),
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "multiply_many_args.tmp.6",
+                    ),
+                    rhs: Var(
+                        "multiply_many_args.tmp.7",
+                    ),
+                    dst: Var(
+                        "multiply_many_args.tmp.8",
                     ),
                 },
                 Return(
                     Var(
-                        16,
+                        "multiply_many_args.tmp.8",
                     ),
                 ),
                 Return(

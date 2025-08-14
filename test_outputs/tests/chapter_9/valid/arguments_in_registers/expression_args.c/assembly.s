@@ -1,4 +1,5 @@
 	.globl _sub
+	.text
 _sub:
 	pushq %rbp
 	movq %rsp, %rbp
@@ -18,6 +19,7 @@ _sub:
 	popq %rbp
 	ret
 	.globl _main
+	.text
 _main:
 	pushq %rbp
 	movq %rsp, %rbp

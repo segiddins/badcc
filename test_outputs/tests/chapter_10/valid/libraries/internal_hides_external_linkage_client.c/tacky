@@ -1,0 +1,163 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: false,
+            init: 1,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "x",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Copy {
+                    src: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "x",
+                    ),
+                },
+                Call(
+                    "read_internal_x",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.1",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "read_x",
+                    [],
+                    Var(
+                        "main.tmp.3",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.3",
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.4",
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "read_internal_x",
+            global: true,
+            params: [],
+            instructions: [
+                Return(
+                    Var(
+                        "x",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

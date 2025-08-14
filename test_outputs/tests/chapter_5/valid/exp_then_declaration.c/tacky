@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Unary {
@@ -10,57 +12,57 @@ Program {
                         2593,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Binary {
                     op: Remainder,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Unary {
                     op: Negate,
                     src: Var(
-                        0,
+                        "a.1",
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        3,
+                        "b.2",
                     ),
                 },
                 Return(
                     Var(
-                        3,
+                        "b.2",
                     ),
                 ),
                 Return(

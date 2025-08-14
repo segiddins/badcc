@@ -1,28 +1,30 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "a",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.1",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "a.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "a.tmp.0",
                     ),
                 ),
                 Return(
@@ -34,6 +36,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
@@ -44,12 +47,12 @@ Program {
                         ),
                     ],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

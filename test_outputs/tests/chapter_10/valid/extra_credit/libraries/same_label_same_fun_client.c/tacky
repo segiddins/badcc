@@ -1,0 +1,128 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "f",
+            global: true,
+            params: [],
+            instructions: [
+                Jump(
+                    "f.x",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Label(
+                    "f.x",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "f",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.0",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "f_caller",
+                    [],
+                    Var(
+                        "main.tmp.2",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.2",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

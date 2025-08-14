@@ -1,7 +1,15 @@
 Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a.1",
+            global: false,
+            init: 0,
+        },
+    ],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,20 +17,20 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        0,
+                        "a.1",
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "b.2",
                     ),
                 ),
                 Return(

@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,23 +11,23 @@ Program {
                         10,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Call(
                     "f",
                     [
                         Var(
-                            0,
+                            "a.1",
                         ),
                     ],
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
@@ -37,27 +39,28 @@ Program {
         },
         Function {
             identifier: "f",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.5",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.5",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "f.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "f.tmp.0",
                     ),
                 ),
                 Return(

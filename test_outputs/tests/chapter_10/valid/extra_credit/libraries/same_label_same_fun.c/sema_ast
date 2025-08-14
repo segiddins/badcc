@@ -1,0 +1,64 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "f",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Goto(
+                                    "x",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "x",
+                                    Return(
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: Some(
+                    Static,
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "f_caller",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "f",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

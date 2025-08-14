@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Label(
@@ -18,38 +20,38 @@ Program {
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Binary {
                     op: GreaterThan,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     "main.0.true",
                 ),
@@ -76,7 +78,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

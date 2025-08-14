@@ -1,0 +1,127 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "f",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Goto(
+                                    "x",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "x",
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "f_caller",
+                params: [],
+                body: None,
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "f",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "f_caller",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            2,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

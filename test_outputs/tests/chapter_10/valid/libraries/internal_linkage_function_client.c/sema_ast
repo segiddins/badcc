@@ -1,0 +1,136 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: None,
+                storage: Some(
+                    Extern,
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "call_static_my_fun",
+                params: [],
+                body: None,
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "call_static_my_fun_2",
+                params: [],
+                body: None,
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "call_static_my_fun",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "my_fun",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            100,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "call_static_my_fun_2",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Constant(
+                                        100,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

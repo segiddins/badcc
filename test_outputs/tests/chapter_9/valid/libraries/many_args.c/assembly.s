@@ -1,4 +1,5 @@
 	.globl _fib
+	.text
 _fib:
 	pushq %rbp
 	movq %rsp, %rbp
@@ -53,6 +54,7 @@ _fib:
 	popq %rbp
 	ret
 	.globl _multiply_many_args
+	.text
 _multiply_many_args:
 	pushq %rbp
 	movq %rsp, %rbp

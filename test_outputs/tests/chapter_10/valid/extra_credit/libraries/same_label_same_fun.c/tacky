@@ -1,0 +1,57 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "f",
+            global: false,
+            params: [],
+            instructions: [
+                Jump(
+                    "f.x",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Label(
+                    "f.x",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "f_caller",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "f",
+                    [],
+                    Var(
+                        "f_caller.tmp.0",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "f_caller.tmp.0",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

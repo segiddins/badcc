@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Unary {
@@ -18,24 +20,24 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 Binary {
                     op: GreaterThan,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.2",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        3,
+                        "main.tmp.2",
                     ),
                     "main.0.true",
                 ),
@@ -44,7 +46,7 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -58,7 +60,7 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -66,7 +68,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

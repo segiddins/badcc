@@ -1,31 +1,33 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "sub",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.1",
                 ),
                 Var(
-                    1,
+                    "b.2",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        2,
+                        "sub.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        2,
+                        "sub.tmp.0",
                     ),
                 ),
                 Return(
@@ -37,6 +39,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Binary {
@@ -48,34 +51,34 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Call(
                     "sub",
                     [
                         Var(
-                            1,
+                            "main.tmp.0",
                         ),
                         Constant(
                             1,
                         ),
                     ],
                     Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        0,
+                        "sum.4",
                     ),
                 },
                 Return(
                     Var(
-                        0,
+                        "sum.4",
                     ),
                 ),
                 Return(

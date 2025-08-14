@@ -1,4 +1,8 @@
+	.bss
+_x.2:
+	.zero 4
 	.globl _main
+	.text
 _main:
 	pushq %rbp
 	movq %rsp, %rbp

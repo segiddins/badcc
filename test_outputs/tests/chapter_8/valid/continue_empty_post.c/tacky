@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "sum.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "i.2",
                     ),
                 },
                 Label(
@@ -26,56 +28,56 @@ Program {
                 Binary {
                     op: LessThan,
                     lhs: Var(
-                        1,
+                        "i.2",
                     ),
                     rhs: Constant(
                         10,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        2,
+                        "main.tmp.0",
                     ),
                     "loop.0",
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
-                        1,
+                        "i.2",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        3,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        1,
+                        "i.2",
                     ),
                 },
                 Binary {
                     op: Remainder,
                     lhs: Var(
-                        1,
+                        "i.2",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        4,
+                        "main.tmp.2",
                     ),
                     "main.0.true",
                 ),
@@ -94,21 +96,21 @@ Program {
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "sum.1",
                     ),
                     rhs: Var(
-                        1,
+                        "i.2",
                     ),
                     dst: Var(
-                        5,
+                        "main.tmp.3",
                     ),
                 },
                 Copy {
                     src: Var(
-                        5,
+                        "main.tmp.3",
                     ),
                     dst: Var(
-                        0,
+                        "sum.1",
                     ),
                 },
                 Label(
@@ -122,7 +124,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "sum.1",
                     ),
                 ),
                 Return(

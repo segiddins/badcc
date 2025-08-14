@@ -1,0 +1,202 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "add_one_and_two",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "sum",
+                    [
+                        Constant(
+                            1,
+                        ),
+                        Constant(
+                            2,
+                        ),
+                    ],
+                    Var(
+                        "add_one_and_two.tmp.0",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "add_one_and_two.tmp.0",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "add_three_and_four",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "sum.14",
+                    ),
+                },
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        "sum.14",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "add_three_and_four.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "add_three_and_four.tmp.0",
+                    ),
+                    "add_three_and_four.0.true",
+                ),
+                Call(
+                    "sum",
+                    [
+                        Constant(
+                            3,
+                        ),
+                        Constant(
+                            4,
+                        ),
+                    ],
+                    Var(
+                        "add_three_and_four.tmp.1",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "add_three_and_four.tmp.1",
+                    ),
+                ),
+                Jump(
+                    "add_three_and_four.0.end",
+                ),
+                Label(
+                    "add_three_and_four.0.true",
+                ),
+                Label(
+                    "add_three_and_four.0.end",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "add_three_and_four",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.0",
+                    ),
+                    rhs: Constant(
+                        7,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "add_one_and_two",
+                    [],
+                    Var(
+                        "main.tmp.2",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.2",
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

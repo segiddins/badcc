@@ -2,6 +2,7 @@ Program {
     definitions: [
         Function {
             name: "main",
+            global: true,
             instructions: [
                 AllocateStack(
                     48,
@@ -95,16 +96,16 @@ Program {
                         R10,
                         Four,
                     ),
-                    destination: Stack(
-                        28,
+                    destination: Data(
+                        "b.2",
                     ),
                 },
                 Cmp(
                     Immediate(
                         8,
                     ),
-                    Stack(
-                        28,
+                    Data(
+                        "b.2",
                     ),
                 ),
                 Move {
@@ -112,13 +113,13 @@ Program {
                         0,
                     ),
                     destination: Stack(
-                        32,
+                        28,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        32,
+                        28,
                     ),
                 ),
                 Cmp(
@@ -126,7 +127,7 @@ Program {
                         0,
                     ),
                     Stack(
-                        32,
+                        28,
                     ),
                 ),
                 JmpCC(
@@ -138,18 +139,18 @@ Program {
                         4,
                     ),
                     destination: Stack(
-                        36,
+                        32,
                     ),
                 },
                 Unary(
                     Neg,
                     Stack(
-                        36,
+                        32,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        36,
+                        32,
                     ),
                     destination: Register(
                         R10,
@@ -170,13 +171,13 @@ Program {
                         0,
                     ),
                     destination: Stack(
-                        40,
+                        36,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        40,
+                        36,
                     ),
                 ),
                 Cmp(
@@ -184,7 +185,7 @@ Program {
                         0,
                     ),
                     Stack(
-                        40,
+                        36,
                     ),
                 ),
                 JmpCC(
@@ -196,7 +197,7 @@ Program {
                         1,
                     ),
                     destination: Stack(
-                        44,
+                        40,
                     ),
                 },
                 Jmp(
@@ -210,7 +211,7 @@ Program {
                         0,
                     ),
                     destination: Stack(
-                        44,
+                        40,
                     ),
                 },
                 Label(
@@ -218,7 +219,7 @@ Program {
                 ),
                 Move {
                     source: Stack(
-                        44,
+                        40,
                     ),
                     destination: Register(
                         AX,
@@ -237,6 +238,13 @@ Program {
                 },
                 Ret,
             ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "b.2",
+            value: 0,
         },
     ],
 }

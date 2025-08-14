@@ -1,0 +1,98 @@
+Program {
+    declarations: [
+        Variable(
+            VariableDeclaration {
+                name: "zed",
+                init: None,
+                storage: Some(
+                    Extern,
+                ),
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 15,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                ],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "g",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                            Constant(
+                                                0,
+                                            ),
+                                            Var(
+                                                "zed",
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

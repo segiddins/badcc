@@ -1,0 +1,34 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x.1",
+            global: false,
+            init: 10,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Jump(
+                    "main.end",
+                ),
+                Label(
+                    "main.end",
+                ),
+                Return(
+                    Var(
+                        "x.1",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

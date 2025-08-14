@@ -2,6 +2,7 @@ Program {
     definitions: [
         Function {
             name: "main",
+            global: true,
             instructions: [
                 AllocateStack(
                     32,
@@ -18,8 +19,8 @@ Program {
                     source: Immediate(
                         5,
                     ),
-                    destination: Stack(
-                        16,
+                    destination: Data(
+                        "i.2",
                     ),
                 },
                 Label(
@@ -29,8 +30,8 @@ Program {
                     Immediate(
                         0,
                     ),
-                    Stack(
-                        16,
+                    Data(
+                        "i.2",
                     ),
                 ),
                 Move {
@@ -38,13 +39,13 @@ Program {
                         0,
                     ),
                     destination: Stack(
-                        20,
+                        16,
                     ),
                 },
                 SetCC(
                     GE,
                     Stack(
-                        20,
+                        16,
                     ),
                 ),
                 Cmp(
@@ -52,7 +53,7 @@ Program {
                         0,
                     ),
                     Stack(
-                        20,
+                        16,
                     ),
                 ),
                 JmpCC(
@@ -90,12 +91,12 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        24,
+                        20,
                     ),
                 },
                 Move {
                     source: Stack(
-                        24,
+                        20,
                     ),
                     destination: Register(
                         R10,
@@ -115,8 +116,8 @@ Program {
                     "loop.0.start",
                 ),
                 Move {
-                    source: Stack(
-                        16,
+                    source: Data(
+                        "i.2",
                     ),
                     destination: Register(
                         R10,
@@ -129,7 +130,7 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        28,
+                        24,
                     ),
                 },
                 Binary(
@@ -138,12 +139,12 @@ Program {
                         1,
                     ),
                     Stack(
-                        28,
+                        24,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        28,
+                        24,
                     ),
                     destination: Register(
                         R10,
@@ -155,8 +156,8 @@ Program {
                         R10,
                         Four,
                     ),
-                    destination: Stack(
-                        16,
+                    destination: Data(
+                        "i.2",
                     ),
                 },
                 Jmp(
@@ -186,6 +187,13 @@ Program {
                 },
                 Ret,
             ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "i.2",
+            value: 0,
         },
     ],
 }

@@ -1,0 +1,183 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "i.3",
+            global: false,
+            init: 65,
+        },
+        StaticVariable {
+            identifier: "i.4",
+            global: false,
+            init: 97,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "print_letters",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "putchar",
+                    [
+                        Var(
+                            "i.3",
+                        ),
+                    ],
+                    Var(
+                        "print_letters.tmp.0",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.3",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "print_letters.tmp.1",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "print_letters.tmp.1",
+                    ),
+                    dst: Var(
+                        "i.3",
+                    ),
+                },
+                Call(
+                    "putchar",
+                    [
+                        Var(
+                            "i.4",
+                        ),
+                    ],
+                    Var(
+                        "print_letters.tmp.2",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.4",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "print_letters.tmp.3",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "print_letters.tmp.3",
+                    ),
+                    dst: Var(
+                        "i.4",
+                    ),
+                },
+                Call(
+                    "putchar",
+                    [
+                        Constant(
+                            10,
+                        ),
+                    ],
+                    Var(
+                        "print_letters.tmp.4",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "i.6",
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        "i.6",
+                    ),
+                    rhs: Constant(
+                        26,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "loop.0",
+                ),
+                Call(
+                    "print_letters",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.6",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.2",
+                    ),
+                    dst: Var(
+                        "i.6",
+                    ),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

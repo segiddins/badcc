@@ -1,4 +1,8 @@
+	.bss
+_a.1:
+	.zero 4
 	.globl _main
+	.text
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
@@ -15,8 +19,8 @@ _main:
 	movl $1, -12(%rbp)
 	Lmain.0.end:
 	movl -12(%rbp), %r10d
-	movl %r10d, -16(%rbp)
-	movl -16(%rbp), %eax
+	movl %r10d, _a.1(%rip)
+	movl _a.1(%rip), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

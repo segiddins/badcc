@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "a",
+            global: true,
             params: [],
             instructions: [
                 Return(
@@ -18,15 +20,16 @@ Program {
         },
         Function {
             identifier: "b",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.2",
                 ),
             ],
             instructions: [
                 Return(
                     Var(
-                        0,
+                        "a.2",
                     ),
                 ),
                 Return(
@@ -38,13 +41,14 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
                     "a",
                     [],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Call(
@@ -55,24 +59,24 @@ Program {
                         ),
                     ],
                     Var(
-                        1,
+                        "main.tmp.1",
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "main.tmp.0",
                     ),
                     rhs: Var(
-                        1,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.2",
                     ),
                 },
                 Return(
                     Var(
-                        2,
+                        "main.tmp.2",
                     ),
                 ),
                 Return(

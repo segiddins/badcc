@@ -1,0 +1,64 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "bar",
+            global: false,
+            init: 4,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "foo",
+            global: false,
+            params: [],
+            instructions: [
+                Return(
+                    Constant(
+                        3,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "main.tmp.0",
+                    ),
+                    rhs: Var(
+                        "bar",
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                Return(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

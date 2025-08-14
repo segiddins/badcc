@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
@@ -17,12 +19,12 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        0,
+                        "a.1",
                     ),
                     "main.0.true",
                 ),
@@ -31,7 +33,7 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Jump(
@@ -45,7 +47,7 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Label(
@@ -53,7 +55,7 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        1,
+                        "b.2",
                     ),
                     "main.1.true",
                 ),
@@ -62,7 +64,7 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Jump(
@@ -76,7 +78,7 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Label(
@@ -85,18 +87,18 @@ Program {
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

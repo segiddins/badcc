@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "foo",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "x.1",
                     ),
                 },
                 Return(
@@ -21,13 +23,14 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
                     "foo",
                     [],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

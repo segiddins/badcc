@@ -1,0 +1,149 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: None,
+                storage: Some(
+                    Static,
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "call_static_my_fun",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "my_fun",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "call_static_my_fun_2",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "my_fun",
+                                        params: [],
+                                        body: None,
+                                        storage: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "my_fun",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: None,
+                storage: Some(
+                    Extern,
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: None,
+                storage: Some(
+                    Static,
+                ),
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "my_fun",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "i",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        storage: Some(
+                                            Static,
+                                        ),
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                231,
+                                            ),
+                                            length: 17,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "i",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "i",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "i",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

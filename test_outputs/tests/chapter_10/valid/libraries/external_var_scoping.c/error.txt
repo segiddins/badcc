@@ -1,0 +1,26 @@
+  × while parsing parse_block_item
+  ├─▶   × while parsing parse_block_item
+  │      ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_10/valid/libraries/external_var_scoping.i:4:9]
+  │    3 │     if (x == 4) {
+  │    4 │         extern int x;
+  │      ·         ───┬──
+  │      ·            ╰── starting here
+  │    5 │         return x;
+  │      ╰────
+  │   
+  ╰─▶   × expected one of [Constant("constant"), Identifier("ident"), LParen, Hypen, Tilde, Exclamation, PlusPlus, MinusMinus], found Extern
+         ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_10/valid/libraries/external_var_scoping.i:4:9]
+       3 │     if (x == 4) {
+       4 │         extern int x;
+         ·         ───┬──
+         ·            ╰── here
+       5 │         return x;
+         ╰────
+      
+   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_10/valid/libraries/external_var_scoping.i:3:5]
+ 2 │     int x = 4;
+ 3 │     if (x == 4) {
+   ·     ─┬
+   ·      ╰── starting here
+ 4 │         extern int x;
+   ╰────

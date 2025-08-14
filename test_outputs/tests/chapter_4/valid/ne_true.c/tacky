@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Unary {
@@ -10,7 +12,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 },
                 Unary {
@@ -19,24 +21,24 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.1",
                     ),
                 },
                 Binary {
                     op: NotEqual,
                     lhs: Var(
-                        0,
+                        "main.tmp.0",
                     ),
                     rhs: Var(
-                        1,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.2",
                     ),
                 },
                 Return(
                     Var(
-                        2,
+                        "main.tmp.2",
                     ),
                 ),
                 Return(

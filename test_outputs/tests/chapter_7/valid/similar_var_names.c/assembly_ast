@@ -2,6 +2,7 @@ Program {
     definitions: [
         Function {
             name: "main",
+            global: true,
             instructions: [
                 AllocateStack(
                     48,
@@ -52,21 +53,21 @@ Program {
                         R10,
                         Four,
                     ),
-                    destination: Stack(
-                        28,
+                    destination: Data(
+                        "result.2",
                     ),
                 },
                 Move {
                     source: Immediate(
                         5,
                     ),
-                    destination: Stack(
-                        32,
+                    destination: Data(
+                        "a.15",
                     ),
                 },
                 Move {
-                    source: Stack(
-                        28,
+                    source: Data(
+                        "result.2",
                     ),
                     destination: Register(
                         R10,
@@ -79,12 +80,12 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        36,
+                        28,
                     ),
                 },
                 Move {
-                    source: Stack(
-                        32,
+                    source: Data(
+                        "a.15",
                     ),
                     destination: Register(
                         R10,
@@ -98,29 +99,11 @@ Program {
                         Four,
                     ),
                     Stack(
-                        36,
+                        28,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        36,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
-                },
-                Move {
-                    source: Register(
-                        R10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        28,
-                    ),
-                },
-                Move {
-                    source: Stack(
                         28,
                     ),
                     destination: Register(
@@ -133,8 +116,26 @@ Program {
                         R10,
                         Four,
                     ),
+                    destination: Data(
+                        "result.2",
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "result.2",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
                     destination: Stack(
-                        40,
+                        32,
                     ),
                 },
                 Move {
@@ -153,12 +154,30 @@ Program {
                         Four,
                     ),
                     Stack(
-                        40,
+                        32,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        40,
+                        32,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "result.2",
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "result.2",
                     ),
                     destination: Register(
                         R10,
@@ -171,25 +190,7 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        28,
-                    ),
-                },
-                Move {
-                    source: Stack(
-                        28,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
-                },
-                Move {
-                    source: Register(
-                        R10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        44,
+                        36,
                     ),
                 },
                 Move {
@@ -208,12 +209,12 @@ Program {
                         Four,
                     ),
                     Stack(
-                        44,
+                        36,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        44,
+                        36,
                     ),
                     destination: Register(
                         AX,
@@ -232,6 +233,63 @@ Program {
                 },
                 Ret,
             ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "a.1",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.10",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.11",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.12",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.13",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.15",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.6",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.7",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.8",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "a.9",
+            value: 0,
+        },
+        StaticVariable {
+            global: false,
+            name: "result.2",
+            value: 0,
         },
     ],
 }

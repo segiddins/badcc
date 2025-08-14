@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "bar",
+            global: true,
             params: [],
             instructions: [
                 Return(
@@ -18,13 +20,14 @@ Program {
         },
         Function {
             identifier: "foo",
+            global: true,
             params: [],
             instructions: [
                 Call(
                     "bar",
                     [],
                     Var(
-                        0,
+                        "foo.tmp.0",
                     ),
                 ),
                 Binary {
@@ -33,15 +36,15 @@ Program {
                         2,
                     ),
                     rhs: Var(
-                        0,
+                        "foo.tmp.0",
                     ),
                     dst: Var(
-                        1,
+                        "foo.tmp.1",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "foo.tmp.1",
                     ),
                 ),
                 Return(
@@ -53,49 +56,50 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
                     "foo",
                     [],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Call(
                     "bar",
                     [],
                     Var(
-                        1,
+                        "main.tmp.1",
                     ),
                 ),
                 Binary {
                     op: Divide,
                     lhs: Var(
-                        1,
+                        "main.tmp.1",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.2",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "main.tmp.0",
                     ),
                     rhs: Var(
-                        2,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.3",
                     ),
                 },
                 Return(
                     Var(
-                        3,
+                        "main.tmp.3",
                     ),
                 ),
                 Return(

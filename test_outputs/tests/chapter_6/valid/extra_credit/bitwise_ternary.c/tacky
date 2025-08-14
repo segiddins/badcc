@@ -1,7 +1,15 @@
 Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "result.1",
+            global: false,
+            init: 0,
+        },
+    ],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Binary {
@@ -13,12 +21,12 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     "main.0.true",
                 ),
@@ -27,15 +35,15 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        0,
+                        "result.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        0,
+                        "result.1",
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -49,15 +57,15 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        0,
+                        "result.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        0,
+                        "result.1",
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -65,7 +73,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "result.1",
                     ),
                 ),
                 Return(

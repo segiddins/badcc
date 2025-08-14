@@ -1,7 +1,15 @@
 Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a.1",
+            global: false,
+            init: 0,
+        },
+    ],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,27 +17,27 @@ Program {
                         7,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        0,
+                        "a.1",
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -66,15 +74,15 @@ Program {
                         2,
                     ),
                     rhs: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "main.tmp.1",
                     ),
                     "switch.0.2",
                 ),

@@ -1,0 +1,42 @@
+Program {
+    declarations: [
+        Variable(
+            VariableDeclaration {
+                name: "foo",
+                init: None,
+                storage: Some(
+                    Extern,
+                ),
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        1,
+                    ),
+                    length: 15,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "foo",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

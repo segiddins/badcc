@@ -1,0 +1,108 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "x.1",
+                                        init: Some(
+                                            Constant(
+                                                0,
+                                            ),
+                                        ),
+                                        storage: None,
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                For {
+                                    init: Decl(
+                                        VariableDeclaration {
+                                            name: "i",
+                                            init: Some(
+                                                Constant(
+                                                    0,
+                                                ),
+                                            ),
+                                            storage: Some(
+                                                Extern,
+                                            ),
+                                        },
+                                    ),
+                                    condition: Some(
+                                        Binary(
+                                            LessThan,
+                                            Var(
+                                                "i",
+                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                        ),
+                                    ),
+                                    post: Some(
+                                        Assignment(
+                                            Var(
+                                                "i",
+                                            ),
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "i",
+                                                ),
+                                                Constant(
+                                                    1,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    body: Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "x.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "x.1",
+                                                                ),
+                                                                Constant(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    label: Some(
+                                        "loop.0",
+                                    ),
+                                },
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "x.1",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+            },
+        ),
+    ],
+}

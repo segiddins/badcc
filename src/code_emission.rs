@@ -2,28 +2,49 @@ use std::io::{self, BufWriter, Write};
 
 use crate::assembly_gen::*;
 
+#[cfg(not(target_os = "macos"))]
+const SYMBOL_PREFIX: &'static str = "";
+#[cfg(target_os = "macos")]
+const SYMBOL_PREFIX: &str = "_";
+
 pub fn emit_asm(program: &Program, w: impl io::Write) -> io::Result<()> {
     let mut w = BufWriter::new(w);
+    for sv in program.static_variables.iter() {
+        if sv.value == 0 {
+            symbol(sv.global, &sv.name, "bss", &mut w)?;
+            w.write_all(b"\t.zero 4\n")?;
+        } else {
+            symbol(sv.global, &sv.name, "data", &mut w)?;
+            writeln!(&mut w, "\t.long {}", sv.value)?;
+        }
+    }
     for definition in program.definitions.iter() {
         function_definition(definition, &mut w)?;
     }
     w.flush()
 }
 
+fn symbol(global: bool, name: &str, section: &str, mut w: impl io::Write) -> io::Result<()> {
+    if global {
+        w.write_all(b"\t.globl ")?;
+
+        w.write_all(SYMBOL_PREFIX.as_bytes())?;
+
+        w.write_all(name.as_bytes())?;
+        writeln!(w)?;
+    }
+
+    w.write_all(b"\t.")?;
+    w.write_all(section.as_bytes())?;
+    w.write_all(b"\n")?;
+    w.write_all(SYMBOL_PREFIX.as_bytes())?;
+    w.write_all(name.as_bytes())?;
+    w.write_all(b":\n")
+}
+
 fn function_definition(function: &Function, mut w: impl io::Write) -> io::Result<()> {
-    w.write_all(b"\t.globl ")?;
+    symbol(function.global, &function.name, "text", &mut w)?;
 
-    #[cfg(target_os = "macos")]
-    w.write_all(b"_")?;
-
-    w.write_all(function.name.as_bytes())?;
-    writeln!(w)?;
-
-    #[cfg(target_os = "macos")]
-    w.write_all(b"_")?;
-
-    w.write_all(function.name.as_bytes())?;
-    w.write_all(b":\n")?;
     w.write_all(b"\tpushq %rbp\n")?;
     w.write_all(b"\tmovq %rsp, %rbp\n")?;
 
@@ -119,6 +140,7 @@ fn operand(operand: &Operand) -> String {
         .into(),
         Operand::Psuedo(_) => unreachable!(),
         Operand::Stack(offset) => format!("{}(%rbp)", -offset),
+        Operand::Data(name) => format!("{SYMBOL_PREFIX}{name}(%rip)"),
     }
 }
 

@@ -2,9 +2,10 @@ Program {
     definitions: [
         Function {
             name: "main",
+            global: true,
             instructions: [
                 AllocateStack(
-                    32,
+                    16,
                 ),
                 Move {
                     source: Immediate(
@@ -39,13 +40,13 @@ Program {
                     source: Immediate(
                         4,
                     ),
-                    destination: Stack(
-                        16,
+                    destination: Data(
+                        "result.1",
                     ),
                 },
                 Move {
-                    source: Stack(
-                        16,
+                    source: Data(
+                        "result.1",
                     ),
                     destination: Register(
                         R10,
@@ -58,7 +59,7 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        20,
+                        16,
                     ),
                 },
                 Jmp(
@@ -71,13 +72,13 @@ Program {
                     source: Immediate(
                         5,
                     ),
-                    destination: Stack(
-                        16,
+                    destination: Data(
+                        "result.1",
                     ),
                 },
                 Move {
-                    source: Stack(
-                        16,
+                    source: Data(
+                        "result.1",
                     ),
                     destination: Register(
                         R10,
@@ -90,15 +91,15 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        20,
+                        16,
                     ),
                 },
                 Label(
                     "main.0.end",
                 ),
                 Move {
-                    source: Stack(
-                        16,
+                    source: Data(
+                        "result.1",
                     ),
                     destination: Register(
                         AX,
@@ -117,6 +118,13 @@ Program {
                 },
                 Ret,
             ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "result.1",
+            value: 0,
         },
     ],
 }

@@ -2,6 +2,7 @@ Program {
     definitions: [
         Function {
             name: "main",
+            global: true,
             instructions: [
                 AllocateStack(
                     16,
@@ -10,13 +11,13 @@ Program {
                     source: Immediate(
                         0,
                     ),
-                    destination: Stack(
-                        12,
+                    destination: Data(
+                        "a.1",
                     ),
                 },
                 Move {
-                    source: Stack(
-                        12,
+                    source: Data(
+                        "a.1",
                     ),
                     destination: Register(
                         R10,
@@ -29,12 +30,12 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        16,
+                        12,
                     ),
                 },
                 Move {
                     source: Stack(
-                        16,
+                        12,
                     ),
                     destination: Register(
                         AX,
@@ -53,6 +54,13 @@ Program {
                 },
                 Ret,
             ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "a.1",
+            value: 0,
         },
     ],
 }

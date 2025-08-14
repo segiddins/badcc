@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "switch1.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "switch2.2",
                     ),
                 },
                 Copy {
@@ -25,7 +27,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        2,
+                        "switch3.3",
                     ),
                 },
                 Jump(
@@ -56,7 +58,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "switch1.1",
                     ),
                 },
                 Jump(
@@ -94,12 +96,12 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "main.tmp.0",
                     ),
                     "switch.0.0",
                 ),
@@ -112,12 +114,12 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "main.tmp.0",
                     ),
                     "switch.0.1",
                 ),
@@ -130,12 +132,12 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "main.tmp.0",
                     ),
                     "switch.0.3",
                 ),
@@ -181,7 +183,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "switch2.2",
                     ),
                 },
                 Jump(
@@ -213,12 +215,12 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        4,
+                        "main.tmp.1",
                     ),
                     "switch.1.0",
                 ),
@@ -231,12 +233,12 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        4,
+                        "main.tmp.1",
                     ),
                     "switch.1.4",
                 ),
@@ -254,7 +256,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        6,
+                        "i.4",
                     ),
                 },
                 Label(
@@ -263,18 +265,18 @@ Program {
                 Binary {
                     op: LessThan,
                     lhs: Var(
-                        6,
+                        "i.4",
                     ),
                     rhs: Constant(
                         10,
                     ),
                     dst: Var(
-                        7,
+                        "main.tmp.3",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        7,
+                        "main.tmp.3",
                     ),
                     "loop.3",
                 ),
@@ -283,7 +285,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "switch1.1",
                     ),
                 },
                 Label(
@@ -294,7 +296,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        2,
+                        "switch3.3",
                     ),
                 },
                 Jump(
@@ -314,21 +316,21 @@ Program {
                 Binary {
                     op: Add,
                     lhs: Var(
-                        6,
+                        "i.4",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        8,
+                        "main.tmp.4",
                     ),
                 },
                 Copy {
                     src: Var(
-                        8,
+                        "main.tmp.4",
                     ),
                     dst: Var(
-                        6,
+                        "i.4",
                     ),
                 },
                 Jump(
@@ -352,12 +354,12 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        5,
+                        "main.tmp.2",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        5,
+                        "main.tmp.2",
                     ),
                     "switch.2.5",
                 ),
@@ -369,13 +371,13 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        0,
+                        "switch1.1",
                     ),
                     "main.2.false",
                 ),
                 JumpIfZero(
                     Var(
-                        1,
+                        "switch2.2",
                     ),
                     "main.2.false",
                 ),
@@ -384,7 +386,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        10,
+                        "main.tmp.6",
                     ),
                 },
                 Jump(
@@ -398,7 +400,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        10,
+                        "main.tmp.6",
                     ),
                 },
                 Label(
@@ -406,13 +408,13 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        10,
+                        "main.tmp.6",
                     ),
                     "main.3.false",
                 ),
                 JumpIfZero(
                     Var(
-                        2,
+                        "switch3.3",
                     ),
                     "main.3.false",
                 ),
@@ -421,7 +423,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        9,
+                        "main.tmp.5",
                     ),
                 },
                 Jump(
@@ -435,7 +437,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        9,
+                        "main.tmp.5",
                     ),
                 },
                 Label(
@@ -443,7 +445,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        9,
+                        "main.tmp.5",
                     ),
                 ),
                 Return(

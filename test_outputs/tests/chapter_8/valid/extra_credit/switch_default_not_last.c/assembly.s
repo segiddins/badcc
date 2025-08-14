@@ -1,15 +1,19 @@
+	.bss
+_a.1:
+	.zero 4
 	.globl _main
+	.text
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
 	subq $32, %rsp
-	movl $7, -12(%rbp)
-	movl -12(%rbp), %r10d
+	movl $7, _a.1(%rip)
+	movl _a.1(%rip), %r10d
+	movl %r10d, -12(%rbp)
+	movl _a.1(%rip), %r10d
 	movl %r10d, -16(%rbp)
 	movl -12(%rbp), %r10d
-	movl %r10d, -20(%rbp)
-	movl -16(%rbp), %r10d
-	addl %r10d, -20(%rbp)
+	addl %r10d, -16(%rbp)
 	jmp Lswitch.0.cases
 	Lswitch.0.default:
 	movl $0, %eax
@@ -25,10 +29,10 @@ _main:
 	Lswitch.0.cases:
 	jmp Lswitch.0.default
 	movl $2, %r11d
-	cmpl -20(%rbp), %r11d
-	movl $0, -24(%rbp)
-	setE -24(%rbp)
-	cmpl $0, -24(%rbp)
+	cmpl -16(%rbp), %r11d
+	movl $0, -20(%rbp)
+	setE -20(%rbp)
+	cmpl $0, -20(%rbp)
 	jNE Lswitch.0.2
 	Lswitch.0:
 	movl $0, %eax
