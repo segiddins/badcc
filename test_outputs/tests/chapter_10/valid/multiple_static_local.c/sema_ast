@@ -1,0 +1,190 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "foo",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.1",
+                                        init: Some(
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                        storage: Some(
+                                            Static,
+                                        ),
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                20,
+                                            ),
+                                            length: 17,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a.1",
+                                        ),
+                                        Binary(
+                                            Multiply,
+                                            Var(
+                                                "a.1",
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a.1",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 72,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "bar",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "a.3",
+                                        init: Some(
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                        storage: Some(
+                                            Static,
+                                        ),
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                89,
+                                            ),
+                                            length: 17,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a.3",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "a.3",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Var(
+                                        "a.3",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        69,
+                    ),
+                    length: 72,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Add,
+                                        Binary(
+                                            Add,
+                                            Binary(
+                                                Add,
+                                                FunctionCall(
+                                                    Var(
+                                                        "foo",
+                                                    ),
+                                                    [],
+                                                ),
+                                                FunctionCall(
+                                                    Var(
+                                                        "bar",
+                                                    ),
+                                                    [],
+                                                ),
+                                            ),
+                                            FunctionCall(
+                                                Var(
+                                                    "foo",
+                                                ),
+                                                [],
+                                            ),
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "bar",
+                                            ),
+                                            [],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        138,
+                    ),
+                    length: 60,
+                },
+            },
+        ),
+    ],
+}

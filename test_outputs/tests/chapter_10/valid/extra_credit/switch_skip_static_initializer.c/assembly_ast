@@ -1,0 +1,169 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Jmp(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.1",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Data(
+                        "x.2",
+                    ),
+                },
+                Label(
+                    "switch.0.3",
+                ),
+                Move {
+                    source: Data(
+                        "x.2",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Data(
+                        "a",
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        12,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.1",
+                ),
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Data(
+                        "a",
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        12,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.3",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "a",
+            value: 3,
+        },
+        StaticVariable {
+            global: false,
+            name: "x.2",
+            value: 10,
+        },
+    ],
+}

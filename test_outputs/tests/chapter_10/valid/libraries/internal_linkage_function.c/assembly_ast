@@ -1,0 +1,167 @@
+Program {
+    definitions: [
+        Function {
+            name: "call_static_my_fun",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Call(
+                    "my_fun",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "call_static_my_fun_2",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Call(
+                    "my_fun",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "my_fun",
+            global: false,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data(
+                        "i.7",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i.7",
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i.7",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "i.7",
+            value: 0,
+        },
+    ],
+}

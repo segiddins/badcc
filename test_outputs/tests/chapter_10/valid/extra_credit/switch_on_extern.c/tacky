@@ -1,0 +1,156 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: true,
+            init: 0,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "update_x",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Jump(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.0",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Label(
+                    "switch.0.1",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Label(
+                    "switch.0.4",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Label(
+                    "switch.0.default",
+                ),
+                Return(
+                    Constant(
+                        4,
+                    ),
+                ),
+                Jump(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        0,
+                    ),
+                    rhs: Var(
+                        "x",
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "switch.0.0",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Var(
+                        "x",
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "switch.0.1",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        4,
+                    ),
+                    rhs: Var(
+                        "x",
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "switch.0.4",
+                ),
+                Jump(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "update_x",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        "x",
+                    ),
+                },
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

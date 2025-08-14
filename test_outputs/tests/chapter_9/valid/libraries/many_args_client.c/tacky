@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
@@ -12,15 +14,15 @@ Program {
                         ),
                     ],
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "x.12",
                     ),
                 },
                 Copy {
@@ -28,7 +30,7 @@ Program {
                         7,
                     ),
                     dst: Var(
-                        2,
+                        "seven.13",
                     ),
                 },
                 Call(
@@ -39,22 +41,22 @@ Program {
                         ),
                     ],
                     Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        3,
+                        "eight.14",
                     ),
                 },
                 Call(
                     "multiply_many_args",
                     [
                         Var(
-                            0,
+                            "x.12",
                         ),
                         Constant(
                             2,
@@ -72,39 +74,39 @@ Program {
                             6,
                         ),
                         Var(
-                            2,
+                            "seven.13",
                         ),
                         Var(
-                            3,
+                            "eight.14",
                         ),
                     ],
                     Var(
-                        6,
+                        "main.tmp.2",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        6,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        5,
+                        "y.15",
                     ),
                 },
                 Binary {
                     op: NotEqual,
                     lhs: Var(
-                        0,
+                        "x.12",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        7,
+                        "main.tmp.3",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        7,
+                        "main.tmp.3",
                     ),
                     "main.0.true",
                 ),
@@ -125,18 +127,18 @@ Program {
                 Binary {
                     op: NotEqual,
                     lhs: Var(
-                        5,
+                        "y.15",
                     ),
                     rhs: Constant(
                         589680,
                     ),
                     dst: Var(
-                        8,
+                        "main.tmp.4",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        8,
+                        "main.tmp.4",
                     ),
                     "main.1.true",
                 ),
@@ -157,30 +159,30 @@ Program {
                 Binary {
                     op: Remainder,
                     lhs: Var(
-                        5,
+                        "y.15",
                     ),
                     rhs: Constant(
                         256,
                     ),
                     dst: Var(
-                        9,
+                        "main.tmp.5",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "x.12",
                     ),
                     rhs: Var(
-                        9,
+                        "main.tmp.5",
                     ),
                     dst: Var(
-                        10,
+                        "main.tmp.6",
                     ),
                 },
                 Return(
                     Var(
-                        10,
+                        "main.tmp.6",
                     ),
                 ),
                 Return(

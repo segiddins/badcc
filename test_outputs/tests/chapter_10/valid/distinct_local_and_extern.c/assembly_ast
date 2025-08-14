@@ -1,0 +1,187 @@
+Program {
+    definitions: [
+        Function {
+            name: "return_a",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data(
+                        "a",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        3,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        5,
+                    ),
+                    Data(
+                        "a",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                SetCC(
+                    NE,
+                    Stack(
+                        16,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Data(
+                        "a",
+                    ),
+                },
+                Call(
+                    "return_a",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Register(
+                        R10,
+                        Four,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "a",
+            value: 5,
+        },
+    ],
+}

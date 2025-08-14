@@ -1,10 +1,12 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "twice",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "x.1",
                 ),
             ],
             instructions: [
@@ -14,15 +16,15 @@ Program {
                         2,
                     ),
                     rhs: Var(
-                        0,
+                        "x.1",
                     ),
                     dst: Var(
-                        1,
+                        "twice.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "twice.tmp.0",
                     ),
                 ),
                 Return(
@@ -34,6 +36,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
@@ -44,12 +47,12 @@ Program {
                         ),
                     ],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

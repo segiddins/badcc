@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Copy {
@@ -25,36 +27,36 @@ Program {
                         8,
                     ),
                     dst: Var(
-                        2,
+                        "c.3",
                     ),
                 },
                 Binary {
                     op: BitwiseAnd,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                 },
                 Binary {
                     op: BitwiseOr,
                     lhs: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                     rhs: Var(
-                        2,
+                        "c.3",
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 },
                 Return(
                     Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 ),
                 Return(

@@ -1,4 +1,5 @@
 	.globl _incr_and_print
+	.text
 _incr_and_print:
 	pushq %rbp
 	movq %rsp, %rbp

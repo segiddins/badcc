@@ -1,0 +1,208 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "y",
+            global: true,
+            init: 0,
+        },
+        StaticVariable {
+            identifier: "x",
+            global: true,
+            init: 1,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                    ),
+                    dst: Var(
+                        "y",
+                    ),
+                },
+                Binary {
+                    op: LeftShift,
+                    lhs: Var(
+                        "x",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                Binary {
+                    op: BitwiseOr,
+                    lhs: Var(
+                        "main.tmp.1",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.2",
+                    ),
+                    dst: Var(
+                        "x",
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "x",
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                    ),
+                },
+                Binary {
+                    op: BitwiseAnd,
+                    lhs: Var(
+                        "y",
+                    ),
+                    rhs: Var(
+                        "main.tmp.4",
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                    ),
+                },
+                Binary {
+                    op: Xor,
+                    lhs: Var(
+                        "main.tmp.5",
+                    ),
+                    rhs: Constant(
+                        12,
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                    ),
+                },
+                Binary {
+                    op: RightShift,
+                    lhs: Var(
+                        "main.tmp.6",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "main.tmp.7",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.7",
+                    ),
+                    dst: Var(
+                        "y",
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "y",
+                    ),
+                    rhs: Var(
+                        "main.tmp.8",
+                    ),
+                    dst: Var(
+                        "main.tmp.9",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.9",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,46 +1,48 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "fib",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "n.1",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         0,
                     ),
                     dst: Var(
-                        2,
+                        "fib.tmp.1",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        2,
+                        "fib.tmp.1",
                     ),
                     "fib.1.true",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        3,
+                        "fib.tmp.2",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        3,
+                        "fib.tmp.2",
                     ),
                     "fib.1.true",
                 ),
@@ -49,7 +51,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                 },
                 Jump(
@@ -63,7 +65,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                 },
                 Label(
@@ -71,13 +73,13 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        1,
+                        "fib.tmp.0",
                     ),
                     "fib.0.true",
                 ),
                 Return(
                     Var(
-                        0,
+                        "n.1",
                     ),
                 ),
                 Jump(
@@ -89,64 +91,64 @@ Program {
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        4,
+                        "fib.tmp.3",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            4,
+                            "fib.tmp.3",
                         ),
                     ],
                     Var(
-                        5,
+                        "fib.tmp.4",
                     ),
                 ),
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "n.1",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        6,
+                        "fib.tmp.5",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            6,
+                            "fib.tmp.5",
                         ),
                     ],
                     Var(
-                        7,
+                        "fib.tmp.6",
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
-                        5,
+                        "fib.tmp.4",
                     ),
                     rhs: Var(
-                        7,
+                        "fib.tmp.6",
                     ),
                     dst: Var(
-                        8,
+                        "fib.tmp.7",
                     ),
                 },
                 Return(
                     Var(
-                        8,
+                        "fib.tmp.7",
                     ),
                 ),
                 Label(
@@ -161,6 +163,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -168,23 +171,23 @@ Program {
                         6,
                     ),
                     dst: Var(
-                        0,
+                        "n.3",
                     ),
                 },
                 Call(
                     "fib",
                     [
                         Var(
-                            0,
+                            "n.3",
                         ),
                     ],
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

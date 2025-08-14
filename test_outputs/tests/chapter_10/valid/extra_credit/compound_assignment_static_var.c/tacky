@@ -1,0 +1,275 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "k.3",
+            global: false,
+            init: 1,
+        },
+        StaticVariable {
+            identifier: "i.1",
+            global: false,
+            init: 0,
+        },
+        StaticVariable {
+            identifier: "l.4",
+            global: false,
+            init: 48,
+        },
+        StaticVariable {
+            identifier: "j.2",
+            global: false,
+            init: 0,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "f",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.1",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "i.1",
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        "j.2",
+                    ),
+                    rhs: Var(
+                        "i.1",
+                    ),
+                    dst: Var(
+                        "j.2",
+                    ),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "k.3",
+                    ),
+                    rhs: Var(
+                        "j.2",
+                    ),
+                    dst: Var(
+                        "k.3",
+                    ),
+                },
+                Binary {
+                    op: Divide,
+                    lhs: Var(
+                        "l.4",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "l.4",
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "i.1",
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "f.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "f.tmp.0",
+                    ),
+                    "f.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "f.0.end",
+                ),
+                Label(
+                    "f.0.true",
+                ),
+                Label(
+                    "f.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        6,
+                    ),
+                    dst: Var(
+                        "f.tmp.1",
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "j.2",
+                    ),
+                    rhs: Var(
+                        "f.tmp.1",
+                    ),
+                    dst: Var(
+                        "f.tmp.2",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "f.tmp.2",
+                    ),
+                    "f.1.true",
+                ),
+                Return(
+                    Constant(
+                        2,
+                    ),
+                ),
+                Jump(
+                    "f.1.end",
+                ),
+                Label(
+                    "f.1.true",
+                ),
+                Label(
+                    "f.1.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        18,
+                    ),
+                    dst: Var(
+                        "f.tmp.3",
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "k.3",
+                    ),
+                    rhs: Var(
+                        "f.tmp.3",
+                    ),
+                    dst: Var(
+                        "f.tmp.4",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "f.tmp.4",
+                    ),
+                    "f.2.true",
+                ),
+                Return(
+                    Constant(
+                        3,
+                    ),
+                ),
+                Jump(
+                    "f.2.end",
+                ),
+                Label(
+                    "f.2.true",
+                ),
+                Label(
+                    "f.2.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "l.4",
+                    ),
+                    rhs: Constant(
+                        6,
+                    ),
+                    dst: Var(
+                        "f.tmp.5",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "f.tmp.5",
+                    ),
+                    "f.3.true",
+                ),
+                Return(
+                    Constant(
+                        4,
+                    ),
+                ),
+                Jump(
+                    "f.3.end",
+                ),
+                Label(
+                    "f.3.true",
+                ),
+                Label(
+                    "f.3.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "f",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Call(
+                    "f",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Call(
+                    "f",
+                    [],
+                    Var(
+                        "main.tmp.2",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "main.tmp.2",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

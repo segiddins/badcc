@@ -1,0 +1,139 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: true,
+            init: 10,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "x.3",
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "x.3",
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "main.0.true",
+                ),
+                Call(
+                    "read_x",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.1",
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "x",
+                    ),
+                    rhs: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

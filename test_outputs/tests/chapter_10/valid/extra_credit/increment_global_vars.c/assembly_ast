@@ -1,0 +1,650 @@
+Program {
+    definitions: [
+        Function {
+            name: "incr_i",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Cmp(
+                    Immediate(
+                        1,
+                    ),
+                    Data(
+                        "i",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        12,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "incr_i.0.true",
+                ),
+                Move {
+                    source: Data(
+                        "i",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i",
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Data(
+                        "i",
+                    ),
+                ),
+                Move {
+                    source: Data(
+                        "i",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i",
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Data(
+                        "i",
+                    ),
+                ),
+                Jmp(
+                    "incr_i.0.end",
+                ),
+                Label(
+                    "incr_i.0.true",
+                ),
+                Label(
+                    "incr_i.0.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "decr_j",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Register(
+                        R10,
+                        Four,
+                    ),
+                    Data(
+                        "j",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        16,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "decr_j.0.true",
+                ),
+                Move {
+                    source: Data(
+                        "j",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "j",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "j",
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        -1,
+                    ),
+                    Data(
+                        "j",
+                    ),
+                ),
+                Jmp(
+                    "decr_j.0.end",
+                ),
+                Label(
+                    "decr_j.0.true",
+                ),
+                Label(
+                    "decr_j.0.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Data(
+                        "i",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i",
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Data(
+                        "i",
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Call(
+                    "incr_i",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Label(
+                    "main.0.end",
+                ),
+                Cmp(
+                    Immediate(
+                        3,
+                    ),
+                    Data(
+                        "i",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                SetCC(
+                    NE,
+                    Stack(
+                        24,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Data(
+                        "j",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "j",
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        -1,
+                    ),
+                    Data(
+                        "j",
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Data(
+                        "j",
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Call(
+                    "decr_j",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        28,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        32,
+                    ),
+                },
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        32,
+                    ),
+                },
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Stack(
+                        36,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        36,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        36,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Register(
+                        R10,
+                        Four,
+                    ),
+                    Data(
+                        "j",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        40,
+                    ),
+                },
+                SetCC(
+                    NE,
+                    Stack(
+                        40,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        40,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.3.true",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "i",
+            value: 0,
+        },
+        StaticVariable {
+            global: true,
+            name: "j",
+            value: 0,
+        },
+    ],
+}

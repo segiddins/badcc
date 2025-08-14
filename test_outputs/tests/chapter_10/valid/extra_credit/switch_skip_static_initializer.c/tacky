@@ -1,0 +1,100 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a",
+            global: true,
+            init: 3,
+        },
+        StaticVariable {
+            identifier: "x.2",
+            global: false,
+            init: 10,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Jump(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.1",
+                ),
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "x.2",
+                    ),
+                },
+                Label(
+                    "switch.0.3",
+                ),
+                Return(
+                    Var(
+                        "x.2",
+                    ),
+                ),
+                Jump(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        1,
+                    ),
+                    rhs: Var(
+                        "a",
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "switch.0.1",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        3,
+                    ),
+                    rhs: Var(
+                        "a",
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "switch.0.3",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

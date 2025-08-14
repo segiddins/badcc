@@ -1,0 +1,289 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "add_one_and_two",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "sum",
+                                        params: [
+                                            "a",
+                                            "b",
+                                        ],
+                                        body: None,
+                                        storage: Some(
+                                            Extern,
+                                        ),
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                32,
+                                            ),
+                                            length: 37,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Declaration(
+                                Function(
+                                    FunctionDeclaration {
+                                        identifier: "sum",
+                                        params: [
+                                            "a",
+                                            "b",
+                                        ],
+                                        body: None,
+                                        storage: None,
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                66,
+                                            ),
+                                            length: 33,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "sum",
+                                        ),
+                                        [
+                                            Constant(
+                                                1,
+                                            ),
+                                            Constant(
+                                                2,
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 119,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "sum",
+                params: [
+                    "x",
+                    "y",
+                ],
+                body: None,
+                storage: Some(
+                    Extern,
+                ),
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        113,
+                    ),
+                    length: 33,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "sum",
+                params: [
+                    "x",
+                    "y",
+                ],
+                body: None,
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        143,
+                    ),
+                    length: 26,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "add_three_and_four",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        name: "sum",
+                                        init: Some(
+                                            Constant(
+                                                3,
+                                            ),
+                                        ),
+                                        storage: None,
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                201,
+                                            ),
+                                            length: 12,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        GreaterThan,
+                                        Var(
+                                            "sum",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Declaration(
+                                                    Function(
+                                                        FunctionDeclaration {
+                                                            identifier: "sum",
+                                                            params: [
+                                                                "one",
+                                                                "two",
+                                                            ],
+                                                            body: None,
+                                                            storage: Some(
+                                                                Extern,
+                                                            ),
+                                                            span: SourceSpan {
+                                                                offset: SourceOffset(
+                                                                    241,
+                                                                ),
+                                                                length: 48,
+                                                            },
+                                                        },
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Return(
+                                                        FunctionCall(
+                                                            Var(
+                                                                "sum",
+                                                            ),
+                                                            [
+                                                                Constant(
+                                                                    3,
+                                                                ),
+                                                                Constant(
+                                                                    4,
+                                                                ),
+                                                            ],
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        166,
+                    ),
+                    length: 160,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "add_three_and_four",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            7,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "add_one_and_two",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            3,
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        323,
+                    ),
+                    length: 135,
+                },
+            },
+        ),
+    ],
+}

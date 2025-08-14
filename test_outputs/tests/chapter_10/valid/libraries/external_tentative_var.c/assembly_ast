@@ -1,0 +1,40 @@
+Program {
+    definitions: [
+        Function {
+            name: "read_x",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data(
+                        "x",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "x",
+            value: 0,
+        },
+    ],
+}

@@ -1,0 +1,47 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: true,
+            init: 0,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        10,
+                    ),
+                    dst: Var(
+                        "x.2",
+                    ),
+                },
+                Jump(
+                    "main.x",
+                ),
+                Return(
+                    Var(
+                        "x.2",
+                    ),
+                ),
+                Label(
+                    "main.x",
+                ),
+                Return(
+                    Var(
+                        "x",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

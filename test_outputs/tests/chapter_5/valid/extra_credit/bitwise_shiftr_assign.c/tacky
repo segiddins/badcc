@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         1234,
                     ),
                     dst: Var(
-                        0,
+                        "var_to_shift.1",
                     ),
                 },
                 Copy {
@@ -17,32 +19,32 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "x.2",
                     ),
                 },
                 Binary {
                     op: RightShift,
                     lhs: Var(
-                        0,
+                        "var_to_shift.1",
                     ),
                     rhs: Constant(
                         4,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Copy {
                     src: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        1,
+                        "x.2",
                     ),
                 },
                 Return(
                     Var(
-                        1,
+                        "x.2",
                     ),
                 ),
                 Return(

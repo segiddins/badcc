@@ -24,6 +24,7 @@ fn test_compiles() {
     // ... do something with input_file ...
     assert_snapshot!(read_to_string(temp.child("return_2.s")).unwrap(), @r"
     	.globl _main
+    	.text
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
@@ -65,6 +66,7 @@ fn test_one_plus_one() {
     // ... do something with input_file ...
     assert_snapshot!(read_to_string(temp.child("return_2.s")).unwrap(), @r"
     	.globl _main
+    	.text
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
@@ -108,6 +110,7 @@ fn test_associativity_3() {
     // ... do something with input_file ...
     assert_snapshot!(read_to_string(temp.child("return_1.s")).unwrap(), @r"
     	.globl _main
+    	.text
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
@@ -152,6 +155,7 @@ fn test_unop_add() {
     // ... do something with input_file ...
     assert_snapshot!(read_to_string(temp.child("return_0.s")).unwrap(), @r"
     	.globl _main
+    	.text
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
@@ -191,6 +195,7 @@ fn test_shifts() {
     // ... do something with input_file ...
     assert_snapshot!(read_to_string(temp.child("return_1.s")).unwrap(), @r"
     	.globl _main
+    	.text
     _main:
     	pushq %rbp
     	movq %rsp, %rbp

@@ -1,4 +1,5 @@
 	.globl _add
+	.text
 _add:
 	pushq %rbp
 	movq %rsp, %rbp

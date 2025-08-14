@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         12345,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         5,
                     ),
                     dst: Var(
-                        1,
+                        "i.2",
                     ),
                 },
                 Label(
@@ -26,39 +28,39 @@ Program {
                 Binary {
                     op: GreaterThanOrEqual,
                     lhs: Var(
-                        1,
+                        "i.2",
                     ),
                     rhs: Constant(
                         0,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        2,
+                        "main.tmp.0",
                     ),
                     "loop.0",
                 ),
                 Binary {
                     op: Divide,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        3,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Label(
@@ -67,21 +69,21 @@ Program {
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        1,
+                        "i.2",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        1,
+                        "i.2",
                     ),
                 },
                 Jump(
@@ -92,7 +94,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

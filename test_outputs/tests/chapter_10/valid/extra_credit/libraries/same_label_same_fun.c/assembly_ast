@@ -1,0 +1,91 @@
+Program {
+    definitions: [
+        Function {
+            name: "f",
+            global: false,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Jmp(
+                    "f.x",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "f.x",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "f_caller",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Call(
+                    "f",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

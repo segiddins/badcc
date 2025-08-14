@@ -1,0 +1,71 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "read_x",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        "x.1",
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "x.1",
+                    ),
+                    rhs: Constant(
+                        4,
+                    ),
+                    dst: Var(
+                        "read_x.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "read_x.tmp.0",
+                    ),
+                    "read_x.0.true",
+                ),
+                Return(
+                    Var(
+                        "x",
+                    ),
+                ),
+                Jump(
+                    "read_x.0.end",
+                ),
+                Label(
+                    "read_x.0.true",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "read_x.tmp.1",
+                    ),
+                },
+                Return(
+                    Var(
+                        "read_x.tmp.1",
+                    ),
+                ),
+                Label(
+                    "read_x.0.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

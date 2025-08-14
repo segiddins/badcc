@@ -1,0 +1,109 @@
+Program {
+    definitions: [
+        Function {
+            name: "read_x",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        4,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        4,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        16,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "read_x.0.true",
+                ),
+                Move {
+                    source: Data(
+                        "x",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "read_x.0.end",
+                ),
+                Label(
+                    "read_x.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Unary(
+                    Neg,
+                    Stack(
+                        20,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "read_x.0.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

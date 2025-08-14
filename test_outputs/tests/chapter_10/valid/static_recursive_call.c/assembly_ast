@@ -1,0 +1,219 @@
+Program {
+    definitions: [
+        Function {
+            name: "print_alphabet",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Data(
+                        "count.3",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        65,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Call(
+                    "putchar",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "count.3",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        20,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        20,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "count.3",
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        26,
+                    ),
+                    Data(
+                        "count.3",
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                SetCC(
+                    L,
+                    Stack(
+                        24,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "print_alphabet.0.true",
+                ),
+                Call(
+                    "print_alphabet",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Jmp(
+                    "print_alphabet.0.end",
+                ),
+                Label(
+                    "print_alphabet.0.true",
+                ),
+                Label(
+                    "print_alphabet.0.end",
+                ),
+                Move {
+                    source: Data(
+                        "count.3",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Call(
+                    "print_alphabet",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "count.3",
+            value: 0,
+        },
+    ],
+}

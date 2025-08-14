@@ -2,7 +2,7 @@
 
 use camino::{Utf8Path, Utf8PathBuf};
 use fs_err::{File, create_dir_all, read_to_string};
-use miette::{Context, IntoDiagnostic, Result, bail};
+use miette::{Context, IntoDiagnostic, NamedSource, Result, bail};
 use std::{io::Write, process::Command};
 
 use clap::Parser;
@@ -57,12 +57,16 @@ struct Driver {
 
 impl Driver {
     fn run(&mut self) -> Result<()> {
+        if let Some(test_output_dir) = self.test_output_dir.as_ref() {
+            let _ = std::fs::remove_dir_all(test_output_dir);
+        };
+
         let pre = self.preprocess()?;
         self.artifacts.push(pre.clone());
 
         let src = read_to_string(&pre)
             .into_diagnostic()
-            .with_context(|| format!("failed to read {}", pre))?;
+            .with_context(|| format!("failed to read {pre}"))?;
 
         let tokens = lex(&src, &pre)?;
         self.write_test_output("tokens", || {
@@ -72,7 +76,7 @@ impl Driver {
             return Ok(());
         }
 
-        let mut program = parse(src, tokens, pre.as_str())?;
+        let mut program = parse(&src, tokens, pre.as_str())?;
         if self.parse {
             return Ok(());
         }
@@ -82,20 +86,21 @@ impl Driver {
             println!("{program:#?}");
         }
 
-        validate(&mut program)?;
+        let symbols = validate(&mut program)
+            .map_err(|e| miette::Report::from(e).with_source_code(NamedSource::new(&pre, src)))?;
         self.write_test_output("sema_ast", || format!("{program:#?}"));
         if self.validate {
             return Ok(());
         }
 
-        let tacky = tacky::lower(&program);
+        let tacky = tacky::lower(&program, &symbols);
         self.write_test_output("tacky", || format!("{tacky:#?}"));
 
         if self.tacky {
             return Ok(());
         }
 
-        let program = generate_assembly(&tacky);
+        let program = generate_assembly(&tacky, &symbols);
         self.write_test_output("assembly_ast", || format!("{program:#?}"));
         if self.codegen {
             return Ok(());

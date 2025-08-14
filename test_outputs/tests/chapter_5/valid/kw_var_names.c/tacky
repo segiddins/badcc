@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        0,
+                        "return_val.1",
                     ),
                 },
                 Copy {
@@ -17,24 +19,24 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "void2.2",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "return_val.1",
                     ),
                     rhs: Var(
-                        1,
+                        "void2.2",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Return(
                     Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

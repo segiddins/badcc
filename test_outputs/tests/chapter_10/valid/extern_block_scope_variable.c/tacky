@@ -1,0 +1,64 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "foo",
+            global: true,
+            init: 3,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "outer.1",
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "foo.2",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "outer.1",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Var(
+                        "foo",
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

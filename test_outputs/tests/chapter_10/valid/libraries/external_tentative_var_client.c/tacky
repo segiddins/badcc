@@ -1,0 +1,101 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "x",
+                    ),
+                    rhs: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Copy {
+                    src: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "x",
+                    ),
+                },
+                Call(
+                    "read_x",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.1",
+                    ),
+                    rhs: Constant(
+                        3,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

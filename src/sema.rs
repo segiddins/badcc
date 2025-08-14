@@ -2,12 +2,15 @@ use miette::Diagnostic;
 
 use crate::parser::Program;
 
+pub use type_check::{Symbol, SymbolAttributes, SymbolTable};
+
 mod loop_labels;
 mod resolve_variables;
 mod statement_labels;
 mod type_check;
 
 #[derive(Debug, thiserror::Error, Diagnostic)]
+#[diagnostic(transparent)]
 pub enum SemaError {
     #[error(transparent)]
     ResolveVariables(#[from] resolve_variables::Error),
@@ -19,11 +22,9 @@ pub enum SemaError {
     LoopLabels(#[from] loop_labels::Error),
 }
 
-pub fn validate(program: &mut Program) -> Result<(), SemaError> {
+pub fn validate(program: &mut Program) -> Result<SymbolTable, SemaError> {
     resolve_variables::run(program)?;
-    type_check::run(program)?;
     statement_labels::run(program)?;
     loop_labels::run(program)?;
-
-    Ok(())
+    Ok(type_check::run(program)?)
 }

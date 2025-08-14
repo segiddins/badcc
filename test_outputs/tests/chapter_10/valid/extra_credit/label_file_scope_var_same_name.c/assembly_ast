@@ -1,0 +1,64 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Immediate(
+                        10,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "main.x",
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "main.x",
+                ),
+                Move {
+                    source: Data(
+                        "x",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "x",
+            value: 0,
+        },
+    ],
+}

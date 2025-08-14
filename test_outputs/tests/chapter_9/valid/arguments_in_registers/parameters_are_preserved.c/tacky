@@ -1,55 +1,57 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "g",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "w.1",
                 ),
                 Var(
-                    1,
+                    "x.2",
                 ),
                 Var(
-                    2,
+                    "y.3",
                 ),
                 Var(
-                    3,
+                    "z.4",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "w.1",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        7,
+                        "g.tmp.3",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        7,
+                        "g.tmp.3",
                     ),
                     "g.1.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        1,
+                        "x.2",
                     ),
                     rhs: Constant(
                         4,
                     ),
                     dst: Var(
-                        8,
+                        "g.tmp.4",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        8,
+                        "g.tmp.4",
                     ),
                     "g.1.false",
                 ),
@@ -58,7 +60,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        6,
+                        "g.tmp.2",
                     ),
                 },
                 Jump(
@@ -72,7 +74,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        6,
+                        "g.tmp.2",
                     ),
                 },
                 Label(
@@ -80,25 +82,25 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        6,
+                        "g.tmp.2",
                     ),
                     "g.2.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        2,
+                        "y.3",
                     ),
                     rhs: Constant(
                         6,
                     ),
                     dst: Var(
-                        9,
+                        "g.tmp.5",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        9,
+                        "g.tmp.5",
                     ),
                     "g.2.false",
                 ),
@@ -107,7 +109,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        5,
+                        "g.tmp.1",
                     ),
                 },
                 Jump(
@@ -121,7 +123,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        5,
+                        "g.tmp.1",
                     ),
                 },
                 Label(
@@ -129,25 +131,25 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        5,
+                        "g.tmp.1",
                     ),
                     "g.3.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        3,
+                        "z.4",
                     ),
                     rhs: Constant(
                         8,
                     ),
                     dst: Var(
-                        10,
+                        "g.tmp.6",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        10,
+                        "g.tmp.6",
                     ),
                     "g.3.false",
                 ),
@@ -156,7 +158,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        4,
+                        "g.tmp.0",
                     ),
                 },
                 Jump(
@@ -170,7 +172,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        4,
+                        "g.tmp.0",
                     ),
                 },
                 Label(
@@ -178,7 +180,7 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        4,
+                        "g.tmp.0",
                     ),
                     "g.0.true",
                 ),
@@ -210,130 +212,131 @@ Program {
         },
         Function {
             identifier: "f",
+            global: true,
             params: [
                 Var(
-                    0,
+                    "a.6",
                 ),
                 Var(
-                    1,
+                    "b.7",
                 ),
                 Var(
-                    2,
+                    "c.8",
                 ),
                 Var(
-                    3,
+                    "d.9",
                 ),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.6",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        5,
+                        "f.tmp.0",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        1,
+                        "b.7",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        6,
+                        "f.tmp.1",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        2,
+                        "c.8",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        7,
+                        "f.tmp.2",
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        3,
+                        "d.9",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        8,
+                        "f.tmp.3",
                     ),
                 },
                 Call(
                     "g",
                     [
                         Var(
-                            5,
+                            "f.tmp.0",
                         ),
                         Var(
-                            6,
+                            "f.tmp.1",
                         ),
                         Var(
-                            7,
+                            "f.tmp.2",
                         ),
                         Var(
-                            8,
+                            "f.tmp.3",
                         ),
                     ],
                     Var(
-                        9,
+                        "f.tmp.4",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        9,
+                        "f.tmp.4",
                     ),
                     dst: Var(
-                        4,
+                        "result.10",
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        4,
+                        "result.10",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        14,
+                        "f.tmp.9",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        14,
+                        "f.tmp.9",
                     ),
                     "f.0.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "a.6",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        15,
+                        "f.tmp.10",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        15,
+                        "f.tmp.10",
                     ),
                     "f.0.false",
                 ),
@@ -342,7 +345,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        13,
+                        "f.tmp.8",
                     ),
                 },
                 Jump(
@@ -356,7 +359,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        13,
+                        "f.tmp.8",
                     ),
                 },
                 Label(
@@ -364,25 +367,25 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        13,
+                        "f.tmp.8",
                     ),
                     "f.1.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        1,
+                        "b.7",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        16,
+                        "f.tmp.11",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        16,
+                        "f.tmp.11",
                     ),
                     "f.1.false",
                 ),
@@ -391,7 +394,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        12,
+                        "f.tmp.7",
                     ),
                 },
                 Jump(
@@ -405,7 +408,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        12,
+                        "f.tmp.7",
                     ),
                 },
                 Label(
@@ -413,25 +416,25 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        12,
+                        "f.tmp.7",
                     ),
                     "f.2.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        2,
+                        "c.8",
                     ),
                     rhs: Constant(
                         3,
                     ),
                     dst: Var(
-                        17,
+                        "f.tmp.12",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        17,
+                        "f.tmp.12",
                     ),
                     "f.2.false",
                 ),
@@ -440,7 +443,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        11,
+                        "f.tmp.6",
                     ),
                 },
                 Jump(
@@ -454,7 +457,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        11,
+                        "f.tmp.6",
                     ),
                 },
                 Label(
@@ -462,25 +465,25 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        11,
+                        "f.tmp.6",
                     ),
                     "f.3.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        3,
+                        "d.9",
                     ),
                     rhs: Constant(
                         4,
                     ),
                     dst: Var(
-                        18,
+                        "f.tmp.13",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        18,
+                        "f.tmp.13",
                     ),
                     "f.3.false",
                 ),
@@ -489,7 +492,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        10,
+                        "f.tmp.5",
                     ),
                 },
                 Jump(
@@ -503,7 +506,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        10,
+                        "f.tmp.5",
                     ),
                 },
                 Label(
@@ -511,7 +514,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        10,
+                        "f.tmp.5",
                     ),
                 ),
                 Return(
@@ -523,6 +526,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
@@ -542,12 +546,12 @@ Program {
                         ),
                     ],
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(
                     Var(
-                        0,
+                        "main.tmp.0",
                     ),
                 ),
                 Return(

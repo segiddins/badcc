@@ -1,0 +1,328 @@
+Program {
+    definitions: [
+        Function {
+            name: "print_letters",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Data(
+                        "i.3",
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Call(
+                    "putchar",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i.3",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i.3",
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i.4",
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Call(
+                    "putchar",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "i.4",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Data(
+                        "i.4",
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        10,
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Call(
+                    "putchar",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Cmp(
+                    Immediate(
+                        26,
+                    ),
+                    Stack(
+                        12,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                SetCC(
+                    L,
+                    Stack(
+                        16,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "loop.0",
+                ),
+                Call(
+                    "print_letters",
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        24,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "i.3",
+            value: 65,
+        },
+        StaticVariable {
+            global: false,
+            name: "i.4",
+            value: 97,
+        },
+    ],
+}

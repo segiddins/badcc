@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Jump(
@@ -37,21 +39,21 @@ Program {
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         2,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Jump(
@@ -65,7 +67,7 @@ Program {
                         99,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Jump(
@@ -80,15 +82,15 @@ Program {
                         0,
                     ),
                     rhs: Var(
-                        0,
+                        "a.1",
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     "switch.0.0",
                 ),
@@ -98,15 +100,15 @@ Program {
                         1,
                     ),
                     rhs: Var(
-                        0,
+                        "a.1",
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 JumpIfNotZero(
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     "switch.0.1",
                 ),
@@ -118,7 +120,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

@@ -1,10 +1,11 @@
 use std::collections::{HashMap, hash_map::Entry};
 
-use miette::Diagnostic;
+use miette::{Diagnostic, SourceSpan};
 
 use crate::parser::*;
 
 #[derive(Debug, thiserror::Error, Diagnostic)]
+#[error("Failed to resolve identifiers")]
 pub enum Error {
     #[error("{0} has been declared twice")]
     DuplicateDeclaration(String),
@@ -18,30 +19,39 @@ pub enum Error {
     NonIdentifierAssignment(String),
     #[error("cannot define {0} inside another function")]
     NestedFunctionDefinition(String),
+    #[error("cannot declare functions at block scope with static storage specifier")]
+    NestedFunctionStorageSpecifier,
+    #[error("a variable declared in a for loop header cannot have a storage class")]
+    ForInitStorageSpecifier,
+    #[error("a variable declared extern cannot have an initializer")]
+    ExternVariableInitializer {
+        #[label("here")]
+        span: SourceSpan,
+    },
+    #[error("initializers for static variables must be constant")]
+    StaticVariableNonConstantInitializer,
 }
 
 type Result<T = ()> = miette::Result<T, Error>;
 
 #[derive(Default)]
 struct Scope {
-    vars: Vec<HashMap<String, (String, Linkage)>>,
+    vars: Vec<HashMap<String, (String, bool)>>,
     idx: u32,
 }
 
 impl Scope {
-    fn declare(&mut self, name: &str, linkage: Linkage) -> Result<&String> {
+    fn declare(&mut self, name: &str, linkage: bool) -> Result<&String> {
         let last = self.vars.last_mut().unwrap();
         let resolved = match last.entry(name.to_string()) {
             Entry::Occupied(occupied_entry) => match linkage {
-                Linkage::External if occupied_entry.get().1 == Linkage::External => {
-                    occupied_entry.into_mut()
-                }
+                true if occupied_entry.get().1 => occupied_entry.into_mut(),
                 _ => return Err(Error::DuplicateDeclaration(name.to_string())),
             },
             Entry::Vacant(vacant_entry) => vacant_entry.insert((
                 match linkage {
-                    Linkage::None => format!("{name}.{}", self.idx),
-                    Linkage::External => name.into(),
+                    false => format!("{name}.{}", self.idx),
+                    true => name.into(),
                 },
                 linkage,
             )),
@@ -75,12 +85,10 @@ impl Scope {
     fn pop(&mut self) {
         self.vars.pop().unwrap();
     }
-}
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
-enum Linkage {
-    None,
-    External,
+    const fn is_file(&self) -> bool {
+        self.vars.len() == 1
+    }
 }
 
 fn visit_expr(expression: &mut Expression, scope: &mut Scope) -> Result {
@@ -171,6 +179,9 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
         } => scope.nest(|scope| {
             match init {
                 ForInit::Decl(variable_declaration) => {
+                    if variable_declaration.storage.is_some() {
+                        return Err(Error::ForInitStorageSpecifier);
+                    }
                     visit_variable_decl(variable_declaration, scope)
                 }
                 ForInit::Expr(expression) => visit_optional_expression(expression, scope),
@@ -187,9 +198,33 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
 }
 
 fn visit_variable_decl(decl: &mut VariableDeclaration, scope: &mut Scope) -> Result {
-    decl.name = scope.declare(&decl.name, Linkage::None)?.clone();
+    let storage = decl.storage.or_else(|| {
+        if scope.is_file() {
+            Some(StorageClass::Static)
+        } else {
+            None
+        }
+    });
+    let linkage = match storage {
+        Some(StorageClass::Extern) => true,
+        Some(StorageClass::Static) => scope.is_file(),
+        None => false,
+    };
+    decl.name = scope.declare(&decl.name, linkage)?.clone();
     if let Some(init) = decl.init.as_mut() {
         visit_expr(init, scope)?;
+        match storage {
+            Some(StorageClass::Extern) if !scope.is_file() => {
+                return Err(Error::ExternVariableInitializer { span: decl.span });
+            }
+            Some(StorageClass::Static) if !matches!(init, Expression::Constant(_)) => {
+                return Err(Error::StaticVariableNonConstantInitializer);
+            }
+            None if scope.is_file() && !matches!(init, Expression::Constant(_)) => {
+                return Err(Error::StaticVariableNonConstantInitializer);
+            }
+            _ => {}
+        }
     }
     Ok(())
 }
@@ -212,18 +247,26 @@ fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result {
             identifier,
             body,
             params,
+            storage,
+            ..
         }) => {
-            scope.declare(identifier, Linkage::External)?;
+            scope.declare(identifier, true)?;
+
+            let is_file = scope.is_file();
 
             scope.push();
             for param in params.iter_mut() {
-                *param = scope.declare(param, Linkage::None)?.clone();
+                *param = scope.declare(param, false)?.clone();
             }
-            if let Some(body) = body.as_mut() {
-                if scope.vars.len() != 2 {
+            if !is_file {
+                if body.is_some() {
                     return Err(Error::NestedFunctionDefinition(identifier.clone()));
                 }
-
+                if storage.is_some_and(|s| s == StorageClass::Static) {
+                    return Err(Error::NestedFunctionStorageSpecifier);
+                }
+            }
+            if let Some(body) = body.as_mut() {
                 visit_block(body, scope)?;
             }
             scope.pop();
@@ -253,5 +296,6 @@ pub fn run(program: &mut Program) -> Result {
         visit_decl(decl, &mut scope)?
     }
     scope.pop();
+    assert!(scope.vars.is_empty());
     Ok(())
 }

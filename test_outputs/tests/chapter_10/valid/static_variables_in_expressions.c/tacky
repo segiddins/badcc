@@ -1,0 +1,82 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "i.1",
+            global: false,
+            init: 2,
+        },
+        StaticVariable {
+            identifier: "j.2",
+            global: false,
+            init: 3,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        "i.1",
+                    ),
+                    rhs: Var(
+                        "j.2",
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                    ),
+                    dst: Var(
+                        "cmp.3",
+                    ),
+                },
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "cmp.3",
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

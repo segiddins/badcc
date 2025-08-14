@@ -1,39 +1,41 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Call(
                     "foo",
                     [],
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "x.2",
                     ),
                 },
                 Binary {
                     op: GreaterThan,
                     lhs: Var(
-                        0,
+                        "x.2",
                     ),
                     rhs: Constant(
                         0,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     "main.0.true",
                 ),
@@ -42,27 +44,27 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        3,
+                        "foo.3",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "x.2",
                     ),
                     rhs: Var(
-                        3,
+                        "foo.3",
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        4,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        0,
+                        "x.2",
                     ),
                 },
                 Jump(
@@ -76,7 +78,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        0,
+                        "x.2",
                     ),
                 ),
                 Return(
@@ -88,6 +90,7 @@ Program {
         },
         Function {
             identifier: "foo",
+            global: true,
             params: [],
             instructions: [
                 Return(

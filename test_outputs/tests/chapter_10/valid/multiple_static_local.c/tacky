@@ -1,0 +1,171 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a.1",
+            global: false,
+            init: 3,
+        },
+        StaticVariable {
+            identifier: "a.3",
+            global: false,
+            init: 4,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "foo",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "a.1",
+                    ),
+                    rhs: Constant(
+                        2,
+                    ),
+                    dst: Var(
+                        "foo.tmp.0",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "foo.tmp.0",
+                    ),
+                    dst: Var(
+                        "a.1",
+                    ),
+                },
+                Return(
+                    Var(
+                        "a.1",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "bar",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "a.3",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "bar.tmp.0",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "bar.tmp.0",
+                    ),
+                    dst: Var(
+                        "a.3",
+                    ),
+                },
+                Return(
+                    Var(
+                        "a.3",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                    ),
+                ),
+                Call(
+                    "bar",
+                    [],
+                    Var(
+                        "main.tmp.1",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "main.tmp.0",
+                    ),
+                    rhs: Var(
+                        "main.tmp.1",
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                Call(
+                    "foo",
+                    [],
+                    Var(
+                        "main.tmp.3",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "main.tmp.2",
+                    ),
+                    rhs: Var(
+                        "main.tmp.3",
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                    ),
+                },
+                Call(
+                    "bar",
+                    [],
+                    Var(
+                        "main.tmp.5",
+                    ),
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "main.tmp.4",
+                    ),
+                    rhs: Var(
+                        "main.tmp.5",
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                    ),
+                },
+                Return(
+                    Var(
+                        "main.tmp.6",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "foo",
+            global: true,
             params: [],
             instructions: [
                 Return(
@@ -18,6 +20,7 @@ Program {
         },
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -25,31 +28,31 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        0,
+                        "x.2",
                     ),
                 },
                 Call(
                     "foo",
                     [],
                     Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 ),
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        0,
+                        "x.2",
                     ),
                     rhs: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "x.2",
                     ),
                 },
                 Return(
                     Var(
-                        0,
+                        "x.2",
                     ),
                 ),
                 Return(

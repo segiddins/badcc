@@ -1,9 +1,12 @@
-use std::collections::{HashMap, HashSet, hash_map::Entry};
+use std::{
+    collections::{HashMap, hash_map::Entry},
+    ops::{Deref, DerefMut},
+};
 
-use miette::Diagnostic;
+use miette::{Diagnostic, SourceSpan};
 
 use crate::parser::{
-    Block, Declaration, Expression, ForInit, FunctionDeclaration, Program, Statement,
+    Block, Declaration, Expression, ForInit, FunctionDeclaration, Program, Statement, StorageClass,
     VariableDeclaration,
 };
 
@@ -23,17 +26,280 @@ pub enum TypeCheckError {
     },
     #[error("duplication definition of function {name}")]
     DuplicateFunctionDefinition { name: String },
+    #[error("duplication definition of variable {name}")]
+    DuplicateVariableDefinition {
+        name: String,
+        #[label(primary, "here")]
+        span: SourceSpan,
+        #[label(collection, "previously declared here")]
+        old: Vec<SourceSpan>,
+    },
+    #[error("conflicting linkage for {name} -- {expected:?} vs {actual:?}")]
+    ConflictingLinkage {
+        name: String,
+        expected: Linkage,
+        actual: Linkage,
+
+        #[label(primary, "declared as {actual:?}")]
+        span: SourceSpan,
+
+        #[label(collection, "previously declared here as {expected:?}")]
+        old: Vec<SourceSpan>,
+    },
+    #[error("initializer on local extern declaration of {name}")]
+    InitializerOnLocalExtern {
+        name: String,
+        #[label("here")]
+        span: SourceSpan,
+    },
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct SymbolTable(HashMap<String, Symbol>);
+
+impl SymbolTable {
+    fn declare_automatic(&mut self, name: &str, ty: Ty) {
+        self.insert(
+            name.to_string(),
+            Symbol {
+                ty,
+                attributes: SymbolAttributes::Local,
+                declarations: vec![],
+            },
+        );
+    }
+
+    fn declare_static(
+        &mut self,
+        name: &str,
+        ty: Ty,
+        global: Option<bool>,
+        init: Initial,
+        span: SourceSpan,
+    ) -> Result {
+        match self.entry(name.to_string()) {
+            Entry::Occupied(mut occupied_entry) => {
+                let symbol = occupied_entry.get_mut();
+                symbol.ty.assert(&ty)?;
+                match &mut symbol.attributes {
+                    SymbolAttributes::Static {
+                        init: old_init,
+                        global: old_global,
+                    } => {
+                        match (global, *old_global) {
+                            // extern in block scope
+                            (None, _) if !matches!(init, Initial::Some(_)) => {}
+                            (None, true) => {}
+                            (Some(x), y) if x == y => {}
+                            (Some(true), false) if !matches!(init, Initial::Some(_)) => {}
+                            _ => {
+                                return Err(TypeCheckError::ConflictingLinkage {
+                                    name: name.to_string(),
+                                    expected: if *old_global {
+                                        Linkage::External
+                                    } else {
+                                        Linkage::Static
+                                    },
+                                    actual: if global != Some(false) {
+                                        Linkage::External
+                                    } else {
+                                        Linkage::Static
+                                    },
+                                    span,
+                                    old: symbol.declarations.clone(),
+                                });
+                            }
+                        }
+                        match (&old_init, init) {
+                            (Initial::Some(_) | Initial::None, Initial::Tentative)
+                            | (Initial::None, Initial::None) => {}
+                            (Initial::Tentative, _) | (Initial::None, Initial::Some(_)) => {
+                                *old_init = init;
+                            }
+                            (Initial::Some(_), Initial::Some(_)) => {
+                                return Err(TypeCheckError::DuplicateVariableDefinition {
+                                    name: name.to_string(),
+                                    span,
+                                    old: symbol.declarations.clone(),
+                                });
+                            }
+                            _ => {}
+                        }
+                        symbol.declarations.push(span);
+                    }
+                    _ => unreachable!(),
+                }
+            }
+            Entry::Vacant(vacant_entry) => {
+                vacant_entry.insert(Symbol {
+                    ty,
+                    attributes: SymbolAttributes::Static {
+                        init,
+                        global: global.unwrap_or(true),
+                    },
+                    declarations: vec![span],
+                });
+            }
+        }
+        Ok(())
+    }
+
+    fn declare_fn(
+        &mut self,
+        name: &str,
+        ty: Ty,
+        global: bool,
+        defined: bool,
+        span: SourceSpan,
+    ) -> Result {
+        match self.entry(name.to_string()) {
+            Entry::Occupied(mut occupied_entry) => {
+                let symbol = occupied_entry.get_mut();
+                symbol.ty.assert(&ty)?;
+                match &mut symbol.attributes {
+                    SymbolAttributes::Function {
+                        defined: old_defined,
+                        global: old_global,
+                        ..
+                    } => {
+                        if defined && !global && *old_global {
+                            return Err(TypeCheckError::ConflictingLinkage {
+                                name: name.to_string(),
+                                expected: if *old_global {
+                                    Linkage::External
+                                } else {
+                                    Linkage::Static
+                                },
+                                actual: if global {
+                                    Linkage::External
+                                } else {
+                                    Linkage::Static
+                                },
+                                span,
+                                old: symbol.declarations.clone(),
+                            });
+                        }
+                        if *old_defined && defined {
+                            return Err(TypeCheckError::DuplicateFunctionDefinition {
+                                name: name.to_string(),
+                            });
+                        }
+                        *old_defined = *old_defined || defined;
+                    }
+                    _ => unreachable!(),
+                }
+                symbol.declarations.push(span);
+            }
+            Entry::Vacant(vacant_entry) => {
+                vacant_entry.insert(Symbol {
+                    ty,
+                    attributes: SymbolAttributes::Function {
+                        defined,
+                        global,
+                        _stack_frame_size: 0,
+                    },
+                    declarations: vec![span],
+                });
+            }
+        }
+
+        Ok(())
+    }
+}
+
+impl Deref for SymbolTable {
+    type Target = HashMap<String, Symbol>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl DerefMut for SymbolTable {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
 }
 
 #[derive(Debug, Default)]
 struct Checker {
-    types: HashMap<String, Ty>,
-    defined_functions: HashSet<String>,
+    symbols: SymbolTable,
+
+    toplevel: bool,
+}
+
+#[derive(Debug, Clone)]
+pub struct Symbol {
+    ty: Ty,
+    pub attributes: SymbolAttributes,
+    declarations: Vec<SourceSpan>,
+}
+
+impl Symbol {
+    pub fn is_global(&self) -> bool {
+        match self.attributes {
+            SymbolAttributes::Function { global, .. } | SymbolAttributes::Static { global, .. } => {
+                global
+            }
+            SymbolAttributes::Local => false,
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub enum SymbolAttributes {
+    Function {
+        defined: bool,
+        global: bool,
+        _stack_frame_size: i32,
+    },
+    Static {
+        init: Initial,
+        global: bool,
+    },
+    Local,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Initial {
+    Tentative,
+    Some(i32),
+    None,
+}
+
+impl Initial {
+    pub fn value(&self) -> i32 {
+        match self {
+            Initial::Tentative => 0,
+            Initial::Some(v) => *v,
+            Initial::None => 0,
+        }
+    }
+
+    pub fn tentative(&self) -> bool {
+        matches!(self, Initial::Tentative)
+    }
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Linkage {
+    Static,
+    External,
+}
+
+impl From<StorageClass> for Linkage {
+    fn from(value: StorageClass) -> Self {
+        match value {
+            StorageClass::Static => Linkage::Static,
+            StorageClass::Extern => Linkage::External,
+        }
+    }
 }
 
 impl Checker {
     fn visit_program(&mut self, program: &Program) -> Result {
         for decl in program.declarations.iter() {
+            self.toplevel = true;
             self.visit_declaration(decl)?
         }
         Ok(())
@@ -51,35 +317,115 @@ impl Checker {
     }
 
     fn visit_variable_declaration(&mut self, decl: &VariableDeclaration) -> Result {
-        self.types.insert(decl.name.clone(), Ty::Int);
-        if let Some(expr) = decl.init.as_ref() {
-            self.visit_expression(expr)?.assert(&Ty::Int)?;
-        }
-        Ok(())
-    }
-    fn visit_function_declaration(&mut self, decl: &FunctionDeclaration) -> Result {
-        let ty = Ty::Function {
-            params: decl.params.len() as u8,
-        };
-        match self.types.entry(decl.identifier.clone()) {
-            Entry::Occupied(entry) => {
-                entry.get().assert(&ty)?;
+        if self.toplevel {
+            match decl.storage {
+                Some(StorageClass::Extern) => self.symbols.declare_static(
+                    &decl.name,
+                    Ty::Int,
+                    None,
+                    match decl.init {
+                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        None => Initial::Tentative,
+                        Some(_) => {
+                            todo!("non-constant initializer on global variable {}", decl.name)
+                        }
+                    },
+                    decl.span,
+                )?,
+                None => self.symbols.declare_static(
+                    &decl.name,
+                    Ty::Int,
+                    Some(true),
+                    match decl.init {
+                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        None => Initial::None,
+                        Some(_) => {
+                            todo!("non-constant initializer on global variable {}", decl.name)
+                        }
+                    },
+                    decl.span,
+                )?,
+                Some(StorageClass::Static) => self.symbols.declare_static(
+                    &decl.name,
+                    Ty::Int,
+                    Some(false),
+                    match decl.init {
+                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        None => Initial::Tentative,
+                        Some(_) => {
+                            todo!("non-constant initializer on static variable {}", decl.name)
+                        }
+                    },
+                    decl.span,
+                )?,
             }
-            Entry::Vacant(entry) => {
-                entry.insert(ty);
+        } else {
+            match decl.storage {
+                Some(StorageClass::Extern) => {
+                    if decl.init.is_some() {
+                        return Err(TypeCheckError::InitializerOnLocalExtern {
+                            name: decl.name.clone(),
+                            span: decl.span,
+                        });
+                    }
+
+                    self.symbols.declare_static(
+                        &decl.name,
+                        Ty::Int,
+                        None,
+                        Initial::Tentative,
+                        decl.span,
+                    )?;
+                }
+                Some(StorageClass::Static) => {
+                    let init = match decl.init {
+                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        None => Initial::Some(0),
+                        Some(_) => {
+                            todo!("non-constant initializer on static variable {}", decl.name)
+                        }
+                    };
+                    self.symbols.declare_static(
+                        &decl.name,
+                        Ty::Int,
+                        Some(false),
+                        init,
+                        decl.span,
+                    )?;
+                }
+                None => {
+                    self.symbols.declare_automatic(&decl.name, Ty::Int);
+                    if let Some(ref expr) = decl.init {
+                        self.visit_expression(expr)?.assert(&Ty::Int)?;
+                    }
+                }
             }
         }
 
+        Ok(())
+    }
+
+    fn visit_function_declaration(&mut self, decl: &FunctionDeclaration) -> Result {
+        let global = decl.storage.is_none_or(|s| s != StorageClass::Static);
+        let defined = decl.body.is_some();
+
+        self.symbols.declare_fn(
+            &decl.identifier,
+            Ty::Function {
+                params: decl.params.len() as u8,
+            },
+            global,
+            defined,
+            decl.span,
+        )?;
+
         for param in decl.params.iter() {
-            self.types.insert(param.clone(), Ty::Int);
+            self.symbols.declare_automatic(param, Ty::Int);
         }
 
         if let Some(body) = decl.body.as_ref() {
-            if !self.defined_functions.insert(decl.identifier.clone()) {
-                return Err(TypeCheckError::DuplicateFunctionDefinition {
-                    name: decl.identifier.clone(),
-                });
-            }
+            self.toplevel = false;
+
             self.visit_block(body)?
         }
         Ok(())
@@ -168,7 +514,11 @@ impl Checker {
             Expression::Binary(_, lhs, rhs) => self
                 .visit_expression(lhs)?
                 .assert(self.visit_expression(rhs)?),
-            Expression::Var(var) => self.types.get(var).ok_or_else(|| panic!("no var {var}")),
+            Expression::Var(var) => self
+                .symbols
+                .get(var)
+                .map(|t| &t.ty)
+                .ok_or_else(|| panic!("no var {var}")),
             Expression::Assignment(lhs, rhs) => {
                 let rhs = self.visit_expression(rhs)?;
                 let lhs = self.visit_expression(lhs)?;
@@ -230,6 +580,8 @@ impl Ty {
     }
 }
 
-pub fn run(program: &Program) -> miette::Result<(), TypeCheckError> {
-    Checker::default().visit_program(program)
+pub fn run(program: &Program) -> miette::Result<SymbolTable, TypeCheckError> {
+    let mut checker = Checker::default();
+    checker.visit_program(program)?;
+    Ok(checker.symbols)
 }

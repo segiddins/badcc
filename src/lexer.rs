@@ -147,6 +147,10 @@ pub enum Token {
     Default,
     #[token(",")]
     Comma,
+    #[token("static")]
+    Static,
+    #[token("extern")]
+    Extern,
 }
 
 pub fn lex(source: impl AsRef<str>, filename: impl AsRef<str>) -> Result<Vec<(Token, SourceSpan)>> {

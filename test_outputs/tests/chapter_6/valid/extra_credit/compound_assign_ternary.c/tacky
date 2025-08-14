@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 JumpIfZero(
@@ -23,7 +25,7 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -37,7 +39,7 @@ Program {
                         3,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -46,18 +48,18 @@ Program {
                 Binary {
                     op: Multiply,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

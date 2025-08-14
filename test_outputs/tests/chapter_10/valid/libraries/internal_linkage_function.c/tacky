@@ -1,0 +1,96 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "i.7",
+            global: false,
+            init: 0,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "call_static_my_fun",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "my_fun",
+                    [],
+                    Var(
+                        "call_static_my_fun.tmp.0",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "call_static_my_fun.tmp.0",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "call_static_my_fun_2",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "my_fun",
+                    [],
+                    Var(
+                        "call_static_my_fun_2.tmp.0",
+                    ),
+                ),
+                Return(
+                    Var(
+                        "call_static_my_fun_2.tmp.0",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "my_fun",
+            global: false,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.7",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "my_fun.tmp.0",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "my_fun.tmp.0",
+                    ),
+                    dst: Var(
+                        "i.7",
+                    ),
+                },
+                Return(
+                    Var(
+                        "i.7",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

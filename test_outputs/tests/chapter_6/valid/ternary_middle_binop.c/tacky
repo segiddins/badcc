@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 JumpIfZero(
@@ -19,15 +21,15 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        2,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -41,7 +43,7 @@ Program {
                         4,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -49,15 +51,15 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Return(
                     Var(
-                        0,
+                        "a.1",
                     ),
                 ),
                 Return(

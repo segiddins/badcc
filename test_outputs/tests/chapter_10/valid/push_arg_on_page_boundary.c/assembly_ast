@@ -1,0 +1,249 @@
+Program {
+    definitions: [
+        Function {
+            name: "foo",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Register(
+                        DI,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        SI,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        DX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        CX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R8,
+                        Four,
+                    ),
+                    destination: Stack(
+                        28,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R9,
+                        Four,
+                    ),
+                    destination: Stack(
+                        32,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        -16,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        36,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        36,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        40,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        1,
+                    ),
+                    Stack(
+                        40,
+                    ),
+                ),
+                Move {
+                    source: Stack(
+                        40,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                AllocateStack(
+                    8,
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        DI,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        SI,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        DX,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        CX,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R8,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        R9,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Data(
+                        "zed",
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Push(
+                    Register(
+                        AX,
+                        Eight,
+                    ),
+                ),
+                Call(
+                    "foo",
+                ),
+                DeallocateStack(
+                    16,
+                ),
+                Move {
+                    source: Register(
+                        AX,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        12,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

@@ -1,0 +1,76 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "f",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Goto(
+                                    "x",
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                Labeled(
+                                    "x",
+                                    Return(
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: Some(
+                    Static,
+                ),
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 73,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "f_caller",
+                params: [],
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    FunctionCall(
+                                        Var(
+                                            "f",
+                                        ),
+                                        [],
+                                    ),
+                                ),
+                            ),
+                        ],
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        70,
+                    ),
+                    length: 38,
+                },
+            },
+        ),
+    ],
+}

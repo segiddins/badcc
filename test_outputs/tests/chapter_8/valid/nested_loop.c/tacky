@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "acc.1",
                     ),
                 },
                 Copy {
@@ -17,7 +19,7 @@ Program {
                         100,
                     ),
                     dst: Var(
-                        1,
+                        "x.2",
                     ),
                 },
                 Label(
@@ -25,7 +27,7 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        1,
+                        "x.2",
                     ),
                     "loop.0",
                 ),
@@ -34,27 +36,27 @@ Program {
                         10,
                     ),
                     dst: Var(
-                        2,
+                        "y.3",
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        1,
+                        "x.2",
                     ),
                     rhs: Var(
-                        2,
+                        "y.3",
                     ),
                     dst: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                 },
                 Copy {
                     src: Var(
-                        3,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        1,
+                        "x.2",
                     ),
                 },
                 Label(
@@ -62,48 +64,48 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        2,
+                        "y.3",
                     ),
                     "loop.1",
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "acc.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                 },
                 Copy {
                     src: Var(
-                        4,
+                        "main.tmp.1",
                     ),
                     dst: Var(
-                        0,
+                        "acc.1",
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
-                        2,
+                        "y.3",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        5,
+                        "main.tmp.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        5,
+                        "main.tmp.2",
                     ),
                     dst: Var(
-                        2,
+                        "y.3",
                     ),
                 },
                 Jump(
@@ -121,36 +123,36 @@ Program {
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        0,
+                        "acc.1",
                     ),
                     rhs: Constant(
                         100,
                     ),
                     dst: Var(
-                        7,
+                        "main.tmp.4",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        7,
+                        "main.tmp.4",
                     ),
                     "main.0.false",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Var(
-                        1,
+                        "x.2",
                     ),
                     rhs: Constant(
                         0,
                     ),
                     dst: Var(
-                        8,
+                        "main.tmp.5",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        8,
+                        "main.tmp.5",
                     ),
                     "main.0.false",
                 ),
@@ -159,7 +161,7 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        6,
+                        "main.tmp.3",
                     ),
                 },
                 Jump(
@@ -173,7 +175,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        6,
+                        "main.tmp.3",
                     ),
                 },
                 Label(
@@ -181,7 +183,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        6,
+                        "main.tmp.3",
                     ),
                 ),
                 Return(

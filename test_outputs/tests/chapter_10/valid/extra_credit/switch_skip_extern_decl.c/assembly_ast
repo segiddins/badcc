@@ -1,0 +1,336 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(
+                        10,
+                    ),
+                    destination: Stack(
+                        12,
+                    ),
+                },
+                Jmp(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.1",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "switch.0.2",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Label(
+                    "switch.0.10",
+                ),
+                Move {
+                    source: Data(
+                        "x",
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        16,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Binary(
+                    Mult,
+                    Immediate(
+                        2,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Register(
+                        R11,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        30,
+                    ),
+                    Stack(
+                        16,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        20,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        20,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        20,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Label(
+                    "switch.0.default",
+                ),
+                Move {
+                    source: Immediate(
+                        5,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Stack(
+                        12,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        24,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.1",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Stack(
+                        12,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        24,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.2",
+                ),
+                Move {
+                    source: Immediate(
+                        10,
+                    ),
+                    destination: Register(
+                        R11,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Stack(
+                        12,
+                    ),
+                    Register(
+                        R11,
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Stack(
+                        24,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        24,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                    ),
+                    Stack(
+                        24,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.10",
+                ),
+                Jmp(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Move {
+                    source: Immediate(
+                        6,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "x",
+            value: 15,
+        },
+    ],
+}

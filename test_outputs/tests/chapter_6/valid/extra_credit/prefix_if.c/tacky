@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Unary {
@@ -10,32 +12,32 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                 },
                 Copy {
                     src: Var(
-                        1,
+                        "main.tmp.0",
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        0,
+                        "a.1",
                     ),
                     "main.0.true",
                 ),
@@ -53,18 +55,18 @@ Program {
                 Binary {
                     op: Add,
                     lhs: Var(
-                        0,
+                        "a.1",
                     ),
                     rhs: Constant(
                         1,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        0,
+                        "a.1",
                     ),
                     "main.1.true",
                 ),

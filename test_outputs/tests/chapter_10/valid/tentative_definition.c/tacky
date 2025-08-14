@@ -1,0 +1,106 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "foo",
+            global: true,
+            init: 0,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        0,
+                    ),
+                    dst: Var(
+                        "i.4",
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var(
+                        "i.4",
+                    ),
+                    rhs: Constant(
+                        5,
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                    ),
+                    "loop.0",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "foo",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                    ),
+                    dst: Var(
+                        "foo",
+                    ),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "i.4",
+                    ),
+                    rhs: Constant(
+                        1,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.2",
+                    ),
+                    dst: Var(
+                        "i.4",
+                    ),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Return(
+                    Var(
+                        "foo",
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+    ],
+}

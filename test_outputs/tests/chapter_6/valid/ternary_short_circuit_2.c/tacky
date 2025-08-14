@@ -1,7 +1,9 @@
 Program {
+    static_variables: [],
     functions: [
         Function {
             identifier: "main",
+            global: true,
             params: [],
             instructions: [
                 Copy {
@@ -9,7 +11,7 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        0,
+                        "a.1",
                     ),
                 },
                 Copy {
@@ -17,12 +19,12 @@ Program {
                         0,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        0,
+                        "a.1",
                     ),
                     "main.0.true",
                 ),
@@ -31,15 +33,15 @@ Program {
                         1,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Jump(
@@ -53,15 +55,15 @@ Program {
                         2,
                     ),
                     dst: Var(
-                        1,
+                        "b.2",
                     ),
                 },
                 Copy {
                     src: Var(
-                        1,
+                        "b.2",
                     ),
                     dst: Var(
-                        2,
+                        "main.tmp.0",
                     ),
                 },
                 Label(
@@ -69,7 +71,7 @@ Program {
                 ),
                 Return(
                     Var(
-                        1,
+                        "b.2",
                     ),
                 ),
                 Return(

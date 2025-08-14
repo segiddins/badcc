@@ -1,4 +1,5 @@
 	.globl _three
+	.text
 _three:
 	pushq %rbp
 	movq %rsp, %rbp
@@ -12,6 +13,7 @@ _three:
 	popq %rbp
 	ret
 	.globl _main
+	.text
 _main:
 	pushq %rbp
 	movq %rsp, %rbp

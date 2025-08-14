@@ -1,15 +1,20 @@
 use std::{collections::HashMap, iter::empty};
 
-use crate::tacky;
+use crate::{
+    sema::{Symbol, SymbolAttributes, SymbolTable},
+    tacky,
+};
 
 #[derive(Debug)]
 pub struct Program {
     pub definitions: Vec<Function>,
+    pub static_variables: Vec<StaticVariable>,
 }
 
 #[derive(Debug)]
 pub struct Function {
     pub name: String,
+    pub global: bool,
     pub instructions: Vec<Instruction>,
 }
 
@@ -89,12 +94,13 @@ pub enum BinaryOperator {
     GreaterThanOrEqual,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub enum Operand {
     Immediate(i32),
     Register(Reg, Width),
-    Psuedo(u32),
+    Psuedo(String),
     Stack(i32),
+    Data(String),
 }
 
 impl Operand {
@@ -102,7 +108,7 @@ impl Operand {
         match self {
             Operand::Immediate(_) => Width::Four,
             Operand::Register(_, width) => *width,
-            Operand::Psuedo(_) | Operand::Stack(_) => Width::Four,
+            Operand::Psuedo(_) | Operand::Stack(_) | Operand::Data(_) => Width::Four,
         }
     }
 }
@@ -149,19 +155,19 @@ impl From<Width> for u32 {
     }
 }
 
-impl From<&tacky::Program> for Program {
-    fn from(value: &tacky::Program) -> Self {
-        let definitions = value.functions.iter().map(|func| func.into()).collect();
-        Program { definitions }
-    }
+#[derive(Debug)]
+pub struct StaticVariable {
+    pub global: bool,
+    pub name: String,
+    pub value: i32,
 }
 
-impl From<&tacky::Function> for Function {
-    fn from(value: &tacky::Function) -> Self {
-        let instructions = lower_instructions(&value.params, &value.instructions);
-        Function {
+impl From<&tacky::StaticVariable> for StaticVariable {
+    fn from(value: &tacky::StaticVariable) -> Self {
+        StaticVariable {
+            global: value.global,
             name: value.identifier.clone(),
-            instructions,
+            value: value.init,
         }
     }
 }
@@ -222,7 +228,7 @@ impl From<&tacky::Val> for Operand {
     fn from(value: &tacky::Val) -> Self {
         match value {
             tacky::Val::Constant(c) => Self::Immediate(*c),
-            tacky::Val::Var(id) => Self::Psuedo(*id),
+            tacky::Val::Var(id) => Self::Psuedo(id.clone()),
         }
     }
 }
@@ -329,7 +335,7 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                 };
 
                 for (param, reg) in args.iter().zip(&REG_ARGS) {
-                    instructions.push(Instruction::mov(param, *reg));
+                    instructions.push(Instruction::mov(param, reg.clone()));
                 }
 
                 for param in stack_args {
@@ -338,7 +344,7 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                         Operand::Immediate(_) | Operand::Register(_, _) => {
                             instructions.push(Instruction::Push(param))
                         }
-                        Operand::Psuedo(_) => {
+                        Operand::Psuedo(_) | Operand::Data(_) => {
                             instructions.push(Instruction::mov(param, Reg::AX.quad()));
                             instructions.push(Instruction::Push(Reg::AX.wide()));
                         }
@@ -361,17 +367,24 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
 }
 
 /// Returns the size of stack that needs to be allocated
-fn replace_pseudo(instructions: &mut [Instruction]) -> u32 {
+fn replace_pseudo(instructions: &mut [Instruction], symbols: &SymbolTable) -> u32 {
     let mut max = 8;
-    let mut mapping: HashMap<u32, i32> = Default::default();
+    let mut mapping: HashMap<String, i32> = Default::default();
     let mut m = |op: &mut Operand| {
         match op {
-            Operand::Immediate(_) | Operand::Register(_, _) => {}
-            Operand::Psuedo(x) => {
-                let stack = *mapping.entry(*x).or_insert_with(|| max + 4);
-                *op = Operand::Stack(stack);
-                max = max.max(stack);
-            }
+            Operand::Immediate(_) | Operand::Register(_, _) | Operand::Data(_) => {}
+            Operand::Psuedo(x) => match symbols.get(x) {
+                None
+                | Some(Symbol {
+                    attributes: SymbolAttributes::Local,
+                    ..
+                }) => {
+                    let stack = *mapping.entry(x.clone()).or_insert_with(|| max + 4);
+                    *op = Operand::Stack(stack);
+                    max = max.max(stack);
+                }
+                _ => *op = Operand::Data(x.clone()),
+            },
             Operand::Stack(x) => max = max.max(*x),
         };
     };
@@ -415,6 +428,7 @@ fn replace_pseudo(instructions: &mut [Instruction]) -> u32 {
 fn lower_instructions(
     params: &[tacky::Val],
     instructions: &[tacky::Instruction],
+    symbols: &SymbolTable,
 ) -> Vec<Instruction> {
     let mut v: Vec<Instruction> = empty()
         .chain(
@@ -433,15 +447,15 @@ fn lower_instructions(
         .chain(instructions.iter().flat_map(Into::<Vec<_>>::into))
         .collect();
 
-    let alloc_stack = Instruction::AllocateStack(replace_pseudo(&mut v));
+    let alloc_stack = Instruction::AllocateStack(replace_pseudo(&mut v, symbols));
     v.insert(0, alloc_stack);
     v.into_iter()
         .flat_map(|i| match i {
             Instruction::Move {
                 source,
                 destination,
-            } if matches!(source, Operand::Stack(_))
-                && matches!(destination, Operand::Stack(_)) =>
+            } if matches!(source, Operand::Stack(_) | Operand::Data(_))
+                && matches!(destination, Operand::Stack(_) | Operand::Data(_)) =>
             {
                 vec![
                     Instruction::mov(source, Reg::R10.quad()),
@@ -450,11 +464,11 @@ fn lower_instructions(
             }
             Instruction::Binary(op, src, dst)
                 if matches!(op, BinaryOperator::LeftShift | BinaryOperator::RightShift)
-                    && matches!(src, Operand::Stack(_))
-                    && matches!(dst, Operand::Stack(_)) =>
+                    && matches!(src, Operand::Stack(_) | Operand::Data(_))
+                    && matches!(dst, Operand::Stack(_) | Operand::Data(_)) =>
             {
                 vec![
-                    Instruction::mov(dst, Reg::R11.quad()),
+                    Instruction::mov(dst.clone(), Reg::R11.quad()),
                     Instruction::mov(src, Reg::CX.quad()),
                     Instruction::binary(op, Reg::CX.word(), Reg::R11.quad()),
                     Instruction::mov(Reg::R11.quad(), dst),
@@ -464,16 +478,17 @@ fn lower_instructions(
                 if matches!(
                     op,
                     BinaryOperator::Mult | BinaryOperator::LeftShift | BinaryOperator::RightShift
-                ) && matches!(dst, Operand::Stack(_)) =>
+                ) && matches!(dst, Operand::Stack(_) | Operand::Data(_)) =>
             {
                 vec![
-                    Instruction::mov(dst, Reg::R11.quad()),
+                    Instruction::mov(dst.clone(), Reg::R11.quad()),
                     Instruction::binary(op, src, Reg::R11.quad()),
                     Instruction::mov(Reg::R11.quad(), dst),
                 ]
             }
             Instruction::Binary(op, src, dst)
-                if matches!(src, Operand::Stack(_)) && matches!(dst, Operand::Stack(_)) =>
+                if matches!(src, Operand::Stack(_) | Operand::Data(_))
+                    && matches!(dst, Operand::Stack(_) | Operand::Data(_)) =>
             {
                 vec![
                     Instruction::mov(src, Reg::R10.quad()),
@@ -481,7 +496,8 @@ fn lower_instructions(
                 ]
             }
             Instruction::Cmp(lhs, rhs)
-                if matches!(lhs, Operand::Stack(_)) && matches!(rhs, Operand::Stack(_)) =>
+                if matches!(lhs, Operand::Stack(_) | Operand::Data(_))
+                    && matches!(rhs, Operand::Stack(_) | Operand::Data(_)) =>
             {
                 vec![
                     Instruction::mov(lhs, Reg::R10.quad()),
@@ -506,6 +522,23 @@ fn lower_instructions(
         .collect()
 }
 
-pub fn generate_assembly(program: &tacky::Program) -> Program {
-    program.into()
+pub fn generate_assembly(program: &tacky::Program, symbols: &SymbolTable) -> Program {
+    let definitions = program
+        .functions
+        .iter()
+        .map(|func| {
+            let instructions = lower_instructions(&func.params, &func.instructions, symbols);
+            Function {
+                name: func.identifier.clone(),
+                global: func.global,
+                instructions,
+            }
+        })
+        .collect();
+    let mut static_variables: Vec<_> = program.static_variables.iter().map(|v| v.into()).collect();
+    static_variables.sort_by(|lhs: &StaticVariable, rhs: &StaticVariable| lhs.name.cmp(&rhs.name));
+    Program {
+        definitions,
+        static_variables,
+    }
 }
