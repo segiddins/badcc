@@ -10,7 +10,7 @@ use crate::parser::{
 type Result = miette::Result<(), TypeCheckError>;
 
 #[derive(Debug, thiserror::Error, Diagnostic, PartialEq, Eq)]
-enum TypeCheckError {
+pub enum TypeCheckError {
     #[error("failed to type check -- expected {expected:?}, got {actual:?}")]
     Error { expected: Ty, actual: Ty },
     #[error("calling a non-function {name}")]
@@ -212,7 +212,7 @@ impl Checker {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-enum Ty {
+pub enum Ty {
     Function { params: u8 },
     Int,
 }
@@ -230,6 +230,6 @@ impl Ty {
     }
 }
 
-pub fn run(program: &Program) -> miette::Result<()> {
-    Ok(Checker::default().visit_program(program)?)
+pub fn run(program: &Program) -> miette::Result<(), TypeCheckError> {
+    Checker::default().visit_program(program)
 }

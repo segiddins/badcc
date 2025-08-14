@@ -2,7 +2,23 @@ use std::collections::HashSet;
 
 use crate::parser::*;
 
-use miette::{Result, bail, miette};
+#[derive(Debug, thiserror::Error, miette::Diagnostic)]
+pub enum Error {
+    #[error("Duplicate default in switch")]
+    DuplicateDefault,
+    #[error("Break used outside of loop or switch")]
+    InvalidBreak,
+    #[error("Continue used outside of loop")]
+    InvalidContinue,
+    #[error("case statement used outside of switch")]
+    InvalidCase,
+    #[error("Duplicate case {0} in switch")]
+    DuplicateCase(i32),
+    #[error("Non-constant expression in case")]
+    NonConstantCase,
+}
+
+type Result = std::result::Result<(), Error>;
 
 #[derive(Debug, Default)]
 struct Scope {
@@ -36,7 +52,7 @@ impl Scope {
     }
 }
 
-fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result<()> {
+fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result {
     match statement {
         Statement::Return(_) => {}
         Statement::Expression(_) => {}
@@ -70,7 +86,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result<
                 loop_label
                     .break_labels
                     .last()
-                    .ok_or_else(|| miette!("Break used outside of loop or switch"))?
+                    .ok_or(Error::InvalidBreak)?
                     .into(),
             );
         }
@@ -79,7 +95,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result<
                 loop_label
                     .continue_labels
                     .last()
-                    .ok_or_else(|| miette!("Continue used outside of loop"))?
+                    .ok_or(Error::InvalidContinue)?
                     .into(),
             );
         }
@@ -89,28 +105,22 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result<
             loop_label.pop(false);
         }
         Statement::Case(expr, statement, label) => {
-            let (switch_label, cases) = loop_label
-                .cases
-                .last_mut()
-                .ok_or_else(|| miette!("case statement used outside of switch"))?;
+            let (switch_label, cases) = loop_label.cases.last_mut().ok_or(Error::InvalidCase)?;
             label.replace(switch_label.clone());
             match expr {
                 Expression::Constant(c) => {
                     if !cases.insert(Some(*c)) {
-                        bail!("Duplicate case {c} in switch")
+                        return Err(Error::DuplicateCase(*c));
                     }
                 }
-                _ => bail!("Non-constant expression in case"),
+                _ => return Err(Error::NonConstantCase),
             }
             visit_statement(statement, loop_label)?
         }
         Statement::Default(statement, label) => {
-            let (switch_label, cases) = loop_label
-                .cases
-                .last_mut()
-                .ok_or_else(|| miette!("case statement used outside of switch"))?;
+            let (switch_label, cases) = loop_label.cases.last_mut().ok_or(Error::InvalidCase)?;
             if !cases.insert(None) {
-                bail!("Duplicate default in switch")
+                return Err(Error::DuplicateDefault);
             }
             label.replace(switch_label.clone());
             visit_statement(statement, loop_label)?
@@ -119,7 +129,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result<
     Ok(())
 }
 
-fn visit_block(block: &mut Block, scope: &mut Scope) -> Result<(), miette::Error> {
+fn visit_block(block: &mut Block, scope: &mut Scope) -> Result {
     for item in block.items.iter_mut() {
         match item {
             BlockItem::Statement(statement) => visit_statement(statement, scope)?,
@@ -129,7 +139,7 @@ fn visit_block(block: &mut Block, scope: &mut Scope) -> Result<(), miette::Error
     Ok(())
 }
 
-fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result<()> {
+fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result {
     match decl {
         Declaration::Variable(_) => Ok(()),
         Declaration::Function(function_declaration) => {
@@ -141,7 +151,7 @@ fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result<()> {
     }
 }
 
-pub(super) fn run(program: &mut Program) -> Result<()> {
+pub(super) fn run(program: &mut Program) -> Result {
     for decl in program.declarations.iter_mut() {
         visit_decl(decl, &mut Scope::default())?
     }
