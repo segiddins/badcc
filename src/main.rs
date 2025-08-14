@@ -1,12 +1,9 @@
 #![feature(assert_matches)]
 
+use camino::{Utf8Path, Utf8PathBuf};
+use fs_err::{File, create_dir_all, read_to_string};
 use miette::{Context, IntoDiagnostic, Result, bail};
-use std::{
-    fs::{File, create_dir_all, read_to_string},
-    io::Write,
-    path::{Path, PathBuf},
-    process::Command,
-};
+use std::{io::Write, process::Command};
 
 use clap::Parser;
 
@@ -27,9 +24,9 @@ mod tacky;
 
 #[derive(clap::Parser)]
 struct Driver {
-    input: PathBuf,
+    input: Utf8PathBuf,
     #[clap(short = 'o')]
-    output: Option<PathBuf>,
+    output: Option<Utf8PathBuf>,
     #[clap(long)]
     lex: bool,
     #[clap(long)]
@@ -40,7 +37,7 @@ struct Driver {
     validate: bool,
 
     #[clap(long, hide = true)]
-    test_output_dir: Option<PathBuf>,
+    test_output_dir: Option<Utf8PathBuf>,
 
     #[clap(long)]
     tacky: bool,
@@ -55,7 +52,7 @@ struct Driver {
     keep_artifacts: bool,
 
     #[clap(skip)]
-    artifacts: Vec<PathBuf>,
+    artifacts: Vec<Utf8PathBuf>,
 }
 
 impl Driver {
@@ -65,9 +62,9 @@ impl Driver {
 
         let src = read_to_string(&pre)
             .into_diagnostic()
-            .with_context(|| format!("failed to read {}", pre.display()))?;
+            .with_context(|| format!("failed to read {}", pre))?;
 
-        let tokens = lex(&src, pre.display().to_string())?;
+        let tokens = lex(&src, &pre)?;
         self.write_test_output("tokens", || {
             format!("{:#?}", tokens.iter().map(|(t, _)| t).collect::<Vec<_>>())
         });
@@ -75,7 +72,7 @@ impl Driver {
             return Ok(());
         }
 
-        let mut program = parse(src, tokens, &pre.display().to_string())?;
+        let mut program = parse(src, tokens, pre.as_str())?;
         if self.parse {
             return Ok(());
         }
@@ -112,7 +109,7 @@ impl Driver {
         Ok(())
     }
 
-    fn preprocess(&self) -> Result<PathBuf> {
+    fn preprocess(&self) -> Result<Utf8PathBuf> {
         let path = self.input.with_extension("i");
         let result = Command::new("gcc")
             .arg("-E")
@@ -126,11 +123,11 @@ impl Driver {
         if result.success() {
             Ok(path)
         } else {
-            bail!("preprocessing {} failed", path.display())
+            bail!("preprocessing {} failed", path)
         }
     }
 
-    fn emit_asm(&self, program: &Program) -> Result<PathBuf> {
+    fn emit_asm(&self, program: &Program) -> Result<Utf8PathBuf> {
         let path = self.input.with_extension("s");
         let mut f = File::create(&path).into_diagnostic()?;
         emit_asm(program, &f).into_diagnostic()?;
@@ -139,7 +136,7 @@ impl Driver {
         Ok(path)
     }
 
-    fn assemble(&self, assembly: impl AsRef<Path>) -> Result<()> {
+    fn assemble(&self, assembly: impl AsRef<Utf8Path>) -> Result<()> {
         #[cfg(target_os = "macos")]
         let mut cmd = {
             let mut c = Command::new("arch");
@@ -169,7 +166,7 @@ impl Driver {
         }
     }
 
-    fn write_test_output<F, S: AsRef<str>>(&self, file: impl AsRef<Path>, contents: F)
+    fn write_test_output<F, S: AsRef<str>>(&self, file: impl AsRef<Utf8Path>, contents: F)
     where
         F: FnOnce() -> S,
     {
@@ -185,7 +182,7 @@ impl Driver {
         );
         output_file.push(file);
         create_dir_all(output_file.parent().unwrap()).unwrap();
-        std::fs::write(output_file, contents().as_ref()).unwrap();
+        fs_err::write(output_file, contents().as_ref()).unwrap();
     }
 }
 
@@ -193,7 +190,7 @@ impl Drop for Driver {
     fn drop(&mut self) {
         if !self.keep_artifacts {
             for artifact in self.artifacts.drain(..) {
-                let _ = std::fs::remove_file(artifact);
+                let _ = fs_err::remove_file(artifact);
             }
         }
     }
