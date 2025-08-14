@@ -33,7 +33,7 @@ pub enum Token {
     Identifier(String),
     #[regex(r"\d+", |lex| lex.slice().to_owned())]
     Constant(String),
-    #[regex(r"\d+[a-zA-Z_]", LexingError::error)]
+    #[regex(r"\d+[a-zA-Z_]\w*", LexingError::error)]
     InvalidIdentifier(String),
     #[token("(")]
     LParen,
