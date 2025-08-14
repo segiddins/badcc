@@ -68,7 +68,9 @@ impl Driver {
             .with_context(|| format!("failed to read {}", pre.display()))?;
 
         let tokens = lex(&src, pre.display().to_string())?;
-        self.write_test_output("tokens", || format!("{tokens:#?}"));
+        self.write_test_output("tokens", || {
+            format!("{:#?}", tokens.iter().map(|(t, _)| t).collect::<Vec<_>>())
+        });
         if self.lex {
             return Ok(());
         }

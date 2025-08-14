@@ -27,7 +27,7 @@ fn test_compiles() {
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
-    	subq $4, %rsp
+    	subq $16, %rsp
     	movl $2, %eax
     	movq %rbp, %rsp
     	popq %rbp
@@ -68,10 +68,10 @@ fn test_one_plus_one() {
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
-    	subq $4, %rsp
-    	movl $1, -4(%rbp)
-    	addl $1, -4(%rbp)
-    	movl -4(%rbp), %eax
+    	subq $16, %rsp
+    	movl $1, -12(%rbp)
+    	addl $1, -12(%rbp)
+    	movl -12(%rbp), %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret
@@ -111,18 +111,18 @@ fn test_associativity_3() {
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
-    	subq $8, %rsp
+    	subq $16, %rsp
     	movl $6, %eax
     	cdq
     	movl $3, %r10d
     	idivl %r10d
-    	movl %eax, -4(%rbp)
-    	movl -4(%rbp), %eax
+    	movl %eax, -12(%rbp)
+    	movl -12(%rbp), %eax
     	cdq
     	movl $2, %r10d
     	idivl %r10d
-    	movl %eax, -8(%rbp)
-    	movl -8(%rbp), %eax
+    	movl %eax, -16(%rbp)
+    	movl -16(%rbp), %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret
@@ -155,13 +155,13 @@ fn test_unop_add() {
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
-    	subq $8, %rsp
-    	movl $2, -4(%rbp)
-    	notl -4(%rbp)
-    	movl -4(%rbp), %r10d
-    	movl %r10d, -8(%rbp)
-    	addl $3, -8(%rbp)
-    	movl -8(%rbp), %eax
+    	subq $16, %rsp
+    	movl $2, -12(%rbp)
+    	notl -12(%rbp)
+    	movl -12(%rbp), %r10d
+    	movl %r10d, -16(%rbp)
+    	addl $3, -16(%rbp)
+    	movl -16(%rbp), %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret
@@ -194,25 +194,25 @@ fn test_shifts() {
     _main:
     	pushq %rbp
     	movq %rsp, %rbp
-    	subq $16, %rsp
-    	movl $1, -4(%rbp)
-    	movl -4(%rbp), %r11d
-    	sall $2, %r11d
-    	movl %r11d, -4(%rbp)
-    	movl -4(%rbp), %r10d
-    	movl %r10d, -8(%rbp)
-    	movl -8(%rbp), %r11d
-    	sarl $1, %r11d
-    	movl %r11d, -8(%rbp)
+    	subq $32, %rsp
     	movl $1, -12(%rbp)
-    	addl $0, -12(%rbp)
-    	movl -8(%rbp), %r10d
+    	movl -12(%rbp), %r11d
+    	sall $2, %r11d
+    	movl %r11d, -12(%rbp)
+    	movl -12(%rbp), %r10d
     	movl %r10d, -16(%rbp)
     	movl -16(%rbp), %r11d
-    	movl -12(%rbp), %ecx
-    	sarl %cl, %r11d
+    	sarl $1, %r11d
     	movl %r11d, -16(%rbp)
-    	movl -16(%rbp), %eax
+    	movl $1, -20(%rbp)
+    	addl $0, -20(%rbp)
+    	movl -16(%rbp), %r10d
+    	movl %r10d, -24(%rbp)
+    	movl -24(%rbp), %r11d
+    	movl -20(%rbp), %ecx
+    	sarl %cl, %r11d
+    	movl %r11d, -24(%rbp)
+    	movl -24(%rbp), %eax
     	movq %rbp, %rsp
     	popq %rbp
     	ret

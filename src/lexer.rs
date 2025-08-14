@@ -15,26 +15,26 @@ pub enum LexingError {
 }
 
 impl LexingError {
-    fn from_lexer<'src>(lex: &mut logos::Lexer<'src, TokenKind>) -> Self {
+    fn from_lexer<'src>(lex: &mut logos::Lexer<'src, Token>) -> Self {
         LexingError::UnknownToken {
             span: lex.span().into(),
         }
     }
 
-    fn error<'src>(lex: &mut logos::Lexer<'src, TokenKind>) -> Result<(), Self> {
+    fn error<'src, T>(lex: &mut logos::Lexer<'src, Token>) -> Result<T, Self> {
         Err(Self::from_lexer(lex))
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy, Logos)]
+#[derive(Debug, PartialEq, Eq, Clone, Logos)]
 #[logos(error(LexingError, LexingError::from_lexer))]
-pub enum TokenKind {
-    #[regex(r"[a-zA-Z_]\w*")]
-    Identifier,
-    #[regex(r"\d+")]
-    Constant,
+pub enum Token {
+    #[regex(r"[a-zA-Z_]\w*", |lex| lex.slice().to_owned())]
+    Identifier(String),
+    #[regex(r"\d+", |lex| lex.slice().to_owned())]
+    Constant(String),
     #[regex(r"\d+[a-zA-Z_]", LexingError::error)]
-    InvalidIdentifier,
+    InvalidIdentifier(String),
     #[token("(")]
     LParen,
     #[token(")")]
@@ -149,50 +149,25 @@ pub enum TokenKind {
     Comma,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct Token {
-    pub kind: TokenKind,
-    pub location: SourceSpan,
-}
-
-impl Token {
-    pub fn source<'a>(&self, source: &'a str) -> &'a str {
-        source
-            .get(self.location.offset()..(self.location.offset() + self.location.len()))
-            .unwrap()
-    }
-}
-
-pub fn lex(source: impl AsRef<str>, name: impl AsRef<str>) -> Result<Vec<Token>> {
-    TokenKind::lexer(source.as_ref())
+pub fn lex(source: impl AsRef<str>, filename: impl AsRef<str>) -> Result<Vec<(Token, SourceSpan)>> {
+    Token::lexer(source.as_ref())
         .spanned()
-        .map(|(kind, range)| {
-            kind.map(|kind| Token {
-                kind,
-                location: range.into(),
-            })
-            .map_err(|e| {
-                miette::Report::from(e).with_source_code(
-                    NamedSource::new(name.as_ref(), source.as_ref().to_string()).with_language("c"),
-                )
+        .map(|(token, span)| {
+            token.map(|t| (t, span.into())).map_err(|e| {
+                miette::Report::from(e).with_source_code(NamedSource::new(
+                    filename.as_ref(),
+                    source.as_ref().to_string(),
+                ))
             })
         })
-        .filter(|t| {
-            !matches!(
-                t,
-                Ok(Token {
-                    kind: TokenKind::Whitespace,
-                    ..
-                })
-            )
-        })
+        .filter(|res| !matches!(res, Ok((Token::Whitespace, _))))
         .collect()
 }
 
 #[cfg(test)]
 mod tests {
 
-    use crate::lexer::{Token, lex};
+    use crate::lexer::{Token::*, lex};
 
     #[test]
     fn test_lex_empty() {
@@ -206,29 +181,11 @@ mod tests {
     #[test]
     fn test_lex_int() {
         let tokens = lex("int", "example.c").unwrap();
-        assert_eq!(
-            tokens,
-            vec![Token {
-                kind: crate::lexer::TokenKind::Int,
-                location: (0, 3).into()
-            }]
-        );
+        assert_eq!(tokens, vec![(Int, (0, 3).into())]);
         let tokens = lex(" int", "example.c").unwrap();
-        assert_eq!(
-            tokens,
-            vec![Token {
-                kind: crate::lexer::TokenKind::Int,
-                location: (1, 3).into()
-            }]
-        );
+        assert_eq!(tokens, vec![(Int, (1, 3).into())]);
         let tokens = lex("int ", "example.c").unwrap();
-        assert_eq!(
-            tokens,
-            vec![Token {
-                kind: crate::lexer::TokenKind::Int,
-                location: (0, 3).into()
-            }]
-        );
+        assert_eq!(tokens, vec![(Int, (0, 3).into())]);
     }
 
     #[test]
@@ -237,46 +194,16 @@ mod tests {
         assert_eq!(
             tokens,
             vec![
-                Token {
-                    kind: crate::lexer::TokenKind::Int,
-                    location: (0, 3).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::Identifier,
-                    location: (4, 4).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::LParen,
-                    location: (8, 1).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::Void,
-                    location: (9, 4).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::RParen,
-                    location: (13, 1).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::LBrace,
-                    location: (15, 1).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::Return,
-                    location: (19, 6).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::Constant,
-                    location: (26, 1).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::Semicolon,
-                    location: (27, 1).into()
-                },
-                Token {
-                    kind: crate::lexer::TokenKind::RBrace,
-                    location: (29, 1).into()
-                },
+                (Int, (0, 3).into()),
+                (Identifier("main".into()), (4, 4).into()),
+                (LParen, (8, 1).into()),
+                (Void, (9, 4).into()),
+                (RParen, (13, 1).into()),
+                (LBrace, (15, 1).into()),
+                (Return, (19, 6).into()),
+                (Constant("2".into()), (26, 1).into()),
+                (Semicolon, (27, 1).into()),
+                (RBrace, (29, 1).into()),
             ]
         );
     }
