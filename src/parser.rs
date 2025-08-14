@@ -534,7 +534,16 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
 
         kind => {
             return Err(ParserError::Expected {
-                options: vec![],
+                options: vec![
+                    TokenKind::Constant,
+                    TokenKind::Identifier,
+                    TokenKind::LParen,
+                    TokenKind::Hypen,
+                    TokenKind::Tilde,
+                    TokenKind::Exclamation,
+                    TokenKind::PlusPlus,
+                    TokenKind::MinusMinus,
+                ],
                 kind,
                 span: token.location,
             });
