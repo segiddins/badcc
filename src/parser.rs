@@ -135,6 +135,7 @@ pub enum Statement {
 #[derive(Debug)]
 pub struct Block {
     pub items: Vec<BlockItem>,
+    span: SourceSpan,
 }
 
 #[derive(Debug)]
@@ -301,13 +302,14 @@ fn parse_program(lexer: &mut Lexer) -> Result<Program> {
 }
 
 fn parse_block(lexer: &mut Lexer) -> Result<Block> {
-    lexer.expect(Token::LBrace)?;
+    let (_, start) = lexer.expect(Token::LBrace)?;
     let mut items = vec![];
     while !matches!(lexer.peek_token(), Some((Token::RBrace, _))) {
         items.push(parse!(parse_block_item, lexer)?);
     }
-    lexer.expect(Token::RBrace)?;
-    Ok(Block { items })
+    let (_, end) = lexer.expect(Token::RBrace)?;
+    let span = (start.offset(), end.offset() + end.len() - start.offset()).into();
+    Ok(Block { items, span })
 }
 
 fn parse_block_item(lexer: &mut Lexer) -> Result<BlockItem> {
@@ -404,13 +406,14 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
 
     lexer.expect(Token::RParen)?;
 
-    let body = if lexer.peek_kind(Token::LBrace) {
-        Some(parse_block(lexer)?)
+    let (body, end) = if lexer.peek_kind(Token::LBrace) {
+        let block = parse_block(lexer)?;
+        let span = block.span;
+        (Some(block), span)
     } else {
-        lexer.expect(Token::Semicolon)?;
-        None
+        let (_, span) = lexer.expect(Token::Semicolon)?;
+        (None, span)
     };
-    let end = lexer.mark();
     let span = (start.offset()..(end.offset() + end.len())).into();
     Ok(Declaration::Function(FunctionDeclaration {
         identifier,

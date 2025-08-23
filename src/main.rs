@@ -37,7 +37,7 @@ struct Driver {
     validate: bool,
 
     #[clap(long, hide = true)]
-    test_output_dir: Option<Utf8PathBuf>,
+    test_outputs_dir: Option<Utf8PathBuf>,
 
     #[clap(long)]
     tacky: bool,
@@ -57,7 +57,7 @@ struct Driver {
 
 impl Driver {
     fn run(&mut self) -> Result<()> {
-        if let Some(test_output_dir) = self.test_output_dir.as_ref() {
+        if let Some(test_output_dir) = self.test_output_dir() {
             let _ = std::fs::remove_dir_all(test_output_dir);
         };
 
@@ -171,20 +171,26 @@ impl Driver {
         }
     }
 
-    fn write_test_output<F, S: AsRef<str>>(&self, file: impl AsRef<Utf8Path>, contents: F)
-    where
-        F: FnOnce() -> S,
-    {
-        let Some(test_output_dir) = self.test_output_dir.as_ref() else {
-            return;
-        };
-
-        let mut output_file = test_output_dir.clone();
-        output_file.extend(
+    fn test_output_dir(&self) -> Option<Utf8PathBuf> {
+        let test_outputs_dir = self.test_outputs_dir.as_ref()?;
+        let mut output_dir = test_outputs_dir.clone();
+        output_dir.extend(
             self.input
                 .components()
                 .skip_while(|comp| comp.as_os_str() != "tests"),
         );
+        Some(output_dir)
+    }
+
+    fn write_test_output<F, S: AsRef<str>>(&self, file: impl AsRef<Utf8Path>, contents: F)
+    where
+        F: FnOnce() -> S,
+    {
+        let Some(test_output_dir) = self.test_output_dir() else {
+            return;
+        };
+
+        let mut output_file = test_output_dir.clone();
         output_file.push(file);
         create_dir_all(output_file.parent().unwrap()).unwrap();
         fs_err::write(output_file, contents().as_ref()).unwrap();
