@@ -1,0 +1,395 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "truncate",
+            global: true,
+            params: [
+                Var(
+                    "l.1",
+                    Long,
+                ),
+                Var(
+                    "expected.2",
+                    Int,
+                ),
+            ],
+            instructions: [
+                Truncate {
+                    src: Var(
+                        "l.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "truncate.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "truncate.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "result.3",
+                        Int,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "result.3",
+                        Int,
+                    ),
+                    rhs: Var(
+                        "expected.2",
+                        Int,
+                    ),
+                    dst: Var(
+                        "truncate.tmp.1",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "truncate.tmp.1",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "truncate",
+                    [
+                        Constant(
+                            Long(
+                                10,
+                            ),
+                        ),
+                        Constant(
+                            Int(
+                                10,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                },
+                Call(
+                    "truncate",
+                    [
+                        Var(
+                            "main.tmp.2",
+                            Long,
+                        ),
+                        Var(
+                            "main.tmp.3",
+                            Int,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "truncate",
+                    [
+                        Constant(
+                            Long(
+                                17179869189,
+                            ),
+                        ),
+                        Constant(
+                            Int(
+                                5,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            17179869179,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Long,
+                    ),
+                },
+                Call(
+                    "truncate",
+                    [
+                        Var(
+                            "main.tmp.8",
+                            Long,
+                        ),
+                        Constant(
+                            Int(
+                                5,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Truncate {
+                    src: Constant(
+                        Long(
+                            17179869189,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.11",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.11",
+                        Int,
+                    ),
+                    dst: Var(
+                        "i.5",
+                        Int,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "i.5",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.12",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.12",
+                        Int,
+                    ),
+                    "main.4.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

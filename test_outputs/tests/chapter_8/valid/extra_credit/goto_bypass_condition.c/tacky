@@ -8,10 +8,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -24,37 +27,48 @@ Program {
                     op: Add,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: LessThan,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     "main.0.true",
                 ),
@@ -75,7 +89,9 @@ Program {
                 ),
                 JumpIfNotZero(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     "loop.0.head",
                 ),
@@ -85,11 +101,14 @@ Program {
                 Return(
                     Var(
                         "i.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

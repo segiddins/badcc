@@ -1,0 +1,220 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "switch_on_long",
+                params: [
+                    (
+                        Long,
+                        "l",
+                    ),
+                ],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Switch(
+                                    Var(
+                                        "l",
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            Int(
+                                                                0,
+                                                            ),
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                Int(
+                                                                    0,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            Int(
+                                                                100,
+                                                            ),
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                Int(
+                                                                    1,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            Long(
+                                                                8589934592,
+                                                            ),
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                Int(
+                                                                    2,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Default(
+                                                        Return(
+                                                            Unary(
+                                                                Minus,
+                                                                Constant(
+                                                                    Int(
+                                                                        1,
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                            ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    44,
+                                                ),
+                                                length: 149,
+                                            },
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                27,
+                            ),
+                            length: 168,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 195,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "switch_on_long",
+                                            ),
+                                            [
+                                                Constant(
+                                                    Long(
+                                                        8589934592,
+                                                    ),
+                                                ),
+                                            ],
+                                        ),
+                                        Constant(
+                                            Int(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "switch_on_long",
+                                            ),
+                                            [
+                                                Constant(
+                                                    Int(
+                                                        100,
+                                                    ),
+                                                ),
+                                            ],
+                                        ),
+                                        Constant(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                211,
+                            ),
+                            length: 128,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        196,
+                    ),
+                    length: 143,
+                },
+            },
+        ),
+    ],
+}

@@ -1,0 +1,212 @@
+Program {
+    declarations: [
+        Variable(
+            VariableDeclaration {
+                ty: Long,
+                name: "l",
+                init: None,
+                storage: Some(
+                    Extern,
+                ),
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 18,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "return_l",
+                params: [],
+                ret: Long,
+                body: None,
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        19,
+                    ),
+                    length: 20,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "return_l_as_int",
+                params: [],
+                ret: Int,
+                body: None,
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        40,
+                    ),
+                    length: 26,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "return_l",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            Long(
+                                                8589934592,
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "return_l_as_int",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            Int(
+                                                0,
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "l",
+                                        ),
+                                        Binary(
+                                            Subtract,
+                                            Var(
+                                                "l",
+                                            ),
+                                            Constant(
+                                                Long(
+                                                    10,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "return_l",
+                                            ),
+                                            [],
+                                        ),
+                                        Constant(
+                                            Long(
+                                                8589934582,
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                3,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        FunctionCall(
+                                            Var(
+                                                "return_l_as_int",
+                                            ),
+                                            [],
+                                        ),
+                                        Unary(
+                                            Minus,
+                                            Constant(
+                                                Int(
+                                                    10,
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Return(
+                                        Constant(
+                                            Int(
+                                                4,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                82,
+                            ),
+                            length: 242,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        67,
+                    ),
+                    length: 257,
+                },
+            },
+        ),
+    ],
+}

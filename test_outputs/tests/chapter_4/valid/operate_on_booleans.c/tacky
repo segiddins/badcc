@@ -8,22 +8,29 @@ Program {
             instructions: [
                 JumpIfZero(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     "main.0.false",
                 ),
                 JumpIfZero(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     "main.0.false",
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Jump(
@@ -34,10 +41,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Label(
@@ -47,29 +57,38 @@ Program {
                     op: Complement,
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     "main.1.true",
                 ),
                 JumpIfNotZero(
                     Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     "main.1.true",
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -80,10 +99,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -93,31 +115,39 @@ Program {
                     op: Negate,
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     rhs: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.4",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "main.tmp.4",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

@@ -4,17 +4,26 @@ Program {
             FunctionDeclaration {
                 identifier: "a",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Statement(
                                 Return(
                                     Constant(
-                                        1,
+                                        Int(
+                                            1,
+                                        ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                12,
+                            ),
+                            length: 17,
+                        },
                     },
                 ),
                 storage: None,
@@ -22,7 +31,7 @@ Program {
                     offset: SourceOffset(
                         0,
                     ),
-                    length: 33,
+                    length: 29,
                 },
             },
         ),
@@ -30,8 +39,12 @@ Program {
             FunctionDeclaration {
                 identifier: "b",
                 params: [
-                    "a.2",
+                    (
+                        Int,
+                        "a.2",
+                    ),
                 ],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
@@ -43,6 +56,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                43,
+                            ),
+                            length: 17,
+                        },
                     },
                 ),
                 storage: None,
@@ -50,7 +69,7 @@ Program {
                     offset: SourceOffset(
                         30,
                     ),
-                    length: 34,
+                    length: 30,
                 },
             },
         ),
@@ -58,6 +77,7 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
@@ -77,7 +97,9 @@ Program {
                                             ),
                                             [
                                                 Constant(
-                                                    2,
+                                                    Int(
+                                                        2,
+                                                    ),
                                                 ),
                                             ],
                                         ),
@@ -85,6 +107,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                76,
+                            ),
+                            length: 26,
+                        },
                     },
                 ),
                 storage: None,

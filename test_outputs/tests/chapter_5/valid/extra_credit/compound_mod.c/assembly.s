@@ -9,7 +9,9 @@ _main:
 	cdq
 	movl $3, %r10d
 	idivl %r10d
-	movl %edx, -12(%rbp)
+	movl %edx, -16(%rbp)
+	movl -16(%rbp), %r10d
+	movl %r10d, -12(%rbp)
 	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp

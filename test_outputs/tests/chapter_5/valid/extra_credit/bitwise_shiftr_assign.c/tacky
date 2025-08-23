@@ -8,48 +8,63 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1234,
+                        Int(
+                            1234,
+                        ),
                     ),
                     dst: Var(
                         "var_to_shift.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: RightShift,
                     lhs: Var(
                         "var_to_shift.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "x.2",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

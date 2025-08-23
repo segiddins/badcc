@@ -8,18 +8,24 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        12345,
+                        Int(
+                            12345,
+                        ),
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
                         "i.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -29,17 +35,22 @@ Program {
                     op: GreaterThanOrEqual,
                     lhs: Var(
                         "i.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -47,20 +58,26 @@ Program {
                     op: Divide,
                     lhs: Var(
                         "a.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -70,20 +87,26 @@ Program {
                     op: Subtract,
                     lhs: Var(
                         "i.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "i.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -95,11 +118,14 @@ Program {
                 Return(
                     Var(
                         "a.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

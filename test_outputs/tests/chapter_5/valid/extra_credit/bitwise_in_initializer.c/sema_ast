@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a.1",
                                         init: Some(
                                             Constant(
-                                                15,
+                                                Int(
+                                                    15,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -29,6 +33,7 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "b.2",
                                         init: Some(
                                             Binary(
@@ -37,7 +42,9 @@ Program {
                                                     "a.1",
                                                 ),
                                                 Constant(
-                                                    5,
+                                                    Int(
+                                                        5,
+                                                    ),
                                                 ),
                                             ),
                                         ),
@@ -56,7 +63,9 @@ Program {
                                     Binary(
                                         BitwiseOr,
                                         Constant(
-                                            1,
+                                            Int(
+                                                1,
+                                            ),
                                         ),
                                         Var(
                                             "b.2",
@@ -65,6 +74,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 56,
+                        },
                     },
                 ),
                 storage: None,

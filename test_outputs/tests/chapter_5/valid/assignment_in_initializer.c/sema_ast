@@ -4,12 +4,14 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a.1",
                                         init: None,
                                         storage: None,
@@ -25,6 +27,7 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "b.2",
                                         init: Some(
                                             Assignment(
@@ -32,7 +35,9 @@ Program {
                                                     "a.1",
                                                 ),
                                                 Constant(
-                                                    0,
+                                                    Int(
+                                                        0,
+                                                    ),
                                                 ),
                                             ),
                                         ),
@@ -54,6 +59,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 47,
+                        },
                     },
                 ),
                 storage: None,

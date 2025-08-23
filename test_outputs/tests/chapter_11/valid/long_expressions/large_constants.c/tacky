@@ -1,0 +1,375 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: true,
+            init: 5,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "add_large",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "add_large.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "add_large.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "x",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967295,
+                        ),
+                    ),
+                    dst: Var(
+                        "add_large.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "add_large.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "add_large.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "add_large.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "subtract_large",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "subtract_large.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "subtract_large.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "x",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "subtract_large.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "subtract_large.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "subtract_large.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "subtract_large.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiply_by_large",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "multiply_by_large.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "multiply_by_large.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "x",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "x",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            21474836450,
+                        ),
+                    ),
+                    dst: Var(
+                        "multiply_by_large.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "multiply_by_large.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "multiply_by_large.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "multiply_by_large.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "add_large",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "subtract_large",
+                    [],
+                    Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "multiply_by_large",
+                    [],
+                    Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

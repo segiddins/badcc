@@ -4,6 +4,7 @@ Program {
             identifier: "foo",
             global: true,
             init: 0,
+            width: Four,
         },
     ],
     functions: [
@@ -14,10 +15,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "i.4",
+                        Int,
                     ),
                 },
                 Label(
@@ -27,17 +31,22 @@ Program {
                     op: LessThan,
                     lhs: Var(
                         "i.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -45,20 +54,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "foo",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "foo",
+                        Int,
                     ),
                 },
                 Label(
@@ -68,20 +83,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "i.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "i.4",
+                        Int,
                     ),
                 },
                 Jump(
@@ -93,11 +114,14 @@ Program {
                 Return(
                     Var(
                         "foo",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

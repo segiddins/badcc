@@ -1,0 +1,433 @@
+Program {
+    declarations: [
+        Function(
+            FunctionDeclaration {
+                identifier: "return_truncated_long",
+                params: [
+                    (
+                        Long,
+                        "l.1",
+                    ),
+                ],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Cast(
+                                        Int,
+                                        Var(
+                                            "l.1",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                34,
+                            ),
+                            length: 17,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        0,
+                    ),
+                    length: 51,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "return_extended_int",
+                params: [
+                    (
+                        Int,
+                        "i.3",
+                    ),
+                ],
+                ret: Long,
+                body: Some(
+                    Block {
+                        items: [
+                            Statement(
+                                Return(
+                                    Cast(
+                                        Long,
+                                        Var(
+                                            "i.3",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                84,
+                            ),
+                            length: 17,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        52,
+                    ),
+                    length: 49,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "truncate_on_assignment",
+                params: [
+                    (
+                        Long,
+                        "l.5",
+                    ),
+                    (
+                        Int,
+                        "expected.6",
+                    ),
+                ],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        ty: Int,
+                                        name: "result.7",
+                                        init: Some(
+                                            Cast(
+                                                Int,
+                                                Var(
+                                                    "l.5",
+                                                ),
+                                            ),
+                                        ),
+                                        storage: None,
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                157,
+                                            ),
+                                            length: 15,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "result.7",
+                                        ),
+                                        Var(
+                                            "expected.6",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                151,
+                            ),
+                            length: 54,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        102,
+                    ),
+                    length: 103,
+                },
+            },
+        ),
+        Function(
+            FunctionDeclaration {
+                identifier: "main",
+                params: [],
+                ret: Int,
+                body: Some(
+                    Block {
+                        items: [
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        ty: Long,
+                                        name: "result.9",
+                                        init: Some(
+                                            Cast(
+                                                Long,
+                                                FunctionCall(
+                                                    Var(
+                                                        "return_truncated_long",
+                                                    ),
+                                                    [
+                                                        Constant(
+                                                            Long(
+                                                                4294967298,
+                                                            ),
+                                                        ),
+                                                    ],
+                                                ),
+                                            ),
+                                        ),
+                                        storage: None,
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                227,
+                                            ),
+                                            length: 49,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "result.9",
+                                        ),
+                                        Constant(
+                                            Long(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            Int(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    299,
+                                                ),
+                                                length: 25,
+                                            },
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "result.9",
+                                        ),
+                                        FunctionCall(
+                                            Var(
+                                                "return_extended_int",
+                                            ),
+                                            [
+                                                Unary(
+                                                    Minus,
+                                                    Constant(
+                                                        Int(
+                                                            10,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "result.9",
+                                        ),
+                                        Cast(
+                                            Long,
+                                            Unary(
+                                                Minus,
+                                                Constant(
+                                                    Int(
+                                                        10,
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            Int(
+                                                                2,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    387,
+                                                ),
+                                                length: 25,
+                                            },
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Declaration(
+                                Variable(
+                                    VariableDeclaration {
+                                        ty: Int,
+                                        name: "i.10",
+                                        init: Some(
+                                            Constant(
+                                                Int(
+                                                    2,
+                                                ),
+                                            ),
+                                        ),
+                                        storage: None,
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                417,
+                                            ),
+                                            length: 20,
+                                        },
+                                    },
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Binary(
+                                        NotEqual,
+                                        Var(
+                                            "i.10",
+                                        ),
+                                        Constant(
+                                            Int(
+                                                2,
+                                            ),
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            Int(
+                                                                3,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    454,
+                                                ),
+                                                length: 25,
+                                            },
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                If(
+                                    Unary(
+                                        Not,
+                                        FunctionCall(
+                                            Var(
+                                                "truncate_on_assignment",
+                                            ),
+                                            [
+                                                Constant(
+                                                    Long(
+                                                        17179869184,
+                                                    ),
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        0,
+                                                    ),
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                    Compound(
+                                        Block {
+                                            items: [
+                                                Statement(
+                                                    Return(
+                                                        Constant(
+                                                            Int(
+                                                                4,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    530,
+                                                ),
+                                                length: 25,
+                                            },
+                                        },
+                                    ),
+                                    None,
+                                ),
+                            ),
+                            Statement(
+                                Return(
+                                    Constant(
+                                        Int(
+                                            0,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                221,
+                            ),
+                            length: 350,
+                        },
+                    },
+                ),
+                storage: None,
+                span: SourceSpan {
+                    offset: SourceOffset(
+                        206,
+                    ),
+                    length: 365,
+                },
+            },
+        ),
+    ],
+}

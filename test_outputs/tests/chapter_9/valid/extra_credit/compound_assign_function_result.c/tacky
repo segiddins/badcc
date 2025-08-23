@@ -8,12 +8,16 @@ Program {
             instructions: [
                 Return(
                     Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -25,10 +29,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Call(
@@ -36,28 +43,45 @@ Program {
                     [],
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "x.2",
+                        Int,
                     ),
                     rhs: Var(
                         "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "x.2",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

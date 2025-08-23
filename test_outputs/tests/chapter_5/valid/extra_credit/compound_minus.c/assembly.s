@@ -6,8 +6,10 @@ _main:
 	subq $16, %rsp
 	movl $10, -12(%rbp)
 	movl -12(%rbp), %r10d
+	movl %r10d, -16(%rbp)
+	subl $8, -16(%rbp)
+	movl -16(%rbp), %r10d
 	movl %r10d, -12(%rbp)
-	subl $8, -12(%rbp)
 	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp

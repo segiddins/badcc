@@ -8,30 +8,39 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "a.1",
+                        Int,
                     ),
                     "main.1.true",
                 ),
                 JumpIfNotZero(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     "main.1.true",
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                 },
                 Jump(
@@ -42,10 +51,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                 },
                 Label(
@@ -53,16 +65,20 @@ Program {
                 ),
                 JumpIfZero(
                     Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                     "main.0.true",
                 ),
                 Copy {
                     src: Constant(
-                        20,
+                        Int(
+                            20,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -73,10 +89,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -84,12 +103,15 @@ Program {
                 ),
                 Return(
                     Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

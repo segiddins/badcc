@@ -8,47 +8,61 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
                         "foo.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "bar.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
                         "foo.1",
+                        Int,
                     ),
                     rhs: Var(
                         "bar.2",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Binary {
                     op: GreaterThan,
                     lhs: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     rhs: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     "main.0.true",
                 ),
@@ -57,14 +71,17 @@ Program {
                     [],
                     Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 ),
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "bar.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -80,22 +97,28 @@ Program {
                     op: Add,
                     lhs: Var(
                         "foo.1",
+                        Int,
                     ),
                     rhs: Var(
                         "bar.2",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -107,12 +130,16 @@ Program {
             instructions: [
                 Return(
                     Constant(
-                        8,
+                        Int(
+                            8,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

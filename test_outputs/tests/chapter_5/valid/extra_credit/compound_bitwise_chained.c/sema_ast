@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a.1",
                                         init: Some(
                                             Constant(
-                                                250,
+                                                Int(
+                                                    250,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -29,10 +33,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "b.2",
                                         init: Some(
                                             Constant(
-                                                200,
+                                                Int(
+                                                    200,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -48,10 +55,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "c.3",
                                         init: Some(
                                             Constant(
-                                                100,
+                                                Int(
+                                                    100,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -67,10 +77,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "d.4",
                                         init: Some(
                                             Constant(
-                                                75,
+                                                Int(
+                                                    75,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -86,10 +99,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "e.5",
                                         init: Some(
                                             Constant(
-                                                50,
+                                                Int(
+                                                    50,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -105,10 +121,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "f.6",
                                         init: Some(
                                             Constant(
-                                                25,
+                                                Int(
+                                                    25,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -124,10 +143,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "g.7",
                                         init: Some(
                                             Constant(
-                                                10,
+                                                Int(
+                                                    10,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -143,10 +165,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "h.8",
                                         init: Some(
                                             Constant(
-                                                1,
+                                                Int(
+                                                    1,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -162,10 +187,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "j.9",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -181,10 +209,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "x.10",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -203,51 +234,78 @@ Program {
                                         Var(
                                             "x.10",
                                         ),
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "a.1",
                                             ),
-                                            BitwiseAnd,
-                                            CompoundAssignment(
+                                            Binary(
+                                                BitwiseAnd,
                                                 Var(
-                                                    "b.2",
+                                                    "a.1",
                                                 ),
-                                                Multiply,
-                                                CompoundAssignment(
+                                                Assignment(
                                                     Var(
-                                                        "c.3",
+                                                        "b.2",
                                                     ),
-                                                    BitwiseOr,
-                                                    Assignment(
+                                                    Binary(
+                                                        Multiply,
                                                         Var(
-                                                            "d.4",
+                                                            "b.2",
                                                         ),
-                                                        CompoundAssignment(
+                                                        Assignment(
                                                             Var(
-                                                                "e.5",
+                                                                "c.3",
                                                             ),
-                                                            Xor,
-                                                            CompoundAssignment(
+                                                            Binary(
+                                                                BitwiseOr,
                                                                 Var(
-                                                                    "f.6",
+                                                                    "c.3",
                                                                 ),
-                                                                Add,
-                                                                CompoundAssignment(
+                                                                Assignment(
                                                                     Var(
-                                                                        "g.7",
+                                                                        "d.4",
                                                                     ),
-                                                                    RightShift,
-                                                                    CompoundAssignment(
+                                                                    Assignment(
                                                                         Var(
-                                                                            "h.8",
+                                                                            "e.5",
                                                                         ),
-                                                                        LeftShift,
-                                                                        Assignment(
+                                                                        Binary(
+                                                                            Xor,
                                                                             Var(
-                                                                                "j.9",
+                                                                                "e.5",
                                                                             ),
-                                                                            Constant(
-                                                                                1,
+                                                                            Assignment(
+                                                                                Var(
+                                                                                    "f.6",
+                                                                                ),
+                                                                                Binary(
+                                                                                    Add,
+                                                                                    Var(
+                                                                                        "f.6",
+                                                                                    ),
+                                                                                    CompoundAssignment(
+                                                                                        Var(
+                                                                                            "g.7",
+                                                                                        ),
+                                                                                        RightShift,
+                                                                                        CompoundAssignment(
+                                                                                            Var(
+                                                                                                "h.8",
+                                                                                            ),
+                                                                                            LeftShift,
+                                                                                            Assignment(
+                                                                                                Var(
+                                                                                                    "j.9",
+                                                                                                ),
+                                                                                                Constant(
+                                                                                                    Int(
+                                                                                                        1,
+                                                                                                    ),
+                                                                                                ),
+                                                                                            ),
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -287,7 +345,9 @@ Program {
                                                                                 "a.1",
                                                                             ),
                                                                             Constant(
-                                                                                40,
+                                                                                Int(
+                                                                                    40,
+                                                                                ),
                                                                             ),
                                                                         ),
                                                                         Binary(
@@ -296,7 +356,9 @@ Program {
                                                                                 "b.2",
                                                                             ),
                                                                             Constant(
-                                                                                21800,
+                                                                                Int(
+                                                                                    21800,
+                                                                                ),
                                                                             ),
                                                                         ),
                                                                     ),
@@ -306,7 +368,9 @@ Program {
                                                                             "c.3",
                                                                         ),
                                                                         Constant(
-                                                                            109,
+                                                                            Int(
+                                                                                109,
+                                                                            ),
                                                                         ),
                                                                     ),
                                                                 ),
@@ -316,7 +380,9 @@ Program {
                                                                         "d.4",
                                                                     ),
                                                                     Constant(
-                                                                        41,
+                                                                        Int(
+                                                                            41,
+                                                                        ),
                                                                     ),
                                                                 ),
                                                             ),
@@ -326,7 +392,9 @@ Program {
                                                                     "e.5",
                                                                 ),
                                                                 Constant(
-                                                                    41,
+                                                                    Int(
+                                                                        41,
+                                                                    ),
                                                                 ),
                                                             ),
                                                         ),
@@ -336,7 +404,9 @@ Program {
                                                                 "f.6",
                                                             ),
                                                             Constant(
-                                                                27,
+                                                                Int(
+                                                                    27,
+                                                                ),
                                                             ),
                                                         ),
                                                     ),
@@ -346,7 +416,9 @@ Program {
                                                             "g.7",
                                                         ),
                                                         Constant(
-                                                            2,
+                                                            Int(
+                                                                2,
+                                                            ),
                                                         ),
                                                     ),
                                                 ),
@@ -356,7 +428,9 @@ Program {
                                                         "h.8",
                                                     ),
                                                     Constant(
-                                                        2,
+                                                        Int(
+                                                            2,
+                                                        ),
                                                     ),
                                                 ),
                                             ),
@@ -366,7 +440,9 @@ Program {
                                                     "j.9",
                                                 ),
                                                 Constant(
-                                                    1,
+                                                    Int(
+                                                        1,
+                                                    ),
                                                 ),
                                             ),
                                         ),
@@ -376,13 +452,21 @@ Program {
                                                 "x.10",
                                             ),
                                             Constant(
-                                                40,
+                                                Int(
+                                                    40,
+                                                ),
                                             ),
                                         ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 353,
+                        },
                     },
                 ),
                 storage: None,

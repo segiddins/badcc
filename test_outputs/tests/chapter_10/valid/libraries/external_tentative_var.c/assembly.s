@@ -2,6 +2,7 @@
 	.bss
 _x:
 	.zero 4
+
 	.globl _read_x
 	.text
 _read_x:

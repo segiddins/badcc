@@ -4,6 +4,7 @@ Program {
             identifier: "x",
             global: true,
             init: 15,
+            width: Four,
         },
     ],
     functions: [
@@ -14,10 +15,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -28,7 +32,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Label(
@@ -36,7 +42,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                 ),
                 Label(
@@ -46,35 +54,46 @@ Program {
                     op: Multiply,
                     lhs: Var(
                         "x",
+                        Int,
                     ),
                     rhs: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        30,
+                        Int(
+                            30,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     "main.0.true",
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Jump(
@@ -91,7 +110,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                 ),
                 Jump(
@@ -103,54 +124,69 @@ Program {
                 Binary {
                     op: Equals,
                     lhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     rhs: Var(
                         "a.1",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "switch.0.1",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     rhs: Var(
                         "a.1",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "switch.0.2",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     rhs: Var(
                         "a.1",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "switch.0.10",
                 ),
@@ -162,12 +198,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        6,
+                        Int(
+                            6,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

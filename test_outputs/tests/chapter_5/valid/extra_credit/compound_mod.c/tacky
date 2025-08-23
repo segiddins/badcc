@@ -8,32 +8,52 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
                         "to_mod.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Remainder,
                     lhs: Var(
                         "to_mod.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "to_mod.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "to_mod.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

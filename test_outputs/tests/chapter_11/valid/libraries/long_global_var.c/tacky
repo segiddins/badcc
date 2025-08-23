@@ -1,0 +1,62 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "l",
+            global: true,
+            init: 8589934592,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "return_l",
+            global: true,
+            params: [],
+            instructions: [
+                Return(
+                    Var(
+                        "l",
+                        Long,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "return_l_as_int",
+            global: true,
+            params: [],
+            instructions: [
+                Truncate {
+                    src: Var(
+                        "l",
+                        Long,
+                    ),
+                    dst: Var(
+                        "return_l_as_int.tmp.0",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "return_l_as_int.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,131 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "foo",
+            global: false,
+            init: 4294967290,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "foo",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967295,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                    "main.0.true",
+                ),
+                Copy {
+                    src: Constant(
+                        Long(
+                            1152921504606846988,
+                        ),
+                    ),
+                    dst: Var(
+                        "foo",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "foo",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            1152921504606846988,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

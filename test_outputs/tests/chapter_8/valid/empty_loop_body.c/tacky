@@ -8,10 +8,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        2147483642,
+                        Int(
+                            2147483642,
+                        ),
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -24,37 +27,48 @@ Program {
                     op: Subtract,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: GreaterThanOrEqual,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        256,
+                        Int(
+                            256,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     "loop.0.head",
                 ),
@@ -64,11 +78,14 @@ Program {
                 Return(
                     Var(
                         "i.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

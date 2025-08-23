@@ -8,22 +8,29 @@ Program {
             instructions: [
                 JumpIfZero(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     "main.0.true",
                 ),
                 JumpIfZero(
                     Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     "main.1.true",
                 ),
                 Copy {
                     src: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                 },
                 Jump(
@@ -34,10 +41,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                 },
                 Label(
@@ -45,10 +55,12 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -59,10 +71,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -70,30 +85,39 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     "main.2.true",
                 ),
                 JumpIfZero(
                     Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     "main.3.true",
                 ),
                 Copy {
                     src: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.3",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -104,10 +128,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.3",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -115,10 +142,12 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        "main.tmp.3",
+                        "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                 },
                 Jump(
@@ -129,10 +158,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                 },
                 Label(
@@ -140,32 +172,40 @@ Program {
                 ),
                 Copy {
                     src: Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                     dst: Var(
                         "b.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "a.1",
+                        Int,
                     ),
                     rhs: Var(
                         "b.2",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.4",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "main.tmp.4",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

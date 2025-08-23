@@ -4,12 +4,14 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a",
                                         init: None,
                                         storage: None,
@@ -33,18 +35,27 @@ Program {
                                                             "b",
                                                         ),
                                                         Constant(
-                                                            10,
+                                                            Int(
+                                                                10,
+                                                            ),
                                                         ),
                                                     ),
                                                 ),
                                             ),
                                         ],
+                                        span: SourceSpan {
+                                            offset: SourceOffset(
+                                                32,
+                                            ),
+                                            length: 23,
+                                        },
                                     },
                                 ),
                             ),
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "b",
                                         init: None,
                                         storage: None,
@@ -65,6 +76,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 67,
+                        },
                     },
                 ),
                 storage: None,

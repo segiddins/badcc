@@ -2,10 +2,12 @@
 	.bss
 _i:
 	.zero 4
+
 	.globl _j
 	.bss
 _j:
 	.zero 4
+
 	.globl _incr_i
 	.text
 _incr_i:

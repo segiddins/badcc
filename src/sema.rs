@@ -2,7 +2,7 @@ use miette::Diagnostic;
 
 use crate::parser::Program;
 
-pub use type_check::{Symbol, SymbolAttributes, SymbolTable};
+pub use type_check::{Symbol, SymbolAttributes, SymbolTable, Type};
 
 mod loop_labels;
 mod resolve_variables;

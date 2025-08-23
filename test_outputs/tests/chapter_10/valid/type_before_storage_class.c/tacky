@@ -4,6 +4,7 @@ Program {
             identifier: "bar",
             global: false,
             init: 4,
+            width: Four,
         },
     ],
     functions: [
@@ -14,12 +15,16 @@ Program {
             instructions: [
                 Return(
                     Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -34,28 +39,35 @@ Program {
                     [],
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     rhs: Var(
                         "bar",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

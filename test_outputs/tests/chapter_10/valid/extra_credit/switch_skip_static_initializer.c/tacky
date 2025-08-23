@@ -4,11 +4,13 @@ Program {
             identifier: "a",
             global: true,
             init: 3,
+            width: Four,
         },
         StaticVariable {
             identifier: "x.2",
             global: false,
             init: 10,
+            width: Four,
         },
     ],
     functions: [
@@ -25,10 +27,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -37,6 +42,7 @@ Program {
                 Return(
                     Var(
                         "x.2",
+                        Int,
                     ),
                 ),
                 Jump(
@@ -48,36 +54,46 @@ Program {
                 Binary {
                     op: Equals,
                     lhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     rhs: Var(
                         "a",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "switch.0.1",
                 ),
                 Binary {
                     op: Equals,
                     lhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     rhs: Var(
                         "a",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "switch.0.3",
                 ),
@@ -86,12 +102,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

@@ -12,10 +12,15 @@ pub fn emit_asm(program: &Program, w: impl io::Write) -> io::Result<()> {
     for sv in program.static_variables.iter() {
         if sv.value == 0 {
             symbol(sv.global, &sv.name, "bss", &mut w)?;
-            w.write_all(b"\t.zero 4\n")?;
-        } else {
+            writeln!(&mut w, "\t.zero {}\n", sv.alignment)?;
+        } else if sv.alignment == 4 {
             symbol(sv.global, &sv.name, "data", &mut w)?;
             writeln!(&mut w, "\t.long {}", sv.value)?;
+        } else if sv.alignment == 8 {
+            symbol(sv.global, &sv.name, "data", &mut w)?;
+            writeln!(&mut w, "\t.quad {}", sv.value)?;
+        } else {
+            unreachable!()
         }
     }
     for definition in program.definitions.iter() {
@@ -68,31 +73,91 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
             operand(source),
             operand(destination)
         )?,
+        Instruction::Movesx {
+            source,
+            destination,
+        } => write!(w, "movslq {}, {}", operand(source), operand(destination))?,
         Instruction::Ret => write!(w, "movq %rbp, %rsp\n\tpopq %rbp\n\tret")?,
         Instruction::Unary(unary_operator, op) => match unary_operator {
-            UnaryOperator::Neg => write!(w, "negl {}", operand(op)),
-            UnaryOperator::Not => write!(w, "notl {}", operand(op)),
+            UnaryOperator::Neg => write!(w, "neg{} {}", width(op, op), operand(op)),
+            UnaryOperator::Not => write!(w, "not{} {}", width(op, op), operand(op)),
         }?,
         Instruction::AllocateStack(offset) => write!(w, "subq ${offset}, %rsp")?,
         Instruction::Binary(binary_operator, op, operand1) => match binary_operator {
-            BinaryOperator::Add => write!(w, "addl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::Sub => write!(w, "subl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::Mult => write!(w, "imull {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::And => write!(w, "andl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::Or => write!(w, "orl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::Xor => write!(w, "xorl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::LeftShift => write!(w, "sall {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::RightShift => write!(w, "sarl {}, {}", operand(op), operand(operand1)),
-            BinaryOperator::Equals => todo!(),
-            BinaryOperator::NotEquals => todo!(),
-            BinaryOperator::LessThan => todo!(),
-            BinaryOperator::LessThanOrEqual => todo!(),
-            BinaryOperator::GreaterThan => todo!(),
-            BinaryOperator::GreaterThanOrEqual => todo!(),
+            BinaryOperator::Add => write!(
+                w,
+                "add{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::Sub => write!(
+                w,
+                "sub{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::Mult => write!(
+                w,
+                "imul{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::And => write!(
+                w,
+                "and{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::Or => write!(
+                w,
+                "or{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::Xor => write!(
+                w,
+                "xor{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::LeftShift => write!(
+                w,
+                "sal{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::RightShift => write!(
+                w,
+                "sar{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::Equals
+            | BinaryOperator::NotEquals
+            | BinaryOperator::LessThan
+            | BinaryOperator::LessThanOrEqual
+            | BinaryOperator::GreaterThan
+            | BinaryOperator::GreaterThanOrEqual => unreachable!(),
         }?,
-        Instruction::Idiv(op) => write!(w, "idivl {}", operand(op))?,
-        Instruction::Cdq => write!(w, "cdq")?,
-        Instruction::Cmp(lhs, rhs) => write!(w, "cmpl {}, {}", operand(lhs), operand(rhs))?,
+        Instruction::Idiv(op) => write!(w, "idiv{} {}", width(op, op), operand(op))?,
+        Instruction::Cdq(Width::One) => unreachable!(),
+        Instruction::Cdq(Width::Four) => write!(w, "cdq")?,
+        Instruction::Cdq(Width::Eight) => write!(w, "cqo")?,
+        Instruction::Cmp(lhs, rhs) => write!(
+            w,
+            "cmp{} {}, {}",
+            width(lhs, rhs),
+            operand(lhs),
+            operand(rhs)
+        )?,
         Instruction::Jmp(label) => write!(w, "jmp L{label}")?,
         Instruction::JmpCC(cond_code, label) => write!(w, "j{cond_code:?} L{label}")?,
         Instruction::SetCC(cond_code, op) => write!(w, "set{cond_code:?} {}", operand(op))?,
@@ -100,6 +165,7 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
         Instruction::DeallocateStack(offset) => write!(w, "addq ${offset}, %rsp")?,
         Instruction::Push(op) => write!(w, "pushq {}", operand(op))?,
         Instruction::Call(func) => write!(w, "call _{func}")?,
+        Instruction::Comment(comment) => write!(w, "# {comment}")?,
     }
     writeln!(w)?;
     Ok(())
@@ -107,7 +173,7 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
 
 fn operand(operand: &Operand) -> String {
     match operand {
-        Operand::Immediate(val) => format!("${val}"),
+        Operand::Immediate(val, _) => format!("${val}"),
         Operand::Register(name, width) => match (name, width) {
             (Reg::AX, Width::One) => "%al",
             (Reg::AX, Width::Four) => "%eax",
@@ -138,9 +204,9 @@ fn operand(operand: &Operand) -> String {
             (Reg::SI, Width::Eight) => "%rsi",
         }
         .into(),
-        Operand::Psuedo(_) => unreachable!(),
-        Operand::Stack(offset) => format!("{}(%rbp)", -offset),
-        Operand::Data(name) => format!("{SYMBOL_PREFIX}{name}(%rip)"),
+        Operand::Psuedo(_, _) => unreachable!(),
+        Operand::Stack(offset, _) => format!("{}(%rbp)", -offset),
+        Operand::Data(name, _) => format!("{SYMBOL_PREFIX}{name}(%rip)"),
     }
 }
 

@@ -1,0 +1,171 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Data(
+                        "i",
+                        Four,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                        Four,
+                    ),
+                },
+                SetCC(
+                    NE,
+                    Stack(
+                        12,
+                        Four,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        12,
+                        Four,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Cmp(
+                    Immediate(
+                        123456,
+                        Eight,
+                    ),
+                    Data(
+                        "j",
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Eight,
+                    ),
+                    destination: Stack(
+                        20,
+                        Eight,
+                    ),
+                },
+                SetCC(
+                    NE,
+                    Stack(
+                        20,
+                        Eight,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        20,
+                        Eight,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(
+                        2,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "i",
+            value: 0,
+            alignment: 4,
+        },
+        StaticVariable {
+            global: true,
+            name: "j",
+            value: 123456,
+            alignment: 8,
+        },
+    ],
+}

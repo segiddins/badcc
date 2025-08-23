@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "to_or.1",
                                         init: Some(
                                             Constant(
-                                                1,
+                                                Int(
+                                                    1,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -28,13 +32,20 @@ Program {
                             ),
                             Statement(
                                 Expression(
-                                    CompoundAssignment(
+                                    Assignment(
                                         Var(
                                             "to_or.1",
                                         ),
-                                        BitwiseOr,
-                                        Constant(
-                                            30,
+                                        Binary(
+                                            BitwiseOr,
+                                            Var(
+                                                "to_or.1",
+                                            ),
+                                            Constant(
+                                                Int(
+                                                    30,
+                                                ),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -47,6 +58,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 57,
+                        },
                     },
                 ),
                 storage: None,

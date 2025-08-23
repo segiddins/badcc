@@ -5,11 +5,12 @@ Program {
             global: true,
             instructions: [
                 AllocateStack(
-                    32,
+                    48,
                 ),
                 Move {
                     source: Data(
                         "i.1",
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -21,22 +22,26 @@ Program {
                         R10,
                         Four,
                     ),
-                    destination: Data(
-                        "i.1",
+                    destination: Stack(
+                        12,
+                        Four,
                     ),
                 },
                 Binary(
                     Add,
                     Immediate(
                         1,
+                        Four,
                     ),
-                    Data(
-                        "i.1",
+                    Stack(
+                        12,
+                        Four,
                     ),
                 ),
                 Move {
-                    source: Data(
-                        "j.2",
+                    source: Stack(
+                        12,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -49,12 +54,34 @@ Program {
                         Four,
                     ),
                     destination: Data(
+                        "i.1",
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Data(
                         "j.2",
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        16,
+                        Four,
                     ),
                 },
                 Move {
                     source: Data(
                         "i.1",
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -67,13 +94,15 @@ Program {
                         R10,
                         Four,
                     ),
-                    Data(
-                        "j.2",
+                    Stack(
+                        16,
+                        Four,
                     ),
                 ),
                 Move {
-                    source: Data(
-                        "k.3",
+                    source: Stack(
+                        16,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -86,12 +115,34 @@ Program {
                         Four,
                     ),
                     destination: Data(
-                        "k.3",
+                        "j.2",
+                        Four,
                     ),
                 },
                 Move {
                     source: Data(
                         "k.3",
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        20,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                        Four,
                     ),
                     destination: Register(
                         R11,
@@ -102,6 +153,7 @@ Program {
                     Mult,
                     Data(
                         "j.2",
+                        Four,
                     ),
                     Register(
                         R11,
@@ -113,23 +165,48 @@ Program {
                         R11,
                         Four,
                     ),
+                    destination: Stack(
+                        20,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        20,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
                     destination: Data(
                         "k.3",
+                        Four,
                     ),
                 },
                 Move {
                     source: Data(
                         "l.4",
+                        Four,
                     ),
                     destination: Register(
                         AX,
                         Four,
                     ),
                 },
-                Cdq,
+                Cdq(
+                    Four,
+                ),
                 Move {
                     source: Immediate(
                         2,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -147,38 +224,66 @@ Program {
                         AX,
                         Four,
                     ),
+                    destination: Stack(
+                        24,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        24,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
                     destination: Data(
                         "l.4",
+                        Four,
                     ),
                 },
                 Cmp(
                     Immediate(
                         3,
+                        Four,
                     ),
                     Data(
                         "i.1",
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        12,
+                        28,
+                        Four,
                     ),
                 },
                 SetCC(
                     NE,
                     Stack(
-                        12,
+                        28,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        12,
+                        28,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -188,6 +293,7 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -207,20 +313,24 @@ Program {
                 Move {
                     source: Immediate(
                         6,
+                        Four,
                     ),
                     destination: Stack(
-                        16,
+                        32,
+                        Four,
                     ),
                 },
                 Unary(
                     Neg,
                     Stack(
-                        16,
+                        32,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        16,
+                        32,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -234,28 +344,34 @@ Program {
                     ),
                     Data(
                         "j.2",
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        20,
+                        36,
+                        Four,
                     ),
                 },
                 SetCC(
                     NE,
                     Stack(
-                        20,
+                        36,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        20,
+                        36,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -265,6 +381,7 @@ Program {
                 Move {
                     source: Immediate(
                         2,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -284,20 +401,24 @@ Program {
                 Move {
                     source: Immediate(
                         18,
+                        Four,
                     ),
                     destination: Stack(
-                        24,
+                        40,
+                        Four,
                     ),
                 },
                 Unary(
                     Neg,
                     Stack(
-                        24,
+                        40,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Stack(
-                        24,
+                        40,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -311,28 +432,34 @@ Program {
                     ),
                     Data(
                         "k.3",
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        28,
+                        44,
+                        Four,
                     ),
                 },
                 SetCC(
                     NE,
                     Stack(
-                        28,
+                        44,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        28,
+                        44,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -342,6 +469,7 @@ Program {
                 Move {
                     source: Immediate(
                         3,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -361,31 +489,38 @@ Program {
                 Cmp(
                     Immediate(
                         6,
+                        Four,
                     ),
                     Data(
                         "l.4",
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        32,
+                        48,
+                        Four,
                     ),
                 },
                 SetCC(
                     NE,
                     Stack(
-                        32,
+                        48,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        32,
+                        48,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -395,6 +530,7 @@ Program {
                 Move {
                     source: Immediate(
                         4,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -414,6 +550,7 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -424,6 +561,7 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -450,6 +588,7 @@ Program {
                     ),
                     destination: Stack(
                         12,
+                        Four,
                     ),
                 },
                 Call(
@@ -462,6 +601,7 @@ Program {
                     ),
                     destination: Stack(
                         16,
+                        Four,
                     ),
                 },
                 Call(
@@ -474,11 +614,13 @@ Program {
                     ),
                     destination: Stack(
                         20,
+                        Four,
                     ),
                 },
                 Move {
                     source: Stack(
                         20,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -489,6 +631,7 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -504,21 +647,25 @@ Program {
             global: false,
             name: "i.1",
             value: 0,
+            alignment: 4,
         },
         StaticVariable {
             global: false,
             name: "j.2",
             value: 0,
+            alignment: 4,
         },
         StaticVariable {
             global: false,
             name: "k.3",
             value: 1,
+            alignment: 4,
         },
         StaticVariable {
             global: false,
             name: "l.4",
             value: 48,
+            alignment: 4,
         },
     ],
 }

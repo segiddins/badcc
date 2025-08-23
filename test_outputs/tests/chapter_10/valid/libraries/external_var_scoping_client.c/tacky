@@ -4,6 +4,7 @@ Program {
             identifier: "x",
             global: true,
             init: 10,
+            width: Four,
         },
     ],
     functions: [
@@ -14,27 +15,35 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "x.3",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
                         "x.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "main.0.true",
                 ),
@@ -43,29 +52,37 @@ Program {
                     [],
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: NotEqual,
                     lhs: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     "main.1.true",
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Jump(
@@ -81,23 +98,30 @@ Program {
                     op: NotEqual,
                     lhs: Var(
                         "x",
+                        Int,
                     ),
                     rhs: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.3",
+                        Int,
                     ),
                     "main.2.true",
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Jump(
@@ -111,7 +135,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Jump(
@@ -125,12 +151,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

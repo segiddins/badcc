@@ -1,6 +1,7 @@
 	.bss
 _x:
 	.zero 4
+
 	.globl _main
 	.text
 _main:

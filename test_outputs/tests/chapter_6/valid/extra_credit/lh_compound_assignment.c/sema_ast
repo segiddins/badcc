@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "x.1",
                                         init: Some(
                                             Constant(
-                                                10,
+                                                Int(
+                                                    10,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -29,26 +33,42 @@ Program {
                             Statement(
                                 Expression(
                                     Ternary(
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "x.1",
                                             ),
-                                            Subtract,
-                                            Constant(
-                                                1,
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "x.1",
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
                                             ),
                                         ),
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "x.1",
                                             ),
-                                            Divide,
-                                            Constant(
-                                                2,
+                                            Binary(
+                                                Divide,
+                                                Var(
+                                                    "x.1",
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        2,
+                                                    ),
+                                                ),
                                             ),
                                         ),
                                         Constant(
-                                            0,
+                                            Int(
+                                                0,
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -61,12 +81,20 @@ Program {
                                             "x.1",
                                         ),
                                         Constant(
-                                            4,
+                                            Int(
+                                                4,
+                                            ),
                                         ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 67,
+                        },
                     },
                 ),
                 storage: None,

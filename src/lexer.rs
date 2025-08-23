@@ -31,7 +31,7 @@ impl LexingError {
 pub enum Token {
     #[regex(r"[a-zA-Z_]\w*", |lex| lex.slice().to_owned())]
     Identifier(String),
-    #[regex(r"\d+", |lex| lex.slice().to_owned())]
+    #[regex(r"\d+[lL]?", priority = 5, callback = |lex| lex.slice().to_owned())]
     Constant(String),
     #[regex(r"\d+[a-zA-Z_]\w*", LexingError::error)]
     InvalidIdentifier(String),
@@ -45,6 +45,8 @@ pub enum Token {
     RBrace,
     #[token("int")]
     Int,
+    #[token("long")]
+    Long,
     #[token("void")]
     Void,
     #[regex(r"return")]

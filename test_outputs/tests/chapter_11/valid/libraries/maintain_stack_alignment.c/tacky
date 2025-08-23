@@ -1,0 +1,78 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "add_variables",
+            global: true,
+            params: [
+                Var(
+                    "x.1",
+                    Long,
+                ),
+                Var(
+                    "y.2",
+                    Long,
+                ),
+                Var(
+                    "z.3",
+                    Int,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "x.1",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "y.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "add_variables.tmp.0",
+                        Long,
+                    ),
+                },
+                SignExtend {
+                    src: Var(
+                        "z.3",
+                        Int,
+                    ),
+                    dst: Var(
+                        "add_variables.tmp.1",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "add_variables.tmp.0",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "add_variables.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "add_variables.tmp.2",
+                        Long,
+                    ),
+                },
+                Return(
+                    Var(
+                        "add_variables.tmp.2",
+                        Long,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

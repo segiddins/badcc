@@ -8,27 +8,35 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Unary {
                     op: Negate,
                     src: Constant(
-                        100,
+                        Int(
+                            100,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "i.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -38,17 +46,22 @@ Program {
                     op: LessThanOrEqual,
                     lhs: Var(
                         "i.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -56,20 +69,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "a.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -79,20 +98,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "i.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                     dst: Var(
                         "i.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -104,11 +129,14 @@ Program {
                 Return(
                     Var(
                         "a.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

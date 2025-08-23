@@ -130,6 +130,9 @@ fn visit_expr(expression: &mut Expression, scope: &mut Scope) -> Result {
                 visit_expr(expr, scope)?;
             }
         }
+        Expression::Cast(_, expression) => {
+            visit_expr(expression, scope)?;
+        }
     }
     Ok(())
 }
@@ -255,8 +258,8 @@ fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result {
             let is_file = scope.is_file();
 
             scope.push();
-            for param in params.iter_mut() {
-                *param = scope.declare(param, false)?.clone();
+            for (_, name) in params.iter_mut() {
+                *name = scope.declare(name, false)?.clone();
             }
             if !is_file {
                 if body.is_some() {

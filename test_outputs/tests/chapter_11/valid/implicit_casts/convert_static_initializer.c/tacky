@@ -1,0 +1,117 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "i",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "j",
+            global: true,
+            init: 123456,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "i",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "j",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            123456,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

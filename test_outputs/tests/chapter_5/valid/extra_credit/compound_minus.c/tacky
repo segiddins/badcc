@@ -8,32 +8,52 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "to_subtract.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "to_subtract.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        8,
+                        Int(
+                            8,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "to_subtract.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "to_subtract.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

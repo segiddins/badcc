@@ -4,6 +4,7 @@ Program {
             identifier: "foo",
             global: true,
             init: 3,
+            width: Four,
         },
     ],
     functions: [
@@ -14,29 +15,37 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "outer.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "foo.2",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "outer.1",
+                        Int,
                     ),
                     "main.0.true",
                 ),
                 Return(
                     Var(
                         "foo",
+                        Int,
                     ),
                 ),
                 Jump(
@@ -50,12 +59,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

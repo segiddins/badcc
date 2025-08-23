@@ -1,6 +1,7 @@
 	.bss
 _i.7:
 	.zero 4
+
 	.globl _call_static_my_fun
 	.text
 _call_static_my_fun:

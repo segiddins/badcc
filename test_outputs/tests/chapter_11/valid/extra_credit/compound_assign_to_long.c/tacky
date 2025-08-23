@@ -1,0 +1,155 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            34359738368,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "l.1",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "i.2",
+                        Int,
+                    ),
+                },
+                SignExtend {
+                    src: Var(
+                        "i.2",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        "l.1",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.3",
+                        Long,
+                    ),
+                    dst: Var(
+                        "l.1",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            34359738358,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "l.1",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

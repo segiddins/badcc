@@ -2,6 +2,7 @@
 	.bss
 _foo:
 	.zero 4
+
 	.globl _main
 	.text
 _main:

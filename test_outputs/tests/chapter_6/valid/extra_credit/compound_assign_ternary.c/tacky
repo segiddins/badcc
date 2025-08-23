@@ -8,24 +8,32 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     "main.0.true",
                 ),
                 Copy {
                     src: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Jump(
@@ -36,10 +44,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Label(
@@ -49,22 +60,38 @@ Program {
                     op: Multiply,
                     lhs: Var(
                         "a.1",
+                        Int,
                     ),
                     rhs: Var(
                         "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "a.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "a.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

@@ -1,0 +1,392 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "switch_on_int",
+            global: true,
+            params: [
+                Var(
+                    "i.1",
+                    Int,
+                ),
+            ],
+            instructions: [
+                Jump(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.5",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Label(
+                    "switch.0.0",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Label(
+                    "switch.0.neg1",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Label(
+                    "switch.0.default",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                    rhs: Var(
+                        "i.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                    "switch.0.5",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    rhs: Var(
+                        "i.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                    "switch.0.0",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: Constant(
+                        Int(
+                            -1,
+                        ),
+                    ),
+                    rhs: Var(
+                        "i.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "switch_on_int.tmp.0",
+                        Int,
+                    ),
+                    "switch.0.neg1",
+                ),
+                Jump(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "switch_on_int",
+                    [
+                        Constant(
+                            Int(
+                                5,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "switch_on_int",
+                    [
+                        Constant(
+                            Int(
+                                0,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                },
+                Call(
+                    "switch_on_int",
+                    [
+                        Var(
+                            "main.tmp.4",
+                            Int,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "switch_on_int",
+                    [
+                        Constant(
+                            Int(
+                                0,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

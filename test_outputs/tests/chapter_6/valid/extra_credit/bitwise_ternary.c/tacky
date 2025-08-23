@@ -9,35 +9,46 @@ Program {
                 Binary {
                     op: Xor,
                     lhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "main.tmp.1",
+                        "main.tmp.0",
+                        Int,
                     ),
                     "main.0.true",
                 ),
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "result.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "result.1",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -48,18 +59,23 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        5,
+                        Int(
+                            5,
+                        ),
                     ),
                     dst: Var(
                         "result.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "result.1",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -68,11 +84,14 @@ Program {
                 Return(
                     Var(
                         "result.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

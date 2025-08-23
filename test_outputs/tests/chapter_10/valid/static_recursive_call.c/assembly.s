@@ -1,6 +1,7 @@
 	.bss
 _count.3:
 	.zero 4
+
 	.globl _print_alphabet
 	.text
 _print_alphabet:

@@ -2,8 +2,11 @@ use std::collections::HashMap;
 
 pub use crate::parser::BinaryOperator;
 use crate::{
-    parser::{self, Block, BlockItem, Declaration, Expression, Statement, VariableDeclaration},
-    sema::{self, SymbolAttributes, SymbolTable},
+    assembly_gen::Width,
+    parser::{
+        self, Block, BlockItem, Constant, Declaration, Expression, Statement, VariableDeclaration,
+    },
+    sema::{self, SymbolAttributes, SymbolTable, Type},
 };
 
 #[derive(Debug, Default)]
@@ -23,7 +26,8 @@ pub struct Function {
 pub struct StaticVariable {
     pub identifier: String,
     pub global: bool,
-    pub init: i32,
+    pub init: i64,
+    pub width: Width,
 }
 
 #[derive(Debug)]
@@ -49,12 +53,29 @@ pub enum Instruction {
     JumpIfNotZero(Val, String),
     Label(String),
     Call(String, Vec<Val>, Val),
+    SignExtend {
+        src: Val,
+        dst: Val,
+    },
+    Truncate {
+        src: Val,
+        dst: Val,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Val {
-    Constant(i32),
-    Var(String),
+    Constant(Constant),
+    Var(String, Type),
+}
+
+impl Val {
+    pub const fn ty(&self) -> &Type {
+        match self {
+            Val::Constant(constant) => constant.ty(),
+            Val::Var(_, ty) => ty,
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -69,13 +90,13 @@ struct State<'i> {
     instructions: Vec<Instruction>,
     phis: u32,
     name: &'i str,
-    switch_cases: HashMap<String, Vec<Option<i32>>>,
+    switch_cases: HashMap<String, Vec<Option<i64>>>,
     symbols: &'i SymbolTable,
     static_variables: HashMap<String, StaticVariable>,
 }
 impl<'i> State<'i> {
-    fn var(&mut self) -> Val {
-        let v = Val::Var(format!("{}.tmp.{}", self.name, self.temps));
+    fn var(&mut self, ty: &Type) -> Val {
+        let v = Val::Var(format!("{}.tmp.{}", self.name, self.temps), ty.clone());
         self.temps += 1;
         v
     }
@@ -129,6 +150,14 @@ pub fn lower(program: &parser::Program, symbols: &sema::SymbolTable) -> Program 
     }
 }
 
+fn constant(ty: &Type, value: i64) -> Val {
+    match ty {
+        Type::Function { .. } => unreachable!(),
+        Type::Int => Val::Constant(Constant::Int(value as i32)),
+        Type::Long => Val::Constant(Constant::Long(value)),
+    }
+}
+
 fn lower_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<'i>) {
     let symbol = &state.symbols[&decl.name];
     match symbol.attributes {
@@ -144,10 +173,14 @@ fn lower_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<
                     identifier: decl.name.clone(),
                     global,
                     init: init.value(),
+                    width: decl.ty.width(),
                 });
         }
         SymbolAttributes::Local => {
-            let var = Val::Var(decl.name.clone());
+            let var = Val::Var(
+                decl.name.clone(),
+                state.symbols.get(&decl.name).unwrap().ty.clone(),
+            );
             if let Some(rhs) = walk_optional(&decl.init, state) {
                 state.push(Instruction::Copy { src: rhs, dst: var })
             }
@@ -157,12 +190,12 @@ fn lower_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<
 
 fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
     match expr {
-        Expression::Constant(val) => Val::Constant(*val),
+        Expression::Constant(c) => Val::Constant(*c),
         Expression::Unary(unary_operator, expression) => {
             let src = walk(expression, state);
             match unary_operator {
                 parser::UnaryOperator::Minus => {
-                    let dst = state.var();
+                    let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Negate,
                         src,
@@ -171,7 +204,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     dst
                 }
                 parser::UnaryOperator::Complement => {
-                    let dst = state.var();
+                    let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Complement,
                         src,
@@ -180,7 +213,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     dst
                 }
                 parser::UnaryOperator::Not => {
-                    let dst = state.var();
+                    let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Not,
                         src,
@@ -192,7 +225,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
-                        rhs: Val::Constant(1),
+                        rhs: constant(src.ty(), 1),
                         dst: src.clone(),
                     });
                     src
@@ -201,13 +234,13 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
-                        rhs: Val::Constant(-1),
+                        rhs: constant(src.ty(), -1),
                         dst: src.clone(),
                     });
                     src.clone()
                 }
                 parser::UnaryOperator::PostfixIncrement => {
-                    let dst = state.var();
+                    let dst = state.var(src.ty());
                     state.push(Instruction::Copy {
                         src: src.clone(),
                         dst: dst.clone(),
@@ -215,13 +248,13 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
-                        rhs: Val::Constant(1),
+                        rhs: constant(src.ty(), 1),
                         dst: src.clone(),
                     });
                     dst
                 }
                 parser::UnaryOperator::PostfixDecrement => {
-                    let dst = state.var();
+                    let dst = state.var(src.ty());
                     state.push(Instruction::Copy {
                         src: src.clone(),
                         dst: dst.clone(),
@@ -229,7 +262,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
-                        rhs: Val::Constant(-1),
+                        rhs: constant(src.ty(), -1),
                         dst: src.clone(),
                     });
                     dst
@@ -237,7 +270,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             }
         }
         Expression::Binary(BinaryOperator::And, lhs, rhs) => {
-            let phi = state.var();
+            let phi = state.var(&Type::Int);
             let lhs = walk(lhs, state);
             let false_label = format!("{}.{}.false", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
@@ -246,13 +279,13 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             let rhs = walk(rhs, state);
             state.push(Instruction::JumpIfZero(rhs, false_label.clone()));
             state.push(Instruction::Copy {
-                src: Val::Constant(1),
+                src: constant(phi.ty(), 1),
                 dst: phi.clone(),
             });
             state.push(Instruction::Jump(end_label.clone()));
             state.push(Instruction::Label(false_label));
             state.push(Instruction::Copy {
-                src: Val::Constant(0),
+                src: constant(phi.ty(), 0),
                 dst: phi.clone(),
             });
             state.push(Instruction::Label(end_label));
@@ -260,7 +293,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             phi
         }
         Expression::Binary(BinaryOperator::Or, lhs, rhs) => {
-            let phi = state.var();
+            let phi = state.var(&Type::Int);
             let lhs = walk(lhs, state);
             let true_label = format!("{}.{}.true", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
@@ -269,13 +302,13 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             let rhs = walk(rhs, state);
             state.push(Instruction::JumpIfNotZero(rhs, true_label.clone()));
             state.push(Instruction::Copy {
-                src: Val::Constant(0),
+                src: constant(phi.ty(), 0),
                 dst: phi.clone(),
             });
             state.push(Instruction::Jump(end_label.clone()));
             state.push(Instruction::Label(true_label));
             state.push(Instruction::Copy {
-                src: Val::Constant(1),
+                src: constant(phi.ty(), 1),
                 dst: phi.clone(),
             });
             state.push(Instruction::Label(end_label));
@@ -285,7 +318,8 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
         Expression::Binary(op, lhs, rhs) => {
             let lhs = walk(lhs, state);
             let rhs = walk(rhs, state);
-            let dst = state.var();
+
+            let dst = state.var(lhs.ty());
             state.push(Instruction::Binary {
                 op: *op,
                 lhs,
@@ -294,10 +328,13 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             });
             dst
         }
-        Expression::Var(name) => Val::Var(name.clone()),
+        Expression::Var(name) => {
+            Val::Var(name.clone(), state.symbols.get(name).unwrap().ty.clone())
+        }
         Expression::Assignment(lhs, rhs) => {
             let rhs = walk(rhs, state);
             let lhs = walk(lhs, state);
+            assert_eq!(lhs.ty(), rhs.ty(), "{lhs:?} {rhs:?}");
             state.push(Instruction::Copy {
                 src: rhs,
                 dst: lhs.clone(),
@@ -307,6 +344,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
         Expression::CompoundAssignment(lhs, op, rhs) => {
             let rhs = walk(rhs, state);
             let lhs = walk(lhs, state);
+            assert_eq!(lhs.ty(), rhs.ty(), "{lhs:?} {op:?} {rhs:?}");
             state.push(Instruction::Binary {
                 op: *op,
                 lhs: lhs.clone(),
@@ -316,7 +354,6 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             lhs
         }
         Expression::Ternary(cond, then, r#else) => {
-            let phi = state.var();
             let else_label = format!("{}.{}.true", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
             state.phis += 1;
@@ -324,6 +361,8 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             let cond = walk(cond, state);
             state.push(Instruction::JumpIfZero(cond, else_label.clone()));
             let src = walk(then, state);
+            let phi = state.var(src.ty());
+
             state.push(Instruction::Copy {
                 src,
                 dst: phi.clone(),
@@ -345,13 +384,37 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                 .collect::<Vec<_>>();
             match ident.as_ref() {
                 Expression::Var(name) => {
-                    let dst = state.var();
+                    let Type::Function { params: _, ref ret } = state.symbols.get(name).unwrap().ty
+                    else {
+                        unreachable!()
+                    };
+                    let dst = state.var(ret);
                     state.push(Instruction::Call(name.clone(), params, dst.clone()));
                     dst
                 }
                 _ => unreachable!(),
             }
         }
+        Expression::Cast(to, expr) => match (walk(expr, state), to) {
+            (src, t) if src.ty() == t => src,
+            (src, Type::Long) if src.ty() == &Type::Int => {
+                let dst = state.var(&Type::Long);
+                state.push(Instruction::SignExtend {
+                    src,
+                    dst: dst.clone(),
+                });
+                dst
+            }
+            (src, Type::Int) if src.ty() == &Type::Long => {
+                let dst = state.var(&Type::Int);
+                state.push(Instruction::Truncate {
+                    src,
+                    dst: dst.clone(),
+                });
+                dst
+            }
+            (from, to) => unreachable!("cast {expr:?} from {from:?} to {to:?}"),
+        },
     }
 }
 
@@ -466,7 +529,7 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             let label = label.as_ref().unwrap();
             let start = format!("{label}.cases");
             let value = walk(expression, state);
-            let cmp = state.var();
+            let cmp = state.var(&Type::Int);
             state.push(Instruction::Jump(start.clone()));
             state.switch_cases.insert(label.clone(), Default::default());
 
@@ -480,14 +543,17 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
                     Some(case) => {
                         state.push(Instruction::Binary {
                             op: BinaryOperator::Equals,
-                            lhs: Val::Constant(case),
+                            lhs: constant(value.ty(), case),
                             rhs: value.clone(),
                             dst: cmp.clone(),
                         });
-                        state.push(Instruction::JumpIfNotZero(
-                            cmp.clone(),
-                            format!("{label}.{case}"),
-                        ));
+                        let case_label = format!(
+                            "{}.{}{}",
+                            label,
+                            if case.is_negative() { "neg" } else { "" },
+                            case.abs()
+                        );
+                        state.push(Instruction::JumpIfNotZero(cmp.clone(), case_label));
                     }
                     None => state.push(Instruction::Jump(format!("{label}.default"))),
                 }
@@ -496,17 +562,24 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
         }
         Statement::Case(expression, statement, label) => {
             let Val::Constant(c) = walk(expression, state) else {
-                unreachable!()
+                unreachable!("non-constant case in switch {expression:?}")
             };
-            state.push(Instruction::Label(format!(
-                "{}.{c}",
-                label.as_ref().unwrap()
-            )));
+            let case_label = format!(
+                "{}.{}{}",
+                label.as_ref().unwrap(),
+                if c.into_long().is_negative() {
+                    "neg"
+                } else {
+                    ""
+                },
+                c.into_long().abs()
+            );
+            state.push(Instruction::Label(case_label));
             state
                 .switch_cases
                 .get_mut(label.as_ref().unwrap())
                 .unwrap_or_else(|| panic!("no switch cases registed for {label:?}",))
-                .push(Some(c));
+                .push(Some(c.into_long()));
             walk_statement(statement, state);
         }
         Statement::Default(statement, label) => {
@@ -550,12 +623,12 @@ fn lower_function<'a>(
     let params = function
         .params
         .iter()
-        .map(|param| Val::Var(param.clone()))
+        .map(|(ty, name)| Val::Var(name.clone(), ty.clone()))
         .collect();
 
     walk_block(body, &mut state);
 
-    state.push(Instruction::Return(Val::Constant(0)));
+    state.push(Instruction::Return(constant(&function.ret, 0)));
 
     for (key, sv) in state.static_variables {
         parent_state.static_variables.entry(key).or_insert(sv);

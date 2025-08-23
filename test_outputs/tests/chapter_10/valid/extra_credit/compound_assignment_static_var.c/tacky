@@ -1,24 +1,28 @@
 Program {
     static_variables: [
         StaticVariable {
+            identifier: "k.3",
+            global: false,
+            init: 1,
+            width: Four,
+        },
+        StaticVariable {
             identifier: "l.4",
             global: false,
             init: 48,
+            width: Four,
         },
         StaticVariable {
             identifier: "j.2",
             global: false,
             init: 0,
+            width: Four,
         },
         StaticVariable {
             identifier: "i.1",
             global: false,
             init: 0,
-        },
-        StaticVariable {
-            identifier: "k.3",
-            global: false,
-            init: 1,
+            width: Four,
         },
     ],
     functions: [
@@ -31,71 +35,132 @@ Program {
                     op: Add,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "f.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "f.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "j.2",
+                        Int,
                     ),
                     rhs: Var(
                         "i.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "f.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "f.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "j.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "k.3",
+                        Int,
                     ),
                     rhs: Var(
                         "j.2",
+                        Int,
+                    ),
+                    dst: Var(
+                        "f.tmp.2",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "f.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "k.3",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Divide,
                     lhs: Var(
                         "l.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "f.tmp.3",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "f.tmp.3",
+                        Int,
                     ),
                     dst: Var(
                         "l.4",
+                        Int,
                     ),
                 },
                 Binary {
                     op: NotEqual,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                     dst: Var(
-                        "f.tmp.0",
+                        "f.tmp.4",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "f.tmp.0",
+                        "f.tmp.4",
+                        Int,
                     ),
                     "f.0.true",
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Jump(
@@ -110,33 +175,42 @@ Program {
                 Unary {
                     op: Negate,
                     src: Constant(
-                        6,
+                        Int(
+                            6,
+                        ),
                     ),
                     dst: Var(
-                        "f.tmp.1",
+                        "f.tmp.5",
+                        Int,
                     ),
                 },
                 Binary {
                     op: NotEqual,
                     lhs: Var(
                         "j.2",
+                        Int,
                     ),
                     rhs: Var(
-                        "f.tmp.1",
+                        "f.tmp.5",
+                        Int,
                     ),
                     dst: Var(
-                        "f.tmp.2",
+                        "f.tmp.6",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "f.tmp.2",
+                        "f.tmp.6",
+                        Int,
                     ),
                     "f.1.true",
                 ),
                 Return(
                     Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                 ),
                 Jump(
@@ -151,33 +225,42 @@ Program {
                 Unary {
                     op: Negate,
                     src: Constant(
-                        18,
+                        Int(
+                            18,
+                        ),
                     ),
                     dst: Var(
-                        "f.tmp.3",
+                        "f.tmp.7",
+                        Int,
                     ),
                 },
                 Binary {
                     op: NotEqual,
                     lhs: Var(
                         "k.3",
+                        Int,
                     ),
                     rhs: Var(
-                        "f.tmp.3",
+                        "f.tmp.7",
+                        Int,
                     ),
                     dst: Var(
-                        "f.tmp.4",
+                        "f.tmp.8",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "f.tmp.4",
+                        "f.tmp.8",
+                        Int,
                     ),
                     "f.2.true",
                 ),
                 Return(
                     Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                 ),
                 Jump(
@@ -193,23 +276,30 @@ Program {
                     op: NotEqual,
                     lhs: Var(
                         "l.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        6,
+                        Int(
+                            6,
+                        ),
                     ),
                     dst: Var(
-                        "f.tmp.5",
+                        "f.tmp.9",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "f.tmp.5",
+                        "f.tmp.9",
+                        Int,
                     ),
                     "f.3.true",
                 ),
                 Return(
                     Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                 ),
                 Jump(
@@ -223,12 +313,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -243,6 +337,7 @@ Program {
                     [],
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 ),
                 Call(
@@ -250,6 +345,7 @@ Program {
                     [],
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Call(
@@ -257,16 +353,20 @@ Program {
                     [],
                     Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 ),
                 Return(
                     Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

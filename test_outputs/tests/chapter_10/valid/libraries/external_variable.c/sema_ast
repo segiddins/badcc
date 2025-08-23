@@ -2,6 +2,7 @@ Program {
     declarations: [
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "x",
                 init: None,
                 storage: None,
@@ -15,6 +16,7 @@ Program {
         ),
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "x",
                 init: None,
                 storage: Some(
@@ -30,6 +32,7 @@ Program {
         ),
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "x",
                 init: None,
                 storage: None,
@@ -45,8 +48,12 @@ Program {
             FunctionDeclaration {
                 identifier: "update_x",
                 params: [
-                    "new_val.4",
+                    (
+                        Int,
+                        "new_val.4",
+                    ),
                 ],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
@@ -65,7 +72,9 @@ Program {
                             Statement(
                                 Return(
                                     Constant(
-                                        0,
+                                        Int(
+                                            0,
+                                        ),
                                     ),
                                 ),
                             ),
@@ -91,6 +100,7 @@ Program {
             FunctionDeclaration {
                 identifier: "read_x",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
@@ -121,10 +131,13 @@ Program {
         ),
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "x",
                 init: Some(
                     Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
                     ),
                 ),
                 storage: None,

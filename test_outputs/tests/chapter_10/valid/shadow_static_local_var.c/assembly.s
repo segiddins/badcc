@@ -2,9 +2,11 @@
 	.bss
 _i:
 	.zero 4
+
 	.bss
 _i.4:
 	.zero 4
+
 	.globl _update_static_or_global
 	.text
 _update_static_or_global:

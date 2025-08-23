@@ -4,17 +4,26 @@ Program {
             FunctionDeclaration {
                 identifier: "foo",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Statement(
                                 Return(
                                     Constant(
-                                        2,
+                                        Int(
+                                            2,
+                                        ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                14,
+                            ),
+                            length: 17,
+                        },
                     },
                 ),
                 storage: None,
@@ -22,7 +31,7 @@ Program {
                     offset: SourceOffset(
                         0,
                     ),
-                    length: 35,
+                    length: 31,
                 },
             },
         ),
@@ -30,16 +39,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "x.2",
                                         init: Some(
                                             Constant(
-                                                3,
+                                                Int(
+                                                    3,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -54,16 +67,21 @@ Program {
                             ),
                             Statement(
                                 Expression(
-                                    CompoundAssignment(
+                                    Assignment(
                                         Var(
                                             "x.2",
                                         ),
-                                        Subtract,
-                                        FunctionCall(
+                                        Binary(
+                                            Subtract,
                                             Var(
-                                                "foo",
+                                                "x.2",
                                             ),
-                                            [],
+                                            FunctionCall(
+                                                Var(
+                                                    "foo",
+                                                ),
+                                                [],
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -76,6 +94,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                47,
+                            ),
+                            length: 48,
+                        },
                     },
                 ),
                 storage: None,

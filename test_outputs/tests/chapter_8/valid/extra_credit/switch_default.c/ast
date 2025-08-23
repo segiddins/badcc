@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -37,24 +41,15 @@ Program {
                                                 Statement(
                                                     Case(
                                                         Constant(
-                                                            1,
-                                                        ),
-                                                        Return(
-                                                            Constant(
+                                                            Int(
                                                                 1,
                                                             ),
                                                         ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            2,
-                                                        ),
                                                         Return(
                                                             Constant(
-                                                                9,
+                                                                Int(
+                                                                    1,
+                                                                ),
                                                             ),
                                                         ),
                                                         None,
@@ -63,7 +58,26 @@ Program {
                                                 Statement(
                                                     Case(
                                                         Constant(
-                                                            4,
+                                                            Int(
+                                                                2,
+                                                            ),
+                                                        ),
+                                                        Return(
+                                                            Constant(
+                                                                Int(
+                                                                    9,
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                ),
+                                                Statement(
+                                                    Case(
+                                                        Constant(
+                                                            Int(
+                                                                4,
+                                                            ),
                                                         ),
                                                         Expression(
                                                             Assignment(
@@ -71,7 +85,9 @@ Program {
                                                                     "a",
                                                                 ),
                                                                 Constant(
-                                                                    11,
+                                                                    Int(
+                                                                        11,
+                                                                    ),
                                                                 ),
                                                             ),
                                                         ),
@@ -91,7 +107,9 @@ Program {
                                                                     "a",
                                                                 ),
                                                                 Constant(
-                                                                    22,
+                                                                    Int(
+                                                                        22,
+                                                                    ),
                                                                 ),
                                                             ),
                                                         ),
@@ -99,6 +117,12 @@ Program {
                                                     ),
                                                 ),
                                             ],
+                                            span: SourceSpan {
+                                                offset: SourceOffset(
+                                                    46,
+                                                ),
+                                                length: 175,
+                                            },
                                         },
                                     ),
                                     None,
@@ -112,6 +136,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 222,
+                        },
                     },
                 ),
                 storage: None,

@@ -4,6 +4,7 @@ Program {
             identifier: "count.3",
             global: false,
             init: 0,
+            width: Four,
         },
     ],
     functions: [
@@ -16,12 +17,16 @@ Program {
                     op: Add,
                     lhs: Var(
                         "count.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        65,
+                        Int(
+                            65,
+                        ),
                     ),
                     dst: Var(
                         "print_alphabet.tmp.0",
+                        Int,
                     ),
                 },
                 Call(
@@ -29,47 +34,60 @@ Program {
                     [
                         Var(
                             "print_alphabet.tmp.0",
+                            Int,
                         ),
                     ],
                     Var(
                         "print_alphabet.tmp.1",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
                         "count.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "print_alphabet.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "print_alphabet.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "count.3",
+                        Int,
                     ),
                 },
                 Binary {
                     op: LessThan,
                     lhs: Var(
                         "count.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        26,
+                        Int(
+                            26,
+                        ),
                     ),
                     dst: Var(
                         "print_alphabet.tmp.3",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "print_alphabet.tmp.3",
+                        Int,
                     ),
                     "print_alphabet.0.true",
                 ),
@@ -78,6 +96,7 @@ Program {
                     [],
                     Var(
                         "print_alphabet.tmp.4",
+                        Int,
                     ),
                 ),
                 Jump(
@@ -92,11 +111,14 @@ Program {
                 Return(
                     Var(
                         "count.3",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -111,11 +133,14 @@ Program {
                     [],
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

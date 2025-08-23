@@ -1,0 +1,560 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "not",
+            global: true,
+            params: [
+                Var(
+                    "l.1",
+                    Long,
+                ),
+            ],
+            instructions: [
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "l.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "not.tmp.0",
+                        Long,
+                    ),
+                },
+                Return(
+                    Var(
+                        "not.tmp.0",
+                        Long,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "if_cond",
+            global: true,
+            params: [
+                Var(
+                    "l.3",
+                    Long,
+                ),
+            ],
+            instructions: [
+                JumpIfZero(
+                    Var(
+                        "l.3",
+                        Long,
+                    ),
+                    "if_cond.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "if_cond.0.end",
+                ),
+                Label(
+                    "if_cond.0.true",
+                ),
+                Label(
+                    "if_cond.0.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "and",
+            global: true,
+            params: [
+                Var(
+                    "l1.5",
+                    Long,
+                ),
+                Var(
+                    "l2.6",
+                    Int,
+                ),
+            ],
+            instructions: [
+                JumpIfZero(
+                    Var(
+                        "l1.5",
+                        Long,
+                    ),
+                    "and.0.false",
+                ),
+                SignExtend {
+                    src: Var(
+                        "l2.6",
+                        Int,
+                    ),
+                    dst: Var(
+                        "and.tmp.1",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "and.tmp.1",
+                        Long,
+                    ),
+                    "and.0.false",
+                ),
+                Copy {
+                    src: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "and.tmp.0",
+                        Int,
+                    ),
+                },
+                Jump(
+                    "and.0.end",
+                ),
+                Label(
+                    "and.0.false",
+                ),
+                Copy {
+                    src: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "and.tmp.0",
+                        Int,
+                    ),
+                },
+                Label(
+                    "and.0.end",
+                ),
+                Return(
+                    Var(
+                        "and.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "or",
+            global: true,
+            params: [
+                Var(
+                    "l1.8",
+                    Int,
+                ),
+                Var(
+                    "l2.9",
+                    Long,
+                ),
+            ],
+            instructions: [
+                SignExtend {
+                    src: Var(
+                        "l1.8",
+                        Int,
+                    ),
+                    dst: Var(
+                        "or.tmp.1",
+                        Long,
+                    ),
+                },
+                JumpIfNotZero(
+                    Var(
+                        "or.tmp.1",
+                        Long,
+                    ),
+                    "or.0.true",
+                ),
+                JumpIfNotZero(
+                    Var(
+                        "l2.9",
+                        Long,
+                    ),
+                    "or.0.true",
+                ),
+                Copy {
+                    src: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "or.tmp.0",
+                        Int,
+                    ),
+                },
+                Jump(
+                    "or.0.end",
+                ),
+                Label(
+                    "or.0.true",
+                ),
+                Copy {
+                    src: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "or.tmp.0",
+                        Int,
+                    ),
+                },
+                Label(
+                    "or.0.end",
+                ),
+                Return(
+                    Var(
+                        "or.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        Long(
+                            1152921504606846976,
+                        ),
+                    ),
+                    dst: Var(
+                        "l.11",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "zero.12",
+                        Long,
+                    ),
+                },
+                Call(
+                    "not",
+                    [
+                        Var(
+                            "l.11",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "not",
+                    [
+                        Var(
+                            "zero.12",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "if_cond",
+                    [
+                        Var(
+                            "l.11",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "if_cond",
+                    [
+                        Var(
+                            "zero.12",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                ),
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Call(
+                    "and",
+                    [
+                        Var(
+                            "zero.12",
+                            Long,
+                        ),
+                        Constant(
+                            Int(
+                                1,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                ),
+                JumpIfZero(
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                    "main.4.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Call(
+                    "or",
+                    [
+                        Constant(
+                            Int(
+                                1,
+                            ),
+                        ),
+                        Var(
+                            "l.11",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                    "main.5.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            6,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

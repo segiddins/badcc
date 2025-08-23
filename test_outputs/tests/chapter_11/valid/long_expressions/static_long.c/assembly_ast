@@ -1,0 +1,225 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Data(
+                        "foo",
+                        Eight,
+                    ),
+                    destination: Register(
+                        R10,
+                        Eight,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Eight,
+                    ),
+                    destination: Stack(
+                        16,
+                        Eight,
+                    ),
+                },
+                Binary(
+                    Add,
+                    Immediate(
+                        5,
+                        Eight,
+                    ),
+                    Stack(
+                        16,
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        4294967295,
+                        Eight,
+                    ),
+                    destination: Register(
+                        R10,
+                        Eight,
+                    ),
+                },
+                Cmp(
+                    Register(
+                        R10,
+                        Eight,
+                    ),
+                    Stack(
+                        16,
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Eight,
+                    ),
+                    destination: Stack(
+                        24,
+                        Eight,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        24,
+                        Eight,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        24,
+                        Eight,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1152921504606846988,
+                        Eight,
+                    ),
+                    destination: Register(
+                        R10,
+                        Eight,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Eight,
+                    ),
+                    destination: Data(
+                        "foo",
+                        Eight,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        1152921504606846988,
+                        Eight,
+                    ),
+                    destination: Register(
+                        R10,
+                        Eight,
+                    ),
+                },
+                Cmp(
+                    Register(
+                        R10,
+                        Eight,
+                    ),
+                    Data(
+                        "foo",
+                        Eight,
+                    ),
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Eight,
+                    ),
+                    destination: Stack(
+                        32,
+                        Eight,
+                    ),
+                },
+                SetCC(
+                    E,
+                    Stack(
+                        32,
+                        Eight,
+                    ),
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        32,
+                        Eight,
+                    ),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Register(
+                        AX,
+                        Four,
+                    ),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "foo",
+            value: 4294967290,
+            alignment: 8,
+        },
+    ],
+}

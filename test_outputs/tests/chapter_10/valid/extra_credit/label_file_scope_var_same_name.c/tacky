@@ -4,6 +4,7 @@ Program {
             identifier: "x",
             global: true,
             init: 0,
+            width: Four,
         },
     ],
     functions: [
@@ -14,10 +15,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "x.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -26,6 +30,7 @@ Program {
                 Return(
                     Var(
                         "x.2",
+                        Int,
                     ),
                 ),
                 Label(
@@ -34,11 +39,14 @@ Program {
                 Return(
                     Var(
                         "x",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

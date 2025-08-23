@@ -4,11 +4,13 @@ Program {
             identifier: "i.1",
             global: false,
             init: 2,
+            width: Four,
         },
         StaticVariable {
             identifier: "j.2",
             global: false,
             init: 3,
+            width: Four,
         },
     ],
     functions: [
@@ -21,40 +23,50 @@ Program {
                     op: LessThan,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Var(
                         "j.2",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "cmp.3",
+                        Int,
                     ),
                 },
                 Unary {
                     op: Not,
                     src: Var(
                         "cmp.3",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     "main.0.true",
                 ),
                 Return(
                     Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                 ),
                 Jump(
@@ -68,12 +80,16 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "i.1",
                                         init: Some(
                                             Constant(
-                                                1,
+                                                Int(
+                                                    1,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -30,15 +34,22 @@ Program {
                                 For {
                                     init: Expr(
                                         Some(
-                                            CompoundAssignment(
+                                            Assignment(
                                                 Var(
                                                     "i.1",
                                                 ),
-                                                Multiply,
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        1,
+                                                Binary(
+                                                    Multiply,
+                                                    Var(
+                                                        "i.1",
+                                                    ),
+                                                    Unary(
+                                                        Minus,
+                                                        Constant(
+                                                            Int(
+                                                                1,
+                                                            ),
+                                                        ),
                                                     ),
                                                 ),
                                             ),
@@ -53,19 +64,28 @@ Program {
                                             Unary(
                                                 Minus,
                                                 Constant(
-                                                    100,
+                                                    Int(
+                                                        100,
+                                                    ),
                                                 ),
                                             ),
                                         ),
                                     ),
                                     post: Some(
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "i.1",
                                             ),
-                                            Subtract,
-                                            Constant(
-                                                3,
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "i.1",
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        3,
+                                                    ),
+                                                ),
                                             ),
                                         ),
                                     ),
@@ -85,13 +105,21 @@ Program {
                                         Unary(
                                             Minus,
                                             Constant(
-                                                103,
+                                                Int(
+                                                    103,
+                                                ),
                                             ),
                                         ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 88,
+                        },
                     },
                 ),
                 storage: None,

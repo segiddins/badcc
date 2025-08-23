@@ -11,17 +11,21 @@ _main:
 	cmpl $0, -16(%rbp)
 	jE Lmain.0.true
 	movl -12(%rbp), %r10d
-	movl %r10d, -12(%rbp)
-	subl $4, -12(%rbp)
-	movl $5, -20(%rbp)
-	cmpl $4, -20(%rbp)
-	movl $0, -24(%rbp)
-	setG -24(%rbp)
-	cmpl $0, -24(%rbp)
-	jE Lmain.1.true
-	movl -20(%rbp), %r10d
 	movl %r10d, -20(%rbp)
 	subl $4, -20(%rbp)
+	movl -20(%rbp), %r10d
+	movl %r10d, -12(%rbp)
+	movl $5, -24(%rbp)
+	cmpl $4, -24(%rbp)
+	movl $0, -28(%rbp)
+	setG -28(%rbp)
+	cmpl $0, -28(%rbp)
+	jE Lmain.1.true
+	movl -24(%rbp), %r10d
+	movl %r10d, -32(%rbp)
+	subl $4, -32(%rbp)
+	movl -32(%rbp), %r10d
+	movl %r10d, -24(%rbp)
 	jmp Lmain.1.end
 	Lmain.1.true:
 	Lmain.1.end:

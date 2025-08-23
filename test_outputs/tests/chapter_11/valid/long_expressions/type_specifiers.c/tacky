@@ -1,0 +1,475 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a",
+            global: false,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "my_function",
+            global: true,
+            params: [
+                Var(
+                    "x.8",
+                    Long,
+                ),
+                Var(
+                    "y.9",
+                    Long,
+                ),
+                Var(
+                    "z.10",
+                    Long,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "x.8",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "y.9",
+                        Long,
+                    ),
+                    dst: Var(
+                        "my_function.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "my_function.tmp.0",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "z.10",
+                        Long,
+                    ),
+                    dst: Var(
+                        "my_function.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "my_function.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "my_function.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "my_function.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        Long(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "x.12",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "y.13",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            3,
+                        ),
+                    ),
+                    dst: Var(
+                        "z.14",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            4,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "sum.16",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            1099511627776,
+                        ),
+                    ),
+                    dst: Var(
+                        "i.17",
+                        Long,
+                    ),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var(
+                        "i.17",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                    "loop.0",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "sum.16",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "sum.16",
+                        Int,
+                    ),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Divide,
+                    lhs: Var(
+                        "i.17",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "i.17",
+                        Long,
+                    ),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "x.12",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.3",
+                        Long,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "y.13",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "a",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "my_function",
+                    [
+                        Var(
+                            "x.12",
+                            Long,
+                        ),
+                        Var(
+                            "y.13",
+                            Long,
+                        ),
+                        Var(
+                            "z.14",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            6,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "sum.16",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            41,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                    "main.4.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

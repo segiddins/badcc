@@ -8,31 +8,50 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Unary {
                     op: Negate,
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Var(
                         "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -41,27 +60,34 @@ Program {
                 Unary {
                     op: Negate,
                     src: Constant(
-                        100,
+                        Int(
+                            100,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: GreaterThanOrEqual,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Var(
-                        "main.tmp.1",
+                        "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -72,12 +98,26 @@ Program {
                     op: Subtract,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.4",
+                        Int,
                     ),
                     dst: Var(
                         "i.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -89,32 +129,41 @@ Program {
                 Unary {
                     op: Negate,
                     src: Constant(
-                        103,
+                        Int(
+                            103,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.3",
+                        "main.tmp.5",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
                         "i.1",
+                        Int,
                     ),
                     rhs: Var(
-                        "main.tmp.3",
+                        "main.tmp.5",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.4",
+                        "main.tmp.6",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
-                        "main.tmp.4",
+                        "main.tmp.6",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

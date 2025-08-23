@@ -6,6 +6,7 @@ _x:
 	.bss
 _y:
 	.zero 4
+
 	.globl _main
 	.text
 _main:

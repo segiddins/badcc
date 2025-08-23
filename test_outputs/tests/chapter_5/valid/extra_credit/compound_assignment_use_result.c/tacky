@@ -8,47 +8,71 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Add,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        3,
+                        Int(
+                            3,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "x.1",
+                        Int,
                     ),
                     dst: Var(
                         "y.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "main.tmp.1",
+                        "main.tmp.2",
+                        Int,
                     ),
                     "main.0.false",
                 ),
@@ -56,26 +80,34 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "y.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
-                        "main.tmp.2",
+                        "main.tmp.3",
+                        Int,
                     ),
                     "main.0.false",
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Jump(
@@ -86,10 +118,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 },
                 Label(
@@ -97,12 +132,15 @@ Program {
                 ),
                 Return(
                     Var(
-                        "main.tmp.0",
+                        "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

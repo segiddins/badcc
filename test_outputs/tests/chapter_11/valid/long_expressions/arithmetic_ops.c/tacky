@@ -1,0 +1,819 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "b",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "addition",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var(
+                        "a",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "b",
+                        Long,
+                    ),
+                    dst: Var(
+                        "addition.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "addition.tmp.0",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967295,
+                        ),
+                    ),
+                    dst: Var(
+                        "addition.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "addition.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "addition.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "addition.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "subtraction",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        "a",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "b",
+                        Long,
+                    ),
+                    dst: Var(
+                        "subtraction.tmp.0",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            4294967380,
+                        ),
+                    ),
+                    dst: Var(
+                        "subtraction.tmp.1",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "subtraction.tmp.0",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "subtraction.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "subtraction.tmp.2",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "subtraction.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "subtraction.tmp.3",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "subtraction.tmp.3",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiplication",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "a",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4,
+                        ),
+                    ),
+                    dst: Var(
+                        "multiplication.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "multiplication.tmp.0",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            17179869160,
+                        ),
+                    ),
+                    dst: Var(
+                        "multiplication.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "multiplication.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "multiplication.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "multiplication.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "division",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Divide,
+                    lhs: Var(
+                        "a",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            128,
+                        ),
+                    ),
+                    dst: Var(
+                        "division.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "division.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "b",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "b",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            33554431,
+                        ),
+                    ),
+                    dst: Var(
+                        "division.tmp.1",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "division.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "division.tmp.2",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "division.tmp.2",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "remaind",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Var(
+                        "a",
+                        Long,
+                    ),
+                    dst: Var(
+                        "remaind.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Remainder,
+                    lhs: Var(
+                        "remaind.tmp.0",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "remaind.tmp.1",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "remaind.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "b",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "remaind.tmp.2",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "b",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "remaind.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "remaind.tmp.3",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "remaind.tmp.3",
+                        Long,
+                    ),
+                    dst: Var(
+                        "remaind.tmp.4",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "remaind.tmp.4",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "complement",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Complement,
+                    src: Var(
+                        "a",
+                        Long,
+                    ),
+                    dst: Var(
+                        "complement.tmp.0",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            9223372036854775807,
+                        ),
+                    ),
+                    dst: Var(
+                        "complement.tmp.1",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "complement.tmp.0",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "complement.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "complement.tmp.2",
+                        Long,
+                    ),
+                },
+                Truncate {
+                    src: Var(
+                        "complement.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "complement.tmp.3",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "complement.tmp.3",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "b",
+                        Long,
+                    ),
+                },
+                Call(
+                    "addition",
+                    [],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Constant(
+                        Long(
+                            90,
+                        ),
+                    ),
+                    dst: Var(
+                        "b",
+                        Long,
+                    ),
+                },
+                Call(
+                    "subtraction",
+                    [],
+                    Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.4",
+                        Int,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Call(
+                    "multiplication",
+                    [],
+                    Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.6",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Copy {
+                    src: Constant(
+                        Long(
+                            4294967290,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Call(
+                    "division",
+                    [],
+                    Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.7",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Copy {
+                    src: Constant(
+                        Long(
+                            8589934585,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Call(
+                    "remaind",
+                    [],
+                    Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                    "main.4.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            5,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Copy {
+                    src: Constant(
+                        Long(
+                            9223372036854775806,
+                        ),
+                    ),
+                    dst: Var(
+                        "a",
+                        Long,
+                    ),
+                },
+                Call(
+                    "complement",
+                    [],
+                    Var(
+                        "main.tmp.11",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.11",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.12",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.12",
+                        Int,
+                    ),
+                    "main.5.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            6,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

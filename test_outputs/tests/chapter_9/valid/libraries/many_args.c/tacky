@@ -7,6 +7,7 @@ Program {
             params: [
                 Var(
                     "n.1",
+                    Int,
                 ),
             ],
             instructions: [
@@ -14,17 +15,22 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "n.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.1",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "fib.tmp.1",
+                        Int,
                     ),
                     "fib.1.true",
                 ),
@@ -32,26 +38,34 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "n.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.2",
+                        Int,
                     ),
                 },
                 JumpIfNotZero(
                     Var(
                         "fib.tmp.2",
+                        Int,
                     ),
                     "fib.1.true",
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.0",
+                        Int,
                     ),
                 },
                 Jump(
@@ -62,10 +76,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.0",
+                        Int,
                     ),
                 },
                 Label(
@@ -74,12 +91,14 @@ Program {
                 JumpIfZero(
                     Var(
                         "fib.tmp.0",
+                        Int,
                     ),
                     "fib.0.true",
                 ),
                 Return(
                     Var(
                         "n.1",
+                        Int,
                     ),
                 ),
                 Jump(
@@ -92,12 +111,16 @@ Program {
                     op: Subtract,
                     lhs: Var(
                         "n.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.3",
+                        Int,
                     ),
                 },
                 Call(
@@ -105,22 +128,28 @@ Program {
                     [
                         Var(
                             "fib.tmp.3",
+                            Int,
                         ),
                     ],
                     Var(
                         "fib.tmp.4",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "n.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
                     ),
                     dst: Var(
                         "fib.tmp.5",
+                        Int,
                     ),
                 },
                 Call(
@@ -128,27 +157,33 @@ Program {
                     [
                         Var(
                             "fib.tmp.5",
+                            Int,
                         ),
                     ],
                     Var(
                         "fib.tmp.6",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Add,
                     lhs: Var(
                         "fib.tmp.4",
+                        Int,
                     ),
                     rhs: Var(
                         "fib.tmp.6",
+                        Int,
                     ),
                     dst: Var(
                         "fib.tmp.7",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "fib.tmp.7",
+                        Int,
                     ),
                 ),
                 Label(
@@ -156,7 +191,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -167,27 +204,35 @@ Program {
             params: [
                 Var(
                     "a.3",
+                    Int,
                 ),
                 Var(
                     "b.4",
+                    Int,
                 ),
                 Var(
                     "c.5",
+                    Int,
                 ),
                 Var(
                     "d.6",
+                    Int,
                 ),
                 Var(
                     "e.7",
+                    Int,
                 ),
                 Var(
                     "f.8",
+                    Int,
                 ),
                 Var(
                     "g.9",
+                    Int,
                 ),
                 Var(
                     "h.10",
+                    Int,
                 ),
             ],
             instructions: [
@@ -195,60 +240,75 @@ Program {
                     op: Multiply,
                     lhs: Var(
                         "a.3",
+                        Int,
                     ),
                     rhs: Var(
                         "b.4",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.0",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.0",
+                        Int,
                     ),
                     rhs: Var(
                         "c.5",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.1",
+                        Int,
                     ),
                     rhs: Var(
                         "d.6",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.2",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.2",
+                        Int,
                     ),
                     rhs: Var(
                         "e.7",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.3",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.3",
+                        Int,
                     ),
                     rhs: Var(
                         "f.8",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.4",
+                        Int,
                     ),
                 },
                 Call(
@@ -256,22 +316,27 @@ Program {
                     [
                         Var(
                             "g.9",
+                            Int,
                         ),
                     ],
                     Var(
                         "multiply_many_args.tmp.5",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.4",
+                        Int,
                     ),
                     rhs: Var(
                         "multiply_many_args.tmp.5",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.6",
+                        Int,
                     ),
                 },
                 Call(
@@ -279,32 +344,40 @@ Program {
                     [
                         Var(
                             "h.10",
+                            Int,
                         ),
                     ],
                     Var(
                         "multiply_many_args.tmp.7",
+                        Int,
                     ),
                 ),
                 Binary {
                     op: Multiply,
                     lhs: Var(
                         "multiply_many_args.tmp.6",
+                        Int,
                     ),
                     rhs: Var(
                         "multiply_many_args.tmp.7",
+                        Int,
                     ),
                     dst: Var(
                         "multiply_many_args.tmp.8",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "multiply_many_args.tmp.8",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

@@ -3,7 +3,7 @@
 _main:
 	pushq %rbp
 	movq %rsp, %rbp
-	subq $16, %rsp
+	subq $32, %rsp
 	movl $4, -12(%rbp)
 	movl $1, %r11d
 	cmpl $0, %r11d
@@ -14,10 +14,12 @@ _main:
 	movl $3, -16(%rbp)
 	Lmain.0.end:
 	movl -12(%rbp), %r10d
-	movl %r10d, -12(%rbp)
-	movl -12(%rbp), %r11d
+	movl %r10d, -20(%rbp)
+	movl -20(%rbp), %r11d
 	imull -16(%rbp), %r11d
-	movl %r11d, -12(%rbp)
+	movl %r11d, -20(%rbp)
+	movl -20(%rbp), %r10d
+	movl %r10d, -12(%rbp)
 	movl -12(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp

@@ -4,6 +4,7 @@ Program {
             identifier: "x.1",
             global: false,
             init: 0,
+            width: Four,
         },
     ],
     functions: [
@@ -16,30 +17,39 @@ Program {
                     op: Add,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "foo.tmp.0",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "foo.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "x.1",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],
@@ -51,10 +61,13 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "i.4",
+                        Int,
                     ),
                 },
                 Label(
@@ -64,17 +77,22 @@ Program {
                     op: LessThan,
                     lhs: Var(
                         "i.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -83,14 +101,17 @@ Program {
                     [],
                     Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 ),
                 Copy {
                     src: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "ret.3",
+                        Int,
                     ),
                 },
                 Label(
@@ -100,20 +121,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "i.4",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "i.4",
+                        Int,
                     ),
                 },
                 Jump(
@@ -125,11 +152,14 @@ Program {
                 Return(
                     Var(
                         "ret.3",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

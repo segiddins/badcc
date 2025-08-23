@@ -8,27 +8,45 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Subtract,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "x.1",
+                        Int,
                     ),
                     "main.0.true",
                 ),
@@ -36,20 +54,36 @@ Program {
                     op: Divide,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        2,
+                        Int(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "x.1",
+                        Int,
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 Jump(
@@ -60,10 +94,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.0",
+                        "main.tmp.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -73,22 +110,29 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
-                        "main.tmp.1",
+                        "main.tmp.3",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
-                        "main.tmp.1",
+                        "main.tmp.3",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

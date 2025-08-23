@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "i.1",
                                         init: Some(
                                             Constant(
-                                                100,
+                                                Int(
+                                                    100,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -29,10 +33,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "sum.2",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -48,23 +55,37 @@ Program {
                             Statement(
                                 DoWhile(
                                     Expression(
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "sum.2",
                                             ),
-                                            Add,
-                                            Constant(
-                                                2,
+                                            Binary(
+                                                Add,
+                                                Var(
+                                                    "sum.2",
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        2,
+                                                    ),
+                                                ),
                                             ),
                                         ),
                                     ),
-                                    CompoundAssignment(
+                                    Assignment(
                                         Var(
                                             "i.1",
                                         ),
-                                        Subtract,
-                                        Constant(
-                                            1,
+                                        Binary(
+                                            Subtract,
+                                            Var(
+                                                "i.1",
+                                            ),
+                                            Constant(
+                                                Int(
+                                                    1,
+                                                ),
+                                            ),
                                         ),
                                     ),
                                     Some(
@@ -82,7 +103,9 @@ Program {
                                                 "i.1",
                                             ),
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         Binary(
@@ -91,13 +114,21 @@ Program {
                                                 "sum.2",
                                             ),
                                             Constant(
-                                                200,
+                                                Int(
+                                                    200,
+                                                ),
                                             ),
                                         ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 109,
+                        },
                     },
                 ),
                 storage: None,

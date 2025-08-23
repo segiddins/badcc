@@ -8,33 +8,42 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "x.1",
+                        Int,
                     ),
                 },
                 Binary {
                     op: Equals,
                     lhs: Var(
                         "x.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        4,
+                        Int(
+                            4,
+                        ),
                     ),
                     dst: Var(
                         "read_x.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "read_x.tmp.0",
+                        Int,
                     ),
                     "read_x.0.true",
                 ),
                 Return(
                     Var(
                         "x",
+                        Int,
                     ),
                 ),
                 Jump(
@@ -46,15 +55,19 @@ Program {
                 Unary {
                     op: Negate,
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "read_x.tmp.1",
+                        Int,
                     ),
                 },
                 Return(
                     Var(
                         "read_x.tmp.1",
+                        Int,
                     ),
                 ),
                 Label(
@@ -62,7 +75,9 @@ Program {
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

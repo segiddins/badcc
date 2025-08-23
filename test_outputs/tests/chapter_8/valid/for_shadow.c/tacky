@@ -8,26 +8,35 @@ Program {
             instructions: [
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "shadow.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "acc.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "shadow.3",
+                        Int,
                     ),
                 },
                 Label(
@@ -37,17 +46,22 @@ Program {
                     op: LessThan,
                     lhs: Var(
                         "shadow.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.0",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.0",
+                        Int,
                     ),
                     "loop.0",
                 ),
@@ -55,20 +69,25 @@ Program {
                     op: Add,
                     lhs: Var(
                         "acc.2",
+                        Int,
                     ),
                     rhs: Var(
                         "shadow.3",
+                        Int,
                     ),
                     dst: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.1",
+                        Int,
                     ),
                     dst: Var(
                         "acc.2",
+                        Int,
                     ),
                 },
                 Label(
@@ -78,20 +97,26 @@ Program {
                     op: Add,
                     lhs: Var(
                         "shadow.3",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                 },
                 Copy {
                     src: Var(
                         "main.tmp.2",
+                        Int,
                     ),
                     dst: Var(
                         "shadow.3",
+                        Int,
                     ),
                 },
                 Jump(
@@ -104,17 +129,22 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "acc.2",
+                        Int,
                     ),
                     rhs: Constant(
-                        45,
+                        Int(
+                            45,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.4",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.4",
+                        Int,
                     ),
                     "main.0.false",
                 ),
@@ -122,26 +152,34 @@ Program {
                     op: Equals,
                     lhs: Var(
                         "shadow.1",
+                        Int,
                     ),
                     rhs: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.5",
+                        Int,
                     ),
                 },
                 JumpIfZero(
                     Var(
                         "main.tmp.5",
+                        Int,
                     ),
                     "main.0.false",
                 ),
                 Copy {
                     src: Constant(
-                        1,
+                        Int(
+                            1,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 Jump(
@@ -152,10 +190,13 @@ Program {
                 ),
                 Copy {
                     src: Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                     dst: Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 },
                 Label(
@@ -164,11 +205,14 @@ Program {
                 Return(
                     Var(
                         "main.tmp.3",
+                        Int,
                     ),
                 ),
                 Return(
                     Constant(
-                        0,
+                        Int(
+                            0,
+                        ),
                     ),
                 ),
             ],

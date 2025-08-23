@@ -13,7 +13,7 @@ pub enum Error {
     #[error("case statement used outside of switch")]
     InvalidCase,
     #[error("Duplicate case {0} in switch")]
-    DuplicateCase(i32),
+    DuplicateCase(i64),
     #[error("Non-constant expression in case")]
     NonConstantCase,
 }
@@ -26,7 +26,7 @@ struct Scope {
     break_labels: Vec<String>,
     continue_labels: Vec<String>,
 
-    cases: Vec<(String, HashSet<Option<i32>>)>,
+    cases: Vec<(String, HashSet<Option<i64>>)>,
 }
 
 impl Scope {
@@ -109,8 +109,8 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
             label.replace(switch_label.clone());
             match expr {
                 Expression::Constant(c) => {
-                    if !cases.insert(Some(*c)) {
-                        return Err(Error::DuplicateCase(*c));
+                    if !cases.insert(Some(c.into_long())) {
+                        return Err(Error::DuplicateCase(c.into_long()));
                     }
                 }
                 _ => return Err(Error::NonConstantCase),

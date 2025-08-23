@@ -1,0 +1,278 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "sign_extend",
+            global: true,
+            params: [
+                Var(
+                    "i.1",
+                    Int,
+                ),
+                Var(
+                    "expected.2",
+                    Long,
+                ),
+            ],
+            instructions: [
+                SignExtend {
+                    src: Var(
+                        "i.1",
+                        Int,
+                    ),
+                    dst: Var(
+                        "sign_extend.tmp.0",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "sign_extend.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "extended.3",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "extended.3",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "expected.2",
+                        Long,
+                    ),
+                    dst: Var(
+                        "sign_extend.tmp.1",
+                        Long,
+                    ),
+                },
+                Return(
+                    Var(
+                        "sign_extend.tmp.1",
+                        Long,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "sign_extend",
+                    [
+                        Constant(
+                            Int(
+                                10,
+                            ),
+                        ),
+                        Constant(
+                            Long(
+                                10,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.0",
+                        Long,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Int,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Long(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Long,
+                    ),
+                },
+                Call(
+                    "sign_extend",
+                    [
+                        Var(
+                            "main.tmp.2",
+                            Int,
+                        ),
+                        Var(
+                            "main.tmp.3",
+                            Long,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.5",
+                        Long,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                SignExtend {
+                    src: Constant(
+                        Int(
+                            100,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.6",
+                        Long,
+                    ),
+                    dst: Var(
+                        "l.5",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "l.5",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            100,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.7",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.7",
+                        Long,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

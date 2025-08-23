@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a.1",
                                         init: Some(
                                             Constant(
-                                                4,
+                                                Int(
+                                                    4,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -28,20 +32,31 @@ Program {
                             ),
                             Statement(
                                 Expression(
-                                    CompoundAssignment(
+                                    Assignment(
                                         Var(
                                             "a.1",
                                         ),
-                                        Multiply,
-                                        Ternary(
-                                            Constant(
-                                                1,
+                                        Binary(
+                                            Multiply,
+                                            Var(
+                                                "a.1",
                                             ),
-                                            Constant(
-                                                2,
-                                            ),
-                                            Constant(
-                                                3,
+                                            Ternary(
+                                                Constant(
+                                                    Int(
+                                                        1,
+                                                    ),
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        2,
+                                                    ),
+                                                ),
+                                                Constant(
+                                                    Int(
+                                                        3,
+                                                    ),
+                                                ),
                                             ),
                                         ),
                                     ),
@@ -55,6 +70,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 52,
+                        },
                     },
                 ),
                 storage: None,

@@ -4,16 +4,20 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a.1",
                                         init: Some(
                                             Constant(
-                                                250,
+                                                Int(
+                                                    250,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -29,10 +33,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "b.2",
                                         init: Some(
                                             Constant(
-                                                200,
+                                                Int(
+                                                    200,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -48,10 +55,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "c.3",
                                         init: Some(
                                             Constant(
-                                                100,
+                                                Int(
+                                                    100,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -67,10 +77,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "d.4",
                                         init: Some(
                                             Constant(
-                                                75,
+                                                Int(
+                                                    75,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -86,12 +99,15 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "e.5",
                                         init: Some(
                                             Unary(
                                                 Minus,
                                                 Constant(
-                                                    25,
+                                                    Int(
+                                                        25,
+                                                    ),
                                                 ),
                                             ),
                                         ),
@@ -108,10 +124,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "f.6",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -127,10 +146,13 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "x.7",
                                         init: Some(
                                             Constant(
-                                                0,
+                                                Int(
+                                                    0,
+                                                ),
                                             ),
                                         ),
                                         storage: None,
@@ -149,39 +171,66 @@ Program {
                                         Var(
                                             "x.7",
                                         ),
-                                        CompoundAssignment(
+                                        Assignment(
                                             Var(
                                                 "a.1",
                                             ),
-                                            Add,
-                                            CompoundAssignment(
+                                            Binary(
+                                                Add,
                                                 Var(
-                                                    "b.2",
+                                                    "a.1",
                                                 ),
-                                                Subtract,
-                                                CompoundAssignment(
+                                                Assignment(
                                                     Var(
-                                                        "c.3",
+                                                        "b.2",
                                                     ),
-                                                    Multiply,
-                                                    CompoundAssignment(
+                                                    Binary(
+                                                        Subtract,
                                                         Var(
-                                                            "d.4",
+                                                            "b.2",
                                                         ),
-                                                        Divide,
-                                                        CompoundAssignment(
+                                                        Assignment(
                                                             Var(
-                                                                "e.5",
+                                                                "c.3",
                                                             ),
-                                                            Remainder,
-                                                            Assignment(
+                                                            Binary(
+                                                                Multiply,
                                                                 Var(
-                                                                    "f.6",
+                                                                    "c.3",
                                                                 ),
-                                                                Unary(
-                                                                    Minus,
-                                                                    Constant(
-                                                                        7,
+                                                                Assignment(
+                                                                    Var(
+                                                                        "d.4",
+                                                                    ),
+                                                                    Binary(
+                                                                        Divide,
+                                                                        Var(
+                                                                            "d.4",
+                                                                        ),
+                                                                        Assignment(
+                                                                            Var(
+                                                                                "e.5",
+                                                                            ),
+                                                                            Binary(
+                                                                                Remainder,
+                                                                                Var(
+                                                                                    "e.5",
+                                                                                ),
+                                                                                Assignment(
+                                                                                    Var(
+                                                                                        "f.6",
+                                                                                    ),
+                                                                                    Unary(
+                                                                                        Minus,
+                                                                                        Constant(
+                                                                                            Int(
+                                                                                                7,
+                                                                                            ),
+                                                                                        ),
+                                                                                    ),
+                                                                                ),
+                                                                            ),
+                                                                        ),
                                                                     ),
                                                                 ),
                                                             ),
@@ -213,7 +262,9 @@ Program {
                                                                     "a.1",
                                                                 ),
                                                                 Constant(
-                                                                    2250,
+                                                                    Int(
+                                                                        2250,
+                                                                    ),
                                                                 ),
                                                             ),
                                                             Binary(
@@ -222,7 +273,9 @@ Program {
                                                                     "b.2",
                                                                 ),
                                                                 Constant(
-                                                                    2000,
+                                                                    Int(
+                                                                        2000,
+                                                                    ),
                                                                 ),
                                                             ),
                                                         ),
@@ -234,7 +287,9 @@ Program {
                                                             Unary(
                                                                 Minus,
                                                                 Constant(
-                                                                    1800,
+                                                                    Int(
+                                                                        1800,
+                                                                    ),
                                                                 ),
                                                             ),
                                                         ),
@@ -247,7 +302,9 @@ Program {
                                                         Unary(
                                                             Minus,
                                                             Constant(
-                                                                18,
+                                                                Int(
+                                                                    18,
+                                                                ),
                                                             ),
                                                         ),
                                                     ),
@@ -260,7 +317,9 @@ Program {
                                                     Unary(
                                                         Minus,
                                                         Constant(
-                                                            4,
+                                                            Int(
+                                                                4,
+                                                            ),
                                                         ),
                                                     ),
                                                 ),
@@ -273,7 +332,9 @@ Program {
                                                 Unary(
                                                     Minus,
                                                     Constant(
-                                                        7,
+                                                        Int(
+                                                            7,
+                                                        ),
                                                     ),
                                                 ),
                                             ),
@@ -284,13 +345,21 @@ Program {
                                                 "x.7",
                                             ),
                                             Constant(
-                                                2250,
+                                                Int(
+                                                    2250,
+                                                ),
                                             ),
                                         ),
                                     ),
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 265,
+                        },
                     },
                 ),
                 storage: None,

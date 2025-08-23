@@ -4,6 +4,7 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
@@ -16,10 +17,14 @@ Program {
                                         Binary(
                                             Add,
                                             Constant(
-                                                1,
+                                                Int(
+                                                    1,
+                                                ),
                                             ),
                                             Constant(
-                                                2,
+                                                Int(
+                                                    2,
+                                                ),
                                             ),
                                         ),
                                     ),
@@ -28,6 +33,7 @@ Program {
                             Declaration(
                                 Variable(
                                     VariableDeclaration {
+                                        ty: Int,
                                         name: "a",
                                         init: None,
                                         storage: None,
@@ -48,6 +54,12 @@ Program {
                                 ),
                             ),
                         ],
+                        span: SourceSpan {
+                            offset: SourceOffset(
+                                15,
+                            ),
+                            length: 43,
+                        },
                     },
                 ),
                 storage: None,

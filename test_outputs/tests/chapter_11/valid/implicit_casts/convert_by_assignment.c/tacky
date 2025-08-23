@@ -1,0 +1,431 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "return_truncated_long",
+            global: true,
+            params: [
+                Var(
+                    "l.1",
+                    Long,
+                ),
+            ],
+            instructions: [
+                Truncate {
+                    src: Var(
+                        "l.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "return_truncated_long.tmp.0",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "return_truncated_long.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "return_extended_int",
+            global: true,
+            params: [
+                Var(
+                    "i.3",
+                    Int,
+                ),
+            ],
+            instructions: [
+                SignExtend {
+                    src: Var(
+                        "i.3",
+                        Int,
+                    ),
+                    dst: Var(
+                        "return_extended_int.tmp.0",
+                        Long,
+                    ),
+                },
+                Return(
+                    Var(
+                        "return_extended_int.tmp.0",
+                        Long,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Long(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "truncate_on_assignment",
+            global: true,
+            params: [
+                Var(
+                    "l.5",
+                    Long,
+                ),
+                Var(
+                    "expected.6",
+                    Int,
+                ),
+            ],
+            instructions: [
+                Truncate {
+                    src: Var(
+                        "l.5",
+                        Long,
+                    ),
+                    dst: Var(
+                        "truncate_on_assignment.tmp.0",
+                        Int,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "truncate_on_assignment.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "result.7",
+                        Int,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "result.7",
+                        Int,
+                    ),
+                    rhs: Var(
+                        "expected.6",
+                        Int,
+                    ),
+                    dst: Var(
+                        "truncate_on_assignment.tmp.1",
+                        Int,
+                    ),
+                },
+                Return(
+                    Var(
+                        "truncate_on_assignment.tmp.1",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "return_truncated_long",
+                    [
+                        Constant(
+                            Long(
+                                4294967298,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                SignExtend {
+                    src: Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "main.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "result.9",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "result.9",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.2",
+                        Long,
+                    ),
+                    "main.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.3",
+                        Int,
+                    ),
+                },
+                Call(
+                    "return_extended_int",
+                    [
+                        Var(
+                            "main.tmp.3",
+                            Int,
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                ),
+                Copy {
+                    src: Var(
+                        "main.tmp.4",
+                        Long,
+                    ),
+                    dst: Var(
+                        "result.9",
+                        Long,
+                    ),
+                },
+                Unary {
+                    op: Negate,
+                    src: Constant(
+                        Int(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                },
+                SignExtend {
+                    src: Var(
+                        "main.tmp.5",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.6",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "result.9",
+                        Long,
+                    ),
+                    rhs: Var(
+                        "main.tmp.6",
+                        Long,
+                    ),
+                    dst: Var(
+                        "main.tmp.7",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.7",
+                        Long,
+                    ),
+                    "main.1.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "i.10",
+                        Int,
+                    ),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var(
+                        "i.10",
+                        Int,
+                    ),
+                    rhs: Constant(
+                        Int(
+                            2,
+                        ),
+                    ),
+                    dst: Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.8",
+                        Int,
+                    ),
+                    "main.2.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            3,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "truncate_on_assignment",
+                    [
+                        Constant(
+                            Long(
+                                17179869184,
+                            ),
+                        ),
+                        Constant(
+                            Int(
+                                0,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var(
+                        "main.tmp.9",
+                        Int,
+                    ),
+                    dst: Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "main.tmp.10",
+                        Int,
+                    ),
+                    "main.3.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            4,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

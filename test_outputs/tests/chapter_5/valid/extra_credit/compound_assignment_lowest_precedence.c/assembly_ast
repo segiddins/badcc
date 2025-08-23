@@ -5,27 +5,32 @@ Program {
             global: true,
             instructions: [
                 AllocateStack(
-                    80,
+                    96,
                 ),
                 Move {
                     source: Immediate(
                         10,
+                        Four,
                     ),
                     destination: Stack(
                         12,
+                        Four,
                     ),
                 },
                 Move {
                     source: Immediate(
                         12,
+                        Four,
                     ),
                     destination: Stack(
                         16,
+                        Four,
                     ),
                 },
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         R11,
@@ -35,6 +40,7 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Register(
                         R11,
@@ -48,9 +54,11 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
                         16,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -60,9 +68,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
                         20,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -74,9 +84,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
                         20,
+                        Four,
                     ),
                 },
                 Label(
@@ -85,6 +97,7 @@ Program {
                 Move {
                     source: Stack(
                         12,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -97,12 +110,14 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        12,
+                        24,
+                        Four,
                     ),
                 },
                 Move {
                     source: Stack(
                         20,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -116,15 +131,38 @@ Program {
                         Four,
                     ),
                     Stack(
-                        12,
+                        24,
+                        Four,
                     ),
                 ),
+                Move {
+                    source: Stack(
+                        24,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        12,
+                        Four,
+                    ),
+                },
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
                         12,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -134,6 +172,7 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         R11,
@@ -143,6 +182,7 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Register(
                         R11,
@@ -156,9 +196,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
-                        24,
+                        28,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -170,9 +212,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        24,
+                        28,
+                        Four,
                     ),
                 },
                 Label(
@@ -181,6 +225,7 @@ Program {
                 Move {
                     source: Stack(
                         16,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -193,12 +238,14 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        16,
+                        32,
+                        Four,
                     ),
                 },
                 Move {
                     source: Stack(
-                        16,
+                        32,
+                        Four,
                     ),
                     destination: Register(
                         R11,
@@ -208,7 +255,8 @@ Program {
                 Binary(
                     Mult,
                     Stack(
-                        24,
+                        28,
+                        Four,
                     ),
                     Register(
                         R11,
@@ -221,69 +269,14 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        16,
-                    ),
-                },
-                Move {
-                    source: Immediate(
-                        14,
-                    ),
-                    destination: Stack(
-                        28,
-                    ),
-                },
-                Cmp(
-                    Immediate(
-                        0,
-                    ),
-                    Stack(
-                        12,
-                    ),
-                ),
-                JmpCC(
-                    NE,
-                    "main.2.true",
-                ),
-                Cmp(
-                    Immediate(
-                        0,
-                    ),
-                    Stack(
-                        16,
-                    ),
-                ),
-                JmpCC(
-                    NE,
-                    "main.2.true",
-                ),
-                Move {
-                    source: Immediate(
-                        0,
-                    ),
-                    destination: Stack(
                         32,
+                        Four,
                     ),
                 },
-                Jmp(
-                    "main.2.end",
-                ),
-                Label(
-                    "main.2.true",
-                ),
-                Move {
-                    source: Immediate(
-                        1,
-                    ),
-                    destination: Stack(
-                        32,
-                    ),
-                },
-                Label(
-                    "main.2.end",
-                ),
                 Move {
                     source: Stack(
-                        28,
+                        32,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -296,12 +289,101 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        28,
+                        16,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        14,
+                        Four,
+                    ),
+                    destination: Stack(
+                        36,
+                        Four,
+                    ),
+                },
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        12,
+                        Four,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "main.2.true",
+                ),
+                Cmp(
+                    Immediate(
+                        0,
+                        Four,
+                    ),
+                    Stack(
+                        16,
+                        Four,
+                    ),
+                ),
+                JmpCC(
+                    NE,
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(
+                        0,
+                        Four,
+                    ),
+                    destination: Stack(
+                        40,
+                        Four,
+                    ),
+                },
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(
+                        1,
+                        Four,
+                    ),
+                    destination: Stack(
+                        40,
+                        Four,
+                    ),
+                },
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Stack(
+                        36,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        44,
+                        Four,
                     ),
                 },
                 Move {
                     source: Stack(
-                        32,
+                        40,
+                        Four,
                     ),
                     destination: Register(
                         R10,
@@ -315,23 +397,48 @@ Program {
                         Four,
                     ),
                     Stack(
-                        28,
+                        44,
+                        Four,
                     ),
                 ),
                 Move {
-                    source: Immediate(
-                        16,
+                    source: Stack(
+                        44,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
                     ),
                     destination: Stack(
                         36,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Immediate(
+                        16,
+                        Four,
+                    ),
+                    destination: Stack(
+                        48,
+                        Four,
                     ),
                 },
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        28,
+                        36,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -341,9 +448,11 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        36,
+                        48,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -353,9 +462,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        40,
+                        52,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -367,9 +478,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
-                        40,
+                        52,
+                        Four,
                     ),
                 },
                 Label(
@@ -377,17 +490,21 @@ Program {
                 ),
                 Move {
                     source: Stack(
-                        36,
+                        48,
+                        Four,
                     ),
                     destination: Register(
                         AX,
                         Four,
                     ),
                 },
-                Cdq,
+                Cdq(
+                    Four,
+                ),
                 Idiv(
                     Stack(
-                        40,
+                        52,
+                        Four,
                     ),
                 ),
                 Move {
@@ -396,37 +513,65 @@ Program {
                         Four,
                     ),
                     destination: Stack(
-                        36,
+                        56,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Stack(
+                        56,
+                        Four,
+                    ),
+                    destination: Register(
+                        R10,
+                        Four,
+                    ),
+                },
+                Move {
+                    source: Register(
+                        R10,
+                        Four,
+                    ),
+                    destination: Stack(
+                        48,
+                        Four,
                     ),
                 },
                 Cmp(
                     Immediate(
                         11,
+                        Four,
                     ),
                     Stack(
                         12,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        44,
+                        60,
+                        Four,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        44,
+                        60,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        44,
+                        60,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -436,31 +581,38 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
                         16,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        48,
+                        64,
+                        Four,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        48,
+                        64,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        48,
+                        64,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -470,9 +622,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
-                        52,
+                        68,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -484,9 +638,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        52,
+                        68,
+                        Four,
                     ),
                 },
                 Label(
@@ -495,9 +651,11 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        52,
+                        68,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -507,31 +665,38 @@ Program {
                 Cmp(
                     Immediate(
                         13,
+                        Four,
                     ),
                     Stack(
-                        28,
+                        36,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        56,
+                        72,
+                        Four,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        56,
+                        72,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        56,
+                        72,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -541,9 +706,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
-                        60,
+                        76,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -555,9 +722,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        60,
+                        76,
+                        Four,
                     ),
                 },
                 Label(
@@ -566,9 +735,11 @@ Program {
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        60,
+                        76,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -578,31 +749,38 @@ Program {
                 Cmp(
                     Immediate(
                         16,
+                        Four,
                     ),
                     Stack(
-                        36,
+                        48,
+                        Four,
                     ),
                 ),
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        64,
+                        80,
+                        Four,
                     ),
                 },
                 SetCC(
                     E,
                     Stack(
-                        64,
+                        80,
+                        Four,
                     ),
                 ),
                 Cmp(
                     Immediate(
                         0,
+                        Four,
                     ),
                     Stack(
-                        64,
+                        80,
+                        Four,
                     ),
                 ),
                 JmpCC(
@@ -612,9 +790,11 @@ Program {
                 Move {
                     source: Immediate(
                         1,
+                        Four,
                     ),
                     destination: Stack(
-                        68,
+                        84,
+                        Four,
                     ),
                 },
                 Jmp(
@@ -626,9 +806,11 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Stack(
-                        68,
+                        84,
+                        Four,
                     ),
                 },
                 Label(
@@ -636,7 +818,8 @@ Program {
                 ),
                 Move {
                     source: Stack(
-                        68,
+                        84,
+                        Four,
                     ),
                     destination: Register(
                         AX,
@@ -647,6 +830,7 @@ Program {
                 Move {
                     source: Immediate(
                         0,
+                        Four,
                     ),
                     destination: Register(
                         AX,

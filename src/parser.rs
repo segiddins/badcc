@@ -2,7 +2,7 @@ use std::{borrow::Borrow, num::ParseIntError};
 
 use miette::{NamedSource, SourceSpan};
 
-use crate::lexer::Token;
+use crate::{lexer::Token, sema::Type};
 
 impl Borrow<dyn miette::Diagnostic + 'static> for Box<ParserError> {
     fn borrow(&self) -> &(dyn miette::Diagnostic + 'static) {
@@ -52,7 +52,10 @@ enum ParserError {
     #[error("declaration cannot have more than one storage specifier")]
     MultipleDeclSpecifiers,
     #[error("declaration must have exactly one type")]
-    DeclSingleType,
+    DeclSingleType {
+        #[label("extra type")]
+        span: SourceSpan,
+    },
 }
 
 type Result<T> = std::result::Result<T, ParserError>;
@@ -62,9 +65,9 @@ pub struct Program {
     pub declarations: Vec<Declaration>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Expression {
-    Constant(i32),
+    Constant(Constant),
     Unary(UnaryOperator, Box<Expression>),
     Binary(BinaryOperator, Box<Expression>, Box<Expression>),
     Var(String),
@@ -72,9 +75,32 @@ pub enum Expression {
     CompoundAssignment(Box<Expression>, BinaryOperator, Box<Expression>),
     Ternary(Box<Expression>, Box<Expression>, Box<Expression>),
     FunctionCall(Box<Expression>, Vec<Expression>),
+    Cast(Type, Box<Expression>),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Constant {
+    Int(i32),
+    Long(i64),
+}
+
+impl Constant {
+    pub fn into_long(self) -> i64 {
+        match self {
+            Constant::Int(v) => v as i64,
+            Constant::Long(v) => v,
+        }
+    }
+
+    pub const fn ty(&self) -> &Type {
+        match self {
+            Constant::Int(_) => &Type::Int,
+            Constant::Long(_) => &Type::Long,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
 pub enum UnaryOperator {
     Minus,
     Complement,
@@ -153,7 +179,8 @@ pub enum Declaration {
 #[derive(Debug)]
 pub struct FunctionDeclaration {
     pub identifier: String,
-    pub params: Vec<String>,
+    pub params: Vec<(Type, String)>,
+    pub ret: Type,
     pub body: Option<Block>,
     pub storage: Option<StorageClass>,
     pub span: SourceSpan,
@@ -161,6 +188,7 @@ pub struct FunctionDeclaration {
 
 #[derive(Debug)]
 pub struct VariableDeclaration {
+    pub ty: Type,
     pub name: String,
     pub init: Option<Expression>,
     pub storage: Option<StorageClass>,
@@ -210,14 +238,17 @@ impl Lexer<'_> {
     fn next_token(&mut self) -> Option<(Token, SourceSpan)> {
         self.tokens.pop()
     }
-    fn peek_token(&self) -> Option<&(Token, SourceSpan)> {
-        self.tokens.last()
+    fn peek_token(&self) -> Option<(&Token, SourceSpan)> {
+        self.tokens.last().as_ref().map(|(t, span)| (t, *span))
     }
-    fn peek_n(&self, n: usize) -> Option<&(Token, SourceSpan)> {
+    fn peek_n(&self, n: usize) -> Option<(&Token, SourceSpan)> {
         if n > self.tokens.len() {
             return None;
         }
-        self.tokens.get(self.tokens.len() - n)
+        self.tokens
+            .get(self.tokens.len() - n)
+            .as_ref()
+            .map(|(t, span)| (t, *span))
     }
 
     fn expect_identifier(&mut self) -> Result<String> {
@@ -231,7 +262,7 @@ impl Lexer<'_> {
                 ParserError::Expected {
                     options: vec![Token::Identifier("ident".into())],
                     kind: token.clone(),
-                    span: (*span),
+                    span,
                 }
             })
             .map(|(t, _)| match t {
@@ -249,7 +280,7 @@ impl Lexer<'_> {
             ParserError::Expected {
                 options: vec![kind],
                 kind: token.clone(),
-                span: (*span),
+                span,
             }
         })
     }
@@ -259,8 +290,9 @@ impl Lexer<'_> {
     }
 
     fn peek_decl_specifier(&self) -> bool {
-        self.peek_token()
-            .is_some_and(|(t, _)| *t == Token::Int || *t == Token::Static || *t == Token::Extern)
+        self.peek_token().is_some_and(|(t, _)| {
+            *t == Token::Int || *t == Token::Static || *t == Token::Extern || *t == Token::Long
+        })
     }
 }
 
@@ -320,44 +352,63 @@ fn parse_block_item(lexer: &mut Lexer) -> Result<BlockItem> {
     }
 }
 
-fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, ())> {
+fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Type)> {
+    let start = lexer.mark();
+    let mut end = start;
     let mut storage = None;
-    let mut ty = None;
+    let mut ty: Vec<Token> = vec![];
     loop {
         match lexer.peek_token() {
-            Some((token, _)) => match token {
-                Token::Int => {
-                    lexer.next_token();
-                    if ty.is_some() {
-                        return Err(ParserError::DeclSingleType);
+            Some((token, span)) => {
+                match token {
+                    Token::Int | Token::Long => {
+                        ty.push(token.clone());
+                        lexer.next_token();
                     }
-                    ty.replace(());
-                }
-                Token::Extern => {
-                    lexer.next_token();
-                    if storage.is_some() {
-                        return Err(ParserError::MultipleDeclSpecifiers);
+                    Token::Extern => {
+                        lexer.next_token();
+                        if storage.is_some() {
+                            return Err(ParserError::MultipleDeclSpecifiers);
+                        }
+                        storage.replace(StorageClass::Extern);
                     }
-                    storage.replace(StorageClass::Extern);
-                }
-                Token::Static => {
-                    lexer.next_token();
-                    if storage.is_some() {
-                        return Err(ParserError::MultipleDeclSpecifiers);
+                    Token::Static => {
+                        lexer.next_token();
+                        if storage.is_some() {
+                            return Err(ParserError::MultipleDeclSpecifiers);
+                        }
+                        storage.replace(StorageClass::Static);
                     }
-                    storage.replace(StorageClass::Static);
+                    _ => break,
                 }
-                _ => break,
-            },
+                end = span;
+            }
             None => return Err(ParserError::UnexpectedEOF),
         }
     }
-    Ok((storage, ty.unwrap()))
+
+    let ty = match ty {
+        _ if ty == [Token::Int] => Type::Int,
+        _ if ty == [Token::Long, Token::Int]
+            || ty == [Token::Int, Token::Long]
+            || ty == [Token::Long] =>
+        {
+            Type::Long
+        }
+        _ if ty.is_empty() => todo!("declaration must have a type"),
+        _ => {
+            return Err(ParserError::DeclSingleType {
+                span: (start.offset(), end.offset() + end.len() - start.offset()).into(),
+            });
+        }
+    };
+
+    Ok((storage, ty))
 }
 
 fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> {
     let start = lexer.mark();
-    let (storage, _) = parse_decl_specifiers(lexer)?;
+    let (storage, ty) = parse_decl_specifiers(lexer)?;
     let name = lexer.expect_identifier()?;
 
     let init = if lexer.expect(Token::Equals).is_ok() {
@@ -371,10 +422,32 @@ fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> 
 
     Ok(VariableDeclaration {
         name: name.to_string(),
+        ty,
         init,
         storage,
         span,
     })
+}
+
+fn parse_type(lexer: &mut Lexer) -> Result<Type> {
+    if lexer.expect(Token::Int).is_ok() {
+        if lexer.expect(Token::Long).is_ok() {
+            Ok(Type::Long)
+        } else {
+            Ok(Type::Int)
+        }
+    } else if lexer.expect(Token::Long).is_ok() {
+        let _ = lexer.expect(Token::Int);
+        Ok(Type::Long)
+    } else if let Some((token, span)) = lexer.peek_token() {
+        Err(ParserError::Expected {
+            options: vec![Token::Int, Token::Long],
+            kind: token.clone(),
+            span,
+        })
+    } else {
+        Err(ParserError::UnexpectedEOF)
+    }
 }
 
 fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
@@ -389,18 +462,18 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
         }
     }
 
-    let (storage, _) = parse_decl_specifiers(lexer)?;
+    let (storage, ret) = parse_decl_specifiers(lexer)?;
     let identifier = lexer.expect_identifier()?;
 
     lexer.expect(Token::LParen)?;
 
     let mut params = vec![];
     if !(lexer.expect(Token::Void).is_ok() || lexer.peek_kind(Token::RParen)) {
-        lexer.expect(Token::Int)?;
-        params.push(lexer.expect_identifier()?);
+        let ty = parse_type(lexer)?;
+        params.push((ty, lexer.expect_identifier()?));
         while lexer.expect(Token::Comma).is_ok() {
-            lexer.expect(Token::Int)?;
-            params.push(lexer.expect_identifier()?);
+            let ty = parse_type(lexer)?;
+            params.push((ty, lexer.expect_identifier()?));
         }
     }
 
@@ -418,6 +491,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
     Ok(Declaration::Function(FunctionDeclaration {
         identifier,
         params,
+        ret,
         body,
         storage,
         span,
@@ -567,16 +641,29 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
         return Err(ParserError::UnexpectedEOF);
     };
     let mut lhs = match token {
-        Token::Constant(s) => s
-            .parse()
-            .map(Expression::Constant)
-            .map_err(|error| ParserError::ConstantOutOfRange { error, span }),
+        Token::Constant(s) => if let Some(s) = s.strip_suffix(|c| c == 'l' || c == 'L') {
+            s.parse().map(Constant::Long)
+        } else {
+            s.parse()
+                .map(Constant::Int)
+                .or_else(|_| s.parse().map(Constant::Long))
+        }
+        .map(Expression::Constant)
+        .map_err(|error| ParserError::ConstantOutOfRange { error, span }),
         Token::Identifier(s) => Ok(Expression::Var(s)),
 
-        Token::LParen => parse_expression_bp(lexer, 0).and_then(|e| {
-            lexer.expect(Token::RParen)?;
-            Ok(e)
-        }),
+        Token::LParen => {
+            if let Ok(ty) = parse_type(lexer) {
+                lexer.expect(Token::RParen)?;
+                let exp = parse_expression_bp(lexer, 65)?;
+                Ok(Expression::Cast(ty.clone(), exp.into()))
+            } else {
+                parse_expression_bp(lexer, 0).and_then(|e| {
+                    lexer.expect(Token::RParen)?;
+                    Ok(e)
+                })
+            }
+        }
 
         // Prefix operators
         Token::Hypen if min_bp <= 60 => parse_expression_bp(lexer, 60)
@@ -695,7 +782,7 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                     return Err(ParserError::Expected {
                         options: vec![Token::Identifier("ident".into())],
                         kind: Token::InvalidIdentifier(format!("{lhs:?}")),
-                        span: *span,
+                        span,
                     });
                 }
                 lhs = {

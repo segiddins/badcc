@@ -1,0 +1,146 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "target",
+            global: true,
+            params: [
+                Var(
+                    "a.1",
+                    Long,
+                ),
+            ],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var(
+                        "a.1",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            5,
+                        ),
+                    ),
+                    dst: Var(
+                        "target.tmp.0",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var(
+                        "target.tmp.0",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            10,
+                        ),
+                    ),
+                    dst: Var(
+                        "target.tmp.1",
+                        Long,
+                    ),
+                },
+                Copy {
+                    src: Var(
+                        "target.tmp.1",
+                        Long,
+                    ),
+                    dst: Var(
+                        "b.2",
+                        Long,
+                    ),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var(
+                        "b.2",
+                        Long,
+                    ),
+                    rhs: Constant(
+                        Long(
+                            21474836440,
+                        ),
+                    ),
+                    dst: Var(
+                        "target.tmp.2",
+                        Long,
+                    ),
+                },
+                JumpIfZero(
+                    Var(
+                        "target.tmp.2",
+                        Long,
+                    ),
+                    "target.0.true",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            1,
+                        ),
+                    ),
+                ),
+                Jump(
+                    "target.0.end",
+                ),
+                Label(
+                    "target.0.true",
+                ),
+                Label(
+                    "target.0.end",
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "target",
+                    [
+                        Constant(
+                            Long(
+                                4294967290,
+                            ),
+                        ),
+                    ],
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Var(
+                        "main.tmp.0",
+                        Int,
+                    ),
+                ),
+                Return(
+                    Constant(
+                        Int(
+                            0,
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

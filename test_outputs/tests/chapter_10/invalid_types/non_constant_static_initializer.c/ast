@@ -2,10 +2,13 @@ Program {
     declarations: [
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "a",
                 init: Some(
                     Constant(
-                        10,
+                        Int(
+                            10,
+                        ),
                     ),
                 ),
                 storage: None,
@@ -19,12 +22,15 @@ Program {
         ),
         Variable(
             VariableDeclaration {
+                ty: Int,
                 name: "b",
                 init: Some(
                     Binary(
                         Add,
                         Constant(
-                            1,
+                            Int(
+                                1,
+                            ),
                         ),
                         Var(
                             "a",
@@ -44,6 +50,7 @@ Program {
             FunctionDeclaration {
                 identifier: "main",
                 params: [],
+                ret: Int,
                 body: Some(
                     Block {
                         items: [
