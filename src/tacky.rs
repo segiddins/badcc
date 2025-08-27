@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 
 pub use crate::parser::BinaryOperator;
 use crate::{
@@ -92,7 +92,7 @@ struct State<'i> {
     name: &'i str,
     switch_cases: HashMap<String, Vec<Option<i64>>>,
     symbols: &'i SymbolTable,
-    static_variables: HashMap<String, StaticVariable>,
+    static_variables: BTreeMap<String, StaticVariable>,
 }
 impl<'i> State<'i> {
     fn var(&mut self, ty: &Type) -> Val {
