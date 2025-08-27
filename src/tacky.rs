@@ -70,10 +70,10 @@ pub enum Val {
 }
 
 impl Val {
-    pub const fn ty(&self) -> &Type {
+    pub fn ty(&self) -> Type {
         match self {
             Val::Constant(constant) => constant.ty(),
-            Val::Var(_, ty) => ty,
+            Val::Var(_, ty) => ty.clone(),
         }
     }
 }
@@ -95,8 +95,8 @@ struct State<'i> {
     static_variables: BTreeMap<String, StaticVariable>,
 }
 impl<'i> State<'i> {
-    fn var(&mut self, ty: &Type) -> Val {
-        let v = Val::Var(format!("{}.tmp.{}", self.name, self.temps), ty.clone());
+    fn var(&mut self, ty: Type) -> Val {
+        let v = Val::Var(format!("{}.tmp.{}", self.name, self.temps), ty);
         self.temps += 1;
         v
     }
@@ -150,7 +150,7 @@ pub fn lower(program: &parser::Program, symbols: &sema::SymbolTable) -> Program 
     }
 }
 
-fn constant(ty: &Type, value: i64) -> Val {
+fn constant(ty: Type, value: i64) -> Val {
     match ty {
         Type::Function { .. } => unreachable!(),
         Type::Int => Val::Constant(Constant::Int(value as i32)),
@@ -270,7 +270,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             }
         }
         Expression::Binary(BinaryOperator::And, lhs, rhs) => {
-            let phi = state.var(&Type::Int);
+            let phi = state.var(Type::Int);
             let lhs = walk(lhs, state);
             let false_label = format!("{}.{}.false", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
@@ -293,7 +293,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             phi
         }
         Expression::Binary(BinaryOperator::Or, lhs, rhs) => {
-            let phi = state.var(&Type::Int);
+            let phi = state.var(Type::Int);
             let lhs = walk(lhs, state);
             let true_label = format!("{}.{}.true", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
@@ -388,7 +388,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     else {
                         unreachable!()
                     };
-                    let dst = state.var(ret);
+                    let dst = state.var(ret.as_ref().clone());
                     state.push(Instruction::Call(name.clone(), params, dst.clone()));
                     dst
                 }
@@ -396,17 +396,17 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             }
         }
         Expression::Cast(to, expr) => match (walk(expr, state), to) {
-            (src, t) if src.ty() == t => src,
-            (src, Type::Long) if src.ty() == &Type::Int => {
-                let dst = state.var(&Type::Long);
+            (src, t) if &src.ty() == t => src,
+            (src, Type::Long) if src.ty() == Type::Int => {
+                let dst = state.var(Type::Long);
                 state.push(Instruction::SignExtend {
                     src,
                     dst: dst.clone(),
                 });
                 dst
             }
-            (src, Type::Int) if src.ty() == &Type::Long => {
-                let dst = state.var(&Type::Int);
+            (src, Type::Int) if src.ty() == Type::Long => {
+                let dst = state.var(Type::Int);
                 state.push(Instruction::Truncate {
                     src,
                     dst: dst.clone(),
@@ -529,7 +529,7 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             let label = label.as_ref().unwrap();
             let start = format!("{label}.cases");
             let value = walk(expression, state);
-            let cmp = state.var(&Type::Int);
+            let cmp = state.var(Type::Int);
             state.push(Instruction::Jump(start.clone()));
             state.switch_cases.insert(label.clone(), Default::default());
 
@@ -628,7 +628,7 @@ fn lower_function<'a>(
 
     walk_block(body, &mut state);
 
-    state.push(Instruction::Return(constant(&function.ret, 0)));
+    state.push(Instruction::Return(constant(function.ret.clone(), 0)));
 
     for (key, sv) in state.static_variables {
         parent_state.static_variables.entry(key).or_insert(sv);

@@ -92,10 +92,10 @@ impl Constant {
         }
     }
 
-    pub const fn ty(&self) -> &Type {
+    pub const fn ty(&self) -> Type {
         match self {
-            Constant::Int(_) => &Type::Int,
-            Constant::Long(_) => &Type::Long,
+            Constant::Int(_) => Type::Int,
+            Constant::Long(_) => Type::Long,
         }
     }
 }

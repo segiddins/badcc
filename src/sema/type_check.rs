@@ -1,6 +1,6 @@
 use std::{
     collections::{HashMap, hash_map::Entry},
-    mem::swap,
+    mem::replace,
     ops::{Deref, DerefMut},
 };
 
@@ -527,79 +527,72 @@ impl Checker {
         Ok(())
     }
 
-    fn cast_to_lhs<'a>(
-        &'a self,
-        lhs: &'a mut Expression,
-        rhs: &'a mut Expression,
-    ) -> miette::Result<&'a Type, TypeCheckError> {
+    fn cast_to_lhs(
+        &self,
+        lhs: &mut Expression,
+        rhs: &mut Expression,
+    ) -> miette::Result<Type, TypeCheckError> {
         let lt = self.visit_expression(lhs)?;
         let rt = self.visit_expression(rhs)?;
 
         match (lt, rt) {
+            (lt @ Type::Int, Type::Long) => self.make_cast(rhs, &lt),
+            (lt @ Type::Long, Type::Int) => self.make_cast(rhs, &lt),
             (lt, rt) if lt == rt => Ok(lt),
-            (Type::Int, Type::Long) => self.make_cast(rhs, lt),
-            (Type::Long, Type::Int) => self.make_cast(rhs, lt),
-            _ => todo!("cast to lhs {lt:?} {rt:?}"),
+            (lt, rt) => todo!("cast to lhs {lt:?} {rt:?}"),
         }
     }
 
-    fn cast_to_common<'a>(
-        &'a self,
-        lhs: &'a mut Expression,
-        rhs: &'a mut Expression,
-    ) -> miette::Result<&'a Type, TypeCheckError> {
+    fn cast_to_common(
+        &self,
+        lhs: &mut Expression,
+        rhs: &mut Expression,
+    ) -> miette::Result<Type, TypeCheckError> {
         let lt = self.visit_expression(lhs)?;
         let rt = self.visit_expression(rhs)?;
 
         match (lt, rt) {
-            (Type::Int, Type::Int) => Ok(&Type::Int),
-            (Type::Long, Type::Long) => Ok(&Type::Long),
+            (Type::Int, Type::Int) => Ok(Type::Int),
+            (Type::Long, Type::Long) => Ok(Type::Long),
             (Type::Int, Type::Long) => self.make_cast(lhs, &Type::Long),
             (Type::Long, Type::Int) => self.make_cast(rhs, &Type::Long),
-            _ => todo!("cast to lhs {lt:?} {rt:?}"),
+            (lt, rt) => todo!("cast to lhs {lt:?} {rt:?}"),
         }
     }
 
-    fn make_cast<'a>(
-        &'a self,
-        expr: &'a mut Expression,
-        to: &'a Type,
-    ) -> miette::Result<&'a Type, TypeCheckError> {
-        if let Expression::Constant(c) = expr {
-            match (&c, to) {
-                (Constant::Int(_), Type::Int) | (Constant::Long(_), Type::Long) => {}
-                (Constant::Int(i), Type::Long) => *c = Constant::Long(*i as i64),
-                (Constant::Long(l), Type::Int) => *c = Constant::Int(*l as i32),
-                _ => unreachable!(),
-            }
-            return Ok(to);
-        }
-
+    fn make_cast(&self, expr: &mut Expression, to: &Type) -> miette::Result<Type, TypeCheckError> {
         match expr {
             Expression::Cast(t, _) if t == to => {
-                return Ok(to);
+                return Ok(to.clone());
+            }
+            Expression::Constant(c) => {
+                match (&c, to) {
+                    (Constant::Int(_), Type::Int) | (Constant::Long(_), Type::Long) => {}
+                    (Constant::Int(i), Type::Long) => *c = Constant::Long(*i as i64),
+                    (Constant::Long(l), Type::Int) => *c = Constant::Int(*l as i32),
+                    _ => unreachable!(),
+                }
+                return Ok(to.clone());
             }
             _ => {}
         }
 
-        let mut nested = Expression::Constant(Constant::Int(0));
-        swap(&mut nested, expr);
-        let from = self.visit_expression(&mut nested)?.clone();
-        if &from == to {
-            *expr = nested;
-        } else {
-            *expr = Expression::Cast(to.clone(), nested.into());
+        if self.visit_expression(expr)? != *to {
+            *expr = Expression::Cast(
+                to.clone(),
+                Box::new(replace(expr, Expression::Constant(Constant::Int(0)))),
+            );
         }
-        Ok(to)
+        Ok(to.clone())
     }
 
-    fn visit_expression<'a>(
-        &'a self,
-        expression: &'a mut Expression,
-    ) -> miette::Result<&'a Type, TypeCheckError> {
+    fn visit_expression(
+        &self,
+        expression: &mut Expression,
+    ) -> miette::Result<Type, TypeCheckError> {
         match expression {
             Expression::Unary(UnaryOperator::Not, expression) => {
-                Type::Int.assert_compatible(self.visit_expression(expression)?)
+                Type::Int.assert_compatible(&self.visit_expression(expression)?)
             }
             Expression::Unary(_, expression) => self
                 .visit_expression(expression)?
@@ -613,7 +606,7 @@ impl Checker {
             Expression::Var(var) => self
                 .symbols
                 .get(var)
-                .map(|t| &t.ty)
+                .map(|t| t.ty.clone())
                 .ok_or_else(|| panic!("no var {var}")),
             Expression::Assignment(lhs, rhs) => self.cast_to_lhs(lhs, rhs),
             Expression::CompoundAssignment(
@@ -631,7 +624,7 @@ impl Checker {
             Expression::Ternary(expression, expression1, expression2) => {
                 self.visit_expression(expression)?;
                 self.visit_expression(expression1)?
-                    .assert_compatible(self.visit_expression(expression2)?)
+                    .assert_compatible(&self.visit_expression(expression2)?)
             }
             Expression::FunctionCall(expression, expressions) => {
                 let name = match expression.as_ref() {
@@ -648,16 +641,25 @@ impl Checker {
                             })
                         } else {
                             for (expr, ty) in expressions.iter_mut().zip(params) {
-                                self.make_cast(expr, ty)?;
+                                self.make_cast(expr, &ty)?;
                             }
-                            Ok(ret)
+                            Ok(ret.as_ref().clone())
                         }
                     }
                     _ => Err(TypeCheckError::NonFunctionCall { name }),
                 }
             }
             Expression::Constant(c) => Ok(c.ty()),
-            Expression::Cast(ty, expr) => ty.assert_compatible(self.visit_expression(expr)?),
+            Expression::Cast(ty, expr) => {
+                let actual = self.visit_expression(expr.as_mut())?;
+
+                if actual == *ty {
+                    *expression = replace(expr.as_mut(), Expression::Constant(Constant::Int(0)));
+                    Ok(actual)
+                } else {
+                    ty.assert_compatible(&actual)
+                }
+            }
         }
     }
 }
@@ -693,10 +695,10 @@ impl Type {
         }
     }
 
-    fn assert_compatible(&self, expected: &Type) -> miette::Result<&Type, TypeCheckError> {
+    fn assert_compatible(&self, expected: &Type) -> miette::Result<Type, TypeCheckError> {
         match (self, expected) {
-            (x, y) if x == y => Ok(self),
-            (Type::Int | Type::Long, Type::Int | Type::Long) => Ok(self),
+            (x, y) if x == y => Ok(self.clone()),
+            (Type::Int | Type::Long, Type::Int | Type::Long) => Ok(self.clone()),
             _ => Err(TypeCheckError::Error {
                 expected: expected.clone(),
                 actual: self.clone(),
