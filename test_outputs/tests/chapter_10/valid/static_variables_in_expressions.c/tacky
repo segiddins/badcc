@@ -21,53 +21,25 @@ Program {
             instructions: [
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "i.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "j.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("i.1", Int),
+                    rhs: Var("j.2", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "cmp.3",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("cmp.3", Int),
                 },
                 Unary {
                     op: Not,
-                    src: Var(
-                        "cmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: Var("cmp.3", Int),
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -79,18 +51,10 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

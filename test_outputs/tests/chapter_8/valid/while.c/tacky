@@ -7,67 +7,31 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("a.1", Int),
                 },
                 Label(
                     "loop.0.start",
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "loop.0",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("a.1", Int),
                 },
                 Jump(
                     "loop.0.start",
@@ -76,17 +40,10 @@ Program {
                     "loop.0",
                 ),
                 Return(
-                    Var(
-                        "a.1",
-                        Int,
-                    ),
+                    Var("a.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

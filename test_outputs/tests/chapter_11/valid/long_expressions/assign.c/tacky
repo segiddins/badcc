@@ -7,75 +7,32 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Long,
-                    ),
+                    src: 4294967290l,
+                    dst: Var("a.1", Long),
                 },
                 Copy {
-                    src: Constant(
-                        Long(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Long,
-                    ),
+                    src: 0l,
+                    dst: Var("b.2", Long),
                 },
                 Copy {
-                    src: Var(
-                        "a.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Long,
-                    ),
+                    src: Var("a.1", Long),
+                    dst: Var("b.2", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b.2",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("b.2", Long),
+                    rhs: 4294967290l,
+                    dst: Var("main.tmp.0", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Long),
+                    dst: Var("main.tmp.1", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

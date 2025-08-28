@@ -5,63 +5,29 @@ Program {
             identifier: "add",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Int,
-                ),
-                Var(
-                    "b.2",
-                    Int,
-                ),
+                Var("a.1", Int),
+                Var("b.2", Int),
             ],
             instructions: [
                 SignExtend {
-                    src: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "add.tmp.0",
-                        Long,
-                    ),
+                    src: Var("a.1", Int),
+                    dst: Var("add.tmp.0", Long),
                 },
                 SignExtend {
-                    src: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "add.tmp.1",
-                        Long,
-                    ),
+                    src: Var("b.2", Int),
+                    dst: Var("add.tmp.1", Long),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "add.tmp.0",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "add.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "add.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("add.tmp.0", Long),
+                    rhs: Var("add.tmp.1", Long),
+                    dst: Var("add.tmp.2", Long),
                 },
                 Return(
-                    Var(
-                        "add.tmp.2",
-                        Long,
-                    ),
+                    Var("add.tmp.2", Long),
                 ),
                 Return(
-                    Constant(
-                        Long(
-                            0,
-                        ),
-                    ),
+                    0l,
                 ),
             ],
         },

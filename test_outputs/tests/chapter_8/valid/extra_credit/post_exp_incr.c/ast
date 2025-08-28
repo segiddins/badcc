@@ -1,137 +1,72 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "product",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 16,
-                                        },
-                                    },
-                                ),
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "product",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                For {
+                    init: VariableDeclaration {
+                        name: "i",
+                        ty: Int,
+                        init: Constant(
+                            0,
+                        ),
+                    },
+                    condition: Some(
+                        Binary(
+                            LessThan,
+                            Var(
+                                "i",
                             ),
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "i",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    47,
-                                                ),
-                                                length: 10,
-                                            },
-                                        },
-                                    ),
-                                    condition: Some(
-                                        Binary(
-                                            LessThan,
-                                            Var(
-                                                "i",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    10,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Unary(
-                                            PostfixIncrement,
-                                            Var(
-                                                "i",
-                                            ),
-                                        ),
-                                    ),
-                                    body: Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "product",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "product",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        2,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    71,
-                                                ),
-                                                length: 38,
-                                            },
-                                        },
-                                    ),
-                                    label: None,
-                                },
+                            Constant(
+                                10,
                             ),
-                            Statement(
-                                Return(
+                        ),
+                    ),
+                    post: Some(
+                        Unary(
+                            PostfixIncrement,
+                            Var(
+                                "i",
+                            ),
+                        ),
+                    ),
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment(
                                     Var(
                                         "product",
+                                    ),
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "product",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 116,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 131,
+                    label: None,
                 },
-            },
-        ),
+                Return(
+                    Var(
+                        "product",
+                    ),
+                ),
+            ],
+        },
     ],
 }

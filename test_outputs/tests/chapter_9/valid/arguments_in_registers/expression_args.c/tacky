@@ -5,43 +5,21 @@ Program {
             identifier: "sub",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Int,
-                ),
-                Var(
-                    "b.2",
-                    Int,
-                ),
+                Var("a.1", Int),
+                Var("b.2", Int),
             ],
             instructions: [
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sub.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: Var("b.2", Int),
+                    dst: Var("sub.tmp.0", Int),
                 },
                 Return(
-                    Var(
-                        "sub.tmp.0",
-                        Int,
-                    ),
+                    Var("sub.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -52,61 +30,27 @@ Program {
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: 1,
+                    rhs: 2,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Call(
                     "sub",
                     [
-                        Var(
-                            "main.tmp.0",
-                            Int,
-                        ),
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
+                        Var("main.tmp.0", Int),
+                        1,
                     ],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.4",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("sum.4", Int),
                 },
                 Return(
-                    Var(
-                        "sum.4",
-                        Int,
-                    ),
+                    Var("sum.4", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

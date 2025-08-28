@@ -1,140 +1,76 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                Goto(
+                    "mid_case",
+                ),
+                Switch(
+                    Constant(
+                        4,
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    4,
+                                ),
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            5,
+                                        ),
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Labeled(
+                                "mid_case",
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "a",
+                                            ),
                                             Constant(
-                                                Int(
-                                                    0,
-                                                ),
+                                                1,
                                             ),
                                         ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+                                    ),
                                 ),
                             ),
-                            Statement(
-                                Goto(
-                                    "mid_case",
-                                ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Constant(
-                                        Int(
-                                            4,
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                4,
-                                                            ),
-                                                        ),
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "a",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        5,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Labeled(
-                                                        "mid_case",
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "a",
-                                                                ),
-                                                                Binary(
-                                                                    Add,
-                                                                    Var(
-                                                                        "a",
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Return(
-                                                        Var(
-                                                            "a",
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    66,
-                                                ),
-                                                length: 105,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            100,
-                                        ),
-                                    ),
+                            Return(
+                                Var(
+                                    "a",
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 174,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 189,
-                },
-            },
-        ),
+                    None,
+                ),
+                Return(
+                    Constant(
+                        100,
+                    ),
+                ),
+            ],
+        },
     ],
 }

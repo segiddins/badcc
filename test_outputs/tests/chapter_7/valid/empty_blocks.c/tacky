@@ -7,70 +7,30 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "ten.1",
-                        Int,
-                    ),
+                    src: 10,
+                    dst: Var("ten.1", Int),
                 },
                 Binary {
                     op: Multiply,
-                    lhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: 10,
+                    rhs: 2,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "twenty.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("twenty.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "ten.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "twenty.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("ten.1", Int),
+                    rhs: Var("twenty.2", Int),
+                    dst: Var("main.tmp.1", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

@@ -1,331 +1,188 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "fib",
-                params: [
-                    (
-                        Int,
-                        "a.1",
+        FunctionDeclaration {
+            identifier: "fib",
+            params: [
+                (
+                    Int,
+                    "a.1",
+                ),
+            ],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "multiply_many_args",
+            params: [
+                (
+                    Int,
+                    "a.3",
+                ),
+                (
+                    Int,
+                    "b.4",
+                ),
+                (
+                    Int,
+                    "c.5",
+                ),
+                (
+                    Int,
+                    "d.6",
+                ),
+                (
+                    Int,
+                    "e.7",
+                ),
+                (
+                    Int,
+                    "f.8",
+                ),
+                (
+                    Int,
+                    "g.9",
+                ),
+                (
+                    Int,
+                    "h.10",
+                ),
+            ],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x.12",
+                    ty: Int,
+                    init: FunctionCall(
+                        Var(
+                            "fib",
+                        ),
+                        [
+                            Constant(
+                                4,
+                            ),
+                        ],
                     ),
-                ],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 15,
                 },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "multiply_many_args",
-                params: [
-                    (
-                        Int,
-                        "a.3",
+                VariableDeclaration {
+                    name: "seven.13",
+                    ty: Int,
+                    init: Constant(
+                        7,
                     ),
-                    (
-                        Int,
-                        "b.4",
-                    ),
-                    (
-                        Int,
-                        "c.5",
-                    ),
-                    (
-                        Int,
-                        "d.6",
-                    ),
-                    (
-                        Int,
-                        "e.7",
-                    ),
-                    (
-                        Int,
-                        "f.8",
-                    ),
-                    (
-                        Int,
-                        "g.9",
-                    ),
-                    (
-                        Int,
-                        "h.10",
-                    ),
-                ],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        16,
-                    ),
-                    length: 79,
                 },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x.12",
-                                        init: Some(
-                                            FunctionCall(
-                                                Var(
-                                                    "fib",
-                                                ),
-                                                [
-                                                    Constant(
-                                                        Int(
-                                                            4,
-                                                        ),
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                117,
-                                            ),
-                                            length: 15,
-                                        },
-                                    },
-                                ),
+                VariableDeclaration {
+                    name: "eight.14",
+                    ty: Int,
+                    init: FunctionCall(
+                        Var(
+                            "fib",
+                        ),
+                        [
+                            Constant(
+                                6,
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "seven.13",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    7,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                137,
-                                            ),
-                                            length: 14,
-                                        },
-                                    },
-                                ),
+                        ],
+                    ),
+                },
+                VariableDeclaration {
+                    name: "y.15",
+                    ty: Int,
+                    init: FunctionCall(
+                        Var(
+                            "multiply_many_args",
+                        ),
+                        [
+                            Var(
+                                "x.12",
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "eight.14",
-                                        init: Some(
-                                            FunctionCall(
-                                                Var(
-                                                    "fib",
-                                                ),
-                                                [
-                                                    Constant(
-                                                        Int(
-                                                            6,
-                                                        ),
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                156,
-                                            ),
-                                            length: 19,
-                                        },
-                                    },
-                                ),
+                            Constant(
+                                2,
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "y.15",
-                                        init: Some(
-                                            FunctionCall(
-                                                Var(
-                                                    "multiply_many_args",
-                                                ),
-                                                [
-                                                    Var(
-                                                        "x.12",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            2,
-                                                        ),
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            3,
-                                                        ),
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            4,
-                                                        ),
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            5,
-                                                        ),
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            6,
-                                                        ),
-                                                    ),
-                                                    Var(
-                                                        "seven.13",
-                                                    ),
-                                                    Var(
-                                                        "eight.14",
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                180,
-                                            ),
-                                            length: 59,
-                                        },
-                                    },
-                                ),
+                            Constant(
+                                3,
                             ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "x.12",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                3,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    256,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
+                            Constant(
+                                4,
                             ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "y.15",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                589680,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    303,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
+                            Constant(
+                                5,
                             ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "x.12",
-                                        ),
-                                        Binary(
-                                            Remainder,
-                                            Var(
-                                                "y.15",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    256,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
+                            Constant(
+                                6,
+                            ),
+                            Var(
+                                "seven.13",
+                            ),
+                            Var(
+                                "eight.14",
+                            ),
+                        ],
+                    ),
+                },
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "x.12",
+                        ),
+                        Constant(
+                            3,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                111,
-                            ),
-                            length: 245,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        96,
                     ),
-                    length: 260,
-                },
-            },
-        ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "y.15",
+                        ),
+                        Constant(
+                            589680,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Binary(
+                        Add,
+                        Var(
+                            "x.12",
+                        ),
+                        Binary(
+                            Remainder,
+                            Var(
+                                "y.15",
+                            ),
+                            Constant(
+                                256,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

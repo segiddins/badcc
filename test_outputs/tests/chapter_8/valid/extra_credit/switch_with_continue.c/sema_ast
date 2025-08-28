@@ -1,246 +1,141 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Switch(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Switch(
+                    Constant(
+                        4,
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
+                                ),
+                                Return(
                                     Constant(
-                                        Int(
-                                            4,
-                                        ),
+                                        0,
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
+                                ),
+                                Some(
+                                    "switch.0",
+                                ),
+                            ),
+                            Case(
+                                Constant(
+                                    4,
+                                ),
+                                Compound(
+                                    [
+                                        VariableDeclaration {
+                                            name: "acc.1",
+                                            ty: Int,
+                                            init: Constant(
+                                                0,
+                                            ),
+                                        },
+                                        For {
+                                            init: VariableDeclaration {
+                                                name: "i.2",
+                                                ty: Int,
+                                                init: Constant(
+                                                    0,
+                                                ),
+                                            },
+                                            condition: Some(
+                                                Binary(
+                                                    LessThan,
+                                                    Var(
+                                                        "i.2",
+                                                    ),
+                                                    Constant(
+                                                        10,
+                                                    ),
+                                                ),
+                                            ),
+                                            post: Some(
+                                                Assignment(
+                                                    Var(
+                                                        "i.2",
+                                                    ),
+                                                    Binary(
+                                                        Add,
+                                                        Var(
+                                                            "i.2",
+                                                        ),
                                                         Constant(
-                                                            Int(
-                                                                0,
+                                                            1,
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                            body: Compound(
+                                                [
+                                                    If(
+                                                        Binary(
+                                                            Remainder,
+                                                            Var(
+                                                                "i.2",
+                                                            ),
+                                                            Constant(
+                                                                2,
                                                             ),
                                                         ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
+                                                        Continue(
+                                                            Some(
+                                                                "loop.1",
+                                                            ),
+                                                        ),
+                                                        None,
+                                                    ),
+                                                    Expression(
+                                                        Assignment(
+                                                            Var(
+                                                                "acc.1",
+                                                            ),
+                                                            Binary(
+                                                                Add,
+                                                                Var(
+                                                                    "acc.1",
+                                                                ),
+                                                                Constant(
+                                                                    1,
                                                                 ),
                                                             ),
                                                         ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
                                                     ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                4,
-                                                            ),
-                                                        ),
-                                                        Compound(
-                                                            Block {
-                                                                items: [
-                                                                    Declaration(
-                                                                        Variable(
-                                                                            VariableDeclaration {
-                                                                                ty: Int,
-                                                                                name: "acc.1",
-                                                                                init: Some(
-                                                                                    Constant(
-                                                                                        Int(
-                                                                                            0,
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                storage: None,
-                                                                                span: SourceSpan {
-                                                                                    offset: SourceOffset(
-                                                                                        101,
-                                                                                    ),
-                                                                                    length: 12,
-                                                                                },
-                                                                            },
-                                                                        ),
-                                                                    ),
-                                                                    Statement(
-                                                                        For {
-                                                                            init: Decl(
-                                                                                VariableDeclaration {
-                                                                                    ty: Int,
-                                                                                    name: "i.2",
-                                                                                    init: Some(
-                                                                                        Constant(
-                                                                                            Int(
-                                                                                                0,
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                    storage: None,
-                                                                                    span: SourceSpan {
-                                                                                        offset: SourceOffset(
-                                                                                            131,
-                                                                                        ),
-                                                                                        length: 10,
-                                                                                    },
-                                                                                },
-                                                                            ),
-                                                                            condition: Some(
-                                                                                Binary(
-                                                                                    LessThan,
-                                                                                    Var(
-                                                                                        "i.2",
-                                                                                    ),
-                                                                                    Constant(
-                                                                                        Int(
-                                                                                            10,
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                            post: Some(
-                                                                                Assignment(
-                                                                                    Var(
-                                                                                        "i.2",
-                                                                                    ),
-                                                                                    Binary(
-                                                                                        Add,
-                                                                                        Var(
-                                                                                            "i.2",
-                                                                                        ),
-                                                                                        Constant(
-                                                                                            Int(
-                                                                                                1,
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                            body: Compound(
-                                                                                Block {
-                                                                                    items: [
-                                                                                        Statement(
-                                                                                            If(
-                                                                                                Binary(
-                                                                                                    Remainder,
-                                                                                                    Var(
-                                                                                                        "i.2",
-                                                                                                    ),
-                                                                                                    Constant(
-                                                                                                        Int(
-                                                                                                            2,
-                                                                                                        ),
-                                                                                                    ),
-                                                                                                ),
-                                                                                                Continue(
-                                                                                                    Some(
-                                                                                                        "loop.1",
-                                                                                                    ),
-                                                                                                ),
-                                                                                                None,
-                                                                                            ),
-                                                                                        ),
-                                                                                        Statement(
-                                                                                            Expression(
-                                                                                                Assignment(
-                                                                                                    Var(
-                                                                                                        "acc.1",
-                                                                                                    ),
-                                                                                                    Binary(
-                                                                                                        Add,
-                                                                                                        Var(
-                                                                                                            "acc.1",
-                                                                                                        ),
-                                                                                                        Constant(
-                                                                                                            Int(
-                                                                                                                1,
-                                                                                                            ),
-                                                                                                        ),
-                                                                                                    ),
-                                                                                                ),
-                                                                                            ),
-                                                                                        ),
-                                                                                    ],
-                                                                                    span: SourceSpan {
-                                                                                        offset: SourceOffset(
-                                                                                            161,
-                                                                                        ),
-                                                                                        length: 103,
-                                                                                    },
-                                                                                },
-                                                                            ),
-                                                                            label: Some(
-                                                                                "loop.1",
-                                                                            ),
-                                                                        },
-                                                                    ),
-                                                                    Statement(
-                                                                        Return(
-                                                                            Var(
-                                                                                "acc.1",
-                                                                            ),
-                                                                        ),
-                                                                    ),
-                                                                ],
-                                                                span: SourceSpan {
-                                                                    offset: SourceOffset(
-                                                                        87,
-                                                                    ),
-                                                                    length: 211,
-                                                                },
-                                                            },
-                                                        ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    31,
-                                                ),
-                                                length: 273,
-                                            },
+                                                ],
+                                            ),
+                                            label: Some(
+                                                "loop.1",
+                                            ),
                                         },
-                                    ),
-                                    Some(
-                                        "switch.0",
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
+                                        Return(
+                                            Var(
+                                                "acc.1",
+                                            ),
                                         ),
-                                    ),
+                                    ],
+                                ),
+                                Some(
+                                    "switch.0",
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 305,
-                        },
-                    },
+                    ),
+                    Some(
+                        "switch.0",
+                    ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 320,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

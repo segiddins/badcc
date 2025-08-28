@@ -8,46 +8,21 @@ Program {
             instructions: [
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: 2,
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 JumpIfNotZero(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -56,31 +31,17 @@ Program {
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Label(
                     "main.0.end",
                 ),
                 Return(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

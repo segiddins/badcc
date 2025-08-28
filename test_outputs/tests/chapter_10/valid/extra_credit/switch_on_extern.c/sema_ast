@@ -1,229 +1,116 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "update_x",
-                params: [],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "update_x",
+            params: [],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    FunctionCall(
+                        Var(
+                            "update_x",
+                        ),
+                        [],
                     ),
-                    length: 19,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Expression(
-                                    FunctionCall(
-                                        Var(
-                                            "update_x",
-                                        ),
-                                        [],
-                                    ),
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x",
-                                        init: None,
-                                        storage: Some(
-                                            Extern,
-                                        ),
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                57,
-                                            ),
-                                            length: 13,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Var(
-                                        "x",
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    1,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    2,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                4,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Default(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    4,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Some(
-                                                            "switch.0",
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    85,
-                                                ),
-                                                length: 112,
-                                            },
-                                        },
-                                    ),
-                                    Some(
-                                        "switch.0",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                35,
-                            ),
-                            length: 164,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        20,
-                    ),
-                    length: 179,
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    storage: Extern,
                 },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "x",
-                init: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        200,
+                Switch(
+                    Var(
+                        "x",
                     ),
-                    length: 6,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "update_x",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "x",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                4,
-                                            ),
-                                        ),
-                                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
                                 ),
-                            ),
-                            Statement(
                                 Return(
                                     Constant(
-                                        Int(
-                                            0,
-                                        ),
+                                        1,
                                     ),
+                                ),
+                                Some(
+                                    "switch.0",
+                                ),
+                            ),
+                            Case(
+                                Constant(
+                                    1,
+                                ),
+                                Return(
+                                    Constant(
+                                        2,
+                                    ),
+                                ),
+                                Some(
+                                    "switch.0",
+                                ),
+                            ),
+                            Case(
+                                Constant(
+                                    4,
+                                ),
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Some(
+                                    "switch.0",
+                                ),
+                            ),
+                            Default(
+                                Return(
+                                    Constant(
+                                        4,
+                                    ),
+                                ),
+                                Some(
+                                    "switch.0",
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                226,
-                            ),
-                            length: 28,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        207,
                     ),
-                    length: 47,
-                },
-            },
-        ),
+                    Some(
+                        "switch.0",
+                    ),
+                ),
+            ],
+        },
+        VariableDeclaration {
+            name: "x",
+            ty: Int,
+        },
+        FunctionDeclaration {
+            identifier: "update_x",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    Assignment(
+                        Var(
+                            "x",
+                        ),
+                        Constant(
+                            4,
+                        ),
+                    ),
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
     ],
 }

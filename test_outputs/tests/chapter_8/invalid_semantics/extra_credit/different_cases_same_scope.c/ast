@@ -1,165 +1,73 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                Switch(
+                    Var(
+                        "a",
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    1,
                                 ),
+                                Null,
+                                None,
                             ),
-                            Statement(
-                                Switch(
-                                    Var(
-                                        "a",
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                        Null,
-                                                        None,
-                                                    ),
-                                                ),
-                                                Declaration(
-                                                    Variable(
-                                                        VariableDeclaration {
-                                                            ty: Int,
-                                                            name: "b",
-                                                            init: Some(
-                                                                Constant(
-                                                                    Int(
-                                                                        10,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            storage: None,
-                                                            span: SourceSpan {
-                                                                offset: SourceOffset(
-                                                                    78,
-                                                                ),
-                                                                length: 11,
-                                                            },
-                                                        },
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Break(
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                        Null,
-                                                        None,
-                                                    ),
-                                                ),
-                                                Declaration(
-                                                    Variable(
-                                                        VariableDeclaration {
-                                                            ty: Int,
-                                                            name: "b",
-                                                            init: Some(
-                                                                Constant(
-                                                                    Int(
-                                                                        11,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            storage: None,
-                                                            span: SourceSpan {
-                                                                offset: SourceOffset(
-                                                                    138,
-                                                                ),
-                                                                length: 11,
-                                                            },
-                                                        },
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Break(
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Default(
-                                                        Break(
-                                                            None,
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    47,
-                                                ),
-                                                length: 163,
-                                            },
-                                        },
-                                    ),
+                            VariableDeclaration {
+                                name: "b",
+                                ty: Int,
+                                init: Constant(
+                                    10,
+                                ),
+                            },
+                            Break(
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    2,
+                                ),
+                                Null,
+                                None,
+                            ),
+                            VariableDeclaration {
+                                name: "b",
+                                ty: Int,
+                                init: Constant(
+                                    11,
+                                ),
+                            },
+                            Break(
+                                None,
+                            ),
+                            Default(
+                                Break(
                                     None,
                                 ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 211,
-                        },
-                    },
+                    ),
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 226,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

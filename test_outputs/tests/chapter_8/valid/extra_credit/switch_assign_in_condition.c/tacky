@@ -7,26 +7,12 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("a.1", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("a.1", Int),
                 },
                 Jump(
                     "switch.0.cases",
@@ -35,40 +21,20 @@ Program {
                     "switch.0.0",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
+                    10,
                 ),
                 Label(
                     "switch.0.1",
                 ),
                 Binary {
                     op: Multiply,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("a.1", Int),
                 },
                 Jump(
                     "switch.0",
@@ -77,15 +43,8 @@ Program {
                     "switch.0.default",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            99,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 99,
+                    dst: Var("a.1", Int),
                 },
                 Jump(
                     "switch.0",
@@ -95,48 +54,22 @@ Program {
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    rhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: 0,
+                    rhs: Var("a.1", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "switch.0.0",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    rhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: 1,
+                    rhs: Var("a.1", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "switch.0.1",
                 ),
                 Jump(
@@ -146,17 +79,10 @@ Program {
                     "switch.0",
                 ),
                 Return(
-                    Var(
-                        "a.1",
-                        Int,
-                    ),
+                    Var("a.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

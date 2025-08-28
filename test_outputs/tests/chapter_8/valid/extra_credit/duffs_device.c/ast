@@ -1,326 +1,213 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "count",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    37,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                22,
-                                            ),
-                                            length: 15,
-                                        },
-                                    },
-                                ),
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "count",
+                    ty: Int,
+                    init: Constant(
+                        37,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "iterations",
+                    ty: Int,
+                    init: Binary(
+                        Divide,
+                        Binary(
+                            Add,
+                            Var(
+                                "count",
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "iterations",
-                                        init: Some(
-                                            Binary(
-                                                Divide,
-                                                Binary(
-                                                    Add,
+                            Constant(
+                                4,
+                            ),
+                        ),
+                        Constant(
+                            5,
+                        ),
+                    ),
+                },
+                Switch(
+                    Binary(
+                        Remainder,
+                        Var(
+                            "count",
+                        ),
+                        Constant(
+                            5,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
+                                ),
+                                DoWhile(
+                                    Compound(
+                                        [
+                                            Expression(
+                                                Assignment(
                                                     Var(
                                                         "count",
                                                     ),
-                                                    Constant(
-                                                        Int(
-                                                            4,
+                                                    Binary(
+                                                        Subtract,
+                                                        Var(
+                                                            "count",
                                                         ),
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                42,
-                                            ),
-                                            length: 33,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Binary(
-                                        Remainder,
-                                        Var(
-                                            "count",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                5,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
                                                         Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
+                                                            1,
                                                         ),
-                                                        DoWhile(
-                                                            Compound(
-                                                                Block {
-                                                                    items: [
-                                                                        Statement(
-                                                                            Expression(
-                                                                                Assignment(
-                                                                                    Var(
-                                                                                        "count",
-                                                                                    ),
-                                                                                    Binary(
-                                                                                        Subtract,
-                                                                                        Var(
-                                                                                            "count",
-                                                                                        ),
-                                                                                        Constant(
-                                                                                            Int(
-                                                                                                1,
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                        Statement(
-                                                                            Case(
-                                                                                Constant(
-                                                                                    Int(
-                                                                                        4,
-                                                                                    ),
-                                                                                ),
-                                                                                Expression(
-                                                                                    Assignment(
-                                                                                        Var(
-                                                                                            "count",
-                                                                                        ),
-                                                                                        Binary(
-                                                                                            Subtract,
-                                                                                            Var(
-                                                                                                "count",
-                                                                                            ),
-                                                                                            Constant(
-                                                                                                Int(
-                                                                                                    1,
-                                                                                                ),
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                None,
-                                                                            ),
-                                                                        ),
-                                                                        Statement(
-                                                                            Case(
-                                                                                Constant(
-                                                                                    Int(
-                                                                                        3,
-                                                                                    ),
-                                                                                ),
-                                                                                Expression(
-                                                                                    Assignment(
-                                                                                        Var(
-                                                                                            "count",
-                                                                                        ),
-                                                                                        Binary(
-                                                                                            Subtract,
-                                                                                            Var(
-                                                                                                "count",
-                                                                                            ),
-                                                                                            Constant(
-                                                                                                Int(
-                                                                                                    1,
-                                                                                                ),
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                None,
-                                                                            ),
-                                                                        ),
-                                                                        Statement(
-                                                                            Case(
-                                                                                Constant(
-                                                                                    Int(
-                                                                                        2,
-                                                                                    ),
-                                                                                ),
-                                                                                Expression(
-                                                                                    Assignment(
-                                                                                        Var(
-                                                                                            "count",
-                                                                                        ),
-                                                                                        Binary(
-                                                                                            Subtract,
-                                                                                            Var(
-                                                                                                "count",
-                                                                                            ),
-                                                                                            Constant(
-                                                                                                Int(
-                                                                                                    1,
-                                                                                                ),
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                None,
-                                                                            ),
-                                                                        ),
-                                                                        Statement(
-                                                                            Case(
-                                                                                Constant(
-                                                                                    Int(
-                                                                                        1,
-                                                                                    ),
-                                                                                ),
-                                                                                Expression(
-                                                                                    Assignment(
-                                                                                        Var(
-                                                                                            "count",
-                                                                                        ),
-                                                                                        Binary(
-                                                                                            Subtract,
-                                                                                            Var(
-                                                                                                "count",
-                                                                                            ),
-                                                                                            Constant(
-                                                                                                Int(
-                                                                                                    1,
-                                                                                                ),
-                                                                                            ),
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                None,
-                                                                            ),
-                                                                        ),
-                                                                    ],
-                                                                    span: SourceSpan {
-                                                                        offset: SourceOffset(
-                                                                            132,
-                                                                        ),
-                                                                        length: 302,
-                                                                    },
-                                                                },
-                                                            ),
-                                                            Binary(
-                                                                GreaterThan,
-                                                                Assignment(
-                                                                    Var(
-                                                                        "iterations",
-                                                                    ),
-                                                                    Binary(
-                                                                        Subtract,
-                                                                        Var(
-                                                                            "iterations",
-                                                                        ),
-                                                                        Constant(
-                                                                            Int(
-                                                                                1,
-                                                                            ),
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        0,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            None,
-                                                        ),
-                                                        None,
                                                     ),
                                                 ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    99,
+                                            ),
+                                            Case(
+                                                Constant(
+                                                    4,
                                                 ),
-                                                length: 384,
-                                            },
-                                        },
+                                                Expression(
+                                                    Assignment(
+                                                        Var(
+                                                            "count",
+                                                        ),
+                                                        Binary(
+                                                            Subtract,
+                                                            Var(
+                                                                "count",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                            Case(
+                                                Constant(
+                                                    3,
+                                                ),
+                                                Expression(
+                                                    Assignment(
+                                                        Var(
+                                                            "count",
+                                                        ),
+                                                        Binary(
+                                                            Subtract,
+                                                            Var(
+                                                                "count",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                            Case(
+                                                Constant(
+                                                    2,
+                                                ),
+                                                Expression(
+                                                    Assignment(
+                                                        Var(
+                                                            "count",
+                                                        ),
+                                                        Binary(
+                                                            Subtract,
+                                                            Var(
+                                                                "count",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                            Case(
+                                                Constant(
+                                                    1,
+                                                ),
+                                                Expression(
+                                                    Assignment(
+                                                        Var(
+                                                            "count",
+                                                        ),
+                                                        Binary(
+                                                            Subtract,
+                                                            Var(
+                                                                "count",
+                                                            ),
+                                                            Constant(
+                                                                1,
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                                None,
+                                            ),
+                                        ],
                                     ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
                                     Binary(
-                                        And,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "count",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
+                                        GreaterThan,
+                                        Assignment(
                                             Var(
                                                 "iterations",
                                             ),
-                                            Constant(
-                                                Int(
-                                                    0,
+                                            Binary(
+                                                Subtract,
+                                                Var(
+                                                    "iterations",
+                                                ),
+                                                Constant(
+                                                    1,
                                                 ),
                                             ),
                                         ),
+                                        Constant(
+                                            0,
+                                        ),
                                     ),
+                                    None,
                                 ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                16,
-                            ),
-                            length: 513,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        1,
                     ),
-                    length: 528,
-                },
-            },
-        ),
+                    None,
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "count",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "iterations",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

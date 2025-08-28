@@ -1,140 +1,70 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    2147483646,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 19,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                45,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "c",
-                                        init: Some(
-                                            Binary(
-                                                Add,
-                                                Binary(
-                                                    Divide,
-                                                    Var(
-                                                        "a",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            6,
-                                                        ),
-                                                    ),
-                                                ),
-                                                Unary(
-                                                    Not,
-                                                    Var(
-                                                        "b",
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                60,
-                                            ),
-                                            length: 19,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Binary(
-                                            Multiply,
-                                            Var(
-                                                "c",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Subtract,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    1431655762,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 102,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        2147483646,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 117,
                 },
-            },
-        ),
+                VariableDeclaration {
+                    name: "c",
+                    ty: Int,
+                    init: Binary(
+                        Add,
+                        Binary(
+                            Divide,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                6,
+                            ),
+                        ),
+                        Unary(
+                            Not,
+                            Var(
+                                "b",
+                            ),
+                        ),
+                    ),
+                },
+                Return(
+                    Binary(
+                        Equals,
+                        Binary(
+                            Multiply,
+                            Var(
+                                "c",
+                            ),
+                            Constant(
+                                2,
+                            ),
+                        ),
+                        Binary(
+                            Subtract,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                1431655762,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

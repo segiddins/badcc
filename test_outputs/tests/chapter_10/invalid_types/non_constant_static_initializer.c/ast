@@ -1,83 +1,36 @@
 Program {
     declarations: [
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "a",
-                init: Some(
-                    Constant(
-                        Int(
-                            10,
-                        ),
+        VariableDeclaration {
+            name: "a",
+            ty: Int,
+            init: Constant(
+                10,
+            ),
+        },
+        VariableDeclaration {
+            name: "b",
+            ty: Int,
+            init: Binary(
+                Add,
+                Constant(
+                    1,
+                ),
+                Var(
+                    "a",
+                ),
+            ),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Var(
+                        "b",
                     ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 11,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "b",
-                init: Some(
-                    Binary(
-                        Add,
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
-                        Var(
-                            "a",
-                        ),
-                    ),
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        12,
-                    ),
-                    length: 14,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Var(
-                                        "b",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                42,
-                            ),
-                            length: 17,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        27,
-                    ),
-                    length: 32,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

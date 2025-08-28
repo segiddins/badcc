@@ -5,10 +5,7 @@ Program {
             identifier: "switch_on_long",
             global: true,
             params: [
-                Var(
-                    "l.1",
-                    Long,
-                ),
+                Var("l.1", Long),
             ],
             instructions: [
                 Jump(
@@ -18,52 +15,30 @@ Program {
                     "switch.0.0",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "switch.0.100",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Label(
                     "switch.0.8589934592",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Label(
                     "switch.0.default",
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "switch_on_long.tmp.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("switch_on_long.tmp.1", Int),
                 },
                 Return(
-                    Var(
-                        "switch_on_long.tmp.1",
-                        Int,
-                    ),
+                    Var("switch_on_long.tmp.1", Int),
                 ),
                 Jump(
                     "switch.0",
@@ -73,71 +48,32 @@ Program {
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Long(
-                            0,
-                        ),
-                    ),
-                    rhs: Var(
-                        "l.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    lhs: 0l,
+                    rhs: Var("l.1", Long),
+                    dst: Var("switch_on_long.tmp.0", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    Var("switch_on_long.tmp.0", Int),
                     "switch.0.0",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Long(
-                            100,
-                        ),
-                    ),
-                    rhs: Var(
-                        "l.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    lhs: 100l,
+                    rhs: Var("l.1", Long),
+                    dst: Var("switch_on_long.tmp.0", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    Var("switch_on_long.tmp.0", Int),
                     "switch.0.100",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Long(
-                            8589934592,
-                        ),
-                    ),
-                    rhs: Var(
-                        "l.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    lhs: 8589934592l,
+                    rhs: Var("l.1", Long),
+                    dst: Var("switch_on_long.tmp.0", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "switch_on_long.tmp.0",
-                        Int,
-                    ),
+                    Var("switch_on_long.tmp.0", Int),
                     "switch.0.8589934592",
                 ),
                 Jump(
@@ -147,11 +83,7 @@ Program {
                     "switch.0",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -163,46 +95,22 @@ Program {
                 Call(
                     "switch_on_long",
                     [
-                        Constant(
-                            Long(
-                                8589934592,
-                            ),
-                        ),
+                        8589934592l,
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.0", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -216,46 +124,22 @@ Program {
                 Call(
                     "switch_on_long",
                     [
-                        Constant(
-                            Long(
-                                100,
-                            ),
-                        ),
+                        100l,
                     ],
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.2", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.1.end",
@@ -267,18 +151,10 @@ Program {
                     "main.1.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

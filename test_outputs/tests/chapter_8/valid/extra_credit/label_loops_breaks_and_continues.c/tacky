@@ -7,25 +7,14 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.do_label",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "main.do_label",
@@ -34,15 +23,8 @@ Program {
                     "loop.0.head",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.while_label",
@@ -51,11 +33,7 @@ Program {
                     "loop.0.start",
                 ),
                 JumpIfNotZero(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                     "loop.0.head",
                 ),
                 Label(
@@ -68,48 +46,24 @@ Program {
                     "loop.1.start",
                 ),
                 JumpIfZero(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                     "loop.1",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "sum.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("sum.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.break_label",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "main.break_label",
@@ -127,87 +81,43 @@ Program {
                     "main.for_label",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "main.for_label",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("i.2", Int),
                 },
                 Label(
                     "loop.2.cond",
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "loop.2",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "sum.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("sum.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.continue_label",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "main.continue_label",
@@ -216,40 +126,20 @@ Program {
                     "loop.2.start",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Label(
                     "loop.2.start",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("i.2", Int),
                 },
                 Jump(
                     "loop.2.cond",
@@ -258,17 +148,10 @@ Program {
                     "loop.2",
                 ),
                 Return(
-                    Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    Var("sum.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

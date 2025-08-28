@@ -21,68 +21,29 @@ Program {
             instructions: [
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "incr_i.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 1,
+                    dst: Var("incr_i.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "incr_i.tmp.0",
-                        Int,
-                    ),
+                    Var("incr_i.tmp.0", Int),
                     "incr_i.0.true",
                 ),
                 Copy {
-                    src: Var(
-                        "i",
-                        Int,
-                    ),
-                    dst: Var(
-                        "incr_i.tmp.1",
-                        Int,
-                    ),
+                    src: Var("i", Int),
+                    dst: Var("incr_i.tmp.1", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "i",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 1,
+                    dst: Var("i", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "i",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 1,
+                    dst: Var("i", Int),
                 },
                 Jump(
                     "incr_i.0.end",
@@ -94,18 +55,10 @@ Program {
                     "incr_i.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -116,63 +69,28 @@ Program {
             instructions: [
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "decr_j.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("decr_j.tmp.0", Int),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "j",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "decr_j.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "decr_j.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("j", Int),
+                    rhs: Var("decr_j.tmp.0", Int),
+                    dst: Var("decr_j.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "decr_j.tmp.1",
-                        Int,
-                    ),
+                    Var("decr_j.tmp.1", Int),
                     "decr_j.0.true",
                 ),
                 Copy {
-                    src: Var(
-                        "j",
-                        Int,
-                    ),
-                    dst: Var(
-                        "decr_j.tmp.2",
-                        Int,
-                    ),
+                    src: Var("j", Int),
+                    dst: Var("decr_j.tmp.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "j",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            -1,
-                        ),
-                    ),
-                    dst: Var(
-                        "j",
-                        Int,
-                    ),
+                    lhs: Var("j", Int),
+                    rhs: -1,
+                    dst: Var("j", Int),
                 },
                 Jump(
                     "decr_j.0.end",
@@ -184,18 +102,10 @@ Program {
                     "decr_j.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -205,48 +115,22 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Var(
-                        "i",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: Var("i", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "i",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 1,
+                    dst: Var("i", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -257,53 +141,27 @@ Program {
                 Call(
                     "incr_i",
                     [],
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.1", Int),
                 },
                 Label(
                     "main.0.end",
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.1.end",
@@ -316,44 +174,22 @@ Program {
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "j",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            -1,
-                        ),
-                    ),
-                    dst: Var(
-                        "j",
-                        Int,
-                    ),
+                    lhs: Var("j", Int),
+                    rhs: -1,
+                    dst: Var("j", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "j",
-                        Int,
-                    ),
+                    Var("j", Int),
                     "main.2.true",
                 ),
                 Call(
                     "decr_j",
                     [],
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", Int),
                 },
                 Jump(
                     "main.2.end",
@@ -362,59 +198,29 @@ Program {
                     "main.2.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.5", Int),
                 },
                 Label(
                     "main.2.end",
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    src: 2,
+                    dst: Var("main.tmp.6", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "j",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    lhs: Var("j", Int),
+                    rhs: Var("main.tmp.6", Int),
+                    dst: Var("main.tmp.7", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    Var("main.tmp.7", Int),
                     "main.3.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.3.end",
@@ -426,18 +232,10 @@ Program {
                     "main.3.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

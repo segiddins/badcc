@@ -7,122 +7,53 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 10,
+                    dst: Var("a.1", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            20,
-                        ),
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Int,
-                    ),
+                    src: 20,
+                    dst: Var("b.2", Int),
                 },
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            20,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 20,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("b.2", Int),
                 },
                 Label(
                     "loop.0.cond",
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("b.2", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "loop.0",
                 ),
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("a.1", Int),
                 },
                 Binary {
                     op: LessThanOrEqual,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.0.true",
                 ),
                 Jump(
@@ -142,29 +73,13 @@ Program {
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    lhs: Var("b.2", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.4", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("b.2", Int),
                 },
                 Jump(
                     "loop.0.cond",
@@ -174,71 +89,32 @@ Program {
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.6", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                     "main.1.false",
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            11,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    src: 11,
+                    dst: Var("main.tmp.7", Int),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    lhs: Var("b.2", Int),
+                    rhs: Var("main.tmp.7", Int),
+                    dst: Var("main.tmp.8", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    Var("main.tmp.8", Int),
                     "main.1.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.5", Int),
                 },
                 Jump(
                     "main.1.end",
@@ -247,31 +123,17 @@ Program {
                     "main.1.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.5", Int),
                 },
                 Label(
                     "main.1.end",
                 ),
                 Return(
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

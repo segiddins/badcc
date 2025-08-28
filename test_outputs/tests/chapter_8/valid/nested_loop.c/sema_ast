@@ -1,227 +1,127 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "acc.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "acc.1",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "x.2",
+                    ty: Int,
+                    init: Constant(
+                        100,
+                    ),
+                },
+                While(
+                    Var(
+                        "x.2",
+                    ),
+                    Compound(
+                        [
+                            VariableDeclaration {
+                                name: "y.3",
+                                ty: Int,
+                                init: Constant(
+                                    10,
                                 ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x.2",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    100,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                38,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                While(
+                            },
+                            Expression(
+                                Assignment(
                                     Var(
                                         "x.2",
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Declaration(
-                                                    Variable(
-                                                        VariableDeclaration {
-                                                            ty: Int,
-                                                            name: "y.3",
-                                                            init: Some(
-                                                                Constant(
-                                                                    Int(
-                                                                        10,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            storage: None,
-                                                            span: SourceSpan {
-                                                                offset: SourceOffset(
-                                                                    75,
-                                                                ),
-                                                                length: 11,
-                                                            },
-                                                        },
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "x.2",
-                                                            ),
-                                                            Binary(
-                                                                Subtract,
-                                                                Var(
-                                                                    "x.2",
-                                                                ),
-                                                                Var(
-                                                                    "y.3",
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    While(
-                                                        Var(
-                                                            "y.3",
-                                                        ),
-                                                        Compound(
-                                                            Block {
-                                                                items: [
-                                                                    Statement(
-                                                                        Expression(
-                                                                            Assignment(
-                                                                                Var(
-                                                                                    "acc.1",
-                                                                                ),
-                                                                                Binary(
-                                                                                    Add,
-                                                                                    Var(
-                                                                                        "acc.1",
-                                                                                    ),
-                                                                                    Constant(
-                                                                                        Int(
-                                                                                            1,
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                    ),
-                                                                    Statement(
-                                                                        Expression(
-                                                                            Assignment(
-                                                                                Var(
-                                                                                    "y.3",
-                                                                                ),
-                                                                                Binary(
-                                                                                    Subtract,
-                                                                                    Var(
-                                                                                        "y.3",
-                                                                                    ),
-                                                                                    Constant(
-                                                                                        Int(
-                                                                                            1,
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                    ),
-                                                                ],
-                                                                span: SourceSpan {
-                                                                    offset: SourceOffset(
-                                                                        124,
-                                                                    ),
-                                                                    length: 61,
-                                                                },
-                                                            },
-                                                        ),
-                                                        Some(
-                                                            "loop.1",
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    65,
-                                                ),
-                                                length: 126,
-                                            },
-                                        },
-                                    ),
-                                    Some(
-                                        "loop.0",
+                                    Binary(
+                                        Subtract,
+                                        Var(
+                                            "x.2",
+                                        ),
+                                        Var(
+                                            "y.3",
+                                        ),
                                     ),
                                 ),
                             ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "acc.1",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    100,
+                            While(
+                                Var(
+                                    "y.3",
+                                ),
+                                Compound(
+                                    [
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "acc.1",
+                                                ),
+                                                Binary(
+                                                    Add,
+                                                    Var(
+                                                        "acc.1",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
                                                 ),
                                             ),
                                         ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "x.2",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "y.3",
+                                                ),
+                                                Binary(
+                                                    Subtract,
+                                                    Var(
+                                                        "y.3",
+                                                    ),
+                                                    Constant(
+                                                        1,
+                                                    ),
                                                 ),
                                             ),
                                         ),
-                                    ),
+                                    ],
+                                ),
+                                Some(
+                                    "loop.1",
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 211,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 226,
-                },
-            },
-        ),
+                    Some(
+                        "loop.0",
+                    ),
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "acc.1",
+                            ),
+                            Constant(
+                                100,
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "x.2",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

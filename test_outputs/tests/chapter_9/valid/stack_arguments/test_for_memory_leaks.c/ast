@@ -1,324 +1,208 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "lots_of_args",
-                params: [
-                    (
-                        Int,
-                        "a",
-                    ),
-                    (
-                        Int,
-                        "b",
-                    ),
-                    (
-                        Int,
-                        "c",
-                    ),
-                    (
-                        Int,
-                        "d",
-                    ),
-                    (
-                        Int,
-                        "e",
-                    ),
-                    (
-                        Int,
-                        "f",
-                    ),
-                    (
-                        Int,
-                        "g",
-                    ),
-                    (
-                        Int,
-                        "h",
-                    ),
-                    (
-                        Int,
-                        "i",
-                    ),
-                    (
-                        Int,
-                        "j",
-                    ),
-                    (
-                        Int,
-                        "k",
-                    ),
-                    (
-                        Int,
-                        "l",
-                    ),
-                    (
-                        Int,
-                        "m",
-                    ),
-                    (
-                        Int,
-                        "n",
-                    ),
-                    (
-                        Int,
-                        "o",
-                    ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "l",
-                                        ),
-                                        Var(
-                                            "o",
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                122,
-                            ),
-                            length: 21,
-                        },
-                    },
+        FunctionDeclaration {
+            identifier: "lots_of_args",
+            params: [
+                (
+                    Int,
+                    "a",
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                (
+                    Int,
+                    "b",
+                ),
+                (
+                    Int,
+                    "c",
+                ),
+                (
+                    Int,
+                    "d",
+                ),
+                (
+                    Int,
+                    "e",
+                ),
+                (
+                    Int,
+                    "f",
+                ),
+                (
+                    Int,
+                    "g",
+                ),
+                (
+                    Int,
+                    "h",
+                ),
+                (
+                    Int,
+                    "i",
+                ),
+                (
+                    Int,
+                    "j",
+                ),
+                (
+                    Int,
+                    "k",
+                ),
+                (
+                    Int,
+                    "l",
+                ),
+                (
+                    Int,
+                    "m",
+                ),
+                (
+                    Int,
+                    "n",
+                ),
+                (
+                    Int,
+                    "o",
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary(
+                        Add,
+                        Var(
+                            "l",
+                        ),
+                        Var(
+                            "o",
+                        ),
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ret",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 143,
                 },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "ret",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                165,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
+                For {
+                    init: VariableDeclaration {
+                        name: "i",
+                        ty: Int,
+                        init: Constant(
+                            0,
+                        ),
+                    },
+                    condition: Some(
+                        Binary(
+                            LessThan,
+                            Var(
+                                "i",
+                            ),
+                            Constant(
+                                10000000,
+                            ),
+                        ),
+                    ),
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "i",
+                            ),
+                            Binary(
+                                Add,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    1,
                                 ),
                             ),
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "i",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    187,
-                                                ),
-                                                length: 10,
-                                            },
-                                        },
+                        ),
+                    ),
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "ret",
                                     ),
-                                    condition: Some(
-                                        Binary(
-                                            LessThan,
-                                            Var(
-                                                "i",
+                                    FunctionCall(
+                                        Var(
+                                            "lots_of_args",
+                                        ),
+                                        [
+                                            Constant(
+                                                1,
                                             ),
                                             Constant(
-                                                Int(
-                                                    10000000,
-                                                ),
+                                                2,
                                             ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Assignment(
+                                            Constant(
+                                                3,
+                                            ),
+                                            Constant(
+                                                4,
+                                            ),
+                                            Constant(
+                                                5,
+                                            ),
+                                            Constant(
+                                                6,
+                                            ),
+                                            Constant(
+                                                7,
+                                            ),
+                                            Constant(
+                                                8,
+                                            ),
+                                            Constant(
+                                                9,
+                                            ),
+                                            Constant(
+                                                10,
+                                            ),
+                                            Constant(
+                                                11,
+                                            ),
                                             Var(
-                                                "i",
+                                                "ret",
                                             ),
-                                            Binary(
-                                                Add,
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
+                                            Constant(
+                                                13,
                                             ),
-                                        ),
-                                    ),
-                                    body: Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "ret",
-                                                            ),
-                                                            FunctionCall(
-                                                                Var(
-                                                                    "lots_of_args",
-                                                                ),
-                                                                [
-                                                                    Constant(
-                                                                        Int(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            2,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            3,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            4,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            5,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            6,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            7,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            8,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            9,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            10,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            11,
-                                                                        ),
-                                                                    ),
-                                                                    Var(
-                                                                        "ret",
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            13,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            14,
-                                                                        ),
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            15,
-                                                                        ),
-                                                                    ),
-                                                                ],
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    223,
-                                                ),
-                                                length: 87,
-                                            },
-                                        },
-                                    ),
-                                    label: None,
-                                },
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "ret",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                150000000,
+                                            Constant(
+                                                14,
                                             ),
-                                        ),
+                                            Constant(
+                                                15,
+                                            ),
+                                        ],
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                159,
-                            ),
-                            length: 182,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        144,
                     ),
-                    length: 197,
+                    label: None,
                 },
-            },
-        ),
+                Return(
+                    Binary(
+                        Equals,
+                        Var(
+                            "ret",
+                        ),
+                        Constant(
+                            150000000,
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

@@ -15,83 +15,36 @@ Program {
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "foo",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("foo", Long),
+                    rhs: 5l,
+                    dst: Var("main.tmp.0", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4294967295,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("main.tmp.0", Long),
+                    rhs: 4294967295l,
+                    dst: Var("main.tmp.1", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Long,
-                    ),
+                    Var("main.tmp.1", Long),
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Long(
-                            1152921504606846988,
-                        ),
-                    ),
-                    dst: Var(
-                        "foo",
-                        Long,
-                    ),
+                    src: 1152921504606846988l,
+                    dst: Var("foo", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "foo",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            1152921504606846988,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("foo", Long),
+                    rhs: 1152921504606846988l,
+                    dst: Var("main.tmp.2", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.2",
-                        Long,
-                    ),
+                    Var("main.tmp.2", Long),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.1.end",
@@ -112,18 +65,10 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

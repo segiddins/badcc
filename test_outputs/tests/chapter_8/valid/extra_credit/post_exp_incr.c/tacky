@@ -7,107 +7,48 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "product.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("product.1", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("i.2", Int),
                 },
                 Label(
                     "loop.0.cond",
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "loop.0",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "product.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("product.1", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "product.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("product.1", Int),
                 },
                 Label(
                     "loop.0.start",
                 ),
                 Copy {
-                    src: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    src: Var("i.2", Int),
+                    dst: Var("main.tmp.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 1,
+                    dst: Var("i.2", Int),
                 },
                 Jump(
                     "loop.0.cond",
@@ -116,17 +57,10 @@ Program {
                     "loop.0",
                 ),
                 Return(
-                    Var(
-                        "product.1",
-                        Int,
-                    ),
+                    Var("product.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

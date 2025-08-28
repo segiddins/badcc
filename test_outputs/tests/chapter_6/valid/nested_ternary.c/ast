@@ -1,131 +1,59 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "flag",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                51,
-                                            ),
-                                            length: 13,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Ternary(
-                                        Binary(
-                                            GreaterThan,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Var(
-                                                "b",
-                                            ),
-                                        ),
-                                        Constant(
-                                            Int(
-                                                5,
-                                            ),
-                                        ),
-                                        Ternary(
-                                            Var(
-                                                "flag",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    6,
-                                                ),
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    7,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 88,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
+                        2,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "flag",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 103,
                 },
-            },
-        ),
+                Return(
+                    Ternary(
+                        Binary(
+                            GreaterThan,
+                            Var(
+                                "a",
+                            ),
+                            Var(
+                                "b",
+                            ),
+                        ),
+                        Constant(
+                            5,
+                        ),
+                        Ternary(
+                            Var(
+                                "flag",
+                            ),
+                            Constant(
+                                6,
+                            ),
+                            Constant(
+                                7,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

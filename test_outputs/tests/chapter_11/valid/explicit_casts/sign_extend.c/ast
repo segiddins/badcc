@@ -1,270 +1,146 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "sign_extend",
-                params: [
-                    (
-                        Int,
-                        "i",
-                    ),
-                    (
+        FunctionDeclaration {
+            identifier: "sign_extend",
+            params: [
+                (
+                    Int,
+                    "i",
+                ),
+                (
+                    Long,
+                    "expected",
+                ),
+            ],
+            ret: Long,
+            body: [
+                VariableDeclaration {
+                    name: "extended",
+                    ty: Long,
+                    init: Cast(
                         Long,
-                        "expected",
+                        Var(
+                            "i",
+                        ),
                     ),
-                ],
-                ret: Long,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "extended",
-                                        init: Some(
-                                            Cast(
-                                                Long,
-                                                Var(
-                                                    "i",
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                45,
-                                            ),
-                                            length: 25,
-                                        },
-                                    },
-                                ),
+                },
+                Return(
+                    Binary(
+                        Equals,
+                        Var(
+                            "extended",
+                        ),
+                        Var(
+                            "expected",
+                        ),
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "sign_extend",
                             ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "extended",
-                                        ),
-                                        Var(
-                                            "expected",
-                                        ),
-                                    ),
+                            [
+                                Constant(
+                                    10,
+                                ),
+                                Constant(
+                                    10l,
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                39,
-                            ),
-                            length: 68,
-                        },
-                    },
+                    ),
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "sign_extend",
+                            ),
+                            [
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        10,
+                                    ),
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        10l,
+                                    ),
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "l",
+                    ty: Long,
+                    init: Cast(
+                        Long,
+                        Constant(
+                            100,
+                        ),
+                    ),
+                },
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "l",
+                        ),
+                        Constant(
+                            100l,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 107,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "sign_extend",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Int(
-                                                        10,
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Long(
-                                                        10,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    156,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "sign_extend",
-                                            ),
-                                            [
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Int(
-                                                            10,
-                                                        ),
-                                                    ),
-                                                ),
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Long(
-                                                            10,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    215,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "l",
-                                        init: Some(
-                                            Cast(
-                                                Long,
-                                                Constant(
-                                                    Int(
-                                                        100,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                245,
-                                            ),
-                                            length: 20,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "l",
-                                        ),
-                                        Constant(
-                                            Long(
-                                                100,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                3,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    285,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                123,
-                            ),
-                            length: 203,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        108,
-                    ),
-                    length: 218,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

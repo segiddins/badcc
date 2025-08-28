@@ -1,4 +1,4 @@
-use std::{collections::HashMap, iter::empty};
+use std::{collections::HashMap, fmt::Debug, iter::empty};
 
 use crate::{
     ast,
@@ -100,13 +100,29 @@ pub enum BinaryOperator {
     GreaterThanOrEqual,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub enum Operand {
     Immediate(i64, Width),
     Register(Reg, Width),
     Psuedo(String, Width),
     Stack(i32, Width),
     Data(String, Width),
+}
+
+impl Debug for Operand {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Immediate(arg0, arg1) => {
+                write!(f, "Immediate({arg0}, {arg1:?})")
+            }
+            Self::Register(arg0, arg1) => {
+                write!(f, "Register({arg0:?}, {arg1:?})")
+            }
+            Self::Psuedo(arg0, arg1) => write!(f, "Psuedo({arg0:?}, {arg1:?})"),
+            Self::Stack(arg0, arg1) => write!(f, "Stack({arg0:?}, {arg1:?})"),
+            Self::Data(arg0, arg1) => write!(f, "Data({arg0:?}, {arg1:?})"),
+        }
+    }
 }
 
 impl Operand {

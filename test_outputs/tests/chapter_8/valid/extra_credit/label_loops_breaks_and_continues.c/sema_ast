@@ -1,333 +1,198 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "sum.1",
-                                        init: Some(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "sum.1",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                Goto(
+                    "do_label",
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+                Labeled(
+                    "do_label",
+                    DoWhile(
+                        Compound(
+                            [
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "sum.1",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                                Goto(
+                                    "while_label",
+                                ),
+                            ],
+                        ),
+                        Constant(
+                            1,
+                        ),
+                        Some(
+                            "loop.0",
+                        ),
+                    ),
+                ),
+                Labeled(
+                    "while_label",
+                    While(
+                        Constant(
+                            1,
+                        ),
+                        Compound(
+                            [
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "sum.1",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "sum.1",
+                                            ),
                                             Constant(
-                                                Int(
-                                                    0,
-                                                ),
+                                                1,
                                             ),
                                         ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
+                                    ),
                                 ),
-                            ),
-                            Statement(
                                 Goto(
-                                    "do_label",
+                                    "break_label",
                                 ),
-                            ),
-                            Statement(
                                 Return(
                                     Constant(
-                                        Int(
-                                            0,
-                                        ),
+                                        0,
                                     ),
                                 ),
-                            ),
-                            Statement(
                                 Labeled(
-                                    "do_label",
-                                    DoWhile(
-                                        Compound(
-                                            Block {
-                                                items: [
-                                                    Statement(
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "sum.1",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Goto(
-                                                            "while_label",
-                                                        ),
-                                                    ),
-                                                ],
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        84,
-                                                    ),
-                                                    length: 50,
-                                                },
-                                            },
-                                        ),
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                        Some(
-                                            "loop.0",
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Labeled(
-                                    "while_label",
-                                    While(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                        Compound(
-                                            Block {
-                                                items: [
-                                                    Statement(
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "sum.1",
-                                                                ),
-                                                                Binary(
-                                                                    Add,
-                                                                    Var(
-                                                                        "sum.1",
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Goto(
-                                                            "break_label",
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Labeled(
-                                                            "break_label",
-                                                            Break(
-                                                                Some(
-                                                                    "loop.1",
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ],
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        173,
-                                                    ),
-                                                    length: 106,
-                                                },
-                                            },
-                                        ),
+                                    "break_label",
+                                    Break(
                                         Some(
                                             "loop.1",
                                         ),
                                     ),
                                 ),
-                            ),
-                            Statement(
-                                Null,
-                            ),
-                            Statement(
-                                Goto(
-                                    "for_label",
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Labeled(
-                                    "for_label",
-                                    For {
-                                        init: Decl(
-                                            VariableDeclaration {
-                                                ty: Int,
-                                                name: "i.2",
-                                                init: Some(
-                                                    Constant(
-                                                        Int(
-                                                            0,
-                                                        ),
-                                                    ),
-                                                ),
-                                                storage: None,
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        335,
-                                                    ),
-                                                    length: 10,
-                                                },
-                                            },
-                                        ),
-                                        condition: Some(
-                                            Binary(
-                                                LessThan,
-                                                Var(
-                                                    "i.2",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        10,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        post: Some(
-                                            Assignment(
-                                                Var(
-                                                    "i.2",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "i.2",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        body: Compound(
-                                            Block {
-                                                items: [
-                                                    Statement(
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "sum.1",
-                                                                ),
-                                                                Binary(
-                                                                    Add,
-                                                                    Var(
-                                                                        "sum.1",
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Goto(
-                                                            "continue_label",
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Labeled(
-                                                            "continue_label",
-                                                            Continue(
-                                                                Some(
-                                                                    "loop.2",
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ],
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        365,
-                                                    ),
-                                                    length: 133,
-                                                },
-                                            },
-                                        ),
-                                        label: Some(
-                                            "loop.2",
-                                        ),
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "sum.1",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 501,
-                        },
-                    },
+                            ],
+                        ),
+                        Some(
+                            "loop.1",
+                        ),
+                    ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Null,
+                Goto(
+                    "for_label",
+                ),
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 516,
-                },
-            },
-        ),
+                ),
+                Labeled(
+                    "for_label",
+                    For {
+                        init: VariableDeclaration {
+                            name: "i.2",
+                            ty: Int,
+                            init: Constant(
+                                0,
+                            ),
+                        },
+                        condition: Some(
+                            Binary(
+                                LessThan,
+                                Var(
+                                    "i.2",
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ),
+                        ),
+                        post: Some(
+                            Assignment(
+                                Var(
+                                    "i.2",
+                                ),
+                                Binary(
+                                    Add,
+                                    Var(
+                                        "i.2",
+                                    ),
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                        body: Compound(
+                            [
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "sum.1",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "sum.1",
+                                            ),
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                                Goto(
+                                    "continue_label",
+                                ),
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Labeled(
+                                    "continue_label",
+                                    Continue(
+                                        Some(
+                                            "loop.2",
+                                        ),
+                                    ),
+                                ),
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                            ],
+                        ),
+                        label: Some(
+                            "loop.2",
+                        ),
+                    },
+                ),
+                Return(
+                    Var(
+                        "sum.1",
+                    ),
+                ),
+            ],
+        },
     ],
 }

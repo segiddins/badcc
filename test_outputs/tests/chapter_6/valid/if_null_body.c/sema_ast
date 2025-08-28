@@ -1,83 +1,41 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                    Null,
-                                    Some(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "x.1",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "x.1",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 77,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x.1",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 92,
                 },
-            },
-        ),
+                If(
+                    Constant(
+                        0,
+                    ),
+                    Null,
+                    Some(
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "x.1",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Return(
+                    Var(
+                        "x.1",
+                    ),
+                ),
+            ],
+        },
     ],
 }

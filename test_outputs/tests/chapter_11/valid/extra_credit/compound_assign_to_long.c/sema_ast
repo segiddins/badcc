@@ -1,150 +1,79 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "l.1",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Constant(
-                                                    Long(
-                                                        34359738368,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 23,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "l.1",
+                    ty: Long,
+                    init: Unary(
+                        Minus,
+                        Constant(
+                            34359738368l,
+                        ),
+                    ),
+                },
+                VariableDeclaration {
+                    name: "i.2",
+                    ty: Int,
+                    init: Unary(
+                        Minus,
+                        Constant(
+                            10,
+                        ),
+                    ),
+                },
+                Expression(
+                    Assignment(
+                        Var(
+                            "l.1",
+                        ),
+                        Binary(
+                            Subtract,
+                            Var(
+                                "l.1",
+                            ),
+                            Cast(
+                                Long,
+                                Var(
+                                    "i.2",
                                 ),
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i.2",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Constant(
-                                                    Int(
-                                                        10,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                49,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
-                                ),
+                        ),
+                    ),
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "l.1",
+                        ),
+                        Unary(
+                            Minus,
+                            Constant(
+                                34359738358l,
                             ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "l.1",
-                                        ),
-                                        Binary(
-                                            Subtract,
-                                            Var(
-                                                "l.1",
-                                            ),
-                                            Cast(
-                                                Long,
-                                                Var(
-                                                    "i.2",
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "l.1",
-                                        ),
-                                        Unary(
-                                            Minus,
-                                            Constant(
-                                                Long(
-                                                    34359738358,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    102,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 128,
-                        },
-                    },
+                    ),
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 143,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

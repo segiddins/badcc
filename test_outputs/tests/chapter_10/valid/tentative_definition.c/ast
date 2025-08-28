@@ -1,169 +1,86 @@
 Program {
     declarations: [
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "foo",
-                init: None,
-                storage: Some(
-                    Extern,
-                ),
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 15,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "foo",
-                init: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        16,
-                    ),
-                    length: 8,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "foo",
-                init: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        25,
-                    ),
-                    length: 8,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "i",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    60,
-                                                ),
-                                                length: 10,
-                                            },
-                                        },
-                                    ),
-                                    condition: Some(
-                                        Binary(
-                                            LessThan,
-                                            Var(
-                                                "i",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    5,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Assignment(
-                                            Var(
-                                                "i",
-                                            ),
-                                            Binary(
-                                                Add,
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    body: Expression(
-                                        Assignment(
-                                            Var(
-                                                "foo",
-                                            ),
-                                            Binary(
-                                                Add,
-                                                Var(
-                                                    "foo",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    label: None,
-                                },
+        VariableDeclaration {
+            name: "foo",
+            ty: Int,
+            storage: Extern,
+        },
+        VariableDeclaration {
+            name: "foo",
+            ty: Int,
+        },
+        VariableDeclaration {
+            name: "foo",
+            ty: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                For {
+                    init: VariableDeclaration {
+                        name: "i",
+                        ty: Int,
+                        init: Constant(
+                            0,
+                        ),
+                    },
+                    condition: Some(
+                        Binary(
+                            LessThan,
+                            Var(
+                                "i",
                             ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "foo",
-                                    ),
+                            Constant(
+                                5,
+                            ),
+                        ),
+                    ),
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "i",
+                            ),
+                            Binary(
+                                Add,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    1,
                                 ),
                             ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                49,
+                        ),
+                    ),
+                    body: Expression(
+                        Assignment(
+                            Var(
+                                "foo",
                             ),
-                            length: 80,
-                        },
-                    },
+                            Binary(
+                                Add,
+                                Var(
+                                    "foo",
+                                ),
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                    ),
+                    label: None,
+                },
+                Return(
+                    Var(
+                        "foo",
+                    ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        34,
-                    ),
-                    length: 95,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "foo",
-                init: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        130,
-                    ),
-                    length: 8,
-                },
-            },
-        ),
+            ],
+        },
+        VariableDeclaration {
+            name: "foo",
+            ty: Int,
+        },
     ],
 }

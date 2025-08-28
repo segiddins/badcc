@@ -1,153 +1,90 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Var(
-                                        "a",
-                                    ),
-                                    Expression(
-                                        Assignment(
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Some(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "a",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        3,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Var(
-                                        "b",
-                                    ),
-                                    Expression(
-                                        Assignment(
-                                            Var(
-                                                "b",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    4,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Some(
-                                        Expression(
-                                            Assignment(
-                                                Var(
-                                                    "b",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Var(
-                                            "b",
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 151,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 166,
                 },
-            },
-        ),
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                If(
+                    Var(
+                        "a",
+                    ),
+                    Expression(
+                        Assignment(
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                2,
+                            ),
+                        ),
+                    ),
+                    Some(
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                If(
+                    Var(
+                        "b",
+                    ),
+                    Expression(
+                        Assignment(
+                            Var(
+                                "b",
+                            ),
+                            Constant(
+                                4,
+                            ),
+                        ),
+                    ),
+                    Some(
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "b",
+                                ),
+                                Constant(
+                                    5,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                Return(
+                    Binary(
+                        Add,
+                        Var(
+                            "a",
+                        ),
+                        Var(
+                            "b",
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

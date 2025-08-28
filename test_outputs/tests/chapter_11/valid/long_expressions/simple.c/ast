@@ -1,75 +1,35 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "l",
-                                        init: Some(
-                                            Constant(
-                                                Long(
-                                                    9223372036854775807,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 30,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Binary(
-                                            Subtract,
-                                            Var(
-                                                "l",
-                                            ),
-                                            Constant(
-                                                Long(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                        Constant(
-                                            Long(
-                                                9223372036854775805,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 83,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "l",
+                    ty: Long,
+                    init: Constant(
+                        9223372036854775807l,
                     ),
-                    length: 98,
                 },
-            },
-        ),
+                Return(
+                    Binary(
+                        Equals,
+                        Binary(
+                            Subtract,
+                            Var(
+                                "l",
+                            ),
+                            Constant(
+                                2l,
+                            ),
+                        ),
+                        Constant(
+                            9223372036854775805l,
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

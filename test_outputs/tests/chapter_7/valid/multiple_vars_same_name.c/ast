@@ -1,161 +1,71 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                Compound(
+                    [
+                        VariableDeclaration {
+                            name: "b",
+                            ty: Int,
+                            init: Constant(
+                                4,
+                            ),
+                        },
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "a",
+                                ),
+                                Var(
+                                    "b",
                                 ),
                             ),
-                            Statement(
-                                Compound(
-                                    Block {
-                                        items: [
-                                            Declaration(
-                                                Variable(
-                                                    VariableDeclaration {
-                                                        ty: Int,
-                                                        name: "b",
-                                                        init: Some(
-                                                            Constant(
-                                                                Int(
-                                                                    4,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        storage: None,
-                                                        span: SourceSpan {
-                                                            offset: SourceOffset(
-                                                                46,
-                                                            ),
-                                                            length: 10,
-                                                        },
-                                                    },
-                                                ),
-                                            ),
-                                            Statement(
-                                                Expression(
-                                                    Assignment(
-                                                        Var(
-                                                            "a",
-                                                        ),
-                                                        Var(
-                                                            "b",
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ],
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 41,
-                                        },
-                                    },
-                                ),
+                        ),
+                    ],
+                ),
+                Compound(
+                    [
+                        VariableDeclaration {
+                            name: "b",
+                            ty: Int,
+                            init: Constant(
+                                2,
                             ),
-                            Statement(
-                                Compound(
-                                    Block {
-                                        items: [
-                                            Declaration(
-                                                Variable(
-                                                    VariableDeclaration {
-                                                        ty: Int,
-                                                        name: "b",
-                                                        init: Some(
-                                                            Constant(
-                                                                Int(
-                                                                    2,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        storage: None,
-                                                        span: SourceSpan {
-                                                            offset: SourceOffset(
-                                                                92,
-                                                            ),
-                                                            length: 10,
-                                                        },
-                                                    },
-                                                ),
-                                            ),
-                                            Statement(
-                                                Expression(
-                                                    Assignment(
-                                                        Var(
-                                                            "a",
-                                                        ),
-                                                        Binary(
-                                                            Subtract,
-                                                            Var(
-                                                                "a",
-                                                            ),
-                                                            Var(
-                                                                "b",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ],
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                82,
-                                            ),
-                                            length: 45,
-                                        },
-                                    },
+                        },
+                        Expression(
+                            Assignment(
+                                Var(
+                                    "a",
                                 ),
-                            ),
-                            Statement(
-                                Return(
+                                Binary(
+                                    Subtract,
                                     Var(
                                         "a",
                                     ),
+                                    Var(
+                                        "b",
+                                    ),
                                 ),
                             ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 128,
-                        },
-                    },
+                        ),
+                    ],
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+                Return(
+                    Var(
+                        "a",
                     ),
-                    length: 143,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

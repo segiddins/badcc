@@ -7,41 +7,21 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 10,
+                    dst: Var("a.1", Int),
                 },
                 Call(
                     "f",
                     [
-                        Var(
-                            "a.1",
-                            Int,
-                        ),
+                        Var("a.1", Int),
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -49,40 +29,20 @@ Program {
             identifier: "f",
             global: true,
             params: [
-                Var(
-                    "a.5",
-                    Int,
-                ),
+                Var("a.5", Int),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
-                    lhs: Var(
-                        "a.5",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("a.5", Int),
+                    rhs: 2,
+                    dst: Var("f.tmp.0", Int),
                 },
                 Return(
-                    Var(
-                        "f.tmp.0",
-                        Int,
-                    ),
+                    Var("f.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

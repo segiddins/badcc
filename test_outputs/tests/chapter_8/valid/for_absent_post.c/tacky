@@ -8,93 +8,41 @@ Program {
             instructions: [
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            2147483647,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 2147483647,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("a.1", Int),
                 },
                 Label(
                     "loop.0.cond",
                 ),
                 Binary {
                     op: Remainder,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.1", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.2", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                     "loop.0",
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("a.1", Int),
                 },
                 Label(
                     "loop.0.start",
@@ -107,60 +55,27 @@ Program {
                 ),
                 Binary {
                     op: Remainder,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.5", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                     "main.0.true",
                 ),
                 Binary {
                     op: GreaterThan,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.6", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.4", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -169,31 +84,17 @@ Program {
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.4", Int),
                 },
                 Label(
                     "main.0.end",
                 ),
                 Return(
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

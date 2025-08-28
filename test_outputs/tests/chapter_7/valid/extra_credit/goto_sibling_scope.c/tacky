@@ -7,87 +7,40 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("sum.1", Int),
                 },
                 JumpIfZero(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.2",
-                        Int,
-                    ),
+                    src: 5,
+                    dst: Var("a.2", Int),
                 },
                 Jump(
                     "main.other_if",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("sum.1", Int),
                 },
                 Label(
                     "main.first_if",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.2",
-                        Int,
-                    ),
+                    src: 5,
+                    dst: Var("a.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "sum.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "a.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("sum.1", Int),
+                    rhs: Var("a.2", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -99,65 +52,32 @@ Program {
                     "main.0.end",
                 ),
                 JumpIfZero(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                     "main.1.true",
                 ),
                 Label(
                     "main.other_if",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            6,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.3",
-                        Int,
-                    ),
+                    src: 6,
+                    dst: Var("a.3", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "sum.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "a.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("sum.1", Int),
+                    rhs: Var("a.3", Int),
+                    dst: Var("main.tmp.1", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.first_if",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "main.1.end",
@@ -169,17 +89,10 @@ Program {
                     "main.1.end",
                 ),
                 Return(
-                    Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    Var("sum.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

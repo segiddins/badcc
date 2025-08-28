@@ -21,57 +21,25 @@ Program {
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "a",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "b",
-                        Long,
-                    ),
-                    dst: Var(
-                        "addition.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("a", Long),
+                    rhs: Var("b", Long),
+                    dst: Var("addition.tmp.0", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "addition.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4294967295,
-                        ),
-                    ),
-                    dst: Var(
-                        "addition.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("addition.tmp.0", Long),
+                    rhs: 4294967295l,
+                    dst: Var("addition.tmp.1", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "addition.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "addition.tmp.2",
-                        Int,
-                    ),
+                    src: Var("addition.tmp.1", Long),
+                    dst: Var("addition.tmp.2", Int),
                 },
                 Return(
-                    Var(
-                        "addition.tmp.2",
-                        Int,
-                    ),
+                    Var("addition.tmp.2", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -82,68 +50,30 @@ Program {
             instructions: [
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "a",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "b",
-                        Long,
-                    ),
-                    dst: Var(
-                        "subtraction.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("a", Long),
+                    rhs: Var("b", Long),
+                    dst: Var("subtraction.tmp.0", Long),
                 },
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Long(
-                            4294967380,
-                        ),
-                    ),
-                    dst: Var(
-                        "subtraction.tmp.1",
-                        Long,
-                    ),
+                    src: 4294967380l,
+                    dst: Var("subtraction.tmp.1", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "subtraction.tmp.0",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "subtraction.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "subtraction.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("subtraction.tmp.0", Long),
+                    rhs: Var("subtraction.tmp.1", Long),
+                    dst: Var("subtraction.tmp.2", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "subtraction.tmp.2",
-                        Long,
-                    ),
-                    dst: Var(
-                        "subtraction.tmp.3",
-                        Int,
-                    ),
+                    src: Var("subtraction.tmp.2", Long),
+                    dst: Var("subtraction.tmp.3", Int),
                 },
                 Return(
-                    Var(
-                        "subtraction.tmp.3",
-                        Int,
-                    ),
+                    Var("subtraction.tmp.3", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -154,58 +84,25 @@ Program {
             instructions: [
                 Binary {
                     op: Multiply,
-                    lhs: Var(
-                        "a",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "multiplication.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("a", Long),
+                    rhs: 4l,
+                    dst: Var("multiplication.tmp.0", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "multiplication.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            17179869160,
-                        ),
-                    ),
-                    dst: Var(
-                        "multiplication.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("multiplication.tmp.0", Long),
+                    rhs: 17179869160l,
+                    dst: Var("multiplication.tmp.1", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "multiplication.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "multiplication.tmp.2",
-                        Int,
-                    ),
+                    src: Var("multiplication.tmp.1", Long),
+                    dst: Var("multiplication.tmp.2", Int),
                 },
                 Return(
-                    Var(
-                        "multiplication.tmp.2",
-                        Int,
-                    ),
+                    Var("multiplication.tmp.2", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -216,68 +113,29 @@ Program {
             instructions: [
                 Binary {
                     op: Divide,
-                    lhs: Var(
-                        "a",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            128,
-                        ),
-                    ),
-                    dst: Var(
-                        "division.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("a", Long),
+                    rhs: 128l,
+                    dst: Var("division.tmp.0", Long),
                 },
                 Copy {
-                    src: Var(
-                        "division.tmp.0",
-                        Long,
-                    ),
-                    dst: Var(
-                        "b",
-                        Long,
-                    ),
+                    src: Var("division.tmp.0", Long),
+                    dst: Var("b", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            33554431,
-                        ),
-                    ),
-                    dst: Var(
-                        "division.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("b", Long),
+                    rhs: 33554431l,
+                    dst: Var("division.tmp.1", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "division.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "division.tmp.2",
-                        Int,
-                    ),
+                    src: Var("division.tmp.1", Long),
+                    dst: Var("division.tmp.2", Int),
                 },
                 Return(
-                    Var(
-                        "division.tmp.2",
-                        Int,
-                    ),
+                    Var("division.tmp.2", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -288,90 +146,39 @@ Program {
             instructions: [
                 Unary {
                     op: Negate,
-                    src: Var(
-                        "a",
-                        Long,
-                    ),
-                    dst: Var(
-                        "remaind.tmp.0",
-                        Long,
-                    ),
+                    src: Var("a", Long),
+                    dst: Var("remaind.tmp.0", Long),
                 },
                 Binary {
                     op: Remainder,
-                    lhs: Var(
-                        "remaind.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "remaind.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("remaind.tmp.0", Long),
+                    rhs: 4294967290l,
+                    dst: Var("remaind.tmp.1", Long),
                 },
                 Copy {
-                    src: Var(
-                        "remaind.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "b",
-                        Long,
-                    ),
+                    src: Var("remaind.tmp.1", Long),
+                    dst: Var("b", Long),
                 },
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Long(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "remaind.tmp.2",
-                        Long,
-                    ),
+                    src: 5l,
+                    dst: Var("remaind.tmp.2", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "remaind.tmp.2",
-                        Long,
-                    ),
-                    dst: Var(
-                        "remaind.tmp.3",
-                        Long,
-                    ),
+                    lhs: Var("b", Long),
+                    rhs: Var("remaind.tmp.2", Long),
+                    dst: Var("remaind.tmp.3", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "remaind.tmp.3",
-                        Long,
-                    ),
-                    dst: Var(
-                        "remaind.tmp.4",
-                        Int,
-                    ),
+                    src: Var("remaind.tmp.3", Long),
+                    dst: Var("remaind.tmp.4", Int),
                 },
                 Return(
-                    Var(
-                        "remaind.tmp.4",
-                        Int,
-                    ),
+                    Var("remaind.tmp.4", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -382,64 +189,29 @@ Program {
             instructions: [
                 Unary {
                     op: Complement,
-                    src: Var(
-                        "a",
-                        Long,
-                    ),
-                    dst: Var(
-                        "complement.tmp.0",
-                        Long,
-                    ),
+                    src: Var("a", Long),
+                    dst: Var("complement.tmp.0", Long),
                 },
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Long(
-                            9223372036854775807,
-                        ),
-                    ),
-                    dst: Var(
-                        "complement.tmp.1",
-                        Long,
-                    ),
+                    src: 9223372036854775807l,
+                    dst: Var("complement.tmp.1", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "complement.tmp.0",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "complement.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "complement.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("complement.tmp.0", Long),
+                    rhs: Var("complement.tmp.1", Long),
+                    dst: Var("complement.tmp.2", Long),
                 },
                 Truncate {
-                    src: Var(
-                        "complement.tmp.2",
-                        Long,
-                    ),
-                    dst: Var(
-                        "complement.tmp.3",
-                        Int,
-                    ),
+                    src: Var("complement.tmp.2", Long),
+                    dst: Var("complement.tmp.3", Int),
                 },
                 Return(
-                    Var(
-                        "complement.tmp.3",
-                        Int,
-                    ),
+                    Var("complement.tmp.3", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -449,59 +221,29 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: 4294967290l,
+                    dst: Var("a", Long),
                 },
                 Copy {
-                    src: Constant(
-                        Long(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "b",
-                        Long,
-                    ),
+                    src: 5l,
+                    dst: Var("b", Long),
                 },
                 Call(
                     "addition",
                     [],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -514,69 +256,33 @@ Program {
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Long,
-                    ),
+                    src: 4294967290l,
+                    dst: Var("main.tmp.2", Long),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Long,
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: Var("main.tmp.2", Long),
+                    dst: Var("a", Long),
                 },
                 Copy {
-                    src: Constant(
-                        Long(
-                            90,
-                        ),
-                    ),
-                    dst: Var(
-                        "b",
-                        Long,
-                    ),
+                    src: 90l,
+                    dst: Var("b", Long),
                 },
                 Call(
                     "subtraction",
                     [],
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("main.tmp.4", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.1.end",
@@ -588,48 +294,25 @@ Program {
                     "main.1.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: 4294967290l,
+                    dst: Var("a", Long),
                 },
                 Call(
                     "multiplication",
                     [],
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    src: Var("main.tmp.5", Int),
+                    dst: Var("main.tmp.6", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                     "main.2.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
+                    3,
                 ),
                 Jump(
                     "main.2.end",
@@ -641,48 +324,25 @@ Program {
                     "main.2.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: 4294967290l,
+                    dst: Var("a", Long),
                 },
                 Call(
                     "division",
                     [],
-                    Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    Var("main.tmp.7", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("main.tmp.8", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    Var("main.tmp.8", Int),
                     "main.3.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
+                    4,
                 ),
                 Jump(
                     "main.3.end",
@@ -694,48 +354,25 @@ Program {
                     "main.3.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Long(
-                            8589934585,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: 8589934585l,
+                    dst: Var("a", Long),
                 },
                 Call(
                     "remaind",
                     [],
-                    Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
+                    Var("main.tmp.9", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.10",
-                        Int,
-                    ),
+                    src: Var("main.tmp.9", Int),
+                    dst: Var("main.tmp.10", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.10",
-                        Int,
-                    ),
+                    Var("main.tmp.10", Int),
                     "main.4.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
+                    5,
                 ),
                 Jump(
                     "main.4.end",
@@ -747,48 +384,25 @@ Program {
                     "main.4.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Long(
-                            9223372036854775806,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Long,
-                    ),
+                    src: 9223372036854775806l,
+                    dst: Var("a", Long),
                 },
                 Call(
                     "complement",
                     [],
-                    Var(
-                        "main.tmp.11",
-                        Int,
-                    ),
+                    Var("main.tmp.11", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.11",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.12",
-                        Int,
-                    ),
+                    src: Var("main.tmp.11", Int),
+                    dst: Var("main.tmp.12", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.12",
-                        Int,
-                    ),
+                    Var("main.tmp.12", Int),
                     "main.5.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            6,
-                        ),
-                    ),
+                    6,
                 ),
                 Jump(
                     "main.5.end",
@@ -800,18 +414,10 @@ Program {
                     "main.5.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

@@ -1,65 +1,44 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "add_variables",
-                params: [
-                    (
-                        Long,
-                        "x.1",
-                    ),
-                    (
-                        Long,
-                        "y.2",
-                    ),
-                    (
-                        Int,
-                        "z.3",
-                    ),
-                ],
-                ret: Long,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Add,
-                                        Binary(
-                                            Add,
-                                            Var(
-                                                "x.1",
-                                            ),
-                                            Var(
-                                                "y.2",
-                                            ),
-                                        ),
-                                        Cast(
-                                            Long,
-                                            Var(
-                                                "z.3",
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                41,
-                            ),
-                            length: 25,
-                        },
-                    },
+        FunctionDeclaration {
+            identifier: "add_variables",
+            params: [
+                (
+                    Long,
+                    "x.1",
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+                (
+                    Long,
+                    "y.2",
+                ),
+                (
+                    Int,
+                    "z.3",
+                ),
+            ],
+            ret: Long,
+            body: [
+                Return(
+                    Binary(
+                        Add,
+                        Binary(
+                            Add,
+                            Var(
+                                "x.1",
+                            ),
+                            Var(
+                                "y.2",
+                            ),
+                        ),
+                        Cast(
+                            Long,
+                            Var(
+                                "z.3",
+                            ),
+                        ),
                     ),
-                    length: 66,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

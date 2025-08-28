@@ -9,79 +9,35 @@ Program {
                 Call(
                     "foo",
                     [],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "x.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("x.2", Int),
                 },
                 Binary {
                     op: GreaterThan,
-                    lhs: Var(
-                        "x.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("x.2", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "foo.3",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("foo.3", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "x.2",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "foo.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("x.2", Int),
+                    rhs: Var("foo.3", Int),
+                    dst: Var("main.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "x.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("x.2", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -93,17 +49,10 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Var(
-                        "x.2",
-                        Int,
-                    ),
+                    Var("x.2", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -113,18 +62,10 @@ Program {
             params: [],
             instructions: [
                 Return(
-                    Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
+                    4,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

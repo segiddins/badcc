@@ -1,361 +1,196 @@
 Program {
     declarations: [
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "i",
-                init: Some(
+        VariableDeclaration {
+            name: "i",
+            ty: Int,
+            init: Constant(
+                0,
+            ),
+        },
+        VariableDeclaration {
+            name: "j",
+            ty: Int,
+            init: Constant(
+                0,
+            ),
+        },
+        FunctionDeclaration {
+            identifier: "incr_i",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary(
+                        Equals,
+                        Var(
+                            "i",
+                        ),
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Expression(
+                                Unary(
+                                    PostfixIncrement,
+                                    Var(
+                                        "i",
+                                    ),
+                                ),
+                            ),
+                            Expression(
+                                Unary(
+                                    PrefixIncrement,
+                                    Var(
+                                        "i",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
                     Constant(
-                        Int(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "decr_j",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary(
+                        Equals,
+                        Var(
+                            "j",
+                        ),
+                        Unary(
+                            Minus,
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Expression(
+                                Unary(
+                                    PostfixDecrement,
+                                    Var(
+                                        "j",
+                                    ),
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    Ternary(
+                        Unary(
+                            PostfixIncrement,
+                            Var(
+                                "i",
+                            ),
+                        ),
+                        Constant(
+                            0,
+                        ),
+                        FunctionCall(
+                            Var(
+                                "incr_i",
+                            ),
+                            [],
+                        ),
+                    ),
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "i",
+                        ),
+                        Constant(
+                            3,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Ternary(
+                        Unary(
+                            PrefixDecrement,
+                            Var(
+                                "j",
+                            ),
+                        ),
+                        FunctionCall(
+                            Var(
+                                "decr_j",
+                            ),
+                            [],
+                        ),
+                        Constant(
                             0,
                         ),
                     ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        1,
-                    ),
-                    length: 10,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "j",
-                init: Some(
-                    Constant(
-                        Int(
-                            0,
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "j",
+                        ),
+                        Unary(
+                            Minus,
+                            Constant(
+                                2,
+                            ),
                         ),
                     ),
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        12,
-                    ),
-                    length: 10,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "incr_i",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                If(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Unary(
-                                                            PostfixIncrement,
-                                                            Var(
-                                                                "i",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Expression(
-                                                        Unary(
-                                                            PrefixIncrement,
-                                                            Var(
-                                                                "i",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    57,
-                                                ),
-                                                length: 33,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    2,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                39,
-                            ),
-                            length: 67,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        23,
                     ),
-                    length: 83,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "decr_j",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                If(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "j",
-                                        ),
-                                        Unary(
-                                            Minus,
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Unary(
-                                                            PostfixDecrement,
-                                                            Var(
-                                                                "j",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    143,
-                                                ),
-                                                length: 20,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                124,
-                            ),
-                            length: 55,
-                        },
-                    },
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        107,
+                Return(
+                    Constant(
+                        0,
                     ),
-                    length: 72,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Expression(
-                                    Ternary(
-                                        Unary(
-                                            PostfixIncrement,
-                                            Var(
-                                                "i",
-                                            ),
-                                        ),
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                        FunctionCall(
-                                            Var(
-                                                "incr_i",
-                                            ),
-                                            [],
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                3,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    237,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Ternary(
-                                        Unary(
-                                            PrefixDecrement,
-                                            Var(
-                                                "j",
-                                            ),
-                                        ),
-                                        FunctionCall(
-                                            Var(
-                                                "decr_j",
-                                            ),
-                                            [],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "j",
-                                        ),
-                                        Unary(
-                                            Minus,
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    302,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                195,
-                            ),
-                            length: 148,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        180,
-                    ),
-                    length: 163,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

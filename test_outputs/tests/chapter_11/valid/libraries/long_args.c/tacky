@@ -5,88 +5,35 @@ Program {
             identifier: "test_sum",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Int,
-                ),
-                Var(
-                    "b.2",
-                    Int,
-                ),
-                Var(
-                    "c.3",
-                    Int,
-                ),
-                Var(
-                    "d.4",
-                    Long,
-                ),
-                Var(
-                    "e.5",
-                    Int,
-                ),
-                Var(
-                    "f.6",
-                    Long,
-                ),
-                Var(
-                    "g.7",
-                    Int,
-                ),
-                Var(
-                    "h.8",
-                    Int,
-                ),
-                Var(
-                    "i.9",
-                    Long,
-                ),
+                Var("a.1", Int),
+                Var("b.2", Int),
+                Var("c.3", Int),
+                Var("d.4", Long),
+                Var("e.5", Int),
+                Var("f.6", Long),
+                Var("g.7", Int),
+                Var("h.8", Int),
+                Var("i.9", Long),
             ],
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "d.4",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "f.6",
-                        Long,
-                    ),
-                    dst: Var(
-                        "test_sum.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("d.4", Long),
+                    rhs: Var("f.6", Long),
+                    dst: Var("test_sum.tmp.0", Long),
                 },
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "test_sum.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            100,
-                        ),
-                    ),
-                    dst: Var(
-                        "test_sum.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("test_sum.tmp.0", Long),
+                    rhs: 100l,
+                    dst: Var("test_sum.tmp.1", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "test_sum.tmp.1",
-                        Long,
-                    ),
+                    Var("test_sum.tmp.1", Long),
                     "test_sum.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "test_sum.0.end",
@@ -99,33 +46,16 @@ Program {
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "i.9",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            100,
-                        ),
-                    ),
-                    dst: Var(
-                        "test_sum.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("i.9", Long),
+                    rhs: 100l,
+                    dst: Var("test_sum.tmp.2", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "test_sum.tmp.2",
-                        Long,
-                    ),
+                    Var("test_sum.tmp.2", Long),
                     "test_sum.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "test_sum.1.end",
@@ -137,18 +67,10 @@ Program {
                     "test_sum.1.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

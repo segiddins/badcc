@@ -8,33 +8,16 @@ Program {
             instructions: [
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "x",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("x", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -46,53 +29,26 @@ Program {
                     "main.0.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "x",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("x", Int),
                 },
                 Call(
                     "read_x",
                     [],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.1", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.2", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.1.end",
@@ -104,18 +60,10 @@ Program {
                     "main.1.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

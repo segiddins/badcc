@@ -18,32 +18,17 @@ Program {
             identifier: "update_static_or_global",
             global: true,
             params: [
-                Var(
-                    "update_global.2",
-                    Int,
-                ),
-                Var(
-                    "new_val.3",
-                    Int,
-                ),
+                Var("update_global.2", Int),
+                Var("new_val.3", Int),
             ],
             instructions: [
                 JumpIfZero(
-                    Var(
-                        "update_global.2",
-                        Int,
-                    ),
+                    Var("update_global.2", Int),
                     "update_static_or_global.0.true",
                 ),
                 Copy {
-                    src: Var(
-                        "new_val.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "i",
-                        Int,
-                    ),
+                    src: Var("new_val.3", Int),
+                    dst: Var("i", Int),
                 },
                 Jump(
                     "update_static_or_global.0.end",
@@ -52,30 +37,17 @@ Program {
                     "update_static_or_global.0.true",
                 ),
                 Copy {
-                    src: Var(
-                        "new_val.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "i.4",
-                        Int,
-                    ),
+                    src: Var("new_val.3", Int),
+                    dst: Var("i.4", Int),
                 },
                 Label(
                     "update_static_or_global.0.end",
                 ),
                 Return(
-                    Var(
-                        "i.4",
-                        Int,
-                    ),
+                    Var("i.4", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -86,33 +58,16 @@ Program {
             instructions: [
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -126,61 +81,27 @@ Program {
                 Call(
                     "update_static_or_global",
                     [
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                10,
-                            ),
-                        ),
+                        1,
+                        10,
                     ],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "result.7",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("result.7", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "result.7",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("result.7", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.2", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.1.end",
@@ -193,33 +114,16 @@ Program {
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.2.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.2.end",
@@ -233,61 +137,27 @@ Program {
                 Call(
                     "update_static_or_global",
                     [
-                        Constant(
-                            Int(
-                                0,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                9,
-                            ),
-                        ),
+                        0,
+                        9,
                     ],
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
-                    dst: Var(
-                        "result.7",
-                        Int,
-                    ),
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("result.7", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "result.7",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            9,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("result.7", Int),
+                    rhs: 9,
+                    dst: Var("main.tmp.5", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                     "main.3.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.3.end",
@@ -300,33 +170,16 @@ Program {
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.6", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                     "main.4.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.4.end",
@@ -340,61 +193,27 @@ Program {
                 Call(
                     "update_static_or_global",
                     [
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                11,
-                            ),
-                        ),
+                        1,
+                        11,
                     ],
-                    Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    Var("main.tmp.7", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
-                    dst: Var(
-                        "result.7",
-                        Int,
-                    ),
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("result.7", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "result.7",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            9,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    lhs: Var("result.7", Int),
+                    rhs: 9,
+                    dst: Var("main.tmp.8", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    Var("main.tmp.8", Int),
                     "main.5.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.5.end",
@@ -407,33 +226,16 @@ Program {
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "i",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            11,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
+                    lhs: Var("i", Int),
+                    rhs: 11,
+                    dst: Var("main.tmp.9", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
+                    Var("main.tmp.9", Int),
                     "main.6.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.6.end",
@@ -445,18 +247,10 @@ Program {
                     "main.6.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

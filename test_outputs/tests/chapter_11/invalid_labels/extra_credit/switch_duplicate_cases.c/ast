@@ -1,143 +1,75 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "switch_statement",
-                params: [
-                    (
-                        Int,
+        FunctionDeclaration {
+            identifier: "switch_statement",
+            params: [
+                (
+                    Int,
+                    "i",
+                ),
+            ],
+            ret: Int,
+            body: [
+                Switch(
+                    Var(
                         "i",
                     ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Switch(
-                                    Var(
-                                        "i",
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Long(
-                                                                17179869184,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Default(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    1,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    44,
-                                                ),
-                                                length: 96,
-                                            },
-                                        },
-                                    ),
-                                    None,
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
                                 ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                28,
-                            ),
-                            length: 114,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 142,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
                                 Return(
-                                    FunctionCall(
-                                        Var(
-                                            "switch_statement",
-                                        ),
-                                        [
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ],
+                                    Constant(
+                                        0,
                                     ),
                                 ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    17179869184l,
+                                ),
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Default(
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                158,
-                            ),
-                            length: 35,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        143,
                     ),
-                    length: 50,
-                },
-            },
-        ),
+                    None,
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    FunctionCall(
+                        Var(
+                            "switch_statement",
+                        ),
+                        [
+                            Constant(
+                                0,
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        },
     ],
 }

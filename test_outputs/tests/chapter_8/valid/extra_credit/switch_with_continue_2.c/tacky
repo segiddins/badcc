@@ -7,68 +7,31 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("sum.1", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("i.2", Int),
                 },
                 Label(
                     "loop.0.cond",
                 ),
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "loop.0",
                 ),
                 Binary {
                     op: Remainder,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Jump(
                     "switch.1.cases",
@@ -84,29 +47,13 @@ Program {
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "sum.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("sum.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("sum.1", Int),
                 },
                 Jump(
                     "switch.1",
@@ -116,25 +63,12 @@ Program {
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    rhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: 0,
+                    rhs: Var("main.tmp.1", Int),
+                    dst: Var("main.tmp.2", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                     "switch.1.0",
                 ),
                 Jump(
@@ -148,29 +82,13 @@ Program {
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "i.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    lhs: Var("i.2", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.4", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
-                    dst: Var(
-                        "i.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("i.2", Int),
                 },
                 Jump(
                     "loop.0.cond",
@@ -179,17 +97,10 @@ Program {
                     "loop.0",
                 ),
                 Return(
-                    Var(
-                        "sum.1",
-                        Int,
-                    ),
+                    Var("sum.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

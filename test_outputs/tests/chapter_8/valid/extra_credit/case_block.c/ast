@@ -1,181 +1,85 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    4,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Constant(
-                                        Int(
-                                            2,
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                        Compound(
-                                                            Block {
-                                                                items: [
-                                                                    Declaration(
-                                                                        Variable(
-                                                                            VariableDeclaration {
-                                                                                ty: Int,
-                                                                                name: "a",
-                                                                                init: Some(
-                                                                                    Constant(
-                                                                                        Int(
-                                                                                            8,
-                                                                                        ),
-                                                                                    ),
-                                                                                ),
-                                                                                storage: None,
-                                                                                span: SourceSpan {
-                                                                                    offset: SourceOffset(
-                                                                                        93,
-                                                                                    ),
-                                                                                    length: 10,
-                                                                                },
-                                                                            },
-                                                                        ),
-                                                                    ),
-                                                                    Statement(
-                                                                        Expression(
-                                                                            Assignment(
-                                                                                Var(
-                                                                                    "b",
-                                                                                ),
-                                                                                Var(
-                                                                                    "a",
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                    ),
-                                                                ],
-                                                                span: SourceSpan {
-                                                                    offset: SourceOffset(
-                                                                        79,
-                                                                    ),
-                                                                    length: 53,
-                                                                },
-                                                            },
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    61,
-                                                ),
-                                                length: 77,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    4,
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "b",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    8,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 156,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        4,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 171,
                 },
-            },
-        ),
+                Switch(
+                    Constant(
+                        2,
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    2,
+                                ),
+                                Compound(
+                                    [
+                                        VariableDeclaration {
+                                            name: "a",
+                                            ty: Int,
+                                            init: Constant(
+                                                8,
+                                            ),
+                                        },
+                                        Expression(
+                                            Assignment(
+                                                Var(
+                                                    "b",
+                                                ),
+                                                Var(
+                                                    "a",
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                ),
+                                None,
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                4,
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "b",
+                            ),
+                            Constant(
+                                8,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

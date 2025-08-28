@@ -15,89 +15,41 @@ Program {
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "count.3",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            65,
-                        ),
-                    ),
-                    dst: Var(
-                        "print_alphabet.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("count.3", Int),
+                    rhs: 65,
+                    dst: Var("print_alphabet.tmp.0", Int),
                 },
                 Call(
                     "putchar",
                     [
-                        Var(
-                            "print_alphabet.tmp.0",
-                            Int,
-                        ),
+                        Var("print_alphabet.tmp.0", Int),
                     ],
-                    Var(
-                        "print_alphabet.tmp.1",
-                        Int,
-                    ),
+                    Var("print_alphabet.tmp.1", Int),
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "count.3",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "print_alphabet.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("count.3", Int),
+                    rhs: 1,
+                    dst: Var("print_alphabet.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "print_alphabet.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "count.3",
-                        Int,
-                    ),
+                    src: Var("print_alphabet.tmp.2", Int),
+                    dst: Var("count.3", Int),
                 },
                 Binary {
                     op: LessThan,
-                    lhs: Var(
-                        "count.3",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            26,
-                        ),
-                    ),
-                    dst: Var(
-                        "print_alphabet.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("count.3", Int),
+                    rhs: 26,
+                    dst: Var("print_alphabet.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "print_alphabet.tmp.3",
-                        Int,
-                    ),
+                    Var("print_alphabet.tmp.3", Int),
                     "print_alphabet.0.true",
                 ),
                 Call(
                     "print_alphabet",
                     [],
-                    Var(
-                        "print_alphabet.tmp.4",
-                        Int,
-                    ),
+                    Var("print_alphabet.tmp.4", Int),
                 ),
                 Jump(
                     "print_alphabet.0.end",
@@ -109,17 +61,10 @@ Program {
                     "print_alphabet.0.end",
                 ),
                 Return(
-                    Var(
-                        "count.3",
-                        Int,
-                    ),
+                    Var("count.3", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -131,17 +76,10 @@ Program {
                 Call(
                     "print_alphabet",
                     [],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

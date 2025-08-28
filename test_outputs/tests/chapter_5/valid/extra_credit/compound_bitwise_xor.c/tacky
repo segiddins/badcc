@@ -7,54 +7,24 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            7,
-                        ),
-                    ),
-                    dst: Var(
-                        "to_xor.1",
-                        Int,
-                    ),
+                    src: 7,
+                    dst: Var("to_xor.1", Int),
                 },
                 Binary {
                     op: Xor,
-                    lhs: Var(
-                        "to_xor.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("to_xor.1", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "to_xor.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("to_xor.1", Int),
                 },
                 Return(
-                    Var(
-                        "to_xor.1",
-                        Int,
-                    ),
+                    Var("to_xor.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

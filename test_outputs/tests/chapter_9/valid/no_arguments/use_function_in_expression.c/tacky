@@ -7,18 +7,10 @@ Program {
             params: [],
             instructions: [
                 Return(
-                    Constant(
-                        Int(
-                            9,
-                        ),
-                    ),
+                    9,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -30,39 +22,19 @@ Program {
                 Call(
                     "bar",
                     [],
-                    Var(
-                        "foo.tmp.0",
-                        Int,
-                    ),
+                    Var("foo.tmp.0", Int),
                 ),
                 Binary {
                     op: Multiply,
-                    lhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    rhs: Var(
-                        "foo.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "foo.tmp.1",
-                        Int,
-                    ),
+                    lhs: 2,
+                    rhs: Var("foo.tmp.0", Int),
+                    dst: Var("foo.tmp.1", Int),
                 },
                 Return(
-                    Var(
-                        "foo.tmp.1",
-                        Int,
-                    ),
+                    Var("foo.tmp.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -74,62 +46,30 @@ Program {
                 Call(
                     "foo",
                     [],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Call(
                     "bar",
                     [],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Binary {
                     op: Divide,
-                    lhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.1", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.0", Int),
+                    rhs: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

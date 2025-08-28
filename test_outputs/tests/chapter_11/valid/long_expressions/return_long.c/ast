@@ -1,164 +1,87 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "add",
-                params: [
-                    (
-                        Int,
-                        "a",
+        FunctionDeclaration {
+            identifier: "add",
+            params: [
+                (
+                    Int,
+                    "a",
+                ),
+                (
+                    Int,
+                    "b",
+                ),
+            ],
+            ret: Long,
+            body: [
+                Return(
+                    Binary(
+                        Add,
+                        Cast(
+                            Long,
+                            Var(
+                                "a",
+                            ),
+                        ),
+                        Cast(
+                            Long,
+                            Var(
+                                "b",
+                            ),
+                        ),
                     ),
-                    (
-                        Int,
-                        "b",
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Long,
+                    init: FunctionCall(
+                        Var(
+                            "add",
+                        ),
+                        [
+                            Constant(
+                                2147483645,
+                            ),
+                            Constant(
+                                2147483645,
+                            ),
+                        ],
                     ),
-                ],
-                ret: Long,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Add,
-                                        Cast(
-                                            Long,
-                                            Var(
-                                                "a",
-                                            ),
-                                        ),
-                                        Cast(
-                                            Long,
-                                            Var(
-                                                "b",
-                                            ),
-                                        ),
-                                    ),
+                },
+                If(
+                    Binary(
+                        Equals,
+                        Var(
+                            "a",
+                        ),
+                        Constant(
+                            4294967290l,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                23,
-                            ),
-                            length: 35,
-                        },
-                    },
+                    ),
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 58,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "a",
-                                        init: Some(
-                                            FunctionCall(
-                                                Var(
-                                                    "add",
-                                                ),
-                                                [
-                                                    Constant(
-                                                        Int(
-                                                            2147483645,
-                                                        ),
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            2147483645,
-                                                        ),
-                                                    ),
-                                                ],
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                80,
-                                            ),
-                                            length: 37,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            Long(
-                                                4294967290,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    144,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                74,
-                            ),
-                            length: 111,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        59,
-                    ),
-                    length: 126,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

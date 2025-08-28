@@ -1,186 +1,101 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                22,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a.1",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b.2",
+                    ty: Int,
+                    init: Constant(
+                        2,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "c.3",
+                    ty: Int,
+                    init: Unary(
+                        Minus,
+                        Unary(
+                            PrefixIncrement,
+                            Var(
+                                "a.1",
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b.2",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                37,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
+                        ),
+                    ),
+                },
+                VariableDeclaration {
+                    name: "d.4",
+                    ty: Int,
+                    init: Unary(
+                        Not,
+                        Unary(
+                            PostfixDecrement,
+                            Var(
+                                "b.2",
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "c.3",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Unary(
-                                                    PrefixIncrement,
-                                                    Var(
-                                                        "a.1",
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                52,
-                                            ),
-                                            length: 15,
-                                        },
-                                    },
+                        ),
+                    ),
+                },
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "a.1",
+                                    ),
+                                    Constant(
+                                        2,
+                                    ),
                                 ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "d.4",
-                                        init: Some(
-                                            Unary(
-                                                Not,
-                                                Unary(
-                                                    PostfixDecrement,
-                                                    Var(
-                                                        "b.2",
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                72,
-                                            ),
-                                            length: 15,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            And,
-                                            Binary(
-                                                And,
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "a.1",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            2,
-                                                        ),
-                                                    ),
-                                                ),
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "b.2",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "c.3",
-                                                ),
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Int(
-                                                            2,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "d.4",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "b.2",
+                                    ),
+                                    Constant(
+                                        1,
                                     ),
                                 ),
                             ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                16,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "c.3",
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        2,
+                                    ),
+                                ),
                             ),
-                            length: 125,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        1,
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "d.4",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
                     ),
-                    length: 140,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

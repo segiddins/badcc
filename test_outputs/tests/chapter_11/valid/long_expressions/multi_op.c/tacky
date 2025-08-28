@@ -5,83 +5,37 @@ Program {
             identifier: "target",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Long,
-                ),
+                Var("a.1", Long),
             ],
             instructions: [
                 Binary {
                     op: Multiply,
-                    lhs: Var(
-                        "a.1",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "target.tmp.0",
-                        Long,
-                    ),
+                    lhs: Var("a.1", Long),
+                    rhs: 5l,
+                    dst: Var("target.tmp.0", Long),
                 },
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "target.tmp.0",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "target.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("target.tmp.0", Long),
+                    rhs: 10l,
+                    dst: Var("target.tmp.1", Long),
                 },
                 Copy {
-                    src: Var(
-                        "target.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "b.2",
-                        Long,
-                    ),
+                    src: Var("target.tmp.1", Long),
+                    dst: Var("b.2", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b.2",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            21474836440,
-                        ),
-                    ),
-                    dst: Var(
-                        "target.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("b.2", Long),
+                    rhs: 21474836440l,
+                    dst: Var("target.tmp.2", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "target.tmp.2",
-                        Long,
-                    ),
+                    Var("target.tmp.2", Long),
                     "target.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "target.0.end",
@@ -93,18 +47,10 @@ Program {
                     "target.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -116,29 +62,15 @@ Program {
                 Call(
                     "target",
                     [
-                        Constant(
-                            Long(
-                                4294967290,
-                            ),
-                        ),
+                        4294967290l,
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

@@ -1,4 +1,7 @@
-use std::collections::{BTreeMap, HashMap};
+use std::{
+    collections::{BTreeMap, HashMap},
+    fmt::Debug,
+};
 
 pub use crate::ast::BinaryOperator;
 use crate::{
@@ -63,10 +66,19 @@ pub enum Instruction {
     },
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Clone, PartialEq, Eq, Hash)]
 pub enum Val {
     Constant(Constant),
     Var(String, Type),
+}
+
+impl Debug for Val {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Constant(arg0) => arg0.fmt(f),
+            Self::Var(arg0, arg1) => write!(f, "Var({arg0:?}, {arg1:?})"),
+        }
+    }
 }
 
 impl Val {

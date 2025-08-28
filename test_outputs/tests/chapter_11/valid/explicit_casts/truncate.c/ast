@@ -1,351 +1,201 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "truncate",
-                params: [
-                    (
-                        Long,
-                        "l",
-                    ),
-                    (
+        FunctionDeclaration {
+            identifier: "truncate",
+            params: [
+                (
+                    Long,
+                    "l",
+                ),
+                (
+                    Int,
+                    "expected",
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "result",
+                    ty: Int,
+                    init: Cast(
                         Int,
-                        "expected",
+                        Var(
+                            "l",
+                        ),
                     ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "result",
-                                        init: Some(
-                                            Cast(
-                                                Int,
-                                                Var(
-                                                    "l",
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                41,
-                                            ),
-                                            length: 21,
-                                        },
-                                    },
-                                ),
+                },
+                Return(
+                    Binary(
+                        Equals,
+                        Var(
+                            "result",
+                        ),
+                        Var(
+                            "expected",
+                        ),
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "truncate",
                             ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "result",
-                                        ),
-                                        Var(
-                                            "expected",
-                                        ),
-                                    ),
+                            [
+                                Constant(
+                                    10l,
+                                ),
+                                Constant(
+                                    10,
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    1,
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                35,
-                            ),
-                            length: 62,
-                        },
-                    },
+                    ),
+                    None,
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "truncate",
+                            ),
+                            [
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        10l,
+                                    ),
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        10,
+                                    ),
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    2,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "truncate",
+                            ),
+                            [
+                                Constant(
+                                    17179869189l,
+                                ),
+                                Constant(
+                                    5,
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary(
+                        Not,
+                        FunctionCall(
+                            Var(
+                                "truncate",
+                            ),
+                            [
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        17179869179l,
+                                    ),
+                                ),
+                                Constant(
+                                    5l,
+                                ),
+                            ],
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Return(
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Cast(
+                        Int,
+                        Constant(
+                            17179869189l,
+                        ),
+                    ),
+                },
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "i",
+                        ),
+                        Constant(
+                            5,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            5,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 97,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "truncate",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Long(
-                                                        10,
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        10,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    143,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "truncate",
-                                            ),
-                                            [
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Long(
-                                                            10,
-                                                        ),
-                                                    ),
-                                                ),
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Int(
-                                                            10,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    199,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "truncate",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Long(
-                                                        17179869189,
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                3,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    279,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Unary(
-                                        Not,
-                                        FunctionCall(
-                                            Var(
-                                                "truncate",
-                                            ),
-                                            [
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Long(
-                                                            17179869179,
-                                                        ),
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Long(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                4,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    361,
-                                                ),
-                                                length: 25,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i",
-                                        init: Some(
-                                            Cast(
-                                                Int,
-                                                Constant(
-                                                    Long(
-                                                        17179869189,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                391,
-                                            ),
-                                            length: 26,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                5,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                5,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                113,
-                            ),
-                            length: 354,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        98,
-                    ),
-                    length: 369,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

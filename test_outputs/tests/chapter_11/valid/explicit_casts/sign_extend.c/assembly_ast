@@ -8,132 +8,57 @@ Program {
                     48,
                 ),
                 Move {
-                    source: Register(
-                        DI,
-                        Four,
-                    ),
-                    destination: Stack(
-                        12,
-                        Four,
-                    ),
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
                 },
                 Move {
-                    source: Register(
-                        SI,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        20,
-                        Eight,
-                    ),
+                    source: Register(SI, Eight),
+                    destination: Stack(20, Eight),
                 },
                 Move {
-                    source: Stack(
-                        12,
-                        Four,
-                    ),
-                    destination: Register(
-                        R11,
-                        Four,
-                    ),
+                    source: Stack(12, Four),
+                    destination: Register(R11, Four),
                 },
                 Movesx {
-                    source: Register(
-                        R11,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Eight,
-                    ),
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        28,
-                        Eight,
-                    ),
+                    source: Register(R10, Eight),
+                    destination: Stack(28, Eight),
                 },
                 Move {
-                    source: Stack(
-                        28,
-                        Eight,
-                    ),
-                    destination: Register(
-                        R10,
-                        Eight,
-                    ),
+                    source: Stack(28, Eight),
+                    destination: Register(R10, Eight),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        36,
-                        Eight,
-                    ),
+                    source: Register(R10, Eight),
+                    destination: Stack(36, Eight),
                 },
                 Move {
-                    source: Stack(
-                        20,
-                        Eight,
-                    ),
-                    destination: Register(
-                        R10,
-                        Eight,
-                    ),
+                    source: Stack(20, Eight),
+                    destination: Register(R10, Eight),
                 },
                 Cmp(
-                    Register(
-                        R10,
-                        Eight,
-                    ),
-                    Stack(
-                        36,
-                        Eight,
-                    ),
+                    Register(R10, Eight),
+                    Stack(36, Eight),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        44,
-                        Eight,
-                    ),
+                    source: Immediate(0, Eight),
+                    destination: Stack(44, Eight),
                 },
                 SetCC(
                     E,
-                    Stack(
-                        44,
-                        Eight,
-                    ),
+                    Stack(44, Eight),
                 ),
                 Move {
-                    source: Stack(
-                        44,
-                        Eight,
-                    ),
-                    destination: Register(
-                        AX,
-                        Eight,
-                    ),
+                    source: Stack(44, Eight),
+                    destination: Register(AX, Eight),
                 },
                 Ret,
                 Move {
-                    source: Immediate(
-                        0,
-                        Eight,
-                    ),
-                    destination: Register(
-                        AX,
-                        Eight,
-                    ),
+                    source: Immediate(0, Eight),
+                    destination: Register(AX, Eight),
                 },
                 Ret,
             ],
@@ -146,88 +71,43 @@ Program {
                     80,
                 ),
                 Move {
-                    source: Immediate(
-                        10,
-                        Four,
-                    ),
-                    destination: Register(
-                        DI,
-                        Four,
-                    ),
+                    source: Immediate(10, Four),
+                    destination: Register(DI, Four),
                 },
                 Move {
-                    source: Immediate(
-                        10,
-                        Eight,
-                    ),
-                    destination: Register(
-                        SI,
-                        Eight,
-                    ),
+                    source: Immediate(10, Eight),
+                    destination: Register(SI, Eight),
                 },
                 Call(
                     "sign_extend",
                 ),
                 Move {
-                    source: Register(
-                        AX,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        16,
-                        Eight,
-                    ),
+                    source: Register(AX, Eight),
+                    destination: Stack(16, Eight),
                 },
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        16,
-                        Eight,
-                    ),
+                    Immediate(0, Four),
+                    Stack(16, Eight),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        24,
-                        Eight,
-                    ),
+                    source: Immediate(0, Eight),
+                    destination: Stack(24, Eight),
                 },
                 SetCC(
                     E,
-                    Stack(
-                        24,
-                        Eight,
-                    ),
+                    Stack(24, Eight),
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        24,
-                        Eight,
-                    ),
+                    Immediate(0, Four),
+                    Stack(24, Eight),
                 ),
                 JmpCC(
                     E,
                     "main.0.true",
                 ),
                 Move {
-                    source: Immediate(
-                        1,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Jmp(
@@ -240,122 +120,59 @@ Program {
                     "main.0.end",
                 ),
                 Move {
-                    source: Immediate(
-                        10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        28,
-                        Four,
-                    ),
+                    source: Immediate(10, Four),
+                    destination: Stack(28, Four),
                 },
                 Unary(
                     Neg,
-                    Stack(
-                        28,
-                        Four,
-                    ),
+                    Stack(28, Four),
                 ),
                 Move {
-                    source: Immediate(
-                        10,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        36,
-                        Eight,
-                    ),
+                    source: Immediate(10, Eight),
+                    destination: Stack(36, Eight),
                 },
                 Unary(
                     Neg,
-                    Stack(
-                        36,
-                        Eight,
-                    ),
+                    Stack(36, Eight),
                 ),
                 Move {
-                    source: Stack(
-                        28,
-                        Four,
-                    ),
-                    destination: Register(
-                        DI,
-                        Four,
-                    ),
+                    source: Stack(28, Four),
+                    destination: Register(DI, Four),
                 },
                 Move {
-                    source: Stack(
-                        36,
-                        Eight,
-                    ),
-                    destination: Register(
-                        SI,
-                        Eight,
-                    ),
+                    source: Stack(36, Eight),
+                    destination: Register(SI, Eight),
                 },
                 Call(
                     "sign_extend",
                 ),
                 Move {
-                    source: Register(
-                        AX,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        44,
-                        Eight,
-                    ),
+                    source: Register(AX, Eight),
+                    destination: Stack(44, Eight),
                 },
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        44,
-                        Eight,
-                    ),
+                    Immediate(0, Four),
+                    Stack(44, Eight),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        52,
-                        Eight,
-                    ),
+                    source: Immediate(0, Eight),
+                    destination: Stack(52, Eight),
                 },
                 SetCC(
                     E,
-                    Stack(
-                        52,
-                        Eight,
-                    ),
+                    Stack(52, Eight),
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        52,
-                        Eight,
-                    ),
+                    Immediate(0, Four),
+                    Stack(52, Eight),
                 ),
                 JmpCC(
                     E,
                     "main.1.true",
                 ),
                 Move {
-                    source: Immediate(
-                        2,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Jmp(
@@ -368,105 +185,48 @@ Program {
                     "main.1.end",
                 ),
                 Move {
-                    source: Immediate(
-                        100,
-                        Four,
-                    ),
-                    destination: Register(
-                        R11,
-                        Four,
-                    ),
+                    source: Immediate(100, Four),
+                    destination: Register(R11, Four),
                 },
                 Movesx {
-                    source: Register(
-                        R11,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Eight,
-                    ),
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        60,
-                        Eight,
-                    ),
+                    source: Register(R10, Eight),
+                    destination: Stack(60, Eight),
                 },
                 Move {
-                    source: Stack(
-                        60,
-                        Eight,
-                    ),
-                    destination: Register(
-                        R10,
-                        Eight,
-                    ),
+                    source: Stack(60, Eight),
+                    destination: Register(R10, Eight),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        68,
-                        Eight,
-                    ),
+                    source: Register(R10, Eight),
+                    destination: Stack(68, Eight),
                 },
                 Cmp(
-                    Immediate(
-                        100,
-                        Eight,
-                    ),
-                    Stack(
-                        68,
-                        Eight,
-                    ),
+                    Immediate(100, Eight),
+                    Stack(68, Eight),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Eight,
-                    ),
-                    destination: Stack(
-                        76,
-                        Eight,
-                    ),
+                    source: Immediate(0, Eight),
+                    destination: Stack(76, Eight),
                 },
                 SetCC(
                     NE,
-                    Stack(
-                        76,
-                        Eight,
-                    ),
+                    Stack(76, Eight),
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        76,
-                        Eight,
-                    ),
+                    Immediate(0, Four),
+                    Stack(76, Eight),
                 ),
                 JmpCC(
                     E,
                     "main.2.true",
                 ),
                 Move {
-                    source: Immediate(
-                        3,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Jmp(
@@ -479,25 +239,13 @@ Program {
                     "main.2.end",
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
             ],

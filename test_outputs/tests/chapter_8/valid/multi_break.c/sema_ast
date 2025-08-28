@@ -1,256 +1,148 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i.1",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                While(
+                    Constant(
+                        1,
+                    ),
+                    Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "i.1",
+                                    ),
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "i.1",
                                         ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                While(
-                                    Constant(
-                                        Int(
+                                        Constant(
                                             1,
                                         ),
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "i.1",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "i.1",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    If(
-                                                        Binary(
-                                                            GreaterThan,
-                                                            Var(
-                                                                "i.1",
-                                                            ),
-                                                            Constant(
-                                                                Int(
-                                                                    10,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Break(
-                                                            Some(
-                                                                "loop.0",
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    46,
-                                                ),
-                                                length: 65,
-                                            },
-                                        },
+                                ),
+                            ),
+                            If(
+                                Binary(
+                                    GreaterThan,
+                                    Var(
+                                        "i.1",
                                     ),
+                                    Constant(
+                                        10,
+                                    ),
+                                ),
+                                Break(
                                     Some(
                                         "loop.0",
                                     ),
                                 ),
+                                None,
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "j.2",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    10,
-                                                ),
-                                            ),
+                        ],
+                    ),
+                    Some(
+                        "loop.0",
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "j.2",
+                    ty: Int,
+                    init: Constant(
+                        10,
+                    ),
+                },
+                While(
+                    Constant(
+                        1,
+                    ),
+                    Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "j.2",
+                                    ),
+                                    Binary(
+                                        Subtract,
+                                        Var(
+                                            "j.2",
                                         ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                116,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                While(
-                                    Constant(
-                                        Int(
+                                        Constant(
                                             1,
                                         ),
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "j.2",
-                                                            ),
-                                                            Binary(
-                                                                Subtract,
-                                                                Var(
-                                                                    "j.2",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    If(
-                                                        Binary(
-                                                            LessThan,
-                                                            Var(
-                                                                "j.2",
-                                                            ),
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Break(
-                                                            Some(
-                                                                "loop.1",
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    142,
-                                                ),
-                                                length: 64,
-                                            },
-                                        },
+                                ),
+                            ),
+                            If(
+                                Binary(
+                                    LessThan,
+                                    Var(
+                                        "j.2",
                                     ),
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Break(
                                     Some(
                                         "loop.1",
                                     ),
                                 ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "result.3",
-                                        init: Some(
-                                            Binary(
-                                                And,
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "j.2",
-                                                    ),
-                                                    Unary(
-                                                        Minus,
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "i.1",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            11,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                211,
-                                            ),
-                                            length: 32,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "result.3",
-                                    ),
-                                ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 249,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 264,
+                    Some(
+                        "loop.1",
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "result.3",
+                    ty: Int,
+                    init: Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "j.2",
+                            ),
+                            Unary(
+                                Minus,
+                                Constant(
+                                    1,
+                                ),
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "i.1",
+                            ),
+                            Constant(
+                                11,
+                            ),
+                        ),
+                    ),
                 },
-            },
-        ),
+                Return(
+                    Var(
+                        "result.3",
+                    ),
+                ),
+            ],
+        },
     ],
 }

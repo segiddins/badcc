@@ -7,54 +7,24 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "to_or.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("to_or.1", Int),
                 },
                 Binary {
                     op: BitwiseOr,
-                    lhs: Var(
-                        "to_or.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            30,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("to_or.1", Int),
+                    rhs: 30,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "to_or.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("to_or.1", Int),
                 },
                 Return(
-                    Var(
-                        "to_or.1",
-                        Int,
-                    ),
+                    Var("to_or.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

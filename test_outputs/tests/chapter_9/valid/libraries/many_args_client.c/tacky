@@ -9,147 +9,59 @@ Program {
                 Call(
                     "fib",
                     [
-                        Constant(
-                            Int(
-                                4,
-                            ),
-                        ),
+                        4,
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "x.12",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("x.12", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            7,
-                        ),
-                    ),
-                    dst: Var(
-                        "seven.13",
-                        Int,
-                    ),
+                    src: 7,
+                    dst: Var("seven.13", Int),
                 },
                 Call(
                     "fib",
                     [
-                        Constant(
-                            Int(
-                                6,
-                            ),
-                        ),
+                        6,
                     ],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "eight.14",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("eight.14", Int),
                 },
                 Call(
                     "multiply_many_args",
                     [
-                        Var(
-                            "x.12",
-                            Int,
-                        ),
-                        Constant(
-                            Int(
-                                2,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                3,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                4,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                5,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                6,
-                            ),
-                        ),
-                        Var(
-                            "seven.13",
-                            Int,
-                        ),
-                        Var(
-                            "eight.14",
-                            Int,
-                        ),
+                        Var("x.12", Int),
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        Var("seven.13", Int),
+                        Var("eight.14", Int),
                     ],
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "y.15",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("y.15", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "x.12",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("x.12", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -162,33 +74,16 @@ Program {
                 ),
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "y.15",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            589680,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    lhs: Var("y.15", Int),
+                    rhs: 589680,
+                    dst: Var("main.tmp.4", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.1.end",
@@ -201,47 +96,21 @@ Program {
                 ),
                 Binary {
                     op: Remainder,
-                    lhs: Var(
-                        "y.15",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            256,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("y.15", Int),
+                    rhs: 256,
+                    dst: Var("main.tmp.5", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "x.12",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("x.12", Int),
+                    rhs: Var("main.tmp.5", Int),
+                    dst: Var("main.tmp.6", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

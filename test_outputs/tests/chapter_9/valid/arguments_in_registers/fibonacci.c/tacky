@@ -5,68 +5,32 @@ Program {
             identifier: "fib",
             global: true,
             params: [
-                Var(
-                    "n.1",
-                    Int,
-                ),
+                Var("n.1", Int),
             ],
             instructions: [
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "n.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("n.1", Int),
+                    rhs: 0,
+                    dst: Var("fib.tmp.1", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "fib.tmp.1",
-                        Int,
-                    ),
+                    Var("fib.tmp.1", Int),
                     "fib.1.true",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "n.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("n.1", Int),
+                    rhs: 1,
+                    dst: Var("fib.tmp.2", Int),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "fib.tmp.2",
-                        Int,
-                    ),
+                    Var("fib.tmp.2", Int),
                     "fib.1.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.0",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("fib.tmp.0", Int),
                 },
                 Jump(
                     "fib.1.end",
@@ -75,31 +39,18 @@ Program {
                     "fib.1.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("fib.tmp.0", Int),
                 },
                 Label(
                     "fib.1.end",
                 ),
                 JumpIfZero(
-                    Var(
-                        "fib.tmp.0",
-                        Int,
-                    ),
+                    Var("fib.tmp.0", Int),
                     "fib.0.true",
                 ),
                 Return(
-                    Var(
-                        "n.1",
-                        Int,
-                    ),
+                    Var("n.1", Int),
                 ),
                 Jump(
                     "fib.0.end",
@@ -109,92 +60,44 @@ Program {
                 ),
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "n.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("n.1", Int),
+                    rhs: 1,
+                    dst: Var("fib.tmp.3", Int),
                 },
                 Call(
                     "fib",
                     [
-                        Var(
-                            "fib.tmp.3",
-                            Int,
-                        ),
+                        Var("fib.tmp.3", Int),
                     ],
-                    Var(
-                        "fib.tmp.4",
-                        Int,
-                    ),
+                    Var("fib.tmp.4", Int),
                 ),
                 Binary {
                     op: Subtract,
-                    lhs: Var(
-                        "n.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "fib.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("n.1", Int),
+                    rhs: 2,
+                    dst: Var("fib.tmp.5", Int),
                 },
                 Call(
                     "fib",
                     [
-                        Var(
-                            "fib.tmp.5",
-                            Int,
-                        ),
+                        Var("fib.tmp.5", Int),
                     ],
-                    Var(
-                        "fib.tmp.6",
-                        Int,
-                    ),
+                    Var("fib.tmp.6", Int),
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "fib.tmp.4",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "fib.tmp.6",
-                        Int,
-                    ),
-                    dst: Var(
-                        "fib.tmp.7",
-                        Int,
-                    ),
+                    lhs: Var("fib.tmp.4", Int),
+                    rhs: Var("fib.tmp.6", Int),
+                    dst: Var("fib.tmp.7", Int),
                 },
                 Return(
-                    Var(
-                        "fib.tmp.7",
-                        Int,
-                    ),
+                    Var("fib.tmp.7", Int),
                 ),
                 Label(
                     "fib.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -204,41 +107,21 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            6,
-                        ),
-                    ),
-                    dst: Var(
-                        "n.3",
-                        Int,
-                    ),
+                    src: 6,
+                    dst: Var("n.3", Int),
                 },
                 Call(
                     "fib",
                     [
-                        Var(
-                            "n.3",
-                            Int,
-                        ),
+                        Var("n.3", Int),
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

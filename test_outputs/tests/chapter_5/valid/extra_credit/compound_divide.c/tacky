@@ -7,54 +7,24 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            8,
-                        ),
-                    ),
-                    dst: Var(
-                        "to_divide.1",
-                        Int,
-                    ),
+                    src: 8,
+                    dst: Var("to_divide.1", Int),
                 },
                 Binary {
                     op: Divide,
-                    lhs: Var(
-                        "to_divide.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("to_divide.1", Int),
+                    rhs: 4,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "to_divide.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("to_divide.1", Int),
                 },
                 Return(
-                    Var(
-                        "to_divide.1",
-                        Int,
-                    ),
+                    Var("to_divide.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

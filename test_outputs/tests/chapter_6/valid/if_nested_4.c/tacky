@@ -7,68 +7,31 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("a.1", Int),
                 },
                 Unary {
                     op: Not,
-                    src: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: Var("a.1", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Binary {
                     op: Divide,
-                    lhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: 3,
+                    rhs: 4,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.1.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("a.1", Int),
                 },
                 Jump(
                     "main.1.end",
@@ -78,30 +41,13 @@ Program {
                 ),
                 Binary {
                     op: Divide,
-                    lhs: Constant(
-                        Int(
-                            8,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: 8,
+                    rhs: 2,
+                    dst: Var("main.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "a.1",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("a.1", Int),
                 },
                 Label(
                     "main.1.end",
@@ -116,17 +62,10 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Var(
-                        "a.1",
-                        Int,
-                    ),
+                    Var("a.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

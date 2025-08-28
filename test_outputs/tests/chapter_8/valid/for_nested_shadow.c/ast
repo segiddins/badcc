@@ -1,267 +1,138 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "j",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "k",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                For {
+                    init: VariableDeclaration {
+                        name: "i",
+                        ty: Int,
+                        init: Constant(
+                            100,
+                        ),
+                    },
+                    condition: Some(
+                        Binary(
+                            GreaterThan,
+                            Var(
+                                "i",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "i",
+                            ),
+                            Binary(
+                                Subtract,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    1,
                                 ),
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "j",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+                        ),
+                    ),
+                    body: Compound(
+                        [
+                            VariableDeclaration {
+                                name: "i",
+                                ty: Int,
+                                init: Constant(
+                                    1,
                                 ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "k",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                51,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+                            },
+                            VariableDeclaration {
+                                name: "j",
+                                ty: Int,
+                                init: Binary(
+                                    Add,
+                                    Var(
+                                        "i",
+                                    ),
+                                    Var(
+                                        "k",
+                                    ),
                                 ),
-                            ),
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "i",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        100,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    71,
-                                                ),
-                                                length: 12,
-                                            },
-                                        },
+                            },
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "k",
                                     ),
-                                    condition: Some(
-                                        Binary(
-                                            GreaterThan,
-                                            Var(
-                                                "i",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Assignment(
-                                            Var(
-                                                "i",
-                                            ),
-                                            Binary(
-                                                Subtract,
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    body: Compound(
-                                        Block {
-                                            items: [
-                                                Declaration(
-                                                    Variable(
-                                                        VariableDeclaration {
-                                                            ty: Int,
-                                                            name: "i",
-                                                            init: Some(
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            storage: None,
-                                                            span: SourceSpan {
-                                                                offset: SourceOffset(
-                                                                    112,
-                                                                ),
-                                                                length: 10,
-                                                            },
-                                                        },
-                                                    ),
-                                                ),
-                                                Declaration(
-                                                    Variable(
-                                                        VariableDeclaration {
-                                                            ty: Int,
-                                                            name: "j",
-                                                            init: Some(
-                                                                Binary(
-                                                                    Add,
-                                                                    Var(
-                                                                        "i",
-                                                                    ),
-                                                                    Var(
-                                                                        "k",
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            storage: None,
-                                                            span: SourceSpan {
-                                                                offset: SourceOffset(
-                                                                    131,
-                                                                ),
-                                                                length: 14,
-                                                            },
-                                                        },
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "k",
-                                                            ),
-                                                            Var(
-                                                                "j",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    102,
-                                                ),
-                                                length: 64,
-                                            },
-                                        },
-                                    ),
-                                    label: None,
-                                },
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            And,
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "k",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        101,
-                                                    ),
-                                                ),
-                                            ),
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "j",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
+                                    Var(
+                                        "j",
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 194,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 209,
+                    label: None,
                 },
-            },
-        ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "k",
+                                ),
+                                Constant(
+                                    101,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "i",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "j",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

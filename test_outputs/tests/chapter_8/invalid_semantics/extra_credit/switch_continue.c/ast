@@ -1,131 +1,71 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    3,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        3,
+                    ),
+                },
+                Switch(
+                    Binary(
+                        Add,
+                        Var(
+                            "a",
+                        ),
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
                                 ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Binary(
-                                        Add,
+                                Expression(
+                                    Assignment(
                                         Var(
                                             "a",
                                         ),
                                         Constant(
-                                            Int(
-                                                1,
-                                            ),
+                                            4,
                                         ),
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
-                                                        ),
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "a",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        4,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Continue(
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Default(
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "a",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    50,
-                                                ),
-                                                length: 88,
-                                            },
-                                        },
-                                    ),
-                                    None,
                                 ),
+                                None,
                             ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "a",
+                            Continue(
+                                None,
+                            ),
+                            Default(
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
                                     ),
                                 ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 139,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 154,
-                },
-            },
-        ),
+                    None,
+                ),
+                Return(
+                    Var(
+                        "a",
+                    ),
+                ),
+            ],
+        },
     ],
 }

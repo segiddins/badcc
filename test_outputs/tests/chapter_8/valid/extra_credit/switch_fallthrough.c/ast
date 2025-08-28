@@ -1,222 +1,120 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    4,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    9,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                36,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "c",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                51,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Switch(
-                                    Ternary(
-                                        Var(
-                                            "a",
-                                        ),
-                                        Var(
-                                            "b",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                7,
-                                            ),
-                                        ),
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    5,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                7,
-                                                            ),
-                                                        ),
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "c",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                9,
-                                                            ),
-                                                        ),
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "c",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        2,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                        Expression(
-                                                            Assignment(
-                                                                Var(
-                                                                    "c",
-                                                                ),
-                                                                Binary(
-                                                                    Add,
-                                                                    Var(
-                                                                        "c",
-                                                                    ),
-                                                                    Constant(
-                                                                        Int(
-                                                                            4,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    85,
-                                                ),
-                                                length: 154,
-                                            },
-                                        },
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "c",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 240,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        4,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
+                        9,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "c",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 255,
                 },
-            },
-        ),
+                Switch(
+                    Ternary(
+                        Var(
+                            "a",
+                        ),
+                        Var(
+                            "b",
+                        ),
+                        Constant(
+                            7,
+                        ),
+                    ),
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    0,
+                                ),
+                                Return(
+                                    Constant(
+                                        5,
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    7,
+                                ),
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "c",
+                                        ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    9,
+                                ),
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "c",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    1,
+                                ),
+                                Expression(
+                                    Assignment(
+                                        Var(
+                                            "c",
+                                        ),
+                                        Binary(
+                                            Add,
+                                            Var(
+                                                "c",
+                                            ),
+                                            Constant(
+                                                4,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                                None,
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Var(
+                        "c",
+                    ),
+                ),
+            ],
+        },
     ],
 }

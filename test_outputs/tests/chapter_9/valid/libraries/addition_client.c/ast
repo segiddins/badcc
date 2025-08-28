@@ -1,75 +1,40 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "add",
-                params: [
-                    (
-                        Int,
-                        "x",
-                    ),
-                    (
-                        Int,
-                        "y",
-                    ),
-                ],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 22,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    FunctionCall(
-                                        Var(
-                                            "add",
-                                        ),
-                                        [
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ],
-                                    ),
-                                ),
+        FunctionDeclaration {
+            identifier: "add",
+            params: [
+                (
+                    Int,
+                    "x",
+                ),
+                (
+                    Int,
+                    "y",
+                ),
+            ],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    FunctionCall(
+                        Var(
+                            "add",
+                        ),
+                        [
+                            Constant(
+                                1,
+                            ),
+                            Constant(
+                                2,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                38,
-                            ),
-                            length: 25,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        23,
                     ),
-                    length: 40,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

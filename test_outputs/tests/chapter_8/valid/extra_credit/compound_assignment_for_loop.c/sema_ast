@@ -1,135 +1,87 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                For {
-                                    init: Expr(
-                                        Some(
-                                            Assignment(
-                                                Var(
-                                                    "i.1",
-                                                ),
-                                                Binary(
-                                                    Multiply,
-                                                    Var(
-                                                        "i.1",
-                                                    ),
-                                                    Unary(
-                                                        Minus,
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    condition: Some(
-                                        Binary(
-                                            GreaterThanOrEqual,
-                                            Var(
-                                                "i.1",
-                                            ),
-                                            Unary(
-                                                Minus,
-                                                Constant(
-                                                    Int(
-                                                        100,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Assignment(
-                                            Var(
-                                                "i.1",
-                                            ),
-                                            Binary(
-                                                Subtract,
-                                                Var(
-                                                    "i.1",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        3,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    body: Null,
-                                    label: Some(
-                                        "loop.0",
-                                    ),
-                                },
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "i.1",
-                                        ),
-                                        Unary(
-                                            Minus,
-                                            Constant(
-                                                Int(
-                                                    103,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 88,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i.1",
+                    ty: Int,
+                    init: Constant(
+                        1,
                     ),
-                    length: 103,
                 },
-            },
-        ),
+                For {
+                    init: Some(
+                        Assignment(
+                            Var(
+                                "i.1",
+                            ),
+                            Binary(
+                                Multiply,
+                                Var(
+                                    "i.1",
+                                ),
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    condition: Some(
+                        Binary(
+                            GreaterThanOrEqual,
+                            Var(
+                                "i.1",
+                            ),
+                            Unary(
+                                Minus,
+                                Constant(
+                                    100,
+                                ),
+                            ),
+                        ),
+                    ),
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "i.1",
+                            ),
+                            Binary(
+                                Subtract,
+                                Var(
+                                    "i.1",
+                                ),
+                                Constant(
+                                    3,
+                                ),
+                            ),
+                        ),
+                    ),
+                    body: Null,
+                    label: Some(
+                        "loop.0",
+                    ),
+                },
+                Return(
+                    Binary(
+                        Equals,
+                        Var(
+                            "i.1",
+                        ),
+                        Unary(
+                            Minus,
+                            Constant(
+                                103,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

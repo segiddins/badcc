@@ -1,105 +1,52 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Constant(
-                                                    Int(
-                                                        2593,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 14,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "a",
-                                        ),
-                                        Binary(
-                                            Remainder,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    3,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Var(
-                                                    "a",
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                55,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Var(
-                                        "b",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 67,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Unary(
+                        Minus,
+                        Constant(
+                            2593,
+                        ),
                     ),
-                    length: 82,
                 },
-            },
-        ),
+                Expression(
+                    Assignment(
+                        Var(
+                            "a",
+                        ),
+                        Binary(
+                            Remainder,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                3,
+                            ),
+                        ),
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Unary(
+                        Minus,
+                        Var(
+                            "a",
+                        ),
+                    ),
+                },
+                Return(
+                    Var(
+                        "b",
+                    ),
+                ),
+            ],
+        },
     ],
 }

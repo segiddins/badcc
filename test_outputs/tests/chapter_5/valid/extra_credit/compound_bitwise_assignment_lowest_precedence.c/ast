@@ -1,310 +1,190 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    11,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        11,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "b",
+                    ty: Int,
+                    init: Constant(
+                        12,
+                    ),
+                },
+                Expression(
+                    CompoundAssignment(
+                        Var(
+                            "a",
+                        ),
+                        BitwiseAnd,
+                        Binary(
+                            Or,
+                            Constant(
+                                0,
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "b",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    12,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                37,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
+                            Var(
+                                "b",
                             ),
-                            Statement(
-                                Expression(
-                                    CompoundAssignment(
+                        ),
+                    ),
+                ),
+                Expression(
+                    CompoundAssignment(
+                        Var(
+                            "b",
+                        ),
+                        Xor,
+                        Binary(
+                            Or,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "c",
+                    ty: Int,
+                    init: Constant(
+                        14,
+                    ),
+                },
+                Expression(
+                    CompoundAssignment(
+                        Var(
+                            "c",
+                        ),
+                        BitwiseOr,
+                        Binary(
+                            Or,
+                            Var(
+                                "a",
+                            ),
+                            Var(
+                                "b",
+                            ),
+                        ),
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "d",
+                    ty: Int,
+                    init: Constant(
+                        16,
+                    ),
+                },
+                Expression(
+                    CompoundAssignment(
+                        Var(
+                            "d",
+                        ),
+                        RightShift,
+                        Binary(
+                            Or,
+                            Var(
+                                "c",
+                            ),
+                            Var(
+                                "d",
+                            ),
+                        ),
+                    ),
+                ),
+                VariableDeclaration {
+                    name: "e",
+                    ty: Int,
+                    init: Constant(
+                        18,
+                    ),
+                },
+                Expression(
+                    CompoundAssignment(
+                        Var(
+                            "e",
+                        ),
+                        LeftShift,
+                        Binary(
+                            Or,
+                            Var(
+                                "c",
+                            ),
+                            Var(
+                                "d",
+                            ),
+                        ),
+                    ),
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    And,
+                                    Binary(
+                                        Equals,
                                         Var(
                                             "a",
                                         ),
-                                        BitwiseAnd,
-                                        Binary(
-                                            Or,
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                            Var(
-                                                "b",
-                                            ),
+                                        Constant(
+                                            1,
                                         ),
                                     ),
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    CompoundAssignment(
+                                    Binary(
+                                        Equals,
                                         Var(
                                             "b",
                                         ),
-                                        Xor,
-                                        Binary(
-                                            Or,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
+                                        Constant(
+                                            13,
                                         ),
                                     ),
                                 ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "c",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    14,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                87,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    CompoundAssignment(
-                                        Var(
-                                            "c",
-                                        ),
-                                        BitwiseOr,
-                                        Binary(
-                                            Or,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Var(
-                                                "b",
-                                            ),
-                                        ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "c",
+                                    ),
+                                    Constant(
+                                        15,
                                     ),
                                 ),
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "d",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    16,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                120,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
+                            Binary(
+                                Equals,
+                                Var(
+                                    "d",
+                                ),
+                                Constant(
+                                    8,
                                 ),
                             ),
-                            Statement(
-                                Expression(
-                                    CompoundAssignment(
-                                        Var(
-                                            "d",
-                                        ),
-                                        RightShift,
-                                        Binary(
-                                            Or,
-                                            Var(
-                                                "c",
-                                            ),
-                                            Var(
-                                                "d",
-                                            ),
-                                        ),
-                                    ),
-                                ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "e",
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "e",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    18,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                154,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
+                            Constant(
+                                36,
                             ),
-                            Statement(
-                                Expression(
-                                    CompoundAssignment(
-                                        Var(
-                                            "e",
-                                        ),
-                                        LeftShift,
-                                        Binary(
-                                            Or,
-                                            Var(
-                                                "c",
-                                            ),
-                                            Var(
-                                                "d",
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            And,
-                                            Binary(
-                                                And,
-                                                Binary(
-                                                    And,
-                                                    Binary(
-                                                        Equals,
-                                                        Var(
-                                                            "a",
-                                                        ),
-                                                        Constant(
-                                                            Int(
-                                                                1,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Binary(
-                                                        Equals,
-                                                        Var(
-                                                            "b",
-                                                        ),
-                                                        Constant(
-                                                            Int(
-                                                                13,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "c",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            15,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "d",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        8,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "e",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    36,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 234,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+                        ),
                     ),
-                    length: 249,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

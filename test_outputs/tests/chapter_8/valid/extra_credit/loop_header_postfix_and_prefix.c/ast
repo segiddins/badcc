@@ -1,195 +1,118 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    100,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "count",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                38,
-                                            ),
-                                            length: 14,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                While(
-                                    Unary(
-                                        PostfixDecrement,
-                                        Var(
-                                            "i",
-                                        ),
-                                    ),
-                                    Expression(
-                                        Unary(
-                                            PostfixIncrement,
-                                            Var(
-                                                "count",
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "count",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                100,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                100,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "count",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                While(
-                                    Unary(
-                                        PrefixDecrement,
-                                        Var(
-                                            "i",
-                                        ),
-                                    ),
-                                    Expression(
-                                        Unary(
-                                            PostfixIncrement,
-                                            Var(
-                                                "count",
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "count",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                99,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            1,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 210,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Constant(
+                        100,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "count",
+                    ty: Int,
+                    init: Constant(
                         0,
                     ),
-                    length: 225,
                 },
-            },
-        ),
+                While(
+                    Unary(
+                        PostfixDecrement,
+                        Var(
+                            "i",
+                        ),
+                    ),
+                    Expression(
+                        Unary(
+                            PostfixIncrement,
+                            Var(
+                                "count",
+                            ),
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "count",
+                        ),
+                        Constant(
+                            100,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment(
+                        Var(
+                            "i",
+                        ),
+                        Constant(
+                            100,
+                        ),
+                    ),
+                ),
+                Expression(
+                    Assignment(
+                        Var(
+                            "count",
+                        ),
+                        Constant(
+                            0,
+                        ),
+                    ),
+                ),
+                While(
+                    Unary(
+                        PrefixDecrement,
+                        Var(
+                            "i",
+                        ),
+                    ),
+                    Expression(
+                        Unary(
+                            PostfixIncrement,
+                            Var(
+                                "count",
+                            ),
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "count",
+                        ),
+                        Constant(
+                            99,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            0,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
+                        1,
+                    ),
+                ),
+            ],
+        },
     ],
 }

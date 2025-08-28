@@ -7,82 +7,37 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "foo.1",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("foo.1", Int),
                 },
                 Copy {
-                    src: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "bar.2",
-                        Int,
-                    ),
+                    src: 4,
+                    dst: Var("bar.2", Int),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "foo.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "bar.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("foo.1", Int),
+                    rhs: Var("bar.2", Int),
+                    dst: Var("main.tmp.0", Int),
                 },
                 Binary {
                     op: GreaterThan,
-                    lhs: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.0", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Call(
                     "foo",
                     [],
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "bar.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("bar.2", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -95,31 +50,15 @@ Program {
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "foo.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "bar.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("foo.1", Int),
+                    rhs: Var("bar.2", Int),
+                    dst: Var("main.tmp.3", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -129,18 +68,10 @@ Program {
             params: [],
             instructions: [
                 Return(
-                    Constant(
-                        Int(
-                            8,
-                        ),
-                    ),
+                    8,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

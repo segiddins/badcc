@@ -1,90 +1,35 @@
 Program {
     declarations: [
-        Variable(
-            VariableDeclaration {
-                ty: Long,
-                name: "l",
-                init: Some(
-                    Constant(
-                        Long(
-                            8589934592,
-                        ),
+        VariableDeclaration {
+            name: "l",
+            ty: Long,
+            init: Constant(
+                8589934592l,
+            ),
+        },
+        FunctionDeclaration {
+            identifier: "return_l",
+            params: [],
+            ret: Long,
+            body: [
+                Return(
+                    Var(
+                        "l",
                     ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_l_as_int",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Var(
+                        "l",
                     ),
-                    length: 25,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "return_l",
-                params: [],
-                ret: Long,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Var(
-                                        "l",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                46,
-                            ),
-                            length: 17,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        26,
-                    ),
-                    length: 37,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "return_l_as_int",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Var(
-                                        "l",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                90,
-                            ),
-                            length: 17,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        64,
-                    ),
-                    length: 43,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

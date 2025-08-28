@@ -5,35 +5,19 @@ Program {
             identifier: "not",
             global: true,
             params: [
-                Var(
-                    "l.1",
-                    Long,
-                ),
+                Var("l.1", Long),
             ],
             instructions: [
                 Unary {
                     op: Not,
-                    src: Var(
-                        "l.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "not.tmp.0",
-                        Long,
-                    ),
+                    src: Var("l.1", Long),
+                    dst: Var("not.tmp.0", Long),
                 },
                 Return(
-                    Var(
-                        "not.tmp.0",
-                        Long,
-                    ),
+                    Var("not.tmp.0", Long),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -41,25 +25,15 @@ Program {
             identifier: "if_cond",
             global: true,
             params: [
-                Var(
-                    "l.3",
-                    Long,
-                ),
+                Var("l.3", Long),
             ],
             instructions: [
                 JumpIfZero(
-                    Var(
-                        "l.3",
-                        Long,
-                    ),
+                    Var("l.3", Long),
                     "if_cond.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "if_cond.0.end",
@@ -71,18 +45,10 @@ Program {
                     "if_cond.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -90,50 +56,25 @@ Program {
             identifier: "and",
             global: true,
             params: [
-                Var(
-                    "l1.5",
-                    Long,
-                ),
-                Var(
-                    "l2.6",
-                    Int,
-                ),
+                Var("l1.5", Long),
+                Var("l2.6", Int),
             ],
             instructions: [
                 JumpIfZero(
-                    Var(
-                        "l1.5",
-                        Long,
-                    ),
+                    Var("l1.5", Long),
                     "and.0.false",
                 ),
                 SignExtend {
-                    src: Var(
-                        "l2.6",
-                        Int,
-                    ),
-                    dst: Var(
-                        "and.tmp.1",
-                        Long,
-                    ),
+                    src: Var("l2.6", Int),
+                    dst: Var("and.tmp.1", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "and.tmp.1",
-                        Long,
-                    ),
+                    Var("and.tmp.1", Long),
                     "and.0.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "and.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("and.tmp.0", Int),
                 },
                 Jump(
                     "and.0.end",
@@ -142,31 +83,17 @@ Program {
                     "and.0.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "and.tmp.0",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("and.tmp.0", Int),
                 },
                 Label(
                     "and.0.end",
                 ),
                 Return(
-                    Var(
-                        "and.tmp.0",
-                        Int,
-                    ),
+                    Var("and.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -174,50 +101,25 @@ Program {
             identifier: "or",
             global: true,
             params: [
-                Var(
-                    "l1.8",
-                    Int,
-                ),
-                Var(
-                    "l2.9",
-                    Long,
-                ),
+                Var("l1.8", Int),
+                Var("l2.9", Long),
             ],
             instructions: [
                 SignExtend {
-                    src: Var(
-                        "l1.8",
-                        Int,
-                    ),
-                    dst: Var(
-                        "or.tmp.1",
-                        Long,
-                    ),
+                    src: Var("l1.8", Int),
+                    dst: Var("or.tmp.1", Long),
                 },
                 JumpIfNotZero(
-                    Var(
-                        "or.tmp.1",
-                        Long,
-                    ),
+                    Var("or.tmp.1", Long),
                     "or.0.true",
                 ),
                 JumpIfNotZero(
-                    Var(
-                        "l2.9",
-                        Long,
-                    ),
+                    Var("l2.9", Long),
                     "or.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "or.tmp.0",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("or.tmp.0", Int),
                 },
                 Jump(
                     "or.0.end",
@@ -226,31 +128,17 @@ Program {
                     "or.0.true",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "or.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("or.tmp.0", Int),
                 },
                 Label(
                     "or.0.end",
                 ),
                 Return(
-                    Var(
-                        "or.tmp.0",
-                        Int,
-                    ),
+                    Var("or.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -260,53 +148,26 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Long(
-                            1152921504606846976,
-                        ),
-                    ),
-                    dst: Var(
-                        "l.11",
-                        Long,
-                    ),
+                    src: 1152921504606846976l,
+                    dst: Var("l.11", Long),
                 },
                 Copy {
-                    src: Constant(
-                        Long(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "zero.12",
-                        Long,
-                    ),
+                    src: 0l,
+                    dst: Var("zero.12", Long),
                 },
                 Call(
                     "not",
                     [
-                        Var(
-                            "l.11",
-                            Long,
-                        ),
+                        Var("l.11", Long),
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -320,40 +181,21 @@ Program {
                 Call(
                     "not",
                     [
-                        Var(
-                            "zero.12",
-                            Long,
-                        ),
+                        Var("zero.12", Long),
                     ],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("main.tmp.2", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.1.end",
@@ -367,40 +209,21 @@ Program {
                 Call(
                     "if_cond",
                     [
-                        Var(
-                            "l.11",
-                            Long,
-                        ),
+                        Var("l.11", Long),
                     ],
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("main.tmp.4", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    Var("main.tmp.4", Int),
                     "main.2.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
+                    3,
                 ),
                 Jump(
                     "main.2.end",
@@ -414,29 +237,16 @@ Program {
                 Call(
                     "if_cond",
                     [
-                        Var(
-                            "zero.12",
-                            Long,
-                        ),
+                        Var("zero.12", Long),
                     ],
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                 ),
                 JumpIfZero(
-                    Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    Var("main.tmp.5", Int),
                     "main.3.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
+                    4,
                 ),
                 Jump(
                     "main.3.end",
@@ -450,34 +260,17 @@ Program {
                 Call(
                     "and",
                     [
-                        Var(
-                            "zero.12",
-                            Long,
-                        ),
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
+                        Var("zero.12", Long),
+                        1,
                     ],
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                 ),
                 JumpIfZero(
-                    Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    Var("main.tmp.6", Int),
                     "main.4.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
+                    5,
                 ),
                 Jump(
                     "main.4.end",
@@ -491,45 +284,22 @@ Program {
                 Call(
                     "or",
                     [
-                        Constant(
-                            Int(
-                                1,
-                            ),
-                        ),
-                        Var(
-                            "l.11",
-                            Long,
-                        ),
+                        1,
+                        Var("l.11", Long),
                     ],
-                    Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    Var("main.tmp.7", Int),
                 ),
                 Unary {
                     op: Not,
-                    src: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("main.tmp.8", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    Var("main.tmp.8", Int),
                     "main.5.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            6,
-                        ),
-                    ),
+                    6,
                 ),
                 Jump(
                     "main.5.end",
@@ -541,18 +311,10 @@ Program {
                     "main.5.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

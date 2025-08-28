@@ -14,17 +14,10 @@ Program {
             params: [],
             instructions: [
                 Return(
-                    Var(
-                        "a",
-                        Int,
-                    ),
+                    Var("a", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },
@@ -34,45 +27,21 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "a.3",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("a.3", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "a",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("a", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -84,51 +53,25 @@ Program {
                     "main.0.end",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "a",
-                        Int,
-                    ),
+                    src: 4,
+                    dst: Var("a", Int),
                 },
                 Call(
                     "return_a",
                     [],
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                 ),
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "a.3",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("a.3", Int),
+                    rhs: Var("main.tmp.1", Int),
+                    dst: Var("main.tmp.2", Int),
                 },
                 Return(
-                    Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    Var("main.tmp.2", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

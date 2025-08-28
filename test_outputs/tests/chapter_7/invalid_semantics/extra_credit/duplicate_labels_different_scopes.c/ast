@@ -1,147 +1,75 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                If(
+                    Var(
+                        "x",
+                    ),
+                    Compound(
+                        [
+                            Expression(
+                                Assignment(
                                     Var(
                                         "x",
                                     ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "x",
-                                                            ),
-                                                            Constant(
-                                                                Int(
-                                                                    5,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Goto(
-                                                        "l",
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Return(
-                                                        Constant(
-                                                            Int(
-                                                                0,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Labeled(
-                                                        "l",
-                                                        Return(
-                                                            Var(
-                                                                "x",
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    43,
-                                                ),
-                                                length: 89,
-                                            },
-                                        },
+                                    Constant(
+                                        5,
                                     ),
-                                    Some(
-                                        Compound(
-                                            Block {
-                                                items: [
-                                                    Statement(
-                                                        Goto(
-                                                            "l",
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Labeled(
-                                                            "l",
-                                                            Return(
-                                                                Var(
-                                                                    "x",
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ],
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        138,
-                                                    ),
-                                                    length: 74,
-                                                },
-                                            },
-                                        ),
+                                ),
+                            ),
+                            Goto(
+                                "l",
+                            ),
+                            Return(
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                            Labeled(
+                                "l",
+                                Return(
+                                    Var(
+                                        "x",
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 199,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 214,
-                },
-            },
-        ),
+                    Some(
+                        Compound(
+                            [
+                                Goto(
+                                    "l",
+                                ),
+                                Return(
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Labeled(
+                                    "l",
+                                    Return(
+                                        Var(
+                                            "x",
+                                        ),
+                                    ),
+                                ),
+                            ],
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

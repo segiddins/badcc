@@ -1,247 +1,123 @@
 Program {
     declarations: [
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "x",
-                init: Some(
-                    Constant(
-                        Int(
+        VariableDeclaration {
+            name: "x",
+            ty: Int,
+            init: Constant(
+                1,
+            ),
+            storage: Static,
+        },
+        FunctionDeclaration {
+            identifier: "read_internal_x",
+            params: [],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "read_x",
+            params: [],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    storage: Extern,
+                },
+                If(
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "x",
+                        ),
+                        Constant(
                             1,
                         ),
                     ),
+                    Return(
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    None,
                 ),
-                storage: Some(
-                    Static,
+                Expression(
+                    Assignment(
+                        Var(
+                            "x",
+                        ),
+                        Constant(
+                            2,
+                        ),
+                    ),
                 ),
-                span: SourceSpan {
-                    offset: SourceOffset(
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "read_internal_x",
+                            ),
+                            [],
+                        ),
+                        Constant(
+                            2,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "read_x",
+                            ),
+                            [],
+                        ),
+                        Constant(
+                            10,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 17,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "read_internal_x",
-                params: [],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        18,
-                    ),
-                    length: 26,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "read_x",
-                params: [],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        45,
-                    ),
-                    length: 17,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x",
-                                        init: None,
-                                        storage: Some(
-                                            Extern,
-                                        ),
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                84,
-                                            ),
-                                            length: 13,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        Var(
-                                            "x",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "x",
-                                        ),
-                                        Constant(
-                                            Int(
-                                                2,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "read_internal_x",
-                                            ),
-                                            [],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                2,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "read_x",
-                                            ),
-                                            [],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                10,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                78,
-                            ),
-                            length: 172,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        63,
+            ],
+        },
+        VariableDeclaration {
+            name: "x",
+            ty: Int,
+            storage: Extern,
+        },
+        FunctionDeclaration {
+            identifier: "read_internal_x",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Var(
+                        "x",
                     ),
-                    length: 187,
-                },
-            },
-        ),
-        Variable(
-            VariableDeclaration {
-                ty: Int,
-                name: "x",
-                init: None,
-                storage: Some(
-                    Extern,
                 ),
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        251,
-                    ),
-                    length: 13,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "read_internal_x",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Var(
-                                        "x",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                291,
-                            ),
-                            length: 17,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        265,
-                    ),
-                    length: 43,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

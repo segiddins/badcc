@@ -5,105 +5,45 @@ Program {
             identifier: "f",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Int,
-                ),
-                Var(
-                    "b.2",
-                    Int,
-                ),
-                Var(
-                    "c.3",
-                    Int,
-                ),
-                Var(
-                    "d.4",
-                    Int,
-                ),
+                Var("a.1", Int),
+                Var("b.2", Int),
+                Var("c.3", Int),
+                Var("d.4", Int),
             ],
             instructions: [
                 Binary {
                     op: Divide,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "f.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: Var("b.2", Int),
+                    dst: Var("f.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "f.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "x.5",
-                        Int,
-                    ),
+                    src: Var("f.tmp.0", Int),
+                    dst: Var("x.5", Int),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            10,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("a.1", Int),
+                    rhs: 10,
+                    dst: Var("f.tmp.5", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "f.tmp.5",
-                        Int,
-                    ),
+                    Var("f.tmp.5", Int),
                     "f.1.false",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("b.2", Int),
+                    rhs: 2,
+                    dst: Var("f.tmp.6", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "f.tmp.6",
-                        Int,
-                    ),
+                    Var("f.tmp.6", Int),
                     "f.1.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.4",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("f.tmp.4", Int),
                 },
                 Jump(
                     "f.1.end",
@@ -112,59 +52,29 @@ Program {
                     "f.1.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.4",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("f.tmp.4", Int),
                 },
                 Label(
                     "f.1.end",
                 ),
                 JumpIfZero(
-                    Var(
-                        "f.tmp.4",
-                        Int,
-                    ),
+                    Var("f.tmp.4", Int),
                     "f.2.false",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "c.3",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            100,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.7",
-                        Int,
-                    ),
+                    lhs: Var("c.3", Int),
+                    rhs: 100,
+                    dst: Var("f.tmp.7", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "f.tmp.7",
-                        Int,
-                    ),
+                    Var("f.tmp.7", Int),
                     "f.2.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.3",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("f.tmp.3", Int),
                 },
                 Jump(
                     "f.2.end",
@@ -173,59 +83,29 @@ Program {
                     "f.2.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.3",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("f.tmp.3", Int),
                 },
                 Label(
                     "f.2.end",
                 ),
                 JumpIfZero(
-                    Var(
-                        "f.tmp.3",
-                        Int,
-                    ),
+                    Var("f.tmp.3", Int),
                     "f.3.false",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "d.4",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.8",
-                        Int,
-                    ),
+                    lhs: Var("d.4", Int),
+                    rhs: 4,
+                    dst: Var("f.tmp.8", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "f.tmp.8",
-                        Int,
-                    ),
+                    Var("f.tmp.8", Int),
                     "f.3.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.2",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("f.tmp.2", Int),
                 },
                 Jump(
                     "f.3.end",
@@ -234,59 +114,29 @@ Program {
                     "f.3.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.2",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("f.tmp.2", Int),
                 },
                 Label(
                     "f.3.end",
                 ),
                 JumpIfZero(
-                    Var(
-                        "f.tmp.2",
-                        Int,
-                    ),
+                    Var("f.tmp.2", Int),
                     "f.4.false",
                 ),
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "x.5",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.9",
-                        Int,
-                    ),
+                    lhs: Var("x.5", Int),
+                    rhs: 5,
+                    dst: Var("f.tmp.9", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "f.tmp.9",
-                        Int,
-                    ),
+                    Var("f.tmp.9", Int),
                     "f.4.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("f.tmp.1", Int),
                 },
                 Jump(
                     "f.4.end",
@@ -295,32 +145,18 @@ Program {
                     "f.4.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "f.tmp.1",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("f.tmp.1", Int),
                 },
                 Label(
                     "f.4.end",
                 ),
                 JumpIfZero(
-                    Var(
-                        "f.tmp.1",
-                        Int,
-                    ),
+                    Var("f.tmp.1", Int),
                     "f.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "f.0.end",
@@ -332,18 +168,10 @@ Program {
                     "f.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

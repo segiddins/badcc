@@ -1,116 +1,58 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                25,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Labeled(
-                                    "label",
-                                    Switch(
-                                        Var(
-                                            "a",
-                                        ),
-                                        Compound(
-                                            Block {
-                                                items: [
-                                                    Statement(
-                                                        Case(
-                                                            Constant(
-                                                                Int(
-                                                                    1,
-                                                                ),
-                                                            ),
-                                                            Return(
-                                                                Constant(
-                                                                    Int(
-                                                                        0,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            None,
-                                                        ),
-                                                    ),
-                                                    Statement(
-                                                        Default(
-                                                            Labeled(
-                                                                "label",
-                                                                Return(
-                                                                    Constant(
-                                                                        Int(
-                                                                            1,
-                                                                        ),
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                            None,
-                                                        ),
-                                                    ),
-                                                ],
-                                                span: SourceSpan {
-                                                    offset: SourceOffset(
-                                                        58,
-                                                    ),
-                                                    length: 99,
-                                                },
-                                            },
-                                        ),
-                                        None,
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                Labeled(
+                    "label",
+                    Switch(
+                        Var(
+                            "a",
+                        ),
+                        Compound(
+                            [
+                                Case(
                                     Constant(
-                                        Int(
+                                        1,
+                                    ),
+                                    Return(
+                                        Constant(
                                             0,
                                         ),
                                     ),
+                                    None,
                                 ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 158,
-                        },
-                    },
+                                Default(
+                                    Labeled(
+                                        "label",
+                                        Return(
+                                            Constant(
+                                                1,
+                                            ),
+                                        ),
+                                    ),
+                                    None,
+                                ),
+                            ],
+                        ),
+                        None,
+                    ),
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 173,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

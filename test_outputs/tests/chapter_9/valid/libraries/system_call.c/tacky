@@ -5,53 +5,27 @@ Program {
             identifier: "incr_and_print",
             global: true,
             params: [
-                Var(
-                    "b.3",
-                    Int,
-                ),
+                Var("b.3", Int),
             ],
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "b.3",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "incr_and_print.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("b.3", Int),
+                    rhs: 2,
+                    dst: Var("incr_and_print.tmp.0", Int),
                 },
                 Call(
                     "putchar",
                     [
-                        Var(
-                            "incr_and_print.tmp.0",
-                            Int,
-                        ),
+                        Var("incr_and_print.tmp.0", Int),
                     ],
-                    Var(
-                        "incr_and_print.tmp.1",
-                        Int,
-                    ),
+                    Var("incr_and_print.tmp.1", Int),
                 ),
                 Return(
-                    Var(
-                        "incr_and_print.tmp.1",
-                        Int,
-                    ),
+                    Var("incr_and_print.tmp.1", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

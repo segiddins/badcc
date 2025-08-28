@@ -1,97 +1,57 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "i.1",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        400,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    26,
-                                                ),
-                                                length: 12,
-                                            },
-                                        },
-                                    ),
-                                    condition: None,
-                                    post: Some(
-                                        Assignment(
-                                            Var(
-                                                "i.1",
-                                            ),
-                                            Binary(
-                                                Subtract,
-                                                Var(
-                                                    "i.1",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        100,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    body: If(
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "i.1",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    100,
-                                                ),
-                                            ),
-                                        ),
-                                        Return(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        None,
-                                    ),
-                                    label: Some(
-                                        "loop.0",
-                                    ),
-                                },
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 84,
-                        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                For {
+                    init: VariableDeclaration {
+                        name: "i.1",
+                        ty: Int,
+                        init: Constant(
+                            400,
+                        ),
                     },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+                    condition: None,
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "i.1",
+                            ),
+                            Binary(
+                                Subtract,
+                                Var(
+                                    "i.1",
+                                ),
+                                Constant(
+                                    100,
+                                ),
+                            ),
+                        ),
                     ),
-                    length: 99,
+                    body: If(
+                        Binary(
+                            Equals,
+                            Var(
+                                "i.1",
+                            ),
+                            Constant(
+                                100,
+                            ),
+                        ),
+                        Return(
+                            Constant(
+                                0,
+                            ),
+                        ),
+                        None,
+                    ),
+                    label: Some(
+                        "loop.0",
+                    ),
                 },
-            },
-        ),
+            ],
+        },
     ],
 }

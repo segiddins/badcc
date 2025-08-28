@@ -1,284 +1,178 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "switch_on_int",
-                params: [
-                    (
-                        Int,
+        FunctionDeclaration {
+            identifier: "switch_on_int",
+            params: [
+                (
+                    Int,
+                    "i",
+                ),
+            ],
+            ret: Int,
+            body: [
+                Switch(
+                    Var(
                         "i",
                     ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Switch(
-                                    Var(
-                                        "i",
-                                    ),
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Int(
-                                                                5,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Long(
-                                                                8589934592,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    1,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Case(
-                                                        Constant(
-                                                            Long(
-                                                                34359738367,
-                                                            ),
-                                                        ),
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    2,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Default(
-                                                        Return(
-                                                            Constant(
-                                                                Int(
-                                                                    3,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    41,
-                                                ),
-                                                length: 180,
-                                            },
-                                        },
-                                    ),
-                                    None,
+                    Compound(
+                        [
+                            Case(
+                                Constant(
+                                    5,
                                 ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                25,
-                            ),
-                            length: 198,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 223,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "switch_on_int",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Int(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                0,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "switch_on_int",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                2,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "switch_on_int",
-                                            ),
-                                            [
-                                                Unary(
-                                                    Minus,
-                                                    Constant(
-                                                        Int(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                2,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                3,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        NotEqual,
-                                        FunctionCall(
-                                            Var(
-                                                "switch_on_int",
-                                            ),
-                                            [
-                                                Constant(
-                                                    Long(
-                                                        17179869184,
-                                                    ),
-                                                ),
-                                            ],
-                                        ),
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                4,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
                                 Return(
                                     Constant(
-                                        Int(
-                                            0,
-                                        ),
+                                        0,
                                     ),
                                 ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    8589934592l,
+                                ),
+                                Return(
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Case(
+                                Constant(
+                                    34359738367l,
+                                ),
+                                Return(
+                                    Constant(
+                                        2,
+                                    ),
+                                ),
+                                None,
+                            ),
+                            Default(
+                                Return(
+                                    Constant(
+                                        3,
+                                    ),
+                                ),
+                                None,
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                239,
-                            ),
-                            length: 224,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        224,
                     ),
-                    length: 239,
-                },
-            },
-        ),
+                    None,
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "switch_on_int",
+                            ),
+                            [
+                                Constant(
+                                    5,
+                                ),
+                            ],
+                        ),
+                        Constant(
+                            0,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "switch_on_int",
+                            ),
+                            [
+                                Constant(
+                                    0,
+                                ),
+                            ],
+                        ),
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            2,
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "switch_on_int",
+                            ),
+                            [
+                                Unary(
+                                    Minus,
+                                    Constant(
+                                        1,
+                                    ),
+                                ),
+                            ],
+                        ),
+                        Constant(
+                            2,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            3,
+                        ),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary(
+                        NotEqual,
+                        FunctionCall(
+                            Var(
+                                "switch_on_int",
+                            ),
+                            [
+                                Constant(
+                                    17179869184l,
+                                ),
+                            ],
+                        ),
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            4,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
+                        0,
+                    ),
+                ),
+            ],
+        },
     ],
 }

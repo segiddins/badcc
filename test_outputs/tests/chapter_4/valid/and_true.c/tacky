@@ -7,42 +7,21 @@ Program {
             params: [],
             instructions: [
                 JumpIfZero(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                     "main.0.false",
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Jump(
                     "main.0.end",
@@ -51,31 +30,17 @@ Program {
                     "main.0.false",
                 ),
                 Copy {
-                    src: Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 0,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Label(
                     "main.0.end",
                 ),
                 Return(
-                    Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    Var("main.tmp.0", Int),
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

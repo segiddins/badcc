@@ -8,50 +8,22 @@ Program {
             instructions: [
                 Binary {
                     op: Add,
-                    lhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    lhs: 1,
+                    rhs: 2,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.0", Int),
+                    rhs: 4,
+                    dst: Var("main.tmp.1", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    Var("main.tmp.1", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
+                    5,
                 ),
                 Jump(
                     "main.0.end",
@@ -63,11 +35,7 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

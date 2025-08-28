@@ -1,191 +1,107 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "shadow.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 15,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "shadow.1",
+                    ty: Int,
+                    init: Constant(
+                        1,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "acc.2",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                For {
+                    init: VariableDeclaration {
+                        name: "shadow.3",
+                        ty: Int,
+                        init: Constant(
+                            0,
+                        ),
+                    },
+                    condition: Some(
+                        Binary(
+                            LessThan,
+                            Var(
+                                "shadow.3",
+                            ),
+                            Constant(
+                                10,
+                            ),
+                        ),
+                    ),
+                    post: Some(
+                        Assignment(
+                            Var(
+                                "shadow.3",
+                            ),
+                            Binary(
+                                Add,
+                                Var(
+                                    "shadow.3",
+                                ),
+                                Constant(
+                                    1,
                                 ),
                             ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "acc.2",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                41,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                For {
-                                    init: Decl(
-                                        VariableDeclaration {
-                                            ty: Int,
-                                            name: "shadow.3",
-                                            init: Some(
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                            storage: None,
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    63,
-                                                ),
-                                                length: 15,
-                                            },
-                                        },
+                        ),
+                    ),
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "acc.2",
                                     ),
-                                    condition: Some(
-                                        Binary(
-                                            LessThan,
-                                            Var(
-                                                "shadow.3",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    10,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: Some(
-                                        Assignment(
-                                            Var(
-                                                "shadow.3",
-                                            ),
-                                            Binary(
-                                                Add,
-                                                Var(
-                                                    "shadow.3",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    body: Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "acc.2",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "acc.2",
-                                                                ),
-                                                                Var(
-                                                                    "shadow.3",
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    113,
-                                                ),
-                                                length: 35,
-                                            },
-                                        },
-                                    ),
-                                    label: Some(
-                                        "loop.0",
-                                    ),
-                                },
-                            ),
-                            Statement(
-                                Return(
                                     Binary(
-                                        And,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "acc.2",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    45,
-                                                ),
-                                            ),
+                                        Add,
+                                        Var(
+                                            "acc.2",
                                         ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "shadow.1",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
+                                        Var(
+                                            "shadow.3",
                                         ),
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 172,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 187,
+                    label: Some(
+                        "loop.0",
+                    ),
                 },
-            },
-        ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "acc.2",
+                            ),
+                            Constant(
+                                45,
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "shadow.1",
+                            ),
+                            Constant(
+                                1,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

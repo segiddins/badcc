@@ -21,97 +21,41 @@ Program {
             instructions: [
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("main.tmp.0", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Int,
-                    ),
-                    dst: Var(
-                        "y",
-                        Int,
-                    ),
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("y", Int),
                 },
                 Binary {
                     op: LeftShift,
-                    lhs: Var(
-                        "x",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
+                    lhs: Var("x", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.1", Int),
                 },
                 Binary {
                     op: BitwiseOr,
-                    lhs: Var(
-                        "main.tmp.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.2", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "x",
-                        Int,
-                    ),
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("x", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "x",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    lhs: Var("x", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.3", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.3",
-                        Int,
-                    ),
+                    Var("main.tmp.3", Int),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -124,113 +68,48 @@ Program {
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            5,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
+                    src: 5,
+                    dst: Var("main.tmp.4", Int),
                 },
                 Binary {
                     op: BitwiseAnd,
-                    lhs: Var(
-                        "y",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.4",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
+                    lhs: Var("y", Int),
+                    rhs: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", Int),
                 },
                 Binary {
                     op: Xor,
-                    lhs: Var(
-                        "main.tmp.5",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            12,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.5", Int),
+                    rhs: 12,
+                    dst: Var("main.tmp.6", Int),
                 },
                 Binary {
                     op: RightShift,
-                    lhs: Var(
-                        "main.tmp.6",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
+                    lhs: Var("main.tmp.6", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.7", Int),
                 },
                 Copy {
-                    src: Var(
-                        "main.tmp.7",
-                        Int,
-                    ),
-                    dst: Var(
-                        "y",
-                        Int,
-                    ),
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("y", Int),
                 },
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            3,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
+                    src: 3,
+                    dst: Var("main.tmp.8", Int),
                 },
                 Binary {
                     op: NotEqual,
-                    lhs: Var(
-                        "y",
-                        Int,
-                    ),
-                    rhs: Var(
-                        "main.tmp.8",
-                        Int,
-                    ),
-                    dst: Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
+                    lhs: Var("y", Int),
+                    rhs: Var("main.tmp.8", Int),
+                    dst: Var("main.tmp.9", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.9",
-                        Int,
-                    ),
+                    Var("main.tmp.9", Int),
                     "main.1.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            2,
-                        ),
-                    ),
+                    2,
                 ),
                 Jump(
                     "main.1.end",
@@ -242,18 +121,10 @@ Program {
                     "main.1.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

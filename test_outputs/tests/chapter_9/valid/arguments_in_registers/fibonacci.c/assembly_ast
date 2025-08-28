@@ -8,106 +8,52 @@ Program {
                     48,
                 ),
                 Move {
-                    source: Register(
-                        DI,
-                        Four,
-                    ),
-                    destination: Stack(
-                        12,
-                        Four,
-                    ),
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
                 },
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        12,
-                        Four,
-                    ),
+                    Immediate(0, Four),
+                    Stack(12, Four),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Stack(
-                        16,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
                 },
                 SetCC(
                     E,
-                    Stack(
-                        16,
-                        Four,
-                    ),
+                    Stack(16, Four),
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        16,
-                        Four,
-                    ),
+                    Immediate(0, Four),
+                    Stack(16, Four),
                 ),
                 JmpCC(
                     NE,
                     "fib.1.true",
                 ),
                 Cmp(
-                    Immediate(
-                        1,
-                        Four,
-                    ),
-                    Stack(
-                        12,
-                        Four,
-                    ),
+                    Immediate(1, Four),
+                    Stack(12, Four),
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Stack(
-                        20,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Stack(20, Four),
                 },
                 SetCC(
                     E,
-                    Stack(
-                        20,
-                        Four,
-                    ),
+                    Stack(20, Four),
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        20,
-                        Four,
-                    ),
+                    Immediate(0, Four),
+                    Stack(20, Four),
                 ),
                 JmpCC(
                     NE,
                     "fib.1.true",
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Stack(
-                        24,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Stack(24, Four),
                 },
                 Jmp(
                     "fib.1.end",
@@ -116,41 +62,23 @@ Program {
                     "fib.1.true",
                 ),
                 Move {
-                    source: Immediate(
-                        1,
-                        Four,
-                    ),
-                    destination: Stack(
-                        24,
-                        Four,
-                    ),
+                    source: Immediate(1, Four),
+                    destination: Stack(24, Four),
                 },
                 Label(
                     "fib.1.end",
                 ),
                 Cmp(
-                    Immediate(
-                        0,
-                        Four,
-                    ),
-                    Stack(
-                        24,
-                        Four,
-                    ),
+                    Immediate(0, Four),
+                    Stack(24, Four),
                 ),
                 JmpCC(
                     E,
                     "fib.0.true",
                 ),
                 Move {
-                    source: Stack(
-                        12,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Stack(12, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Jmp(
@@ -160,177 +88,81 @@ Program {
                     "fib.0.true",
                 ),
                 Move {
-                    source: Stack(
-                        12,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        28,
-                        Four,
-                    ),
+                    source: Register(R10, Four),
+                    destination: Stack(28, Four),
                 },
                 Binary(
                     Sub,
-                    Immediate(
-                        1,
-                        Four,
-                    ),
-                    Stack(
-                        28,
-                        Four,
-                    ),
+                    Immediate(1, Four),
+                    Stack(28, Four),
                 ),
                 Move {
-                    source: Stack(
-                        28,
-                        Four,
-                    ),
-                    destination: Register(
-                        DI,
-                        Four,
-                    ),
+                    source: Stack(28, Four),
+                    destination: Register(DI, Four),
                 },
                 Call(
                     "fib",
                 ),
                 Move {
-                    source: Register(
-                        AX,
-                        Four,
-                    ),
-                    destination: Stack(
-                        32,
-                        Four,
-                    ),
+                    source: Register(AX, Four),
+                    destination: Stack(32, Four),
                 },
                 Move {
-                    source: Stack(
-                        12,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        36,
-                        Four,
-                    ),
+                    source: Register(R10, Four),
+                    destination: Stack(36, Four),
                 },
                 Binary(
                     Sub,
-                    Immediate(
-                        2,
-                        Four,
-                    ),
-                    Stack(
-                        36,
-                        Four,
-                    ),
+                    Immediate(2, Four),
+                    Stack(36, Four),
                 ),
                 Move {
-                    source: Stack(
-                        36,
-                        Four,
-                    ),
-                    destination: Register(
-                        DI,
-                        Four,
-                    ),
+                    source: Stack(36, Four),
+                    destination: Register(DI, Four),
                 },
                 Call(
                     "fib",
                 ),
                 Move {
-                    source: Register(
-                        AX,
-                        Four,
-                    ),
-                    destination: Stack(
-                        40,
-                        Four,
-                    ),
+                    source: Register(AX, Four),
+                    destination: Stack(40, Four),
                 },
                 Move {
-                    source: Stack(
-                        32,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
+                    source: Stack(32, Four),
+                    destination: Register(R10, Four),
                 },
                 Move {
-                    source: Register(
-                        R10,
-                        Four,
-                    ),
-                    destination: Stack(
-                        44,
-                        Four,
-                    ),
+                    source: Register(R10, Four),
+                    destination: Stack(44, Four),
                 },
                 Move {
-                    source: Stack(
-                        40,
-                        Four,
-                    ),
-                    destination: Register(
-                        R10,
-                        Four,
-                    ),
+                    source: Stack(40, Four),
+                    destination: Register(R10, Four),
                 },
                 Binary(
                     Add,
-                    Register(
-                        R10,
-                        Four,
-                    ),
-                    Stack(
-                        44,
-                        Four,
-                    ),
+                    Register(R10, Four),
+                    Stack(44, Four),
                 ),
                 Move {
-                    source: Stack(
-                        44,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Stack(44, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Label(
                     "fib.0.end",
                 ),
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
             ],
@@ -343,58 +175,28 @@ Program {
                     16,
                 ),
                 Move {
-                    source: Immediate(
-                        6,
-                        Four,
-                    ),
-                    destination: Stack(
-                        12,
-                        Four,
-                    ),
+                    source: Immediate(6, Four),
+                    destination: Stack(12, Four),
                 },
                 Move {
-                    source: Stack(
-                        12,
-                        Four,
-                    ),
-                    destination: Register(
-                        DI,
-                        Four,
-                    ),
+                    source: Stack(12, Four),
+                    destination: Register(DI, Four),
                 },
                 Call(
                     "fib",
                 ),
                 Move {
-                    source: Register(
-                        AX,
-                        Four,
-                    ),
-                    destination: Stack(
-                        16,
-                        Four,
-                    ),
+                    source: Register(AX, Four),
+                    destination: Stack(16, Four),
                 },
                 Move {
-                    source: Stack(
-                        16,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Stack(16, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
-                    source: Immediate(
-                        0,
-                        Four,
-                    ),
-                    destination: Register(
-                        AX,
-                        Four,
-                    ),
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
                 },
                 Ret,
             ],

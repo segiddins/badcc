@@ -1,104 +1,50 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "foo",
-                params: [
-                    (
-                        Int,
+        FunctionDeclaration {
+            identifier: "foo",
+            params: [
+                (
+                    Int,
+                    "a",
+                ),
+            ],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    FunctionCall(
+                        Var(
+                            "foo",
+                        ),
+                        [
+                            Constant(
+                                3,
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "foo",
+            params: [
+                (
+                    Int,
+                    "x",
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Var(
                         "a",
                     ),
-                ],
-                ret: Int,
-                body: None,
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
-                    ),
-                    length: 15,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    FunctionCall(
-                                        Var(
-                                            "foo",
-                                        ),
-                                        [
-                                            Constant(
-                                                Int(
-                                                    3,
-                                                ),
-                                            ),
-                                        ],
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                31,
-                            ),
-                            length: 22,
-                        },
-                    },
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        16,
-                    ),
-                    length: 37,
-                },
-            },
-        ),
-        Function(
-            FunctionDeclaration {
-                identifier: "foo",
-                params: [
-                    (
-                        Int,
-                        "x",
-                    ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Statement(
-                                Return(
-                                    Var(
-                                        "a",
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                69,
-                            ),
-                            length: 17,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        54,
-                    ),
-                    length: 32,
-                },
-            },
-        ),
+            ],
+        },
     ],
 }

@@ -1,265 +1,161 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    10,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 11,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "y",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                37,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "z",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                52,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                DoWhile(
-                                    Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "z",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "z",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    If(
-                                                        Binary(
-                                                            LessThanOrEqual,
-                                                            Var(
-                                                                "x",
-                                                            ),
-                                                            Constant(
-                                                                Int(
-                                                                    0,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Continue(
-                                                            None,
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "x",
-                                                            ),
-                                                            Binary(
-                                                                Subtract,
-                                                                Var(
-                                                                    "x",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    If(
-                                                        Binary(
-                                                            GreaterThanOrEqual,
-                                                            Var(
-                                                                "y",
-                                                            ),
-                                                            Constant(
-                                                                Int(
-                                                                    10,
-                                                                ),
-                                                            ),
-                                                        ),
-                                                        Continue(
-                                                            None,
-                                                        ),
-                                                        None,
-                                                    ),
-                                                ),
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "y",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "y",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    70,
-                                                ),
-                                                length: 149,
-                                            },
-                                        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    init: Constant(
+                        10,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "y",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                VariableDeclaration {
+                    name: "z",
+                    ty: Int,
+                    init: Constant(
+                        0,
+                    ),
+                },
+                DoWhile(
+                    Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "z",
                                     ),
                                     Binary(
-                                        NotEqual,
+                                        Add,
                                         Var(
                                             "z",
                                         ),
                                         Constant(
-                                            Int(
-                                                50,
-                                            ),
+                                            1,
                                         ),
                                     ),
-                                    None,
                                 ),
                             ),
-                            Statement(
-                                Return(
+                            If(
+                                Binary(
+                                    LessThanOrEqual,
+                                    Var(
+                                        "x",
+                                    ),
+                                    Constant(
+                                        0,
+                                    ),
+                                ),
+                                Continue(
+                                    None,
+                                ),
+                                None,
+                            ),
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "x",
+                                    ),
                                     Binary(
-                                        And,
-                                        Binary(
-                                            And,
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "z",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        50,
-                                                    ),
-                                                ),
-                                            ),
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "x",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
+                                        Subtract,
+                                        Var(
+                                            "x",
                                         ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "y",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    10,
-                                                ),
-                                            ),
+                                        Constant(
+                                            1,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            If(
+                                Binary(
+                                    GreaterThanOrEqual,
+                                    Var(
+                                        "y",
+                                    ),
+                                    Constant(
+                                        10,
+                                    ),
+                                ),
+                                Continue(
+                                    None,
+                                ),
+                                None,
+                            ),
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "y",
+                                    ),
+                                    Binary(
+                                        Add,
+                                        Var(
+                                            "y",
+                                        ),
+                                        Constant(
+                                            1,
                                         ),
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 264,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 279,
-                },
-            },
-        ),
+                    Binary(
+                        NotEqual,
+                        Var(
+                            "z",
+                        ),
+                        Constant(
+                            50,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            And,
+                            Binary(
+                                Equals,
+                                Var(
+                                    "z",
+                                ),
+                                Constant(
+                                    50,
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "x",
+                                ),
+                                Constant(
+                                    0,
+                                ),
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "y",
+                            ),
+                            Constant(
+                                10,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

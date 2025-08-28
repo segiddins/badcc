@@ -1,161 +1,111 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "f",
-                params: [
-                    (
-                        Int,
-                        "a",
-                    ),
-                    (
-                        Int,
-                        "b",
-                    ),
-                    (
-                        Int,
-                        "c",
-                    ),
-                    (
-                        Int,
-                        "d",
-                    ),
-                ],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x",
-                                        init: Some(
-                                            Binary(
-                                                Divide,
-                                                Var(
-                                                    "a",
-                                                ),
-                                                Var(
-                                                    "b",
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                40,
-                                            ),
-                                            length: 14,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                If(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            And,
-                                            Binary(
-                                                And,
-                                                Binary(
-                                                    And,
-                                                    Binary(
-                                                        Equals,
-                                                        Var(
-                                                            "a",
-                                                        ),
-                                                        Constant(
-                                                            Int(
-                                                                10,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                    Binary(
-                                                        Equals,
-                                                        Var(
-                                                            "b",
-                                                        ),
-                                                        Constant(
-                                                            Int(
-                                                                2,
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                                Binary(
-                                                    Equals,
-                                                    Var(
-                                                        "c",
-                                                    ),
-                                                    Constant(
-                                                        Int(
-                                                            100,
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
-                                            Binary(
-                                                Equals,
-                                                Var(
-                                                    "d",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        4,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "x",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    5,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Return(
-                                        Constant(
-                                            Int(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
-                                    None,
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Constant(
-                                        Int(
-                                            0,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                34,
-                            ),
-                            length: 113,
-                        },
-                    },
+        FunctionDeclaration {
+            identifier: "f",
+            params: [
+                (
+                    Int,
+                    "a",
                 ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
+                (
+                    Int,
+                    "b",
+                ),
+                (
+                    Int,
+                    "c",
+                ),
+                (
+                    Int,
+                    "d",
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    init: Binary(
+                        Divide,
+                        Var(
+                            "a",
+                        ),
+                        Var(
+                            "b",
+                        ),
+                    ),
+                },
+                If(
+                    Binary(
+                        And,
+                        Binary(
+                            And,
+                            Binary(
+                                And,
+                                Binary(
+                                    And,
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "a",
+                                        ),
+                                        Constant(
+                                            10,
+                                        ),
+                                    ),
+                                    Binary(
+                                        Equals,
+                                        Var(
+                                            "b",
+                                        ),
+                                        Constant(
+                                            2,
+                                        ),
+                                    ),
+                                ),
+                                Binary(
+                                    Equals,
+                                    Var(
+                                        "c",
+                                    ),
+                                    Constant(
+                                        100,
+                                    ),
+                                ),
+                            ),
+                            Binary(
+                                Equals,
+                                Var(
+                                    "d",
+                                ),
+                                Constant(
+                                    4,
+                                ),
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "x",
+                            ),
+                            Constant(
+                                5,
+                            ),
+                        ),
+                    ),
+                    Return(
+                        Constant(
+                            1,
+                        ),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(
                         0,
                     ),
-                    length: 147,
-                },
-            },
-        ),
+                ),
+            ],
+        },
     ],
 }

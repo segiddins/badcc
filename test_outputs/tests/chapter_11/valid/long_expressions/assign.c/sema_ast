@@ -1,104 +1,49 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "a.1",
-                                        init: Some(
-                                            Constant(
-                                                Long(
-                                                    4294967290,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 21,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Long,
-                                        name: "b.2",
-                                        init: Some(
-                                            Constant(
-                                                Long(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                47,
-                                            ),
-                                            length: 12,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Expression(
-                                    Assignment(
-                                        Var(
-                                            "b.2",
-                                        ),
-                                        Var(
-                                            "a.1",
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Cast(
-                                        Int,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "b.2",
-                                            ),
-                                            Constant(
-                                                Long(
-                                                    4294967290,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 88,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a.1",
+                    ty: Long,
+                    init: Constant(
+                        4294967290l,
                     ),
-                    length: 103,
                 },
-            },
-        ),
+                VariableDeclaration {
+                    name: "b.2",
+                    ty: Long,
+                    init: Constant(
+                        0l,
+                    ),
+                },
+                Expression(
+                    Assignment(
+                        Var(
+                            "b.2",
+                        ),
+                        Var(
+                            "a.1",
+                        ),
+                    ),
+                ),
+                Return(
+                    Cast(
+                        Int,
+                        Binary(
+                            Equals,
+                            Var(
+                                "b.2",
+                            ),
+                            Constant(
+                                4294967290l,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

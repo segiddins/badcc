@@ -7,44 +7,21 @@ Program {
             params: [],
             instructions: [
                 Copy {
-                    src: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "x.1",
-                        Int,
-                    ),
+                    src: 4,
+                    dst: Var("x.1", Int),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "x.1",
-                        Int,
-                    ),
-                    rhs: Constant(
-                        Int(
-                            4,
-                        ),
-                    ),
-                    dst: Var(
-                        "read_x.tmp.0",
-                        Int,
-                    ),
+                    lhs: Var("x.1", Int),
+                    rhs: 4,
+                    dst: Var("read_x.tmp.0", Int),
                 },
                 JumpIfZero(
-                    Var(
-                        "read_x.tmp.0",
-                        Int,
-                    ),
+                    Var("read_x.tmp.0", Int),
                     "read_x.0.true",
                 ),
                 Return(
-                    Var(
-                        "x",
-                        Int,
-                    ),
+                    Var("x", Int),
                 ),
                 Jump(
                     "read_x.0.end",
@@ -54,31 +31,17 @@ Program {
                 ),
                 Unary {
                     op: Negate,
-                    src: Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
-                    dst: Var(
-                        "read_x.tmp.1",
-                        Int,
-                    ),
+                    src: 1,
+                    dst: Var("read_x.tmp.1", Int),
                 },
                 Return(
-                    Var(
-                        "read_x.tmp.1",
-                        Int,
-                    ),
+                    Var("read_x.tmp.1", Int),
                 ),
                 Label(
                     "read_x.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

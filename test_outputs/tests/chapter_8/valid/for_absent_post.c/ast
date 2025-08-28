@@ -1,146 +1,86 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "a",
-                                        init: Some(
-                                            Unary(
-                                                Minus,
-                                                Constant(
-                                                    Int(
-                                                        2147483647,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 20,
-                                        },
-                                    },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Unary(
+                        Minus,
+                        Constant(
+                            2147483647,
+                        ),
+                    ),
+                },
+                For {
+                    init: None,
+                    condition: Some(
+                        Binary(
+                            NotEqual,
+                            Binary(
+                                Remainder,
+                                Var(
+                                    "a",
+                                ),
+                                Constant(
+                                    5,
                                 ),
                             ),
-                            Statement(
-                                For {
-                                    init: Expr(
-                                        None,
-                                    ),
-                                    condition: Some(
-                                        Binary(
-                                            NotEqual,
-                                            Binary(
-                                                Remainder,
-                                                Var(
-                                                    "a",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        5,
-                                                    ),
-                                                ),
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    post: None,
-                                    body: Compound(
-                                        Block {
-                                            items: [
-                                                Statement(
-                                                    Expression(
-                                                        Assignment(
-                                                            Var(
-                                                                "a",
-                                                            ),
-                                                            Binary(
-                                                                Add,
-                                                                Var(
-                                                                    "a",
-                                                                ),
-                                                                Constant(
-                                                                    Int(
-                                                                        1,
-                                                                    ),
-                                                                ),
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ),
-                                            ],
-                                            span: SourceSpan {
-                                                offset: SourceOffset(
-                                                    66,
-                                                ),
-                                                length: 26,
-                                            },
-                                        },
-                                    ),
-                                    label: None,
-                                },
+                            Constant(
+                                0,
                             ),
-                            Statement(
-                                Return(
+                        ),
+                    ),
+                    post: None,
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment(
+                                    Var(
+                                        "a",
+                                    ),
                                     Binary(
-                                        Or,
-                                        Binary(
-                                            Remainder,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    5,
-                                                ),
-                                            ),
+                                        Add,
+                                        Var(
+                                            "a",
                                         ),
-                                        Binary(
-                                            GreaterThan,
-                                            Var(
-                                                "a",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    0,
-                                                ),
-                                            ),
+                                        Constant(
+                                            1,
                                         ),
                                     ),
                                 ),
                             ),
                         ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 106,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
                     ),
-                    length: 121,
+                    label: None,
                 },
-            },
-        ),
+                Return(
+                    Binary(
+                        Or,
+                        Binary(
+                            Remainder,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                5,
+                            ),
+                        ),
+                        Binary(
+                            GreaterThan,
+                            Var(
+                                "a",
+                            ),
+                            Constant(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }

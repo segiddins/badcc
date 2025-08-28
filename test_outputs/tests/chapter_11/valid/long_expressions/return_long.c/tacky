@@ -5,63 +5,29 @@ Program {
             identifier: "add",
             global: true,
             params: [
-                Var(
-                    "a.1",
-                    Int,
-                ),
-                Var(
-                    "b.2",
-                    Int,
-                ),
+                Var("a.1", Int),
+                Var("b.2", Int),
             ],
             instructions: [
                 SignExtend {
-                    src: Var(
-                        "a.1",
-                        Int,
-                    ),
-                    dst: Var(
-                        "add.tmp.0",
-                        Long,
-                    ),
+                    src: Var("a.1", Int),
+                    dst: Var("add.tmp.0", Long),
                 },
                 SignExtend {
-                    src: Var(
-                        "b.2",
-                        Int,
-                    ),
-                    dst: Var(
-                        "add.tmp.1",
-                        Long,
-                    ),
+                    src: Var("b.2", Int),
+                    dst: Var("add.tmp.1", Long),
                 },
                 Binary {
                     op: Add,
-                    lhs: Var(
-                        "add.tmp.0",
-                        Long,
-                    ),
-                    rhs: Var(
-                        "add.tmp.1",
-                        Long,
-                    ),
-                    dst: Var(
-                        "add.tmp.2",
-                        Long,
-                    ),
+                    lhs: Var("add.tmp.0", Long),
+                    rhs: Var("add.tmp.1", Long),
+                    dst: Var("add.tmp.2", Long),
                 },
                 Return(
-                    Var(
-                        "add.tmp.2",
-                        Long,
-                    ),
+                    Var("add.tmp.2", Long),
                 ),
                 Return(
-                    Constant(
-                        Long(
-                            0,
-                        ),
-                    ),
+                    0l,
                 ),
             ],
         },
@@ -73,61 +39,27 @@ Program {
                 Call(
                     "add",
                     [
-                        Constant(
-                            Int(
-                                2147483645,
-                            ),
-                        ),
-                        Constant(
-                            Int(
-                                2147483645,
-                            ),
-                        ),
+                        2147483645,
+                        2147483645,
                     ],
-                    Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
+                    Var("main.tmp.0", Long),
                 ),
                 Copy {
-                    src: Var(
-                        "main.tmp.0",
-                        Long,
-                    ),
-                    dst: Var(
-                        "a.4",
-                        Long,
-                    ),
+                    src: Var("main.tmp.0", Long),
+                    dst: Var("a.4", Long),
                 },
                 Binary {
                     op: Equals,
-                    lhs: Var(
-                        "a.4",
-                        Long,
-                    ),
-                    rhs: Constant(
-                        Long(
-                            4294967290,
-                        ),
-                    ),
-                    dst: Var(
-                        "main.tmp.1",
-                        Long,
-                    ),
+                    lhs: Var("a.4", Long),
+                    rhs: 4294967290l,
+                    dst: Var("main.tmp.1", Long),
                 },
                 JumpIfZero(
-                    Var(
-                        "main.tmp.1",
-                        Long,
-                    ),
+                    Var("main.tmp.1", Long),
                     "main.0.true",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            1,
-                        ),
-                    ),
+                    1,
                 ),
                 Jump(
                     "main.0.end",
@@ -139,18 +71,10 @@ Program {
                     "main.0.end",
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
                 Return(
-                    Constant(
-                        Int(
-                            0,
-                        ),
-                    ),
+                    0,
                 ),
             ],
         },

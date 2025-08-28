@@ -1,130 +1,69 @@
 Program {
     declarations: [
-        Function(
-            FunctionDeclaration {
-                identifier: "main",
-                params: [],
-                ret: Int,
-                body: Some(
-                    Block {
-                        items: [
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "x.1",
-                                        init: Some(
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                21,
-                                            ),
-                                            length: 10,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Goto(
-                                    "post_declaration",
-                                ),
-                            ),
-                            Declaration(
-                                Variable(
-                                    VariableDeclaration {
-                                        ty: Int,
-                                        name: "i.2",
-                                        init: Some(
-                                            Assignment(
-                                                Var(
-                                                    "x.1",
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        0,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                        storage: None,
-                                        span: SourceSpan {
-                                            offset: SourceOffset(
-                                                63,
-                                            ),
-                                            length: 16,
-                                        },
-                                    },
-                                ),
-                            ),
-                            Statement(
-                                Labeled(
-                                    "post_declaration",
-                                    Expression(
-                                        Assignment(
-                                            Var(
-                                                "i.2",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    5,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            Statement(
-                                Return(
-                                    Binary(
-                                        And,
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "x.1",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    1,
-                                                ),
-                                            ),
-                                        ),
-                                        Binary(
-                                            Equals,
-                                            Var(
-                                                "i.2",
-                                            ),
-                                            Constant(
-                                                Int(
-                                                    5,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ],
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                15,
-                            ),
-                            length: 126,
-                        },
-                    },
-                ),
-                storage: None,
-                span: SourceSpan {
-                    offset: SourceOffset(
-                        0,
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x.1",
+                    ty: Int,
+                    init: Constant(
+                        1,
                     ),
-                    length: 141,
                 },
-            },
-        ),
+                Goto(
+                    "post_declaration",
+                ),
+                VariableDeclaration {
+                    name: "i.2",
+                    ty: Int,
+                    init: Assignment(
+                        Var(
+                            "x.1",
+                        ),
+                        Constant(
+                            0,
+                        ),
+                    ),
+                },
+                Labeled(
+                    "post_declaration",
+                    Expression(
+                        Assignment(
+                            Var(
+                                "i.2",
+                            ),
+                            Constant(
+                                5,
+                            ),
+                        ),
+                    ),
+                ),
+                Return(
+                    Binary(
+                        And,
+                        Binary(
+                            Equals,
+                            Var(
+                                "x.1",
+                            ),
+                            Constant(
+                                1,
+                            ),
+                        ),
+                        Binary(
+                            Equals,
+                            Var(
+                                "i.2",
+                            ),
+                            Constant(
+                                5,
+                            ),
+                        ),
+                    ),
+                ),
+            ],
+        },
     ],
 }
