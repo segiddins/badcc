@@ -2,7 +2,7 @@
 
 use camino::{Utf8Path, Utf8PathBuf};
 use fs_err::{File, create_dir_all, read_to_string};
-use miette::{Context, IntoDiagnostic, NamedSource, Result, bail};
+use miette::{Context, IntoDiagnostic, MietteHandlerOpts, NamedSource, Result, bail};
 use std::{
     io::Write,
     process::{Command, ExitCode},
@@ -106,12 +106,13 @@ impl Driver {
 
         let program = generate_assembly(&tacky, &symbols);
         self.write_test_output("assembly_ast", || format!("{program:#?}"));
-        if self.codegen {
-            return Ok(());
-        }
 
         let assembly = self.emit_asm(&program)?;
         self.artifacts.push(assembly.clone());
+
+        if self.codegen {
+            return Ok(());
+        }
 
         self.assemble(assembly).context("Assembling failed")?;
 
@@ -146,13 +147,6 @@ impl Driver {
     }
 
     fn assemble(&self, assembly: impl AsRef<Utf8Path>) -> Result<()> {
-        #[cfg(target_os = "macos")]
-        let mut cmd = {
-            let mut c = Command::new("arch");
-            c.arg("-x86_64").arg("gcc");
-            c
-        };
-        #[cfg(not(target_os = "macos"))]
         let mut cmd = Command::new("gcc");
 
         if self.skip_linking {
@@ -160,6 +154,8 @@ impl Driver {
         }
 
         cmd.arg(assembly.as_ref())
+            .arg("-arch")
+            .arg("x86_64")
             .arg("-o")
             .arg(self.output.clone().unwrap_or_else(|| {
                 self.input
@@ -214,12 +210,20 @@ impl Drop for Driver {
 fn main() -> ExitCode {
     let mut driver = Driver::parse();
 
-    match driver.run() {
-        Ok(_) => ExitCode::SUCCESS,
+    if driver.test_outputs_dir.is_some() {
+        miette::set_hook(Box::new(|_| {
+            Box::new(MietteHandlerOpts::new().width(10000).build())
+        }))
+        .unwrap();
+    }
+
+    let status: u8 = match driver.run() {
+        Ok(_) => 0,
         Err(err) => {
             driver.write_test_output("error.txt", || format!("{err:?}"));
             eprintln!("{err:?}");
-            2.into()
+            2
         }
-    }
+    };
+    status.into()
 }
