@@ -6,30 +6,42 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            13,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            20,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Cast(
-                            Long,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                        Cast(
-                            Long,
-                            Var(
-                                "b",
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Cast {
+                            to: Long,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                        rhs: Cast {
+                            to: Long,
+                            expr: Var {
+                                name: "b",
+                            },
+                        },
+                    },
                 ),
             ],
         },

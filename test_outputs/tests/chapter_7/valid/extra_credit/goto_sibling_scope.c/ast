@@ -8,73 +8,73 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 If(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "a",
                                 ty: Int,
-                                init: Constant(
-                                    5,
-                                ),
+                                init: Constant {
+                                    constant: 5,
+                                },
                             },
                             Goto(
                                 "other_if",
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "sum",
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                             ),
                             Labeled(
                                 "first_if",
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            5,
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "a",
+                                        },
+                                        rhs: Constant {
+                                            constant: 5,
+                                        },
+                                    },
                                 ),
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "sum",
-                                        ),
-                                        Var(
-                                            "a",
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "sum",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "sum",
+                                        },
+                                        rhs: Var {
+                                            name: "a",
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                     Compound(
                         [
                             Labeled(
@@ -84,47 +84,47 @@ Program {
                             VariableDeclaration {
                                 name: "a",
                                 ty: Int,
-                                init: Constant(
-                                    6,
-                                ),
+                                init: Constant {
+                                    constant: 6,
+                                },
                             },
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "sum",
-                                        ),
-                                        Var(
-                                            "a",
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "sum",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "sum",
+                                        },
+                                        rhs: Var {
+                                            name: "a",
+                                        },
+                                    },
+                                },
                             ),
                             Goto(
                                 "first_if",
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "sum",
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var(
-                        "sum",
-                    ),
+                    Var {
+                        name: "sum",
+                    },
                 ),
             ],
         },

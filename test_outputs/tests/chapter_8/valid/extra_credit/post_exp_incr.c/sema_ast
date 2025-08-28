@@ -8,54 +8,54 @@ Program {
                 VariableDeclaration {
                     name: "product.1",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.2",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "i.2",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "i.2",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Unary(
-                            PostfixIncrement,
-                            Var(
-                                "i.2",
-                            ),
-                        ),
+                        Unary {
+                            op: PostfixIncrement,
+                            expr: Var {
+                                name: "i.2",
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "product.1",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "product.1",
-                                        ),
-                                        Constant(
-                                            2,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "product.1",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "product.1",
+                                        },
+                                        rhs: Constant {
+                                            constant: 2,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
@@ -64,9 +64,9 @@ Program {
                     ),
                 },
                 Return(
-                    Var(
-                        "product.1",
-                    ),
+                    Var {
+                        name: "product.1",
+                    },
                 ),
             ],
         },

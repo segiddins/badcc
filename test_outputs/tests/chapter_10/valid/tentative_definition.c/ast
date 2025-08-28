@@ -22,59 +22,59 @@ Program {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "i",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Expression(
-                        Assignment(
-                            Var(
-                                "foo",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "foo",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "foo",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "foo",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     label: None,
                 },
                 Return(
-                    Var(
-                        "foo",
-                    ),
+                    Var {
+                        name: "foo",
+                    },
                 ),
             ],
         },

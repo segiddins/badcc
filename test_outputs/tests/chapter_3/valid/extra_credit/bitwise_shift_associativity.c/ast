@@ -6,21 +6,21 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        RightShift,
-                        Binary(
-                            LeftShift,
-                            Constant(
-                                33,
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Binary {
+                        op: RightShift,
+                        lhs: Binary {
+                            op: LeftShift,
+                            lhs: Constant {
+                                constant: 33,
+                            },
+                            rhs: Constant {
+                                constant: 4,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                 ),
             ],
         },

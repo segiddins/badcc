@@ -6,46 +6,52 @@ Program {
                 (
                     Int,
                     "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            25,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Switch(
-                    Cast(
-                        Long,
-                        Var(
-                            "i",
-                        ),
-                    ),
+                    Cast {
+                        to: Long,
+                        expr: Var {
+                            name: "i",
+                        },
+                    },
                     Compound(
                         [
                             Case(
-                                Constant(
-                                    100l,
-                                ),
+                                Constant {
+                                    constant: 100l,
+                                },
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 None,
                             ),
                             Case(
-                                Constant(
-                                    100,
-                                ),
+                                Constant {
+                                    constant: 100,
+                                },
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 None,
                             ),
                             Default(
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
@@ -61,16 +67,16 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "switch_statement",
-                        ),
-                        [
-                            Constant(
-                                100,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "switch_statement",
+                        },
+                        params: [
+                            Constant {
+                                constant: 100,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 FunctionDeclaration {
                     identifier: "f",
@@ -18,21 +18,27 @@ Program {
                         (
                             Int,
                             "a",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    47,
+                                ),
+                                length: 1,
+                            },
                         ),
                     ],
                     ret: Int,
                 },
                 Return(
-                    FunctionCall(
-                        Var(
-                            "f",
-                        ),
-                        [
-                            Var(
-                                "a",
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "f",
+                        },
+                        params: [
+                            Var {
+                                name: "a",
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },
@@ -42,20 +48,26 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            80,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Multiply,
-                        Var(
-                            "a",
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Binary {
+                        op: Multiply,
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                 ),
             ],
         },

@@ -8,37 +8,37 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant(
-                        2,
-                    ),
+                    init: Constant {
+                        constant: 2,
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "a",
-                        ),
-                        Assignment(
-                            Binary(
-                                Multiply,
-                                Constant(
-                                    3,
-                                ),
-                                Var(
-                                    "b",
-                                ),
-                            ),
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Assignment {
+                            lhs: Binary {
+                                op: Multiply,
+                                lhs: Constant {
+                                    constant: 3,
+                                },
+                                rhs: Var {
+                                    name: "b",
+                                },
+                            },
+                            rhs: Var {
+                                name: "a",
+                            },
+                        },
+                    },
                 ),
             ],
         },

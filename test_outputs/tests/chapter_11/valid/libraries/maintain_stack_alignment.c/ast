@@ -6,34 +6,52 @@ Program {
                 (
                     Long,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            32,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "z",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            39,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Binary(
-                            Add,
-                            Var(
-                                "x",
-                            ),
-                            Var(
-                                "y",
-                            ),
-                        ),
-                        Var(
-                            "z",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Var {
+                                name: "y",
+                            },
+                        },
+                        rhs: Var {
+                            name: "z",
+                        },
+                    },
                 ),
             ],
         },

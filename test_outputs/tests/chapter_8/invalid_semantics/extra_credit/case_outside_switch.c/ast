@@ -9,47 +9,47 @@ Program {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "i",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Case(
-                                Constant(
-                                    0,
-                                ),
+                                Constant {
+                                    constant: 0,
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
@@ -58,9 +58,9 @@ Program {
                     label: None,
                 },
                 Return(
-                    Constant(
-                        9,
-                    ),
+                    Constant {
+                        constant: 9,
+                    },
                 ),
             ],
         },

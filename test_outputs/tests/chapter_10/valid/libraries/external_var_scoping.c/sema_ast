@@ -8,20 +8,20 @@ Program {
                 VariableDeclaration {
                     name: "x.1",
                     ty: Int,
-                    init: Constant(
-                        4,
-                    ),
+                    init: Constant {
+                        constant: 4,
+                    },
                 },
                 If(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x.1",
-                        ),
-                        Constant(
-                            4,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x.1",
+                        },
+                        rhs: Constant {
+                            constant: 4,
+                        },
+                    },
                     Compound(
                         [
                             VariableDeclaration {
@@ -30,9 +30,9 @@ Program {
                                 storage: Extern,
                             },
                             Return(
-                                Var(
-                                    "x",
-                                ),
+                                Var {
+                                    name: "x",
+                                },
                             ),
                         ],
                     ),
@@ -40,12 +40,12 @@ Program {
                         Compound(
                             [
                                 Return(
-                                    Unary(
-                                        Minus,
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
+                                    Unary {
+                                        op: Minus,
+                                        expr: Constant {
+                                            constant: 1,
+                                        },
+                                    },
                                 ),
                             ],
                         ),

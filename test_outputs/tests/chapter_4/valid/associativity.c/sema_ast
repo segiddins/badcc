@@ -6,27 +6,27 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        LessThanOrEqual,
-                        Binary(
-                            GreaterThan,
-                            Binary(
-                                GreaterThanOrEqual,
-                                Constant(
-                                    5,
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: LessThanOrEqual,
+                        lhs: Binary {
+                            op: GreaterThan,
+                            lhs: Binary {
+                                op: GreaterThanOrEqual,
+                                lhs: Constant {
+                                    constant: 5,
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                 ),
             ],
         },

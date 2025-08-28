@@ -8,123 +8,123 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        5,
-                    ),
+                    init: Constant {
+                        constant: 5,
+                    },
                 },
                 VariableDeclaration {
                     name: "acc",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 While(
-                    Binary(
-                        GreaterThanOrEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "i",
                                 ty: Int,
-                                init: Var(
-                                    "x",
-                                ),
+                                init: Var {
+                                    name: "x",
+                                },
                             },
                             While(
-                                Binary(
-                                    LessThanOrEqual,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: LessThanOrEqual,
+                                    lhs: Var {
+                                        name: "i",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Compound(
                                     [
                                         Expression(
-                                            Assignment(
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "i",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
+                                            Assignment {
+                                                lhs: Var {
+                                                    name: "i",
+                                                },
+                                                rhs: Binary {
+                                                    op: Add,
+                                                    lhs: Var {
+                                                        name: "i",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
+                                            },
                                         ),
                                         If(
-                                            Binary(
-                                                Remainder,
-                                                Var(
-                                                    "i",
-                                                ),
-                                                Constant(
-                                                    2,
-                                                ),
-                                            ),
+                                            Binary {
+                                                op: Remainder,
+                                                lhs: Var {
+                                                    name: "i",
+                                                },
+                                                rhs: Constant {
+                                                    constant: 2,
+                                                },
+                                            },
                                             Continue(
                                                 None,
                                             ),
                                             None,
                                         ),
                                         Expression(
-                                            Assignment(
-                                                Var(
-                                                    "acc",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "acc",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
+                                            Assignment {
+                                                lhs: Var {
+                                                    name: "acc",
+                                                },
+                                                rhs: Binary {
+                                                    op: Add,
+                                                    lhs: Var {
+                                                        name: "acc",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
+                                            },
                                         ),
                                     ],
                                 ),
                                 None,
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "x",
-                                    ),
-                                    Binary(
-                                        Subtract,
-                                        Var(
-                                            "x",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "x",
+                                    },
+                                    rhs: Binary {
+                                        op: Subtract,
+                                        lhs: Var {
+                                            name: "x",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var(
-                        "acc",
-                    ),
+                    Var {
+                        name: "acc",
+                    },
                 ),
             ],
         },

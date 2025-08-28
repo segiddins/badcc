@@ -6,18 +6,42 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            10,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            17,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "c",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            31,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -25,85 +49,85 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Binary(
-                        Divide,
-                        Var(
-                            "a",
-                        ),
-                        Var(
-                            "b",
-                        ),
-                    ),
+                    init: Binary {
+                        op: Divide,
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Var {
+                            name: "b",
+                        },
+                    },
                 },
                 If(
-                    Binary(
-                        And,
-                        Binary(
-                            And,
-                            Binary(
-                                And,
-                                Binary(
-                                    And,
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            10,
-                                        ),
-                                    ),
-                                    Binary(
-                                        Equals,
-                                        Var(
-                                            "b",
-                                        ),
-                                        Constant(
-                                            2,
-                                        ),
-                                    ),
-                                ),
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "c",
-                                    ),
-                                    Constant(
-                                        100,
-                                    ),
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "d",
-                                ),
-                                Constant(
-                                    4,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: And,
+                                lhs: Binary {
+                                    op: And,
+                                    lhs: Binary {
+                                        op: Equals,
+                                        lhs: Var {
+                                            name: "a",
+                                        },
+                                        rhs: Constant {
+                                            constant: 10,
+                                        },
+                                    },
+                                    rhs: Binary {
+                                        op: Equals,
+                                        lhs: Var {
+                                            name: "b",
+                                        },
+                                        rhs: Constant {
+                                            constant: 2,
+                                        },
+                                    },
+                                },
+                                rhs: Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "c",
+                                    },
+                                    rhs: Constant {
+                                        constant: 100,
+                                    },
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "d",
+                                },
+                                rhs: Constant {
+                                    constant: 4,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

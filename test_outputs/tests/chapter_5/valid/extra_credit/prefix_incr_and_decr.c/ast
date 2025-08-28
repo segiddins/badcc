@@ -8,83 +8,83 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant(
-                        2,
-                    ),
+                    init: Constant {
+                        constant: 2,
+                    },
                 },
                 VariableDeclaration {
                     name: "c",
                     ty: Int,
-                    init: Unary(
-                        PrefixIncrement,
-                        Var(
-                            "a",
-                        ),
-                    ),
+                    init: Unary {
+                        op: PrefixIncrement,
+                        expr: Var {
+                            name: "a",
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "d",
                     ty: Int,
-                    init: Unary(
-                        PrefixDecrement,
-                        Var(
-                            "b",
-                        ),
-                    ),
+                    init: Unary {
+                        op: PrefixDecrement,
+                        expr: Var {
+                            name: "b",
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            And,
-                            Binary(
-                                And,
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Constant(
-                                        2,
-                                    ),
-                                ),
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "b",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "c",
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "d",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: And,
+                                lhs: Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Constant {
+                                        constant: 2,
+                                    },
+                                },
+                                rhs: Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "b",
+                                    },
+                                    rhs: Constant {
+                                        constant: 1,
+                                    },
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "c",
+                                },
+                                rhs: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "d",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                 ),
             ],
         },

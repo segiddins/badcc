@@ -8,62 +8,62 @@ Program {
                 VariableDeclaration {
                     name: "l",
                     ty: Long,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            34359738368l,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 34359738368l,
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 10,
+                        },
+                    },
                 },
                 Expression(
-                    CompoundAssignment(
-                        Var(
-                            "l",
-                        ),
-                        Subtract,
-                        Var(
-                            "i",
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Subtract,
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Var {
+                            name: "i",
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "l",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                34359738358l,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 34359738358l,
+                            },
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

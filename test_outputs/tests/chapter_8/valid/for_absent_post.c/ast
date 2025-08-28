@@ -8,77 +8,77 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            2147483647,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 2147483647,
+                        },
+                    },
                 },
                 For {
                     init: None,
                     condition: Some(
-                        Binary(
-                            NotEqual,
-                            Binary(
-                                Remainder,
-                                Var(
-                                    "a",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
+                        Binary {
+                            op: NotEqual,
+                            lhs: Binary {
+                                op: Remainder,
+                                lhs: Var {
+                                    name: "a",
+                                },
+                                rhs: Constant {
+                                    constant: 5,
+                                },
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
                     ),
                     post: None,
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "a",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "a",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     label: None,
                 },
                 Return(
-                    Binary(
-                        Or,
-                        Binary(
-                            Remainder,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                        Binary(
-                            GreaterThan,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Or,
+                        lhs: Binary {
+                            op: Remainder,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                        rhs: Binary {
+                            op: GreaterThan,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

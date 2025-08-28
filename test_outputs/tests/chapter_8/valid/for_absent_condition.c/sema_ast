@@ -9,41 +9,41 @@ Program {
                     init: VariableDeclaration {
                         name: "i.1",
                         ty: Int,
-                        init: Constant(
-                            400,
-                        ),
+                        init: Constant {
+                            constant: 400,
+                        },
                     },
                     condition: None,
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i.1",
-                            ),
-                            Binary(
-                                Subtract,
-                                Var(
-                                    "i.1",
-                                ),
-                                Constant(
-                                    100,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i.1",
+                            },
+                            rhs: Binary {
+                                op: Subtract,
+                                lhs: Var {
+                                    name: "i.1",
+                                },
+                                rhs: Constant {
+                                    constant: 100,
+                                },
+                            },
+                        },
                     ),
                     body: If(
-                        Binary(
-                            Equals,
-                            Var(
-                                "i.1",
-                            ),
-                            Constant(
-                                100,
-                            ),
-                        ),
+                        Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "i.1",
+                            },
+                            rhs: Constant {
+                                constant: 100,
+                            },
+                        },
                         Return(
-                            Constant(
-                                0,
-                            ),
+                            Constant {
+                                constant: 0,
+                            },
                         ),
                         None,
                     ),

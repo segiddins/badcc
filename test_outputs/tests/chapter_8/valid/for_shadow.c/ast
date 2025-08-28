@@ -8,96 +8,96 @@ Program {
                 VariableDeclaration {
                     name: "shadow",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "acc",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "shadow",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "shadow",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "shadow",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "shadow",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "shadow",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "shadow",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "shadow",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "acc",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "acc",
-                                        ),
-                                        Var(
-                                            "shadow",
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "acc",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "acc",
+                                        },
+                                        rhs: Var {
+                                            name: "shadow",
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     label: None,
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "acc",
-                            ),
-                            Constant(
-                                45,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "shadow",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "acc",
+                            },
+                            rhs: Constant {
+                                constant: 45,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "shadow",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                 ),
             ],
         },

@@ -8,92 +8,92 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant(
-                        2,
-                    ),
+                    init: Constant {
+                        constant: 2,
+                    },
                 },
                 VariableDeclaration {
                     name: "c",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Unary(
-                            PrefixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Unary {
+                            op: PrefixIncrement,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "d",
                     ty: Int,
-                    init: Unary(
-                        Not,
-                        Unary(
-                            PostfixDecrement,
-                            Var(
-                                "b",
-                            ),
-                        ),
-                    ),
+                    init: Unary {
+                        op: Not,
+                        expr: Unary {
+                            op: PostfixDecrement,
+                            expr: Var {
+                                name: "b",
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            And,
-                            Binary(
-                                And,
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Constant(
-                                        2,
-                                    ),
-                                ),
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "b",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "c",
-                                ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        2,
-                                    ),
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "d",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: And,
+                                lhs: Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Constant {
+                                        constant: 2,
+                                    },
+                                },
+                                rhs: Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "b",
+                                    },
+                                    rhs: Constant {
+                                        constant: 1,
+                                    },
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "c",
+                                },
+                                rhs: Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 2,
+                                    },
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "d",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

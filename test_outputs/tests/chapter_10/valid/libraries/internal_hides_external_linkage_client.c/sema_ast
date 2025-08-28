@@ -3,9 +3,9 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant(
-                1,
-            ),
+            init: Constant {
+                constant: 1,
+            },
             storage: Static,
         },
         FunctionDeclaration {
@@ -29,76 +29,76 @@ Program {
                     storage: Extern,
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            1,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "read_internal_x",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "read_internal_x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "read_x",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "read_x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 10,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },
@@ -113,9 +113,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },

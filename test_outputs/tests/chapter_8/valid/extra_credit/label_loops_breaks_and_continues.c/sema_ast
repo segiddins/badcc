@@ -8,17 +8,17 @@ Program {
                 VariableDeclaration {
                     name: "sum.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Goto(
                     "do_label",
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
                 Labeled(
                     "do_label",
@@ -26,23 +26,23 @@ Program {
                         Compound(
                             [
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "sum.1",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "sum.1",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
                                 ),
                                 Goto(
                                     "while_label",
                                 ),
                             ],
                         ),
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                         Some(
                             "loop.0",
                         ),
@@ -51,34 +51,34 @@ Program {
                 Labeled(
                     "while_label",
                     While(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                         Compound(
                             [
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "sum.1",
-                                        ),
-                                        Binary(
-                                            Add,
-                                            Var(
-                                                "sum.1",
-                                            ),
-                                            Constant(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "sum.1",
+                                        },
+                                        rhs: Binary {
+                                            op: Add,
+                                            lhs: Var {
+                                                name: "sum.1",
+                                            },
+                                            rhs: Constant {
+                                                constant: 1,
+                                            },
+                                        },
+                                    },
                                 ),
                                 Goto(
                                     "break_label",
                                 ),
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 Labeled(
                                     "break_label",
@@ -100,9 +100,9 @@ Program {
                     "for_label",
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
                 Labeled(
                     "for_label",
@@ -110,62 +110,62 @@ Program {
                         init: VariableDeclaration {
                             name: "i.2",
                             ty: Int,
-                            init: Constant(
-                                0,
-                            ),
+                            init: Constant {
+                                constant: 0,
+                            },
                         },
                         condition: Some(
-                            Binary(
-                                LessThan,
-                                Var(
-                                    "i.2",
-                                ),
-                                Constant(
-                                    10,
-                                ),
-                            ),
+                            Binary {
+                                op: LessThan,
+                                lhs: Var {
+                                    name: "i.2",
+                                },
+                                rhs: Constant {
+                                    constant: 10,
+                                },
+                            },
                         ),
                         post: Some(
-                            Assignment(
-                                Var(
-                                    "i.2",
-                                ),
-                                Binary(
-                                    Add,
-                                    Var(
-                                        "i.2",
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
+                            Assignment {
+                                lhs: Var {
+                                    name: "i.2",
+                                },
+                                rhs: Binary {
+                                    op: Add,
+                                    lhs: Var {
+                                        name: "i.2",
+                                    },
+                                    rhs: Constant {
+                                        constant: 1,
+                                    },
+                                },
+                            },
                         ),
                         body: Compound(
                             [
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "sum.1",
-                                        ),
-                                        Binary(
-                                            Add,
-                                            Var(
-                                                "sum.1",
-                                            ),
-                                            Constant(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "sum.1",
+                                        },
+                                        rhs: Binary {
+                                            op: Add,
+                                            lhs: Var {
+                                                name: "sum.1",
+                                            },
+                                            rhs: Constant {
+                                                constant: 1,
+                                            },
+                                        },
+                                    },
                                 ),
                                 Goto(
                                     "continue_label",
                                 ),
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 Labeled(
                                     "continue_label",
@@ -176,9 +176,9 @@ Program {
                                     ),
                                 ),
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                             ],
                         ),
@@ -188,9 +188,9 @@ Program {
                     },
                 ),
                 Return(
-                    Var(
-                        "sum.1",
-                    ),
+                    Var {
+                        name: "sum.1",
+                    },
                 ),
             ],
         },

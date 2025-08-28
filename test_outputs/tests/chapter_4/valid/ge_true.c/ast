@@ -6,30 +6,30 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Binary(
-                            GreaterThanOrEqual,
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        Binary(
-                            GreaterThanOrEqual,
-                            Constant(
-                                1,
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    4,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Constant {
+                                constant: 1,
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        rhs: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Constant {
+                                constant: 1,
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 4,
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

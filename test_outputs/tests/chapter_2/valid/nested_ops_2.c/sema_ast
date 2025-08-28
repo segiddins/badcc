@@ -6,15 +6,15 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Unary(
-                        Minus,
-                        Unary(
-                            Complement,
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Unary {
+                        op: Minus,
+                        expr: Unary {
+                            op: Complement,
+                            expr: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

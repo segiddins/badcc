@@ -6,14 +6,32 @@ Program {
                 (
                     Long,
                     "x.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "y.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            32,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "z.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            39,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
@@ -26,44 +44,44 @@ Program {
                 VariableDeclaration {
                     name: "x.5",
                     ty: Long,
-                    init: Constant(
-                        3l,
-                    ),
+                    init: Constant {
+                        constant: 3l,
+                    },
                 },
                 VariableDeclaration {
                     name: "y.6",
                     ty: Long,
-                    init: Constant(
-                        4l,
-                    ),
+                    init: Constant {
+                        constant: 4l,
+                    },
                 },
                 VariableDeclaration {
                     name: "z.7",
                     ty: Int,
-                    init: Constant(
-                        5,
-                    ),
+                    init: Constant {
+                        constant: 5,
+                    },
                 },
                 Return(
-                    Cast(
-                        Int,
-                        FunctionCall(
-                            Var(
-                                "add_variables",
-                            ),
-                            [
-                                Var(
-                                    "x.5",
-                                ),
-                                Var(
-                                    "y.6",
-                                ),
-                                Var(
-                                    "z.7",
-                                ),
+                    Cast {
+                        to: Int,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "add_variables",
+                            },
+                            params: [
+                                Var {
+                                    name: "x.5",
+                                },
+                                Var {
+                                    name: "y.6",
+                                },
+                                Var {
+                                    name: "z.7",
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 ),
             ],
         },

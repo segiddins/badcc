@@ -8,45 +8,45 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Expression(
-                    Ternary(
-                        CompoundAssignment(
-                            Var(
-                                "x",
-                            ),
-                            Subtract,
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        CompoundAssignment(
-                            Var(
-                                "x",
-                            ),
-                            Divide,
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Ternary {
+                        cond: CompoundAssignment {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        if_true: CompoundAssignment {
+                            op: Divide,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        if_false: Constant {
+                            constant: 0,
+                        },
+                    },
                 ),
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            4,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 4,
+                        },
+                    },
                 ),
             ],
         },

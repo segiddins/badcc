@@ -8,24 +8,24 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Switch(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                     Compound(
                         [
                             Case(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
@@ -35,42 +35,42 @@ Program {
                                 storage: Extern,
                             },
                             Case(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                                 Return(
-                                    Constant(
-                                        2,
-                                    ),
+                                    Constant {
+                                        constant: 2,
+                                    },
                                 ),
                                 None,
                             ),
                             Case(
-                                Constant(
-                                    10,
-                                ),
+                                Constant {
+                                    constant: 10,
+                                },
                                 If(
-                                    Binary(
-                                        Equals,
-                                        Binary(
-                                            Multiply,
-                                            Var(
-                                                "x",
-                                            ),
-                                            Constant(
-                                                2,
-                                            ),
-                                        ),
-                                        Constant(
-                                            30,
-                                        ),
-                                    ),
+                                    Binary {
+                                        op: Equals,
+                                        lhs: Binary {
+                                            op: Multiply,
+                                            lhs: Var {
+                                                name: "x",
+                                            },
+                                            rhs: Constant {
+                                                constant: 2,
+                                            },
+                                        },
+                                        rhs: Constant {
+                                            constant: 30,
+                                        },
+                                    },
                                     Compound(
                                         [
                                             Return(
-                                                Constant(
-                                                    0,
-                                                ),
+                                                Constant {
+                                                    constant: 0,
+                                                },
                                             ),
                                         ],
                                     ),
@@ -80,9 +80,9 @@ Program {
                             ),
                             Default(
                                 Return(
-                                    Constant(
-                                        5,
-                                    ),
+                                    Constant {
+                                        constant: 5,
+                                    },
                                 ),
                                 None,
                             ),
@@ -91,18 +91,18 @@ Program {
                     None,
                 ),
                 Return(
-                    Constant(
-                        6,
-                    ),
+                    Constant {
+                        constant: 6,
+                    },
                 ),
             ],
         },
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant(
-                15,
-            ),
+            init: Constant {
+                constant: 15,
+            },
         },
     ],
 }

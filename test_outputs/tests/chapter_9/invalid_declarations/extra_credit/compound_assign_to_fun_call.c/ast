@@ -11,23 +11,23 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    CompoundAssignment(
-                        FunctionCall(
-                            Var(
-                                "x",
-                            ),
-                            [],
-                        ),
-                        Add,
-                        Constant(
-                            1,
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Add,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

@@ -8,76 +8,76 @@ Program {
                 VariableDeclaration {
                     name: "sum.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.2",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: None,
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i.2",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i.2",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Labeled(
                                 "lbl",
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "sum.1",
-                                        ),
-                                        Binary(
-                                            Add,
-                                            Var(
-                                                "sum.1",
-                                            ),
-                                            Constant(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "sum.1",
+                                        },
+                                        rhs: Binary {
+                                            op: Add,
+                                            lhs: Var {
+                                                name: "sum.1",
+                                            },
+                                            rhs: Constant {
+                                                constant: 1,
+                                            },
+                                        },
+                                    },
                                 ),
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "i.2",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "i.2",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "i.2",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "i.2",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    GreaterThan,
-                                    Var(
-                                        "i.2",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: GreaterThan,
+                                    lhs: Var {
+                                        name: "i.2",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Break(
                                     Some(
                                         "loop.0",
@@ -95,9 +95,9 @@ Program {
                     ),
                 },
                 Return(
-                    Var(
-                        "sum.1",
-                    ),
+                    Var {
+                        name: "sum.1",
+                    },
                 ),
             ],
         },

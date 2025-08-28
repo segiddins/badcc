@@ -8,83 +8,83 @@ Program {
                 VariableDeclaration {
                     name: "acc",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        100,
-                    ),
+                    init: Constant {
+                        constant: 100,
+                    },
                 },
                 While(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "y",
                                 ty: Int,
-                                init: Constant(
-                                    10,
-                                ),
+                                init: Constant {
+                                    constant: 10,
+                                },
                             },
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "x",
-                                    ),
-                                    Binary(
-                                        Subtract,
-                                        Var(
-                                            "x",
-                                        ),
-                                        Var(
-                                            "y",
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "x",
+                                    },
+                                    rhs: Binary {
+                                        op: Subtract,
+                                        lhs: Var {
+                                            name: "x",
+                                        },
+                                        rhs: Var {
+                                            name: "y",
+                                        },
+                                    },
+                                },
                             ),
                             While(
-                                Var(
-                                    "y",
-                                ),
+                                Var {
+                                    name: "y",
+                                },
                                 Compound(
                                     [
                                         Expression(
-                                            Assignment(
-                                                Var(
-                                                    "acc",
-                                                ),
-                                                Binary(
-                                                    Add,
-                                                    Var(
-                                                        "acc",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
+                                            Assignment {
+                                                lhs: Var {
+                                                    name: "acc",
+                                                },
+                                                rhs: Binary {
+                                                    op: Add,
+                                                    lhs: Var {
+                                                        name: "acc",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
+                                            },
                                         ),
                                         Expression(
-                                            Assignment(
-                                                Var(
-                                                    "y",
-                                                ),
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "y",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
+                                            Assignment {
+                                                lhs: Var {
+                                                    name: "y",
+                                                },
+                                                rhs: Binary {
+                                                    op: Subtract,
+                                                    lhs: Var {
+                                                        name: "y",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
+                                            },
                                         ),
                                     ],
                                 ),
@@ -95,27 +95,27 @@ Program {
                     None,
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "acc",
-                            ),
-                            Constant(
-                                100,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "acc",
+                            },
+                            rhs: Constant {
+                                constant: 100,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 DoWhile(
                     Compound(
@@ -18,32 +18,32 @@ Program {
                             Labeled(
                                 "while_start",
                                 Expression(
-                                    Assignment(
-                                        Var(
-                                            "i",
-                                        ),
-                                        Binary(
-                                            Add,
-                                            Var(
-                                                "i",
-                                            ),
-                                            Constant(
-                                                1,
-                                            ),
-                                        ),
-                                    ),
+                                    Assignment {
+                                        lhs: Var {
+                                            name: "i",
+                                        },
+                                        rhs: Binary {
+                                            op: Add,
+                                            lhs: Var {
+                                                name: "i",
+                                            },
+                                            rhs: Constant {
+                                                constant: 1,
+                                            },
+                                        },
+                                    },
                                 ),
                             ),
                             If(
-                                Binary(
-                                    LessThan,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: LessThan,
+                                    lhs: Var {
+                                        name: "i",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Goto(
                                     "while_start",
                                 ),
@@ -51,15 +51,15 @@ Program {
                             ),
                         ],
                     ),
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                     None,
                 ),
                 Return(
-                    Var(
-                        "i",
-                    ),
+                    Var {
+                        name: "i",
+                    },
                 ),
             ],
         },

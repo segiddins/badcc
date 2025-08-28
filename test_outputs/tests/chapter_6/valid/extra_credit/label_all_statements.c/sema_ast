@@ -8,16 +8,16 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 Labeled(
                     "label_if",
                     If(
-                        Var(
-                            "a.1",
-                        ),
+                        Var {
+                            name: "a.1",
+                        },
                         Goto(
                             "label_expression",
                         ),
@@ -35,20 +35,20 @@ Program {
                     ),
                 ),
                 If(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                     Labeled(
                         "label_expression",
                         Expression(
-                            Assignment(
-                                Var(
-                                    "a.1",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
+                            Assignment {
+                                lhs: Var {
+                                    name: "a.1",
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
                         ),
                     ),
                     None,
@@ -59,9 +59,9 @@ Program {
                 Labeled(
                     "label_return",
                     Return(
-                        Var(
-                            "a.1",
-                        ),
+                        Var {
+                            name: "a.1",
+                        },
                     ),
                 ),
                 Labeled(
@@ -69,14 +69,14 @@ Program {
                     Null,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "a.1",
-                        ),
-                        Constant(
-                            100,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "a.1",
+                        },
+                        rhs: Constant {
+                            constant: 100,
+                        },
+                    },
                 ),
                 Goto(
                     "label_goto",

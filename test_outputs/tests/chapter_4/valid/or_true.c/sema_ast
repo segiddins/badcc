@@ -6,39 +6,39 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Binary(
-                            Add,
-                            Binary(
-                                Or,
-                                Constant(
-                                    4,
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                            Binary(
-                                Or,
-                                Constant(
-                                    0,
-                                ),
-                                Constant(
-                                    3,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Or,
-                            Constant(
-                                5,
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Binary {
+                                op: Or,
+                                lhs: Constant {
+                                    constant: 4,
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
+                            rhs: Binary {
+                                op: Or,
+                                lhs: Constant {
+                                    constant: 0,
+                                },
+                                rhs: Constant {
+                                    constant: 3,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Or,
+                            lhs: Constant {
+                                constant: 5,
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                    },
                 ),
             ],
         },

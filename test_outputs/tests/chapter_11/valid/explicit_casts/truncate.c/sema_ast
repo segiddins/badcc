@@ -6,10 +6,22 @@ Program {
                 (
                     Long,
                     "l.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "expected.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            25,
+                        ),
+                        length: 8,
+                    },
                 ),
             ],
             ret: Int,
@@ -17,23 +29,23 @@ Program {
                 VariableDeclaration {
                     name: "result.3",
                     ty: Int,
-                    init: Cast(
-                        Int,
-                        Var(
-                            "l.1",
-                        ),
-                    ),
+                    init: Cast {
+                        to: Int,
+                        expr: Var {
+                            name: "l.1",
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "result.3",
-                        ),
-                        Var(
-                            "expected.2",
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "result.3",
+                        },
+                        rhs: Var {
+                            name: "expected.2",
+                        },
+                    },
                 ),
             ],
         },
@@ -43,121 +55,121 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "truncate",
-                            ),
-                            [
-                                Constant(
-                                    10l,
-                                ),
-                                Constant(
-                                    10,
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "truncate",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 10l,
+                                },
+                                Constant {
+                                    constant: 10,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "truncate",
-                            ),
-                            [
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        10l,
-                                    ),
-                                ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "truncate",
+                            },
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 10l,
+                                    },
+                                },
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 10,
+                                    },
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "truncate",
-                            ),
-                            [
-                                Constant(
-                                    17179869189l,
-                                ),
-                                Constant(
-                                    5,
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "truncate",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 17179869189l,
+                                },
+                                Constant {
+                                    constant: 5,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "truncate",
-                            ),
-                            [
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        17179869179l,
-                                    ),
-                                ),
-                                Constant(
-                                    5,
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "truncate",
+                            },
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 17179869179l,
+                                    },
+                                },
+                                Constant {
+                                    constant: 5,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    4,
-                                ),
+                                Constant {
+                                    constant: 4,
+                                },
                             ),
                         ],
                     ),
@@ -166,34 +178,34 @@ Program {
                 VariableDeclaration {
                     name: "i.5",
                     ty: Int,
-                    init: Cast(
-                        Int,
-                        Constant(
-                            17179869189l,
-                        ),
-                    ),
+                    init: Cast {
+                        to: Int,
+                        expr: Constant {
+                            constant: 17179869189l,
+                        },
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "i.5",
-                        ),
-                        Constant(
-                            5,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "i.5",
+                        },
+                        rhs: Constant {
+                            constant: 5,
+                        },
+                    },
                     Return(
-                        Constant(
-                            5,
-                        ),
+                        Constant {
+                            constant: 5,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

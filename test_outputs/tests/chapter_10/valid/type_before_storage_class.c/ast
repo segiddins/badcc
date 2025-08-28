@@ -6,9 +6,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        3,
-                    ),
+                    Constant {
+                        constant: 3,
+                    },
                 ),
             ],
             storage: Static,
@@ -16,9 +16,9 @@ Program {
         VariableDeclaration {
             name: "bar",
             ty: Int,
-            init: Constant(
-                4,
-            ),
+            init: Constant {
+                constant: 4,
+            },
             storage: Static,
         },
         FunctionDeclaration {
@@ -38,18 +38,18 @@ Program {
                     storage: Extern,
                 },
                 Return(
-                    Binary(
-                        Add,
-                        FunctionCall(
-                            Var(
-                                "foo",
-                            ),
-                            [],
-                        ),
-                        Var(
-                            "bar",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "foo",
+                            },
+                            params: [],
+                        },
+                        rhs: Var {
+                            name: "bar",
+                        },
+                    },
                 ),
             ],
         },

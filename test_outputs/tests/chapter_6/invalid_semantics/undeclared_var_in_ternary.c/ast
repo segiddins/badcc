@@ -6,30 +6,30 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Ternary(
-                        Binary(
-                            GreaterThan,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Constant(
-                            1,
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Ternary {
+                        cond: Binary {
+                            op: GreaterThan,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        if_true: Constant {
+                            constant: 1,
+                        },
+                        if_false: Constant {
+                            constant: 2,
+                        },
+                    },
                 ),
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        5,
-                    ),
+                    init: Constant {
+                        constant: 5,
+                    },
                 },
             ],
         },

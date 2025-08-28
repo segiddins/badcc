@@ -3,9 +3,9 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant(
-                10,
-            ),
+            init: Constant {
+                constant: 10,
+            },
         },
         FunctionDeclaration {
             identifier: "read_x",
@@ -20,39 +20,39 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 If(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Compound(
                         [
                             If(
-                                Binary(
-                                    NotEqual,
-                                    FunctionCall(
-                                        Var(
-                                            "read_x",
-                                        ),
-                                        [],
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: NotEqual,
+                                    lhs: FunctionCall {
+                                        function: Var {
+                                            name: "read_x",
+                                        },
+                                        params: [],
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
@@ -62,35 +62,35 @@ Program {
                                 storage: Extern,
                             },
                             If(
-                                Binary(
-                                    NotEqual,
-                                    Var(
-                                        "x",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: NotEqual,
+                                    lhs: Var {
+                                        name: "x",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
                             Return(
-                                Constant(
-                                    0,
-                                ),
+                                Constant {
+                                    constant: 0,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                 ),
             ],
         },

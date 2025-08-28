@@ -8,26 +8,26 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Expression(
-                    CompoundAssignment(
-                        CompoundAssignment(
-                            Var(
-                                "a",
-                            ),
-                            Add,
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        Subtract,
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Subtract,
+                        lhs: CompoundAssignment {
+                            op: Add,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                 ),
             ],
         },

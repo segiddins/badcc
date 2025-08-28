@@ -6,39 +6,39 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        BitwiseOr,
-                        Binary(
-                            RightShift,
-                            Constant(
-                                80,
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Binary(
-                            Xor,
-                            Constant(
-                                1,
-                            ),
-                            Binary(
-                                BitwiseAnd,
-                                Constant(
-                                    5,
-                                ),
-                                Binary(
-                                    LeftShift,
-                                    Constant(
-                                        7,
-                                    ),
-                                    Constant(
-                                        1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: BitwiseOr,
+                        lhs: Binary {
+                            op: RightShift,
+                            lhs: Constant {
+                                constant: 80,
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Xor,
+                            lhs: Constant {
+                                constant: 1,
+                            },
+                            rhs: Binary {
+                                op: BitwiseAnd,
+                                lhs: Constant {
+                                    constant: 5,
+                                },
+                                rhs: Binary {
+                                    op: LeftShift,
+                                    lhs: Constant {
+                                        constant: 7,
+                                    },
+                                    rhs: Constant {
+                                        constant: 1,
+                                    },
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

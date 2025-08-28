@@ -6,6 +6,12 @@ Program {
                 (
                     Int,
                     "c",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            23,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -16,21 +22,21 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    FunctionCall(
-                        Var(
-                            "incr_and_print",
-                        ),
-                        [
-                            Constant(
-                                70,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "incr_and_print",
+                        },
+                        params: [
+                            Constant {
+                                constant: 70,
+                            },
                         ],
-                    ),
+                    },
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

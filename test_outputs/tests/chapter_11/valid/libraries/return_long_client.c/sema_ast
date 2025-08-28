@@ -6,10 +6,22 @@ Program {
                 (
                     Int,
                     "a.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            13,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            20,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
@@ -22,45 +34,45 @@ Program {
                 VariableDeclaration {
                     name: "a.4",
                     ty: Long,
-                    init: FunctionCall(
-                        Var(
-                            "add",
-                        ),
-                        [
-                            Constant(
-                                2147483645,
-                            ),
-                            Constant(
-                                2147483645,
-                            ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "add",
+                        },
+                        params: [
+                            Constant {
+                                constant: 2147483645,
+                            },
+                            Constant {
+                                constant: 2147483645,
+                            },
                         ],
-                    ),
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "a.4",
-                        ),
-                        Constant(
-                            4294967290l,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "a.4",
+                        },
+                        rhs: Constant {
+                            constant: 4294967290l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

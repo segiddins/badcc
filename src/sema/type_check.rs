@@ -1,6 +1,6 @@
 use std::{
     collections::{HashMap, hash_map::Entry},
-    mem::replace,
+    mem::take,
     ops::{Deref, DerefMut},
 };
 
@@ -10,26 +10,61 @@ use crate::{
     assembly_gen::Width,
     ast::{
         BinaryOperator, Block, BlockItem, Constant, Declaration, Expression, ForInit,
-        FunctionDeclaration, Program, Statement, StorageClass, UnaryOperator, VariableDeclaration,
+        FunctionDeclaration, Program, Spanned, Statement, StorageClass, UnaryOperator,
+        VariableDeclaration,
     },
 };
 
-type Result = miette::Result<(), TypeCheckError>;
+type Result<T = ()> = miette::Result<T, TypeCheckError>;
 
 #[derive(Debug, thiserror::Error, Diagnostic, PartialEq, Eq)]
 pub enum TypeCheckError {
     #[error("failed to type check -- expected {expected:?}, got {actual:?}")]
-    Error { expected: Type, actual: Type },
+    Error {
+        expected: Type,
+        actual: Type,
+        #[label("here")]
+        span: SourceSpan,
+
+        #[label(collection, "declared here")]
+        declarations: Vec<SourceSpan>,
+    },
+    #[error("expected numeric expression in {position}")]
+    NonNumeric {
+        actual: Type,
+        #[label("is {actual:?}")]
+        span: SourceSpan,
+        position: &'static str,
+    },
     #[error("calling a non-function {name}")]
-    NonFunctionCall { name: String },
+    NonFunctionCall {
+        name: String,
+        #[label("is {ty:?}")]
+        span: SourceSpan,
+        ty: Type,
+        #[label(collection, "declared here")]
+        old: Vec<SourceSpan>,
+    },
     #[error("calling function {name} with {passed} parameters instead of {expected}")]
     FunctionArity {
         name: String,
         passed: usize,
         expected: usize,
+
+        #[label("call site")]
+        span: SourceSpan,
+
+        #[label(collection, "declared here")]
+        old: Vec<SourceSpan>,
     },
     #[error("duplication definition of function {name}")]
-    DuplicateFunctionDefinition { name: String },
+    DuplicateFunctionDefinition {
+        name: String,
+        #[label(primary, "here")]
+        span: SourceSpan,
+        #[label(collection, "previously declared here")]
+        old: Vec<SourceSpan>,
+    },
     #[error("duplication definition of variable {name}")]
     DuplicateVariableDefinition {
         name: String,
@@ -84,7 +119,7 @@ impl SymbolTable {
         match self.entry(name.to_string()) {
             Entry::Occupied(mut occupied_entry) => {
                 let symbol = occupied_entry.get_mut();
-                symbol.ty.assert(&ty)?;
+                symbol.assert(&ty, span)?;
                 match &mut symbol.attributes {
                     SymbolAttributes::Static {
                         init: old_init,
@@ -159,7 +194,7 @@ impl SymbolTable {
         match self.entry(name.to_string()) {
             Entry::Occupied(mut occupied_entry) => {
                 let symbol = occupied_entry.get_mut();
-                symbol.ty.assert(&ty)?;
+                symbol.assert(&ty, span)?;
                 match &mut symbol.attributes {
                     SymbolAttributes::Function {
                         defined: old_defined,
@@ -185,7 +220,9 @@ impl SymbolTable {
                         }
                         if *old_defined && defined {
                             return Err(TypeCheckError::DuplicateFunctionDefinition {
+                                span,
                                 name: name.to_string(),
+                                old: symbol.declarations.clone(),
                             });
                         }
                         *old_defined = *old_defined || defined;
@@ -334,7 +371,7 @@ impl Checker {
                     decl.ty.clone(),
                     None,
                     match decl.init {
-                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        Some(Expression::Constant { constant, .. }) => Initial::Some(constant),
                         None => Initial::Tentative,
                         Some(_) => {
                             todo!("non-constant initializer on global variable {}", decl.name)
@@ -347,7 +384,7 @@ impl Checker {
                     decl.ty.clone(),
                     Some(true),
                     match decl.init {
-                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        Some(Expression::Constant { constant, .. }) => Initial::Some(constant),
                         None => Initial::None,
                         Some(_) => {
                             todo!("non-constant initializer on global variable {}", decl.name)
@@ -360,7 +397,7 @@ impl Checker {
                     decl.ty.clone(),
                     Some(false),
                     match decl.init {
-                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        Some(Expression::Constant { constant, .. }) => Initial::Some(constant),
                         None => Initial::Tentative,
                         Some(_) => {
                             todo!("non-constant initializer on static variable {}", decl.name)
@@ -389,7 +426,7 @@ impl Checker {
                 }
                 Some(StorageClass::Static) => {
                     let init = match decl.init {
-                        Some(Expression::Constant(c)) => Initial::Some(c),
+                        Some(Expression::Constant { constant, .. }) => Initial::Some(constant),
                         None => Initial::Some(Constant::Int(0)),
                         Some(_) => {
                             todo!("non-constant initializer on static variable {}", decl.name)
@@ -422,7 +459,7 @@ impl Checker {
         self.symbols.declare_fn(
             &decl.identifier,
             Type::Function {
-                params: decl.params.iter().map(|(ty, _)| ty).cloned().collect(),
+                params: decl.params.iter().map(|(ty, _, _)| ty).cloned().collect(),
                 ret: Box::new(decl.ret.clone()),
             },
             global,
@@ -430,7 +467,7 @@ impl Checker {
             decl.span,
         )?;
 
-        for (ty, name) in decl.params.iter() {
+        for (ty, name, _) in decl.params.iter() {
             self.symbols.declare_automatic(name, ty.clone());
         }
 
@@ -462,22 +499,21 @@ impl Checker {
                 self.visit_expression(expression)?;
             }
             Statement::If(expression, statement, statement1) => {
-                self.visit_expression(expression)?
-                    .assert_compatible(&Type::Int)?;
+                self.visit_numeric_expression(expression, "if condition")?;
                 if let Some(statement) = statement1 {
                     self.visit_statement(statement)?;
                 }
                 self.visit_statement(statement)?
             }
-            Statement::Labeled(_, statement) => self.visit_statement(statement)?,
+            Statement::Labeled(_, statement, _) => self.visit_statement(statement)?,
             Statement::Compound(block) => self.visit_block(block)?,
             Statement::While(expression, statement, _) => {
-                self.visit_expression(expression)?;
+                self.visit_numeric_expression(expression, "while loop control condition")?;
                 self.visit_statement(statement)?
             }
             Statement::DoWhile(statement, expression, _) => {
                 self.visit_statement(statement)?;
-                self.visit_expression(expression)?;
+                self.visit_numeric_expression(expression, "do-while loop control condition")?;
             }
             Statement::For {
                 init,
@@ -496,7 +532,7 @@ impl Checker {
                     ForInit::Expr(None) => {}
                 }
                 if let Some(expression) = condition {
-                    self.visit_expression(expression)?;
+                    self.visit_numeric_expression(expression, "for loop condition")?;
                 }
                 if let Some(expression) = post {
                     self.visit_expression(expression)?;
@@ -504,9 +540,10 @@ impl Checker {
                 self.visit_statement(body)?;
             }
             Statement::Switch(expression, statement, label) => {
-                let ty = self
-                    .visit_expression(expression)?
-                    .assert_compatible(&Type::Int)?;
+                let ty = self.visit_numeric_expression(
+                    expression,
+                    "switch statement controlling condition",
+                )?;
                 self.switches.insert(label.clone().unwrap(), ty.clone());
                 self.visit_statement(statement)?
             }
@@ -517,7 +554,7 @@ impl Checker {
                 )?;
                 self.visit_statement(statement)?
             }
-            Statement::Default(statement, _) => self.visit_statement(statement)?,
+            Statement::Default(statement, _, _) => self.visit_statement(statement)?,
             _ => {}
         }
         Ok(())
@@ -530,12 +567,13 @@ impl Checker {
     ) -> miette::Result<Type, TypeCheckError> {
         let lt = self.visit_expression(lhs)?;
         let rt = self.visit_expression(rhs)?;
+        self.check_cast(&rt, &lt, rhs.span())?;
 
         match (lt, rt) {
             (lt @ Type::Int, Type::Long) => self.make_cast(rhs, &lt),
             (lt @ Type::Long, Type::Int) => self.make_cast(rhs, &lt),
             (lt, rt) if lt == rt => Ok(lt),
-            (lt, rt) => todo!("cast to lhs {lt:?} {rt:?}"),
+            _ => unreachable!(),
         }
     }
 
@@ -546,26 +584,44 @@ impl Checker {
     ) -> miette::Result<Type, TypeCheckError> {
         let lt = self.visit_expression(lhs)?;
         let rt = self.visit_expression(rhs)?;
+        self.check_cast(&rt, &lt, rhs.span())?;
 
         match (lt, rt) {
             (Type::Int, Type::Int) => Ok(Type::Int),
             (Type::Long, Type::Long) => Ok(Type::Long),
             (Type::Int, Type::Long) => self.make_cast(lhs, &Type::Long),
             (Type::Long, Type::Int) => self.make_cast(rhs, &Type::Long),
-            (lt, rt) => todo!("cast to lhs {lt:?} {rt:?}"),
+            _ => unreachable!(),
+        }
+    }
+
+    fn check_cast(
+        &self,
+        from: &Type,
+        to: &Type,
+        span: SourceSpan,
+    ) -> miette::Result<(), TypeCheckError> {
+        match (from, to) {
+            (Type::Int | Type::Long, Type::Int | Type::Long) => Ok(()),
+            (actual, to) => Err(TypeCheckError::Error {
+                expected: to.clone(),
+                actual: actual.clone(),
+                span,
+                declarations: vec![],
+            }),
         }
     }
 
     fn make_cast(&self, expr: &mut Expression, to: &Type) -> miette::Result<Type, TypeCheckError> {
         match expr {
-            Expression::Cast(t, _) if t == to => {
+            Expression::Cast { to: t, .. } if t == to => {
                 return Ok(to.clone());
             }
-            Expression::Constant(c) => {
-                match (&c, to) {
+            Expression::Constant { constant, .. } => {
+                match (&constant, to) {
                     (Constant::Int(_), Type::Int) | (Constant::Long(_), Type::Long) => {}
-                    (Constant::Int(i), Type::Long) => *c = Constant::Long(*i as i64),
-                    (Constant::Long(l), Type::Int) => *c = Constant::Int(*l as i32),
+                    (Constant::Int(i), Type::Long) => *constant = Constant::Long(*i as i64),
+                    (Constant::Long(l), Type::Int) => *constant = Constant::Int(*l as i32),
                     _ => unreachable!(),
                 }
                 return Ok(to.clone());
@@ -573,11 +629,15 @@ impl Checker {
             _ => {}
         }
 
-        if self.visit_expression(expr)? != *to {
-            *expr = Expression::Cast(
-                to.clone(),
-                Box::new(replace(expr, Expression::Constant(Constant::Int(0)))),
-            );
+        let actual = self.visit_expression(expr)?;
+        self.check_cast(&actual, to, expr.span())?;
+        if actual != *to {
+            let span = expr.span();
+            *expr = Expression::Cast {
+                to: to.clone(),
+                expr: Box::new(take(expr)),
+                span,
+            }
         }
         Ok(to.clone())
     }
@@ -587,53 +647,75 @@ impl Checker {
         expression: &mut Expression,
     ) -> miette::Result<Type, TypeCheckError> {
         match expression {
-            Expression::Unary(UnaryOperator::Not, expression) => {
-                Type::Int.assert_compatible(&self.visit_expression(expression)?)
+            Expression::Unary {
+                op: UnaryOperator::Not,
+                expr,
+                ..
+            } => self.visit_numeric_expression(expr, "unary not"),
+            Expression::Unary { expr, .. } => {
+                self.visit_numeric_expression(expr, "unary expression")
             }
-            Expression::Unary(_, expression) => self
-                .visit_expression(expression)?
-                .assert_compatible(&Type::Int),
-            Expression::Binary(
-                BinaryOperator::LeftShift | BinaryOperator::RightShift,
+            Expression::Binary {
+                op: BinaryOperator::LeftShift | BinaryOperator::RightShift,
                 lhs,
                 rhs,
-            ) => self.cast_to_lhs(lhs, rhs),
-            Expression::Binary(_, lhs, rhs) => self.cast_to_common(lhs, rhs),
-            Expression::Var(var) => self
+                ..
+            } => self.cast_to_lhs(lhs, rhs),
+            Expression::Binary { lhs, rhs, .. } => self.cast_to_common(lhs, rhs),
+            Expression::Var { name, .. } => self
                 .symbols
-                .get(var)
+                .get(name)
                 .map(|t| t.ty.clone())
-                .ok_or_else(|| panic!("no var {var}")),
-            Expression::Assignment(lhs, rhs) => self.cast_to_lhs(lhs, rhs),
-            Expression::CompoundAssignment(
+                .ok_or_else(|| unreachable!("no var {name}")),
+            Expression::Assignment { lhs, rhs, .. } => self.cast_to_lhs(lhs, rhs),
+            Expression::CompoundAssignment {
                 lhs,
-                BinaryOperator::LeftShift | BinaryOperator::RightShift,
+                op: BinaryOperator::LeftShift | BinaryOperator::RightShift,
                 rhs,
-            ) => self.cast_to_lhs(lhs, rhs),
-            Expression::CompoundAssignment(lhs, op, rhs) => {
-                *expression = Expression::Assignment(
-                    lhs.clone(),
-                    Expression::Binary(*op, lhs.clone(), rhs.clone()).into(),
-                );
+                ..
+            } => self.cast_to_lhs(lhs, rhs),
+            Expression::CompoundAssignment { lhs, op, rhs, span } => {
+                *expression = Expression::Assignment {
+                    lhs: lhs.clone(),
+                    rhs: Expression::Binary {
+                        op: *op,
+                        lhs: lhs.clone(),
+                        rhs: rhs.clone(),
+                        span: *span,
+                    }
+                    .into(),
+                    span: *span,
+                };
                 self.visit_expression(expression)
             }
-            Expression::Ternary(expression, expression1, expression2) => {
-                self.visit_expression(expression)?;
-                self.visit_expression(expression1)?
-                    .assert_compatible(&self.visit_expression(expression2)?)
+            Expression::Ternary {
+                cond,
+                if_true,
+                if_false,
+                ..
+            } => {
+                self.visit_numeric_expression(cond, "ternary condition")?;
+                self.cast_to_common(if_true, if_false)
             }
-            Expression::FunctionCall(expression, expressions) => {
-                let name = match expression.as_ref() {
-                    Expression::Var(name) => name.clone(),
+            Expression::FunctionCall {
+                function,
+                params: expressions,
+                ..
+            } => {
+                let name = match function.as_ref() {
+                    Expression::Var { name, .. } => name.clone(),
                     _ => unreachable!(),
                 };
-                match self.visit_expression(expression)? {
+                match self.visit_expression(function)? {
                     Type::Function { params, ret } => {
                         if params.len() != expressions.len() {
+                            let old = self.symbols.get(&name).unwrap().declarations.clone();
                             Err(TypeCheckError::FunctionArity {
                                 name,
                                 passed: expressions.len(),
                                 expected: params.len(),
+                                span: function.span(),
+                                old,
                             })
                         } else {
                             for (expr, ty) in expressions.iter_mut().zip(params) {
@@ -642,20 +724,46 @@ impl Checker {
                             Ok(ret.as_ref().clone())
                         }
                     }
-                    _ => Err(TypeCheckError::NonFunctionCall { name }),
+                    ty => {
+                        let old = self.symbols.get(&name).unwrap().declarations.clone();
+                        Err(TypeCheckError::NonFunctionCall {
+                            name,
+                            span: function.span(),
+                            ty,
+                            old,
+                        })
+                    }
                 }
             }
-            Expression::Constant(c) => Ok(c.ty()),
-            Expression::Cast(ty, expr) => {
+            Expression::Constant { constant, .. } => Ok(constant.ty()),
+            Expression::Cast { to, expr, .. } => {
                 let actual = self.visit_expression(expr.as_mut())?;
+                self.check_cast(&actual, to, expr.span())?;
 
-                if actual == *ty {
-                    *expression = replace(expr.as_mut(), Expression::Constant(Constant::Int(0)));
+                if actual == *to {
+                    *expression = take(expr.as_mut());
                     Ok(actual)
                 } else {
-                    ty.assert_compatible(&actual)
+                    Ok(to.clone())
                 }
             }
+        }
+    }
+
+    fn visit_numeric_expression(
+        &self,
+        expression: &mut Expression,
+        position: &'static str,
+    ) -> Result<Type> {
+        let ty = self.visit_expression(expression)?;
+        match ty {
+            Type::Function { .. } => Err(TypeCheckError::NonNumeric {
+                actual: ty.clone(),
+                span: expression.span(),
+                position,
+            }),
+            Type::Int => Ok(ty),
+            Type::Long => Ok(ty),
         }
     }
 }
@@ -679,25 +787,20 @@ impl Type {
             Type::Long => Width::Eight,
         }
     }
-
-    fn assert(&self, expected: &Type) -> miette::Result<&Type, TypeCheckError> {
-        match (self, expected) {
-            (x, y) if x == y => Ok(self),
-            (Type::Int | Type::Long, Type::Int | Type::Long) => panic!(),
-            _ => Err(TypeCheckError::Error {
+}
+impl Symbol {
+    fn assert(
+        &self,
+        expected: &Type,
+        spanned: impl Spanned,
+    ) -> miette::Result<&Type, TypeCheckError> {
+        match (&self.ty, expected) {
+            (x, y) if x == y => Ok(x),
+            (actual, expected) => Err(TypeCheckError::Error {
                 expected: expected.clone(),
-                actual: self.clone(),
-            }),
-        }
-    }
-
-    fn assert_compatible(&self, expected: &Type) -> miette::Result<Type, TypeCheckError> {
-        match (self, expected) {
-            (x, y) if x == y => Ok(self.clone()),
-            (Type::Int | Type::Long, Type::Int | Type::Long) => Ok(self.clone()),
-            _ => Err(TypeCheckError::Error {
-                expected: expected.clone(),
-                actual: self.clone(),
+                actual: actual.clone(),
+                span: spanned.span(),
+                declarations: self.declarations.clone(),
             }),
         }
     }

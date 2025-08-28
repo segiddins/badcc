@@ -8,20 +8,20 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Return(
-                    Unary(
-                        PostfixDecrement,
-                        Unary(
-                            PostfixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
+                    Unary {
+                        op: PostfixDecrement,
+                        expr: Unary {
+                            op: PostfixIncrement,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                    },
                 ),
             ],
         },

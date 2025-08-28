@@ -8,90 +8,90 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "j.2",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "k.3",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.4",
                         ty: Int,
-                        init: Constant(
-                            100,
-                        ),
+                        init: Constant {
+                            constant: 100,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            GreaterThan,
-                            Var(
-                                "i.4",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
+                        Binary {
+                            op: GreaterThan,
+                            lhs: Var {
+                                name: "i.4",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i.4",
-                            ),
-                            Binary(
-                                Subtract,
-                                Var(
-                                    "i.4",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i.4",
+                            },
+                            rhs: Binary {
+                                op: Subtract,
+                                lhs: Var {
+                                    name: "i.4",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             VariableDeclaration {
                                 name: "i.5",
                                 ty: Int,
-                                init: Constant(
-                                    1,
-                                ),
+                                init: Constant {
+                                    constant: 1,
+                                },
                             },
                             VariableDeclaration {
                                 name: "j.6",
                                 ty: Int,
-                                init: Binary(
-                                    Add,
-                                    Var(
-                                        "i.5",
-                                    ),
-                                    Var(
-                                        "k.3",
-                                    ),
-                                ),
+                                init: Binary {
+                                    op: Add,
+                                    lhs: Var {
+                                        name: "i.5",
+                                    },
+                                    rhs: Var {
+                                        name: "k.3",
+                                    },
+                                },
                             },
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "k.3",
-                                    ),
-                                    Var(
-                                        "j.6",
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "k.3",
+                                    },
+                                    rhs: Var {
+                                        name: "j.6",
+                                    },
+                                },
                             ),
                         ],
                     ),
@@ -100,39 +100,39 @@ Program {
                     ),
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "k.3",
-                                ),
-                                Constant(
-                                    101,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "i.1",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "j.2",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "k.3",
+                                },
+                                rhs: Constant {
+                                    constant: 101,
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "i.1",
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "j.2",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

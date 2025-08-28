@@ -13,56 +13,56 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [],
-                    ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [],
+                    },
                 },
                 If(
-                    Binary(
-                        GreaterThan,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "foo",
                                 ty: Int,
-                                init: Constant(
-                                    3,
-                                ),
+                                init: Constant {
+                                    constant: 3,
+                                },
                             },
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "x",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "x",
-                                        ),
-                                        Var(
-                                            "foo",
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "x",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "x",
+                                        },
+                                        rhs: Var {
+                                            name: "foo",
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },
@@ -72,9 +72,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        4,
-                    ),
+                    Constant {
+                        constant: 4,
+                    },
                 ),
             ],
         },

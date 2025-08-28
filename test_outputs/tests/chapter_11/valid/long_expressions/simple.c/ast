@@ -8,26 +8,26 @@ Program {
                 VariableDeclaration {
                     name: "l",
                     ty: Long,
-                    init: Constant(
-                        9223372036854775807l,
-                    ),
+                    init: Constant {
+                        constant: 9223372036854775807l,
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Binary(
-                            Subtract,
-                            Var(
-                                "l",
-                            ),
-                            Constant(
-                                2l,
-                            ),
-                        ),
-                        Constant(
-                            9223372036854775805l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "l",
+                            },
+                            rhs: Constant {
+                                constant: 2l,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 9223372036854775805l,
+                        },
+                    },
                 ),
             ],
         },

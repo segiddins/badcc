@@ -1,21 +1,20 @@
-use std::collections::HashSet;
+use miette::SourceSpan;
 
 use crate::ast::*;
 
 #[derive(Debug, thiserror::Error, miette::Diagnostic)]
 pub enum Error {
-    #[error("Duplicate default in switch")]
-    DuplicateDefault,
     #[error("Break used outside of loop or switch")]
-    InvalidBreak,
+    InvalidBreak(#[label] SourceSpan),
     #[error("Continue used outside of loop")]
-    InvalidContinue,
+    InvalidContinue(#[label] SourceSpan),
     #[error("case statement used outside of switch")]
-    InvalidCase,
-    #[error("Duplicate case {0} in switch")]
-    DuplicateCase(i64),
+    InvalidCase(#[label] SourceSpan),
     #[error("Non-constant expression in case")]
-    NonConstantCase,
+    NonConstantCase {
+        #[label("expression")]
+        span: SourceSpan,
+    },
 }
 
 type Result = std::result::Result<(), Error>;
@@ -26,7 +25,7 @@ struct Scope {
     break_labels: Vec<String>,
     continue_labels: Vec<String>,
 
-    cases: Vec<(String, HashSet<Option<i64>>)>,
+    cases: Vec<String>,
 }
 
 impl Scope {
@@ -37,7 +36,7 @@ impl Scope {
         if is_loop {
             self.continue_labels.push(label.clone());
         } else {
-            self.cases.push((label.clone(), Default::default()));
+            self.cases.push(label.clone());
         }
         label
     }
@@ -62,8 +61,8 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
                 visit_statement(statement, loop_label)?
             }
         }
-        Statement::Labeled(_, statement) => visit_statement(statement, loop_label)?,
-        Statement::Goto(_) => {}
+        Statement::Labeled(_, statement, _) => visit_statement(statement, loop_label)?,
+        Statement::Goto(_, _) => {}
         Statement::Compound(block) => visit_block(block, loop_label)?,
         Statement::While(_, statement, label) => {
             label.replace(loop_label.new_label(true));
@@ -81,21 +80,21 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
             loop_label.pop(true);
         }
         Statement::Null => {}
-        Statement::Break(label) => {
+        Statement::Break(label, span) => {
             label.replace(
                 loop_label
                     .break_labels
                     .last()
-                    .ok_or(Error::InvalidBreak)?
+                    .ok_or(Error::InvalidBreak(*span))?
                     .into(),
             );
         }
-        Statement::Continue(label) => {
+        Statement::Continue(label, span) => {
             label.replace(
                 loop_label
                     .continue_labels
                     .last()
-                    .ok_or(Error::InvalidContinue)?
+                    .ok_or(Error::InvalidContinue(*span))?
                     .into(),
             );
         }
@@ -105,23 +104,23 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
             loop_label.pop(false);
         }
         Statement::Case(expr, statement, label) => {
-            let (switch_label, cases) = loop_label.cases.last_mut().ok_or(Error::InvalidCase)?;
+            let switch_label = loop_label
+                .cases
+                .last_mut()
+                .ok_or(Error::InvalidCase(expr.span()))?;
             label.replace(switch_label.clone());
             match expr {
-                Expression::Constant(c) => {
-                    if !cases.insert(Some(c.into_long())) {
-                        return Err(Error::DuplicateCase(c.into_long()));
-                    }
-                }
-                _ => return Err(Error::NonConstantCase),
+                Expression::Constant { .. } => {}
+                expr => return Err(Error::NonConstantCase { span: expr.span() }),
             }
             visit_statement(statement, loop_label)?
         }
-        Statement::Default(statement, label) => {
-            let (switch_label, cases) = loop_label.cases.last_mut().ok_or(Error::InvalidCase)?;
-            if !cases.insert(None) {
-                return Err(Error::DuplicateDefault);
-            }
+        Statement::Default(statement, label, span) => {
+            let switch_label = loop_label
+                .cases
+                .last_mut()
+                .ok_or(Error::InvalidCase(*span))?;
+
             label.replace(switch_label.clone());
             visit_statement(statement, loop_label)?
         }

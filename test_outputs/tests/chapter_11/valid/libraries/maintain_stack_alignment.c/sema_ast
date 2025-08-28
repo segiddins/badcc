@@ -6,37 +6,55 @@ Program {
                 (
                     Long,
                     "x.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "y.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            32,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "z.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            39,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Binary(
-                            Add,
-                            Var(
-                                "x.1",
-                            ),
-                            Var(
-                                "y.2",
-                            ),
-                        ),
-                        Cast(
-                            Long,
-                            Var(
-                                "z.3",
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "x.1",
+                            },
+                            rhs: Var {
+                                name: "y.2",
+                            },
+                        },
+                        rhs: Cast {
+                            to: Long,
+                            expr: Var {
+                                name: "z.3",
+                            },
+                        },
+                    },
                 ),
             ],
         },

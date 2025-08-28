@@ -202,10 +202,10 @@ fn lower_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<
 
 fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
     match expr {
-        Expression::Constant(c) => Val::Constant(*c),
-        Expression::Unary(unary_operator, expression) => {
-            let src = walk(expression, state);
-            match unary_operator {
+        Expression::Constant { constant, .. } => Val::Constant(*constant),
+        Expression::Unary { op, expr, .. } => {
+            let src = walk(expr, state);
+            match op {
                 ast::UnaryOperator::Minus => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
@@ -281,7 +281,12 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                 }
             }
         }
-        Expression::Binary(BinaryOperator::And, lhs, rhs) => {
+        Expression::Binary {
+            op: BinaryOperator::And,
+            lhs,
+            rhs,
+            ..
+        } => {
             let phi = state.var(Type::Int);
             let lhs = walk(lhs, state);
             let false_label = format!("{}.{}.false", state.name, state.phis);
@@ -304,7 +309,12 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
 
             phi
         }
-        Expression::Binary(BinaryOperator::Or, lhs, rhs) => {
+        Expression::Binary {
+            op: BinaryOperator::Or,
+            lhs,
+            rhs,
+            ..
+        } => {
             let phi = state.var(Type::Int);
             let lhs = walk(lhs, state);
             let true_label = format!("{}.{}.true", state.name, state.phis);
@@ -327,7 +337,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
 
             phi
         }
-        Expression::Binary(op, lhs, rhs) => {
+        Expression::Binary { op, lhs, rhs, .. } => {
             let lhs = walk(lhs, state);
             let rhs = walk(rhs, state);
 
@@ -340,10 +350,10 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             });
             dst
         }
-        Expression::Var(name) => {
+        Expression::Var { name, .. } => {
             Val::Var(name.clone(), state.symbols.get(name).unwrap().ty.clone())
         }
-        Expression::Assignment(lhs, rhs) => {
+        Expression::Assignment { lhs, rhs, .. } => {
             let rhs = walk(rhs, state);
             let lhs = walk(lhs, state);
             assert_eq!(lhs.ty(), rhs.ty(), "{lhs:?} {rhs:?}");
@@ -353,7 +363,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             });
             lhs
         }
-        Expression::CompoundAssignment(lhs, op, rhs) => {
+        Expression::CompoundAssignment { lhs, op, rhs, .. } => {
             let rhs = walk(rhs, state);
             let lhs = walk(lhs, state);
             assert_eq!(lhs.ty(), rhs.ty(), "{lhs:?} {op:?} {rhs:?}");
@@ -365,14 +375,19 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             });
             lhs
         }
-        Expression::Ternary(cond, then, r#else) => {
+        Expression::Ternary {
+            cond,
+            if_true,
+            if_false,
+            ..
+        } => {
             let else_label = format!("{}.{}.true", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
             state.phis += 1;
 
             let cond = walk(cond, state);
             state.push(Instruction::JumpIfZero(cond, else_label.clone()));
-            let src = walk(then, state);
+            let src = walk(if_true, state);
             let phi = state.var(src.ty());
 
             state.push(Instruction::Copy {
@@ -381,7 +396,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             });
             state.push(Instruction::Jump(end_label.clone()));
             state.push(Instruction::Label(else_label));
-            let src = walk(r#else, state);
+            let src = walk(if_false, state);
             state.push(Instruction::Copy {
                 src,
                 dst: phi.clone(),
@@ -389,13 +404,12 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
             state.push(Instruction::Label(end_label));
             phi
         }
-        Expression::FunctionCall(ident, expressions) => {
-            let params = expressions
-                .iter()
-                .map(|e| walk(e, state))
-                .collect::<Vec<_>>();
-            match ident.as_ref() {
-                Expression::Var(name) => {
+        Expression::FunctionCall {
+            function, params, ..
+        } => {
+            let params = params.iter().map(|e| walk(e, state)).collect::<Vec<_>>();
+            match function.as_ref() {
+                Expression::Var { name, .. } => {
                     let Type::Function { params: _, ref ret } = state.symbols.get(name).unwrap().ty
                     else {
                         unreachable!()
@@ -407,7 +421,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                 _ => unreachable!(),
             }
         }
-        Expression::Cast(to, expr) => match (walk(expr, state), to) {
+        Expression::Cast { to, expr, .. } => match (walk(expr, state), to) {
             (src, t) if &src.ty() == t => src,
             (src, Type::Long) if src.ty() == Type::Int => {
                 let dst = state.var(Type::Long);
@@ -458,10 +472,10 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             }
             state.push(Instruction::Label(end_label));
         }
-        Statement::Goto(label) => {
+        Statement::Goto(label, _) => {
             state.push(Instruction::Jump(format!("{}.{label}", state.name)));
         }
-        Statement::Labeled(label, statement) => {
+        Statement::Labeled(label, statement, _) => {
             state.push(Instruction::Label(format!("{}.{label}", state.name)));
             walk_statement(statement, state);
         }
@@ -469,10 +483,10 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             walk_block(block, state);
         }
         Statement::Null => {}
-        Statement::Break(label) => {
+        Statement::Break(label, _) => {
             state.push(Instruction::Jump(label.as_ref().unwrap().clone()));
         }
-        Statement::Continue(label) => {
+        Statement::Continue(label, _) => {
             let label = label.as_ref().unwrap();
             state.push(Instruction::Jump(format!("{label}.start")));
         }
@@ -594,7 +608,7 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
                 .push(Some(c.into_long()));
             walk_statement(statement, state);
         }
-        Statement::Default(statement, label) => {
+        Statement::Default(statement, label, _) => {
             state.push(Instruction::Label(format!(
                 "{}.default",
                 label.as_ref().unwrap()
@@ -635,7 +649,7 @@ fn lower_function<'a>(
     let params = function
         .params
         .iter()
-        .map(|(ty, name)| Val::Var(name.clone(), ty.clone()))
+        .map(|(ty, name, _)| Val::Var(name.clone(), ty.clone()))
         .collect();
 
     walk_block(body, &mut state);

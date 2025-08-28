@@ -21,6 +21,12 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            63,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -31,39 +37,39 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "read_x",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            5,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "read_x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 5,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
@@ -73,105 +79,105 @@ Program {
                     storage: Extern,
                 },
                 Expression(
-                    FunctionCall(
-                        Var(
-                            "update_x",
-                        ),
-                        [
-                            Constant(
-                                10,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "update_x",
+                        },
+                        params: [
+                            Constant {
+                                constant: 10,
+                            },
                         ],
-                    ),
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "read_x",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "read_x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 10,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            20,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 20,
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            20,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 20,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "read_x",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "read_x",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 10,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

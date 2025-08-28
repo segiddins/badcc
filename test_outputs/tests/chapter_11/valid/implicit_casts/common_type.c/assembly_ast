@@ -242,7 +242,19 @@ Program {
                     "conditional.0.true",
                 ),
                 Move {
-                    source: Data("i", Eight),
+                    source: Data("i", Four),
+                    destination: Register(R11, Four),
+                },
+                Movesx {
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(24, Eight),
+                },
+                Move {
+                    source: Stack(24, Eight),
                     destination: Register(R10, Eight),
                 },
                 Move {
@@ -258,7 +270,7 @@ Program {
                 },
                 Move {
                     source: Register(R10, Eight),
-                    destination: Stack(24, Eight),
+                    destination: Stack(32, Eight),
                 },
                 Move {
                     source: Immediate(8589934592, Eight),
@@ -266,26 +278,26 @@ Program {
                 },
                 Cmp(
                     Register(R10, Eight),
-                    Stack(24, Eight),
-                ),
-                Move {
-                    source: Immediate(0, Eight),
-                    destination: Stack(32, Eight),
-                },
-                SetCC(
-                    E,
                     Stack(32, Eight),
                 ),
                 Move {
-                    source: Stack(32, Four),
+                    source: Immediate(0, Eight),
+                    destination: Stack(40, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(40, Eight),
+                ),
+                Move {
+                    source: Stack(40, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
                     source: Register(R10, Four),
-                    destination: Stack(36, Four),
+                    destination: Stack(44, Four),
                 },
                 Move {
-                    source: Stack(36, Four),
+                    source: Stack(44, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,

@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 For {
                     init: None,
@@ -19,31 +19,31 @@ Program {
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "a",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "a",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    GreaterThan,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Constant(
-                                        3,
-                                    ),
-                                ),
+                                Binary {
+                                    op: GreaterThan,
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Constant {
+                                        constant: 3,
+                                    },
+                                },
                                 Break(
                                     None,
                                 ),
@@ -54,9 +54,9 @@ Program {
                     label: None,
                 },
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },

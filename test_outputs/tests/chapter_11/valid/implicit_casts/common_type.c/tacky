@@ -134,8 +134,12 @@ Program {
                 Label(
                     "conditional.0.true",
                 ),
-                Copy {
+                SignExtend {
                     src: Var("i", Int),
+                    dst: Var("conditional.tmp.1", Long),
+                },
+                Copy {
+                    src: Var("conditional.tmp.1", Long),
                     dst: Var("conditional.tmp.0", Long),
                 },
                 Label(
@@ -149,14 +153,14 @@ Program {
                     op: Equals,
                     lhs: Var("result.8", Long),
                     rhs: 8589934592l,
-                    dst: Var("conditional.tmp.1", Long),
+                    dst: Var("conditional.tmp.2", Long),
                 },
                 Truncate {
-                    src: Var("conditional.tmp.1", Long),
-                    dst: Var("conditional.tmp.2", Int),
+                    src: Var("conditional.tmp.2", Long),
+                    dst: Var("conditional.tmp.3", Int),
                 },
                 Return(
-                    Var("conditional.tmp.2", Int),
+                    Var("conditional.tmp.3", Int),
                 ),
                 Return(
                     0,

@@ -8,59 +8,59 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Ternary(
-                        Constant(
-                            1,
-                        ),
-                        Ternary(
-                            Constant(
-                                2,
-                            ),
-                            Constant(
-                                3,
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                        Constant(
-                            5,
-                        ),
-                    ),
+                    init: Ternary {
+                        cond: Constant {
+                            constant: 1,
+                        },
+                        if_true: Ternary {
+                            cond: Constant {
+                                constant: 2,
+                            },
+                            if_true: Constant {
+                                constant: 3,
+                            },
+                            if_false: Constant {
+                                constant: 4,
+                            },
+                        },
+                        if_false: Constant {
+                            constant: 5,
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Ternary(
-                        Constant(
-                            0,
-                        ),
-                        Ternary(
-                            Constant(
-                                2,
-                            ),
-                            Constant(
-                                3,
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                        Constant(
-                            5,
-                        ),
-                    ),
+                    init: Ternary {
+                        cond: Constant {
+                            constant: 0,
+                        },
+                        if_true: Ternary {
+                            cond: Constant {
+                                constant: 2,
+                            },
+                            if_true: Constant {
+                                constant: 3,
+                            },
+                            if_false: Constant {
+                                constant: 4,
+                            },
+                        },
+                        if_false: Constant {
+                            constant: 5,
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Multiply,
-                        Var(
-                            "a",
-                        ),
-                        Var(
-                            "b",
-                        ),
-                    ),
+                    Binary {
+                        op: Multiply,
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Var {
+                            name: "b",
+                        },
+                    },
                 ),
             ],
         },

@@ -6,9 +6,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        2,
-                    ),
+                    Constant {
+                        constant: 2,
+                    },
                 ),
             ],
         },
@@ -20,28 +20,28 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        3,
-                    ),
+                    init: Constant {
+                        constant: 3,
+                    },
                 },
                 Expression(
-                    CompoundAssignment(
-                        Var(
-                            "x",
-                        ),
-                        Subtract,
-                        FunctionCall(
-                            Var(
-                                "foo",
-                            ),
-                            [],
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Subtract,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "foo",
+                            },
+                            params: [],
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },

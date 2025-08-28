@@ -3,9 +3,9 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Long,
-            init: Constant(
-                5l,
-            ),
+            init: Constant {
+                constant: 5l,
+            },
         },
         FunctionDeclaration {
             identifier: "add_large",
@@ -13,31 +13,31 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Binary(
-                            Add,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                4294967290l,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 4294967290l,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            4294967295l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 4294967295l,
+                        },
+                    },
                 ),
             ],
         },
@@ -47,31 +47,31 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Binary(
-                            Subtract,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                4294967290l,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 4294967290l,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            5l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 5l,
+                        },
+                    },
                 ),
             ],
         },
@@ -81,31 +81,31 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Binary(
-                            Multiply,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                4294967290l,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Binary {
+                            op: Multiply,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 4294967290l,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            21474836450l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 21474836450l,
+                        },
+                    },
                 ),
             ],
         },
@@ -115,72 +115,72 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "add_large",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "add_large",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "subtract_large",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "subtract_large",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "multiply_by_large",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "multiply_by_large",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

@@ -101,18 +101,21 @@ _conditional:
 	movq %r10, -16(%rbp)
 	jmp Lconditional.0.end
 	Lconditional.0.true:
-	movq _i(%rip), %r10
+	movl _i(%rip), %r11d
+	movslq %r11d, %r10
+	movq %r10, -24(%rbp)
+	movq -24(%rbp), %r10
 	movq %r10, -16(%rbp)
 	Lconditional.0.end:
 	movq -16(%rbp), %r10
-	movq %r10, -24(%rbp)
+	movq %r10, -32(%rbp)
 	movq $8589934592, %r10
-	cmpq %r10, -24(%rbp)
-	movq $0, -32(%rbp)
-	setE -32(%rbp)
-	movl -32(%rbp), %r10d
-	movl %r10d, -36(%rbp)
-	movl -36(%rbp), %eax
+	cmpq %r10, -32(%rbp)
+	movq $0, -40(%rbp)
+	setE -40(%rbp)
+	movl -40(%rbp), %r10d
+	movl %r10d, -44(%rbp)
+	movl -44(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

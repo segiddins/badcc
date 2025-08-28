@@ -6,90 +6,144 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            17,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "c",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            31,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            39,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "e",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            46,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "f",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            54,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "g",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            61,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "h",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            68,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            76,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        LessThan,
-                        Binary(
-                            Add,
-                            Var(
-                                "d",
-                            ),
-                            Var(
-                                "f",
-                            ),
-                        ),
-                        Constant(
-                            100l,
-                        ),
-                    ),
+                    Binary {
+                        op: LessThan,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "d",
+                            },
+                            rhs: Var {
+                                name: "f",
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 100l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        LessThan,
-                        Var(
-                            "i",
-                        ),
-                        Constant(
-                            100l,
-                        ),
-                    ),
+                    Binary {
+                        op: LessThan,
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Constant {
+                            constant: 100l,
+                        },
+                    },
                     Return(
-                        Constant(
-                            2,
-                        ),
+                        Constant {
+                            constant: 2,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

@@ -8,74 +8,74 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant(
-                        100,
-                    ),
+                    init: Constant {
+                        constant: 100,
+                    },
                 },
                 VariableDeclaration {
                     name: "sum.2",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 DoWhile(
                     Expression(
-                        Assignment(
-                            Var(
-                                "sum.2",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "sum.2",
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "sum.2",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "sum.2",
+                                },
+                                rhs: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
                     ),
-                    Assignment(
-                        Var(
-                            "i.1",
-                        ),
-                        Binary(
-                            Subtract,
-                            Var(
-                                "i.1",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i.1",
+                        },
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "i.1",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                     Some(
                         "loop.0",
                     ),
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "i.1",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "sum.2",
-                            ),
-                            Constant(
-                                200,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "i.1",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "sum.2",
+                            },
+                            rhs: Constant {
+                                constant: 200,
+                            },
+                        },
+                    },
                 ),
             ],
         },

@@ -6,6 +6,12 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -16,16 +22,16 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [
-                            Constant(
-                                3,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [
+                            Constant {
+                                constant: 3,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },
@@ -35,14 +41,20 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            66,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },

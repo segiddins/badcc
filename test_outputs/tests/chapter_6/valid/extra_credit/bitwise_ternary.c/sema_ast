@@ -10,38 +10,38 @@ Program {
                     ty: Int,
                 },
                 Expression(
-                    Ternary(
-                        Binary(
-                            Xor,
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        Assignment(
-                            Var(
-                                "result.1",
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                        Assignment(
-                            Var(
-                                "result.1",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    ),
+                    Ternary {
+                        cond: Binary {
+                            op: Xor,
+                            lhs: Constant {
+                                constant: 1,
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        if_true: Assignment {
+                            lhs: Var {
+                                name: "result.1",
+                            },
+                            rhs: Constant {
+                                constant: 4,
+                            },
+                        },
+                        if_false: Assignment {
+                            lhs: Var {
+                                name: "result.1",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "result.1",
-                    ),
+                    Var {
+                        name: "result.1",
+                    },
                 ),
             ],
         },

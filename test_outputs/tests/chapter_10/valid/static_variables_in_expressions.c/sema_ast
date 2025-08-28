@@ -8,50 +8,50 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant(
-                        2,
-                    ),
+                    init: Constant {
+                        constant: 2,
+                    },
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "j.2",
                     ty: Int,
-                    init: Constant(
-                        3,
-                    ),
+                    init: Constant {
+                        constant: 3,
+                    },
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "cmp.3",
                     ty: Int,
-                    init: Binary(
-                        LessThan,
-                        Var(
-                            "i.1",
-                        ),
-                        Var(
-                            "j.2",
-                        ),
-                    ),
+                    init: Binary {
+                        op: LessThan,
+                        lhs: Var {
+                            name: "i.1",
+                        },
+                        rhs: Var {
+                            name: "j.2",
+                        },
+                    },
                 },
                 If(
-                    Unary(
-                        Not,
-                        Var(
-                            "cmp.3",
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: Var {
+                            name: "cmp.3",
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

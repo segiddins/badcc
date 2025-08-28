@@ -6,23 +6,23 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Ternary(
-                        Constant(
-                            0,
-                        ),
-                        Constant(
-                            1,
-                        ),
-                        Binary(
-                            Or,
-                            Constant(
-                                0,
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                    ),
+                    Ternary {
+                        cond: Constant {
+                            constant: 0,
+                        },
+                        if_true: Constant {
+                            constant: 1,
+                        },
+                        if_false: Binary {
+                            op: Or,
+                            lhs: Constant {
+                                constant: 0,
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                    },
                 ),
             ],
         },

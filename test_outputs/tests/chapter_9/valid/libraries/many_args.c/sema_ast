@@ -6,38 +6,44 @@ Program {
                 (
                     Int,
                     "n.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        Or,
-                        Binary(
-                            Equals,
-                            Var(
-                                "n.1",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "n.1",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Or,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "n.1",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "n.1",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Var(
-                                    "n.1",
-                                ),
+                                Var {
+                                    name: "n.1",
+                                },
                             ),
                         ],
                     ),
@@ -45,41 +51,41 @@ Program {
                         Compound(
                             [
                                 Return(
-                                    Binary(
-                                        Add,
-                                        FunctionCall(
-                                            Var(
-                                                "fib",
-                                            ),
-                                            [
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "n.1",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
+                                    Binary {
+                                        op: Add,
+                                        lhs: FunctionCall {
+                                            function: Var {
+                                                name: "fib",
+                                            },
+                                            params: [
+                                                Binary {
+                                                    op: Subtract,
+                                                    lhs: Var {
+                                                        name: "n.1",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
                                             ],
-                                        ),
-                                        FunctionCall(
-                                            Var(
-                                                "fib",
-                                            ),
-                                            [
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "n.1",
-                                                    ),
-                                                    Constant(
-                                                        2,
-                                                    ),
-                                                ),
+                                        },
+                                        rhs: FunctionCall {
+                                            function: Var {
+                                                name: "fib",
+                                            },
+                                            params: [
+                                                Binary {
+                                                    op: Subtract,
+                                                    lhs: Var {
+                                                        name: "n.1",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 2,
+                                                    },
+                                                },
                                             ],
-                                        ),
-                                    ),
+                                        },
+                                    },
                                 ),
                             ],
                         ),
@@ -93,98 +99,146 @@ Program {
                 (
                     Int,
                     "a.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            151,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b.4",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            158,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "c.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            165,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "d.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            172,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "e.7",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            179,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "f.8",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            186,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "g.9",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            193,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "h.10",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            200,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Multiply,
-                        Binary(
-                            Multiply,
-                            Binary(
-                                Multiply,
-                                Binary(
-                                    Multiply,
-                                    Binary(
-                                        Multiply,
-                                        Binary(
-                                            Multiply,
-                                            Binary(
-                                                Multiply,
-                                                Var(
-                                                    "a.3",
-                                                ),
-                                                Var(
-                                                    "b.4",
-                                                ),
-                                            ),
-                                            Var(
-                                                "c.5",
-                                            ),
-                                        ),
-                                        Var(
-                                            "d.6",
-                                        ),
-                                    ),
-                                    Var(
-                                        "e.7",
-                                    ),
-                                ),
-                                Var(
-                                    "f.8",
-                                ),
-                            ),
-                            FunctionCall(
-                                Var(
-                                    "fib",
-                                ),
-                                [
-                                    Var(
-                                        "g.9",
-                                    ),
+                    Binary {
+                        op: Multiply,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Binary {
+                                op: Multiply,
+                                lhs: Binary {
+                                    op: Multiply,
+                                    lhs: Binary {
+                                        op: Multiply,
+                                        lhs: Binary {
+                                            op: Multiply,
+                                            lhs: Binary {
+                                                op: Multiply,
+                                                lhs: Var {
+                                                    name: "a.3",
+                                                },
+                                                rhs: Var {
+                                                    name: "b.4",
+                                                },
+                                            },
+                                            rhs: Var {
+                                                name: "c.5",
+                                            },
+                                        },
+                                        rhs: Var {
+                                            name: "d.6",
+                                        },
+                                    },
+                                    rhs: Var {
+                                        name: "e.7",
+                                    },
+                                },
+                                rhs: Var {
+                                    name: "f.8",
+                                },
+                            },
+                            rhs: FunctionCall {
+                                function: Var {
+                                    name: "fib",
+                                },
+                                params: [
+                                    Var {
+                                        name: "g.9",
+                                    },
                                 ],
-                            ),
-                        ),
-                        FunctionCall(
-                            Var(
-                                "fib",
-                            ),
-                            [
-                                Var(
-                                    "h.10",
-                                ),
+                            },
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "fib",
+                            },
+                            params: [
+                                Var {
+                                    name: "h.10",
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 ),
             ],
         },

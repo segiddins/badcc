@@ -8,63 +8,63 @@ Program {
                 VariableDeclaration {
                     name: "product",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Unary(
-                            PostfixIncrement,
-                            Var(
-                                "i",
-                            ),
-                        ),
+                        Unary {
+                            op: PostfixIncrement,
+                            expr: Var {
+                                name: "i",
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "product",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "product",
-                                        ),
-                                        Constant(
-                                            2,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "product",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "product",
+                                        },
+                                        rhs: Constant {
+                                            constant: 2,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     label: None,
                 },
                 Return(
-                    Var(
-                        "product",
-                    ),
+                    Var {
+                        name: "product",
+                    },
                 ),
             ],
         },

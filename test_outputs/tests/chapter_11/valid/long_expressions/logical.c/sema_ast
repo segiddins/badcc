@@ -6,17 +6,26 @@ Program {
                 (
                     Long,
                     "l.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            13,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Unary(
-                        Not,
-                        Var(
-                            "l.1",
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Unary {
+                            op: Not,
+                            expr: Var {
+                                name: "l.1",
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -26,29 +35,35 @@ Program {
                 (
                     Long,
                     "l.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            52,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 If(
-                    Var(
-                        "l.3",
-                    ),
+                    Var {
+                        name: "l.3",
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },
@@ -58,30 +73,42 @@ Program {
                 (
                     Long,
                     "l1.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            123,
+                        ),
+                        length: 2,
+                    },
                 ),
                 (
                     Int,
                     "l2.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            131,
+                        ),
+                        length: 2,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            And,
-                            Var(
-                                "l1.5",
-                            ),
-                            Cast(
-                                Long,
-                                Var(
-                                    "l2.6",
-                                ),
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: And,
+                            lhs: Var {
+                                name: "l1.5",
+                            },
+                            rhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "l2.6",
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -91,30 +118,42 @@ Program {
                 (
                     Int,
                     "l1.8",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            171,
+                        ),
+                        length: 2,
+                    },
                 ),
                 (
                     Long,
                     "l2.9",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            180,
+                        ),
+                        length: 2,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            Or,
-                            Cast(
-                                Long,
-                                Var(
-                                    "l1.8",
-                                ),
-                            ),
-                            Var(
-                                "l2.9",
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "l1.8",
+                                },
+                            },
+                            rhs: Var {
+                                name: "l2.9",
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -126,168 +165,168 @@ Program {
                 VariableDeclaration {
                     name: "l.11",
                     ty: Long,
-                    init: Constant(
-                        1152921504606846976l,
-                    ),
+                    init: Constant {
+                        constant: 1152921504606846976l,
+                    },
                 },
                 VariableDeclaration {
                     name: "zero.12",
                     ty: Long,
-                    init: Constant(
-                        0l,
-                    ),
+                    init: Constant {
+                        constant: 0l,
+                    },
                 },
                 If(
-                    FunctionCall(
-                        Var(
-                            "not",
-                        ),
-                        [
-                            Var(
-                                "l.11",
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "not",
+                        },
+                        params: [
+                            Var {
+                                name: "l.11",
+                            },
                         ],
-                    ),
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "not",
-                            ),
-                            [
-                                Var(
-                                    "zero.12",
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "not",
+                            },
+                            params: [
+                                Var {
+                                    name: "zero.12",
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "if_cond",
-                            ),
-                            [
-                                Var(
-                                    "l.11",
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "if_cond",
+                            },
+                            params: [
+                                Var {
+                                    name: "l.11",
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    FunctionCall(
-                        Var(
-                            "if_cond",
-                        ),
-                        [
-                            Var(
-                                "zero.12",
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "if_cond",
+                        },
+                        params: [
+                            Var {
+                                name: "zero.12",
+                            },
                         ],
-                    ),
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    4,
-                                ),
+                                Constant {
+                                    constant: 4,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    FunctionCall(
-                        Var(
-                            "and",
-                        ),
-                        [
-                            Var(
-                                "zero.12",
-                            ),
-                            Constant(
-                                1,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "and",
+                        },
+                        params: [
+                            Var {
+                                name: "zero.12",
+                            },
+                            Constant {
+                                constant: 1,
+                            },
                         ],
-                    ),
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    5,
-                                ),
+                                Constant {
+                                    constant: 5,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "or",
-                            ),
-                            [
-                                Constant(
-                                    1,
-                                ),
-                                Var(
-                                    "l.11",
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "or",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 1,
+                                },
+                                Var {
+                                    name: "l.11",
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    6,
-                                ),
+                                Constant {
+                                    constant: 6,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

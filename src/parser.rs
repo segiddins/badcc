@@ -13,17 +13,6 @@ impl Borrow<dyn miette::Diagnostic + 'static> for Box<ParserError> {
 #[derive(Debug, thiserror::Error, miette::Diagnostic)]
 #[error("Failed to parse")]
 enum ParserError {
-    #[error("while parsing {kind}")]
-    Nested {
-        #[source]
-        #[diagnostic_source]
-        nested: Box<ParserError>,
-
-        kind: &'static str,
-        #[label("starting here")]
-        start: SourceSpan,
-    },
-
     #[error("unexpectedly encountered the end of the file")]
     UnexpectedEOF,
 
@@ -50,15 +39,22 @@ enum ParserError {
         span: SourceSpan,
     },
     #[error("declaration cannot have more than one storage specifier")]
-    MultipleDeclSpecifiers,
+    MultipleDeclSpecifiers {
+        #[label("specifiers")]
+        span: SourceSpan,
+    },
     #[error("declaration must have exactly one type")]
     DeclSingleType {
-        #[label("extra type")]
+        #[label("specifiers")]
         span: SourceSpan,
     },
 }
 
 type Result<T> = std::result::Result<T, ParserError>;
+
+fn spanning(start: SourceSpan, end: SourceSpan) -> SourceSpan {
+    (start.offset()..(end.offset() + end.len())).into()
+}
 
 struct Lexer<'i> {
     source: &'i str,
@@ -66,26 +62,10 @@ struct Lexer<'i> {
 }
 
 impl Lexer<'_> {
-    #[allow(dead_code)]
     fn mark(&self) -> SourceSpan {
         self.peek_token()
             .map(|t| t.1)
             .unwrap_or_else(|| (self.source.len() - 1, 0).into())
-    }
-
-    #[inline]
-    #[allow(dead_code)]
-    fn marked<O>(
-        &mut self,
-        kind: &'static str,
-        parser: impl FnOnce(&mut Self) -> Result<O>,
-    ) -> Result<O> {
-        let mark = self.mark();
-        parser(self).map_err(|e| ParserError::Nested {
-            nested: Box::new(e),
-            kind,
-            start: mark,
-        })
     }
 
     fn next_token(&mut self) -> Option<(Token, SourceSpan)> {
@@ -104,7 +84,7 @@ impl Lexer<'_> {
             .map(|(t, span)| (t, *span))
     }
 
-    fn expect_identifier(&mut self) -> Result<String> {
+    fn expect_identifier(&mut self) -> Result<(String, SourceSpan)> {
         if self.tokens.is_empty() {
             return Err(ParserError::UnexpectedEOF);
         }
@@ -118,8 +98,8 @@ impl Lexer<'_> {
                     span,
                 }
             })
-            .map(|(t, _)| match t {
-                Token::Identifier(i) => i,
+            .map(|(t, span)| match t {
+                Token::Identifier(i) => (i, span),
                 _ => unreachable!(),
             })
     }
@@ -147,12 +127,6 @@ impl Lexer<'_> {
             *t == Token::Int || *t == Token::Static || *t == Token::Extern || *t == Token::Long
         })
     }
-}
-
-macro_rules! parse {
-    ($fn:ident, $lexer:expr) => {
-        $lexer.marked(stringify!($fn), $fn)
-    };
 }
 
 pub fn parse(
@@ -190,10 +164,10 @@ fn parse_block(lexer: &mut Lexer) -> Result<Block> {
     let (_, start) = lexer.expect(Token::LBrace)?;
     let mut items = vec![];
     while !matches!(lexer.peek_token(), Some((Token::RBrace, _))) {
-        items.push(parse!(parse_block_item, lexer)?);
+        items.push(parse_block_item(lexer)?);
     }
     let (_, end) = lexer.expect(Token::RBrace)?;
-    let span = (start.offset(), end.offset() + end.len() - start.offset()).into();
+    let span = spanning(start, end);
     Ok(Block { items, span })
 }
 
@@ -221,14 +195,18 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
                     Token::Extern => {
                         lexer.next_token();
                         if storage.is_some() {
-                            return Err(ParserError::MultipleDeclSpecifiers);
+                            return Err(ParserError::MultipleDeclSpecifiers {
+                                span: spanning(start, span),
+                            });
                         }
                         storage.replace(StorageClass::Extern);
                     }
                     Token::Static => {
                         lexer.next_token();
                         if storage.is_some() {
-                            return Err(ParserError::MultipleDeclSpecifiers);
+                            return Err(ParserError::MultipleDeclSpecifiers {
+                                span: spanning(start, span),
+                            });
                         }
                         storage.replace(StorageClass::Static);
                     }
@@ -248,10 +226,9 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
         {
             Type::Long
         }
-        _ if ty.is_empty() => todo!("declaration must have a type"),
         _ => {
             return Err(ParserError::DeclSingleType {
-                span: (start.offset(), end.offset() + end.len() - start.offset()).into(),
+                span: spanning(start, end),
             });
         }
     };
@@ -262,7 +239,7 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
 fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> {
     let start = lexer.mark();
     let (storage, ty) = parse_decl_specifiers(lexer)?;
-    let name = lexer.expect_identifier()?;
+    let (name, _) = lexer.expect_identifier()?;
 
     let init = if lexer.expect(Token::Equals).is_ok() {
         Some(parse_expression(lexer)?)
@@ -271,7 +248,7 @@ fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> 
     };
 
     let (_, end) = lexer.expect(Token::Semicolon)?;
-    let span = (start.offset()..(end.offset() + end.len())).into();
+    let span = spanning(start, end);
 
     Ok(VariableDeclaration {
         name: name.to_string(),
@@ -316,17 +293,19 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
     }
 
     let (storage, ret) = parse_decl_specifiers(lexer)?;
-    let identifier = lexer.expect_identifier()?;
+    let (identifier, _) = lexer.expect_identifier()?;
 
     lexer.expect(Token::LParen)?;
 
     let mut params = vec![];
     if !(lexer.expect(Token::Void).is_ok() || lexer.peek_kind(Token::RParen)) {
         let ty = parse_type(lexer)?;
-        params.push((ty, lexer.expect_identifier()?));
+        let (id, span) = lexer.expect_identifier()?;
+        params.push((ty, id, span));
         while lexer.expect(Token::Comma).is_ok() {
             let ty = parse_type(lexer)?;
-            params.push((ty, lexer.expect_identifier()?));
+            let (id, span) = lexer.expect_identifier()?;
+            params.push((ty, id, span));
         }
     }
 
@@ -340,7 +319,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
         let (_, span) = lexer.expect(Token::Semicolon)?;
         (None, span)
     };
-    let span = (start.offset()..(end.offset() + end.len())).into();
+    let span = spanning(start, end);
     Ok(Declaration::Function(FunctionDeclaration {
         identifier,
         params,
@@ -363,7 +342,7 @@ fn parse_optional_expression(lexer: &mut Lexer, end: Token) -> Result<Option<Exp
 
 fn parse_for_init(lexer: &mut Lexer) -> Result<ForInit> {
     if lexer.peek_decl_specifier() {
-        parse!(parse_variable_declaration, lexer).map(ForInit::Decl)
+        parse_variable_declaration(lexer).map(ForInit::Decl)
     } else {
         parse_optional_expression(lexer, Token::Semicolon).map(ForInit::Expr)
     }
@@ -393,16 +372,16 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 Ok(Statement::If(cond, Box::new(then), r#else.map(Box::new)))
             }
             Token::Identifier(_) if lexer.peek_n(2).is_some_and(|(t, _)| *t == Token::Colon) => {
-                let label = lexer.expect_identifier()?;
+                let (label, span) = lexer.expect_identifier()?;
                 lexer.expect(Token::Colon)?;
                 let statement = parse_statement(lexer)?;
-                Ok(Statement::Labeled(label, statement.into()))
+                Ok(Statement::Labeled(label, statement.into(), span))
             }
             Token::Goto => {
                 lexer.expect(Token::Goto)?;
                 lexer
                     .expect_identifier()
-                    .map(|t| Statement::Goto(t.clone()))
+                    .map(|(t, _)| Statement::Goto(t.clone(), _span))
                     .and_then(|s| {
                         lexer.expect(Token::Semicolon)?;
                         Ok(s)
@@ -430,17 +409,21 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
             Token::Default => {
                 lexer.next_token();
                 lexer.expect(Token::Colon)?;
-                Ok(Statement::Default(parse_statement(lexer)?.into(), None))
+                Ok(Statement::Default(
+                    parse_statement(lexer)?.into(),
+                    None,
+                    _span,
+                ))
             }
             Token::Break => {
                 lexer.next_token();
                 lexer.expect(Token::Semicolon)?;
-                Ok(Statement::Break(None))
+                Ok(Statement::Break(None, _span))
             }
             Token::Continue => {
                 lexer.next_token();
                 lexer.expect(Token::Semicolon)?;
-                Ok(Statement::Continue(None))
+                Ok(Statement::Continue(None, _span))
             }
             Token::While => {
                 lexer.next_token();
@@ -486,10 +469,19 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
 }
 
 fn parse_expression(lexer: &mut Lexer) -> Result<Expression> {
-    parse_expression_bp(lexer, 0)
+    parse_expression_bp(
+        lexer,
+        0,
+        lexer.peek_token().map_or((0, 0).into(), |(_, span)| span),
+    )
+    .map(|(e, _)| e)
 }
 
-fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
+fn parse_expression_bp(
+    lexer: &mut Lexer,
+    min_bp: u8,
+    start: SourceSpan,
+) -> Result<(Expression, SourceSpan)> {
     let Some((token, span)) = lexer.next_token() else {
         return Err(ParserError::UnexpectedEOF);
     };
@@ -501,17 +493,21 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                 .map(Constant::Int)
                 .or_else(|_| s.parse().map(Constant::Long))
         }
-        .map(Expression::Constant)
+        .map(|constant| Expression::Constant { constant, span })
         .map_err(|error| ParserError::ConstantOutOfRange { error, span }),
-        Token::Identifier(s) => Ok(Expression::Var(s)),
+        Token::Identifier(name) => Ok(Expression::Var { name, span }),
 
         Token::LParen => {
-            if let Ok(ty) = parse_type(lexer) {
+            if let Ok(to) = parse_type(lexer) {
                 lexer.expect(Token::RParen)?;
-                let exp = parse_expression_bp(lexer, 65)?;
-                Ok(Expression::Cast(ty.clone(), exp.into()))
+                let (exp, span) = parse_expression_bp(lexer, 65, span)?;
+                Ok(Expression::Cast {
+                    to,
+                    expr: exp.into(),
+                    span,
+                })
             } else {
-                parse_expression_bp(lexer, 0).and_then(|e| {
+                parse_expression_bp(lexer, 0, span).and_then(|(e, _)| {
                     lexer.expect(Token::RParen)?;
                     Ok(e)
                 })
@@ -519,16 +515,41 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
         }
 
         // Prefix operators
-        Token::Hypen if min_bp <= 60 => parse_expression_bp(lexer, 60)
-            .map(|e| Expression::Unary(UnaryOperator::Minus, Box::new(e))),
-        Token::Tilde if min_bp <= 60 => parse_expression_bp(lexer, 60)
-            .map(|e| Expression::Unary(UnaryOperator::Complement, Box::new(e))),
-        Token::Exclamation if min_bp <= 60 => parse_expression_bp(lexer, 60)
-            .map(|e| Expression::Unary(UnaryOperator::Not, Box::new(e))),
-        Token::PlusPlus if min_bp <= 60 => parse_expression_bp(lexer, 60)
-            .map(|e| Expression::Unary(UnaryOperator::PrefixIncrement, Box::new(e))),
-        Token::MinusMinus if min_bp <= 60 => parse_expression_bp(lexer, 60)
-            .map(|e| Expression::Unary(UnaryOperator::PrefixDecrement, Box::new(e))),
+        Token::Hypen if min_bp <= 60 => {
+            parse_expression_bp(lexer, 60, span).map(|(e, span)| Expression::Unary {
+                op: UnaryOperator::Minus,
+                expr: Box::new(e),
+                span,
+            })
+        }
+        Token::Tilde if min_bp <= 60 => {
+            parse_expression_bp(lexer, 60, span).map(|(e, span)| Expression::Unary {
+                op: UnaryOperator::Complement,
+                expr: Box::new(e),
+                span,
+            })
+        }
+        Token::Exclamation if min_bp <= 60 => {
+            parse_expression_bp(lexer, 60, span).map(|(e, span)| Expression::Unary {
+                op: UnaryOperator::Not,
+                expr: Box::new(e),
+                span,
+            })
+        }
+        Token::PlusPlus if min_bp <= 60 => {
+            parse_expression_bp(lexer, 60, span).map(|(e, span)| Expression::Unary {
+                op: UnaryOperator::PrefixIncrement,
+                expr: Box::new(e),
+                span,
+            })
+        }
+        Token::MinusMinus if min_bp <= 60 => {
+            parse_expression_bp(lexer, 60, span).map(|(e, span)| Expression::Unary {
+                op: UnaryOperator::PrefixDecrement,
+                expr: Box::new(e),
+                span,
+            })
+        }
 
         kind => {
             return Err(ParserError::Expected {
@@ -549,23 +570,32 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
     }?;
 
     loop {
-        let Some((next, span)) = lexer.peek_token() else {
+        let Some((next, next_span)) = lexer.peek_token() else {
             break;
         };
         let (op, r_bp) = match next {
             // Ternary
             Token::Question if min_bp <= 3 => {
                 lexer.next_token();
-                let then = parse_expression_bp(lexer, 0)?;
+                let (then, span) = parse_expression_bp(lexer, 0, span)?;
                 lexer.expect(Token::Colon)?;
-                let r#else = parse_expression_bp(lexer, 3)?;
-                lhs = Expression::Ternary(Box::new(lhs), Box::new(then), Box::new(r#else));
+                let (r#else, span) = parse_expression_bp(lexer, 3, span)?;
+                lhs = Expression::Ternary {
+                    cond: Box::new(lhs),
+                    if_true: Box::new(then),
+                    if_false: Box::new(r#else),
+                    span,
+                };
                 continue;
             }
             Token::Equals if min_bp <= 1 => {
                 lexer.next_token();
-                let rhs = parse_expression_bp(lexer, 1)?;
-                lhs = Expression::Assignment(Box::new(lhs), Box::new(rhs));
+                let (rhs, span) = parse_expression_bp(lexer, 1, span)?;
+                lhs = Expression::Assignment {
+                    lhs: Box::new(lhs),
+                    rhs: Box::new(rhs),
+                    span,
+                };
                 continue;
             }
             // Assignment
@@ -595,19 +625,32 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                     _ => unreachable!(),
                 };
                 lexer.next_token();
-                let rhs = parse_expression_bp(lexer, 1)?;
-                lhs = Expression::CompoundAssignment(Box::new(lhs), op, Box::new(rhs));
+                let (rhs, span) = parse_expression_bp(lexer, 1, span)?;
+                lhs = Expression::CompoundAssignment {
+                    op,
+                    lhs: Box::new(lhs),
+                    rhs: Box::new(rhs),
+                    span,
+                };
                 continue;
             }
             // Postfix
             Token::PlusPlus if min_bp <= 65 => {
-                lexer.next_token();
-                lhs = Expression::Unary(UnaryOperator::PostfixIncrement, Box::new(lhs));
+                let (_, end) = lexer.next_token().unwrap();
+                lhs = Expression::Unary {
+                    op: UnaryOperator::PostfixIncrement,
+                    expr: Box::new(lhs),
+                    span: spanning(span, end),
+                };
                 continue;
             }
             Token::MinusMinus if min_bp <= 65 => {
-                lexer.next_token();
-                lhs = Expression::Unary(UnaryOperator::PostfixDecrement, Box::new(lhs));
+                let (_, end) = lexer.next_token().unwrap();
+                lhs = Expression::Unary {
+                    op: UnaryOperator::PostfixDecrement,
+                    expr: Box::new(lhs),
+                    span: spanning(span, end),
+                };
                 continue;
             }
             // Binary
@@ -631,11 +674,11 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             Token::Percent => (BinaryOperator::Remainder, 50),
             // Indexing / Call
             Token::LParen => {
-                if !matches!(lhs, Expression::Var(_)) {
+                if !matches!(lhs, Expression::Var { .. }) {
                     return Err(ParserError::Expected {
                         options: vec![Token::Identifier("ident".into())],
                         kind: Token::InvalidIdentifier(format!("{lhs:?}")),
-                        span,
+                        span: next_span,
                     });
                 }
                 lhs = {
@@ -648,8 +691,12 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
                             params.push(parse_expression(lexer)?);
                         }
                     }
-                    lexer.expect(Token::RParen)?;
-                    Ok(Expression::FunctionCall(lhs.into(), params))
+                    let (_, end) = lexer.expect(Token::RParen)?;
+                    Ok(Expression::FunctionCall {
+                        function: lhs.into(),
+                        params,
+                        span: spanning(span, end),
+                    })
                 }?;
                 continue;
             }
@@ -659,13 +706,16 @@ fn parse_expression_bp(lexer: &mut Lexer, min_bp: u8) -> Result<Expression> {
             break;
         }
         lexer.next_token();
-        lhs = Expression::Binary(
+        let (rhs, span) = parse_expression_bp(lexer, r_bp + 1, span)?;
+        lhs = Expression::Binary {
             op,
-            Box::new(lhs),
-            Box::new(parse_expression_bp(lexer, r_bp + 1)?),
-        );
+            lhs: Box::new(lhs),
+            rhs: Box::new(rhs),
+            span,
+        };
     }
-    Ok(lhs)
+    let span = spanning(start, lhs.span());
+    Ok((lhs, span))
 }
 
 #[cfg(test)]
@@ -680,41 +730,18 @@ mod tests {
         insta::assert_debug_snapshot!(program, @r#"
         Program {
             declarations: [
-                Function(
-                    FunctionDeclaration {
-                        identifier: "main",
-                        params: [],
-                        ret: Int,
-                        body: Some(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Return(
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ],
-                                span: SourceSpan {
-                                    offset: SourceOffset(
-                                        15,
-                                    ),
-                                    length: 13,
-                                },
+                FunctionDeclaration {
+                    identifier: "main",
+                    params: [],
+                    ret: Int,
+                    body: [
+                        Return(
+                            Constant {
+                                constant: 2,
                             },
                         ),
-                        storage: None,
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                0,
-                            ),
-                            length: 28,
-                        },
-                    },
-                ),
+                    ],
+                },
             ],
         }
         "#);
@@ -729,64 +756,31 @@ mod tests {
         insta::assert_debug_snapshot!(program, @r#"
         Program {
             declarations: [
-                Function(
-                    FunctionDeclaration {
-                        identifier: "main",
-                        params: [],
-                        ret: Int,
-                        body: Some(
-                            Block {
-                                items: [
-                                    Statement(
-                                        Expression(
-                                            Binary(
-                                                Add,
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                                Constant(
-                                                    Int(
-                                                        1,
-                                                    ),
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    Statement(
-                                        Null,
-                                    ),
-                                    Statement(
-                                        Null,
-                                    ),
-                                    Statement(
-                                        Return(
-                                            Constant(
-                                                Int(
-                                                    2,
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                ],
-                                span: SourceSpan {
-                                    offset: SourceOffset(
-                                        15,
-                                    ),
-                                    length: 22,
+                FunctionDeclaration {
+                    identifier: "main",
+                    params: [],
+                    ret: Int,
+                    body: [
+                        Expression(
+                            Binary {
+                                op: Add,
+                                lhs: Constant {
+                                    constant: 1,
+                                },
+                                rhs: Constant {
+                                    constant: 1,
                                 },
                             },
                         ),
-                        storage: None,
-                        span: SourceSpan {
-                            offset: SourceOffset(
-                                0,
-                            ),
-                            length: 37,
-                        },
-                    },
-                ),
+                        Null,
+                        Null,
+                        Return(
+                            Constant {
+                                constant: 2,
+                            },
+                        ),
+                    ],
+                },
             ],
         }
         "#);

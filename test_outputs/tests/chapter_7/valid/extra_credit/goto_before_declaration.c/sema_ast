@@ -8,28 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Compound(
                     [
                         If(
-                            Binary(
-                                NotEqual,
-                                Var(
-                                    "a.1",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
+                            Binary {
+                                op: NotEqual,
+                                lhs: Var {
+                                    name: "a.1",
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
                             Labeled(
                                 "return_a",
                                 Return(
-                                    Var(
-                                        "a.1",
-                                    ),
+                                    Var {
+                                        name: "a.1",
+                                    },
                                 ),
                             ),
                             None,
@@ -37,9 +37,9 @@ Program {
                         VariableDeclaration {
                             name: "a.2",
                             ty: Int,
-                            init: Constant(
-                                4,
-                            ),
+                            init: Constant {
+                                constant: 4,
+                            },
                         },
                         Goto(
                             "return_a",

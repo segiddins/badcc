@@ -8,32 +8,32 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "i",
-                        ),
-                        Assignment(
-                            Cast(
-                                Long,
-                                Var(
-                                    "i",
-                                ),
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Assignment {
+                            lhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "i",
+                                },
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

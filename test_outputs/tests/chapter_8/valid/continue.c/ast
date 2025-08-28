@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "counter",
@@ -20,112 +20,112 @@ Program {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThanOrEqual,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThanOrEqual,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "i",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "counter",
-                                    ),
-                                    Var(
-                                        "i",
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "counter",
+                                    },
+                                    rhs: Var {
+                                        name: "i",
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    Equals,
-                                    Binary(
-                                        Remainder,
-                                        Var(
-                                            "i",
-                                        ),
-                                        Constant(
-                                            2,
-                                        ),
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Binary {
+                                    op: Equals,
+                                    lhs: Binary {
+                                        op: Remainder,
+                                        lhs: Var {
+                                            name: "i",
+                                        },
+                                        rhs: Constant {
+                                            constant: 2,
+                                        },
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                                 Continue(
                                     None,
                                 ),
                                 None,
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "sum",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "sum",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "sum",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
                     label: None,
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "sum",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "counter",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "sum",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "counter",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
+                    },
                 ),
             ],
         },

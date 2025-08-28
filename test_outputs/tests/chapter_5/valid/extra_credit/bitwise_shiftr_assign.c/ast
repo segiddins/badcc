@@ -8,37 +8,37 @@ Program {
                 VariableDeclaration {
                     name: "var_to_shift",
                     ty: Int,
-                    init: Constant(
-                        1234,
-                    ),
+                    init: Constant {
+                        constant: 1234,
+                    },
                 },
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Binary(
-                            RightShift,
-                            Var(
-                                "var_to_shift",
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Binary {
+                            op: RightShift,
+                            lhs: Var {
+                                name: "var_to_shift",
+                            },
+                            rhs: Constant {
+                                constant: 4,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },

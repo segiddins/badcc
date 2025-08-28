@@ -6,6 +6,12 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -16,34 +22,82 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            43,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            50,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "c",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            57,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            64,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "e",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            71,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "f",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            78,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "g",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            85,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "h",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            92,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -56,131 +110,131 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: FunctionCall(
-                        Var(
-                            "fib",
-                        ),
-                        [
-                            Constant(
-                                4,
-                            ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "fib",
+                        },
+                        params: [
+                            Constant {
+                                constant: 4,
+                            },
                         ],
-                    ),
+                    },
                 },
                 VariableDeclaration {
                     name: "seven",
                     ty: Int,
-                    init: Constant(
-                        7,
-                    ),
+                    init: Constant {
+                        constant: 7,
+                    },
                 },
                 VariableDeclaration {
                     name: "eight",
                     ty: Int,
-                    init: FunctionCall(
-                        Var(
-                            "fib",
-                        ),
-                        [
-                            Constant(
-                                6,
-                            ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "fib",
+                        },
+                        params: [
+                            Constant {
+                                constant: 6,
+                            },
                         ],
-                    ),
+                    },
                 },
                 VariableDeclaration {
                     name: "y",
                     ty: Int,
-                    init: FunctionCall(
-                        Var(
-                            "multiply_many_args",
-                        ),
-                        [
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                2,
-                            ),
-                            Constant(
-                                3,
-                            ),
-                            Constant(
-                                4,
-                            ),
-                            Constant(
-                                5,
-                            ),
-                            Constant(
-                                6,
-                            ),
-                            Var(
-                                "seven",
-                            ),
-                            Var(
-                                "eight",
-                            ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "multiply_many_args",
+                        },
+                        params: [
+                            Var {
+                                name: "x",
+                            },
+                            Constant {
+                                constant: 2,
+                            },
+                            Constant {
+                                constant: 3,
+                            },
+                            Constant {
+                                constant: 4,
+                            },
+                            Constant {
+                                constant: 5,
+                            },
+                            Constant {
+                                constant: 6,
+                            },
+                            Var {
+                                name: "seven",
+                            },
+                            Var {
+                                name: "eight",
+                            },
                         ],
-                    ),
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            3,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 3,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "y",
-                        ),
-                        Constant(
-                            589680,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "y",
+                        },
+                        rhs: Constant {
+                            constant: 589680,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Binary(
-                        Add,
-                        Var(
-                            "x",
-                        ),
-                        Binary(
-                            Remainder,
-                            Var(
-                                "y",
-                            ),
-                            Constant(
-                                256,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Binary {
+                            op: Remainder,
+                            lhs: Var {
+                                name: "y",
+                            },
+                            rhs: Constant {
+                                constant: 256,
+                            },
+                        },
+                    },
                 ),
             ],
         },

@@ -8,61 +8,61 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant(
-                        2147483646,
-                    ),
+                    init: Constant {
+                        constant: 2147483646,
+                    },
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "c.3",
                     ty: Int,
-                    init: Binary(
-                        Add,
-                        Binary(
-                            Divide,
-                            Var(
-                                "a.1",
-                            ),
-                            Constant(
-                                6,
-                            ),
-                        ),
-                        Unary(
-                            Not,
-                            Var(
-                                "b.2",
-                            ),
-                        ),
-                    ),
+                    init: Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Var {
+                                name: "a.1",
+                            },
+                            rhs: Constant {
+                                constant: 6,
+                            },
+                        },
+                        rhs: Unary {
+                            op: Not,
+                            expr: Var {
+                                name: "b.2",
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Binary(
-                            Multiply,
-                            Var(
-                                "c.3",
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Binary(
-                            Subtract,
-                            Var(
-                                "a.1",
-                            ),
-                            Constant(
-                                1431655762,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Var {
+                                name: "c.3",
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "a.1",
+                            },
+                            rhs: Constant {
+                                constant: 1431655762,
+                            },
+                        },
+                    },
                 ),
             ],
         },

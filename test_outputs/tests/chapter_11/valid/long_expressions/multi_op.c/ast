@@ -6,6 +6,12 @@ Program {
                 (
                     Long,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            16,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -13,47 +19,47 @@ Program {
                 VariableDeclaration {
                     name: "b",
                     ty: Long,
-                    init: Binary(
-                        Subtract,
-                        Binary(
-                            Multiply,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                5l,
-                            ),
-                        ),
-                        Constant(
-                            10l,
-                        ),
-                    ),
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 5l,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 10l,
+                        },
+                    },
                 },
                 If(
-                    Binary(
-                        Equals,
-                        Var(
-                            "b",
-                        ),
-                        Constant(
-                            21474836440l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "b",
+                        },
+                        rhs: Constant {
+                            constant: 21474836440l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },
@@ -63,16 +69,16 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "target",
-                        ),
-                        [
-                            Constant(
-                                4294967290l,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "target",
+                        },
+                        params: [
+                            Constant {
+                                constant: 4294967290l,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

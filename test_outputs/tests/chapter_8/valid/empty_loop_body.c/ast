@@ -8,38 +8,38 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        2147483642,
-                    ),
+                    init: Constant {
+                        constant: 2147483642,
+                    },
                 },
                 DoWhile(
                     Null,
-                    Binary(
-                        GreaterThanOrEqual,
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Binary(
-                                Subtract,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    5,
-                                ),
-                            ),
-                        ),
-                        Constant(
-                            256,
-                        ),
-                    ),
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Binary {
+                                op: Subtract,
+                                lhs: Var {
+                                    name: "i",
+                                },
+                                rhs: Constant {
+                                    constant: 5,
+                                },
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 256,
+                        },
+                    },
                     None,
                 ),
                 Return(
-                    Var(
-                        "i",
-                    ),
+                    Var {
+                        name: "i",
+                    },
                 ),
             ],
         },

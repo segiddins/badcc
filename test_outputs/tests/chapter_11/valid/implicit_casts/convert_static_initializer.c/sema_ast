@@ -3,16 +3,16 @@ Program {
         VariableDeclaration {
             name: "i",
             ty: Int,
-            init: Constant(
-                0,
-            ),
+            init: Constant {
+                constant: 0,
+            },
         },
         VariableDeclaration {
             name: "j",
             ty: Long,
-            init: Constant(
-                123456l,
-            ),
+            init: Constant {
+                constant: 123456l,
+            },
         },
         FunctionDeclaration {
             identifier: "main",
@@ -20,51 +20,51 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "i",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "j",
-                        ),
-                        Constant(
-                            123456l,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "j",
+                        },
+                        rhs: Constant {
+                            constant: 123456l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

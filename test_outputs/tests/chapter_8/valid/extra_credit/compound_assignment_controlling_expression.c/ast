@@ -8,62 +8,62 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        100,
-                    ),
+                    init: Constant {
+                        constant: 100,
+                    },
                 },
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 DoWhile(
                     Expression(
-                        CompoundAssignment(
-                            Var(
-                                "sum",
-                            ),
-                            Add,
-                            Constant(
-                                2,
-                            ),
-                        ),
+                        CompoundAssignment {
+                            op: Add,
+                            lhs: Var {
+                                name: "sum",
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
                     ),
-                    CompoundAssignment(
-                        Var(
-                            "i",
-                        ),
-                        Subtract,
-                        Constant(
-                            1,
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Subtract,
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                     None,
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "sum",
-                            ),
-                            Constant(
-                                200,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "sum",
+                            },
+                            rhs: Constant {
+                                constant: 200,
+                            },
+                        },
+                    },
                 ),
             ],
         },

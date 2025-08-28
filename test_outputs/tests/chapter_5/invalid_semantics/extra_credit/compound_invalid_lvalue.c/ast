@@ -8,28 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Expression(
-                    CompoundAssignment(
-                        Unary(
-                            Minus,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                        Add,
-                        Constant(
-                            1,
-                        ),
-                    ),
+                    CompoundAssignment {
+                        op: Add,
+                        lhs: Unary {
+                            op: Minus,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },

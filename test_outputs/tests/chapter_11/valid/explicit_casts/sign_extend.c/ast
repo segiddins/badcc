@@ -6,10 +6,22 @@ Program {
                 (
                     Int,
                     "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            21,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Long,
                     "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            29,
+                        ),
+                        length: 8,
+                    },
                 ),
             ],
             ret: Long,
@@ -17,23 +29,23 @@ Program {
                 VariableDeclaration {
                     name: "extended",
                     ty: Long,
-                    init: Cast(
-                        Long,
-                        Var(
-                            "i",
-                        ),
-                    ),
+                    init: Cast {
+                        to: Long,
+                        expr: Var {
+                            name: "i",
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "extended",
-                        ),
-                        Var(
-                            "expected",
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "extended",
+                        },
+                        rhs: Var {
+                            name: "expected",
+                        },
+                    },
                 ),
             ],
         },
@@ -43,62 +55,62 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "sign_extend",
-                            ),
-                            [
-                                Constant(
-                                    10,
-                                ),
-                                Constant(
-                                    10l,
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "sign_extend",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 10,
+                                },
+                                Constant {
+                                    constant: 10l,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "sign_extend",
-                            ),
-                            [
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        10l,
-                                    ),
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "sign_extend",
+                            },
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 10,
+                                    },
+                                },
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 10l,
+                                    },
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
@@ -107,38 +119,38 @@ Program {
                 VariableDeclaration {
                     name: "l",
                     ty: Long,
-                    init: Cast(
-                        Long,
-                        Constant(
-                            100,
-                        ),
-                    ),
+                    init: Cast {
+                        to: Long,
+                        expr: Constant {
+                            constant: 100,
+                        },
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            100l,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 100l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

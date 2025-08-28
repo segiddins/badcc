@@ -8,226 +8,226 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            20,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 20,
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
-                    init: Constant(
-                        2147483647,
-                    ),
+                    init: Constant {
+                        constant: 2147483647,
+                    },
                 },
                 VariableDeclaration {
                     name: "c.3",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            5000000,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 5000000,
+                        },
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "i.1",
-                        ),
-                        Cast(
-                            Int,
-                            Binary(
-                                Add,
-                                Cast(
-                                    Long,
-                                    Var(
-                                        "i.1",
-                                    ),
-                                ),
-                                Constant(
-                                    2147483648l,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i.1",
+                        },
+                        rhs: Cast {
+                            to: Int,
+                            expr: Binary {
+                                op: Add,
+                                lhs: Cast {
+                                    to: Long,
+                                    expr: Var {
+                                        name: "i.1",
+                                    },
+                                },
+                                rhs: Constant {
+                                    constant: 2147483648l,
+                                },
+                            },
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "i.1",
-                        ),
-                        Constant(
-                            2147483628,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "i.1",
+                        },
+                        rhs: Constant {
+                            constant: 2147483628,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "b.2",
-                        ),
-                        Constant(
-                            2147483647,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "b.2",
+                        },
+                        rhs: Constant {
+                            constant: 2147483647,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ],
-                    ),
-                    None,
-                ),
-                Expression(
-                    Assignment(
-                        Var(
-                            "b.2",
-                        ),
-                        Cast(
-                            Int,
-                            Binary(
-                                Divide,
-                                Cast(
-                                    Long,
-                                    Var(
-                                        "b.2",
-                                    ),
-                                ),
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        34359738367l,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                If(
-                    Var(
-                        "b.2",
-                    ),
-                    Compound(
-                        [
-                            Return(
-                                Constant(
-                                    3,
-                                ),
-                            ),
-                        ],
-                    ),
-                    None,
-                ),
-                If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "i.1",
-                        ),
-                        Constant(
-                            2147483628,
-                        ),
-                    ),
-                    Compound(
-                        [
-                            Return(
-                                Constant(
-                                    4,
-                                ),
-                            ),
-                        ],
-                    ),
-                    None,
-                ),
-                If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "c.3",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                5000000,
-                            ),
-                        ),
-                    ),
-                    Compound(
-                        [
-                            Return(
-                                Constant(
-                                    5,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "c.3",
-                        ),
-                        Cast(
-                            Int,
-                            Binary(
-                                Multiply,
-                                Cast(
-                                    Long,
-                                    Var(
-                                        "c.3",
-                                    ),
-                                ),
-                                Constant(
-                                    10000l,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "b.2",
+                        },
+                        rhs: Cast {
+                            to: Int,
+                            expr: Binary {
+                                op: Divide,
+                                lhs: Cast {
+                                    to: Long,
+                                    expr: Var {
+                                        name: "b.2",
+                                    },
+                                },
+                                rhs: Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 34359738367l,
+                                    },
+                                },
+                            },
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "c.3",
-                        ),
-                        Constant(
-                            1539607552,
-                        ),
-                    ),
+                    Var {
+                        name: "b.2",
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    6,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "i.1",
+                        },
+                        rhs: Constant {
+                            constant: 2147483628,
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant {
+                                    constant: 4,
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "c.3",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 5000000,
+                            },
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant {
+                                    constant: 5,
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var {
+                            name: "c.3",
+                        },
+                        rhs: Cast {
+                            to: Int,
+                            expr: Binary {
+                                op: Multiply,
+                                lhs: Cast {
+                                    to: Long,
+                                    expr: Var {
+                                        name: "c.3",
+                                    },
+                                },
+                                rhs: Constant {
+                                    constant: 10000l,
+                                },
+                            },
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "c.3",
+                        },
+                        rhs: Constant {
+                            constant: 1539607552,
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant {
+                                    constant: 6,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

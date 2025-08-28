@@ -6,57 +6,63 @@ Program {
                 (
                     Long,
                     "l",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            24,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Switch(
-                    Var(
-                        "l",
-                    ),
+                    Var {
+                        name: "l",
+                    },
                     Compound(
                         [
                             Case(
-                                Constant(
-                                    0,
-                                ),
+                                Constant {
+                                    constant: 0,
+                                },
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 None,
                             ),
                             Case(
-                                Constant(
-                                    100,
-                                ),
+                                Constant {
+                                    constant: 100,
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
                             Case(
-                                Constant(
-                                    8589934592l,
-                                ),
+                                Constant {
+                                    constant: 8589934592l,
+                                },
                                 Return(
-                                    Constant(
-                                        2,
-                                    ),
+                                    Constant {
+                                        constant: 2,
+                                    },
                                 ),
                                 None,
                             ),
                             Default(
                                 Return(
-                                    Unary(
-                                        Minus,
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
+                                    Unary {
+                                        op: Minus,
+                                        expr: Constant {
+                                            constant: 1,
+                                        },
+                                    },
                                 ),
                                 None,
                             ),
@@ -72,57 +78,57 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "switch_on_long",
-                            ),
-                            [
-                                Constant(
-                                    8589934592l,
-                                ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "switch_on_long",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 8589934592l,
+                                },
                             ],
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "switch_on_long",
-                            ),
-                            [
-                                Constant(
-                                    100,
-                                ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "switch_on_long",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 100,
+                                },
                             ],
-                        ),
-                        Constant(
-                            1,
-                        ),
-                    ),
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                     Return(
-                        Constant(
-                            2,
-                        ),
+                        Constant {
+                            constant: 2,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

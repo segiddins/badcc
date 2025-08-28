@@ -8,66 +8,66 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 For {
                     init: Some(
-                        CompoundAssignment(
-                            Var(
-                                "i",
-                            ),
-                            Multiply,
-                            Unary(
-                                Minus,
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        CompoundAssignment {
+                            op: Multiply,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     condition: Some(
-                        Binary(
-                            GreaterThanOrEqual,
-                            Var(
-                                "i",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    100,
-                                ),
-                            ),
-                        ),
+                        Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 100,
+                                },
+                            },
+                        },
                     ),
                     post: Some(
-                        CompoundAssignment(
-                            Var(
-                                "i",
-                            ),
-                            Subtract,
-                            Constant(
-                                3,
-                            ),
-                        ),
+                        CompoundAssignment {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 3,
+                            },
+                        },
                     ),
                     body: Null,
                     label: None,
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "i",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                103,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 103,
+                            },
+                        },
+                    },
                 ),
             ],
         },

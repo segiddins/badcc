@@ -12,36 +12,42 @@ pub enum Error {
     #[error("{0} used without being declared")]
     UnresolvedReference(String),
     #[error("{0} assigned without being declared")]
-    UnresolvedAssignment(String),
-    #[error("cannot call non-identifier {0}")]
-    NonIdentifierCall(String),
-    #[error("cannot assign to non-identifier {0}")]
-    NonIdentifierAssignment(String),
+    UnresolvedAssignment(String, #[label("identifier")] SourceSpan),
+    #[error("cannot call non-identifier")]
+    NonIdentifierCall(#[label("identifier required here")] SourceSpan),
+    #[error("cannot assign to non-identifier")]
+    NonIdentifierAssignment(#[label("lvalue required here")] SourceSpan),
     #[error("cannot define {0} inside another function")]
     NestedFunctionDefinition(String),
     #[error("cannot declare functions at block scope with static storage specifier")]
     NestedFunctionStorageSpecifier,
     #[error("a variable declared in a for loop header cannot have a storage class")]
-    ForInitStorageSpecifier,
+    ForInitStorageSpecifier {
+        #[label("declaration")]
+        span: SourceSpan,
+    },
     #[error("a variable declared extern cannot have an initializer")]
     ExternVariableInitializer {
         #[label("here")]
         span: SourceSpan,
     },
     #[error("initializers for static variables must be constant")]
-    StaticVariableNonConstantInitializer,
+    StaticVariableNonConstantInitializer {
+        #[label("expression")]
+        span: SourceSpan,
+    },
 }
 
 type Result<T = ()> = miette::Result<T, Error>;
 
 #[derive(Default)]
 struct Scope {
-    vars: Vec<HashMap<String, (String, bool)>>,
+    vars: Vec<HashMap<String, (String, bool, SourceSpan)>>,
     idx: u32,
 }
 
 impl Scope {
-    fn declare(&mut self, name: &str, linkage: bool) -> Result<&String> {
+    fn declare(&mut self, name: &str, linkage: bool, span: SourceSpan) -> Result<&String> {
         let last = self.vars.last_mut().unwrap();
         let resolved = match last.entry(name.to_string()) {
             Entry::Occupied(occupied_entry) => match linkage {
@@ -54,6 +60,7 @@ impl Scope {
                     true => name.into(),
                 },
                 linkage,
+                span,
             )),
         };
 
@@ -68,7 +75,7 @@ impl Scope {
             .rev()
             .find_map(|s| s.get(name))
             .as_ref()
-            .map(|(s, _)| s)
+            .map(|(s, _, _)| s)
     }
 
     fn nest(&mut self, f: impl FnOnce(&mut Self) -> Result) -> Result {
@@ -93,45 +100,53 @@ impl Scope {
 
 fn visit_expr(expression: &mut Expression, scope: &mut Scope) -> Result {
     match expression {
-        Expression::Unary(op, expression) => match op {
+        Expression::Unary { op, expr, .. } => match op {
             UnaryOperator::PrefixIncrement
             | UnaryOperator::PrefixDecrement
             | UnaryOperator::PostfixIncrement
-            | UnaryOperator::PostfixDecrement => visit_assignment_lhs(expression, scope)?,
-            _ => visit_expr(expression, scope)?,
+            | UnaryOperator::PostfixDecrement => visit_assignment_lhs(expr, scope)?,
+            _ => visit_expr(expr, scope)?,
         },
-        Expression::Binary(_, lhs, rhs) => {
+        Expression::Binary { lhs, rhs, .. } => {
             visit_expr(lhs, scope)?;
             visit_expr(rhs, scope)?;
         }
-        Expression::Var(name) => {
+        Expression::Var { name, .. } => {
             *name = scope
                 .get(name)
                 .ok_or_else(|| Error::UnresolvedReference(name.clone()))?
                 .clone();
         }
-        Expression::Assignment(lhs, rhs) | Expression::CompoundAssignment(lhs, _, rhs) => {
+        Expression::Assignment { lhs, rhs, .. }
+        | Expression::CompoundAssignment { lhs, rhs, .. } => {
             visit_assignment_lhs(lhs, scope)?;
             visit_expr(rhs, scope)?;
         }
-        Expression::Ternary(cond, then, r#else) => {
+        Expression::Ternary {
+            cond,
+            if_true,
+            if_false,
+            ..
+        } => {
             visit_expr(cond, scope)?;
-            visit_expr(then, scope)?;
-            visit_expr(r#else, scope)?;
+            visit_expr(if_true, scope)?;
+            visit_expr(if_false, scope)?;
         }
-        Expression::Constant(_) => {}
-        Expression::FunctionCall(function, expressions) => {
+        Expression::Constant { .. } => {}
+        Expression::FunctionCall {
+            function, params, ..
+        } => {
             visit_expr(function, scope)?;
             match function.as_ref() {
-                Expression::Var(var) if scope.get(var).is_some() => {}
-                _ => return Err(Error::NonIdentifierCall(format!("{function:?}"))),
+                Expression::Var { name, .. } if scope.get(name).is_some() => {}
+                expr => return Err(Error::NonIdentifierCall(expr.span())),
             }
-            for expr in expressions.iter_mut() {
+            for expr in params.iter_mut() {
                 visit_expr(expr, scope)?;
             }
         }
-        Expression::Cast(_, expression) => {
-            visit_expr(expression, scope)?;
+        Expression::Cast { expr, .. } => {
+            visit_expr(expr, scope)?;
         }
     }
     Ok(())
@@ -149,7 +164,7 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
         Statement::Return(expression) | Statement::Expression(expression) => {
             visit_expr(expression, scope)
         }
-        Statement::Null | Statement::Goto(_) | Statement::Break(_) | Statement::Continue(_) => {
+        Statement::Null | Statement::Goto(..) | Statement::Break(..) | Statement::Continue(..) => {
             Ok(())
         }
         Statement::If(cond, then, r#else) => {
@@ -161,7 +176,7 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
                 Ok(())
             }
         }
-        Statement::Labeled(_, statement) | Statement::Default(statement, _) => {
+        Statement::Labeled(_, statement, _) | Statement::Default(statement, _, _) => {
             visit_statement(statement, scope)
         }
         Statement::Compound(block) => scope.nest(|scope| visit_block(block, scope)),
@@ -183,7 +198,9 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
             match init {
                 ForInit::Decl(variable_declaration) => {
                     if variable_declaration.storage.is_some() {
-                        return Err(Error::ForInitStorageSpecifier);
+                        return Err(Error::ForInitStorageSpecifier {
+                            span: variable_declaration.span,
+                        });
                     }
                     visit_variable_decl(variable_declaration, scope)
                 }
@@ -213,18 +230,18 @@ fn visit_variable_decl(decl: &mut VariableDeclaration, scope: &mut Scope) -> Res
         Some(StorageClass::Static) => scope.is_file(),
         None => false,
     };
-    decl.name = scope.declare(&decl.name, linkage)?.clone();
+    decl.name = scope.declare(&decl.name, linkage, decl.span)?.clone();
     if let Some(init) = decl.init.as_mut() {
         visit_expr(init, scope)?;
         match storage {
             Some(StorageClass::Extern) if !scope.is_file() => {
-                return Err(Error::ExternVariableInitializer { span: decl.span });
+                return Err(Error::ExternVariableInitializer { span: init.span() });
             }
-            Some(StorageClass::Static) if !matches!(init, Expression::Constant(_)) => {
-                return Err(Error::StaticVariableNonConstantInitializer);
+            Some(StorageClass::Static) if !matches!(init, Expression::Constant { .. }) => {
+                return Err(Error::StaticVariableNonConstantInitializer { span: init.span() });
             }
-            None if scope.is_file() && !matches!(init, Expression::Constant(_)) => {
-                return Err(Error::StaticVariableNonConstantInitializer);
+            None if scope.is_file() && !matches!(init, Expression::Constant { .. }) => {
+                return Err(Error::StaticVariableNonConstantInitializer { span: init.span() });
             }
             _ => {}
         }
@@ -251,15 +268,16 @@ fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result {
             body,
             params,
             storage,
+            span,
             ..
         }) => {
-            scope.declare(identifier, true)?;
+            scope.declare(identifier, true, *span)?;
 
             let is_file = scope.is_file();
 
             scope.push();
-            for (_, name) in params.iter_mut() {
-                *name = scope.declare(name, false)?.clone();
+            for (_, name, span) in params.iter_mut() {
+                *name = scope.declare(name, false, *span)?.clone();
             }
             if !is_file {
                 if body.is_some() {
@@ -280,15 +298,15 @@ fn visit_decl(decl: &mut Declaration, scope: &mut Scope) -> Result {
 
 fn visit_assignment_lhs(expr: &mut Expression, scope: &mut Scope) -> Result {
     match expr {
-        Expression::Var(name) => {
+        Expression::Var { name, span } => {
             *name = scope
                 .get(name)
-                .ok_or_else(|| Error::UnresolvedAssignment(name.clone()))?
+                .ok_or_else(|| Error::UnresolvedAssignment(name.clone(), *span))?
                 .clone();
 
             Ok(())
         }
-        _ => Err(Error::NonIdentifierAssignment(format!("{expr:?}"))),
+        expr => Err(Error::NonIdentifierAssignment(expr.span())),
     }
 }
 

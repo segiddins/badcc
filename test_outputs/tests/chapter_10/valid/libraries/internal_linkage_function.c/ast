@@ -12,12 +12,12 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "my_fun",
-                        ),
-                        [],
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "my_fun",
+                        },
+                        params: [],
+                    },
                 ),
             ],
         },
@@ -32,12 +32,12 @@ Program {
                     ret: Int,
                 },
                 Return(
-                    FunctionCall(
-                        Var(
-                            "my_fun",
-                        ),
-                        [],
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "my_fun",
+                        },
+                        params: [],
+                    },
                 ),
             ],
         },
@@ -61,31 +61,31 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                     storage: Static,
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "i",
-                        ),
-                        Binary(
-                            Add,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "i",
-                    ),
+                    Var {
+                        name: "i",
+                    },
                 ),
             ],
         },

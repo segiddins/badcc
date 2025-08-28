@@ -6,9 +6,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        9,
-                    ),
+                    Constant {
+                        constant: 9,
+                    },
                 ),
             ],
         },
@@ -18,18 +18,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Multiply,
-                        Constant(
-                            2,
-                        ),
-                        FunctionCall(
-                            Var(
-                                "bar",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Binary {
+                        op: Multiply,
+                        lhs: Constant {
+                            constant: 2,
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "bar",
+                            },
+                            params: [],
+                        },
+                    },
                 ),
             ],
         },
@@ -39,27 +39,27 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        FunctionCall(
-                            Var(
-                                "foo",
-                            ),
-                            [],
-                        ),
-                        Binary(
-                            Divide,
-                            FunctionCall(
-                                Var(
-                                    "bar",
-                                ),
-                                [],
-                            ),
-                            Constant(
-                                3,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "foo",
+                            },
+                            params: [],
+                        },
+                        rhs: Binary {
+                            op: Divide,
+                            lhs: FunctionCall {
+                                function: Var {
+                                    name: "bar",
+                                },
+                                params: [],
+                            },
+                            rhs: Constant {
+                                constant: 3,
+                            },
+                        },
+                    },
                 ),
             ],
         },

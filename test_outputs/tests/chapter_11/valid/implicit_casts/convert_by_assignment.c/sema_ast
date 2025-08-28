@@ -6,17 +6,23 @@ Program {
                 (
                     Long,
                     "l.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            31,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Var(
-                            "l.1",
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Var {
+                            name: "l.1",
+                        },
+                    },
                 ),
             ],
         },
@@ -26,17 +32,23 @@ Program {
                 (
                     Int,
                     "i.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            81,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Long,
             body: [
                 Return(
-                    Cast(
-                        Long,
-                        Var(
-                            "i.3",
-                        ),
-                    ),
+                    Cast {
+                        to: Long,
+                        expr: Var {
+                            name: "i.3",
+                        },
+                    },
                 ),
             ],
         },
@@ -46,10 +58,22 @@ Program {
                 (
                     Long,
                     "l.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            134,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "expected.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            141,
+                        ),
+                        length: 8,
+                    },
                 ),
             ],
             ret: Int,
@@ -57,23 +81,23 @@ Program {
                 VariableDeclaration {
                     name: "result.7",
                     ty: Int,
-                    init: Cast(
-                        Int,
-                        Var(
-                            "l.5",
-                        ),
-                    ),
+                    init: Cast {
+                        to: Int,
+                        expr: Var {
+                            name: "l.5",
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "result.7",
-                        ),
-                        Var(
-                            "expected.6",
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "result.7",
+                        },
+                        rhs: Var {
+                            name: "expected.6",
+                        },
+                    },
                 ),
             ],
         },
@@ -85,83 +109,83 @@ Program {
                 VariableDeclaration {
                     name: "result.9",
                     ty: Long,
-                    init: Cast(
-                        Long,
-                        FunctionCall(
-                            Var(
-                                "return_truncated_long",
-                            ),
-                            [
-                                Constant(
-                                    4294967298l,
-                                ),
+                    init: Cast {
+                        to: Long,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "return_truncated_long",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 4294967298l,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "result.9",
-                        ),
-                        Constant(
-                            2l,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "result.9",
+                        },
+                        rhs: Constant {
+                            constant: 2l,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "result.9",
-                        ),
-                        FunctionCall(
-                            Var(
-                                "return_extended_int",
-                            ),
-                            [
-                                Unary(
-                                    Minus,
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                    Assignment {
+                        lhs: Var {
+                            name: "result.9",
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "return_extended_int",
+                            },
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant {
+                                        constant: 10,
+                                    },
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "result.9",
-                        ),
-                        Cast(
-                            Long,
-                            Unary(
-                                Minus,
-                                Constant(
-                                    10,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "result.9",
+                        },
+                        rhs: Cast {
+                            to: Long,
+                            expr: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 10,
+                                },
+                            },
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
@@ -170,63 +194,63 @@ Program {
                 VariableDeclaration {
                     name: "i.10",
                     ty: Int,
-                    init: Constant(
-                        2,
-                    ),
+                    init: Constant {
+                        constant: 2,
+                    },
                 },
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "i.10",
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "i.10",
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "truncate_on_assignment",
-                            ),
-                            [
-                                Constant(
-                                    17179869184l,
-                                ),
-                                Constant(
-                                    0,
-                                ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "truncate_on_assignment",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 17179869184l,
+                                },
+                                Constant {
+                                    constant: 0,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    4,
-                                ),
+                                Constant {
+                                    constant: 4,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

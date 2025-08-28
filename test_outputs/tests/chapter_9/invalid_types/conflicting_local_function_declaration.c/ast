@@ -16,30 +16,36 @@ Program {
                         (
                             Int,
                             "a",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    48,
+                                ),
+                                length: 1,
+                            },
                         ),
                     ],
                     ret: Int,
                 },
                 Return(
-                    Binary(
-                        Add,
-                        FunctionCall(
-                            Var(
-                                "bar",
-                            ),
-                            [],
-                        ),
-                        FunctionCall(
-                            Var(
-                                "foo",
-                            ),
-                            [
-                                Constant(
-                                    1,
-                                ),
+                    Binary {
+                        op: Add,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "bar",
+                            },
+                            params: [],
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "foo",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 1,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 ),
             ],
         },
@@ -54,28 +60,40 @@ Program {
                         (
                             Int,
                             "a",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    113,
+                                ),
+                                length: 1,
+                            },
                         ),
                         (
                             Int,
                             "b",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    120,
+                                ),
+                                length: 1,
+                            },
                         ),
                     ],
                     ret: Int,
                 },
                 Return(
-                    FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                2,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [
+                            Constant {
+                                constant: 1,
+                            },
+                            Constant {
+                                constant: 2,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

@@ -6,6 +6,12 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -13,14 +19,14 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        5,
-                    ),
+                    init: Constant {
+                        constant: 5,
+                    },
                 },
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },
@@ -30,16 +36,16 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [
-                            Constant(
-                                3,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [
+                            Constant {
+                                constant: 3,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

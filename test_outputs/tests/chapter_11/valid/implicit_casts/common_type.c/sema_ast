@@ -16,32 +16,32 @@ Program {
                 VariableDeclaration {
                     name: "result.3",
                     ty: Long,
-                    init: Binary(
-                        Add,
-                        Cast(
-                            Long,
-                            Var(
-                                "i",
-                            ),
-                        ),
-                        Var(
-                            "l",
-                        ),
-                    ),
+                    init: Binary {
+                        op: Add,
+                        lhs: Cast {
+                            to: Long,
+                            expr: Var {
+                                name: "i",
+                            },
+                        },
+                        rhs: Var {
+                            name: "l",
+                        },
+                    },
                 },
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            Equals,
-                            Var(
-                                "result.3",
-                            ),
-                            Constant(
-                                2147483663l,
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "result.3",
+                            },
+                            rhs: Constant {
+                                constant: 2147483663l,
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -53,32 +53,32 @@ Program {
                 VariableDeclaration {
                     name: "int_result.5",
                     ty: Int,
-                    init: Cast(
-                        Int,
-                        Binary(
-                            Divide,
-                            Var(
-                                "l",
-                            ),
-                            Cast(
-                                Long,
-                                Var(
-                                    "i",
-                                ),
-                            ),
-                        ),
-                    ),
+                    init: Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Divide,
+                            lhs: Var {
+                                name: "l",
+                            },
+                            rhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "i",
+                                },
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        Equals,
-                        Var(
-                            "int_result.5",
-                        ),
-                        Constant(
-                            214748364,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Var {
+                            name: "int_result.5",
+                        },
+                        rhs: Constant {
+                            constant: 214748364,
+                        },
+                    },
                 ),
             ],
         },
@@ -88,21 +88,21 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            LessThanOrEqual,
-                            Cast(
-                                Long,
-                                Var(
-                                    "i",
-                                ),
-                            ),
-                            Var(
-                                "l",
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: LessThanOrEqual,
+                            lhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "i",
+                                },
+                            },
+                            rhs: Var {
+                                name: "l",
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -114,31 +114,34 @@ Program {
                 VariableDeclaration {
                     name: "result.8",
                     ty: Long,
-                    init: Ternary(
-                        Constant(
-                            1,
-                        ),
-                        Var(
-                            "l",
-                        ),
-                        Var(
-                            "i",
-                        ),
-                    ),
+                    init: Ternary {
+                        cond: Constant {
+                            constant: 1,
+                        },
+                        if_true: Var {
+                            name: "l",
+                        },
+                        if_false: Cast {
+                            to: Long,
+                            expr: Var {
+                                name: "i",
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            Equals,
-                            Var(
-                                "result.8",
-                            ),
-                            Constant(
-                                8589934592l,
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "result.8",
+                            },
+                            rhs: Constant {
+                                constant: 8589934592l,
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -148,166 +151,166 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            2147483653l,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 2147483653l,
+                        },
+                    },
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "i",
-                        ),
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Constant {
+                            constant: 10,
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "addition",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "addition",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            2147483649l,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 2147483649l,
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "division",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "division",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "i",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                100,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 100,
+                            },
+                        },
+                    },
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            2147483648l,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 2147483648l,
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "comparison",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "comparison",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    3,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            8589934592l,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 8589934592l,
+                        },
+                    },
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "i",
-                        ),
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "i",
+                        },
+                        rhs: Constant {
+                            constant: 10,
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "conditional",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "conditional",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    4,
-                                ),
+                                Constant {
+                                    constant: 4,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

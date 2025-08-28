@@ -6,33 +6,33 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Equals,
-                        Binary(
-                            Multiply,
-                            Unary(
-                                Complement,
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Add,
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Unary {
+                                op: Complement,
+                                expr: Constant {
+                                    constant: 2,
+                                },
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Constant {
+                                constant: 1,
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                    },
                 ),
             ],
         },

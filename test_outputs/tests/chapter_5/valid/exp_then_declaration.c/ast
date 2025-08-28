@@ -8,43 +8,43 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            2593,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 2593,
+                        },
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "a",
-                        ),
-                        Binary(
-                            Remainder,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                3,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Binary {
+                            op: Remainder,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 3,
+                            },
+                        },
+                    },
                 ),
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Var(
-                            "a",
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Var {
+                            name: "a",
+                        },
+                    },
                 },
                 Return(
-                    Var(
-                        "b",
-                    ),
+                    Var {
+                        name: "b",
+                    },
                 ),
             ],
         },

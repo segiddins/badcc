@@ -6,20 +6,26 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Var(
-                            "a",
-                        ),
-                        Constant(
-                            1,
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Constant {
+                            constant: 1,
+                        },
+                    },
                 ),
             ],
         },
@@ -29,19 +35,19 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                2,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [
+                            Constant {
+                                constant: 1,
+                            },
+                            Constant {
+                                constant: 2,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

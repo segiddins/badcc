@@ -8,28 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Ternary(
-                        Constant(
-                            1,
-                        ),
-                        Binary(
-                            Remainder,
-                            Constant(
-                                3,
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Constant(
-                            4,
-                        ),
-                    ),
+                    init: Ternary {
+                        cond: Constant {
+                            constant: 1,
+                        },
+                        if_true: Binary {
+                            op: Remainder,
+                            lhs: Constant {
+                                constant: 3,
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        if_false: Constant {
+                            constant: 4,
+                        },
+                    },
                 },
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },

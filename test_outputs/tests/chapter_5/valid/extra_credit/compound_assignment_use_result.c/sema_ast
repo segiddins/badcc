@@ -8,50 +8,50 @@ Program {
                 VariableDeclaration {
                     name: "x.1",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "y.2",
                     ty: Int,
-                    init: Assignment(
-                        Var(
-                            "x.1",
-                        ),
-                        Binary(
-                            Add,
-                            Var(
-                                "x.1",
-                            ),
-                            Constant(
-                                3,
-                            ),
-                        ),
-                    ),
+                    init: Assignment {
+                        lhs: Var {
+                            name: "x.1",
+                        },
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "x.1",
+                            },
+                            rhs: Constant {
+                                constant: 3,
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "x.1",
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "y.2",
-                            ),
-                            Constant(
-                                4,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "x.1",
+                            },
+                            rhs: Constant {
+                                constant: 4,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "y.2",
+                            },
+                            rhs: Constant {
+                                constant: 4,
+                            },
+                        },
+                    },
                 ),
             ],
         },

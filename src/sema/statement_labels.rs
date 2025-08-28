@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use miette::Diagnostic;
+use miette::{Diagnostic, SourceSpan};
 
 use crate::ast::*;
 
@@ -9,9 +9,9 @@ type Result = miette::Result<(), Error>;
 #[derive(Debug, thiserror::Error, Diagnostic)]
 pub enum Error {
     #[error("label {0} repeated in function")]
-    RepeatedLabel(String),
+    RepeatedLabel(String, #[label("here")] SourceSpan),
     #[error("jump to unknown label {0}")]
-    GotoUnknown(String),
+    GotoUnknown(String, #[label("here")] SourceSpan),
 }
 
 fn visit_block(block: &Block, labels: &mut HashSet<String>, error: bool) -> Result {
@@ -31,23 +31,23 @@ fn visit_statement(statement: &Statement, labels: &mut HashSet<String>, error: b
         Statement::Return(_) => {}
         Statement::Expression(_) => {}
         Statement::Null => {}
-        Statement::Break(_) => {}
-        Statement::Continue(_) => {}
+        Statement::Break(..) => {}
+        Statement::Continue(..) => {}
         Statement::If(_, statement, statement1) => {
             visit_statement(statement, labels, error)?;
             if let Some(statement) = statement1 {
                 visit_statement(statement, labels, error)?;
             }
         }
-        Statement::Labeled(label, statement) => {
+        Statement::Labeled(label, statement, span) => {
             if !labels.insert(label.clone()) && !error {
-                return Err(Error::RepeatedLabel(label.clone()));
+                return Err(Error::RepeatedLabel(label.clone(), *span));
             }
             visit_statement(statement, labels, error)?
         }
-        Statement::Goto(label) => {
+        Statement::Goto(label, span) => {
             if !labels.contains(label) && error {
-                return Err(Error::GotoUnknown(label.clone()));
+                return Err(Error::GotoUnknown(label.clone(), *span));
             }
         }
         Statement::While(_, statement, _) => visit_statement(statement, labels, error)?,
@@ -55,7 +55,7 @@ fn visit_statement(statement: &Statement, labels: &mut HashSet<String>, error: b
         Statement::For { body, .. } => visit_statement(body, labels, error)?,
         Statement::Switch(_, cases, _) => visit_statement(cases, labels, error)?,
         Statement::Case(_, statement, _) => visit_statement(statement, labels, error)?,
-        Statement::Default(statement, _) => visit_statement(statement, labels, error)?,
+        Statement::Default(statement, _, _) => visit_statement(statement, labels, error)?,
     }
     Ok(())
 }

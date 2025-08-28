@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "ten.1",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Compound(
                     [],
@@ -18,15 +18,15 @@ Program {
                 VariableDeclaration {
                     name: "twenty.2",
                     ty: Int,
-                    init: Binary(
-                        Multiply,
-                        Constant(
-                            10,
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Constant {
+                            constant: 10,
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                 },
                 Compound(
                     [
@@ -36,15 +36,15 @@ Program {
                     ],
                 ),
                 Return(
-                    Binary(
-                        Add,
-                        Var(
-                            "ten.1",
-                        ),
-                        Var(
-                            "twenty.2",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "ten.1",
+                        },
+                        rhs: Var {
+                            name: "twenty.2",
+                        },
+                    },
                 ),
             ],
         },

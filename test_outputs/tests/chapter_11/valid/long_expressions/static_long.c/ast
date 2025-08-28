@@ -3,9 +3,9 @@ Program {
         VariableDeclaration {
             name: "foo",
             ty: Long,
-            init: Constant(
-                4294967290l,
-            ),
+            init: Constant {
+                constant: 4294967290l,
+            },
             storage: Static,
         },
         FunctionDeclaration {
@@ -14,47 +14,47 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        Equals,
-                        Binary(
-                            Add,
-                            Var(
-                                "foo",
-                            ),
-                            Constant(
-                                5l,
-                            ),
-                        ),
-                        Constant(
-                            4294967295l,
-                        ),
-                    ),
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "foo",
+                            },
+                            rhs: Constant {
+                                constant: 5l,
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 4294967295l,
+                        },
+                    },
                     Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "foo",
-                                    ),
-                                    Constant(
-                                        1152921504606846988l,
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "foo",
+                                    },
+                                    rhs: Constant {
+                                        constant: 1152921504606846988l,
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    Equals,
-                                    Var(
-                                        "foo",
-                                    ),
-                                    Constant(
-                                        1152921504606846988l,
-                                    ),
-                                ),
+                                Binary {
+                                    op: Equals,
+                                    lhs: Var {
+                                        name: "foo",
+                                    },
+                                    rhs: Constant {
+                                        constant: 1152921504606846988l,
+                                    },
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),
@@ -63,9 +63,9 @@ Program {
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

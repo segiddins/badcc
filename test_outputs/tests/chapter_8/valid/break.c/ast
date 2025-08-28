@@ -8,86 +8,86 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant(
-                        20,
-                    ),
+                    init: Constant {
+                        constant: 20,
+                    },
                 },
                 For {
                     init: Some(
-                        Assignment(
-                            Var(
-                                "b",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    20,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "b",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 20,
+                                },
+                            },
+                        },
                     ),
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "b",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "b",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "b",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "b",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "b",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "b",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "a",
-                                    ),
-                                    Binary(
-                                        Subtract,
-                                        Var(
-                                            "a",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Binary {
+                                        op: Subtract,
+                                        lhs: Var {
+                                            name: "a",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    LessThanOrEqual,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Binary {
+                                    op: LessThanOrEqual,
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                                 Break(
                                     None,
                                 ),
@@ -98,30 +98,30 @@ Program {
                     label: None,
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "b",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    11,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "b",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 11,
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

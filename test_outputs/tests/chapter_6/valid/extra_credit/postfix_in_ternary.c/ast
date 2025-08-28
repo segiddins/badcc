@@ -8,36 +8,36 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 Expression(
-                    Ternary(
-                        Binary(
-                            Subtract,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
-                        Constant(
-                            0,
-                        ),
-                        Unary(
-                            PostfixDecrement,
-                            Var(
-                                "x",
-                            ),
-                        ),
-                    ),
+                    Ternary {
+                        cond: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
+                        if_true: Constant {
+                            constant: 0,
+                        },
+                        if_false: Unary {
+                            op: PostfixDecrement,
+                            expr: Var {
+                                name: "x",
+                            },
+                        },
+                    },
                 ),
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },

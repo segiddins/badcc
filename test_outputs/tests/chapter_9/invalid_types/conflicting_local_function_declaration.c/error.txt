@@ -1,1 +1,14 @@
   × failed to type check -- expected Function { params: [Int, Int], ret: Int }, got Function { params: [Int], ret: Int }
+   ╭─[/Users/segiddins/Development/github.com/nlsandler/writing-a-c-compiler-tests/tests/chapter_9/invalid_types/conflicting_local_function_declaration.i:3:5]
+ 2 │ int main(void) {
+ 3 │     int foo(int a);
+   ·     ───────┬───────
+   ·            ╰── declared here
+ 4 │     return bar() + foo(1);
+ 5 │ }
+ 6 │ int bar(void) {
+ 7 │     int foo(int a, int b);
+   ·     ───────────┬──────────
+   ·                ╰── here
+ 8 │     return foo(1, 2);
+   ╰────

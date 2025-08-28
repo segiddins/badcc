@@ -8,45 +8,45 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Unary(
-                        Not,
-                        Unary(
-                            PostfixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                    ),
+                    init: Unary {
+                        op: Not,
+                        expr: Unary {
+                            op: PostfixIncrement,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "a",
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "b",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "a",
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "b",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                    },
                 ),
             ],
         },

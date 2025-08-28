@@ -6,38 +6,44 @@ Program {
                 (
                     Int,
                     "n",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        Or,
-                        Binary(
-                            Equals,
-                            Var(
-                                "n",
-                            ),
-                            Constant(
-                                0,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "n",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Or,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "n",
+                            },
+                            rhs: Constant {
+                                constant: 0,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "n",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Var(
-                                    "n",
-                                ),
+                                Var {
+                                    name: "n",
+                                },
                             ),
                         ],
                     ),
@@ -45,41 +51,41 @@ Program {
                         Compound(
                             [
                                 Return(
-                                    Binary(
-                                        Add,
-                                        FunctionCall(
-                                            Var(
-                                                "fib",
-                                            ),
-                                            [
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "n",
-                                                    ),
-                                                    Constant(
-                                                        1,
-                                                    ),
-                                                ),
+                                    Binary {
+                                        op: Add,
+                                        lhs: FunctionCall {
+                                            function: Var {
+                                                name: "fib",
+                                            },
+                                            params: [
+                                                Binary {
+                                                    op: Subtract,
+                                                    lhs: Var {
+                                                        name: "n",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 1,
+                                                    },
+                                                },
                                             ],
-                                        ),
-                                        FunctionCall(
-                                            Var(
-                                                "fib",
-                                            ),
-                                            [
-                                                Binary(
-                                                    Subtract,
-                                                    Var(
-                                                        "n",
-                                                    ),
-                                                    Constant(
-                                                        2,
-                                                    ),
-                                                ),
+                                        },
+                                        rhs: FunctionCall {
+                                            function: Var {
+                                                name: "fib",
+                                            },
+                                            params: [
+                                                Binary {
+                                                    op: Subtract,
+                                                    lhs: Var {
+                                                        name: "n",
+                                                    },
+                                                    rhs: Constant {
+                                                        constant: 2,
+                                                    },
+                                                },
                                             ],
-                                        ),
-                                    ),
+                                        },
+                                    },
                                 ),
                             ],
                         ),
@@ -95,21 +101,21 @@ Program {
                 VariableDeclaration {
                     name: "n",
                     ty: Int,
-                    init: Constant(
-                        6,
-                    ),
+                    init: Constant {
+                        constant: 6,
+                    },
                 },
                 Return(
-                    FunctionCall(
-                        Var(
-                            "fib",
-                        ),
-                        [
-                            Var(
-                                "n",
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "fib",
+                        },
+                        params: [
+                            Var {
+                                name: "n",
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

@@ -8,28 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Return(
-                    Ternary(
-                        Unary(
-                            PrefixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                        Unary(
-                            PrefixIncrement,
-                            Var(
-                                "a",
-                            ),
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Ternary {
+                        cond: Unary {
+                            op: PrefixIncrement,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                        if_true: Unary {
+                            op: PrefixIncrement,
+                            expr: Var {
+                                name: "a",
+                            },
+                        },
+                        if_false: Constant {
+                            constant: 0,
+                        },
+                    },
                 ),
             ],
         },

@@ -6,10 +6,22 @@ Program {
                 (
                     Int,
                     "a.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            19,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -20,19 +32,19 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "foo",
-                        ),
-                        [
-                            Constant(
-                                2,
-                            ),
-                            Constant(
-                                1,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "foo",
+                        },
+                        params: [
+                            Constant {
+                                constant: 2,
+                            },
+                            Constant {
+                                constant: 1,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },
@@ -42,24 +54,36 @@ Program {
                 (
                     Int,
                     "x.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            76,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "y.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            83,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Subtract,
-                        Var(
-                            "x.5",
-                        ),
-                        Var(
-                            "y.6",
-                        ),
-                    ),
+                    Binary {
+                        op: Subtract,
+                        lhs: Var {
+                            name: "x.5",
+                        },
+                        rhs: Var {
+                            name: "y.6",
+                        },
+                    },
                 ),
             ],
         },

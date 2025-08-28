@@ -3,7 +3,10 @@
 use camino::{Utf8Path, Utf8PathBuf};
 use fs_err::{File, create_dir_all, read_to_string};
 use miette::{Context, IntoDiagnostic, NamedSource, Result, bail};
-use std::{io::Write, process::Command};
+use std::{
+    io::Write,
+    process::{Command, ExitCode},
+};
 
 use clap::Parser;
 
@@ -208,14 +211,15 @@ impl Drop for Driver {
     }
 }
 
-fn main() -> Result<()> {
+fn main() -> ExitCode {
     let mut driver = Driver::parse();
 
     match driver.run() {
-        Ok(_) => Ok(()),
+        Ok(_) => ExitCode::SUCCESS,
         Err(err) => {
             driver.write_test_output("error.txt", || format!("{err:?}"));
-            Err(err)
+            eprintln!("{err:?}");
+            2.into()
         }
     }
 }

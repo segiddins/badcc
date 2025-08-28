@@ -8,33 +8,33 @@ Program {
                 VariableDeclaration {
                     name: "foo",
                     ty: Int,
-                    init: Constant(
-                        3,
-                    ),
+                    init: Constant {
+                        constant: 3,
+                    },
                 },
                 VariableDeclaration {
                     name: "bar",
                     ty: Int,
-                    init: Constant(
-                        4,
-                    ),
+                    init: Constant {
+                        constant: 4,
+                    },
                 },
                 If(
-                    Binary(
-                        GreaterThan,
-                        Binary(
-                            Add,
-                            Var(
-                                "foo",
-                            ),
-                            Var(
-                                "bar",
-                            ),
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "foo",
+                            },
+                            rhs: Var {
+                                name: "bar",
+                            },
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                     Compound(
                         [
                             FunctionDeclaration {
@@ -43,32 +43,32 @@ Program {
                                 ret: Int,
                             },
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "bar",
-                                    ),
-                                    FunctionCall(
-                                        Var(
-                                            "foo",
-                                        ),
-                                        [],
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "bar",
+                                    },
+                                    rhs: FunctionCall {
+                                        function: Var {
+                                            name: "foo",
+                                        },
+                                        params: [],
+                                    },
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Binary(
-                        Add,
-                        Var(
-                            "foo",
-                        ),
-                        Var(
-                            "bar",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "foo",
+                        },
+                        rhs: Var {
+                            name: "bar",
+                        },
+                    },
                 ),
             ],
         },
@@ -78,9 +78,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        8,
-                    ),
+                    Constant {
+                        constant: 8,
+                    },
                 ),
             ],
         },

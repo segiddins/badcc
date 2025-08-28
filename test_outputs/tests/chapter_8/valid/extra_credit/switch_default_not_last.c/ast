@@ -12,43 +12,43 @@ Program {
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Assignment(
-                        Var(
-                            "a",
-                        ),
-                        Constant(
-                            7,
-                        ),
-                    ),
+                    init: Assignment {
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Constant {
+                            constant: 7,
+                        },
+                    },
                 },
                 Switch(
-                    Binary(
-                        Add,
-                        Var(
-                            "a",
-                        ),
-                        Var(
-                            "b",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "a",
+                        },
+                        rhs: Var {
+                            name: "b",
+                        },
+                    },
                     Compound(
                         [
                             Default(
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 None,
                             ),
                             Case(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 None,
                             ),

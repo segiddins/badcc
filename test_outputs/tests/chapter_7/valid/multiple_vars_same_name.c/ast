@@ -8,28 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Compound(
                     [
                         VariableDeclaration {
                             name: "b",
                             ty: Int,
-                            init: Constant(
-                                4,
-                            ),
+                            init: Constant {
+                                constant: 4,
+                            },
                         },
                         Expression(
-                            Assignment(
-                                Var(
-                                    "a",
-                                ),
-                                Var(
-                                    "b",
-                                ),
-                            ),
+                            Assignment {
+                                lhs: Var {
+                                    name: "a",
+                                },
+                                rhs: Var {
+                                    name: "b",
+                                },
+                            },
                         ),
                     ],
                 ),
@@ -38,32 +38,32 @@ Program {
                         VariableDeclaration {
                             name: "b",
                             ty: Int,
-                            init: Constant(
-                                2,
-                            ),
+                            init: Constant {
+                                constant: 2,
+                            },
                         },
                         Expression(
-                            Assignment(
-                                Var(
-                                    "a",
-                                ),
-                                Binary(
-                                    Subtract,
-                                    Var(
-                                        "a",
-                                    ),
-                                    Var(
-                                        "b",
-                                    ),
-                                ),
-                            ),
+                            Assignment {
+                                lhs: Var {
+                                    name: "a",
+                                },
+                                rhs: Binary {
+                                    op: Subtract,
+                                    lhs: Var {
+                                        name: "a",
+                                    },
+                                    rhs: Var {
+                                        name: "b",
+                                    },
+                                },
+                            },
                         ),
                     ],
                 ),
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },

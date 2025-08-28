@@ -8,53 +8,53 @@ Program {
                 VariableDeclaration {
                     name: "x.1",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 VariableDeclaration {
                     name: "y.2",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "z.3",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 DoWhile(
                     Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "z.3",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "z.3",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "z.3",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "z.3",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    LessThanOrEqual,
-                                    Var(
-                                        "x.1",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Binary {
+                                    op: LessThanOrEqual,
+                                    lhs: Var {
+                                        name: "x.1",
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                                 Continue(
                                     Some(
                                         "loop.0",
@@ -63,31 +63,31 @@ Program {
                                 None,
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "x.1",
-                                    ),
-                                    Binary(
-                                        Subtract,
-                                        Var(
-                                            "x.1",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "x.1",
+                                    },
+                                    rhs: Binary {
+                                        op: Subtract,
+                                        lhs: Var {
+                                            name: "x.1",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    GreaterThanOrEqual,
-                                    Var(
-                                        "y.2",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: GreaterThanOrEqual,
+                                    lhs: Var {
+                                        name: "y.2",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Continue(
                                     Some(
                                         "loop.0",
@@ -96,70 +96,70 @@ Program {
                                 None,
                             ),
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "y.2",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "y.2",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "y.2",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "y.2",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                         ],
                     ),
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "z.3",
-                        ),
-                        Constant(
-                            50,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "z.3",
+                        },
+                        rhs: Constant {
+                            constant: 50,
+                        },
+                    },
                     Some(
                         "loop.0",
                     ),
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            And,
-                            Binary(
-                                Equals,
-                                Var(
-                                    "z.3",
-                                ),
-                                Constant(
-                                    50,
-                                ),
-                            ),
-                            Binary(
-                                Equals,
-                                Var(
-                                    "x.1",
-                                ),
-                                Constant(
-                                    0,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "y.2",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "z.3",
+                                },
+                                rhs: Constant {
+                                    constant: 50,
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var {
+                                    name: "x.1",
+                                },
+                                rhs: Constant {
+                                    constant: 0,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "y.2",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
+                    },
                 ),
             ],
         },

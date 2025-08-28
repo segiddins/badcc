@@ -6,39 +6,39 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Binary(
-                            LeftShift,
-                            Constant(
-                                4,
-                            ),
-                            Binary(
-                                Multiply,
-                                Constant(
-                                    2,
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            RightShift,
-                            Constant(
-                                100,
-                            ),
-                            Binary(
-                                Add,
-                                Constant(
-                                    1,
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Binary {
+                            op: LeftShift,
+                            lhs: Constant {
+                                constant: 4,
+                            },
+                            rhs: Binary {
+                                op: Multiply,
+                                lhs: Constant {
+                                    constant: 2,
+                                },
+                                rhs: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: RightShift,
+                            lhs: Constant {
+                                constant: 100,
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Constant {
+                                    constant: 1,
+                                },
+                                rhs: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

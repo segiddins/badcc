@@ -11,10 +11,22 @@ Program {
                         (
                             Int,
                             "a",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    51,
+                                ),
+                                length: 1,
+                            },
                         ),
                         (
                             Int,
                             "b",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    58,
+                                ),
+                                length: 1,
+                            },
                         ),
                     ],
                     ret: Int,
@@ -26,28 +38,40 @@ Program {
                         (
                             Int,
                             "a",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    78,
+                                ),
+                                length: 1,
+                            },
                         ),
                         (
                             Int,
                             "b",
+                            SourceSpan {
+                                offset: SourceOffset(
+                                    85,
+                                ),
+                                length: 1,
+                            },
                         ),
                     ],
                     ret: Int,
                 },
                 Return(
-                    FunctionCall(
-                        Var(
-                            "sum",
-                        ),
-                        [
-                            Constant(
-                                1,
-                            ),
-                            Constant(
-                                2,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "sum",
+                        },
+                        params: [
+                            Constant {
+                                constant: 1,
+                            },
+                            Constant {
+                                constant: 2,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },
@@ -57,10 +81,22 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            132,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            139,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -72,10 +108,22 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            155,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            162,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
@@ -88,20 +136,20 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant(
-                        3,
-                    ),
+                    init: Constant {
+                        constant: 3,
+                    },
                 },
                 If(
-                    Binary(
-                        GreaterThan,
-                        Var(
-                            "sum",
-                        ),
-                        Constant(
-                            2,
-                        ),
-                    ),
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var {
+                            name: "sum",
+                        },
+                        rhs: Constant {
+                            constant: 2,
+                        },
+                    },
                     Compound(
                         [
                             FunctionDeclaration {
@@ -110,38 +158,50 @@ Program {
                                     (
                                         Int,
                                         "one",
+                                        SourceSpan {
+                                            offset: SourceOffset(
+                                                260,
+                                            ),
+                                            length: 3,
+                                        },
                                     ),
                                     (
                                         Int,
                                         "two",
+                                        SourceSpan {
+                                            offset: SourceOffset(
+                                                269,
+                                            ),
+                                            length: 3,
+                                        },
                                     ),
                                 ],
                                 ret: Int,
                                 storage: Extern,
                             },
                             Return(
-                                FunctionCall(
-                                    Var(
-                                        "sum",
-                                    ),
-                                    [
-                                        Constant(
-                                            3,
-                                        ),
-                                        Constant(
-                                            4,
-                                        ),
+                                FunctionCall {
+                                    function: Var {
+                                        name: "sum",
+                                    },
+                                    params: [
+                                        Constant {
+                                            constant: 3,
+                                        },
+                                        Constant {
+                                            constant: 4,
+                                        },
                                     ],
-                                ),
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                 ),
             ],
         },
@@ -151,49 +211,49 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "add_three_and_four",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            7,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "add_three_and_four",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 7,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        FunctionCall(
-                            Var(
-                                "add_one_and_two",
-                            ),
-                            [],
-                        ),
-                        Constant(
-                            3,
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "add_one_and_two",
+                            },
+                            params: [],
+                        },
+                        rhs: Constant {
+                            constant: 3,
+                        },
+                    },
                     Return(
-                        Constant(
-                            1,
-                        ),
+                        Constant {
+                            constant: 1,
+                        },
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

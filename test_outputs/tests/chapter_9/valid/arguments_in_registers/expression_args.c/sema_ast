@@ -6,24 +6,36 @@ Program {
                 (
                     Int,
                     "a.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "b.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            19,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Subtract,
-                        Var(
-                            "a.1",
-                        ),
-                        Var(
-                            "b.2",
-                        ),
-                    ),
+                    Binary {
+                        op: Subtract,
+                        lhs: Var {
+                            name: "a.1",
+                        },
+                        rhs: Var {
+                            name: "b.2",
+                        },
+                    },
                 ),
             ],
         },
@@ -35,30 +47,30 @@ Program {
                 VariableDeclaration {
                     name: "sum.4",
                     ty: Int,
-                    init: FunctionCall(
-                        Var(
-                            "sub",
-                        ),
-                        [
-                            Binary(
-                                Add,
-                                Constant(
-                                    1,
-                                ),
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                            Constant(
-                                1,
-                            ),
+                    init: FunctionCall {
+                        function: Var {
+                            name: "sub",
+                        },
+                        params: [
+                            Binary {
+                                op: Add,
+                                lhs: Constant {
+                                    constant: 1,
+                                },
+                                rhs: Constant {
+                                    constant: 2,
+                                },
+                            },
+                            Constant {
+                                constant: 1,
+                            },
                         ],
-                    ),
+                    },
                 },
                 Return(
-                    Var(
-                        "sum.4",
-                    ),
+                    Var {
+                        name: "sum.4",
+                    },
                 ),
             ],
         },

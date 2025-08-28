@@ -8,9 +8,9 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 Goto(
                     "post_declaration",
@@ -18,50 +18,50 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Constant(
-                            0,
-                        ),
-                    ),
+                    init: Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Constant {
+                            constant: 0,
+                        },
+                    },
                 },
                 Labeled(
                     "post_declaration",
                     Expression(
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
                     ),
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "x",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                5,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 5,
+                            },
+                        },
+                    },
                 ),
             ],
         },

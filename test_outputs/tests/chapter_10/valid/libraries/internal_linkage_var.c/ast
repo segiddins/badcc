@@ -11,9 +11,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },
@@ -23,6 +23,12 @@ Program {
                 (
                     Int,
                     "new_val",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            66,
+                        ),
+                        length: 7,
+                    },
                 ),
             ],
             ret: Int,
@@ -33,19 +39,19 @@ Program {
                     storage: Extern,
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "x",
-                        ),
-                        Var(
-                            "new_val",
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Var {
+                            name: "new_val",
+                        },
+                    },
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },
@@ -57,9 +63,9 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant(
-                5,
-            ),
+            init: Constant {
+                constant: 5,
+            },
             storage: Static,
         },
         VariableDeclaration {

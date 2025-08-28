@@ -8,82 +8,82 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 Expression(
-                    Unary(
-                        PostfixIncrement,
-                        Var(
-                            "a.1",
-                        ),
-                    ),
+                    Unary {
+                        op: PostfixIncrement,
+                        expr: Var {
+                            name: "a.1",
+                        },
+                    },
                 ),
                 Expression(
-                    Unary(
-                        PrefixIncrement,
-                        Var(
-                            "a.1",
-                        ),
-                    ),
+                    Unary {
+                        op: PrefixIncrement,
+                        expr: Var {
+                            name: "a.1",
+                        },
+                    },
                 ),
                 Expression(
-                    Unary(
-                        PrefixIncrement,
-                        Var(
-                            "a.1",
-                        ),
-                    ),
+                    Unary {
+                        op: PrefixIncrement,
+                        expr: Var {
+                            name: "a.1",
+                        },
+                    },
                 ),
                 Expression(
-                    Unary(
-                        PostfixDecrement,
-                        Var(
-                            "b.2",
-                        ),
-                    ),
+                    Unary {
+                        op: PostfixDecrement,
+                        expr: Var {
+                            name: "b.2",
+                        },
+                    },
                 ),
                 Expression(
-                    Unary(
-                        PrefixDecrement,
-                        Var(
-                            "b.2",
-                        ),
-                    ),
+                    Unary {
+                        op: PrefixDecrement,
+                        expr: Var {
+                            name: "b.2",
+                        },
+                    },
                 ),
                 Return(
-                    Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "a.1",
-                            ),
-                            Constant(
-                                3,
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "b.2",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "a.1",
+                            },
+                            rhs: Constant {
+                                constant: 3,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "b.2",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 2,
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

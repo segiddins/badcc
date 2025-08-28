@@ -8,42 +8,42 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 While(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                     Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "i.1",
-                                    ),
-                                    Binary(
-                                        Add,
-                                        Var(
-                                            "i.1",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "i.1",
+                                    },
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var {
+                                            name: "i.1",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    GreaterThan,
-                                    Var(
-                                        "i.1",
-                                    ),
-                                    Constant(
-                                        10,
-                                    ),
-                                ),
+                                Binary {
+                                    op: GreaterThan,
+                                    lhs: Var {
+                                        name: "i.1",
+                                    },
+                                    rhs: Constant {
+                                        constant: 10,
+                                    },
+                                },
                                 Break(
                                     Some(
                                         "loop.0",
@@ -60,42 +60,42 @@ Program {
                 VariableDeclaration {
                     name: "j.2",
                     ty: Int,
-                    init: Constant(
-                        10,
-                    ),
+                    init: Constant {
+                        constant: 10,
+                    },
                 },
                 While(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                     Compound(
                         [
                             Expression(
-                                Assignment(
-                                    Var(
-                                        "j.2",
-                                    ),
-                                    Binary(
-                                        Subtract,
-                                        Var(
-                                            "j.2",
-                                        ),
-                                        Constant(
-                                            1,
-                                        ),
-                                    ),
-                                ),
+                                Assignment {
+                                    lhs: Var {
+                                        name: "j.2",
+                                    },
+                                    rhs: Binary {
+                                        op: Subtract,
+                                        lhs: Var {
+                                            name: "j.2",
+                                        },
+                                        rhs: Constant {
+                                            constant: 1,
+                                        },
+                                    },
+                                },
                             ),
                             If(
-                                Binary(
-                                    LessThan,
-                                    Var(
-                                        "j.2",
-                                    ),
-                                    Constant(
-                                        0,
-                                    ),
-                                ),
+                                Binary {
+                                    op: LessThan,
+                                    lhs: Var {
+                                        name: "j.2",
+                                    },
+                                    rhs: Constant {
+                                        constant: 0,
+                                    },
+                                },
                                 Break(
                                     Some(
                                         "loop.1",
@@ -112,35 +112,35 @@ Program {
                 VariableDeclaration {
                     name: "result.3",
                     ty: Int,
-                    init: Binary(
-                        And,
-                        Binary(
-                            Equals,
-                            Var(
-                                "j.2",
-                            ),
-                            Unary(
-                                Minus,
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
-                        Binary(
-                            Equals,
-                            Var(
-                                "i.1",
-                            ),
-                            Constant(
-                                11,
-                            ),
-                        ),
-                    ),
+                    init: Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "j.2",
+                            },
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "i.1",
+                            },
+                            rhs: Constant {
+                                constant: 11,
+                            },
+                        },
+                    },
                 },
                 Return(
-                    Var(
-                        "result.3",
-                    ),
+                    Var {
+                        name: "result.3",
+                    },
                 ),
             ],
         },

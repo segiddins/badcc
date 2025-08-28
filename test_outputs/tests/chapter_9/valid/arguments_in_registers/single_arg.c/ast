@@ -6,20 +6,26 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            14,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Multiply,
-                        Constant(
-                            2,
-                        ),
-                        Var(
-                            "x",
-                        ),
-                    ),
+                    Binary {
+                        op: Multiply,
+                        lhs: Constant {
+                            constant: 2,
+                        },
+                        rhs: Var {
+                            name: "x",
+                        },
+                    },
                 ),
             ],
         },
@@ -29,16 +35,16 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    FunctionCall(
-                        Var(
-                            "twice",
-                        ),
-                        [
-                            Constant(
-                                3,
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "twice",
+                        },
+                        params: [
+                            Constant {
+                                constant: 3,
+                            },
                         ],
-                    ),
+                    },
                 ),
             ],
         },

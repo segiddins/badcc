@@ -3,9 +3,9 @@ Program {
         VariableDeclaration {
             name: "l",
             ty: Long,
-            init: Constant(
-                8589934592l,
-            ),
+            init: Constant {
+                constant: 8589934592l,
+            },
         },
         FunctionDeclaration {
             identifier: "return_l",
@@ -13,9 +13,9 @@ Program {
             ret: Long,
             body: [
                 Return(
-                    Var(
-                        "l",
-                    ),
+                    Var {
+                        name: "l",
+                    },
                 ),
             ],
         },
@@ -25,12 +25,12 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Var(
-                            "l",
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Var {
+                            name: "l",
+                        },
+                    },
                 ),
             ],
         },

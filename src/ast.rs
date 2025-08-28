@@ -24,22 +24,163 @@ impl FieldIf for DebugStruct<'_, '_> {
     }
 }
 
+pub trait Spanned {
+    fn span(&self) -> SourceSpan;
+}
+
+impl Spanned for SourceSpan {
+    fn span(&self) -> SourceSpan {
+        *self
+    }
+}
+
 #[derive(Debug)]
 pub struct Program {
     pub declarations: Vec<Declaration>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum Expression {
-    Constant(Constant),
-    Unary(UnaryOperator, Box<Expression>),
-    Binary(BinaryOperator, Box<Expression>, Box<Expression>),
-    Var(String),
-    Assignment(Box<Expression>, Box<Expression>),
-    CompoundAssignment(Box<Expression>, BinaryOperator, Box<Expression>),
-    Ternary(Box<Expression>, Box<Expression>, Box<Expression>),
-    FunctionCall(Box<Expression>, Vec<Expression>),
-    Cast(Type, Box<Expression>),
+    Constant {
+        constant: Constant,
+        span: SourceSpan,
+    },
+    Unary {
+        op: UnaryOperator,
+        expr: Box<Expression>,
+        span: SourceSpan,
+    },
+    Binary {
+        op: BinaryOperator,
+        lhs: Box<Expression>,
+        rhs: Box<Expression>,
+        span: SourceSpan,
+    },
+    Var {
+        name: String,
+        span: SourceSpan,
+    },
+    Assignment {
+        lhs: Box<Expression>,
+        rhs: Box<Expression>,
+        span: SourceSpan,
+    },
+    CompoundAssignment {
+        op: BinaryOperator,
+        lhs: Box<Expression>,
+        rhs: Box<Expression>,
+        span: SourceSpan,
+    },
+    Ternary {
+        cond: Box<Expression>,
+        if_true: Box<Expression>,
+        if_false: Box<Expression>,
+        span: SourceSpan,
+    },
+    FunctionCall {
+        function: Box<Expression>,
+        params: Vec<Expression>,
+        span: SourceSpan,
+    },
+    Cast {
+        to: Type,
+        expr: Box<Expression>,
+        span: SourceSpan,
+    },
+}
+
+impl Default for Expression {
+    fn default() -> Self {
+        Self::Constant {
+            constant: Constant::Int(0),
+            span: SourceSpan::new(0.into(), 0),
+        }
+    }
+}
+
+impl Spanned for Expression {
+    fn span(&self) -> SourceSpan {
+        match self {
+            Expression::Constant { span, .. }
+            | Expression::Unary { span, .. }
+            | Expression::Binary { span, .. }
+            | Expression::Var { span, .. }
+            | Expression::Assignment { span, .. }
+            | Expression::CompoundAssignment { span, .. }
+            | Expression::Ternary { span, .. }
+            | Expression::FunctionCall { span, .. }
+            | Expression::Cast { span, .. } => *span,
+        }
+    }
+}
+
+impl Debug for Expression {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Constant { constant, span: _ } => f
+                .debug_struct("Constant")
+                .field("constant", constant)
+                .finish(),
+            Self::Unary { op, expr, span: _ } => f
+                .debug_struct("Unary")
+                .field("op", op)
+                .field("expr", expr)
+                .finish(),
+            Self::Binary {
+                op,
+                lhs,
+                rhs,
+                span: _,
+            } => f
+                .debug_struct("Binary")
+                .field("op", op)
+                .field("lhs", lhs)
+                .field("rhs", rhs)
+                .finish(),
+            Self::Var { name, span: _ } => f.debug_struct("Var").field("name", name).finish(),
+            Self::Assignment { lhs, rhs, span: _ } => f
+                .debug_struct("Assignment")
+                .field("lhs", lhs)
+                .field("rhs", rhs)
+                .finish(),
+            Self::CompoundAssignment {
+                op,
+                lhs,
+                rhs,
+                span: _,
+            } => f
+                .debug_struct("CompoundAssignment")
+                .field("op", op)
+                .field("lhs", lhs)
+                .field("rhs", rhs)
+                .finish(),
+            Self::Ternary {
+                cond,
+                if_true,
+                if_false,
+                span: _,
+            } => f
+                .debug_struct("Ternary")
+                .field("cond", cond)
+                .field("if_true", if_true)
+                .field("if_false", if_false)
+                .finish(),
+            Self::FunctionCall {
+                function,
+                params,
+                span: _,
+            } => f
+                .debug_struct("FunctionCall")
+                .field("function", function)
+                .field("params", params)
+                .finish(),
+            Self::Cast { to, expr, span: _ } => f
+                .debug_struct("Cast")
+                .field("to", to)
+                .field("expr", expr)
+                .finish(),
+        }
+    }
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
@@ -106,16 +247,16 @@ pub enum BinaryOperator {
     Or,
 }
 
-#[derive(Debug)]
+#[derive()]
 pub enum Statement {
     Return(Expression),
     Expression(Expression),
     If(Expression, Box<Statement>, Option<Box<Statement>>),
-    Labeled(String, Box<Statement>),
-    Goto(String),
+    Labeled(String, Box<Statement>, SourceSpan),
+    Goto(String, SourceSpan),
     Compound(Block),
-    Break(Option<String>),
-    Continue(Option<String>),
+    Break(Option<String>, SourceSpan),
+    Continue(Option<String>, SourceSpan),
     While(Expression, Box<Statement>, Option<String>),
     DoWhile(Box<Statement>, Expression, Option<String>),
     For {
@@ -127,8 +268,72 @@ pub enum Statement {
     },
     Switch(Expression, Box<Statement>, Option<String>),
     Case(Expression, Box<Statement>, Option<String>),
-    Default(Box<Statement>, Option<String>),
+    Default(Box<Statement>, Option<String>, SourceSpan),
     Null,
+}
+
+impl Debug for Statement {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Return(arg0) => f.debug_tuple("Return").field(arg0).finish(),
+            Self::Expression(arg0) => f.debug_tuple("Expression").field(arg0).finish(),
+            Self::If(arg0, arg1, arg2) => f
+                .debug_tuple("If")
+                .field(arg0)
+                .field(arg1)
+                .field(arg2)
+                .finish(),
+            Self::Labeled(arg0, arg1, _) => {
+                f.debug_tuple("Labeled").field(arg0).field(arg1).finish()
+            }
+            Self::Goto(arg0, _) => f.debug_tuple("Goto").field(arg0).finish(),
+            Self::Compound(arg0) => f.debug_tuple("Compound").field(arg0).finish(),
+            Self::Break(arg0, _) => f.debug_tuple("Break").field(arg0).finish(),
+            Self::Continue(arg0, _) => f.debug_tuple("Continue").field(arg0).finish(),
+            Self::While(arg0, arg1, arg2) => f
+                .debug_tuple("While")
+                .field(arg0)
+                .field(arg1)
+                .field(arg2)
+                .finish(),
+            Self::DoWhile(arg0, arg1, arg2) => f
+                .debug_tuple("DoWhile")
+                .field(arg0)
+                .field(arg1)
+                .field(arg2)
+                .finish(),
+            Self::For {
+                init,
+                condition,
+                post,
+                body,
+                label,
+            } => f
+                .debug_struct("For")
+                .field("init", init)
+                .field("condition", condition)
+                .field("post", post)
+                .field("body", body)
+                .field("label", label)
+                .finish(),
+            Self::Switch(arg0, arg1, arg2) => f
+                .debug_tuple("Switch")
+                .field(arg0)
+                .field(arg1)
+                .field(arg2)
+                .finish(),
+            Self::Case(arg0, arg1, arg2) => f
+                .debug_tuple("Case")
+                .field(arg0)
+                .field(arg1)
+                .field(arg2)
+                .finish(),
+            Self::Default(arg0, arg1, _) => {
+                f.debug_tuple("Default").field(arg0).field(arg1).finish()
+            }
+            Self::Null => write!(f, "Null"),
+        }
+    }
 }
 
 #[derive()]
@@ -158,6 +363,15 @@ impl Debug for ForInit {
     }
 }
 
+impl Spanned for ForInit {
+    fn span(&self) -> SourceSpan {
+        match self {
+            ForInit::Decl(variable_declaration) => variable_declaration.span,
+            ForInit::Expr(expression) => expression.as_ref().map(|e| e.span()).unwrap(),
+        }
+    }
+}
+
 #[derive()]
 pub enum Declaration {
     Variable(VariableDeclaration),
@@ -173,10 +387,19 @@ impl Debug for Declaration {
     }
 }
 
+impl Spanned for Declaration {
+    fn span(&self) -> SourceSpan {
+        match self {
+            Declaration::Variable(variable_declaration) => variable_declaration.span,
+            Declaration::Function(function_declaration) => function_declaration.span,
+        }
+    }
+}
+
 #[derive()]
 pub struct FunctionDeclaration {
     pub identifier: String,
-    pub params: Vec<(Type, String)>,
+    pub params: Vec<(Type, String, SourceSpan)>,
     pub ret: Type,
     pub body: Option<Block>,
     pub storage: Option<StorageClass>,

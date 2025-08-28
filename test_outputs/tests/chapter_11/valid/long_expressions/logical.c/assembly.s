@@ -8,7 +8,9 @@ _not:
 	cmpq $0, -16(%rbp)
 	movq $0, -24(%rbp)
 	setE -24(%rbp)
-	movq -24(%rbp), %rax
+	movl -24(%rbp), %r10d
+	movl %r10d, -28(%rbp)
+	movl -28(%rbp), %eax
 	movq %rbp, %rsp
 	popq %rbp
 	ret

@@ -8,70 +8,70 @@ Program {
                 VariableDeclaration {
                     name: "l.1",
                     ty: Long,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            34359738368l,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 34359738368l,
+                        },
+                    },
                 },
                 VariableDeclaration {
                     name: "i.2",
                     ty: Int,
-                    init: Unary(
-                        Minus,
-                        Constant(
-                            10,
-                        ),
-                    ),
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant {
+                            constant: 10,
+                        },
+                    },
                 },
                 Expression(
-                    Assignment(
-                        Var(
-                            "l.1",
-                        ),
-                        Binary(
-                            Subtract,
-                            Var(
-                                "l.1",
-                            ),
-                            Cast(
-                                Long,
-                                Var(
-                                    "i.2",
-                                ),
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l.1",
+                        },
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var {
+                                name: "l.1",
+                            },
+                            rhs: Cast {
+                                to: Long,
+                                expr: Var {
+                                    name: "i.2",
+                                },
+                            },
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        NotEqual,
-                        Var(
-                            "l.1",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                34359738358l,
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var {
+                            name: "l.1",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 34359738358l,
+                            },
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

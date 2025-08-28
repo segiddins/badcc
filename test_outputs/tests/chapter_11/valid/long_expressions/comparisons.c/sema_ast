@@ -14,18 +14,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            GreaterThan,
-                            Constant(
-                                8589934593l,
-                            ),
-                            Constant(
-                                255l,
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Constant {
+                                constant: 8589934593l,
+                            },
+                            rhs: Constant {
+                                constant: 255l,
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -35,18 +35,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            LessThan,
-                            Constant(
-                                255l,
-                            ),
-                            Constant(
-                                8589934593l,
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Constant {
+                                constant: 255l,
+                            },
+                            rhs: Constant {
+                                constant: 8589934593l,
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -56,18 +56,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            GreaterThanOrEqual,
-                            Var(
-                                "l",
-                            ),
-                            Constant(
-                                1152921504606846976l,
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Var {
+                                name: "l",
+                            },
+                            rhs: Constant {
+                                constant: 1152921504606846976l,
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -77,18 +77,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            LessThanOrEqual,
-                            Constant(
-                                4294967295l,
-                            ),
-                            Var(
-                                "l",
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: LessThanOrEqual,
+                            lhs: Constant {
+                                constant: 4294967295l,
+                            },
+                            rhs: Var {
+                                name: "l",
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -98,18 +98,18 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Cast(
-                        Int,
-                        Binary(
-                            Equals,
-                            Var(
-                                "l",
-                            ),
-                            Var(
-                                "l2",
-                            ),
-                        ),
-                    ),
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Var {
+                                name: "l",
+                            },
+                            rhs: Var {
+                                name: "l2",
+                            },
+                        },
+                    },
                 ),
             ],
         },
@@ -119,183 +119,183 @@ Program {
             ret: Int,
             body: [
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "compare_constants",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "compare_constants",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    1,
-                                ),
+                                Constant {
+                                    constant: 1,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "compare_constants_2",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "compare_constants_2",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    2,
-                                ),
-                            ),
-                        ],
-                    ),
-                    None,
-                ),
-                Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Unary(
-                            Minus,
-                            Constant(
-                                9223372036854775807l,
-                            ),
-                        ),
-                    ),
-                ),
-                If(
-                    FunctionCall(
-                        Var(
-                            "l_geq_2_60",
-                        ),
-                        [],
-                    ),
-                    Compound(
-                        [
-                            Return(
-                                Constant(
-                                    3,
-                                ),
-                            ),
-                        ],
-                    ),
-                    None,
-                ),
-                If(
-                    FunctionCall(
-                        Var(
-                            "uint_max_leq_l",
-                        ),
-                        [],
-                    ),
-                    Compound(
-                        [
-                            Return(
-                                Constant(
-                                    4,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "l",
-                        ),
-                        Constant(
-                            1152921504606846976l,
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant {
+                                constant: 9223372036854775807l,
+                            },
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "l_geq_2_60",
-                            ),
-                            [],
-                        ),
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "l_geq_2_60",
+                        },
+                        params: [],
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    5,
-                                ),
+                                Constant {
+                                    constant: 3,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "uint_max_leq_l",
-                            ),
-                            [],
-                        ),
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "uint_max_leq_l",
+                        },
+                        params: [],
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    6,
-                                ),
+                                Constant {
+                                    constant: 4,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "l2",
-                        ),
-                        Var(
-                            "l",
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "l",
+                        },
+                        rhs: Constant {
+                            constant: 1152921504606846976l,
+                        },
+                    },
                 ),
                 If(
-                    Unary(
-                        Not,
-                        FunctionCall(
-                            Var(
-                                "l_eq_l2",
-                            ),
-                            [],
-                        ),
-                    ),
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "l_geq_2_60",
+                            },
+                            params: [],
+                        },
+                    },
                     Compound(
                         [
                             Return(
-                                Constant(
-                                    7,
-                                ),
+                                Constant {
+                                    constant: 5,
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "uint_max_leq_l",
+                            },
+                            params: [],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant {
+                                    constant: 6,
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var {
+                            name: "l2",
+                        },
+                        rhs: Var {
+                            name: "l",
+                        },
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var {
+                                name: "l_eq_l2",
+                            },
+                            params: [],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant {
+                                    constant: 7,
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant(
-                        0,
-                    ),
+                    Constant {
+                        constant: 0,
+                    },
                 ),
             ],
         },

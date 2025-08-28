@@ -6,9 +6,9 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant(
-                        1,
-                    ),
+                    Constant {
+                        constant: 1,
+                    },
                 ),
             ],
         },
@@ -18,14 +18,20 @@ Program {
                 (
                     Int,
                     "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            40,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Var(
-                        "a",
-                    ),
+                    Var {
+                        name: "a",
+                    },
                 ),
             ],
         },
@@ -35,25 +41,25 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        FunctionCall(
-                            Var(
-                                "a",
-                            ),
-                            [],
-                        ),
-                        FunctionCall(
-                            Var(
-                                "b",
-                            ),
-                            [
-                                Constant(
-                                    2,
-                                ),
+                    Binary {
+                        op: Add,
+                        lhs: FunctionCall {
+                            function: Var {
+                                name: "a",
+                            },
+                            params: [],
+                        },
+                        rhs: FunctionCall {
+                            function: Var {
+                                name: "b",
+                            },
+                            params: [
+                                Constant {
+                                    constant: 2,
+                                },
                             ],
-                        ),
-                    ),
+                        },
+                    },
                 ),
             ],
         },

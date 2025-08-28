@@ -6,6 +6,12 @@ Program {
                 (
                     Int,
                     "ch",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            17,
+                        ),
+                        length: 2,
+                    },
                 ),
             ],
             ret: Int,
@@ -18,73 +24,73 @@ Program {
                 VariableDeclaration {
                     name: "count",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                     storage: Static,
                 },
                 Expression(
-                    FunctionCall(
-                        Var(
-                            "putchar",
-                        ),
-                        [
-                            Binary(
-                                Add,
-                                Var(
-                                    "count",
-                                ),
-                                Constant(
-                                    65,
-                                ),
-                            ),
+                    FunctionCall {
+                        function: Var {
+                            name: "putchar",
+                        },
+                        params: [
+                            Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "count",
+                                },
+                                rhs: Constant {
+                                    constant: 65,
+                                },
+                            },
                         ],
-                    ),
+                    },
                 ),
                 Expression(
-                    Assignment(
-                        Var(
-                            "count",
-                        ),
-                        Binary(
-                            Add,
-                            Var(
-                                "count",
-                            ),
-                            Constant(
-                                1,
-                            ),
-                        ),
-                    ),
+                    Assignment {
+                        lhs: Var {
+                            name: "count",
+                        },
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var {
+                                name: "count",
+                            },
+                            rhs: Constant {
+                                constant: 1,
+                            },
+                        },
+                    },
                 ),
                 If(
-                    Binary(
-                        LessThan,
-                        Var(
-                            "count",
-                        ),
-                        Constant(
-                            26,
-                        ),
-                    ),
+                    Binary {
+                        op: LessThan,
+                        lhs: Var {
+                            name: "count",
+                        },
+                        rhs: Constant {
+                            constant: 26,
+                        },
+                    },
                     Compound(
                         [
                             Expression(
-                                FunctionCall(
-                                    Var(
-                                        "print_alphabet",
-                                    ),
-                                    [],
-                                ),
+                                FunctionCall {
+                                    function: Var {
+                                        name: "print_alphabet",
+                                    },
+                                    params: [],
+                                },
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var(
-                        "count",
-                    ),
+                    Var {
+                        name: "count",
+                    },
                 ),
             ],
         },
@@ -94,12 +100,12 @@ Program {
             ret: Int,
             body: [
                 Expression(
-                    FunctionCall(
-                        Var(
-                            "print_alphabet",
-                        ),
-                        [],
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "print_alphabet",
+                        },
+                        params: [],
+                    },
                 ),
             ],
         },

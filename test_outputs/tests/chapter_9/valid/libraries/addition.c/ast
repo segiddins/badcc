@@ -6,24 +6,36 @@ Program {
                 (
                     Int,
                     "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            12,
+                        ),
+                        length: 1,
+                    },
                 ),
                 (
                     Int,
                     "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            19,
+                        ),
+                        length: 1,
+                    },
                 ),
             ],
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Add,
-                        Var(
-                            "x",
-                        ),
-                        Var(
-                            "y",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "x",
+                        },
+                        rhs: Var {
+                            name: "y",
+                        },
+                    },
                 ),
             ],
         },

@@ -6,39 +6,39 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Binary(
-                        Subtract,
-                        Binary(
-                            Divide,
-                            Binary(
-                                Multiply,
-                                Constant(
-                                    5,
-                                ),
-                                Constant(
-                                    4,
-                                ),
-                            ),
-                            Constant(
-                                2,
-                            ),
-                        ),
-                        Binary(
-                            Remainder,
-                            Constant(
-                                3,
-                            ),
-                            Binary(
-                                Add,
-                                Constant(
-                                    2,
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
-                    ),
+                    Binary {
+                        op: Subtract,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Binary {
+                                op: Multiply,
+                                lhs: Constant {
+                                    constant: 5,
+                                },
+                                rhs: Constant {
+                                    constant: 4,
+                                },
+                            },
+                            rhs: Constant {
+                                constant: 2,
+                            },
+                        },
+                        rhs: Binary {
+                            op: Remainder,
+                            lhs: Constant {
+                                constant: 3,
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Constant {
+                                    constant: 2,
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
+                    },
                 ),
             ],
         },

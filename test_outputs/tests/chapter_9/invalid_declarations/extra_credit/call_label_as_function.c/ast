@@ -8,41 +8,41 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant(
-                        1,
-                    ),
+                    init: Constant {
+                        constant: 1,
+                    },
                 },
                 Labeled(
                     "a",
                     Expression(
-                        Assignment(
-                            Var(
-                                "x",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "x",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "x",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "x",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                 ),
                 Expression(
-                    FunctionCall(
-                        Var(
-                            "a",
-                        ),
-                        [],
-                    ),
+                    FunctionCall {
+                        function: Var {
+                            name: "a",
+                        },
+                        params: [],
+                    },
                 ),
                 Return(
-                    Var(
-                        "x",
-                    ),
+                    Var {
+                        name: "x",
+                    },
                 ),
             ],
         },

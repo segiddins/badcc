@@ -8,63 +8,63 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant(
-                        0,
-                    ),
+                    init: Constant {
+                        constant: 0,
+                    },
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant(
-                            0,
-                        ),
+                        init: Constant {
+                            constant: 0,
+                        },
                     },
                     condition: Some(
-                        Binary(
-                            LessThan,
-                            Var(
-                                "i",
-                            ),
-                            Constant(
-                                10,
-                            ),
-                        ),
+                        Binary {
+                            op: LessThan,
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Constant {
+                                constant: 10,
+                            },
+                        },
                     ),
                     post: Some(
-                        Assignment(
-                            Var(
-                                "i",
-                            ),
-                            Binary(
-                                Add,
-                                Var(
-                                    "i",
-                                ),
-                                Constant(
-                                    1,
-                                ),
-                            ),
-                        ),
+                        Assignment {
+                            lhs: Var {
+                                name: "i",
+                            },
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var {
+                                    name: "i",
+                                },
+                                rhs: Constant {
+                                    constant: 1,
+                                },
+                            },
+                        },
                     ),
                     body: Compound(
                         [
                             Switch(
-                                Binary(
-                                    Remainder,
-                                    Var(
-                                        "i",
-                                    ),
-                                    Constant(
-                                        2,
-                                    ),
-                                ),
+                                Binary {
+                                    op: Remainder,
+                                    lhs: Var {
+                                        name: "i",
+                                    },
+                                    rhs: Constant {
+                                        constant: 2,
+                                    },
+                                },
                                 Compound(
                                     [
                                         Case(
-                                            Constant(
-                                                0,
-                                            ),
+                                            Constant {
+                                                constant: 0,
+                                            },
                                             Continue(
                                                 None,
                                             ),
@@ -72,20 +72,20 @@ Program {
                                         ),
                                         Default(
                                             Expression(
-                                                Assignment(
-                                                    Var(
-                                                        "sum",
-                                                    ),
-                                                    Binary(
-                                                        Add,
-                                                        Var(
-                                                            "sum",
-                                                        ),
-                                                        Constant(
-                                                            1,
-                                                        ),
-                                                    ),
-                                                ),
+                                                Assignment {
+                                                    lhs: Var {
+                                                        name: "sum",
+                                                    },
+                                                    rhs: Binary {
+                                                        op: Add,
+                                                        lhs: Var {
+                                                            name: "sum",
+                                                        },
+                                                        rhs: Constant {
+                                                            constant: 1,
+                                                        },
+                                                    },
+                                                },
                                             ),
                                             None,
                                         ),
@@ -98,9 +98,9 @@ Program {
                     label: None,
                 },
                 Return(
-                    Var(
-                        "sum",
-                    ),
+                    Var {
+                        name: "sum",
+                    },
                 ),
             ],
         },

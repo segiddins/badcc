@@ -12,45 +12,45 @@ Program {
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
-                    init: Assignment(
-                        Var(
-                            "a.1",
-                        ),
-                        Constant(
-                            7,
-                        ),
-                    ),
+                    init: Assignment {
+                        lhs: Var {
+                            name: "a.1",
+                        },
+                        rhs: Constant {
+                            constant: 7,
+                        },
+                    },
                 },
                 Switch(
-                    Binary(
-                        Add,
-                        Var(
-                            "a.1",
-                        ),
-                        Var(
-                            "b.2",
-                        ),
-                    ),
+                    Binary {
+                        op: Add,
+                        lhs: Var {
+                            name: "a.1",
+                        },
+                        rhs: Var {
+                            name: "b.2",
+                        },
+                    },
                     Compound(
                         [
                             Default(
                                 Return(
-                                    Constant(
-                                        0,
-                                    ),
+                                    Constant {
+                                        constant: 0,
+                                    },
                                 ),
                                 Some(
                                     "switch.0",
                                 ),
                             ),
                             Case(
-                                Constant(
-                                    2,
-                                ),
+                                Constant {
+                                    constant: 2,
+                                },
                                 Return(
-                                    Constant(
-                                        1,
-                                    ),
+                                    Constant {
+                                        constant: 1,
+                                    },
                                 ),
                                 Some(
                                     "switch.0",
