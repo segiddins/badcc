@@ -1,9 +1,9 @@
 use std::collections::{BTreeMap, HashMap};
 
-pub use crate::parser::BinaryOperator;
+pub use crate::ast::BinaryOperator;
 use crate::{
     assembly_gen::Width,
-    parser::{
+    ast::{
         self, Block, BlockItem, Constant, Declaration, Expression, Statement, VariableDeclaration,
     },
     sema::{self, SymbolAttributes, SymbolTable, Type},
@@ -129,7 +129,7 @@ impl<'i> State<'i> {
     }
 }
 
-pub fn lower(program: &parser::Program, symbols: &sema::SymbolTable) -> Program {
+pub fn lower(program: &ast::Program, symbols: &sema::SymbolTable) -> Program {
     let mut state = State::new("global", symbols);
     let mut functions = vec![];
     for decl in program.declarations.iter() {
@@ -194,7 +194,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
         Expression::Unary(unary_operator, expression) => {
             let src = walk(expression, state);
             match unary_operator {
-                parser::UnaryOperator::Minus => {
+                ast::UnaryOperator::Minus => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Negate,
@@ -203,7 +203,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     dst
                 }
-                parser::UnaryOperator::Complement => {
+                ast::UnaryOperator::Complement => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Complement,
@@ -212,7 +212,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     dst
                 }
-                parser::UnaryOperator::Not => {
+                ast::UnaryOperator::Not => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Unary {
                         op: UnaryOperator::Not,
@@ -221,7 +221,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     dst
                 }
-                parser::UnaryOperator::PrefixIncrement => {
+                ast::UnaryOperator::PrefixIncrement => {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
@@ -230,7 +230,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     src
                 }
-                parser::UnaryOperator::PrefixDecrement => {
+                ast::UnaryOperator::PrefixDecrement => {
                     state.push(Instruction::Binary {
                         op: BinaryOperator::Add,
                         lhs: src.clone(),
@@ -239,7 +239,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     src.clone()
                 }
-                parser::UnaryOperator::PostfixIncrement => {
+                ast::UnaryOperator::PostfixIncrement => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Copy {
                         src: src.clone(),
@@ -253,7 +253,7 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                     });
                     dst
                 }
-                parser::UnaryOperator::PostfixDecrement => {
+                ast::UnaryOperator::PostfixDecrement => {
                     let dst = state.var(src.ty());
                     state.push(Instruction::Copy {
                         src: src.clone(),
@@ -503,10 +503,10 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             let start_label = format!("{end_label}.start");
 
             match init {
-                parser::ForInit::Decl(variable_declaration) => {
+                ast::ForInit::Decl(variable_declaration) => {
                     lower_variable_declaration(variable_declaration, state)
                 }
-                parser::ForInit::Expr(expression) => {
+                ast::ForInit::Expr(expression) => {
                     walk_optional(expression, state);
                 }
             };
@@ -614,7 +614,7 @@ fn walk_block<'i>(block: &Block, state: &mut State<'i>) {
 }
 
 fn lower_function<'a>(
-    function: &'a parser::FunctionDeclaration,
+    function: &'a ast::FunctionDeclaration,
     parent_state: &mut State<'a>,
 ) -> Option<Function> {
     let body = function.body.as_ref()?;

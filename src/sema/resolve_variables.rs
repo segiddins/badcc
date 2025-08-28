@@ -2,7 +2,7 @@ use std::collections::{HashMap, hash_map::Entry};
 
 use miette::{Diagnostic, SourceSpan};
 
-use crate::parser::*;
+use crate::ast::*;
 
 #[derive(Debug, thiserror::Error, Diagnostic)]
 #[error("Failed to resolve identifiers")]

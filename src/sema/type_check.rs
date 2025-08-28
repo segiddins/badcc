@@ -8,9 +8,9 @@ use miette::{Diagnostic, SourceSpan};
 
 use crate::{
     assembly_gen::Width,
-    parser::{
-        BinaryOperator, Block, Constant, Declaration, Expression, ForInit, FunctionDeclaration,
-        Program, Statement, StorageClass, UnaryOperator, VariableDeclaration,
+    ast::{
+        BinaryOperator, Block, BlockItem, Constant, Declaration, Expression, ForInit,
+        FunctionDeclaration, Program, Statement, StorageClass, UnaryOperator, VariableDeclaration,
     },
 };
 
@@ -446,12 +446,8 @@ impl Checker {
     fn visit_block(&mut self, block: &mut Block) -> Result {
         for item in block.items.iter_mut() {
             match item {
-                crate::parser::BlockItem::Statement(statement) => {
-                    self.visit_statement(statement)?
-                }
-                crate::parser::BlockItem::Declaration(declaration) => {
-                    self.visit_declaration(declaration)?
-                }
+                BlockItem::Statement(statement) => self.visit_statement(statement)?,
+                BlockItem::Declaration(declaration) => self.visit_declaration(declaration)?,
             }
         }
         Ok(())

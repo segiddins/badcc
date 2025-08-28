@@ -1,6 +1,6 @@
 use miette::Diagnostic;
 
-use crate::parser::Program;
+use crate::ast::Program;
 
 pub use type_check::{Symbol, SymbolAttributes, SymbolTable, Type};
 

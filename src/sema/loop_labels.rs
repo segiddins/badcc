@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::parser::*;
+use crate::ast::*;
 
 #[derive(Debug, thiserror::Error, miette::Diagnostic)]
 pub enum Error {

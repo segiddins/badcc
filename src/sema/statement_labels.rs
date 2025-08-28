@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use miette::Diagnostic;
 
-use crate::parser::*;
+use crate::ast::*;
 
 type Result = miette::Result<(), Error>;
 

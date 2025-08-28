@@ -1,6 +1,7 @@
 use std::{collections::HashMap, iter::empty};
 
 use crate::{
+    ast,
     sema::{Symbol, SymbolAttributes, SymbolTable},
     tacky,
 };
@@ -252,8 +253,8 @@ impl From<&tacky::Val> for Operand {
     fn from(value: &tacky::Val) -> Self {
         match value {
             tacky::Val::Constant(c) => match c {
-                crate::parser::Constant::Int(_) => Self::Immediate(c.into_long(), Width::Four),
-                crate::parser::Constant::Long(_) => Self::Immediate(c.into_long(), Width::Eight),
+                ast::Constant::Int(_) => Self::Immediate(c.into_long(), Width::Four),
+                ast::Constant::Long(_) => Self::Immediate(c.into_long(), Width::Eight),
             },
             tacky::Val::Var(id, ty) => Self::Psuedo(id.clone(), ty.width()),
         }

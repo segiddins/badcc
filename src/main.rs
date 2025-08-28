@@ -16,6 +16,7 @@ use crate::{
 };
 
 mod assembly_gen;
+mod ast;
 mod code_emission;
 mod lexer;
 mod parser;
