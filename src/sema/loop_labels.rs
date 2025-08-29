@@ -55,21 +55,37 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
     match statement {
         Statement::Return(_) => {}
         Statement::Expression(_) => {}
-        Statement::If(_, statement, statement1) => {
+        Statement::If {
+            cond: _,
+            if_true: statement,
+            if_false: statement1,
+        } => {
             visit_statement(statement, loop_label)?;
             if let Some(statement) = statement1 {
                 visit_statement(statement, loop_label)?
             }
         }
-        Statement::Labeled(_, statement, _) => visit_statement(statement, loop_label)?,
-        Statement::Goto(_, _) => {}
+        Statement::Labeled {
+            label: _,
+            statement,
+            span: _,
+        } => visit_statement(statement, loop_label)?,
+        Statement::Goto { label: _, span: _ } => {}
         Statement::Compound(block) => visit_block(block, loop_label)?,
-        Statement::While(_, statement, label) => {
+        Statement::While {
+            expression: _,
+            statement,
+            label,
+        } => {
             label.replace(loop_label.new_label(true));
             visit_statement(statement, loop_label)?;
             loop_label.pop(true);
         }
-        Statement::DoWhile(statement, _, label) => {
+        Statement::DoWhile {
+            statement,
+            expression: _,
+            label,
+        } => {
             label.replace(loop_label.new_label(true));
             visit_statement(statement, loop_label)?;
             loop_label.pop(true);
@@ -80,7 +96,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
             loop_label.pop(true);
         }
         Statement::Null => {}
-        Statement::Break(label, span) => {
+        Statement::Break { label, span } => {
             label.replace(
                 loop_label
                     .break_labels
@@ -89,7 +105,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
                     .into(),
             );
         }
-        Statement::Continue(label, span) => {
+        Statement::Continue { label, span } => {
             label.replace(
                 loop_label
                     .continue_labels
@@ -98,12 +114,20 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
                     .into(),
             );
         }
-        Statement::Switch(_, cases, label) => {
+        Statement::Switch {
+            condition: _,
+            body: cases,
+            span: label,
+        } => {
             label.replace(loop_label.new_label(false));
             visit_statement(cases, loop_label)?;
             loop_label.pop(false);
         }
-        Statement::Case(expr, statement, label) => {
+        Statement::Case {
+            expression: expr,
+            statement,
+            label,
+        } => {
             let switch_label = loop_label
                 .cases
                 .last_mut()
@@ -115,7 +139,11 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
             }
             visit_statement(statement, loop_label)?
         }
-        Statement::Default(statement, label, span) => {
+        Statement::Default {
+            statement,
+            label,
+            span,
+        } => {
             let switch_label = loop_label
                 .cases
                 .last_mut()

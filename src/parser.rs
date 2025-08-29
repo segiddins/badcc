@@ -369,19 +369,30 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 if lexer.expect(Token::Else).is_ok() {
                     r#else = Some(parse_statement(lexer)?);
                 }
-                Ok(Statement::If(cond, Box::new(then), r#else.map(Box::new)))
+                Ok(Statement::If {
+                    cond,
+                    if_true: Box::new(then),
+                    if_false: r#else.map(Box::new),
+                })
             }
             Token::Identifier(_) if lexer.peek_n(2).is_some_and(|(t, _)| *t == Token::Colon) => {
                 let (label, span) = lexer.expect_identifier()?;
                 lexer.expect(Token::Colon)?;
                 let statement = parse_statement(lexer)?;
-                Ok(Statement::Labeled(label, statement.into(), span))
+                Ok(Statement::Labeled {
+                    label,
+                    statement: statement.into(),
+                    span,
+                })
             }
             Token::Goto => {
                 lexer.expect(Token::Goto)?;
                 lexer
                     .expect_identifier()
-                    .map(|(t, _)| Statement::Goto(t.clone(), _span))
+                    .map(|(t, _)| Statement::Goto {
+                        label: t.clone(),
+                        span: _span,
+                    })
                     .and_then(|s| {
                         lexer.expect(Token::Semicolon)?;
                         Ok(s)
@@ -393,44 +404,58 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 let expr = parse_expression(lexer)?;
                 lexer.expect(Token::RParen)?;
 
-                Ok(Statement::Switch(
-                    expr,
-                    parse_statement(lexer)?.into(),
-                    None,
-                ))
+                Ok(Statement::Switch {
+                    condition: expr,
+                    body: parse_statement(lexer)?.into(),
+                    span: None,
+                })
             }
             Token::LBrace => parse_block(lexer).map(Statement::Compound),
             Token::Case => {
                 lexer.next_token();
                 let expr = parse_expression(lexer)?;
                 lexer.expect(Token::Colon)?;
-                Ok(Statement::Case(expr, parse_statement(lexer)?.into(), None))
+                Ok(Statement::Case {
+                    expression: expr,
+                    statement: parse_statement(lexer)?.into(),
+                    label: None,
+                })
             }
             Token::Default => {
                 lexer.next_token();
                 lexer.expect(Token::Colon)?;
-                Ok(Statement::Default(
-                    parse_statement(lexer)?.into(),
-                    None,
-                    _span,
-                ))
+                Ok(Statement::Default {
+                    statement: parse_statement(lexer)?.into(),
+                    label: None,
+                    span: _span,
+                })
             }
             Token::Break => {
                 lexer.next_token();
                 lexer.expect(Token::Semicolon)?;
-                Ok(Statement::Break(None, _span))
+                Ok(Statement::Break {
+                    label: None,
+                    span: _span,
+                })
             }
             Token::Continue => {
                 lexer.next_token();
                 lexer.expect(Token::Semicolon)?;
-                Ok(Statement::Continue(None, _span))
+                Ok(Statement::Continue {
+                    label: None,
+                    span: _span,
+                })
             }
             Token::While => {
                 lexer.next_token();
                 lexer.expect(Token::LParen)?;
                 let exp = parse_expression(lexer)?;
                 lexer.expect(Token::RParen)?;
-                parse_statement(lexer).map(|s| Statement::While(exp, s.into(), None))
+                parse_statement(lexer).map(|s| Statement::While {
+                    expression: exp,
+                    statement: s.into(),
+                    label: None,
+                })
             }
             Token::Do => {
                 lexer.next_token();
@@ -440,7 +465,11 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 let cond = parse_expression(lexer)?;
                 lexer.expect(Token::RParen)?;
                 lexer.expect(Token::Semicolon)?;
-                Ok(Statement::DoWhile(body.into(), cond, None))
+                Ok(Statement::DoWhile {
+                    statement: body.into(),
+                    expression: cond,
+                    label: None,
+                })
             }
             Token::For => {
                 lexer.next_token();

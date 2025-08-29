@@ -498,20 +498,36 @@ impl Checker {
             Statement::Expression(expression) => {
                 self.visit_expression(expression)?;
             }
-            Statement::If(expression, statement, statement1) => {
+            Statement::If {
+                cond: expression,
+                if_true: statement,
+                if_false: statement1,
+            } => {
                 self.visit_numeric_expression(expression, "if condition")?;
                 if let Some(statement) = statement1 {
                     self.visit_statement(statement)?;
                 }
                 self.visit_statement(statement)?
             }
-            Statement::Labeled(_, statement, _) => self.visit_statement(statement)?,
+            Statement::Labeled {
+                label: _,
+                statement,
+                span: _,
+            } => self.visit_statement(statement)?,
             Statement::Compound(block) => self.visit_block(block)?,
-            Statement::While(expression, statement, _) => {
+            Statement::While {
+                expression,
+                statement,
+                label: _,
+            } => {
                 self.visit_numeric_expression(expression, "while loop control condition")?;
                 self.visit_statement(statement)?
             }
-            Statement::DoWhile(statement, expression, _) => {
+            Statement::DoWhile {
+                statement,
+                expression,
+                label: _,
+            } => {
                 self.visit_statement(statement)?;
                 self.visit_numeric_expression(expression, "do-while loop control condition")?;
             }
@@ -539,7 +555,11 @@ impl Checker {
                 }
                 self.visit_statement(body)?;
             }
-            Statement::Switch(expression, statement, label) => {
+            Statement::Switch {
+                condition: expression,
+                body: statement,
+                span: label,
+            } => {
                 let ty = self.visit_numeric_expression(
                     expression,
                     "switch statement controlling condition",
@@ -547,14 +567,22 @@ impl Checker {
                 self.switches.insert(label.clone().unwrap(), ty.clone());
                 self.visit_statement(statement)?
             }
-            Statement::Case(expression, statement, label) => {
+            Statement::Case {
+                expression,
+                statement,
+                label,
+            } => {
                 self.make_cast(
                     expression,
                     self.switches.get(label.as_ref().unwrap()).unwrap(),
                 )?;
                 self.visit_statement(statement)?
             }
-            Statement::Default(statement, _, _) => self.visit_statement(statement)?,
+            Statement::Default {
+                statement,
+                label: _,
+                span: _,
+            } => self.visit_statement(statement)?,
             _ => {}
         }
         Ok(())

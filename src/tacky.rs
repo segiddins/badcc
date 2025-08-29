@@ -457,7 +457,11 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
         Statement::Expression(expression) => {
             walk(expression, state);
         }
-        Statement::If(cond, then, r#else) => {
+        Statement::If {
+            cond,
+            if_true: then,
+            if_false: r#else,
+        } => {
             let else_label = format!("{}.{}.true", state.name, state.phis);
             let end_label = format!("{}.{}.end", state.name, state.phis);
             state.phis += 1;
@@ -472,10 +476,14 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             }
             state.push(Instruction::Label(end_label));
         }
-        Statement::Goto(label, _) => {
+        Statement::Goto { label, span: _ } => {
             state.push(Instruction::Jump(format!("{}.{label}", state.name)));
         }
-        Statement::Labeled(label, statement, _) => {
+        Statement::Labeled {
+            label,
+            statement,
+            span: _,
+        } => {
             state.push(Instruction::Label(format!("{}.{label}", state.name)));
             walk_statement(statement, state);
         }
@@ -483,14 +491,18 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             walk_block(block, state);
         }
         Statement::Null => {}
-        Statement::Break(label, _) => {
+        Statement::Break { label, span: _ } => {
             state.push(Instruction::Jump(label.as_ref().unwrap().clone()));
         }
-        Statement::Continue(label, _) => {
+        Statement::Continue { label, span: _ } => {
             let label = label.as_ref().unwrap();
             state.push(Instruction::Jump(format!("{label}.start")));
         }
-        Statement::While(expression, statement, label) => {
+        Statement::While {
+            expression,
+            statement,
+            label,
+        } => {
             let label = label.as_ref().unwrap();
             let start_label = format!("{label}.start");
 
@@ -503,7 +515,11 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
 
             state.push(Instruction::Label(label.clone()));
         }
-        Statement::DoWhile(statement, expression, label) => {
+        Statement::DoWhile {
+            statement,
+            expression,
+            label,
+        } => {
             let label = label.as_ref().unwrap();
             let head_label = format!("{label}.head");
             let start_label = format!("{label}.start");
@@ -551,7 +567,11 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             state.push(Instruction::Jump(cond_label));
             state.push(Instruction::Label(end_label));
         }
-        Statement::Switch(expression, switch_cases, label) => {
+        Statement::Switch {
+            condition: expression,
+            body: switch_cases,
+            span: label,
+        } => {
             let label = label.as_ref().unwrap();
             let start = format!("{label}.cases");
             let value = walk(expression, state);
@@ -586,7 +606,11 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             }
             state.push(Instruction::Label(label.clone()));
         }
-        Statement::Case(expression, statement, label) => {
+        Statement::Case {
+            expression,
+            statement,
+            label,
+        } => {
             let Val::Constant(c) = walk(expression, state) else {
                 unreachable!("non-constant case in switch {expression:?}")
             };
@@ -608,7 +632,11 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
                 .push(Some(c.into_long()));
             walk_statement(statement, state);
         }
-        Statement::Default(statement, label, _) => {
+        Statement::Default {
+            statement,
+            label,
+            span: _,
+        } => {
             state.push(Instruction::Label(format!(
                 "{}.default",
                 label.as_ref().unwrap()

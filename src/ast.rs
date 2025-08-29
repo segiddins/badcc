@@ -251,14 +251,39 @@ pub enum BinaryOperator {
 pub enum Statement {
     Return(Expression),
     Expression(Expression),
-    If(Expression, Box<Statement>, Option<Box<Statement>>),
-    Labeled(String, Box<Statement>, SourceSpan),
-    Goto(String, SourceSpan),
+    If {
+        cond: Expression,
+        if_true: Box<Statement>,
+        if_false: Option<Box<Statement>>,
+    },
+    Labeled {
+        label: String,
+        statement: Box<Statement>,
+        span: SourceSpan,
+    },
+    Goto {
+        label: String,
+        span: SourceSpan,
+    },
     Compound(Block),
-    Break(Option<String>, SourceSpan),
-    Continue(Option<String>, SourceSpan),
-    While(Expression, Box<Statement>, Option<String>),
-    DoWhile(Box<Statement>, Expression, Option<String>),
+    Break {
+        label: Option<String>,
+        span: SourceSpan,
+    },
+    Continue {
+        label: Option<String>,
+        span: SourceSpan,
+    },
+    While {
+        expression: Expression,
+        statement: Box<Statement>,
+        label: Option<String>,
+    },
+    DoWhile {
+        statement: Box<Statement>,
+        expression: Expression,
+        label: Option<String>,
+    },
     For {
         init: ForInit,
         condition: Option<Expression>,
@@ -266,9 +291,21 @@ pub enum Statement {
         body: Box<Statement>,
         label: Option<String>,
     },
-    Switch(Expression, Box<Statement>, Option<String>),
-    Case(Expression, Box<Statement>, Option<String>),
-    Default(Box<Statement>, Option<String>, SourceSpan),
+    Switch {
+        condition: Expression,
+        body: Box<Statement>,
+        span: Option<String>,
+    },
+    Case {
+        expression: Expression,
+        statement: Box<Statement>,
+        label: Option<String>,
+    },
+    Default {
+        statement: Box<Statement>,
+        label: Option<String>,
+        span: SourceSpan,
+    },
     Null,
 }
 
@@ -277,26 +314,49 @@ impl Debug for Statement {
         match self {
             Self::Return(arg0) => f.debug_tuple("Return").field(arg0).finish(),
             Self::Expression(arg0) => f.debug_tuple("Expression").field(arg0).finish(),
-            Self::If(arg0, arg1, arg2) => f
+            Self::If {
+                cond: arg0,
+                if_true: arg1,
+                if_false: arg2,
+            } => f
                 .debug_tuple("If")
                 .field(arg0)
                 .field(arg1)
                 .field(arg2)
                 .finish(),
-            Self::Labeled(arg0, arg1, _) => {
-                f.debug_tuple("Labeled").field(arg0).field(arg1).finish()
-            }
-            Self::Goto(arg0, _) => f.debug_tuple("Goto").field(arg0).finish(),
+            Self::Labeled {
+                label: arg0,
+                statement: arg1,
+                span: _,
+            } => f.debug_tuple("Labeled").field(arg0).field(arg1).finish(),
+            Self::Goto {
+                label: arg0,
+                span: _,
+            } => f.debug_tuple("Goto").field(arg0).finish(),
             Self::Compound(arg0) => f.debug_tuple("Compound").field(arg0).finish(),
-            Self::Break(arg0, _) => f.debug_tuple("Break").field(arg0).finish(),
-            Self::Continue(arg0, _) => f.debug_tuple("Continue").field(arg0).finish(),
-            Self::While(arg0, arg1, arg2) => f
+            Self::Break {
+                label: arg0,
+                span: _,
+            } => f.debug_tuple("Break").field(arg0).finish(),
+            Self::Continue {
+                label: arg0,
+                span: _,
+            } => f.debug_tuple("Continue").field(arg0).finish(),
+            Self::While {
+                expression: arg0,
+                statement: arg1,
+                label: arg2,
+            } => f
                 .debug_tuple("While")
                 .field(arg0)
                 .field(arg1)
                 .field(arg2)
                 .finish(),
-            Self::DoWhile(arg0, arg1, arg2) => f
+            Self::DoWhile {
+                statement: arg0,
+                expression: arg1,
+                label: arg2,
+            } => f
                 .debug_tuple("DoWhile")
                 .field(arg0)
                 .field(arg1)
@@ -316,21 +376,31 @@ impl Debug for Statement {
                 .field("body", body)
                 .field("label", label)
                 .finish(),
-            Self::Switch(arg0, arg1, arg2) => f
+            Self::Switch {
+                condition: arg0,
+                body: arg1,
+                span: arg2,
+            } => f
                 .debug_tuple("Switch")
                 .field(arg0)
                 .field(arg1)
                 .field(arg2)
                 .finish(),
-            Self::Case(arg0, arg1, arg2) => f
+            Self::Case {
+                expression: arg0,
+                statement: arg1,
+                label: arg2,
+            } => f
                 .debug_tuple("Case")
                 .field(arg0)
                 .field(arg1)
                 .field(arg2)
                 .finish(),
-            Self::Default(arg0, arg1, _) => {
-                f.debug_tuple("Default").field(arg0).field(arg1).finish()
-            }
+            Self::Default {
+                statement: arg0,
+                label: arg1,
+                span: _,
+            } => f.debug_tuple("Default").field(arg0).field(arg1).finish(),
             Self::Null => write!(f, "Null"),
         }
     }

@@ -31,31 +31,59 @@ fn visit_statement(statement: &Statement, labels: &mut HashSet<String>, error: b
         Statement::Return(_) => {}
         Statement::Expression(_) => {}
         Statement::Null => {}
-        Statement::Break(..) => {}
-        Statement::Continue(..) => {}
-        Statement::If(_, statement, statement1) => {
+        Statement::Break { .. } => {}
+        Statement::Continue { .. } => {}
+        Statement::If {
+            cond: _,
+            if_true: statement,
+            if_false: statement1,
+        } => {
             visit_statement(statement, labels, error)?;
             if let Some(statement) = statement1 {
                 visit_statement(statement, labels, error)?;
             }
         }
-        Statement::Labeled(label, statement, span) => {
+        Statement::Labeled {
+            label,
+            statement,
+            span,
+        } => {
             if !labels.insert(label.clone()) && !error {
                 return Err(Error::RepeatedLabel(label.clone(), *span));
             }
             visit_statement(statement, labels, error)?
         }
-        Statement::Goto(label, span) => {
+        Statement::Goto { label, span } => {
             if !labels.contains(label) && error {
                 return Err(Error::GotoUnknown(label.clone(), *span));
             }
         }
-        Statement::While(_, statement, _) => visit_statement(statement, labels, error)?,
-        Statement::DoWhile(statement, _, _) => visit_statement(statement, labels, error)?,
+        Statement::While {
+            expression: _,
+            statement,
+            label: _,
+        } => visit_statement(statement, labels, error)?,
+        Statement::DoWhile {
+            statement,
+            expression: _,
+            label: _,
+        } => visit_statement(statement, labels, error)?,
         Statement::For { body, .. } => visit_statement(body, labels, error)?,
-        Statement::Switch(_, cases, _) => visit_statement(cases, labels, error)?,
-        Statement::Case(_, statement, _) => visit_statement(statement, labels, error)?,
-        Statement::Default(statement, _, _) => visit_statement(statement, labels, error)?,
+        Statement::Switch {
+            condition: _,
+            body: cases,
+            span: _,
+        } => visit_statement(cases, labels, error)?,
+        Statement::Case {
+            expression: _,
+            statement,
+            label: _,
+        } => visit_statement(statement, labels, error)?,
+        Statement::Default {
+            statement,
+            label: _,
+            span: _,
+        } => visit_statement(statement, labels, error)?,
     }
     Ok(())
 }

@@ -38,33 +38,51 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
     match statement {
         Statement::Return(_) => {}
         Statement::Expression(_) => {}
-        Statement::If(_, statement, statement1) => {
+        Statement::If {
+            cond: _,
+            if_true: statement,
+            if_false: statement1,
+        } => {
             visit_statement(statement, scope)?;
             if let Some(statement) = statement1 {
                 visit_statement(statement, scope)?
             }
         }
-        Statement::Labeled(_, statement, _) => visit_statement(statement, scope)?,
-        Statement::Goto(_, _) => {}
+        Statement::Labeled {
+            label: _,
+            statement,
+            span: _,
+        } => visit_statement(statement, scope)?,
+        Statement::Goto { label: _, span: _ } => {}
         Statement::Compound(block) => visit_block(block, scope)?,
-        Statement::While(_, statement, ..) => {
+        Statement::While { statement, .. } => {
             visit_statement(statement, scope)?;
         }
-        Statement::DoWhile(statement, _, _) => {
+        Statement::DoWhile {
+            statement,
+            expression: _,
+            label: _,
+        } => {
             visit_statement(statement, scope)?;
         }
         Statement::For { body, .. } => {
             visit_statement(body, scope)?;
         }
         Statement::Null => {}
-        Statement::Break(..) => {}
-        Statement::Continue(..) => {}
-        Statement::Switch(_, statement, ..) => {
+        Statement::Break { .. } => {}
+        Statement::Continue { .. } => {}
+        Statement::Switch {
+            body: statement, ..
+        } => {
             let cases = take(&mut scope.cases);
             visit_statement(statement, scope)?;
             scope.cases = cases;
         }
-        Statement::Case(expr, statement, ..) => {
+        Statement::Case {
+            expression: expr,
+            statement,
+            ..
+        } => {
             if let Expression::Constant { constant, span } = expr
                 && let Some(previous) = scope.cases.insert(Some(constant.into_long()), *span)
             {
@@ -76,7 +94,9 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
             }
             visit_statement(statement, scope)?
         }
-        Statement::Default(statement, .., span) => {
+        Statement::Default {
+            statement, span, ..
+        } => {
             if let Some(previous) = scope.cases.insert(None, *span) {
                 return Err(Error::DuplicateDefault {
                     span: *span,

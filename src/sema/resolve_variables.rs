@@ -164,10 +164,15 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
         Statement::Return(expression) | Statement::Expression(expression) => {
             visit_expr(expression, scope)
         }
-        Statement::Null | Statement::Goto(..) | Statement::Break(..) | Statement::Continue(..) => {
-            Ok(())
-        }
-        Statement::If(cond, then, r#else) => {
+        Statement::Null
+        | Statement::Goto { .. }
+        | Statement::Break { .. }
+        | Statement::Continue { .. } => Ok(()),
+        Statement::If {
+            cond,
+            if_true: then,
+            if_false: r#else,
+        } => {
             visit_expr(cond, scope)?;
             visit_statement(then, scope)?;
             if let Some(r#else) = r#else {
@@ -176,15 +181,30 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
                 Ok(())
             }
         }
-        Statement::Labeled(_, statement, _) | Statement::Default(statement, _, _) => {
-            visit_statement(statement, scope)
+        Statement::Labeled {
+            label: _,
+            statement,
+            span: _,
         }
+        | Statement::Default {
+            statement,
+            label: _,
+            span: _,
+        } => visit_statement(statement, scope),
         Statement::Compound(block) => scope.nest(|scope| visit_block(block, scope)),
-        Statement::While(expression, statement, _) => {
+        Statement::While {
+            expression,
+            statement,
+            label: _,
+        } => {
             visit_expr(expression, scope)?;
             visit_statement(statement, scope)
         }
-        Statement::DoWhile(statement, expression, _) => {
+        Statement::DoWhile {
+            statement,
+            expression,
+            label: _,
+        } => {
             visit_statement(statement, scope)?;
             visit_expr(expression, scope)
         }
@@ -210,7 +230,16 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
             visit_optional_expression(post, scope)?;
             visit_statement(body, scope)
         }),
-        Statement::Switch(expression, statement, _) | Statement::Case(expression, statement, _) => {
+        Statement::Switch {
+            condition: expression,
+            body: statement,
+            span: _,
+        }
+        | Statement::Case {
+            expression,
+            statement,
+            label: _,
+        } => {
             visit_expr(expression, scope)?;
             visit_statement(statement, scope)
         }
