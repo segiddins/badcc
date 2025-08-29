@@ -1,0 +1,296 @@
+Program {
+    definitions: [
+        Function {
+            name: "switch_on_uint",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
+                },
+                Jmp(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.5",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Label(
+                    "switch.0.4294967286",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Label(
+                    "switch.0.10",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Label(
+                    "switch.0.default",
+                ),
+                Move {
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Move {
+                    source: Immediate(5, Four),
+                    destination: Register(R11, Four),
+                },
+                Cmp(
+                    Stack(12, Four),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(16, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Four),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.5",
+                ),
+                Move {
+                    source: Immediate(4294967286, Four),
+                    destination: Register(R11, Four),
+                },
+                Cmp(
+                    Stack(12, Four),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(16, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Four),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.4294967286",
+                ),
+                Move {
+                    source: Immediate(10, Four),
+                    destination: Register(R11, Four),
+                },
+                Cmp(
+                    Stack(12, Four),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(16, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Four),
+                ),
+                JmpCC(
+                    NE,
+                    "switch.0.10",
+                ),
+                Jmp(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(5, Four),
+                    destination: Register(DI, Four),
+                },
+                Call(
+                    "switch_on_uint",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(12, Four),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(16, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Immediate(4294967286, Four),
+                    destination: Register(DI, Four),
+                },
+                Call(
+                    "switch_on_uint",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(20, Four),
+                },
+                Cmp(
+                    Immediate(1, Four),
+                    Stack(20, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(24, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(24, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(24, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Immediate(10, Four),
+                    destination: Register(DI, Four),
+                },
+                Call(
+                    "switch_on_uint",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(28, Four),
+                },
+                Cmp(
+                    Immediate(2, Four),
+                    Stack(28, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(32, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(32, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(32, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

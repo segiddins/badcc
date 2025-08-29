@@ -1,0 +1,280 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "not",
+            params: [
+                (
+                    ULong,
+                    "ul.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            22,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Unary {
+                            op: Not,
+                            expr: Var("ul.1"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "if_cond",
+            params: [
+                (
+                    UInt,
+                    "u.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            67,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                If(
+                    Var("u.3"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "and",
+            params: [
+                (
+                    ULong,
+                    "ul.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            147,
+                        ),
+                        length: 2,
+                    },
+                ),
+                (
+                    Int,
+                    "i.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            155,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: And,
+                            lhs: Var("ul.5"),
+                            rhs: Cast {
+                                to: ULong,
+                                expr: Var("i.6"),
+                            },
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "or",
+            params: [
+                (
+                    Int,
+                    "i.8",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            193,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    UInt,
+                    "u.9",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            205,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Cast {
+                                to: UInt,
+                                expr: Var("i.8"),
+                            },
+                            rhs: Var("u.9"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ul.11",
+                    ty: ULong,
+                    init: Constant(1152921504606846976ul),
+                },
+                VariableDeclaration {
+                    name: "u.12",
+                    ty: UInt,
+                    init: Constant(2147483648u),
+                },
+                VariableDeclaration {
+                    name: "zero.13",
+                    ty: ULong,
+                    init: Constant(0ul),
+                },
+                If(
+                    FunctionCall {
+                        function: Var("not"),
+                        params: [
+                            Var("ul.11"),
+                        ],
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("not"),
+                            params: [
+                                Var("zero.13"),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("if_cond"),
+                            params: [
+                                Var("u.12"),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    FunctionCall {
+                        function: Var("if_cond"),
+                        params: [
+                            Cast {
+                                to: UInt,
+                                expr: Var("zero.13"),
+                            },
+                        ],
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    FunctionCall {
+                        function: Var("and"),
+                        params: [
+                            Var("zero.13"),
+                            Constant(1),
+                        ],
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("or"),
+                            params: [
+                                Constant(1),
+                                Var("u.12"),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

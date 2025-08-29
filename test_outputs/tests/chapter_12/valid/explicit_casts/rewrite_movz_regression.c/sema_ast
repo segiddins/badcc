@@ -1,0 +1,893 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "check_12_ints",
+            params: [
+                (
+                    Int,
+                    "start.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            22,
+                        ),
+                        length: 5,
+                    },
+                ),
+                (
+                    Int,
+                    "a.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            33,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "b.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            40,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "c.4",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            47,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "d.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            54,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "e.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            61,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "f.7",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            68,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "g.8",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            75,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "h.9",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            100,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "i.10",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            107,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "j.11",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            114,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "k.12",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            121,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "l.13",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            128,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+        },
+        VariableDeclaration {
+            name: "glob",
+            ty: UInt,
+            init: Constant(5000u),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "should_spill.16",
+                    ty: Long,
+                    init: Cast {
+                        to: Long,
+                        expr: Var("glob"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "one.17",
+                    ty: Int,
+                    init: Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Subtract,
+                            lhs: Var("glob"),
+                            rhs: Constant(4999u),
+                        },
+                    },
+                },
+                VariableDeclaration {
+                    name: "two.18",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("one.17"),
+                        rhs: Var("one.17"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "three.19",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Constant(2),
+                        rhs: Var("one.17"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "four.20",
+                    ty: Int,
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Var("two.18"),
+                        rhs: Var("two.18"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "five.21",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Constant(6),
+                        rhs: Var("one.17"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "six.22",
+                    ty: Int,
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Var("two.18"),
+                        rhs: Var("three.19"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "seven.23",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("one.17"),
+                        rhs: Constant(6),
+                    },
+                },
+                VariableDeclaration {
+                    name: "eight.24",
+                    ty: Int,
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Var("two.18"),
+                        rhs: Constant(4),
+                    },
+                },
+                VariableDeclaration {
+                    name: "nine.25",
+                    ty: Int,
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Var("three.19"),
+                        rhs: Var("three.19"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "ten.26",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("four.20"),
+                        rhs: Var("six.22"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "eleven.27",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Constant(16),
+                        rhs: Var("five.21"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twelve.28",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("six.22"),
+                        rhs: Var("six.22"),
+                    },
+                },
+                Expression(
+                    FunctionCall {
+                        function: Var("check_12_ints"),
+                        params: [
+                            Var("one.17"),
+                            Var("two.18"),
+                            Var("three.19"),
+                            Var("four.20"),
+                            Var("five.21"),
+                            Var("six.22"),
+                            Var("seven.23"),
+                            Var("eight.24"),
+                            Var("nine.25"),
+                            Var("ten.26"),
+                            Var("eleven.27"),
+                            Var("twelve.28"),
+                            Constant(1),
+                        ],
+                    },
+                ),
+                VariableDeclaration {
+                    name: "thirteen.29",
+                    ty: Int,
+                    init: Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Subtract,
+                            lhs: Var("glob"),
+                            rhs: Constant(4987u),
+                        },
+                    },
+                },
+                VariableDeclaration {
+                    name: "fourteen.30",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("thirteen.29"),
+                        rhs: Constant(1),
+                    },
+                },
+                VariableDeclaration {
+                    name: "fifteen.31",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Constant(28),
+                        rhs: Var("thirteen.29"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "sixteen.32",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("fourteen.30"),
+                        rhs: Constant(2),
+                    },
+                },
+                VariableDeclaration {
+                    name: "seventeen.33",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Constant(4),
+                        rhs: Var("thirteen.29"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "eighteen.34",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Constant(32),
+                        rhs: Var("fourteen.30"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "nineteen.35",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Constant(35),
+                        rhs: Var("sixteen.32"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twenty.36",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("fifteen.31"),
+                        rhs: Constant(5),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twenty_one.37",
+                    ty: Int,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Var("thirteen.29"),
+                            rhs: Constant(2),
+                        },
+                        rhs: Constant(5),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twenty_two.38",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("fifteen.31"),
+                        rhs: Constant(7),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twenty_three.39",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Constant(6),
+                        rhs: Var("seventeen.33"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "twenty_four.40",
+                    ty: Int,
+                    init: Binary {
+                        op: Add,
+                        lhs: Var("thirteen.29"),
+                        rhs: Constant(11),
+                    },
+                },
+                Expression(
+                    FunctionCall {
+                        function: Var("check_12_ints"),
+                        params: [
+                            Var("thirteen.29"),
+                            Var("fourteen.30"),
+                            Var("fifteen.31"),
+                            Var("sixteen.32"),
+                            Var("seventeen.33"),
+                            Var("eighteen.34"),
+                            Var("nineteen.35"),
+                            Var("twenty.36"),
+                            Var("twenty_one.37"),
+                            Var("twenty_two.38"),
+                            Var("twenty_three.39"),
+                            Var("twenty_four.40"),
+                            Constant(13),
+                        ],
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("should_spill.16"),
+                        rhs: Constant(5000l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1),
+                                },
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "check_12_ints",
+            params: [
+                (
+                    Int,
+                    "a.42",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1332,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "b.43",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1339,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "c.44",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1346,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "d.45",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1353,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "e.46",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1360,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "f.47",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1367,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "g.48",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1374,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "h.49",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1381,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "i.50",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1388,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "j.51",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1413,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "k.52",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1420,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "l.53",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1427,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "start.54",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            1434,
+                        ),
+                        length: 5,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "expected.55",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(0),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("a.42"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(1),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("b.43"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(2),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("c.44"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(3),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.45"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(4),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("e.46"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(5),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("f.47"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(6),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("g.48"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(7),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("h.49"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(8),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i.50"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(9),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("j.51"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(10),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("k.52"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("expected.55"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("start.54"),
+                            rhs: Constant(11),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l.53"),
+                        rhs: Var("expected.55"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Var("expected.55"),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

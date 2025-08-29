@@ -1,0 +1,435 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "large_uint",
+            global: true,
+            init: 4294967294,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "large_ulong",
+            global: true,
+            init: 4294967294,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "one_hundred",
+            global: true,
+            init: 100,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "one_hundred_ulong",
+            global: true,
+            init: 100,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: LessThan,
+                    lhs: Var("large_uint", UInt),
+                    rhs: Var("one_hundred", UInt),
+                    dst: Var("main.tmp.0", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.0", UInt),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: LessThanOrEqual,
+                    lhs: Var("large_uint", UInt),
+                    rhs: Var("one_hundred", UInt),
+                    dst: Var("main.tmp.1", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", UInt),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: Var("one_hundred", UInt),
+                    rhs: Var("large_uint", UInt),
+                    dst: Var("main.tmp.2", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", UInt),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("one_hundred", UInt),
+                    rhs: Var("large_uint", UInt),
+                    dst: Var("main.tmp.3", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", UInt),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Binary {
+                    op: LessThanOrEqual,
+                    lhs: Var("one_hundred", UInt),
+                    rhs: Var("large_uint", UInt),
+                    dst: Var("main.tmp.4", UInt),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.4", UInt),
+                    dst: Var("main.tmp.5", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", UInt),
+                    "main.4.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var("one_hundred", UInt),
+                    rhs: Var("large_uint", UInt),
+                    dst: Var("main.tmp.6", UInt),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.6", UInt),
+                    dst: Var("main.tmp.7", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", UInt),
+                    "main.5.true",
+                ),
+                Return(
+                    6,
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("large_uint", UInt),
+                    rhs: Var("one_hundred", UInt),
+                    dst: Var("main.tmp.8", UInt),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.8", UInt),
+                    dst: Var("main.tmp.9", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.9", UInt),
+                    "main.6.true",
+                ),
+                Return(
+                    7,
+                ),
+                Jump(
+                    "main.6.end",
+                ),
+                Label(
+                    "main.6.true",
+                ),
+                Label(
+                    "main.6.end",
+                ),
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: Var("large_uint", UInt),
+                    rhs: Var("one_hundred", UInt),
+                    dst: Var("main.tmp.10", UInt),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.10", UInt),
+                    dst: Var("main.tmp.11", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.11", UInt),
+                    "main.7.true",
+                ),
+                Return(
+                    8,
+                ),
+                Jump(
+                    "main.7.end",
+                ),
+                Label(
+                    "main.7.true",
+                ),
+                Label(
+                    "main.7.end",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var("large_ulong", ULong),
+                    rhs: Var("one_hundred_ulong", ULong),
+                    dst: Var("main.tmp.12", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.12", ULong),
+                    "main.8.true",
+                ),
+                Return(
+                    9,
+                ),
+                Jump(
+                    "main.8.end",
+                ),
+                Label(
+                    "main.8.true",
+                ),
+                Label(
+                    "main.8.end",
+                ),
+                Binary {
+                    op: LessThanOrEqual,
+                    lhs: Var("large_ulong", ULong),
+                    rhs: Var("one_hundred_ulong", ULong),
+                    dst: Var("main.tmp.13", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.13", ULong),
+                    "main.9.true",
+                ),
+                Return(
+                    10,
+                ),
+                Jump(
+                    "main.9.end",
+                ),
+                Label(
+                    "main.9.true",
+                ),
+                Label(
+                    "main.9.end",
+                ),
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: Var("one_hundred_ulong", ULong),
+                    rhs: Var("large_ulong", ULong),
+                    dst: Var("main.tmp.14", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.14", ULong),
+                    "main.10.true",
+                ),
+                Return(
+                    11,
+                ),
+                Jump(
+                    "main.10.end",
+                ),
+                Label(
+                    "main.10.true",
+                ),
+                Label(
+                    "main.10.end",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("one_hundred_ulong", ULong),
+                    rhs: Var("large_ulong", ULong),
+                    dst: Var("main.tmp.15", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.15", ULong),
+                    "main.11.true",
+                ),
+                Return(
+                    12,
+                ),
+                Jump(
+                    "main.11.end",
+                ),
+                Label(
+                    "main.11.true",
+                ),
+                Label(
+                    "main.11.end",
+                ),
+                Binary {
+                    op: LessThanOrEqual,
+                    lhs: Var("one_hundred_ulong", ULong),
+                    rhs: Var("large_ulong", ULong),
+                    dst: Var("main.tmp.16", ULong),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.16", ULong),
+                    dst: Var("main.tmp.17", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.17", ULong),
+                    "main.12.true",
+                ),
+                Return(
+                    13,
+                ),
+                Jump(
+                    "main.12.end",
+                ),
+                Label(
+                    "main.12.true",
+                ),
+                Label(
+                    "main.12.end",
+                ),
+                Binary {
+                    op: LessThan,
+                    lhs: Var("one_hundred_ulong", ULong),
+                    rhs: Var("large_ulong", ULong),
+                    dst: Var("main.tmp.18", ULong),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.18", ULong),
+                    dst: Var("main.tmp.19", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.19", ULong),
+                    "main.13.true",
+                ),
+                Return(
+                    14,
+                ),
+                Jump(
+                    "main.13.end",
+                ),
+                Label(
+                    "main.13.true",
+                ),
+                Label(
+                    "main.13.end",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("large_ulong", ULong),
+                    rhs: Var("one_hundred_ulong", ULong),
+                    dst: Var("main.tmp.20", ULong),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.20", ULong),
+                    dst: Var("main.tmp.21", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.21", ULong),
+                    "main.14.true",
+                ),
+                Return(
+                    15,
+                ),
+                Jump(
+                    "main.14.end",
+                ),
+                Label(
+                    "main.14.true",
+                ),
+                Label(
+                    "main.14.end",
+                ),
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: Var("large_ulong", ULong),
+                    rhs: Var("one_hundred_ulong", ULong),
+                    dst: Var("main.tmp.22", ULong),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.22", ULong),
+                    dst: Var("main.tmp.23", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.23", ULong),
+                    "main.15.true",
+                ),
+                Return(
+                    16,
+                ),
+                Jump(
+                    "main.15.end",
+                ),
+                Label(
+                    "main.15.true",
+                ),
+                Label(
+                    "main.15.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

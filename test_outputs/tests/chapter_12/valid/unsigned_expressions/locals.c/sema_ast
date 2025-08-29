@@ -1,0 +1,208 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a.1",
+                    ty: ULong,
+                    init: Constant(8589934592ul),
+                },
+                VariableDeclaration {
+                    name: "b.2",
+                    ty: Int,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1),
+                    },
+                },
+                VariableDeclaration {
+                    name: "c.3",
+                    ty: Long,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(8589934592l),
+                    },
+                },
+                VariableDeclaration {
+                    name: "d.4",
+                    ty: UInt,
+                    init: Constant(10u),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("a.1"),
+                        rhs: Constant(8589934592ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("b.2"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(1),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("c.3"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(8589934592l),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.4"),
+                        rhs: Constant(10u),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("a.1"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Var("a.1"),
+                        },
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("b.2"),
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var("b.2"),
+                            rhs: Constant(1),
+                        },
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("c.3"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("c.3"),
+                            rhs: Constant(8589934594l),
+                        },
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("d.4"),
+                        rhs: Binary {
+                            op: Multiply,
+                            lhs: Var("d.4"),
+                            rhs: Constant(268435456u),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("a.1"),
+                        rhs: Constant(18446744065119617024ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("b.2"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("c.3"),
+                        rhs: Constant(2l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.4"),
+                        rhs: Constant(2684354560u),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

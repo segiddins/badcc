@@ -1,0 +1,64 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "a",
+            ty: ULong,
+            init: Constant(8589934580ul),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "b",
+                    ty: ULong,
+                    init: Cast {
+                        to: ULong,
+                        expr: Cast {
+                            to: UInt,
+                            expr: Var("a"),
+                        },
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("b"),
+                        rhs: Constant(4294967284ul),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("b"),
+                        rhs: Cast {
+                            to: ULong,
+                            expr: Cast {
+                                to: Int,
+                                expr: Var("a"),
+                            },
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("b"),
+                        rhs: Constant(18446744073709551604ul),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

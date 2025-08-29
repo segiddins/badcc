@@ -1,0 +1,74 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "x",
+            ty: ULong,
+            init: Constant(9223372036854775803ul),
+            storage: Static,
+        },
+        VariableDeclaration {
+            name: "zero_long",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "zero_int",
+            ty: UInt,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("x"),
+                        rhs: Constant(9223372036854775803ul),
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("x"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("x"),
+                            rhs: Constant(10ul),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("x"),
+                        rhs: Constant(9223372036854775813ul),
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: Or,
+                        lhs: Var("zero_long"),
+                        rhs: Cast {
+                            to: ULong,
+                            expr: Var("zero_int"),
+                        },
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(1),
+                ),
+            ],
+        },
+    ],
+}

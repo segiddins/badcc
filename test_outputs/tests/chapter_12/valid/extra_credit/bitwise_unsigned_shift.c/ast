@@ -1,0 +1,104 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ui",
+                    ty: UInt,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1u),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: LeftShift,
+                            lhs: Var("ui"),
+                            rhs: Constant(2l),
+                        },
+                        rhs: Constant(4294967292l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: RightShift,
+                            lhs: Var("ui"),
+                            rhs: Constant(2),
+                        },
+                        rhs: Constant(1073741823),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "shiftcount",
+                    ty: Int,
+                    init: Constant(5),
+                    storage: Static,
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: RightShift,
+                            lhs: Constant(1000000u),
+                            rhs: Var("shiftcount"),
+                        },
+                        rhs: Constant(31250),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: LeftShift,
+                            lhs: Constant(1000000u),
+                            rhs: Var("shiftcount"),
+                        },
+                        rhs: Constant(32000000),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

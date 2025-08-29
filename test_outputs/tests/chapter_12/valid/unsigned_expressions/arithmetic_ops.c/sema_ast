@@ -1,0 +1,403 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ui_a",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "ui_b",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "ul_a",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "ul_b",
+            ty: ULong,
+        },
+        FunctionDeclaration {
+            identifier: "addition",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Add,
+                                lhs: Var("ui_a"),
+                                rhs: Constant(2147483653u),
+                            },
+                            rhs: Constant(2147483663u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "subtraction",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Subtract,
+                                lhs: Var("ul_a"),
+                                rhs: Var("ul_b"),
+                            },
+                            rhs: Constant(18446744072635808792ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "multiplication",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Multiply,
+                                lhs: Var("ui_a"),
+                                rhs: Var("ui_b"),
+                            },
+                            rhs: Constant(3221225472u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "division",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Divide,
+                                lhs: Var("ui_a"),
+                                rhs: Var("ui_b"),
+                            },
+                            rhs: Constant(0u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "division_large_dividend",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Divide,
+                                lhs: Var("ui_a"),
+                                rhs: Var("ui_b"),
+                            },
+                            rhs: Constant(2u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "division_by_literal",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Divide,
+                                lhs: Var("ul_a"),
+                                rhs: Constant(5ul),
+                            },
+                            rhs: Constant(219902325555ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "remaind",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Remainder,
+                                lhs: Var("ul_b"),
+                                rhs: Var("ul_a"),
+                            },
+                            rhs: Constant(5ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "complement",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Unary {
+                                op: Complement,
+                                expr: Var("ui_a"),
+                            },
+                            rhs: Constant(0u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(10u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("addition"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_a"),
+                        rhs: Constant(18446744072635809792ul),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_b"),
+                        rhs: Constant(1000ul),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("subtraction"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(1073741824u),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_b"),
+                        rhs: Constant(3u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("multiplication"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(100u),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_b"),
+                        rhs: Constant(4294967294u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("division"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(4294967294u),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_b"),
+                        rhs: Constant(2147483647u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("division_large_dividend"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_a"),
+                        rhs: Constant(1099511627775ul),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("division_by_literal"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_a"),
+                        rhs: Constant(100ul),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_b"),
+                        rhs: Constant(18446744073709551605ul),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("remaind"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(4294967295u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("complement"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

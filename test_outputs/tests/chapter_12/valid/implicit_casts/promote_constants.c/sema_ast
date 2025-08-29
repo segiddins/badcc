@@ -1,0 +1,87 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "negative_one",
+            ty: Long,
+            init: Constant(1l),
+        },
+        VariableDeclaration {
+            name: "zero",
+            ty: Long,
+            init: Constant(0l),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    Assignment {
+                        lhs: Var("negative_one"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Var("negative_one"),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Constant(68719476736ul),
+                        rhs: Cast {
+                            to: ULong,
+                            expr: Var("negative_one"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Unary {
+                            op: Minus,
+                            expr: Constant(2147483658l),
+                        },
+                        rhs: Var("zero"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Add,
+                            lhs: Constant(3ul),
+                            rhs: Constant(4294967293ul),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

@@ -84,10 +84,10 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
             ..
         } => {
             if let Expression::Constant { constant, span } = expr
-                && let Some(previous) = scope.cases.insert(Some(constant.into_long()), *span)
+                && let Some(previous) = scope.cases.insert(Some(constant.as_long()), *span)
             {
                 return Err(Error::DuplicateCase {
-                    value: constant.into_long(),
+                    value: constant.as_long(),
                     span: *span,
                     previous,
                 });

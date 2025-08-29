@@ -126,16 +126,30 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
                 operand(op),
                 operand(operand1)
             ),
-            BinaryOperator::LeftShift => write!(
+            BinaryOperator::SignedLeftShift => write!(
                 w,
                 "sal{} {}, {}",
                 width(op, operand1),
                 operand(op),
                 operand(operand1)
             ),
-            BinaryOperator::RightShift => write!(
+            BinaryOperator::SignedRightShift => write!(
                 w,
                 "sar{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::LeftShift => write!(
+                w,
+                "shl{} {}, {}",
+                width(op, operand1),
+                operand(op),
+                operand(operand1)
+            ),
+            BinaryOperator::RightShift => write!(
+                w,
+                "shr{} {}, {}",
                 width(op, operand1),
                 operand(op),
                 operand(operand1)
@@ -147,6 +161,7 @@ fn instruction(instruction: &Instruction, mut w: impl io::Write) -> io::Result<(
             | BinaryOperator::GreaterThan
             | BinaryOperator::GreaterThanOrEqual => unreachable!(),
         }?,
+        Instruction::Div(op) => write!(w, "div{} {}", width(op, op), operand(op))?,
         Instruction::Idiv(op) => write!(w, "idiv{} {}", width(op, op), operand(op))?,
         Instruction::Cdq(Width::One) => unreachable!(),
         Instruction::Cdq(Width::Four) => write!(w, "cdq")?,

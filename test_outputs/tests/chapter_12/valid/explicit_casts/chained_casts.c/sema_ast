@@ -1,0 +1,56 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ui",
+            ty: UInt,
+            init: Constant(4294967200u),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Cast {
+                            to: Long,
+                            expr: Cast {
+                                to: Int,
+                                expr: Var("ui"),
+                            },
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(96l),
+                        },
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Cast {
+                            to: ULong,
+                            expr: Cast {
+                                to: Int,
+                                expr: Var("ui"),
+                            },
+                        },
+                        rhs: Constant(18446744073709551520ul),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

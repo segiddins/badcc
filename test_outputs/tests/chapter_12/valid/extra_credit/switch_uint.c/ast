@@ -1,0 +1,111 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "switch_on_uint",
+            params: [
+                (
+                    UInt,
+                    "ui",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            32,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Switch(
+                    Var("ui"),
+                    Compound(
+                        [
+                            Case {
+                                expression: Constant(5u),
+                                statement: Return(
+                                    Constant(0),
+                                ),
+                            },
+                            Case {
+                                expression: Constant(4294967286l),
+                                statement: Return(
+                                    Constant(1),
+                                ),
+                            },
+                            Case {
+                                expression: Constant(34359738378ul),
+                                statement: Return(
+                                    Constant(2),
+                                ),
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(3),
+                                ),
+                            },
+                        ],
+                    ),
+                    None,
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("switch_on_uint"),
+                            params: [
+                                Constant(5),
+                            ],
+                        },
+                        rhs: Constant(0),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("switch_on_uint"),
+                            params: [
+                                Constant(4294967286l),
+                            ],
+                        },
+                        rhs: Constant(1),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("switch_on_uint"),
+                            params: [
+                                Constant(10),
+                            ],
+                        },
+                        rhs: Constant(2),
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

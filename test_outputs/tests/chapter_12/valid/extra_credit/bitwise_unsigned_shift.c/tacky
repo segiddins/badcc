@@ -1,0 +1,158 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "shiftcount.2",
+            global: false,
+            init: 5,
+            width: Four,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 1u,
+                    dst: Var("main.tmp.0", UInt),
+                },
+                Copy {
+                    src: Var("main.tmp.0", UInt),
+                    dst: Var("ui.1", UInt),
+                },
+                Binary {
+                    op: LeftShift,
+                    lhs: Var("ui.1", UInt),
+                    rhs: 2u,
+                    dst: Var("main.tmp.1", UInt),
+                },
+                ZeroExtend {
+                    src: Var("main.tmp.1", UInt),
+                    dst: Var("main.tmp.2", Long),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.2", Long),
+                    rhs: 4294967292l,
+                    dst: Var("main.tmp.3", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Long),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: RightShift,
+                    lhs: Var("ui.1", UInt),
+                    rhs: 2u,
+                    dst: Var("main.tmp.4", UInt),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.4", UInt),
+                    rhs: 1073741823u,
+                    dst: Var("main.tmp.5", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", UInt),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: Var("shiftcount.2", Int),
+                    dst: Var("main.tmp.6", UInt),
+                },
+                Binary {
+                    op: RightShift,
+                    lhs: 1000000u,
+                    rhs: Var("main.tmp.6", UInt),
+                    dst: Var("main.tmp.7", UInt),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.7", UInt),
+                    rhs: 31250u,
+                    dst: Var("main.tmp.8", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", UInt),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Copy {
+                    src: Var("shiftcount.2", Int),
+                    dst: Var("main.tmp.9", UInt),
+                },
+                Binary {
+                    op: LeftShift,
+                    lhs: 1000000u,
+                    rhs: Var("main.tmp.9", UInt),
+                    dst: Var("main.tmp.10", UInt),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.10", UInt),
+                    rhs: 32000000u,
+                    dst: Var("main.tmp.11", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.11", UInt),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

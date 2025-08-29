@@ -1,0 +1,41 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ui",
+                    ty: UInt,
+                    init: Constant(10u),
+                },
+                Switch(
+                    Var("ui"),
+                    Compound(
+                        [
+                            Case {
+                                expression: Constant(4294967295u),
+                                statement: Return(
+                                    Constant(0),
+                                ),
+                            },
+                            Case {
+                                expression: Constant(1099511627775l),
+                                statement: Return(
+                                    Constant(1),
+                                ),
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(2),
+                                ),
+                            },
+                        ],
+                    ),
+                    None,
+                ),
+            ],
+        },
+    ],
+}

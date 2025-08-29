@@ -1,0 +1,85 @@
+Program {
+    definitions: [
+        Function {
+            name: "return_uint",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data("ui", Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "return_uint_as_signed",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data("ui", Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "return_uint_as_long",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    source: Data("ui", Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(16, Eight),
+                },
+                Move {
+                    source: Stack(16, Eight),
+                    destination: Register(AX, Eight),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Register(AX, Eight),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "ui",
+            value: 4294967200,
+            alignment: 4,
+        },
+    ],
+}

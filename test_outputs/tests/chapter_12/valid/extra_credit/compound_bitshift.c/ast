@@ -1,0 +1,74 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(2),
+                    },
+                },
+                Expression(
+                    CompoundAssignment {
+                        op: RightShift,
+                        lhs: Var("i"),
+                        rhs: Constant(3u),
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(1),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "ul",
+                    ty: ULong,
+                    init: Constant(18446744073709551615ul),
+                },
+                Expression(
+                    CompoundAssignment {
+                        op: LeftShift,
+                        lhs: Var("ul"),
+                        rhs: Constant(44),
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul"),
+                        rhs: Constant(18446726481523507200ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

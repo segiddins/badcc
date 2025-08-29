@@ -64,6 +64,10 @@ pub enum Instruction {
         src: Val,
         dst: Val,
     },
+    ZeroExtend {
+        src: Val,
+        dst: Val,
+    },
 }
 
 #[derive(Clone, PartialEq, Eq, Hash)]
@@ -167,6 +171,8 @@ fn constant(ty: Type, value: i64) -> Val {
         Type::Function { .. } => unreachable!(),
         Type::Int => Val::Constant(Constant::Int(value as i32)),
         Type::Long => Val::Constant(Constant::Long(value)),
+        Type::UInt => Val::Constant(Constant::UInt(value as u32)),
+        Type::ULong => Val::Constant(Constant::ULong(value as u64)),
     }
 }
 
@@ -421,26 +427,48 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                 _ => unreachable!(),
             }
         }
-        Expression::Cast { to, expr, .. } => match (walk(expr, state), to) {
-            (src, t) if &src.ty() == t => src,
-            (src, Type::Long) if src.ty() == Type::Int => {
-                let dst = state.var(Type::Long);
-                state.push(Instruction::SignExtend {
-                    src,
-                    dst: dst.clone(),
-                });
-                dst
+        Expression::Cast { to, expr, .. } => {
+            use Type::*;
+            let src = walk(expr, state);
+            match (src.ty(), to) {
+                (Function { .. }, _) | (_, Function { .. }) => unreachable!(),
+                (from, t) if from == *t => src,
+                (Int, Long | ULong) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::SignExtend {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (Long | ULong, Int | UInt) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::Truncate {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (UInt, Int) | (Int, UInt) | (Long, ULong) | (ULong, Long) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::Copy {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+
+                (UInt, Long | ULong) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::ZeroExtend {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (from, to) => unreachable!("cast {expr:?} from {from:?} to {to:?}"),
             }
-            (src, Type::Int) if src.ty() == Type::Long => {
-                let dst = state.var(Type::Int);
-                state.push(Instruction::Truncate {
-                    src,
-                    dst: dst.clone(),
-                });
-                dst
-            }
-            (from, to) => unreachable!("cast {expr:?} from {from:?} to {to:?}"),
-        },
+        }
     }
 }
 
@@ -617,19 +645,15 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
             let case_label = format!(
                 "{}.{}{}",
                 label.as_ref().unwrap(),
-                if c.into_long().is_negative() {
-                    "neg"
-                } else {
-                    ""
-                },
-                c.into_long().abs()
+                if c.as_long().is_negative() { "neg" } else { "" },
+                c.as_long().abs()
             );
             state.push(Instruction::Label(case_label));
             state
                 .switch_cases
                 .get_mut(label.as_ref().unwrap())
                 .unwrap_or_else(|| panic!("no switch cases registed for {label:?}",))
-                .push(Some(c.into_long()));
+                .push(Some(c.as_long()));
             walk_statement(statement, state);
         }
         Statement::Default {

@@ -1,0 +1,122 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ui",
+            ty: UInt,
+            storage: Extern,
+        },
+        FunctionDeclaration {
+            identifier: "return_uint",
+            params: [],
+            ret: UInt,
+        },
+        FunctionDeclaration {
+            identifier: "return_uint_as_signed",
+            params: [],
+            ret: Int,
+        },
+        FunctionDeclaration {
+            identifier: "return_uint_as_long",
+            params: [],
+            ret: Long,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ui"),
+                        rhs: Constant(4294967200u),
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui"),
+                        rhs: Cast {
+                            to: UInt,
+                            expr: Unary {
+                                op: Minus,
+                                expr: Constant(1),
+                            },
+                        },
+                    },
+                ),
+                VariableDeclaration {
+                    name: "result.5",
+                    ty: Long,
+                    init: Cast {
+                        to: Long,
+                        expr: FunctionCall {
+                            function: Var("return_uint"),
+                        },
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("result.5"),
+                        rhs: Constant(4294967295l),
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("result.5"),
+                        rhs: Cast {
+                            to: Long,
+                            expr: FunctionCall {
+                                function: Var("return_uint_as_signed"),
+                            },
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("result.5"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(1l),
+                        },
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("result.5"),
+                        rhs: FunctionCall {
+                            function: Var("return_uint_as_long"),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("result.5"),
+                        rhs: Constant(4294967295l),
+                    },
+                    Return(
+                        Constant(0),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(1),
+                ),
+            ],
+        },
+    ],
+}

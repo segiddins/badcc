@@ -1,0 +1,27 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "u",
+                    ty: UInt,
+                    init: Constant(2147483647u),
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var("u"),
+                            rhs: Constant(2u),
+                        },
+                        rhs: Constant(2147483649u),
+                    },
+                ),
+            ],
+        },
+    ],
+}

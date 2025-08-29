@@ -31,7 +31,7 @@ impl LexingError {
 pub enum Token {
     #[regex(r"[a-zA-Z_]\w*")]
     Identifier,
-    #[regex(r"\d+[lL]?", priority = 5)]
+    #[regex(r"\d+([uU][lL]|[lL][uU]|[uU]|[lL])?", priority = 5)]
     Constant,
     #[regex(r"\d+[a-zA-Z_]\w*", |lex| LexingError::error::<()>(lex))]
     InvalidIdentifier,
@@ -153,6 +153,10 @@ pub enum Token {
     Static,
     #[token("extern")]
     Extern,
+    #[token("signed")]
+    Signed,
+    #[token("unsigned")]
+    Unsigned,
 }
 
 pub fn lex(source: impl AsRef<str>, filename: impl AsRef<str>) -> Result<Vec<(Token, SourceSpan)>> {

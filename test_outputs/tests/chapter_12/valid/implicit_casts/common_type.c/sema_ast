@@ -1,0 +1,418 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "int_gt_uint",
+            params: [
+                (
+                    Int,
+                    "i.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            20,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    UInt,
+                    "u.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            36,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Cast {
+                                to: UInt,
+                                expr: Var("i.1"),
+                            },
+                            rhs: Var("u.2"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "int_gt_ulong",
+            params: [
+                (
+                    Int,
+                    "i.4",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            82,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    ULong,
+                    "ul.5",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            99,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("i.4"),
+                            },
+                            rhs: Var("ul.5"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "uint_gt_long",
+            params: [
+                (
+                    UInt,
+                    "u.7",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            156,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Long,
+                    "l.8",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            164,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Cast {
+                                to: Long,
+                                expr: Var("u.7"),
+                            },
+                            rhs: Var("l.8"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "uint_lt_ulong",
+            params: [
+                (
+                    UInt,
+                    "u.10",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            220,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    ULong,
+                    "ul.11",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            237,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("u.10"),
+                            },
+                            rhs: Var("ul.11"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "long_gt_ulong",
+            params: [
+                (
+                    Long,
+                    "l.13",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            287,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    ULong,
+                    "ul.14",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            304,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("l.13"),
+                            },
+                            rhs: Var("ul.14"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "ternary_int_uint",
+            params: [
+                (
+                    Int,
+                    "flag.16",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            356,
+                        ),
+                        length: 4,
+                    },
+                ),
+                (
+                    Int,
+                    "i.17",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            366,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    UInt,
+                    "ui.18",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            382,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "result.19",
+                    ty: Long,
+                    init: Cast {
+                        to: Long,
+                        expr: Ternary {
+                            cond: Var("flag.16"),
+                            if_true: Cast {
+                                to: UInt,
+                                expr: Var("i.17"),
+                            },
+                            if_false: Var("ui.18"),
+                        },
+                    },
+                },
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Var("result.19"),
+                            rhs: Constant(4294967295l),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("int_gt_uint"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(100),
+                                },
+                                Constant(100u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("int_gt_ulong"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1),
+                                },
+                                Constant(18446744073709551606ul),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("uint_gt_long"),
+                            params: [
+                                Constant(100u),
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(100l),
+                                },
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("uint_lt_ulong"),
+                            params: [
+                                Constant(1073741824u),
+                                Constant(34359738368ul),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("long_gt_ulong"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1l),
+                                },
+                                Constant(1000ul),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ternary_int_uint"),
+                            params: [
+                                Constant(1),
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1),
+                                },
+                                Constant(1u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

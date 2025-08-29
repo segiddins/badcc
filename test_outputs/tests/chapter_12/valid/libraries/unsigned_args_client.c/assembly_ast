@@ -1,0 +1,114 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Stack(12, Four),
+                },
+                Unary(
+                    Neg,
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(16, Four),
+                },
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Stack(20, Four),
+                },
+                Unary(
+                    Neg,
+                    Stack(20, Four),
+                ),
+                Move {
+                    source: Stack(20, Four),
+                    destination: Register(R11, Four),
+                },
+                Movesx {
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(28, Eight),
+                },
+                AllocateStack(
+                    8,
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(DI, Four),
+                },
+                Move {
+                    source: Stack(16, Four),
+                    destination: Register(SI, Four),
+                },
+                Move {
+                    source: Stack(28, Eight),
+                    destination: Register(DX, Eight),
+                },
+                Move {
+                    source: Immediate(-9223372036854775808, Eight),
+                    destination: Register(CX, Eight),
+                },
+                Move {
+                    source: Immediate(2147483648, Four),
+                    destination: Register(R8, Four),
+                },
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(R9, Four),
+                },
+                Move {
+                    source: Immediate(-9223372032559808512, Eight),
+                    destination: Register(AX, Eight),
+                },
+                Push(
+                    Register(AX, Eight),
+                ),
+                Move {
+                    source: Immediate(2147487744, Four),
+                    destination: Register(AX, Four),
+                },
+                Push(
+                    Register(AX, Eight),
+                ),
+                Push(
+                    Immediate(123456, Eight),
+                ),
+                Call(
+                    "accept_unsigned",
+                ),
+                DeallocateStack(
+                    32,
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(32, Four),
+                },
+                Move {
+                    source: Stack(32, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

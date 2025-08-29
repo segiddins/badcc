@@ -1,0 +1,93 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "a",
+            global: true,
+            init: 8589934580,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Truncate {
+                    src: Var("a", ULong),
+                    dst: Var("main.tmp.0", UInt),
+                },
+                ZeroExtend {
+                    src: Var("main.tmp.0", UInt),
+                    dst: Var("main.tmp.1", ULong),
+                },
+                Copy {
+                    src: Var("main.tmp.1", ULong),
+                    dst: Var("b.2", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("b.2", ULong),
+                    rhs: 4294967284ul,
+                    dst: Var("main.tmp.2", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", ULong),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Truncate {
+                    src: Var("a", ULong),
+                    dst: Var("main.tmp.3", Int),
+                },
+                SignExtend {
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("main.tmp.4", ULong),
+                },
+                Copy {
+                    src: Var("main.tmp.4", ULong),
+                    dst: Var("b.2", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("b.2", ULong),
+                    rhs: 18446744073709551604ul,
+                    dst: Var("main.tmp.5", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", ULong),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

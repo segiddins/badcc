@@ -1,0 +1,51 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 1,
+                    dst: Var("main.tmp.0", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", UInt),
+                },
+                Unary {
+                    op: Negate,
+                    src: 1,
+                    dst: Var("main.tmp.2", Int),
+                },
+                SignExtend {
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", ULong),
+                },
+                Call(
+                    "accept_unsigned",
+                    [
+                        1u,
+                        Var("main.tmp.1", UInt),
+                        Var("main.tmp.3", ULong),
+                        9223372036854775808ul,
+                        2147483648u,
+                        0u,
+                        123456ul,
+                        2147487744u,
+                        9223372041149743104ul,
+                    ],
+                    Var("main.tmp.4", Int),
+                ),
+                Return(
+                    Var("main.tmp.4", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

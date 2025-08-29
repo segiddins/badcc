@@ -1,0 +1,45 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ui",
+            ty: UInt,
+            init: Constant(4294967200u),
+        },
+        FunctionDeclaration {
+            identifier: "return_uint",
+            params: [],
+            ret: UInt,
+            body: [
+                Return(
+                    Var("ui"),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_uint_as_signed",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Var("ui"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_uint_as_long",
+            params: [],
+            ret: Long,
+            body: [
+                Return(
+                    Cast {
+                        to: Long,
+                        expr: Var("ui"),
+                    },
+                ),
+            ],
+        },
+    ],
+}

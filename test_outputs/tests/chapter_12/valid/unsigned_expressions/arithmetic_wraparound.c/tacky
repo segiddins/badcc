@@ -1,0 +1,227 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ui_a",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "ui_b",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "ul_a",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "ul_b",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "addition",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var("ui_a", UInt),
+                    rhs: Var("ui_b", UInt),
+                    dst: Var("addition.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("addition.tmp.0", UInt),
+                    rhs: 0u,
+                    dst: Var("addition.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("addition.tmp.1", UInt),
+                    dst: Var("addition.tmp.2", Int),
+                },
+                Return(
+                    Var("addition.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "subtraction",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Subtract,
+                    lhs: Var("ul_a", ULong),
+                    rhs: Var("ul_b", ULong),
+                    dst: Var("subtraction.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("subtraction.tmp.0", ULong),
+                    rhs: 18446744073709551606ul,
+                    dst: Var("subtraction.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("subtraction.tmp.1", ULong),
+                    dst: Var("subtraction.tmp.2", Int),
+                },
+                Return(
+                    Var("subtraction.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "neg",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Var("ul_a", ULong),
+                    dst: Var("neg.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("neg.tmp.0", ULong),
+                    rhs: 18446744073709551615ul,
+                    dst: Var("neg.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("neg.tmp.1", ULong),
+                    dst: Var("neg.tmp.2", Int),
+                },
+                Return(
+                    Var("neg.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: 4294967293u,
+                    dst: Var("ui_a", UInt),
+                },
+                Copy {
+                    src: 3u,
+                    dst: Var("ui_b", UInt),
+                },
+                Call(
+                    "addition",
+                    [],
+                    Var("main.tmp.0", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Copy {
+                    src: 10ul,
+                    dst: Var("ul_a", ULong),
+                },
+                Copy {
+                    src: 20ul,
+                    dst: Var("ul_b", ULong),
+                },
+                Call(
+                    "subtraction",
+                    [],
+                    Var("main.tmp.2", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: 1ul,
+                    dst: Var("ul_a", ULong),
+                },
+                Call(
+                    "neg",
+                    [],
+                    Var("main.tmp.4", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

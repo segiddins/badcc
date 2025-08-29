@@ -1,0 +1,110 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    64,
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Stack(12, Four),
+                },
+                Unary(
+                    Neg,
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(16, Four),
+                },
+                Move {
+                    source: Stack(16, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(24, Eight),
+                },
+                Move {
+                    source: Immediate(10, Eight),
+                    destination: Stack(32, Eight),
+                },
+                Unary(
+                    Neg,
+                    Stack(32, Eight),
+                ),
+                Move {
+                    source: Stack(24, Eight),
+                    destination: Register(AX, Eight),
+                },
+                Cdq(
+                    Eight,
+                ),
+                Idiv(
+                    Stack(32, Eight),
+                ),
+                Move {
+                    source: Register(AX, Eight),
+                    destination: Stack(40, Eight),
+                },
+                Move {
+                    source: Stack(40, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(44, Four),
+                },
+                Move {
+                    source: Stack(44, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(16, Four),
+                },
+                Move {
+                    source: Immediate(3865470567, Four),
+                    destination: Register(R10, Four),
+                },
+                Cmp(
+                    Register(R10, Four),
+                    Stack(16, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(48, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(48, Four),
+                ),
+                Move {
+                    source: Stack(48, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(52, Four),
+                },
+                Move {
+                    source: Stack(52, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

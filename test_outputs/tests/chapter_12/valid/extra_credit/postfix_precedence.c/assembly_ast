@@ -1,0 +1,121 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    source: Immediate(4294967295, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(16, Four),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(12, Four),
+                },
+                Binary(
+                    Add,
+                    Immediate(1, Four),
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Stack(16, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(24, Eight),
+                },
+                Move {
+                    source: Immediate(4294967295, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(24, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(32, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(32, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(32, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(12, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

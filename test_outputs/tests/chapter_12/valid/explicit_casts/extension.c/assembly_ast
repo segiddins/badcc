@@ -1,0 +1,471 @@
+Program {
+    definitions: [
+        Function {
+            name: "int_to_ulong",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Register(SI, Eight),
+                    destination: Stack(20, Eight),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R11, Four),
+                },
+                Movesx {
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(28, Eight),
+                },
+                Move {
+                    source: Stack(28, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(36, Eight),
+                },
+                Move {
+                    source: Stack(20, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(36, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(44, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(44, Eight),
+                ),
+                Move {
+                    source: Stack(44, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(48, Four),
+                },
+                Move {
+                    source: Stack(48, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "uint_to_long",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Register(SI, Eight),
+                    destination: Stack(20, Eight),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(28, Eight),
+                },
+                Move {
+                    source: Stack(28, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(36, Eight),
+                },
+                Move {
+                    source: Stack(20, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(36, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(44, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(44, Eight),
+                ),
+                Move {
+                    source: Stack(44, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(48, Four),
+                },
+                Move {
+                    source: Stack(48, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "uint_to_ulong",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Register(DI, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Register(SI, Eight),
+                    destination: Stack(20, Eight),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(28, Eight),
+                },
+                Move {
+                    source: Stack(20, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(28, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(36, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(36, Eight),
+                ),
+                Move {
+                    source: Stack(36, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(40, Four),
+                },
+                Move {
+                    source: Stack(40, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    64,
+                ),
+                Move {
+                    source: Immediate(10, Four),
+                    destination: Register(DI, Four),
+                },
+                Move {
+                    source: Immediate(10, Eight),
+                    destination: Register(SI, Eight),
+                },
+                Call(
+                    "int_to_ulong",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(12, Four),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(16, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(16, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Immediate(10, Four),
+                    destination: Stack(20, Four),
+                },
+                Unary(
+                    Neg,
+                    Stack(20, Four),
+                ),
+                Move {
+                    source: Stack(20, Four),
+                    destination: Register(DI, Four),
+                },
+                Move {
+                    source: Immediate(-10, Eight),
+                    destination: Register(SI, Eight),
+                },
+                Call(
+                    "int_to_ulong",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(24, Four),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(24, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(28, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(28, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(28, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Immediate(4294967200, Four),
+                    destination: Register(DI, Four),
+                },
+                Move {
+                    source: Immediate(4294967200, Eight),
+                    destination: Register(SI, Eight),
+                },
+                Call(
+                    "uint_to_long",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(32, Four),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(32, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(36, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(36, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(36, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Immediate(4294967200, Four),
+                    destination: Register(DI, Four),
+                },
+                Move {
+                    source: Immediate(4294967200, Eight),
+                    destination: Register(SI, Eight),
+                },
+                Call(
+                    "uint_to_ulong",
+                ),
+                Move {
+                    source: Register(AX, Four),
+                    destination: Stack(40, Four),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(40, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(44, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(44, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(44, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.3.true",
+                ),
+                Move {
+                    source: Immediate(4, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Move {
+                    source: Immediate(4294967200, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(52, Eight),
+                },
+                Move {
+                    source: Immediate(4294967200, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(52, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(60, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(60, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(60, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.4.true",
+                ),
+                Move {
+                    source: Immediate(5, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+}

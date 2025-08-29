@@ -1,0 +1,38 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: 2147483647u,
+                    dst: Var("u.1", UInt),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var("u.1", UInt),
+                    rhs: 2u,
+                    dst: Var("main.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("main.tmp.0", UInt),
+                    rhs: 2147483649u,
+                    dst: Var("main.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("main.tmp.1", UInt),
+                    dst: Var("main.tmp.2", Int),
+                },
+                Return(
+                    Var("main.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

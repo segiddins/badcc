@@ -1,0 +1,90 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ui",
+            global: true,
+            init: 4294967200,
+            width: Four,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Var("ui", UInt),
+                    dst: Var("main.tmp.0", Int),
+                },
+                SignExtend {
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Long),
+                },
+                Unary {
+                    op: Negate,
+                    src: 96l,
+                    dst: Var("main.tmp.2", Long),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.1", Long),
+                    rhs: Var("main.tmp.2", Long),
+                    dst: Var("main.tmp.3", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Long),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Copy {
+                    src: Var("ui", UInt),
+                    dst: Var("main.tmp.4", Int),
+                },
+                SignExtend {
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.5", ULong),
+                    rhs: 18446744073709551520ul,
+                    dst: Var("main.tmp.6", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", ULong),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

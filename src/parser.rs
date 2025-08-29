@@ -48,6 +48,12 @@ enum ParserError {
         #[label("specifiers")]
         span: SourceSpan,
     },
+
+    #[error("storage class found on type")]
+    TypeStorageClass {
+        #[label]
+        span: SourceSpan,
+    },
 }
 
 type Result<T> = std::result::Result<T, ParserError>;
@@ -120,9 +126,9 @@ impl Lexer<'_> {
     }
 
     fn peek_decl_specifier(&self) -> bool {
-        self.peek_token().is_some_and(|(t, _)| {
-            t == Token::Int || t == Token::Static || t == Token::Extern || t == Token::Long
-        })
+        use Token::*;
+        self.peek_token()
+            .is_some_and(|(t, _)| matches!(t, Int | Long | Signed | Unsigned | Static | Extern))
     }
 
     fn str_at(&self, span: SourceSpan) -> &str {
@@ -180,66 +186,67 @@ fn parse_block_item(lexer: &mut Lexer) -> Result<BlockItem> {
     }
 }
 
-fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Type)> {
+fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Type, SourceSpan)> {
+    use Token::*;
+
     let start = lexer.mark();
     let mut end = start;
-    let mut storage = None;
-    let mut ty: Vec<Token> = vec![];
-    loop {
-        match lexer.peek_token() {
-            Some((token, span)) => {
-                match token {
-                    Token::Int | Token::Long => {
-                        ty.push(token);
-                        lexer.next_token();
-                    }
-                    Token::Extern => {
-                        lexer.next_token();
-                        if storage.is_some() {
-                            return Err(ParserError::MultipleDeclSpecifiers {
-                                span: spanning(start, span),
-                            });
-                        }
-                        storage.replace(StorageClass::Extern);
-                    }
-                    Token::Static => {
-                        lexer.next_token();
-                        if storage.is_some() {
-                            return Err(ParserError::MultipleDeclSpecifiers {
-                                span: spanning(start, span),
-                            });
-                        }
-                        storage.replace(StorageClass::Static);
-                    }
-                    _ => break,
-                }
-                end = span;
-            }
-            None => return Err(ParserError::UnexpectedEOF),
-        }
+    let mut type_tokens = vec![];
+    while let Some((token, span)) = lexer
+        .tokens
+        .pop_if(|(token, _)| matches!(token, Int | Long | Signed | Unsigned | Static | Extern))
+    {
+        end = span;
+        type_tokens.push(token);
     }
 
-    let ty = match ty {
-        _ if ty == [Token::Int] => Type::Int,
-        _ if ty == [Token::Long, Token::Int]
-            || ty == [Token::Int, Token::Long]
-            || ty == [Token::Long] =>
-        {
-            Type::Long
-        }
-        _ => {
-            return Err(ParserError::DeclSingleType {
-                span: spanning(start, end),
-            });
+    let mut remove = |token: Token| {
+        if let Some(idx) = type_tokens.iter().position(|t| *t == token) {
+            type_tokens.remove(idx);
+            true
+        } else {
+            false
         }
     };
 
-    Ok((storage, ty))
+    let int = remove(Int);
+    let long = remove(Long);
+    let signed = remove(Signed);
+    let unsigned = remove(Unsigned);
+
+    let r#static = remove(Static);
+    let r#extern = remove(Extern);
+
+    if !type_tokens.is_empty() || (!int && !long && !signed && !unsigned) || (signed && unsigned) {
+        return Err(ParserError::DeclSingleType {
+            span: spanning(start, end),
+        });
+    }
+
+    let ty = match (!long, !unsigned) {
+        (true, true) => Type::Int,
+        (true, false) => Type::UInt,
+        (false, true) => Type::Long,
+        (false, false) => Type::ULong,
+    };
+
+    let storage = match (r#static, r#extern) {
+        (true, true) => {
+            return Err(ParserError::MultipleDeclSpecifiers {
+                span: spanning(start, end),
+            });
+        }
+        (true, false) => Some(StorageClass::Static),
+        (false, true) => Some(StorageClass::Extern),
+        (false, false) => None,
+    };
+
+    Ok((storage, ty, spanning(start, end)))
 }
 
 fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> {
     let start = lexer.mark();
-    let (storage, ty) = parse_decl_specifiers(lexer)?;
+    let (storage, ty, _) = parse_decl_specifiers(lexer)?;
     let (name, _) = lexer.expect_identifier()?;
 
     let init = if lexer.expect(Token::Equals).is_ok() {
@@ -261,24 +268,11 @@ fn parse_variable_declaration(lexer: &mut Lexer) -> Result<VariableDeclaration> 
 }
 
 fn parse_type(lexer: &mut Lexer) -> Result<Type> {
-    if lexer.expect(Token::Int).is_ok() {
-        if lexer.expect(Token::Long).is_ok() {
-            Ok(Type::Long)
-        } else {
-            Ok(Type::Int)
-        }
-    } else if lexer.expect(Token::Long).is_ok() {
-        let _ = lexer.expect(Token::Int);
-        Ok(Type::Long)
-    } else if let Some((token, span)) = lexer.peek_token() {
-        Err(ParserError::Expected {
-            options: vec![Token::Int, Token::Long],
-            kind: token,
-            span,
-        })
-    } else {
-        Err(ParserError::UnexpectedEOF)
+    let (storage, ty, span) = parse_decl_specifiers(lexer)?;
+    if storage.is_some() {
+        return Err(ParserError::TypeStorageClass { span });
     }
+    Ok(ty)
 }
 
 fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
@@ -293,7 +287,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
         }
     }
 
-    let (storage, ret) = parse_decl_specifiers(lexer)?;
+    let (storage, ret, _) = parse_decl_specifiers(lexer)?;
     let (identifier, _) = lexer.expect_identifier()?;
 
     lexer.expect(Token::LParen)?;
@@ -517,10 +511,29 @@ fn parse_expression_bp(
     };
     let mut lhs = match token {
         Token::Constant => {
-            let s = lexer.str_at(span);
-            if let Some(s) = lexer.source[span.offset()..(span.offset() + span.len())]
-                .strip_suffix(|c| c == 'l' || c == 'L')
-            {
+            let mut s = lexer.str_at(span);
+            let mut strip =
+                |c: char| match s.strip_suffix(|s| s == c || s == (c as u8 - 32) as char) {
+                    Some(pre) => {
+                        s = pre;
+                        true
+                    }
+                    None => false,
+                };
+            let mut long = strip('l');
+            let mut unsigned = strip('u');
+            long |= strip('l');
+            unsigned |= strip('u');
+
+            if unsigned {
+                if long {
+                    s.parse().map(Constant::ULong)
+                } else {
+                    s.parse()
+                        .map(Constant::UInt)
+                        .or_else(|_| s.parse().map(Constant::ULong))
+                }
+            } else if long {
                 s.parse().map(Constant::Long)
             } else {
                 s.parse()

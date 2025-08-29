@@ -1,0 +1,136 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "x",
+            global: false,
+            init: 9223372036854775803,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "zero_int",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "zero_long",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("x", ULong),
+                    rhs: 9223372036854775803ul,
+                    dst: Var("main.tmp.0", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.0", ULong),
+                    "main.0.true",
+                ),
+                Return(
+                    0,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var("x", ULong),
+                    rhs: 10ul,
+                    dst: Var("main.tmp.1", ULong),
+                },
+                Copy {
+                    src: Var("main.tmp.1", ULong),
+                    dst: Var("x", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("x", ULong),
+                    rhs: 9223372036854775813ul,
+                    dst: Var("main.tmp.2", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", ULong),
+                    "main.1.true",
+                ),
+                Return(
+                    0,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                JumpIfNotZero(
+                    Var("zero_long", ULong),
+                    "main.3.true",
+                ),
+                ZeroExtend {
+                    src: Var("zero_int", UInt),
+                    dst: Var("main.tmp.4", ULong),
+                },
+                JumpIfNotZero(
+                    Var("main.tmp.4", ULong),
+                    "main.3.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.3", Int),
+                },
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.3", Int),
+                },
+                Label(
+                    "main.3.end",
+                ),
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    0,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    1,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

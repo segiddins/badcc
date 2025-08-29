@@ -1,0 +1,534 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ui_a",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "ui_b",
+            global: true,
+            init: 0,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "ul_a",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "ul_b",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "addition",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var("ui_a", UInt),
+                    rhs: 2147483653u,
+                    dst: Var("addition.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("addition.tmp.0", UInt),
+                    rhs: 2147483663u,
+                    dst: Var("addition.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("addition.tmp.1", UInt),
+                    dst: Var("addition.tmp.2", Int),
+                },
+                Return(
+                    Var("addition.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "subtraction",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Subtract,
+                    lhs: Var("ul_a", ULong),
+                    rhs: Var("ul_b", ULong),
+                    dst: Var("subtraction.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("subtraction.tmp.0", ULong),
+                    rhs: 18446744072635808792ul,
+                    dst: Var("subtraction.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("subtraction.tmp.1", ULong),
+                    dst: Var("subtraction.tmp.2", Int),
+                },
+                Return(
+                    Var("subtraction.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiplication",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var("ui_a", UInt),
+                    rhs: Var("ui_b", UInt),
+                    dst: Var("multiplication.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("multiplication.tmp.0", UInt),
+                    rhs: 3221225472u,
+                    dst: Var("multiplication.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("multiplication.tmp.1", UInt),
+                    dst: Var("multiplication.tmp.2", Int),
+                },
+                Return(
+                    Var("multiplication.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "division",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Divide,
+                    lhs: Var("ui_a", UInt),
+                    rhs: Var("ui_b", UInt),
+                    dst: Var("division.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("division.tmp.0", UInt),
+                    rhs: 0u,
+                    dst: Var("division.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("division.tmp.1", UInt),
+                    dst: Var("division.tmp.2", Int),
+                },
+                Return(
+                    Var("division.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "division_large_dividend",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Divide,
+                    lhs: Var("ui_a", UInt),
+                    rhs: Var("ui_b", UInt),
+                    dst: Var("division_large_dividend.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("division_large_dividend.tmp.0", UInt),
+                    rhs: 2u,
+                    dst: Var("division_large_dividend.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("division_large_dividend.tmp.1", UInt),
+                    dst: Var("division_large_dividend.tmp.2", Int),
+                },
+                Return(
+                    Var("division_large_dividend.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "division_by_literal",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Divide,
+                    lhs: Var("ul_a", ULong),
+                    rhs: 5ul,
+                    dst: Var("division_by_literal.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("division_by_literal.tmp.0", ULong),
+                    rhs: 219902325555ul,
+                    dst: Var("division_by_literal.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("division_by_literal.tmp.1", ULong),
+                    dst: Var("division_by_literal.tmp.2", Int),
+                },
+                Return(
+                    Var("division_by_literal.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "remaind",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Remainder,
+                    lhs: Var("ul_b", ULong),
+                    rhs: Var("ul_a", ULong),
+                    dst: Var("remaind.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("remaind.tmp.0", ULong),
+                    rhs: 5ul,
+                    dst: Var("remaind.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("remaind.tmp.1", ULong),
+                    dst: Var("remaind.tmp.2", Int),
+                },
+                Return(
+                    Var("remaind.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "complement",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Complement,
+                    src: Var("ui_a", UInt),
+                    dst: Var("complement.tmp.0", UInt),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("complement.tmp.0", UInt),
+                    rhs: 0u,
+                    dst: Var("complement.tmp.1", UInt),
+                },
+                Copy {
+                    src: Var("complement.tmp.1", UInt),
+                    dst: Var("complement.tmp.2", Int),
+                },
+                Return(
+                    Var("complement.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: 10u,
+                    dst: Var("ui_a", UInt),
+                },
+                Call(
+                    "addition",
+                    [],
+                    Var("main.tmp.0", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Copy {
+                    src: 18446744072635809792ul,
+                    dst: Var("ul_a", ULong),
+                },
+                Copy {
+                    src: 1000ul,
+                    dst: Var("ul_b", ULong),
+                },
+                Call(
+                    "subtraction",
+                    [],
+                    Var("main.tmp.2", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: 1073741824u,
+                    dst: Var("ui_a", UInt),
+                },
+                Copy {
+                    src: 3u,
+                    dst: Var("ui_b", UInt),
+                },
+                Call(
+                    "multiplication",
+                    [],
+                    Var("main.tmp.4", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Copy {
+                    src: 100u,
+                    dst: Var("ui_a", UInt),
+                },
+                Copy {
+                    src: 4294967294u,
+                    dst: Var("ui_b", UInt),
+                },
+                Call(
+                    "division",
+                    [],
+                    Var("main.tmp.6", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.6", Int),
+                    dst: Var("main.tmp.7", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", Int),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Copy {
+                    src: 4294967294u,
+                    dst: Var("ui_a", UInt),
+                },
+                Copy {
+                    src: 2147483647u,
+                    dst: Var("ui_b", UInt),
+                },
+                Call(
+                    "division_large_dividend",
+                    [],
+                    Var("main.tmp.8", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.8", Int),
+                    dst: Var("main.tmp.9", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.9", Int),
+                    "main.4.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Copy {
+                    src: 1099511627775ul,
+                    dst: Var("ul_a", ULong),
+                },
+                Call(
+                    "division_by_literal",
+                    [],
+                    Var("main.tmp.10", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.10", Int),
+                    dst: Var("main.tmp.11", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.11", Int),
+                    "main.5.true",
+                ),
+                Return(
+                    6,
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Copy {
+                    src: 100ul,
+                    dst: Var("ul_a", ULong),
+                },
+                Copy {
+                    src: 18446744073709551605ul,
+                    dst: Var("ul_b", ULong),
+                },
+                Call(
+                    "remaind",
+                    [],
+                    Var("main.tmp.12", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.12", Int),
+                    dst: Var("main.tmp.13", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.13", Int),
+                    "main.6.true",
+                ),
+                Return(
+                    7,
+                ),
+                Jump(
+                    "main.6.end",
+                ),
+                Label(
+                    "main.6.true",
+                ),
+                Label(
+                    "main.6.end",
+                ),
+                Copy {
+                    src: 4294967295u,
+                    dst: Var("ui_a", UInt),
+                },
+                Call(
+                    "complement",
+                    [],
+                    Var("main.tmp.14", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.14", Int),
+                    dst: Var("main.tmp.15", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.15", Int),
+                    "main.7.true",
+                ),
+                Return(
+                    8,
+                ),
+                Jump(
+                    "main.7.end",
+                ),
+                Label(
+                    "main.7.true",
+                ),
+                Label(
+                    "main.7.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

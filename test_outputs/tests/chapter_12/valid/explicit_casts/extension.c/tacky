@@ -1,0 +1,263 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "int_to_ulong",
+            global: true,
+            params: [
+                Var("i.1", Int),
+                Var("expected.2", ULong),
+            ],
+            instructions: [
+                SignExtend {
+                    src: Var("i.1", Int),
+                    dst: Var("int_to_ulong.tmp.0", ULong),
+                },
+                Copy {
+                    src: Var("int_to_ulong.tmp.0", ULong),
+                    dst: Var("result.3", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("result.3", ULong),
+                    rhs: Var("expected.2", ULong),
+                    dst: Var("int_to_ulong.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("int_to_ulong.tmp.1", ULong),
+                    dst: Var("int_to_ulong.tmp.2", Int),
+                },
+                Return(
+                    Var("int_to_ulong.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "uint_to_long",
+            global: true,
+            params: [
+                Var("ui.5", UInt),
+                Var("expected.6", Long),
+            ],
+            instructions: [
+                ZeroExtend {
+                    src: Var("ui.5", UInt),
+                    dst: Var("uint_to_long.tmp.0", Long),
+                },
+                Copy {
+                    src: Var("uint_to_long.tmp.0", Long),
+                    dst: Var("result.7", Long),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("result.7", Long),
+                    rhs: Var("expected.6", Long),
+                    dst: Var("uint_to_long.tmp.1", Long),
+                },
+                Truncate {
+                    src: Var("uint_to_long.tmp.1", Long),
+                    dst: Var("uint_to_long.tmp.2", Int),
+                },
+                Return(
+                    Var("uint_to_long.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "uint_to_ulong",
+            global: true,
+            params: [
+                Var("ui.9", UInt),
+                Var("expected.10", ULong),
+            ],
+            instructions: [
+                ZeroExtend {
+                    src: Var("ui.9", UInt),
+                    dst: Var("uint_to_ulong.tmp.0", ULong),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("uint_to_ulong.tmp.0", ULong),
+                    rhs: Var("expected.10", ULong),
+                    dst: Var("uint_to_ulong.tmp.1", ULong),
+                },
+                Truncate {
+                    src: Var("uint_to_ulong.tmp.1", ULong),
+                    dst: Var("uint_to_ulong.tmp.2", Int),
+                },
+                Return(
+                    Var("uint_to_ulong.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "int_to_ulong",
+                    [
+                        10,
+                        10ul,
+                    ],
+                    Var("main.tmp.0", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 10,
+                    dst: Var("main.tmp.2", Int),
+                },
+                Call(
+                    "int_to_ulong",
+                    [
+                        Var("main.tmp.2", Int),
+                        18446744073709551606ul,
+                    ],
+                    Var("main.tmp.3", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("main.tmp.4", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "uint_to_long",
+                    [
+                        4294967200u,
+                        4294967200l,
+                    ],
+                    Var("main.tmp.5", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.5", Int),
+                    dst: Var("main.tmp.6", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "uint_to_ulong",
+                    [
+                        4294967200u,
+                        4294967200ul,
+                    ],
+                    Var("main.tmp.7", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("main.tmp.8", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", Int),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                ZeroExtend {
+                    src: 4294967200u,
+                    dst: Var("main.tmp.9", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.9", ULong),
+                    rhs: 4294967200ul,
+                    dst: Var("main.tmp.10", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.10", ULong),
+                    "main.4.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

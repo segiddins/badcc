@@ -1,0 +1,120 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "negative_one",
+            global: true,
+            init: 1,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "zero",
+            global: true,
+            init: 0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Var("negative_one", Long),
+                    dst: Var("main.tmp.0", Long),
+                },
+                Copy {
+                    src: Var("main.tmp.0", Long),
+                    dst: Var("negative_one", Long),
+                },
+                Copy {
+                    src: Var("negative_one", Long),
+                    dst: Var("main.tmp.1", ULong),
+                },
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: 68719476736ul,
+                    rhs: Var("main.tmp.1", ULong),
+                    dst: Var("main.tmp.2", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", ULong),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 2147483658l,
+                    dst: Var("main.tmp.3", Long),
+                },
+                Binary {
+                    op: GreaterThanOrEqual,
+                    lhs: Var("main.tmp.3", Long),
+                    rhs: Var("zero", Long),
+                    dst: Var("main.tmp.4", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Long),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: 3ul,
+                    rhs: 4294967293ul,
+                    dst: Var("main.tmp.5", ULong),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.5", ULong),
+                    dst: Var("main.tmp.6", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", ULong),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

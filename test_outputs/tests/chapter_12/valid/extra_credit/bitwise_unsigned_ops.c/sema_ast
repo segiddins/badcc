@@ -1,0 +1,110 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ui.1",
+                    ty: UInt,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1u),
+                    },
+                },
+                VariableDeclaration {
+                    name: "ul.2",
+                    ty: ULong,
+                    init: Constant(9223372036854775808ul),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: BitwiseAnd,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("ui.1"),
+                            },
+                            rhs: Var("ul.2"),
+                        },
+                        rhs: Constant(0ul),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: BitwiseOr,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("ui.1"),
+                            },
+                            rhs: Var("ul.2"),
+                        },
+                        rhs: Constant(9223372041149743103ul),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "i.3",
+                    ty: Int,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: BitwiseAnd,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("i.3"),
+                            },
+                            rhs: Var("ul.2"),
+                        },
+                        rhs: Var("ul.2"),
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: BitwiseOr,
+                            lhs: Cast {
+                                to: ULong,
+                                expr: Var("i.3"),
+                            },
+                            rhs: Var("ul.2"),
+                        },
+                        rhs: Cast {
+                            to: ULong,
+                            expr: Var("i.3"),
+                        },
+                    },
+                    Return(
+                        Constant(4),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,36 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: UInt,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1u),
+                    },
+                },
+                Expression(
+                    CompoundAssignment {
+                        op: Divide,
+                        lhs: Var("x"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(10l),
+                        },
+                    },
+                ),
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("x"),
+                        rhs: Constant(3865470567u),
+                    },
+                ),
+            ],
+        },
+    ],
+}

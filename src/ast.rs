@@ -184,13 +184,17 @@ impl Debug for Expression {
 pub enum Constant {
     Int(i32),
     Long(i64),
+    UInt(u32),
+    ULong(u64),
 }
 
 impl Constant {
-    pub fn into_long(self) -> i64 {
+    pub fn as_long(&self) -> i64 {
         match self {
-            Constant::Int(v) => v as i64,
-            Constant::Long(v) => v,
+            Constant::Int(v) => *v as i64,
+            Constant::Long(v) => *v,
+            Constant::UInt(v) => *v as i64,
+            Constant::ULong(v) => *v as i64,
         }
     }
 
@@ -198,6 +202,8 @@ impl Constant {
         match self {
             Constant::Int(_) => Type::Int,
             Constant::Long(_) => Type::Long,
+            Constant::UInt(_) => Type::UInt,
+            Constant::ULong(_) => Type::ULong,
         }
     }
 }
@@ -207,6 +213,8 @@ impl Debug for Constant {
         match self {
             Self::Int(arg0) => write!(f, "{arg0}"),
             Self::Long(arg0) => write!(f, "{arg0}l"),
+            Self::UInt(arg0) => write!(f, "{arg0}u"),
+            Self::ULong(arg0) => write!(f, "{arg0}ul"),
         }
     }
 }

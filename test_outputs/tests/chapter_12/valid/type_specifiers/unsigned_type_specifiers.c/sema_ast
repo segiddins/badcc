@@ -1,0 +1,144 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "u",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "u",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "u",
+            ty: UInt,
+            init: Constant(6u),
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+            init: Constant(4ul),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("u"),
+                        rhs: Constant(6u),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "ul",
+                    ty: ULong,
+                    storage: Extern,
+                },
+                VariableDeclaration {
+                    name: "ul",
+                    ty: ULong,
+                    storage: Extern,
+                },
+                VariableDeclaration {
+                    name: "ul",
+                    ty: ULong,
+                    storage: Extern,
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul"),
+                        rhs: Constant(4ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "counter.11",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                For {
+                    init: VariableDeclaration {
+                        name: "index.12",
+                        ty: UInt,
+                        init: Constant(10u),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("index.12"),
+                        rhs: Constant(4294967295u),
+                    },
+                    post: Assignment {
+                        lhs: Var("index.12"),
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var("index.12"),
+                            rhs: Constant(1u),
+                        },
+                    },
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment {
+                                    lhs: Var("counter.11"),
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var("counter.11"),
+                                        rhs: Constant(1),
+                                    },
+                                },
+                            ),
+                        ],
+                    ),
+                    label: "loop.0",
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("counter.11"),
+                        rhs: Constant(11),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

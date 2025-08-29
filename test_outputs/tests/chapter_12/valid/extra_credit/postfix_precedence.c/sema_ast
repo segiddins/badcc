@@ -1,0 +1,51 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "ui.1",
+                    ty: UInt,
+                    init: Constant(4294967295u),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Cast {
+                            to: ULong,
+                            expr: Unary {
+                                op: PostfixIncrement,
+                                expr: Var("ui.1"),
+                            },
+                        },
+                        rhs: Constant(4294967295ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Var("ui.1"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

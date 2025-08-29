@@ -1,0 +1,295 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    80,
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Stack(12, Four),
+                },
+                Unary(
+                    Neg,
+                    Stack(12, Four),
+                ),
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(16, Four),
+                },
+                Move {
+                    source: Stack(16, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(20, Four),
+                },
+                Move {
+                    source: Stack(20, Four),
+                    destination: Register(R11, Four),
+                },
+                Binary(
+                    LeftShift,
+                    Immediate(2, Four),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Register(R11, Four),
+                    destination: Stack(20, Four),
+                },
+                Move {
+                    source: Stack(20, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(28, Eight),
+                },
+                Move {
+                    source: Immediate(4294967292, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(28, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(36, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(36, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(36, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Stack(16, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(40, Four),
+                },
+                Move {
+                    source: Stack(40, Four),
+                    destination: Register(R11, Four),
+                },
+                Binary(
+                    RightShift,
+                    Immediate(2, Four),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Register(R11, Four),
+                    destination: Stack(40, Four),
+                },
+                Cmp(
+                    Immediate(1073741823, Four),
+                    Stack(40, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(44, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(44, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(44, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Data("shiftcount.2", Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(48, Four),
+                },
+                Move {
+                    source: Immediate(1000000, Four),
+                    destination: Stack(52, Four),
+                },
+                Move {
+                    source: Stack(52, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Stack(48, Four),
+                    destination: Register(CX, Four),
+                },
+                Binary(
+                    RightShift,
+                    Register(CX, One),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Register(R11, Four),
+                    destination: Stack(52, Four),
+                },
+                Cmp(
+                    Immediate(31250, Four),
+                    Stack(52, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(56, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(56, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(56, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Data("shiftcount.2", Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(60, Four),
+                },
+                Move {
+                    source: Immediate(1000000, Four),
+                    destination: Stack(64, Four),
+                },
+                Move {
+                    source: Stack(64, Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Stack(60, Four),
+                    destination: Register(CX, Four),
+                },
+                Binary(
+                    LeftShift,
+                    Register(CX, One),
+                    Register(R11, Four),
+                ),
+                Move {
+                    source: Register(R11, Four),
+                    destination: Stack(64, Four),
+                },
+                Cmp(
+                    Immediate(32000000, Four),
+                    Stack(64, Four),
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(68, Four),
+                },
+                SetCC(
+                    NE,
+                    Stack(68, Four),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(68, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.3.true",
+                ),
+                Move {
+                    source: Immediate(4, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "shiftcount.2",
+            value: 5,
+            alignment: 4,
+        },
+    ],
+}

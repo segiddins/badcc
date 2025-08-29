@@ -1,0 +1,234 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "one_hundred",
+            ty: UInt,
+            init: Constant(100u),
+        },
+        VariableDeclaration {
+            name: "large_uint",
+            ty: UInt,
+            init: Constant(4294967294u),
+        },
+        VariableDeclaration {
+            name: "one_hundred_ulong",
+            ty: ULong,
+            init: Constant(100ul),
+        },
+        VariableDeclaration {
+            name: "large_ulong",
+            ty: ULong,
+            init: Constant(4294967294ul),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: LessThan,
+                        lhs: Var("large_uint"),
+                        rhs: Var("one_hundred"),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("large_uint"),
+                        rhs: Var("one_hundred"),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Var("one_hundred"),
+                        rhs: Var("large_uint"),
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var("one_hundred"),
+                        rhs: Var("large_uint"),
+                    },
+                    Return(
+                        Constant(4),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThanOrEqual,
+                            lhs: Var("one_hundred"),
+                            rhs: Var("large_uint"),
+                        },
+                    },
+                    Return(
+                        Constant(5),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Var("one_hundred"),
+                            rhs: Var("large_uint"),
+                        },
+                    },
+                    Return(
+                        Constant(6),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Var("large_uint"),
+                            rhs: Var("one_hundred"),
+                        },
+                    },
+                    Return(
+                        Constant(7),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Var("large_uint"),
+                            rhs: Var("one_hundred"),
+                        },
+                    },
+                    Return(
+                        Constant(8),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThan,
+                        lhs: Var("large_ulong"),
+                        rhs: Var("one_hundred_ulong"),
+                    },
+                    Return(
+                        Constant(9),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("large_ulong"),
+                        rhs: Var("one_hundred_ulong"),
+                    },
+                    Return(
+                        Constant(10),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Var("one_hundred_ulong"),
+                        rhs: Var("large_ulong"),
+                    },
+                    Return(
+                        Constant(11),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var("one_hundred_ulong"),
+                        rhs: Var("large_ulong"),
+                    },
+                    Return(
+                        Constant(12),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThanOrEqual,
+                            lhs: Var("one_hundred_ulong"),
+                            rhs: Var("large_ulong"),
+                        },
+                    },
+                    Return(
+                        Constant(13),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Var("one_hundred_ulong"),
+                            rhs: Var("large_ulong"),
+                        },
+                    },
+                    Return(
+                        Constant(14),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Var("large_ulong"),
+                            rhs: Var("one_hundred_ulong"),
+                        },
+                    },
+                    Return(
+                        Constant(15),
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Var("large_ulong"),
+                            rhs: Var("one_hundred_ulong"),
+                        },
+                    },
+                    Return(
+                        Constant(16),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

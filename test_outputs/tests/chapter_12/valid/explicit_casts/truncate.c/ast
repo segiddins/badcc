@@ -1,0 +1,321 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "ulong_to_int",
+            params: [
+                (
+                    ULong,
+                    "ul",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            32,
+                        ),
+                        length: 2,
+                    },
+                ),
+                (
+                    Int,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            40,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "result",
+                    ty: Int,
+                    init: Cast {
+                        to: Int,
+                        expr: Var("ul"),
+                    },
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("result"),
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "ulong_to_uint",
+            params: [
+                (
+                    ULong,
+                    "ul",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            146,
+                        ),
+                        length: 2,
+                    },
+                ),
+                (
+                    UInt,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            159,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Cast {
+                            to: UInt,
+                            expr: Var("ul"),
+                        },
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "long_to_uint",
+            params: [
+                (
+                    Long,
+                    "l",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            239,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    UInt,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            255,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Cast {
+                            to: UInt,
+                            expr: Var("l"),
+                        },
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("long_to_uint"),
+                            params: [
+                                Constant(100l),
+                                Constant(100u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("long_to_uint"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(9223372036854774574l),
+                                },
+                                Constant(1234u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_int"),
+                            params: [
+                                Constant(100ul),
+                                Constant(100),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_uint"),
+                            params: [
+                                Constant(100ul),
+                                Constant(100u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_uint"),
+                            params: [
+                                Constant(4294967200ul),
+                                Constant(4294967200u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_int"),
+                            params: [
+                                Constant(4294967200ul),
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(96),
+                                },
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_uint"),
+                            params: [
+                                Constant(1152921506754330624ul),
+                                Constant(2147483648u),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("ulong_to_int"),
+                            params: [
+                                Constant(1152921506754330624ul),
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(2147483648l),
+                                },
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "ui",
+                    ty: UInt,
+                    init: Cast {
+                        to: UInt,
+                        expr: Constant(17179869189ul),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ui"),
+                        rhs: Constant(5),
+                    },
+                    Return(
+                        Constant(9),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

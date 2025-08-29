@@ -1,0 +1,151 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "u",
+            ty: UInt,
+            init: Constant(2147483660u),
+        },
+        VariableDeclaration {
+            name: "i",
+            ty: Int,
+            init: Constant(-2147483646),
+        },
+        VariableDeclaration {
+            name: "l",
+            ty: Long,
+            init: Constant(-9223372036854775716l),
+        },
+        VariableDeclaration {
+            name: "l2",
+            ty: Long,
+            init: Constant(2147483650l),
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+            init: Constant(4294967294ul),
+        },
+        VariableDeclaration {
+            name: "ul2",
+            ty: ULong,
+            init: Constant(9223372036854775798ul),
+        },
+        VariableDeclaration {
+            name: "i2",
+            ty: Int,
+            init: Constant(-2147483498),
+        },
+        VariableDeclaration {
+            name: "ui2",
+            ty: UInt,
+            init: Constant(2147483798u),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("u"),
+                        rhs: Constant(2147483660u),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(2147483646),
+                        },
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(9223372036854775716l),
+                        },
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l2"),
+                        rhs: Constant(2147483650l),
+                    },
+                    Return(
+                        Constant(4),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul"),
+                        rhs: Constant(4294967294ul),
+                    },
+                    Return(
+                        Constant(5),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul2"),
+                        rhs: Constant(9223372036854775798ul),
+                    },
+                    Return(
+                        Constant(6),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i2"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(2147483498),
+                        },
+                    },
+                    Return(
+                        Constant(7),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ui2"),
+                        rhs: Constant(2147483798u),
+                    },
+                    Return(
+                        Constant(8),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

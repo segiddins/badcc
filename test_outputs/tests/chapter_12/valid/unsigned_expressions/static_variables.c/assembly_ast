@@ -1,0 +1,203 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    48,
+                ),
+                Move {
+                    source: Immediate(9223372036854775803, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Data("x", Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(16, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(16, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(16, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Data("x", Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(24, Eight),
+                },
+                Binary(
+                    Add,
+                    Immediate(10, Eight),
+                    Stack(24, Eight),
+                ),
+                Move {
+                    source: Stack(24, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Data("x", Eight),
+                },
+                Move {
+                    source: Immediate(-9223372036854775803, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Data("x", Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(32, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(32, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(32, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Data("zero_long", Eight),
+                ),
+                JmpCC(
+                    NE,
+                    "main.3.true",
+                ),
+                Move {
+                    source: Data("zero_int", Four),
+                    destination: Register(R11, Four),
+                },
+                Move {
+                    source: Register(R11, Eight),
+                    destination: Stack(40, Eight),
+                },
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(40, Eight),
+                ),
+                JmpCC(
+                    NE,
+                    "main.3.true",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Stack(44, Four),
+                },
+                Jmp(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Stack(44, Four),
+                },
+                Label(
+                    "main.3.end",
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(44, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: false,
+            name: "x",
+            value: 9223372036854775803,
+            alignment: 8,
+        },
+        StaticVariable {
+            global: true,
+            name: "zero_int",
+            value: 0,
+            alignment: 4,
+        },
+        StaticVariable {
+            global: true,
+            name: "zero_long",
+            value: 0,
+            alignment: 8,
+        },
+    ],
+}

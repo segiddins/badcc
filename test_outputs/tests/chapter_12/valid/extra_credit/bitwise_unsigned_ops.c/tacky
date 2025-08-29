@@ -1,0 +1,172 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 1u,
+                    dst: Var("main.tmp.0", UInt),
+                },
+                Copy {
+                    src: Var("main.tmp.0", UInt),
+                    dst: Var("ui.1", UInt),
+                },
+                Copy {
+                    src: 9223372036854775808ul,
+                    dst: Var("ul.2", ULong),
+                },
+                ZeroExtend {
+                    src: Var("ui.1", UInt),
+                    dst: Var("main.tmp.1", ULong),
+                },
+                Binary {
+                    op: BitwiseAnd,
+                    lhs: Var("main.tmp.1", ULong),
+                    rhs: Var("ul.2", ULong),
+                    dst: Var("main.tmp.2", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.2", ULong),
+                    rhs: 0ul,
+                    dst: Var("main.tmp.3", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", ULong),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                ZeroExtend {
+                    src: Var("ui.1", UInt),
+                    dst: Var("main.tmp.4", ULong),
+                },
+                Binary {
+                    op: BitwiseOr,
+                    lhs: Var("main.tmp.4", ULong),
+                    rhs: Var("ul.2", ULong),
+                    dst: Var("main.tmp.5", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.5", ULong),
+                    rhs: 9223372041149743103ul,
+                    dst: Var("main.tmp.6", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", ULong),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 1,
+                    dst: Var("main.tmp.7", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.7", Int),
+                    dst: Var("i.3", Int),
+                },
+                SignExtend {
+                    src: Var("i.3", Int),
+                    dst: Var("main.tmp.8", ULong),
+                },
+                Binary {
+                    op: BitwiseAnd,
+                    lhs: Var("main.tmp.8", ULong),
+                    rhs: Var("ul.2", ULong),
+                    dst: Var("main.tmp.9", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.9", ULong),
+                    rhs: Var("ul.2", ULong),
+                    dst: Var("main.tmp.10", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.10", ULong),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                SignExtend {
+                    src: Var("i.3", Int),
+                    dst: Var("main.tmp.11", ULong),
+                },
+                Binary {
+                    op: BitwiseOr,
+                    lhs: Var("main.tmp.11", ULong),
+                    rhs: Var("ul.2", ULong),
+                    dst: Var("main.tmp.12", ULong),
+                },
+                SignExtend {
+                    src: Var("i.3", Int),
+                    dst: Var("main.tmp.13", ULong),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.12", ULong),
+                    rhs: Var("main.tmp.13", ULong),
+                    dst: Var("main.tmp.14", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.14", ULong),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

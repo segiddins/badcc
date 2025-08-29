@@ -1,0 +1,170 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ui_a",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "ui_b",
+            ty: UInt,
+        },
+        VariableDeclaration {
+            name: "ul_a",
+            ty: ULong,
+        },
+        VariableDeclaration {
+            name: "ul_b",
+            ty: ULong,
+        },
+        FunctionDeclaration {
+            identifier: "addition",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Add,
+                                lhs: Var("ui_a"),
+                                rhs: Var("ui_b"),
+                            },
+                            rhs: Constant(0u),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "subtraction",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Binary {
+                                op: Subtract,
+                                lhs: Var("ul_a"),
+                                rhs: Var("ul_b"),
+                            },
+                            rhs: Constant(18446744073709551606ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "neg",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Unary {
+                                op: Minus,
+                                expr: Var("ul_a"),
+                            },
+                            rhs: Constant(18446744073709551615ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_a"),
+                        rhs: Constant(4294967293u),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ui_b"),
+                        rhs: Constant(3u),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("addition"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_a"),
+                        rhs: Constant(10ul),
+                    },
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_b"),
+                        rhs: Constant(20ul),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("subtraction"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("ul_a"),
+                        rhs: Constant(1ul),
+                    },
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("neg"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

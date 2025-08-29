@@ -1,0 +1,186 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "switch_on_uint",
+            global: true,
+            params: [
+                Var("ui.1", UInt),
+            ],
+            instructions: [
+                Jump(
+                    "switch.0.cases",
+                ),
+                Label(
+                    "switch.0.5",
+                ),
+                Return(
+                    0,
+                ),
+                Label(
+                    "switch.0.4294967286",
+                ),
+                Return(
+                    1,
+                ),
+                Label(
+                    "switch.0.10",
+                ),
+                Return(
+                    2,
+                ),
+                Label(
+                    "switch.0.default",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "switch.0",
+                ),
+                Label(
+                    "switch.0.cases",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: 5u,
+                    rhs: Var("ui.1", UInt),
+                    dst: Var("switch_on_uint.tmp.0", Int),
+                },
+                JumpIfNotZero(
+                    Var("switch_on_uint.tmp.0", Int),
+                    "switch.0.5",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: 4294967286u,
+                    rhs: Var("ui.1", UInt),
+                    dst: Var("switch_on_uint.tmp.0", Int),
+                },
+                JumpIfNotZero(
+                    Var("switch_on_uint.tmp.0", Int),
+                    "switch.0.4294967286",
+                ),
+                Binary {
+                    op: Equals,
+                    lhs: 10u,
+                    rhs: Var("ui.1", UInt),
+                    dst: Var("switch_on_uint.tmp.0", Int),
+                },
+                JumpIfNotZero(
+                    Var("switch_on_uint.tmp.0", Int),
+                    "switch.0.10",
+                ),
+                Jump(
+                    "switch.0.default",
+                ),
+                Label(
+                    "switch.0",
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "switch_on_uint",
+                    [
+                        5u,
+                    ],
+                    Var("main.tmp.0", Int),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.0", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.1", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "switch_on_uint",
+                    [
+                        4294967286u,
+                    ],
+                    Var("main.tmp.2", Int),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.2", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "switch_on_uint",
+                    [
+                        10u,
+                    ],
+                    Var("main.tmp.4", Int),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.4", Int),
+                    rhs: 2,
+                    dst: Var("main.tmp.5", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

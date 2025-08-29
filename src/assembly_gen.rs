@@ -2,7 +2,7 @@ use std::{collections::HashMap, fmt::Debug, iter::empty};
 
 use crate::{
     ast,
-    sema::{Symbol, SymbolAttributes, SymbolTable},
+    sema::{Symbol, SymbolAttributes, SymbolTable, Type},
     tacky,
 };
 
@@ -23,10 +23,16 @@ pub struct Function {
 pub enum CondCode {
     E,
     NE,
+
     G,
     GE,
     L,
     LE,
+
+    A,
+    AE,
+    B,
+    BE,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -43,6 +49,7 @@ pub enum Instruction {
     Binary(BinaryOperator, Operand, Operand),
     Cmp(Operand, Operand),
     Idiv(Operand),
+    Div(Operand),
     Cdq(Width),
     Jmp(String),
     JmpCC(CondCode, String),
@@ -90,6 +97,8 @@ pub enum BinaryOperator {
     And,
     Or,
     Xor,
+    SignedLeftShift,
+    SignedRightShift,
     LeftShift,
     RightShift,
     Equals,
@@ -230,8 +239,8 @@ impl From<&tacky::BinaryOperator> for BinaryOperator {
             tacky::BinaryOperator::Multiply => Self::Mult,
             tacky::BinaryOperator::Divide => unreachable!(),
             tacky::BinaryOperator::Remainder => unreachable!(),
-            tacky::BinaryOperator::LeftShift => Self::LeftShift,
-            tacky::BinaryOperator::RightShift => Self::RightShift,
+            tacky::BinaryOperator::LeftShift => Self::SignedLeftShift,
+            tacky::BinaryOperator::RightShift => Self::SignedRightShift,
             tacky::BinaryOperator::BitwiseOr => Self::Or,
             tacky::BinaryOperator::BitwiseAnd => Self::And,
             tacky::BinaryOperator::Xor => Self::Xor,
@@ -247,19 +256,22 @@ impl From<&tacky::BinaryOperator> for BinaryOperator {
     }
 }
 
-impl From<&tacky::BinaryOperator> for CondCode {
-    fn from(value: &tacky::BinaryOperator) -> Self {
+impl tacky::BinaryOperator {
+    fn cond_code(&self, ty: &Type) -> CondCode {
         use CondCode::*;
         use tacky::BinaryOperator::*;
-        match value {
-            Equals => E,
-            NotEqual => NE,
-            LessThan => L,
-            LessThanOrEqual => LE,
-            GreaterThan => G,
-            GreaterThanOrEqual => GE,
-            Or => NE,
-            And => NE,
+        match (self, ty.signed()) {
+            (Equals, _) => E,
+            (NotEqual, _) => NE,
+            (LessThan, true) => L,
+            (LessThan, false) => B,
+            (LessThanOrEqual, true) => LE,
+            (LessThanOrEqual, false) => BE,
+            (GreaterThan, true) => G,
+            (GreaterThan, false) => A,
+            (GreaterThanOrEqual, true) => GE,
+            (GreaterThanOrEqual, false) => AE,
+            (Or | And, _) => NE,
             value => unreachable!("{value:?} is not a valid CondCode"),
         }
     }
@@ -269,8 +281,12 @@ impl From<&tacky::Val> for Operand {
     fn from(value: &tacky::Val) -> Self {
         match value {
             tacky::Val::Constant(c) => match c {
-                ast::Constant::Int(_) => Self::Immediate(c.into_long(), Width::Four),
-                ast::Constant::Long(_) => Self::Immediate(c.into_long(), Width::Eight),
+                ast::Constant::Int(_) | ast::Constant::UInt(_) => {
+                    Self::Immediate(c.as_long(), Width::Four)
+                }
+                ast::Constant::Long(_) | ast::Constant::ULong(_) => {
+                    Self::Immediate(c.as_long(), Width::Eight)
+                }
             },
             tacky::Val::Var(id, ty) => Self::Psuedo(id.clone(), ty.width()),
         }
@@ -322,7 +338,7 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                 op => vec![Instruction::mov(src, dst), Instruction::unary(op, dst)],
             },
             tacky::Instruction::Binary { op, lhs, rhs, dst } => match op {
-                tacky::BinaryOperator::Divide => {
+                tacky::BinaryOperator::Divide if dst.ty().signed() => {
                     vec![
                         Instruction::mov(lhs, Reg::AX.width(lhs.ty().width())),
                         Instruction::Cdq(lhs.ty().width()),
@@ -330,11 +346,34 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                         Instruction::mov(Reg::AX.width(dst.ty().width()), dst),
                     ]
                 }
-                tacky::BinaryOperator::Remainder => {
+                // unsigned
+                tacky::BinaryOperator::Divide => {
+                    vec![
+                        Instruction::mov(lhs, Reg::AX.width(lhs.ty().width())),
+                        Instruction::mov(
+                            Operand::Immediate(0, lhs.ty().width()),
+                            Reg::DX.width(lhs.ty().width()),
+                        ),
+                        Instruction::Div(rhs.into()),
+                        Instruction::mov(Reg::AX.width(dst.ty().width()), dst),
+                    ]
+                }
+                tacky::BinaryOperator::Remainder if dst.ty().signed() => {
                     vec![
                         Instruction::mov(lhs, Reg::AX.width(lhs.ty().width())),
                         Instruction::Cdq(lhs.ty().width()),
                         Instruction::Idiv(rhs.into()),
+                        Instruction::mov(Reg::DX.width(dst.ty().width()), dst),
+                    ]
+                }
+                tacky::BinaryOperator::Remainder => {
+                    vec![
+                        Instruction::mov(lhs, Reg::AX.width(lhs.ty().width())),
+                        Instruction::mov(
+                            Operand::Immediate(0, lhs.ty().width()),
+                            Reg::DX.width(lhs.ty().width()),
+                        ),
+                        Instruction::Div(rhs.into()),
                         Instruction::mov(Reg::DX.width(dst.ty().width()), dst),
                     ]
                 }
@@ -349,7 +388,19 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
                     vec![
                         Instruction::Cmp(rhs.into(), lhs.into()),
                         Instruction::mov(0, dst),
-                        Instruction::SetCC(op.into(), dst.into()),
+                        Instruction::SetCC(op.cond_code(&dst.ty()), dst.into()),
+                    ]
+                }
+                tacky::BinaryOperator::LeftShift if !lhs.ty().signed() => {
+                    vec![
+                        Instruction::mov(lhs, dst),
+                        Instruction::binary(BinaryOperator::LeftShift, rhs, dst),
+                    ]
+                }
+                tacky::BinaryOperator::RightShift if !lhs.ty().signed() => {
+                    vec![
+                        Instruction::mov(lhs, dst),
+                        Instruction::binary(BinaryOperator::RightShift, rhs, dst),
                     ]
                 }
                 op => {
@@ -415,12 +466,18 @@ impl From<&tacky::Instruction> for Vec<Instruction> {
             tacky::Instruction::Truncate { src, dst } => vec![Instruction::mov(
                 match src {
                     tacky::Val::Constant(constant) => {
-                        Operand::Immediate(constant.into_long() as i32 as i64, dst.ty().width())
+                        Operand::Immediate(constant.as_long() as i32 as i64, dst.ty().width())
                     }
                     tacky::Val::Var(name, _) => Operand::Psuedo(name.clone(), dst.ty().width()),
                 },
                 dst,
             )],
+            tacky::Instruction::ZeroExtend { src, dst } => {
+                vec![
+                    Instruction::mov(src, Reg::R11.width(src.ty().width())),
+                    Instruction::mov(Reg::R11.width(dst.ty().width()), dst),
+                ]
+            }
         }
     }
 }
@@ -468,7 +525,7 @@ fn replace_pseudo(instructions: &mut [Instruction], symbols: &SymbolTable) -> u3
                 m(operand);
                 m(operand1);
             }
-            Instruction::Idiv(operand) => m(operand),
+            Instruction::Idiv(operand) | Instruction::Div(operand) => m(operand),
             Instruction::Cmp(operand, operand1) => {
                 m(operand);
                 m(operand1);
@@ -575,8 +632,13 @@ fn fixup_instruction(instruction: Instruction) -> Vec<Instruction> {
             ]
         }
         Instruction::Binary(op, src, dst)
-            if matches!(op, BinaryOperator::LeftShift | BinaryOperator::RightShift)
-                && matches!(src, Operand::Stack(_, _) | Operand::Data(_, _))
+            if matches!(
+                op,
+                BinaryOperator::SignedLeftShift
+                    | BinaryOperator::SignedRightShift
+                    | BinaryOperator::LeftShift
+                    | BinaryOperator::RightShift
+            ) && matches!(src, Operand::Stack(_, _) | Operand::Data(_, _))
                 && matches!(dst, Operand::Stack(_, _) | Operand::Data(_, _)) =>
         {
             vec![
@@ -589,7 +651,11 @@ fn fixup_instruction(instruction: Instruction) -> Vec<Instruction> {
         Instruction::Binary(op, src, dst)
             if (matches!(
                 op,
-                BinaryOperator::Mult | BinaryOperator::LeftShift | BinaryOperator::RightShift
+                BinaryOperator::Mult
+                    | BinaryOperator::SignedLeftShift
+                    | BinaryOperator::SignedRightShift
+                    | BinaryOperator::LeftShift
+                    | BinaryOperator::RightShift
             ) && matches!(dst, Operand::Stack(_, _) | Operand::Data(_, _))) =>
         {
             vec![
@@ -601,7 +667,13 @@ fn fixup_instruction(instruction: Instruction) -> Vec<Instruction> {
         Instruction::Binary(op, src, dst)
             if (matches!(src, Operand::Stack(_, _) | Operand::Data(_, _))
                 && matches!(dst, Operand::Stack(_, _) | Operand::Data(_, _))
-                && !matches!(op, BinaryOperator::LeftShift | BinaryOperator::RightShift))
+                && !matches!(
+                    op,
+                    BinaryOperator::SignedLeftShift
+                        | BinaryOperator::SignedRightShift
+                        | BinaryOperator::LeftShift
+                        | BinaryOperator::RightShift
+                ))
                 || src.outside_int_range() =>
         {
             vec![
@@ -645,6 +717,12 @@ fn fixup_instruction(instruction: Instruction) -> Vec<Instruction> {
             vec![
                 Instruction::mov(Operand::Immediate(val, width), Reg::R10.width(width)),
                 Instruction::Idiv(Reg::R10.width(width)),
+            ]
+        }
+        Instruction::Div(Operand::Immediate(val, width)) => {
+            vec![
+                Instruction::mov(Operand::Immediate(val, width), Reg::R10.width(width)),
+                Instruction::Div(Reg::R10.width(width)),
             ]
         }
 

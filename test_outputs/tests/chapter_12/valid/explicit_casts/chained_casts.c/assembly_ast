@@ -1,0 +1,151 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    64,
+                ),
+                Move {
+                    source: Data("ui", Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(12, Four),
+                },
+                Move {
+                    source: Stack(12, Four),
+                    destination: Register(R11, Four),
+                },
+                Movesx {
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(20, Eight),
+                },
+                Move {
+                    source: Immediate(96, Eight),
+                    destination: Stack(28, Eight),
+                },
+                Unary(
+                    Neg,
+                    Stack(28, Eight),
+                ),
+                Move {
+                    source: Stack(28, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cmp(
+                    Register(R10, Eight),
+                    Stack(20, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(36, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(36, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(36, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Move {
+                    source: Data("ui", Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    source: Register(R10, Four),
+                    destination: Stack(40, Four),
+                },
+                Move {
+                    source: Stack(40, Four),
+                    destination: Register(R11, Four),
+                },
+                Movesx {
+                    source: Register(R11, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    source: Register(R10, Eight),
+                    destination: Stack(48, Eight),
+                },
+                Cmp(
+                    Immediate(-96, Eight),
+                    Stack(48, Eight),
+                ),
+                Move {
+                    source: Immediate(0, Eight),
+                    destination: Stack(56, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(56, Eight),
+                ),
+                Cmp(
+                    Immediate(0, Four),
+                    Stack(56, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [
+        StaticVariable {
+            global: true,
+            name: "ui",
+            value: 4294967200,
+            alignment: 4,
+        },
+    ],
+}

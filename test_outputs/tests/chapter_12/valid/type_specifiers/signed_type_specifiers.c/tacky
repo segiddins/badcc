@@ -1,0 +1,147 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "i",
+            global: false,
+            init: 5,
+            width: Four,
+        },
+        StaticVariable {
+            identifier: "l",
+            global: true,
+            init: 7,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("i", Int),
+                    rhs: 5,
+                    dst: Var("main.tmp.0", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.0", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("l", Long),
+                    rhs: 7l,
+                    dst: Var("main.tmp.1", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Long),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("counter.11", Int),
+                },
+                Copy {
+                    src: 10,
+                    dst: Var("index.12", Int),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("index.12", Int),
+                    rhs: 0,
+                    dst: Var("main.tmp.2", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", Int),
+                    "loop.0",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var("counter.11", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.3", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.3", Int),
+                    dst: Var("counter.11", Int),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Subtract,
+                    lhs: Var("index.12", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.4", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("index.12", Int),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("counter.11", Int),
+                    rhs: 10,
+                    dst: Var("main.tmp.5", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

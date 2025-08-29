@@ -316,6 +316,8 @@ impl Initial {
             Initial::Tentative => 0,
             Initial::Some(Constant::Int(v)) => *v as i64,
             Initial::Some(Constant::Long(v)) => *v,
+            Initial::Some(Constant::UInt(v)) => *v as i64,
+            Initial::Some(Constant::ULong(v)) => *v as i64,
             Initial::None => 0,
         }
     }
@@ -337,6 +339,21 @@ impl From<StorageClass> for Linkage {
             StorageClass::Static => Linkage::Static,
             StorageClass::Extern => Linkage::External,
         }
+    }
+}
+
+impl Constant {
+    fn cast(&mut self, to: &Type) -> Result {
+        use Constant::*;
+        use Type as T;
+        match (&self, to) {
+            (_, T::Function { .. }) => unreachable!(),
+            (_, T::Int) => *self = Int(self.as_long() as i32),
+            (_, T::UInt) => *self = UInt(self.as_long() as u32),
+            (_, T::Long) => *self = Long(self.as_long()),
+            (_, T::ULong) => *self = ULong(self.as_long() as u64),
+        }
+        Ok(())
     }
 }
 
@@ -596,13 +613,7 @@ impl Checker {
         let lt = self.visit_expression(lhs)?;
         let rt = self.visit_expression(rhs)?;
         self.check_cast(&rt, &lt, rhs.span())?;
-
-        match (lt, rt) {
-            (lt @ Type::Int, Type::Long) => self.make_cast(rhs, &lt),
-            (lt @ Type::Long, Type::Int) => self.make_cast(rhs, &lt),
-            (lt, rt) if lt == rt => Ok(lt),
-            _ => unreachable!(),
-        }
+        self.make_cast(rhs, &lt)
     }
 
     fn cast_to_common(
@@ -610,16 +621,26 @@ impl Checker {
         lhs: &mut Expression,
         rhs: &mut Expression,
     ) -> miette::Result<Type, TypeCheckError> {
-        let lt = self.visit_expression(lhs)?;
-        let rt = self.visit_expression(rhs)?;
-        self.check_cast(&rt, &lt, rhs.span())?;
+        let lt = &self.visit_expression(lhs)?;
+        let rt = &self.visit_expression(rhs)?;
+        self.check_cast(rt, lt, rhs.span())?;
 
         match (lt, rt) {
+            (Type::Function { .. }, _) | (_, Type::Function { .. }) => unreachable!(),
+
             (Type::Int, Type::Int) => Ok(Type::Int),
             (Type::Long, Type::Long) => Ok(Type::Long),
-            (Type::Int, Type::Long) => self.make_cast(lhs, &Type::Long),
-            (Type::Long, Type::Int) => self.make_cast(rhs, &Type::Long),
-            _ => unreachable!(),
+            (Type::ULong, Type::ULong) => Ok(Type::ULong),
+            (Type::UInt, Type::UInt) => Ok(Type::UInt),
+
+            (Type::Int | Type::UInt, Type::Long) => self.make_cast(lhs, rt),
+            (Type::Long, Type::Int | Type::UInt) => self.make_cast(rhs, lt),
+
+            (Type::Int, Type::UInt) => self.make_cast(lhs, rt),
+            (Type::UInt, Type::Int) => self.make_cast(rhs, lt),
+
+            (Type::Int | Type::UInt | Type::Long, Type::ULong) => self.make_cast(lhs, rt),
+            (Type::ULong, Type::Int | Type::UInt | Type::Long) => self.make_cast(rhs, lt),
         }
     }
 
@@ -630,7 +651,10 @@ impl Checker {
         span: SourceSpan,
     ) -> miette::Result<(), TypeCheckError> {
         match (from, to) {
-            (Type::Int | Type::Long, Type::Int | Type::Long) => Ok(()),
+            (
+                Type::Int | Type::Long | Type::UInt | Type::ULong,
+                Type::Int | Type::Long | Type::UInt | Type::ULong,
+            ) => Ok(()),
             (actual, to) => Err(TypeCheckError::Error {
                 expected: to.clone(),
                 actual: actual.clone(),
@@ -646,12 +670,7 @@ impl Checker {
                 return Ok(to.clone());
             }
             Expression::Constant { constant, .. } => {
-                match (&constant, to) {
-                    (Constant::Int(_), Type::Int) | (Constant::Long(_), Type::Long) => {}
-                    (Constant::Int(i), Type::Long) => *constant = Constant::Long(*i as i64),
-                    (Constant::Long(l), Type::Int) => *constant = Constant::Int(*l as i32),
-                    _ => unreachable!(),
-                }
+                constant.cast(to)?;
                 return Ok(to.clone());
             }
             _ => {}
@@ -790,8 +809,7 @@ impl Checker {
                 span: expression.span(),
                 position,
             }),
-            Type::Int => Ok(ty),
-            Type::Long => Ok(ty),
+            Type::Int | Type::Long | Type::UInt | Type::ULong => Ok(ty),
         }
     }
 }
@@ -805,14 +823,24 @@ pub enum Type {
     #[default]
     Int,
     Long,
+    UInt,
+    ULong,
 }
 
 impl Type {
     pub fn width(&self) -> Width {
         match self {
             Type::Function { .. } => Width::Eight,
-            Type::Int => Width::Four,
-            Type::Long => Width::Eight,
+            Type::Int | Type::UInt => Width::Four,
+            Type::Long | Type::ULong => Width::Eight,
+        }
+    }
+
+    pub fn signed(&self) -> bool {
+        match self {
+            Type::Function { .. } => false,
+            Type::Int | Type::Long => true,
+            Type::UInt | Type::ULong => false,
         }
     }
 }

@@ -1,0 +1,399 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "check_int",
+            params: [
+                (
+                    Int,
+                    "converted",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 9,
+                    },
+                ),
+                (
+                    Int,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            33,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("converted"),
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "check_long",
+            params: [
+                (
+                    Long,
+                    "converted",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            103,
+                        ),
+                        length: 9,
+                    },
+                ),
+                (
+                    Long,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            119,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("converted"),
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "check_ulong",
+            params: [
+                (
+                    ULong,
+                    "converted",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            199,
+                        ),
+                        length: 9,
+                    },
+                ),
+                (
+                    ULong,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            224,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("converted"),
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_extended_uint",
+            params: [
+                (
+                    UInt,
+                    "u",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            313,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Long,
+            body: [
+                Return(
+                    Var("u"),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_extended_int",
+            params: [
+                (
+                    Int,
+                    "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            372,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: ULong,
+            body: [
+                Return(
+                    Var("i"),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_truncated_ulong",
+            params: [
+                (
+                    ULong,
+                    "ul",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            434,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Var("ul"),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "extend_on_assignment",
+            params: [
+                (
+                    UInt,
+                    "ui",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            495,
+                        ),
+                        length: 2,
+                    },
+                ),
+                (
+                    Long,
+                    "expected",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            504,
+                        ),
+                        length: 8,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "result",
+                    ty: Long,
+                    init: Var("ui"),
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("result"),
+                        rhs: Var("expected"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("check_int"),
+                            params: [
+                                Constant(9223372036854775813ul),
+                                Constant(5),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("check_long"),
+                            params: [
+                                Constant(2147483658u),
+                                Constant(2147483658l),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("check_ulong"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1),
+                                },
+                                Constant(18446744073709551615ul),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("return_extended_uint"),
+                            params: [
+                                Constant(2147483658u),
+                            ],
+                        },
+                        rhs: Constant(2147483658l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("return_extended_int"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(1),
+                                },
+                            ],
+                        },
+                        rhs: Constant(18446744073709551615ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "l",
+                    ty: Long,
+                    init: FunctionCall {
+                        function: Var("return_truncated_ulong"),
+                        params: [
+                            Constant(1125902054326372ul),
+                        ],
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(2147483548l),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("extend_on_assignment"),
+                            params: [
+                                Constant(2147483658u),
+                                Constant(2147483658l),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Constant(4294967196u),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(100),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,59 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ui",
+            global: true,
+            init: 4294967200,
+            width: Four,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "return_uint",
+            global: true,
+            params: [],
+            instructions: [
+                Return(
+                    Var("ui", UInt),
+                ),
+                Return(
+                    0u,
+                ),
+            ],
+        },
+        Function {
+            identifier: "return_uint_as_signed",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Var("ui", UInt),
+                    dst: Var("return_uint_as_signed.tmp.0", Int),
+                },
+                Return(
+                    Var("return_uint_as_signed.tmp.0", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "return_uint_as_long",
+            global: true,
+            params: [],
+            instructions: [
+                ZeroExtend {
+                    src: Var("ui", UInt),
+                    dst: Var("return_uint_as_long.tmp.0", Long),
+                },
+                Return(
+                    Var("return_uint_as_long.tmp.0", Long),
+                ),
+                Return(
+                    0l,
+                ),
+            ],
+        },
+    ],
+}
