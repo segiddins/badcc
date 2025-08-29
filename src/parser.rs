@@ -71,17 +71,14 @@ impl Lexer<'_> {
     fn next_token(&mut self) -> Option<(Token, SourceSpan)> {
         self.tokens.pop()
     }
-    fn peek_token(&self) -> Option<(&Token, SourceSpan)> {
-        self.tokens.last().as_ref().map(|(t, span)| (t, *span))
+    fn peek_token(&self) -> Option<(Token, SourceSpan)> {
+        self.tokens.last().copied()
     }
-    fn peek_n(&self, n: usize) -> Option<(&Token, SourceSpan)> {
+    fn peek_n(&self, n: usize) -> Option<(Token, SourceSpan)> {
         if n > self.tokens.len() {
             return None;
         }
-        self.tokens
-            .get(self.tokens.len() - n)
-            .as_ref()
-            .map(|(t, span)| (t, *span))
+        self.tokens.get(self.tokens.len() - n).copied()
     }
 
     fn expect_identifier(&mut self) -> Result<(String, SourceSpan)> {
@@ -89,17 +86,17 @@ impl Lexer<'_> {
             return Err(ParserError::UnexpectedEOF);
         }
         self.tokens
-            .pop_if(|(t, _)| matches!(t, Token::Identifier(_)))
+            .pop_if(|(t, _)| matches!(t, Token::Identifier))
             .ok_or_else(|| {
                 let (token, span) = self.peek_token().unwrap();
                 ParserError::Expected {
-                    options: vec![Token::Identifier("ident".into())],
-                    kind: token.clone(),
+                    options: vec![Token::Identifier],
+                    kind: token,
                     span,
                 }
             })
             .map(|(t, span)| match t {
-                Token::Identifier(i) => (i, span),
+                Token::Identifier => (self.str_at(span).into(), span),
                 _ => unreachable!(),
             })
     }
@@ -112,20 +109,24 @@ impl Lexer<'_> {
             let (token, span) = self.peek_token().unwrap();
             ParserError::Expected {
                 options: vec![kind],
-                kind: token.clone(),
+                kind: token,
                 span,
             }
         })
     }
 
     fn peek_kind(&self, kind: Token) -> bool {
-        self.peek_token().is_some_and(|(t, _)| *t == kind)
+        self.peek_token().is_some_and(|(t, _)| t == kind)
     }
 
     fn peek_decl_specifier(&self) -> bool {
         self.peek_token().is_some_and(|(t, _)| {
-            *t == Token::Int || *t == Token::Static || *t == Token::Extern || *t == Token::Long
+            t == Token::Int || t == Token::Static || t == Token::Extern || t == Token::Long
         })
+    }
+
+    fn str_at(&self, span: SourceSpan) -> &str {
+        &self.source[span.offset()..(span.offset() + span.len())]
     }
 }
 
@@ -189,7 +190,7 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
             Some((token, span)) => {
                 match token {
                     Token::Int | Token::Long => {
-                        ty.push(token.clone());
+                        ty.push(token);
                         lexer.next_token();
                     }
                     Token::Extern => {
@@ -272,7 +273,7 @@ fn parse_type(lexer: &mut Lexer) -> Result<Type> {
     } else if let Some((token, span)) = lexer.peek_token() {
         Err(ParserError::Expected {
             options: vec![Token::Int, Token::Long],
-            kind: token.clone(),
+            kind: token,
             span,
         })
     } else {
@@ -331,7 +332,7 @@ fn parse_declaration(lexer: &mut Lexer) -> Result<Declaration> {
 }
 
 fn parse_optional_expression(lexer: &mut Lexer, end: Token) -> Result<Option<Expression>> {
-    if lexer.expect(end.clone()).is_ok() {
+    if lexer.expect(end).is_ok() {
         return Ok(None);
     }
 
@@ -375,7 +376,7 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                     if_false: r#else.map(Box::new),
                 })
             }
-            Token::Identifier(_) if lexer.peek_n(2).is_some_and(|(t, _)| *t == Token::Colon) => {
+            Token::Identifier if lexer.peek_n(2).is_some_and(|(t, _)| t == Token::Colon) => {
                 let (label, span) = lexer.expect_identifier()?;
                 lexer.expect(Token::Colon)?;
                 let statement = parse_statement(lexer)?;
@@ -515,16 +516,24 @@ fn parse_expression_bp(
         return Err(ParserError::UnexpectedEOF);
     };
     let mut lhs = match token {
-        Token::Constant(s) => if let Some(s) = s.strip_suffix(|c| c == 'l' || c == 'L') {
-            s.parse().map(Constant::Long)
-        } else {
-            s.parse()
-                .map(Constant::Int)
-                .or_else(|_| s.parse().map(Constant::Long))
+        Token::Constant => {
+            let s = lexer.str_at(span);
+            if let Some(s) = lexer.source[span.offset()..(span.offset() + span.len())]
+                .strip_suffix(|c| c == 'l' || c == 'L')
+            {
+                s.parse().map(Constant::Long)
+            } else {
+                s.parse()
+                    .map(Constant::Int)
+                    .or_else(|_| s.parse().map(Constant::Long))
+            }
+            .map(|constant| Expression::Constant { constant, span })
+            .map_err(|error| ParserError::ConstantOutOfRange { error, span })
         }
-        .map(|constant| Expression::Constant { constant, span })
-        .map_err(|error| ParserError::ConstantOutOfRange { error, span }),
-        Token::Identifier(name) => Ok(Expression::Var { name, span }),
+        Token::Identifier => Ok(Expression::Var {
+            name: lexer.str_at(span).into(),
+            span,
+        }),
 
         Token::LParen => {
             if let Ok(to) = parse_type(lexer) {
@@ -583,8 +592,8 @@ fn parse_expression_bp(
         kind => {
             return Err(ParserError::Expected {
                 options: vec![
-                    Token::Constant("constant".into()),
-                    Token::Identifier("ident".into()),
+                    Token::Constant,
+                    Token::Identifier,
                     Token::LParen,
                     Token::Hypen,
                     Token::Tilde,
@@ -705,8 +714,8 @@ fn parse_expression_bp(
             Token::LParen => {
                 if !matches!(lhs, Expression::Var { .. }) {
                     return Err(ParserError::Expected {
-                        options: vec![Token::Identifier("ident".into())],
-                        kind: Token::InvalidIdentifier(format!("{lhs:?}")),
+                        options: vec![Token::Identifier],
+                        kind: Token::InvalidIdentifier,
                         span: next_span,
                     });
                 }

@@ -26,15 +26,15 @@ impl LexingError {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone, Logos)]
+#[derive(Debug, PartialEq, Eq, Clone, Logos, Copy)]
 #[logos(error(LexingError, LexingError::from_lexer))]
 pub enum Token {
-    #[regex(r"[a-zA-Z_]\w*", |lex| lex.slice().to_owned())]
-    Identifier(String),
-    #[regex(r"\d+[lL]?", priority = 5, callback = |lex| lex.slice().to_owned())]
-    Constant(String),
-    #[regex(r"\d+[a-zA-Z_]\w*", LexingError::error)]
-    InvalidIdentifier(String),
+    #[regex(r"[a-zA-Z_]\w*")]
+    Identifier,
+    #[regex(r"\d+[lL]?", priority = 5)]
+    Constant,
+    #[regex(r"\d+[a-zA-Z_]\w*", |lex| LexingError::error::<()>(lex))]
+    InvalidIdentifier,
     #[token("(")]
     LParen,
     #[token(")")]
@@ -201,13 +201,13 @@ mod tests {
             tokens,
             vec![
                 (Int, (0, 3).into()),
-                (Identifier("main".into()), (4, 4).into()),
+                (Identifier, (4, 4).into()),
                 (LParen, (8, 1).into()),
                 (Void, (9, 4).into()),
                 (RParen, (13, 1).into()),
                 (LBrace, (15, 1).into()),
                 (Return, (19, 6).into()),
-                (Constant("2".into()), (26, 1).into()),
+                (Constant, (26, 1).into()),
                 (Semicolon, (27, 1).into()),
                 (RBrace, (29, 1).into()),
             ]
