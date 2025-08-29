@@ -13,10 +13,7 @@ Program {
             body: [
                 Return(
                     FunctionCall {
-                        function: Var {
-                            name: "my_fun",
-                        },
-                        params: [],
+                        function: Var("my_fun"),
                     },
                 ),
             ],
@@ -33,10 +30,7 @@ Program {
                 },
                 Return(
                     FunctionCall {
-                        function: Var {
-                            name: "my_fun",
-                        },
-                        params: [],
+                        function: Var("my_fun"),
                     },
                 ),
             ],
@@ -61,31 +55,21 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                     storage: Static,
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "i",
-                        },
+                        lhs: Var("i"),
                         rhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
                     },
                 ),
                 Return(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                 ),
             ],
         },

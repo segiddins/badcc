@@ -8,55 +8,34 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                 },
                 Switch(
                     Binary {
                         op: Add,
-                        lhs: Var {
-                            name: "a",
-                        },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        lhs: Var("a"),
+                        rhs: Constant(1),
                     },
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Var {
-                                    name: "a",
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                            },
+                            Case {
+                                expression: Var("a"),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 2,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(1),
+                                statement: Return(
+                                    Constant(2),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,

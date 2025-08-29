@@ -8,51 +8,30 @@ Program {
                 For {
                     init: Some(
                         Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("i"),
+                            rhs: Constant(0),
                         },
                     ),
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i"),
+                        rhs: Constant(1),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
+                    },
                     body: Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 0,
-                                },
+                                Constant(0),
                             ),
                         ],
                     ),
-                    label: None,
                 },
             ],
         },

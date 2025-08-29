@@ -3,9 +3,7 @@ Program {
         VariableDeclaration {
             name: "foo",
             ty: Long,
-            init: Constant {
-                constant: 4294967290l,
-            },
+            init: Constant(4294967290l),
             storage: Static,
         },
         FunctionDeclaration {
@@ -18,43 +16,27 @@ Program {
                         op: Equals,
                         lhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "foo",
-                            },
-                            rhs: Constant {
-                                constant: 5l,
-                            },
+                            lhs: Var("foo"),
+                            rhs: Constant(5l),
                         },
-                        rhs: Constant {
-                            constant: 4294967295l,
-                        },
+                        rhs: Constant(4294967295l),
                     },
                     Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "foo",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1152921504606846988l,
-                                    },
+                                    lhs: Var("foo"),
+                                    rhs: Constant(1152921504606846988l),
                                 },
                             ),
                             If(
                                 Binary {
                                     op: Equals,
-                                    lhs: Var {
-                                        name: "foo",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1152921504606846988l,
-                                    },
+                                    lhs: Var("foo"),
+                                    rhs: Constant(1152921504606846988l),
                                 },
                                 Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                                    Constant(1),
                                 ),
                                 None,
                             ),
@@ -63,9 +45,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

@@ -8,52 +8,34 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 100,
-                    },
+                    init: Constant(100),
                 },
                 Switch(
                     Binary {
                         op: LeftShift,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 2l,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(2l),
                     },
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 34359738768l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                            Case {
+                                expression: Constant(34359738768l),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 400,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(400),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 10,
-                    },
+                    Constant(10),
                 ),
             ],
         },

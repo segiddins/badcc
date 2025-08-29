@@ -8,162 +8,98 @@ Program {
                 VariableDeclaration {
                     name: "acc.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 VariableDeclaration {
                     name: "ctr.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.3",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i.3"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.3"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i.3"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i.3",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.3",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i.3",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Compound(
                         [
                             Switch(
-                                Var {
-                                    name: "i.3",
-                                },
+                                Var("i.3"),
                                 Compound(
                                     [
-                                        Case(
-                                            Constant {
-                                                constant: 0,
-                                            },
-                                            Expression(
+                                        Case {
+                                            expression: Constant(0),
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "acc.1",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 2,
-                                                    },
+                                                    lhs: Var("acc.1"),
+                                                    rhs: Constant(2),
                                                 },
                                             ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Break(
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Case(
-                                            Constant {
-                                                constant: 1,
-                                            },
-                                            Expression(
+                                            label: "switch.1",
+                                        },
+                                        Break {
+                                            label: "switch.1",
+                                        },
+                                        Case {
+                                            expression: Constant(1),
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "acc.1",
-                                                    },
+                                                    lhs: Var("acc.1"),
                                                     rhs: Binary {
                                                         op: Multiply,
-                                                        lhs: Var {
-                                                            name: "acc.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 3,
-                                                        },
+                                                        lhs: Var("acc.1"),
+                                                        rhs: Constant(3),
                                                     },
                                                 },
                                             ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Break(
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Case(
-                                            Constant {
-                                                constant: 2,
-                                            },
-                                            Expression(
+                                            label: "switch.1",
+                                        },
+                                        Break {
+                                            label: "switch.1",
+                                        },
+                                        Case {
+                                            expression: Constant(2),
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "acc.1",
-                                                    },
+                                                    lhs: Var("acc.1"),
                                                     rhs: Binary {
                                                         op: Multiply,
-                                                        lhs: Var {
-                                                            name: "acc.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 4,
-                                                        },
+                                                        lhs: Var("acc.1"),
+                                                        rhs: Constant(4),
                                                     },
                                                 },
                                             ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Break(
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Default(
-                                            Expression(
+                                            label: "switch.1",
+                                        },
+                                        Break {
+                                            label: "switch.1",
+                                        },
+                                        Default {
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "acc.1",
-                                                    },
+                                                    lhs: Var("acc.1"),
                                                     rhs: Binary {
                                                         op: Add,
-                                                        lhs: Var {
-                                                            name: "acc.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("acc.1"),
+                                                        rhs: Constant(1),
                                                     },
                                                 },
                                             ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
+                                            label: "switch.1",
+                                        },
                                     ],
                                 ),
                                 Some(
@@ -172,46 +108,30 @@ Program {
                             ),
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "ctr.2",
-                                    },
+                                    lhs: Var("ctr.2"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "ctr.2",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("ctr.2"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
                     Binary {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "ctr.2",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
+                            lhs: Var("ctr.2"),
+                            rhs: Constant(10),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "acc.1",
-                            },
-                            rhs: Constant {
-                                constant: 31,
-                            },
+                            lhs: Var("acc.1"),
+                            rhs: Constant(31),
                         },
                     },
                 ),

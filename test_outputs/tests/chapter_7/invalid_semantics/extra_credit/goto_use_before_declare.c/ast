@@ -8,28 +8,20 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(0),
                     },
                     Compound(
                         [
                             Labeled(
                                 "return_y",
                                 Return(
-                                    Var {
-                                        name: "y",
-                                    },
+                                    Var("y"),
                                 ),
                             ),
                         ],
@@ -39,13 +31,9 @@ Program {
                 VariableDeclaration {
                     name: "y",
                     ty: Int,
-                    init: Constant {
-                        constant: 4,
-                    },
+                    init: Constant(4),
                 },
-                Goto(
-                    "return_y",
-                ),
+                Goto("return_y"),
             ],
         },
     ],

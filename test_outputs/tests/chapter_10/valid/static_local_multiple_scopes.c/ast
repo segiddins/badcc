@@ -24,20 +24,14 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 65,
-                    },
+                    init: Constant(65),
                     storage: Static,
                 },
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "putchar",
-                        },
+                        function: Var("putchar"),
                         params: [
-                            Var {
-                                name: "i",
-                            },
+                            Var("i"),
                         ],
                     },
                 ),
@@ -45,53 +39,35 @@ Program {
                     [
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "i",
-                                },
+                                lhs: Var("i"),
                                 rhs: Binary {
                                     op: Add,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(1),
                                 },
                             },
                         ),
                         VariableDeclaration {
                             name: "i",
                             ty: Int,
-                            init: Constant {
-                                constant: 97,
-                            },
+                            init: Constant(97),
                             storage: Static,
                         },
                         Expression(
                             FunctionCall {
-                                function: Var {
-                                    name: "putchar",
-                                },
+                                function: Var("putchar"),
                                 params: [
-                                    Var {
-                                        name: "i",
-                                    },
+                                    Var("i"),
                                 ],
                             },
                         ),
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "i",
-                                },
+                                lhs: Var("i"),
                                 rhs: Binary {
                                     op: Add,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(1),
                                 },
                             },
                         ),
@@ -99,20 +75,14 @@ Program {
                 ),
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "putchar",
-                        },
+                        function: Var("putchar"),
                         params: [
-                            Constant {
-                                constant: 10,
-                            },
+                            Constant(10),
                         ],
                     },
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
@@ -125,46 +95,26 @@ Program {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i"),
+                        rhs: Constant(26),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 26,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Expression(
                         FunctionCall {
-                            function: Var {
-                                name: "print_letters",
-                            },
-                            params: [],
+                            function: Var("print_letters"),
                         },
                     ),
-                    label: None,
                 },
             ],
         },

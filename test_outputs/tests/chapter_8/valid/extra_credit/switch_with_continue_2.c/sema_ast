@@ -8,93 +8,57 @@ Program {
                 VariableDeclaration {
                     name: "sum.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.2",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i.2"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.2"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i.2"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i.2",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.2",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i.2",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Compound(
                         [
                             Switch(
                                 Binary {
                                     op: Remainder,
-                                    lhs: Var {
-                                        name: "i.2",
-                                    },
-                                    rhs: Constant {
-                                        constant: 2,
-                                    },
+                                    lhs: Var("i.2"),
+                                    rhs: Constant(2),
                                 },
                                 Compound(
                                     [
-                                        Case(
-                                            Constant {
-                                                constant: 0,
+                                        Case {
+                                            expression: Constant(0),
+                                            statement: Continue {
+                                                label: "loop.0",
                                             },
-                                            Continue(
-                                                Some(
-                                                    "loop.0",
-                                                ),
-                                            ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
-                                        Default(
-                                            Expression(
+                                            label: "switch.1",
+                                        },
+                                        Default {
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "sum.1",
-                                                    },
+                                                    lhs: Var("sum.1"),
                                                     rhs: Binary {
                                                         op: Add,
-                                                        lhs: Var {
-                                                            name: "sum.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("sum.1"),
+                                                        rhs: Constant(1),
                                                     },
                                                 },
                                             ),
-                                            Some(
-                                                "switch.1",
-                                            ),
-                                        ),
+                                            label: "switch.1",
+                                        },
                                     ],
                                 ),
                                 Some(
@@ -103,14 +67,10 @@ Program {
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
-                    Var {
-                        name: "sum.1",
-                    },
+                    Var("sum.1"),
                 ),
             ],
         },

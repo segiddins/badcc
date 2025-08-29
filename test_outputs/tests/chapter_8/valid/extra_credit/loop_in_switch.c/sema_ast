@@ -8,128 +8,78 @@ Program {
                 VariableDeclaration {
                     name: "cond.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 10,
-                    },
+                    init: Constant(10),
                 },
                 Switch(
-                    Var {
-                        name: "cond.1",
-                    },
+                    Var("cond.1"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(1),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 10,
-                                },
-                                For {
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(10),
+                                statement: For {
                                     init: VariableDeclaration {
                                         name: "i.2",
                                         ty: Int,
-                                        init: Constant {
-                                            constant: 0,
+                                        init: Constant(0),
+                                    },
+                                    condition: Binary {
+                                        op: LessThan,
+                                        lhs: Var("i.2"),
+                                        rhs: Constant(5),
+                                    },
+                                    post: Assignment {
+                                        lhs: Var("i.2"),
+                                        rhs: Binary {
+                                            op: Add,
+                                            lhs: Var("i.2"),
+                                            rhs: Constant(1),
                                         },
                                     },
-                                    condition: Some(
-                                        Binary {
-                                            op: LessThan,
-                                            lhs: Var {
-                                                name: "i.2",
-                                            },
-                                            rhs: Constant {
-                                                constant: 5,
-                                            },
-                                        },
-                                    ),
-                                    post: Some(
-                                        Assignment {
-                                            lhs: Var {
-                                                name: "i.2",
-                                            },
-                                            rhs: Binary {
-                                                op: Add,
-                                                lhs: Var {
-                                                    name: "i.2",
-                                                },
-                                                rhs: Constant {
-                                                    constant: 1,
-                                                },
-                                            },
-                                        },
-                                    ),
                                     body: Compound(
                                         [
                                             Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "cond.1",
-                                                    },
+                                                    lhs: Var("cond.1"),
                                                     rhs: Binary {
                                                         op: Subtract,
-                                                        lhs: Var {
-                                                            name: "cond.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("cond.1"),
+                                                        rhs: Constant(1),
                                                     },
                                                 },
                                             ),
                                             If(
                                                 Binary {
                                                     op: Equals,
-                                                    lhs: Var {
-                                                        name: "cond.1",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 8,
-                                                    },
+                                                    lhs: Var("cond.1"),
+                                                    rhs: Constant(8),
                                                 },
-                                                Break(
-                                                    Some(
-                                                        "loop.1",
-                                                    ),
-                                                ),
+                                                Break {
+                                                    label: "loop.1",
+                                                },
                                                 None,
                                             ),
                                         ],
                                     ),
-                                    label: Some(
-                                        "loop.1",
-                                    ),
+                                    label: "loop.1",
                                 },
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                             Return(
-                                Constant {
-                                    constant: 123,
-                                },
+                                Constant(123),
                             ),
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 2,
-                                    },
+                            Default {
+                                statement: Return(
+                                    Constant(2),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(
@@ -137,9 +87,7 @@ Program {
                     ),
                 ),
                 Return(
-                    Constant {
-                        constant: 3,
-                    },
+                    Constant(3),
                 ),
             ],
         },

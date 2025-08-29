@@ -8,9 +8,7 @@ Program {
                 VariableDeclaration {
                     name: "sum.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 VariableDeclaration {
                     name: "counter.2",
@@ -20,47 +18,27 @@ Program {
                     init: VariableDeclaration {
                         name: "i.3",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("i.3"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.3"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i.3"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThanOrEqual,
-                            lhs: Var {
-                                name: "i.3",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.3",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i.3",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "counter.2",
-                                    },
-                                    rhs: Var {
-                                        name: "i.3",
-                                    },
+                                    lhs: Var("counter.2"),
+                                    rhs: Var("i.3"),
                                 },
                             ),
                             If(
@@ -68,66 +46,42 @@ Program {
                                     op: Equals,
                                     lhs: Binary {
                                         op: Remainder,
-                                        lhs: Var {
-                                            name: "i.3",
-                                        },
-                                        rhs: Constant {
-                                            constant: 2,
-                                        },
+                                        lhs: Var("i.3"),
+                                        rhs: Constant(2),
                                     },
-                                    rhs: Constant {
-                                        constant: 0,
-                                    },
+                                    rhs: Constant(0),
                                 },
-                                Continue(
-                                    Some(
-                                        "loop.0",
-                                    ),
-                                ),
+                                Continue {
+                                    label: "loop.0",
+                                },
                                 None,
                             ),
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "sum.1",
-                                    },
+                                    lhs: Var("sum.1"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "sum.1",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("sum.1"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
                     Binary {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "sum.1",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("sum.1"),
+                            rhs: Constant(5),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "counter.2",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
+                            lhs: Var("counter.2"),
+                            rhs: Constant(10),
                         },
                     },
                 ),

@@ -8,96 +8,61 @@ Program {
                 VariableDeclaration {
                     name: "sum.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.2",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
-                        },
+                        init: Constant(0),
                     },
-                    condition: None,
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.2",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
-                        },
-                    ),
+                    post: Assignment {
+                        lhs: Var("i.2"),
+                        rhs: Constant(0),
+                    },
                     body: Compound(
                         [
                             Labeled(
                                 "lbl",
                                 Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "sum.1",
-                                        },
+                                        lhs: Var("sum.1"),
                                         rhs: Binary {
                                             op: Add,
-                                            lhs: Var {
-                                                name: "sum.1",
-                                            },
-                                            rhs: Constant {
-                                                constant: 1,
-                                            },
+                                            lhs: Var("sum.1"),
+                                            rhs: Constant(1),
                                         },
                                     },
                                 ),
                             ),
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "i.2",
-                                    },
+                                    lhs: Var("i.2"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "i.2",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("i.2"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                             If(
                                 Binary {
                                     op: GreaterThan,
-                                    lhs: Var {
-                                        name: "i.2",
-                                    },
-                                    rhs: Constant {
-                                        constant: 10,
-                                    },
+                                    lhs: Var("i.2"),
+                                    rhs: Constant(10),
                                 },
-                                Break(
-                                    Some(
-                                        "loop.0",
-                                    ),
-                                ),
+                                Break {
+                                    label: "loop.0",
+                                },
                                 None,
                             ),
-                            Goto(
-                                "lbl",
-                            ),
+                            Goto("lbl"),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
-                    Var {
-                        name: "sum.1",
-                    },
+                    Var("sum.1"),
                 ),
             ],
         },

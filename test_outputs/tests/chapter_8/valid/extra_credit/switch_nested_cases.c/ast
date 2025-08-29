@@ -8,239 +8,151 @@ Program {
                 VariableDeclaration {
                     name: "switch1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 VariableDeclaration {
                     name: "switch2",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 VariableDeclaration {
                     name: "switch3",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Switch(
-                    Constant {
-                        constant: 3,
-                    },
+                    Constant(3),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                If(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(1),
+                                statement: If(
+                                    Constant(0),
                                     Compound(
                                         [
-                                            Case(
-                                                Constant {
-                                                    constant: 3,
-                                                },
-                                                Expression(
+                                            Case {
+                                                expression: Constant(3),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "switch1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("switch1"),
+                                                        rhs: Constant(1),
                                                     },
                                                 ),
-                                                None,
-                                            ),
-                                            Break(
-                                                None,
-                                            ),
+                                            },
+                                            Break,
                                         ],
                                     ),
                                     None,
                                 ),
-                                None,
-                            ),
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
                 ),
                 Switch(
-                    Constant {
-                        constant: 4,
-                    },
+                    Constant(4),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
+                            },
                             If(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                                 Compound(
                                     [
                                         Return(
-                                            Constant {
-                                                constant: 0,
-                                            },
+                                            Constant(0),
                                         ),
                                     ],
                                 ),
                                 Some(
                                     Compound(
                                         [
-                                            Case(
-                                                Constant {
-                                                    constant: 4,
-                                                },
-                                                Expression(
+                                            Case {
+                                                expression: Constant(4),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "switch2",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("switch2"),
+                                                        rhs: Constant(1),
                                                     },
                                                 ),
-                                                None,
-                                            ),
-                                            Break(
-                                                None,
-                                            ),
+                                            },
+                                            Break,
                                         ],
                                     ),
                                 ),
                             ),
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Default {
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
                 ),
                 Switch(
-                    Constant {
-                        constant: 5,
-                    },
+                    Constant(5),
                     Compound(
                         [
                             For {
                                 init: VariableDeclaration {
                                     name: "i",
                                     ty: Int,
-                                    init: Constant {
-                                        constant: 0,
+                                    init: Constant(0),
+                                },
+                                condition: Binary {
+                                    op: LessThan,
+                                    lhs: Var("i"),
+                                    rhs: Constant(10),
+                                },
+                                post: Assignment {
+                                    lhs: Var("i"),
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var("i"),
+                                        rhs: Constant(1),
                                     },
                                 },
-                                condition: Some(
-                                    Binary {
-                                        op: LessThan,
-                                        lhs: Var {
-                                            name: "i",
-                                        },
-                                        rhs: Constant {
-                                            constant: 10,
-                                        },
-                                    },
-                                ),
-                                post: Some(
-                                    Assignment {
-                                        lhs: Var {
-                                            name: "i",
-                                        },
-                                        rhs: Binary {
-                                            op: Add,
-                                            lhs: Var {
-                                                name: "i",
-                                            },
-                                            rhs: Constant {
-                                                constant: 1,
-                                            },
-                                        },
-                                    },
-                                ),
                                 body: Compound(
                                     [
                                         Expression(
                                             Assignment {
-                                                lhs: Var {
-                                                    name: "switch1",
-                                                },
-                                                rhs: Constant {
-                                                    constant: 0,
-                                                },
+                                                lhs: Var("switch1"),
+                                                rhs: Constant(0),
                                             },
                                         ),
-                                        Case(
-                                            Constant {
-                                                constant: 5,
-                                            },
-                                            Expression(
+                                        Case {
+                                            expression: Constant(5),
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "switch3",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 1,
-                                                    },
+                                                    lhs: Var("switch3"),
+                                                    rhs: Constant(1),
                                                 },
                                             ),
-                                            None,
-                                        ),
-                                        Break(
-                                            None,
-                                        ),
-                                        Default(
-                                            Return(
-                                                Constant {
-                                                    constant: 0,
-                                                },
+                                        },
+                                        Break,
+                                        Default {
+                                            statement: Return(
+                                                Constant(0),
                                             ),
-                                            None,
-                                        ),
+                                        },
                                     ],
                                 ),
-                                label: None,
                             },
                         ],
                     ),
@@ -251,16 +163,10 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: And,
-                            lhs: Var {
-                                name: "switch1",
-                            },
-                            rhs: Var {
-                                name: "switch2",
-                            },
+                            lhs: Var("switch1"),
+                            rhs: Var("switch2"),
                         },
-                        rhs: Var {
-                            name: "switch3",
-                        },
+                        rhs: Var("switch3"),
                     },
                 ),
             ],

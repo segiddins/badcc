@@ -17,63 +17,39 @@ Program {
             ret: Int,
             body: [
                 Switch(
-                    Var {
-                        name: "l.1",
-                    },
+                    Var("l.1"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0l),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                Some(
-                                    "switch.0",
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(100l),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 100l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(8589934592l),
+                                statement: Return(
+                                    Constant(2),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 8589934592l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 2,
-                                    },
-                                ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Default(
-                                Return(
+                                label: "switch.0",
+                            },
+                            Default {
+                                statement: Return(
                                     Unary {
                                         op: Minus,
-                                        expr: Constant {
-                                            constant: 1,
-                                        },
+                                        expr: Constant(1),
                                     },
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(
@@ -91,23 +67,15 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_long",
-                            },
+                            function: Var("switch_on_long"),
                             params: [
-                                Constant {
-                                    constant: 8589934592l,
-                                },
+                                Constant(8589934592l),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        rhs: Constant(2),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
@@ -115,30 +83,20 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_long",
-                            },
+                            function: Var("switch_on_long"),
                             params: [
-                                Constant {
-                                    constant: 100l,
-                                },
+                                Constant(100l),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        rhs: Constant(1),
                     },
                     Return(
-                        Constant {
-                            constant: 2,
-                        },
+                        Constant(2),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

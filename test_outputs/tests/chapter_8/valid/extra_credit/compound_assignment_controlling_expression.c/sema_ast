@@ -8,46 +8,30 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 100,
-                    },
+                    init: Constant(100),
                 },
                 VariableDeclaration {
                     name: "sum.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 DoWhile(
                     Expression(
                         Assignment {
-                            lhs: Var {
-                                name: "sum.2",
-                            },
+                            lhs: Var("sum.2"),
                             rhs: Binary {
                                 op: Add,
-                                lhs: Var {
-                                    name: "sum.2",
-                                },
-                                rhs: Constant {
-                                    constant: 2,
-                                },
+                                lhs: Var("sum.2"),
+                                rhs: Constant(2),
                             },
                         },
                     ),
                     Assignment {
-                        lhs: Var {
-                            name: "i.1",
-                        },
+                        lhs: Var("i.1"),
                         rhs: Binary {
                             op: Subtract,
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("i.1"),
+                            rhs: Constant(1),
                         },
                     },
                     Some(
@@ -59,21 +43,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("i.1"),
+                            rhs: Constant(0),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "sum.2",
-                            },
-                            rhs: Constant {
-                                constant: 200,
-                            },
+                            lhs: Var("sum.2"),
+                            rhs: Constant(200),
                         },
                     },
                 ),

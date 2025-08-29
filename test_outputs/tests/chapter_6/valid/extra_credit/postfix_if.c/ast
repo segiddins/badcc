@@ -8,43 +8,31 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
                     Unary {
                         op: PostfixDecrement,
-                        expr: Var {
-                            name: "a",
-                        },
+                        expr: Var("a"),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     Some(
                         If(
                             Unary {
                                 op: PostfixDecrement,
-                                expr: Var {
-                                    name: "a",
-                                },
+                                expr: Var("a"),
                             },
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                             None,
                         ),
                     ),
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

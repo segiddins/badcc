@@ -8,26 +8,18 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 DoWhile(
                     Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "a.1",
-                                    },
+                                    lhs: Var("a.1"),
                                     rhs: Binary {
                                         op: Multiply,
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
-                                        rhs: Constant {
-                                            constant: 2,
-                                        },
+                                        lhs: Var("a.1"),
+                                        rhs: Constant(2),
                                     },
                                 },
                             ),
@@ -35,21 +27,15 @@ Program {
                     ),
                     Binary {
                         op: LessThan,
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Constant {
-                            constant: 11,
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Constant(11),
                     },
                     Some(
                         "loop.0",
                     ),
                 ),
                 Return(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                 ),
             ],
         },

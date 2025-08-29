@@ -8,32 +8,22 @@ Program {
                 VariableDeclaration {
                     name: "foo.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                 },
                 VariableDeclaration {
                     name: "bar.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 4,
-                    },
+                    init: Constant(4),
                 },
                 If(
                     Binary {
                         op: GreaterThan,
                         lhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "foo.1",
-                            },
-                            rhs: Var {
-                                name: "bar.2",
-                            },
+                            lhs: Var("foo.1"),
+                            rhs: Var("bar.2"),
                         },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        rhs: Constant(0),
                     },
                     Compound(
                         [
@@ -44,14 +34,9 @@ Program {
                             },
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "bar.2",
-                                    },
+                                    lhs: Var("bar.2"),
                                     rhs: FunctionCall {
-                                        function: Var {
-                                            name: "foo",
-                                        },
-                                        params: [],
+                                        function: Var("foo"),
                                     },
                                 },
                             ),
@@ -62,12 +47,8 @@ Program {
                 Return(
                     Binary {
                         op: Add,
-                        lhs: Var {
-                            name: "foo.1",
-                        },
-                        rhs: Var {
-                            name: "bar.2",
-                        },
+                        lhs: Var("foo.1"),
+                        rhs: Var("bar.2"),
                     },
                 ),
             ],
@@ -78,9 +59,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant {
-                        constant: 8,
-                    },
+                    Constant(8),
                 ),
             ],
         },

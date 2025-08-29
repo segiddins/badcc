@@ -8,30 +8,22 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 100,
-                    },
+                    init: Constant(100),
                 },
                 VariableDeclaration {
                     name: "count.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 While(
                     Unary {
                         op: PostfixDecrement,
-                        expr: Var {
-                            name: "i.1",
-                        },
+                        expr: Var("i.1"),
                     },
                     Expression(
                         Unary {
                             op: PostfixIncrement,
-                            expr: Var {
-                                name: "count.2",
-                            },
+                            expr: Var("count.2"),
                         },
                     ),
                     Some(
@@ -41,53 +33,35 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "count.2",
-                        },
-                        rhs: Constant {
-                            constant: 100,
-                        },
+                        lhs: Var("count.2"),
+                        rhs: Constant(100),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     None,
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "i.1",
-                        },
-                        rhs: Constant {
-                            constant: 100,
-                        },
+                        lhs: Var("i.1"),
+                        rhs: Constant(100),
                     },
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "count.2",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("count.2"),
+                        rhs: Constant(0),
                     },
                 ),
                 While(
                     Unary {
                         op: PrefixDecrement,
-                        expr: Var {
-                            name: "i.1",
-                        },
+                        expr: Var("i.1"),
                     },
                     Expression(
                         Unary {
                             op: PostfixIncrement,
-                            expr: Var {
-                                name: "count.2",
-                            },
+                            expr: Var("count.2"),
                         },
                     ),
                     Some(
@@ -97,24 +71,16 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "count.2",
-                        },
-                        rhs: Constant {
-                            constant: 99,
-                        },
+                        lhs: Var("count.2"),
+                        rhs: Constant(99),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 1,
-                    },
+                    Constant(1),
                 ),
             ],
         },

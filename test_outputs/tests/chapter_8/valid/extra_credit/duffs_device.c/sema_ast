@@ -8,9 +8,7 @@ Program {
                 VariableDeclaration {
                     name: "count.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 37,
-                    },
+                    init: Constant(37),
                 },
                 VariableDeclaration {
                     name: "iterations.2",
@@ -19,179 +17,111 @@ Program {
                         op: Divide,
                         lhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "count.1",
-                            },
-                            rhs: Constant {
-                                constant: 4,
-                            },
+                            lhs: Var("count.1"),
+                            rhs: Constant(4),
                         },
-                        rhs: Constant {
-                            constant: 5,
-                        },
+                        rhs: Constant(5),
                     },
                 },
                 Switch(
                     Binary {
                         op: Remainder,
-                        lhs: Var {
-                            name: "count.1",
-                        },
-                        rhs: Constant {
-                            constant: 5,
-                        },
+                        lhs: Var("count.1"),
+                        rhs: Constant(5),
                     },
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                DoWhile(
+                            Case {
+                                expression: Constant(0),
+                                statement: DoWhile(
                                     Compound(
                                         [
                                             Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "count.1",
-                                                    },
+                                                    lhs: Var("count.1"),
                                                     rhs: Binary {
                                                         op: Subtract,
-                                                        lhs: Var {
-                                                            name: "count.1",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("count.1"),
+                                                        rhs: Constant(1),
                                                     },
                                                 },
                                             ),
-                                            Case(
-                                                Constant {
-                                                    constant: 4,
-                                                },
-                                                Expression(
+                                            Case {
+                                                expression: Constant(4),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "count.1",
-                                                        },
+                                                        lhs: Var("count.1"),
                                                         rhs: Binary {
                                                             op: Subtract,
-                                                            lhs: Var {
-                                                                name: "count.1",
-                                                            },
-                                                            rhs: Constant {
-                                                                constant: 1,
-                                                            },
+                                                            lhs: Var("count.1"),
+                                                            rhs: Constant(1),
                                                         },
                                                     },
                                                 ),
-                                                Some(
-                                                    "switch.0",
-                                                ),
-                                            ),
-                                            Case(
-                                                Constant {
-                                                    constant: 3,
-                                                },
-                                                Expression(
+                                                label: "switch.0",
+                                            },
+                                            Case {
+                                                expression: Constant(3),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "count.1",
-                                                        },
+                                                        lhs: Var("count.1"),
                                                         rhs: Binary {
                                                             op: Subtract,
-                                                            lhs: Var {
-                                                                name: "count.1",
-                                                            },
-                                                            rhs: Constant {
-                                                                constant: 1,
-                                                            },
+                                                            lhs: Var("count.1"),
+                                                            rhs: Constant(1),
                                                         },
                                                     },
                                                 ),
-                                                Some(
-                                                    "switch.0",
-                                                ),
-                                            ),
-                                            Case(
-                                                Constant {
-                                                    constant: 2,
-                                                },
-                                                Expression(
+                                                label: "switch.0",
+                                            },
+                                            Case {
+                                                expression: Constant(2),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "count.1",
-                                                        },
+                                                        lhs: Var("count.1"),
                                                         rhs: Binary {
                                                             op: Subtract,
-                                                            lhs: Var {
-                                                                name: "count.1",
-                                                            },
-                                                            rhs: Constant {
-                                                                constant: 1,
-                                                            },
+                                                            lhs: Var("count.1"),
+                                                            rhs: Constant(1),
                                                         },
                                                     },
                                                 ),
-                                                Some(
-                                                    "switch.0",
-                                                ),
-                                            ),
-                                            Case(
-                                                Constant {
-                                                    constant: 1,
-                                                },
-                                                Expression(
+                                                label: "switch.0",
+                                            },
+                                            Case {
+                                                expression: Constant(1),
+                                                statement: Expression(
                                                     Assignment {
-                                                        lhs: Var {
-                                                            name: "count.1",
-                                                        },
+                                                        lhs: Var("count.1"),
                                                         rhs: Binary {
                                                             op: Subtract,
-                                                            lhs: Var {
-                                                                name: "count.1",
-                                                            },
-                                                            rhs: Constant {
-                                                                constant: 1,
-                                                            },
+                                                            lhs: Var("count.1"),
+                                                            rhs: Constant(1),
                                                         },
                                                     },
                                                 ),
-                                                Some(
-                                                    "switch.0",
-                                                ),
-                                            ),
+                                                label: "switch.0",
+                                            },
                                         ],
                                     ),
                                     Binary {
                                         op: GreaterThan,
                                         lhs: Assignment {
-                                            lhs: Var {
-                                                name: "iterations.2",
-                                            },
+                                            lhs: Var("iterations.2"),
                                             rhs: Binary {
                                                 op: Subtract,
-                                                lhs: Var {
-                                                    name: "iterations.2",
-                                                },
-                                                rhs: Constant {
-                                                    constant: 1,
-                                                },
+                                                lhs: Var("iterations.2"),
+                                                rhs: Constant(1),
                                             },
                                         },
-                                        rhs: Constant {
-                                            constant: 0,
-                                        },
+                                        rhs: Constant(0),
                                     },
                                     Some(
                                         "loop.1",
                                     ),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(
@@ -203,21 +133,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "count.1",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("count.1"),
+                            rhs: Constant(0),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "iterations.2",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("iterations.2"),
+                            rhs: Constant(0),
                         },
                     },
                 ),

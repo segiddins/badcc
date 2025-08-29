@@ -8,17 +8,13 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 2,
-                    },
+                    init: Constant(2),
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "j",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                     storage: Static,
                 },
                 VariableDeclaration {
@@ -26,32 +22,22 @@ Program {
                     ty: Int,
                     init: Binary {
                         op: LessThan,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Var {
-                            name: "j",
-                        },
+                        lhs: Var("i"),
+                        rhs: Var("j"),
                     },
                 },
                 If(
                     Unary {
                         op: Not,
-                        expr: Var {
-                            name: "cmp",
-                        },
+                        expr: Var("cmp"),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

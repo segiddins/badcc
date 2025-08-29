@@ -117,7 +117,7 @@ fn visit_statement(statement: &mut Statement, loop_label: &mut Scope) -> Result 
         Statement::Switch {
             condition: _,
             body: cases,
-            span: label,
+            label,
         } => {
             label.replace(loop_label.new_label(false));
             visit_statement(cases, loop_label)?;

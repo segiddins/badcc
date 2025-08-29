@@ -8,62 +8,38 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 5,
-                    },
+                    init: Constant(5),
                 },
                 Switch(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 5,
-                                },
-                                Expression(
+                            Case {
+                                expression: Constant(5),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 10,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(10),
                                     },
                                 ),
-                                None,
-                            ),
-                            Break(
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 6,
-                                },
-                                Expression(
+                            },
+                            Break,
+                            Case {
+                                expression: Constant(6),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 0,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(0),
                                     },
                                 ),
-                                None,
-                            ),
-                            Break(
-                                None,
-                            ),
+                            },
+                            Break,
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },

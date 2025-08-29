@@ -94,16 +94,10 @@ Program {
                             op: Add,
                             lhs: Binary {
                                 op: Add,
-                                lhs: Var {
-                                    name: "x.8",
-                                },
-                                rhs: Var {
-                                    name: "y.9",
-                                },
+                                lhs: Var("x.8"),
+                                rhs: Var("y.9"),
                             },
-                            rhs: Var {
-                                name: "z.10",
-                            },
+                            rhs: Var("z.10"),
                         },
                     },
                 ),
@@ -117,23 +111,17 @@ Program {
                 VariableDeclaration {
                     name: "x.12",
                     ty: Long,
-                    init: Constant {
-                        constant: 1l,
-                    },
+                    init: Constant(1l),
                 },
                 VariableDeclaration {
                     name: "y.13",
                     ty: Long,
-                    init: Constant {
-                        constant: 2l,
-                    },
+                    init: Constant(2l),
                 },
                 VariableDeclaration {
                     name: "z.14",
                     ty: Long,
-                    init: Constant {
-                        constant: 3l,
-                    },
+                    init: Constant(3l),
                 },
                 VariableDeclaration {
                     name: "a",
@@ -142,96 +130,60 @@ Program {
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "a",
-                        },
-                        rhs: Constant {
-                            constant: 4l,
-                        },
+                        lhs: Var("a"),
+                        rhs: Constant(4l),
                     },
                 ),
                 VariableDeclaration {
                     name: "sum.16",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i.17",
                         ty: Long,
-                        init: Constant {
-                            constant: 1099511627776l,
+                        init: Constant(1099511627776l),
+                    },
+                    condition: Binary {
+                        op: GreaterThan,
+                        lhs: Var("i.17"),
+                        rhs: Constant(0l),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.17"),
+                        rhs: Binary {
+                            op: Divide,
+                            lhs: Var("i.17"),
+                            rhs: Constant(2l),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: GreaterThan,
-                            lhs: Var {
-                                name: "i.17",
-                            },
-                            rhs: Constant {
-                                constant: 0l,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.17",
-                            },
-                            rhs: Binary {
-                                op: Divide,
-                                lhs: Var {
-                                    name: "i.17",
-                                },
-                                rhs: Constant {
-                                    constant: 2l,
-                                },
-                            },
-                        },
-                    ),
                     body: Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "sum.16",
-                                    },
+                                    lhs: Var("sum.16"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "sum.16",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("sum.16"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "x.12",
-                        },
-                        rhs: Constant {
-                            constant: 1l,
-                        },
+                        lhs: Var("x.12"),
+                        rhs: Constant(1l),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -240,19 +192,13 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "y.13",
-                        },
-                        rhs: Constant {
-                            constant: 2l,
-                        },
+                        lhs: Var("y.13"),
+                        rhs: Constant(2l),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
@@ -261,19 +207,13 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "a",
-                        },
-                        rhs: Constant {
-                            constant: 4l,
-                        },
+                        lhs: Var("a"),
+                        rhs: Constant(4l),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 3,
-                                },
+                                Constant(3),
                             ),
                         ],
                     ),
@@ -283,31 +223,19 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "my_function",
-                            },
+                            function: Var("my_function"),
                             params: [
-                                Var {
-                                    name: "x.12",
-                                },
-                                Var {
-                                    name: "y.13",
-                                },
-                                Var {
-                                    name: "z.14",
-                                },
+                                Var("x.12"),
+                                Var("y.13"),
+                                Var("z.14"),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 6,
-                        },
+                        rhs: Constant(6),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 4,
-                                },
+                                Constant(4),
                             ),
                         ],
                     ),
@@ -316,28 +244,20 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "sum.16",
-                        },
-                        rhs: Constant {
-                            constant: 41,
-                        },
+                        lhs: Var("sum.16"),
+                        rhs: Constant(41),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 5,
-                                },
+                                Constant(5),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

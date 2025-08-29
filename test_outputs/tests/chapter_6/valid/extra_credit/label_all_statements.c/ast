@@ -8,60 +8,40 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 Labeled(
                     "label_if",
                     If(
-                        Var {
-                            name: "a",
-                        },
-                        Goto(
-                            "label_expression",
-                        ),
+                        Var("a"),
+                        Goto("label_expression"),
                         Some(
-                            Goto(
-                                "label_empty",
-                            ),
+                            Goto("label_empty"),
                         ),
                     ),
                 ),
                 Labeled(
                     "label_goto",
-                    Goto(
-                        "label_return",
-                    ),
+                    Goto("label_return"),
                 ),
                 If(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                     Labeled(
                         "label_expression",
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "a",
-                                },
-                                rhs: Constant {
-                                    constant: 0,
-                                },
+                                lhs: Var("a"),
+                                rhs: Constant(0),
                             },
                         ),
                     ),
                     None,
                 ),
-                Goto(
-                    "label_if",
-                ),
+                Goto("label_if"),
                 Labeled(
                     "label_return",
                     Return(
-                        Var {
-                            name: "a",
-                        },
+                        Var("a"),
                     ),
                 ),
                 Labeled(
@@ -70,17 +50,11 @@ Program {
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "a",
-                        },
-                        rhs: Constant {
-                            constant: 100,
-                        },
+                        lhs: Var("a"),
+                        rhs: Constant(100),
                     },
                 ),
-                Goto(
-                    "label_goto",
-                ),
+                Goto("label_goto"),
             ],
         },
     ],

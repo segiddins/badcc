@@ -8,30 +8,22 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 100,
-                    },
+                    init: Constant(100),
                 },
                 VariableDeclaration {
                     name: "count",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 While(
                     Unary {
                         op: PostfixDecrement,
-                        expr: Var {
-                            name: "i",
-                        },
+                        expr: Var("i"),
                     },
                     Expression(
                         Unary {
                             op: PostfixIncrement,
-                            expr: Var {
-                                name: "count",
-                            },
+                            expr: Var("count"),
                         },
                     ),
                     None,
@@ -39,53 +31,35 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "count",
-                        },
-                        rhs: Constant {
-                            constant: 100,
-                        },
+                        lhs: Var("count"),
+                        rhs: Constant(100),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     None,
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 100,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(100),
                     },
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "count",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("count"),
+                        rhs: Constant(0),
                     },
                 ),
                 While(
                     Unary {
                         op: PrefixDecrement,
-                        expr: Var {
-                            name: "i",
-                        },
+                        expr: Var("i"),
                     },
                     Expression(
                         Unary {
                             op: PostfixIncrement,
-                            expr: Var {
-                                name: "count",
-                            },
+                            expr: Var("count"),
                         },
                     ),
                     None,
@@ -93,24 +67,16 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "count",
-                        },
-                        rhs: Constant {
-                            constant: 99,
-                        },
+                        lhs: Var("count"),
+                        rhs: Constant(99),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 1,
-                    },
+                    Constant(1),
                 ),
             ],
         },

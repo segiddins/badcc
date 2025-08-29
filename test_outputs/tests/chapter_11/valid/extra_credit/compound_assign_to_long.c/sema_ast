@@ -10,9 +10,7 @@ Program {
                     ty: Long,
                     init: Unary {
                         op: Minus,
-                        expr: Constant {
-                            constant: 34359738368l,
-                        },
+                        expr: Constant(34359738368l),
                     },
                 },
                 VariableDeclaration {
@@ -20,26 +18,18 @@ Program {
                     ty: Int,
                     init: Unary {
                         op: Minus,
-                        expr: Constant {
-                            constant: 10,
-                        },
+                        expr: Constant(10),
                     },
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "l.1",
-                        },
+                        lhs: Var("l.1"),
                         rhs: Binary {
                             op: Subtract,
-                            lhs: Var {
-                                name: "l.1",
-                            },
+                            lhs: Var("l.1"),
                             rhs: Cast {
                                 to: Long,
-                                expr: Var {
-                                    name: "i.2",
-                                },
+                                expr: Var("i.2"),
                             },
                         },
                     },
@@ -47,31 +37,23 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "l.1",
-                        },
+                        lhs: Var("l.1"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 34359738358l,
-                            },
+                            expr: Constant(34359738358l),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

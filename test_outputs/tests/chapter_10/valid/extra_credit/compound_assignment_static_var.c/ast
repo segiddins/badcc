@@ -8,95 +8,65 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "j",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "k",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                     storage: Static,
                 },
                 VariableDeclaration {
                     name: "l",
                     ty: Int,
-                    init: Constant {
-                        constant: 48,
-                    },
+                    init: Constant(48),
                     storage: Static,
                 },
                 Expression(
                     CompoundAssignment {
                         op: Add,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(1),
                     },
                 ),
                 Expression(
                     CompoundAssignment {
                         op: Subtract,
-                        lhs: Var {
-                            name: "j",
-                        },
-                        rhs: Var {
-                            name: "i",
-                        },
+                        lhs: Var("j"),
+                        rhs: Var("i"),
                     },
                 ),
                 Expression(
                     CompoundAssignment {
                         op: Multiply,
-                        lhs: Var {
-                            name: "k",
-                        },
-                        rhs: Var {
-                            name: "j",
-                        },
+                        lhs: Var("k"),
+                        rhs: Var("j"),
                     },
                 ),
                 Expression(
                     CompoundAssignment {
                         op: Divide,
-                        lhs: Var {
-                            name: "l",
-                        },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        lhs: Var("l"),
+                        rhs: Constant(2),
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 3,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(3),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -105,22 +75,16 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "j",
-                        },
+                        lhs: Var("j"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 6,
-                            },
+                            expr: Constant(6),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
@@ -129,22 +93,16 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "k",
-                        },
+                        lhs: Var("k"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 18,
-                            },
+                            expr: Constant(18),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 3,
-                                },
+                                Constant(3),
                             ),
                         ],
                     ),
@@ -153,28 +111,20 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "l",
-                        },
-                        rhs: Constant {
-                            constant: 6,
-                        },
+                        lhs: Var("l"),
+                        rhs: Constant(6),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 4,
-                                },
+                                Constant(4),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
@@ -185,26 +135,17 @@ Program {
             body: [
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "f",
-                        },
-                        params: [],
+                        function: Var("f"),
                     },
                 ),
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "f",
-                        },
-                        params: [],
+                        function: Var("f"),
                     },
                 ),
                 Return(
                     FunctionCall {
-                        function: Var {
-                            name: "f",
-                        },
-                        params: [],
+                        function: Var("f"),
                     },
                 ),
             ],

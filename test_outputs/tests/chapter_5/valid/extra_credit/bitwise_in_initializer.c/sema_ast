@@ -8,32 +8,22 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 15,
-                    },
+                    init: Constant(15),
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
                     init: Binary {
                         op: Xor,
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Constant {
-                            constant: 5,
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Constant(5),
                     },
                 },
                 Return(
                     Binary {
                         op: BitwiseOr,
-                        lhs: Constant {
-                            constant: 1,
-                        },
-                        rhs: Var {
-                            name: "b.2",
-                        },
+                        lhs: Constant(1),
+                        rhs: Var("b.2"),
                     },
                 ),
             ],

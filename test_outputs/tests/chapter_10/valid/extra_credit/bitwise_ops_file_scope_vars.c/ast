@@ -3,16 +3,12 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant {
-                constant: 1,
-            },
+            init: Constant(1),
         },
         VariableDeclaration {
             name: "y",
             ty: Int,
-            init: Constant {
-                constant: 0,
-            },
+            init: Constant(0),
         },
         FunctionDeclaration {
             identifier: "main",
@@ -21,55 +17,37 @@ Program {
             body: [
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "y",
-                        },
+                        lhs: Var("y"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 1,
-                            },
+                            expr: Constant(1),
                         },
                     },
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "x",
-                        },
+                        lhs: Var("x"),
                         rhs: Binary {
                             op: BitwiseOr,
                             lhs: Binary {
                                 op: LeftShift,
-                                lhs: Var {
-                                    name: "x",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
+                                lhs: Var("x"),
+                                rhs: Constant(1),
                             },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            rhs: Constant(1),
                         },
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 3,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(3),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -77,63 +55,45 @@ Program {
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "y",
-                        },
+                        lhs: Var("y"),
                         rhs: Binary {
                             op: RightShift,
                             lhs: Binary {
                                 op: Xor,
                                 lhs: Binary {
                                     op: BitwiseAnd,
-                                    lhs: Var {
-                                        name: "y",
-                                    },
+                                    lhs: Var("y"),
                                     rhs: Unary {
                                         op: Minus,
-                                        expr: Constant {
-                                            constant: 5,
-                                        },
+                                        expr: Constant(5),
                                     },
                                 },
-                                rhs: Constant {
-                                    constant: 12,
-                                },
+                                rhs: Constant(12),
                             },
-                            rhs: Constant {
-                                constant: 2,
-                            },
+                            rhs: Constant(2),
                         },
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "y",
-                        },
+                        lhs: Var("y"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 3,
-                            },
+                            expr: Constant(3),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

@@ -8,80 +8,46 @@ Program {
                 VariableDeclaration {
                     name: "ans",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: For {
                         init: VariableDeclaration {
                             name: "j",
                             ty: Int,
-                            init: Constant {
-                                constant: 0,
+                            init: Constant(0),
+                        },
+                        condition: Binary {
+                            op: LessThan,
+                            lhs: Var("j"),
+                            rhs: Constant(10),
+                        },
+                        post: Assignment {
+                            lhs: Var("j"),
+                            rhs: Binary {
+                                op: Add,
+                                lhs: Var("j"),
+                                rhs: Constant(1),
                             },
                         },
-                        condition: Some(
-                            Binary {
-                                op: LessThan,
-                                lhs: Var {
-                                    name: "j",
-                                },
-                                rhs: Constant {
-                                    constant: 10,
-                                },
-                            },
-                        ),
-                        post: Some(
-                            Assignment {
-                                lhs: Var {
-                                    name: "j",
-                                },
-                                rhs: Binary {
-                                    op: Add,
-                                    lhs: Var {
-                                        name: "j",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1,
-                                    },
-                                },
-                            },
-                        ),
                         body: If(
                             Binary {
                                 op: Equals,
@@ -89,51 +55,31 @@ Program {
                                     op: Multiply,
                                     lhs: Binary {
                                         op: Divide,
-                                        lhs: Var {
-                                            name: "i",
-                                        },
-                                        rhs: Constant {
-                                            constant: 2,
-                                        },
+                                        lhs: Var("i"),
+                                        rhs: Constant(2),
                                     },
-                                    rhs: Constant {
-                                        constant: 2,
-                                    },
+                                    rhs: Constant(2),
                                 },
-                                rhs: Var {
-                                    name: "i",
-                                },
+                                rhs: Var("i"),
                             },
-                            Break(
-                                None,
-                            ),
+                            Break,
                             Some(
                                 Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "ans",
-                                        },
+                                        lhs: Var("ans"),
                                         rhs: Binary {
                                             op: Add,
-                                            lhs: Var {
-                                                name: "ans",
-                                            },
-                                            rhs: Var {
-                                                name: "i",
-                                            },
+                                            lhs: Var("ans"),
+                                            rhs: Var("i"),
                                         },
                                     },
                                 ),
                             ),
                         ),
-                        label: None,
                     },
-                    label: None,
                 },
                 Return(
-                    Var {
-                        name: "ans",
-                    },
+                    Var("ans"),
                 ),
             ],
         },

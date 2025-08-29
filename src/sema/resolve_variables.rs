@@ -233,7 +233,7 @@ fn visit_statement(statement: &mut Statement, scope: &mut Scope) -> Result {
         Statement::Switch {
             condition: expression,
             body: statement,
-            span: _,
+            label: _,
         }
         | Statement::Case {
             expression,

@@ -8,9 +8,7 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
@@ -18,60 +16,35 @@ Program {
                         ty: Int,
                         init: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 100,
-                            },
+                            expr: Constant(100),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThanOrEqual,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                    condition: Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("i"),
+                        rhs: Constant(0),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
+                    },
                     body: Expression(
                         Assignment {
-                            lhs: Var {
-                                name: "a",
-                            },
+                            lhs: Var("a"),
                             rhs: Binary {
                                 op: Add,
-                                lhs: Var {
-                                    name: "a",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
+                                lhs: Var("a"),
+                                rhs: Constant(1),
                             },
                         },
                     ),
-                    label: None,
                 },
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },

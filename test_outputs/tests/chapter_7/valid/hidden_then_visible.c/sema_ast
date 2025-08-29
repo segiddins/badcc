@@ -8,9 +8,7 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 2,
-                    },
+                    init: Constant(2),
                 },
                 VariableDeclaration {
                     name: "b.2",
@@ -20,37 +18,25 @@ Program {
                     [
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "a.1",
-                                },
+                                lhs: Var("a.1"),
                                 rhs: Unary {
                                     op: Minus,
-                                    expr: Constant {
-                                        constant: 4,
-                                    },
+                                    expr: Constant(4),
                                 },
                             },
                         ),
                         VariableDeclaration {
                             name: "a.3",
                             ty: Int,
-                            init: Constant {
-                                constant: 7,
-                            },
+                            init: Constant(7),
                         },
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "b.2",
-                                },
+                                lhs: Var("b.2"),
                                 rhs: Binary {
                                     op: Add,
-                                    lhs: Var {
-                                        name: "a.3",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1,
-                                    },
+                                    lhs: Var("a.3"),
+                                    rhs: Constant(1),
                                 },
                             },
                         ),
@@ -61,23 +47,15 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "b.2",
-                            },
-                            rhs: Constant {
-                                constant: 8,
-                            },
+                            lhs: Var("b.2"),
+                            rhs: Constant(8),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "a.1",
-                            },
+                            lhs: Var("a.1"),
                             rhs: Unary {
                                 op: Minus,
-                                expr: Constant {
-                                    constant: 4,
-                                },
+                                expr: Constant(4),
                             },
                         },
                     },

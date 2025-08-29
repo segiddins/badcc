@@ -9,47 +9,28 @@ Program {
                     init: VariableDeclaration {
                         name: "i.1",
                         ty: Int,
-                        init: Constant {
-                            constant: 400,
+                        init: Constant(400),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.1"),
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var("i.1"),
+                            rhs: Constant(100),
                         },
                     },
-                    condition: None,
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Binary {
-                                op: Subtract,
-                                lhs: Var {
-                                    name: "i.1",
-                                },
-                                rhs: Constant {
-                                    constant: 100,
-                                },
-                            },
-                        },
-                    ),
                     body: If(
                         Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Constant {
-                                constant: 100,
-                            },
+                            lhs: Var("i.1"),
+                            rhs: Constant(100),
                         },
                         Return(
-                            Constant {
-                                constant: 0,
-                            },
+                            Constant(0),
                         ),
                         None,
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
             ],
         },

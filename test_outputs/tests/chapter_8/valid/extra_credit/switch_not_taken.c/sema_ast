@@ -8,55 +8,33 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 Switch(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                Some(
-                                    "switch.0",
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(2),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 2,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(3),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 3,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
-                                ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(
@@ -64,9 +42,7 @@ Program {
                     ),
                 ),
                 Return(
-                    Constant {
-                        constant: 1,
-                    },
+                    Constant(1),
                 ),
             ],
         },

@@ -8,44 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "flag",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Expression(
                     Ternary {
-                        cond: Var {
-                            name: "flag",
-                        },
+                        cond: Var("flag"),
                         if_true: Assignment {
-                            lhs: Var {
-                                name: "a",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("a"),
+                            rhs: Constant(1),
                         },
                         if_false: Assignment {
-                            lhs: Var {
-                                name: "a",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("a"),
+                            rhs: Constant(0),
                         },
                     },
                 ),
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },

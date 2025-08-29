@@ -8,78 +8,48 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Switch(
                     Assignment {
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Constant(1),
                     },
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 10,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(10),
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                Expression(
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(1),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
+                                        lhs: Var("a.1"),
                                         rhs: Binary {
                                             op: Multiply,
-                                            lhs: Var {
-                                                name: "a.1",
-                                            },
-                                            rhs: Constant {
-                                                constant: 2,
-                                            },
+                                            lhs: Var("a.1"),
+                                            rhs: Constant(2),
                                         },
                                     },
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Break(
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
-                            Default(
-                                Expression(
+                                label: "switch.0",
+                            },
+                            Break {
+                                label: "switch.0",
+                            },
+                            Default {
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
-                                        rhs: Constant {
-                                            constant: 99,
-                                        },
+                                        lhs: Var("a.1"),
+                                        rhs: Constant(99),
                                     },
                                 ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(
@@ -87,9 +57,7 @@ Program {
                     ),
                 ),
                 Return(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                 ),
             ],
         },

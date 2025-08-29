@@ -8,44 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 10,
-                    },
+                    init: Constant(10),
                 },
                 Expression(
                     Ternary {
                         cond: CompoundAssignment {
                             op: Subtract,
-                            lhs: Var {
-                                name: "x",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("x"),
+                            rhs: Constant(1),
                         },
                         if_true: CompoundAssignment {
                             op: Divide,
-                            lhs: Var {
-                                name: "x",
-                            },
-                            rhs: Constant {
-                                constant: 2,
-                            },
+                            lhs: Var("x"),
+                            rhs: Constant(2),
                         },
-                        if_false: Constant {
-                            constant: 0,
-                        },
+                        if_false: Constant(0),
                     },
                 ),
                 Return(
                     Binary {
                         op: Equals,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 4,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(4),
                     },
                 ),
             ],

@@ -8,40 +8,26 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
-                    Var {
-                        name: "x",
-                    },
+                    Var("x"),
                     Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "x",
-                                    },
-                                    rhs: Constant {
-                                        constant: 5,
-                                    },
+                                    lhs: Var("x"),
+                                    rhs: Constant(5),
                                 },
                             ),
-                            Goto(
-                                "l",
-                            ),
+                            Goto("l"),
                             Return(
-                                Constant {
-                                    constant: 0,
-                                },
+                                Constant(0),
                             ),
                             Labeled(
                                 "l",
                                 Return(
-                                    Var {
-                                        name: "x",
-                                    },
+                                    Var("x"),
                                 ),
                             ),
                         ],
@@ -49,20 +35,14 @@ Program {
                     Some(
                         Compound(
                             [
-                                Goto(
-                                    "l",
-                                ),
+                                Goto("l"),
                                 Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                                    Constant(0),
                                 ),
                                 Labeled(
                                     "l",
                                     Return(
-                                        Var {
-                                            name: "x",
-                                        },
+                                        Var("x"),
                                     ),
                                 ),
                             ],

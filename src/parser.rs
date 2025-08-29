@@ -407,7 +407,7 @@ fn parse_statement(lexer: &mut Lexer) -> Result<Statement> {
                 Ok(Statement::Switch {
                     condition: expr,
                     body: parse_statement(lexer)?.into(),
-                    span: None,
+                    label: None,
                 })
             }
             Token::LBrace => parse_block(lexer).map(Statement::Compound),

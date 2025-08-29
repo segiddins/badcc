@@ -17,52 +17,32 @@ Program {
             ret: Int,
             body: [
                 Switch(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 5,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(5),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 8589934592l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(8589934592l),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 34359738367l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 2,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(34359738367l),
+                                statement: Return(
+                                    Constant(2),
                                 ),
-                                None,
-                            ),
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 3,
-                                    },
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(3),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
@@ -78,23 +58,15 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_int",
-                            },
+                            function: Var("switch_on_int"),
                             params: [
-                                Constant {
-                                    constant: 5,
-                                },
+                                Constant(5),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        rhs: Constant(0),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
@@ -102,23 +74,15 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_int",
-                            },
+                            function: Var("switch_on_int"),
                             params: [
-                                Constant {
-                                    constant: 0,
-                                },
+                                Constant(0),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        rhs: Constant(1),
                     },
                     Return(
-                        Constant {
-                            constant: 2,
-                        },
+                        Constant(2),
                     ),
                     None,
                 ),
@@ -126,26 +90,18 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_int",
-                            },
+                            function: Var("switch_on_int"),
                             params: [
                                 Unary {
                                     op: Minus,
-                                    expr: Constant {
-                                        constant: 1,
-                                    },
+                                    expr: Constant(1),
                                 },
                             ],
                         },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        rhs: Constant(2),
                     },
                     Return(
-                        Constant {
-                            constant: 3,
-                        },
+                        Constant(3),
                     ),
                     None,
                 ),
@@ -153,30 +109,20 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "switch_on_int",
-                            },
+                            function: Var("switch_on_int"),
                             params: [
-                                Constant {
-                                    constant: 17179869184l,
-                                },
+                                Constant(17179869184l),
                             ],
                         },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        rhs: Constant(1),
                     },
                     Return(
-                        Constant {
-                            constant: 4,
-                        },
+                        Constant(4),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

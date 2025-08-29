@@ -8,54 +8,37 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 Switch(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "b",
                                 ty: Int,
-                                init: Constant {
-                                    constant: 2,
-                                },
+                                init: Constant(2),
                             },
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Expression(
+                            Case {
+                                expression: Constant(0),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 3,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(3),
                                     },
                                 ),
-                                None,
-                            ),
+                            },
                             VariableDeclaration {
                                 name: "b",
                                 ty: Int,
-                                init: Constant {
-                                    constant: 2,
-                                },
+                                init: Constant(2),
                             },
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

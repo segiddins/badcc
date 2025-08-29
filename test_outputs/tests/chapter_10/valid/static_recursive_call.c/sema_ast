@@ -24,63 +24,42 @@ Program {
                 VariableDeclaration {
                     name: "count.3",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                     storage: Static,
                 },
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "putchar",
-                        },
+                        function: Var("putchar"),
                         params: [
                             Binary {
                                 op: Add,
-                                lhs: Var {
-                                    name: "count.3",
-                                },
-                                rhs: Constant {
-                                    constant: 65,
-                                },
+                                lhs: Var("count.3"),
+                                rhs: Constant(65),
                             },
                         ],
                     },
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "count.3",
-                        },
+                        lhs: Var("count.3"),
                         rhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "count.3",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("count.3"),
+                            rhs: Constant(1),
                         },
                     },
                 ),
                 If(
                     Binary {
                         op: LessThan,
-                        lhs: Var {
-                            name: "count.3",
-                        },
-                        rhs: Constant {
-                            constant: 26,
-                        },
+                        lhs: Var("count.3"),
+                        rhs: Constant(26),
                     },
                     Compound(
                         [
                             Expression(
                                 FunctionCall {
-                                    function: Var {
-                                        name: "print_alphabet",
-                                    },
-                                    params: [],
+                                    function: Var("print_alphabet"),
                                 },
                             ),
                         ],
@@ -88,9 +67,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "count.3",
-                    },
+                    Var("count.3"),
                 ),
             ],
         },
@@ -101,10 +78,7 @@ Program {
             body: [
                 Expression(
                     FunctionCall {
-                        function: Var {
-                            name: "print_alphabet",
-                        },
-                        params: [],
+                        function: Var("print_alphabet"),
                     },
                 ),
             ],

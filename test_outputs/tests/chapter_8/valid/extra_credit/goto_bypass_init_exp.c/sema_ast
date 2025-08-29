@@ -8,79 +8,47 @@ Program {
                 VariableDeclaration {
                     name: "i.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
-                Goto(
-                    "target",
-                ),
+                Goto("target"),
                 For {
                     init: Some(
                         Assignment {
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("i.1"),
+                            rhs: Constant(5),
                         },
                     ),
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i.1"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.1"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i.1"),
+                            rhs: Constant(1),
                         },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.1",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i.1",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
+                    },
                     body: Labeled(
                         "target",
                         If(
                             Binary {
                                 op: Equals,
-                                lhs: Var {
-                                    name: "i.1",
-                                },
-                                rhs: Constant {
-                                    constant: 0,
-                                },
+                                lhs: Var("i.1"),
+                                rhs: Constant(0),
                             },
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                             None,
                         ),
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

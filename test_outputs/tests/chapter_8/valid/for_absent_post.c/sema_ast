@@ -10,75 +10,48 @@ Program {
                     ty: Int,
                     init: Unary {
                         op: Minus,
-                        expr: Constant {
-                            constant: 2147483647,
-                        },
+                        expr: Constant(2147483647),
                     },
                 },
                 For {
                     init: None,
-                    condition: Some(
-                        Binary {
-                            op: NotEqual,
-                            lhs: Binary {
-                                op: Remainder,
-                                lhs: Var {
-                                    name: "a.1",
-                                },
-                                rhs: Constant {
-                                    constant: 5,
-                                },
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                    condition: Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Remainder,
+                            lhs: Var("a.1"),
+                            rhs: Constant(5),
                         },
-                    ),
-                    post: None,
+                        rhs: Constant(0),
+                    },
                     body: Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "a.1",
-                                    },
+                                    lhs: Var("a.1"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("a.1"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
                     Binary {
                         op: Or,
                         lhs: Binary {
                             op: Remainder,
-                            lhs: Var {
-                                name: "a.1",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("a.1"),
+                            rhs: Constant(5),
                         },
                         rhs: Binary {
                             op: GreaterThan,
-                            lhs: Var {
-                                name: "a.1",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
+                            lhs: Var("a.1"),
+                            rhs: Constant(0),
                         },
                     },
                 ),

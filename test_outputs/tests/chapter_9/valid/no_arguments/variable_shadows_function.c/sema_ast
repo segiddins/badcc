@@ -14,44 +14,29 @@ Program {
                     name: "x.2",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "foo",
-                        },
-                        params: [],
+                        function: Var("foo"),
                     },
                 },
                 If(
                     Binary {
                         op: GreaterThan,
-                        lhs: Var {
-                            name: "x.2",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("x.2"),
+                        rhs: Constant(0),
                     },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "foo.3",
                                 ty: Int,
-                                init: Constant {
-                                    constant: 3,
-                                },
+                                init: Constant(3),
                             },
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "x.2",
-                                    },
+                                    lhs: Var("x.2"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "x.2",
-                                        },
-                                        rhs: Var {
-                                            name: "foo.3",
-                                        },
+                                        lhs: Var("x.2"),
+                                        rhs: Var("foo.3"),
                                     },
                                 },
                             ),
@@ -60,9 +45,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "x.2",
-                    },
+                    Var("x.2"),
                 ),
             ],
         },
@@ -72,9 +55,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant {
-                        constant: 4,
-                    },
+                    Constant(4),
                 ),
             ],
         },

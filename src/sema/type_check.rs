@@ -558,7 +558,7 @@ impl Checker {
             Statement::Switch {
                 condition: expression,
                 body: statement,
-                span: label,
+                label,
             } => {
                 let ty = self.visit_numeric_expression(
                     expression,

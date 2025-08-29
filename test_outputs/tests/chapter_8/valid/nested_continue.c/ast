@@ -8,92 +8,60 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 5,
-                    },
+                    init: Constant(5),
                 },
                 VariableDeclaration {
                     name: "acc",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 While(
                     Binary {
                         op: GreaterThanOrEqual,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(0),
                     },
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "i",
                                 ty: Int,
-                                init: Var {
-                                    name: "x",
-                                },
+                                init: Var("x"),
                             },
                             While(
                                 Binary {
                                     op: LessThanOrEqual,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 10,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(10),
                                 },
                                 Compound(
                                     [
                                         Expression(
                                             Assignment {
-                                                lhs: Var {
-                                                    name: "i",
-                                                },
+                                                lhs: Var("i"),
                                                 rhs: Binary {
                                                     op: Add,
-                                                    lhs: Var {
-                                                        name: "i",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 1,
-                                                    },
+                                                    lhs: Var("i"),
+                                                    rhs: Constant(1),
                                                 },
                                             },
                                         ),
                                         If(
                                             Binary {
                                                 op: Remainder,
-                                                lhs: Var {
-                                                    name: "i",
-                                                },
-                                                rhs: Constant {
-                                                    constant: 2,
-                                                },
+                                                lhs: Var("i"),
+                                                rhs: Constant(2),
                                             },
-                                            Continue(
-                                                None,
-                                            ),
+                                            Continue,
                                             None,
                                         ),
                                         Expression(
                                             Assignment {
-                                                lhs: Var {
-                                                    name: "acc",
-                                                },
+                                                lhs: Var("acc"),
                                                 rhs: Binary {
                                                     op: Add,
-                                                    lhs: Var {
-                                                        name: "acc",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 1,
-                                                    },
+                                                    lhs: Var("acc"),
+                                                    rhs: Constant(1),
                                                 },
                                             },
                                         ),
@@ -103,17 +71,11 @@ Program {
                             ),
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "x",
-                                    },
+                                    lhs: Var("x"),
                                     rhs: Binary {
                                         op: Subtract,
-                                        lhs: Var {
-                                            name: "x",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("x"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
@@ -122,9 +84,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "acc",
-                    },
+                    Var("acc"),
                 ),
             ],
         },

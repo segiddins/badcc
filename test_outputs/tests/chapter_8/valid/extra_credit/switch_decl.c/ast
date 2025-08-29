@@ -8,64 +8,41 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Switch(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "a",
                                 ty: Int,
                                 init: Assignment {
-                                    lhs: Var {
-                                        name: "b",
-                                    },
-                                    rhs: Constant {
-                                        constant: 5,
-                                    },
+                                    lhs: Var("b"),
+                                    rhs: Constant(5),
                                 },
                             },
-                            Case(
-                                Constant {
-                                    constant: 3,
-                                },
-                                Expression(
+                            Case {
+                                expression: Constant(3),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 4,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(4),
                                     },
                                 ),
-                                None,
-                            ),
+                            },
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "b",
-                                    },
+                                    lhs: Var("b"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "b",
-                                        },
-                                        rhs: Var {
-                                            name: "a",
-                                        },
+                                        lhs: Var("b"),
+                                        rhs: Var("a"),
                                     },
                                 },
                             ),
@@ -78,21 +55,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "a",
-                            },
-                            rhs: Constant {
-                                constant: 3,
-                            },
+                            lhs: Var("a"),
+                            rhs: Constant(3),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "b",
-                            },
-                            rhs: Constant {
-                                constant: 4,
-                            },
+                            lhs: Var("b"),
+                            rhs: Constant(4),
                         },
                     },
                 ),

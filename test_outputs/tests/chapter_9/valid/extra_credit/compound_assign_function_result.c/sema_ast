@@ -6,9 +6,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant {
-                        constant: 2,
-                    },
+                    Constant(2),
                 ),
             ],
         },
@@ -20,33 +18,22 @@ Program {
                 VariableDeclaration {
                     name: "x.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "x.2",
-                        },
+                        lhs: Var("x.2"),
                         rhs: Binary {
                             op: Subtract,
-                            lhs: Var {
-                                name: "x.2",
-                            },
+                            lhs: Var("x.2"),
                             rhs: FunctionCall {
-                                function: Var {
-                                    name: "foo",
-                                },
-                                params: [],
+                                function: Var("foo"),
                             },
                         },
                     },
                 ),
                 Return(
-                    Var {
-                        name: "x.2",
-                    },
+                    Var("x.2"),
                 ),
             ],
         },

@@ -6,9 +6,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Constant {
-                        constant: 9,
-                    },
+                    Constant(9),
                 ),
             ],
         },
@@ -20,14 +18,9 @@ Program {
                 Return(
                     Binary {
                         op: Multiply,
-                        lhs: Constant {
-                            constant: 2,
-                        },
+                        lhs: Constant(2),
                         rhs: FunctionCall {
-                            function: Var {
-                                name: "bar",
-                            },
-                            params: [],
+                            function: Var("bar"),
                         },
                     },
                 ),
@@ -42,22 +35,14 @@ Program {
                     Binary {
                         op: Add,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "foo",
-                            },
-                            params: [],
+                            function: Var("foo"),
                         },
                         rhs: Binary {
                             op: Divide,
                             lhs: FunctionCall {
-                                function: Var {
-                                    name: "bar",
-                                },
-                                params: [],
+                                function: Var("bar"),
                             },
-                            rhs: Constant {
-                                constant: 3,
-                            },
+                            rhs: Constant(3),
                         },
                     },
                 ),

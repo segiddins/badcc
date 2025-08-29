@@ -8,78 +8,48 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Switch(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                            Case {
+                                expression: Constant(1),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 2,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 9,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(2),
+                                statement: Return(
+                                    Constant(9),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 4,
-                                },
-                                Expression(
+                            },
+                            Case {
+                                expression: Constant(4),
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 11,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(11),
                                     },
                                 ),
-                                None,
-                            ),
-                            Break(
-                                None,
-                            ),
-                            Default(
-                                Expression(
+                            },
+                            Break,
+                            Default {
+                                statement: Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "a",
-                                        },
-                                        rhs: Constant {
-                                            constant: 22,
-                                        },
+                                        lhs: Var("a"),
+                                        rhs: Constant(22),
                                     },
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },

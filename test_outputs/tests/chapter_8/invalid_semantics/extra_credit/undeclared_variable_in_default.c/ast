@@ -8,44 +8,28 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 10,
-                    },
+                    init: Constant(10),
                 },
                 Switch(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 1,
-                                },
-                                Break(
-                                    None,
+                            Case {
+                                expression: Constant(1),
+                                statement: Break,
+                            },
+                            Default {
+                                statement: Return(
+                                    Var("b"),
                                 ),
-                                None,
-                            ),
-                            Default(
-                                Return(
-                                    Var {
-                                        name: "b",
-                                    },
-                                ),
-                                None,
-                            ),
-                            Break(
-                                None,
-                            ),
+                            },
+                            Break,
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

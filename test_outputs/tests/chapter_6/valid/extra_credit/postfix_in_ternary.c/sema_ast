@@ -8,36 +8,24 @@ Program {
                 VariableDeclaration {
                     name: "x.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 10,
-                    },
+                    init: Constant(10),
                 },
                 Expression(
                     Ternary {
                         cond: Binary {
                             op: Subtract,
-                            lhs: Var {
-                                name: "x.1",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
+                            lhs: Var("x.1"),
+                            rhs: Constant(10),
                         },
-                        if_true: Constant {
-                            constant: 0,
-                        },
+                        if_true: Constant(0),
                         if_false: Unary {
                             op: PostfixDecrement,
-                            expr: Var {
-                                name: "x.1",
-                            },
+                            expr: Var("x.1"),
                         },
                     },
                 ),
                 Return(
-                    Var {
-                        name: "x.1",
-                    },
+                    Var("x.1"),
                 ),
             ],
         },

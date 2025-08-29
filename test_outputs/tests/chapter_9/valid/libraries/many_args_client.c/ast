@@ -111,34 +111,24 @@ Program {
                     name: "x",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "fib",
-                        },
+                        function: Var("fib"),
                         params: [
-                            Constant {
-                                constant: 4,
-                            },
+                            Constant(4),
                         ],
                     },
                 },
                 VariableDeclaration {
                     name: "seven",
                     ty: Int,
-                    init: Constant {
-                        constant: 7,
-                    },
+                    init: Constant(7),
                 },
                 VariableDeclaration {
                     name: "eight",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "fib",
-                        },
+                        function: Var("fib"),
                         params: [
-                            Constant {
-                                constant: 6,
-                            },
+                            Constant(6),
                         ],
                     },
                 },
@@ -146,53 +136,29 @@ Program {
                     name: "y",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "multiply_many_args",
-                        },
+                        function: Var("multiply_many_args"),
                         params: [
-                            Var {
-                                name: "x",
-                            },
-                            Constant {
-                                constant: 2,
-                            },
-                            Constant {
-                                constant: 3,
-                            },
-                            Constant {
-                                constant: 4,
-                            },
-                            Constant {
-                                constant: 5,
-                            },
-                            Constant {
-                                constant: 6,
-                            },
-                            Var {
-                                name: "seven",
-                            },
-                            Var {
-                                name: "eight",
-                            },
+                            Var("x"),
+                            Constant(2),
+                            Constant(3),
+                            Constant(4),
+                            Constant(5),
+                            Constant(6),
+                            Var("seven"),
+                            Var("eight"),
                         ],
                     },
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 3,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(3),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -201,19 +167,13 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "y",
-                        },
-                        rhs: Constant {
-                            constant: 589680,
-                        },
+                        lhs: Var("y"),
+                        rhs: Constant(589680),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
@@ -222,17 +182,11 @@ Program {
                 Return(
                     Binary {
                         op: Add,
-                        lhs: Var {
-                            name: "x",
-                        },
+                        lhs: Var("x"),
                         rhs: Binary {
                             op: Remainder,
-                            lhs: Var {
-                                name: "y",
-                            },
-                            rhs: Constant {
-                                constant: 256,
-                            },
+                            lhs: Var("y"),
+                            rhs: Constant(256),
                         },
                     },
                 ),

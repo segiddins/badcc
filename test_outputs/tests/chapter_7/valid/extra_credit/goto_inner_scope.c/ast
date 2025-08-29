@@ -8,39 +8,27 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 5,
-                    },
+                    init: Constant(5),
                 },
-                Goto(
-                    "inner",
-                ),
+                Goto("inner"),
                 Compound(
                     [
                         VariableDeclaration {
                             name: "x",
                             ty: Int,
-                            init: Constant {
-                                constant: 0,
-                            },
+                            init: Constant(0),
                         },
                         Labeled(
                             "inner",
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "x",
-                                    },
-                                    rhs: Constant {
-                                        constant: 1,
-                                    },
+                                    lhs: Var("x"),
+                                    rhs: Constant(1),
                                 },
                             ),
                         ),
                         Return(
-                            Var {
-                                name: "x",
-                            },
+                            Var("x"),
                         ),
                     ],
                 ),

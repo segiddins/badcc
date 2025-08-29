@@ -8,51 +8,33 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
                     Unary {
                         op: Not,
-                        expr: Var {
-                            name: "a",
-                        },
+                        expr: Var("a"),
                     },
                     If(
                         Binary {
                             op: Divide,
-                            lhs: Constant {
-                                constant: 3,
-                            },
-                            rhs: Constant {
-                                constant: 4,
-                            },
+                            lhs: Constant(3),
+                            rhs: Constant(4),
                         },
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "a",
-                                },
-                                rhs: Constant {
-                                    constant: 3,
-                                },
+                                lhs: Var("a"),
+                                rhs: Constant(3),
                             },
                         ),
                         Some(
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "a",
-                                    },
+                                    lhs: Var("a"),
                                     rhs: Binary {
                                         op: Divide,
-                                        lhs: Constant {
-                                            constant: 8,
-                                        },
-                                        rhs: Constant {
-                                            constant: 2,
-                                        },
+                                        lhs: Constant(8),
+                                        rhs: Constant(2),
                                     },
                                 },
                             ),
@@ -61,9 +43,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },

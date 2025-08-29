@@ -3,16 +3,12 @@ Program {
         VariableDeclaration {
             name: "i",
             ty: Int,
-            init: Constant {
-                constant: 0,
-            },
+            init: Constant(0),
         },
         VariableDeclaration {
             name: "j",
             ty: Int,
-            init: Constant {
-                constant: 0,
-            },
+            init: Constant(0),
         },
         FunctionDeclaration {
             identifier: "incr_i",
@@ -22,29 +18,21 @@ Program {
                 If(
                     Binary {
                         op: Equals,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(1),
                     },
                     Compound(
                         [
                             Expression(
                                 Unary {
                                     op: PostfixIncrement,
-                                    expr: Var {
-                                        name: "i",
-                                    },
+                                    expr: Var("i"),
                                 },
                             ),
                             Expression(
                                 Unary {
                                     op: PrefixIncrement,
-                                    expr: Var {
-                                        name: "i",
-                                    },
+                                    expr: Var("i"),
                                 },
                             ),
                         ],
@@ -52,9 +40,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
@@ -66,14 +52,10 @@ Program {
                 If(
                     Binary {
                         op: Equals,
-                        lhs: Var {
-                            name: "j",
-                        },
+                        lhs: Var("j"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 1,
-                            },
+                            expr: Constant(1),
                         },
                     },
                     Compound(
@@ -81,9 +63,7 @@ Program {
                             Expression(
                                 Unary {
                                     op: PostfixDecrement,
-                                    expr: Var {
-                                        name: "j",
-                                    },
+                                    expr: Var("j"),
                                 },
                             ),
                         ],
@@ -91,9 +71,7 @@ Program {
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
@@ -106,37 +84,24 @@ Program {
                     Ternary {
                         cond: Unary {
                             op: PostfixIncrement,
-                            expr: Var {
-                                name: "i",
-                            },
+                            expr: Var("i"),
                         },
-                        if_true: Constant {
-                            constant: 0,
-                        },
+                        if_true: Constant(0),
                         if_false: FunctionCall {
-                            function: Var {
-                                name: "incr_i",
-                            },
-                            params: [],
+                            function: Var("incr_i"),
                         },
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 3,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(3),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -146,49 +111,34 @@ Program {
                     Ternary {
                         cond: Unary {
                             op: PrefixDecrement,
-                            expr: Var {
-                                name: "j",
-                            },
+                            expr: Var("j"),
                         },
                         if_true: FunctionCall {
-                            function: Var {
-                                name: "decr_j",
-                            },
-                            params: [],
+                            function: Var("decr_j"),
                         },
-                        if_false: Constant {
-                            constant: 0,
-                        },
+                        if_false: Constant(0),
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "j",
-                        },
+                        lhs: Var("j"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 2,
-                            },
+                            expr: Constant(2),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

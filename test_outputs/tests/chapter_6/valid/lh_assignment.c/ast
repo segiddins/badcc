@@ -8,37 +8,23 @@ Program {
                 VariableDeclaration {
                     name: "x",
                     ty: Int,
-                    init: Constant {
-                        constant: 10,
-                    },
+                    init: Constant(10),
                 },
                 VariableDeclaration {
                     name: "y",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "y",
-                        },
+                        lhs: Var("y"),
                         rhs: Ternary {
                             cond: Assignment {
-                                lhs: Var {
-                                    name: "x",
-                                },
-                                rhs: Constant {
-                                    constant: 5,
-                                },
+                                lhs: Var("x"),
+                                rhs: Constant(5),
                             },
-                            if_true: Var {
-                                name: "x",
-                            },
-                            if_false: Constant {
-                                constant: 2,
-                            },
+                            if_true: Var("x"),
+                            if_false: Constant(2),
                         },
                     },
                 ),
@@ -47,21 +33,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "x",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("x"),
+                            rhs: Constant(5),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "y",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("y"),
+                            rhs: Constant(5),
                         },
                     },
                 ),

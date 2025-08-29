@@ -8,27 +8,19 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                     Compound(
                         [
                             VariableDeclaration {
                                 name: "b.2",
                                 ty: Int,
-                                init: Constant {
-                                    constant: 2,
-                                },
+                                init: Constant(2),
                             },
                             Return(
-                                Var {
-                                    name: "b.2",
-                                },
+                                Var("b.2"),
                             ),
                         ],
                     ),
@@ -38,28 +30,20 @@ Program {
                                 VariableDeclaration {
                                     name: "c.3",
                                     ty: Int,
-                                    init: Constant {
-                                        constant: 3,
-                                    },
+                                    init: Constant(3),
                                 },
                                 If(
                                     Binary {
                                         op: LessThan,
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
-                                        rhs: Var {
-                                            name: "c.3",
-                                        },
+                                        lhs: Var("a.1"),
+                                        rhs: Var("c.3"),
                                     },
                                     Compound(
                                         [
                                             Return(
                                                 Unary {
                                                     op: Not,
-                                                    expr: Var {
-                                                        name: "a.1",
-                                                    },
+                                                    expr: Var("a.1"),
                                                 },
                                             ),
                                         ],
@@ -68,9 +52,7 @@ Program {
                                         Compound(
                                             [
                                                 Return(
-                                                    Constant {
-                                                        constant: 5,
-                                                    },
+                                                    Constant(5),
                                                 ),
                                             ],
                                         ),
@@ -81,9 +63,7 @@ Program {
                     ),
                 ),
                 Return(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                 ),
             ],
         },

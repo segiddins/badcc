@@ -8,9 +8,7 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 DoWhile(
                     Compound(
@@ -19,17 +17,11 @@ Program {
                                 "while_start",
                                 Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "i",
-                                        },
+                                        lhs: Var("i"),
                                         rhs: Binary {
                                             op: Add,
-                                            lhs: Var {
-                                                name: "i",
-                                            },
-                                            rhs: Constant {
-                                                constant: 1,
-                                            },
+                                            lhs: Var("i"),
+                                            rhs: Constant(1),
                                         },
                                     },
                                 ),
@@ -37,29 +29,19 @@ Program {
                             If(
                                 Binary {
                                     op: LessThan,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 10,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(10),
                                 },
-                                Goto(
-                                    "while_start",
-                                ),
+                                Goto("while_start"),
                                 None,
                             ),
                         ],
                     ),
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                     None,
                 ),
                 Return(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                 ),
             ],
         },

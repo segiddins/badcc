@@ -8,50 +8,35 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 4,
-                    },
+                    init: Constant(4),
                 },
                 VariableDeclaration {
                     name: "b",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Switch(
-                    Constant {
-                        constant: 2,
-                    },
+                    Constant(2),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 2,
-                                },
-                                Compound(
+                            Case {
+                                expression: Constant(2),
+                                statement: Compound(
                                     [
                                         VariableDeclaration {
                                             name: "a",
                                             ty: Int,
-                                            init: Constant {
-                                                constant: 8,
-                                            },
+                                            init: Constant(8),
                                         },
                                         Expression(
                                             Assignment {
-                                                lhs: Var {
-                                                    name: "b",
-                                                },
-                                                rhs: Var {
-                                                    name: "a",
-                                                },
+                                                lhs: Var("b"),
+                                                rhs: Var("a"),
                                             },
                                         ),
                                     ],
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
@@ -61,21 +46,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "a",
-                            },
-                            rhs: Constant {
-                                constant: 4,
-                            },
+                            lhs: Var("a"),
+                            rhs: Constant(4),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "b",
-                            },
-                            rhs: Constant {
-                                constant: 8,
-                            },
+                            lhs: Var("b"),
+                            rhs: Constant(8),
                         },
                     },
                 ),

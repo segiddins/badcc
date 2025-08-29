@@ -12,24 +12,16 @@ Program {
                 },
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "x.1",
-                        },
+                        lhs: Var("x.1"),
                         rhs: Binary {
                             op: Add,
-                            lhs: Var {
-                                name: "x.1",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("x.1"),
+                            rhs: Constant(1),
                         },
                     },
                 ),
                 Return(
-                    Var {
-                        name: "x.1",
-                    },
+                    Var("x.1"),
                 ),
             ],
         },
@@ -46,58 +38,33 @@ Program {
                     init: VariableDeclaration {
                         name: "i.4",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i.4"),
+                        rhs: Constant(4),
+                    },
+                    post: Assignment {
+                        lhs: Var("i.4"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i.4"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i.4",
-                            },
-                            rhs: Constant {
-                                constant: 4,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i.4",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i.4",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Expression(
                         Assignment {
-                            lhs: Var {
-                                name: "ret.3",
-                            },
+                            lhs: Var("ret.3"),
                             rhs: FunctionCall {
-                                function: Var {
-                                    name: "foo",
-                                },
-                                params: [],
+                                function: Var("foo"),
                             },
                         },
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
-                    Var {
-                        name: "ret.3",
-                    },
+                    Var("ret.3"),
                 ),
             ],
         },

@@ -8,48 +8,30 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 2,
-                    },
+                    init: Constant(2),
                 },
                 VariableDeclaration {
                     name: "flag.3",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 Return(
                     Ternary {
                         cond: Binary {
                             op: GreaterThan,
-                            lhs: Var {
-                                name: "a.1",
-                            },
-                            rhs: Var {
-                                name: "b.2",
-                            },
+                            lhs: Var("a.1"),
+                            rhs: Var("b.2"),
                         },
-                        if_true: Constant {
-                            constant: 5,
-                        },
+                        if_true: Constant(5),
                         if_false: Ternary {
-                            cond: Var {
-                                name: "flag.3",
-                            },
-                            if_true: Constant {
-                                constant: 6,
-                            },
-                            if_false: Constant {
-                                constant: 7,
-                            },
+                            cond: Var("flag.3"),
+                            if_true: Constant(6),
+                            if_false: Constant(7),
                         },
                     },
                 ),

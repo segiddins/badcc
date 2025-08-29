@@ -8,59 +8,39 @@ Program {
                 VariableDeclaration {
                     name: "a.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: None,
-                    condition: None,
-                    post: None,
                     body: Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "a.1",
-                                    },
+                                    lhs: Var("a.1"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "a.1",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("a.1"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                             If(
                                 Binary {
                                     op: GreaterThan,
-                                    lhs: Var {
-                                        name: "a.1",
-                                    },
-                                    rhs: Constant {
-                                        constant: 3,
-                                    },
+                                    lhs: Var("a.1"),
+                                    rhs: Constant(3),
                                 },
-                                Break(
-                                    Some(
-                                        "loop.0",
-                                    ),
-                                ),
+                                Break {
+                                    label: "loop.0",
+                                },
                                 None,
                             ),
                         ],
                     ),
-                    label: Some(
-                        "loop.0",
-                    ),
+                    label: "loop.0",
                 },
                 Return(
-                    Var {
-                        name: "a.1",
-                    },
+                    Var("a.1"),
                 ),
             ],
         },

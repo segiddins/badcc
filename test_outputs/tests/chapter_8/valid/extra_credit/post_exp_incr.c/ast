@@ -8,63 +8,40 @@ Program {
                 VariableDeclaration {
                     name: "product",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
-                        },
+                        init: Constant(0),
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Unary {
-                            op: PostfixIncrement,
-                            expr: Var {
-                                name: "i",
-                            },
-                        },
-                    ),
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i"),
+                        rhs: Constant(10),
+                    },
+                    post: Unary {
+                        op: PostfixIncrement,
+                        expr: Var("i"),
+                    },
                     body: Compound(
                         [
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "product",
-                                    },
+                                    lhs: Var("product"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "product",
-                                        },
-                                        rhs: Constant {
-                                            constant: 2,
-                                        },
+                                        lhs: Var("product"),
+                                        rhs: Constant(2),
                                     },
                                 },
                             ),
                         ],
                     ),
-                    label: None,
                 },
                 Return(
-                    Var {
-                        name: "product",
-                    },
+                    Var("product"),
                 ),
             ],
         },

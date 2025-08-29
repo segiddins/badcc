@@ -29,12 +29,8 @@ Program {
                 Return(
                     Binary {
                         op: Subtract,
-                        lhs: Var {
-                            name: "a",
-                        },
-                        rhs: Var {
-                            name: "b",
-                        },
+                        lhs: Var("a"),
+                        rhs: Var("b"),
                     },
                 ),
             ],
@@ -48,29 +44,19 @@ Program {
                     name: "sum",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "sub",
-                        },
+                        function: Var("sub"),
                         params: [
                             Binary {
                                 op: Add,
-                                lhs: Constant {
-                                    constant: 1,
-                                },
-                                rhs: Constant {
-                                    constant: 2,
-                                },
+                                lhs: Constant(1),
+                                rhs: Constant(2),
                             },
-                            Constant {
-                                constant: 1,
-                            },
+                            Constant(1),
                         ],
                     },
                 },
                 Return(
-                    Var {
-                        name: "sum",
-                    },
+                    Var("sum"),
                 ),
             ],
         },

@@ -36,9 +36,7 @@ Program {
                     storage: Static,
                 },
                 If(
-                    Var {
-                        name: "update_global",
-                    },
+                    Var("update_global"),
                     Compound(
                         [
                             VariableDeclaration {
@@ -48,12 +46,8 @@ Program {
                             },
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Var {
-                                        name: "new_val",
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Var("new_val"),
                                 },
                             ),
                         ],
@@ -61,20 +55,14 @@ Program {
                     Some(
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Var {
-                                    name: "new_val",
-                                },
+                                lhs: Var("i"),
+                                rhs: Var("new_val"),
                             },
                         ),
                     ),
                 ),
                 Return(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                 ),
             ],
         },
@@ -86,17 +74,11 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(0),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
@@ -104,69 +86,43 @@ Program {
                     name: "result",
                     ty: Int,
                     init: FunctionCall {
-                        function: Var {
-                            name: "update_static_or_global",
-                        },
+                        function: Var("update_static_or_global"),
                         params: [
-                            Constant {
-                                constant: 1,
-                            },
-                            Constant {
-                                constant: 10,
-                            },
+                            Constant(1),
+                            Constant(10),
                         ],
                     },
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "result",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("result"),
+                        rhs: Constant(0),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 10,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(10),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "result",
-                        },
+                        lhs: Var("result"),
                         rhs: FunctionCall {
-                            function: Var {
-                                name: "update_static_or_global",
-                            },
+                            function: Var("update_static_or_global"),
                             params: [
-                                Constant {
-                                    constant: 0,
-                                },
-                                Constant {
-                                    constant: 9,
-                                },
+                                Constant(0),
+                                Constant(9),
                             ],
                         },
                     },
@@ -174,53 +130,33 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "result",
-                        },
-                        rhs: Constant {
-                            constant: 9,
-                        },
+                        lhs: Var("result"),
+                        rhs: Constant(9),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 10,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(10),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "result",
-                        },
+                        lhs: Var("result"),
                         rhs: FunctionCall {
-                            function: Var {
-                                name: "update_static_or_global",
-                            },
+                            function: Var("update_static_or_global"),
                             params: [
-                                Constant {
-                                    constant: 1,
-                                },
-                                Constant {
-                                    constant: 11,
-                                },
+                                Constant(1),
+                                Constant(11),
                             ],
                         },
                     },
@@ -228,41 +164,27 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "result",
-                        },
-                        rhs: Constant {
-                            constant: 9,
-                        },
+                        lhs: Var("result"),
+                        rhs: Constant(9),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 11,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(11),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

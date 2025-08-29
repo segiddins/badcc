@@ -3,21 +3,15 @@ Program {
         VariableDeclaration {
             name: "a",
             ty: Int,
-            init: Constant {
-                constant: 10,
-            },
+            init: Constant(10),
         },
         VariableDeclaration {
             name: "b",
             ty: Int,
             init: Binary {
                 op: Add,
-                lhs: Constant {
-                    constant: 1,
-                },
-                rhs: Var {
-                    name: "a",
-                },
+                lhs: Constant(1),
+                rhs: Var("a"),
             },
         },
         FunctionDeclaration {
@@ -26,9 +20,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var {
-                        name: "b",
-                    },
+                    Var("b"),
                 ),
             ],
         },

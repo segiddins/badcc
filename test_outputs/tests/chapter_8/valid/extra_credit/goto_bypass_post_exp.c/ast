@@ -8,92 +8,58 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
-                        },
+                        init: Constant(0),
                     },
-                    condition: None,
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 0,
-                            },
-                        },
-                    ),
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Constant(0),
+                    },
                     body: Compound(
                         [
                             Labeled(
                                 "lbl",
                                 Expression(
                                     Assignment {
-                                        lhs: Var {
-                                            name: "sum",
-                                        },
+                                        lhs: Var("sum"),
                                         rhs: Binary {
                                             op: Add,
-                                            lhs: Var {
-                                                name: "sum",
-                                            },
-                                            rhs: Constant {
-                                                constant: 1,
-                                            },
+                                            lhs: Var("sum"),
+                                            rhs: Constant(1),
                                         },
                                     },
                                 ),
                             ),
                             Expression(
                                 Assignment {
-                                    lhs: Var {
-                                        name: "i",
-                                    },
+                                    lhs: Var("i"),
                                     rhs: Binary {
                                         op: Add,
-                                        lhs: Var {
-                                            name: "i",
-                                        },
-                                        rhs: Constant {
-                                            constant: 1,
-                                        },
+                                        lhs: Var("i"),
+                                        rhs: Constant(1),
                                     },
                                 },
                             ),
                             If(
                                 Binary {
                                     op: GreaterThan,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 10,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(10),
                                 },
-                                Break(
-                                    None,
-                                ),
+                                Break,
                                 None,
                             ),
-                            Goto(
-                                "lbl",
-                            ),
+                            Goto("lbl"),
                         ],
                     ),
-                    label: None,
                 },
                 Return(
-                    Var {
-                        name: "sum",
-                    },
+                    Var("sum"),
                 ),
             ],
         },

@@ -8,99 +8,62 @@ Program {
                 VariableDeclaration {
                     name: "sum",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 For {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 0,
+                        init: Constant(0),
+                    },
+                    condition: Binary {
+                        op: LessThan,
+                        lhs: Var("i"),
+                        rhs: Constant(10),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("i"),
+                            rhs: Constant(1),
                         },
                     },
-                    condition: Some(
-                        Binary {
-                            op: LessThan,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 10,
-                            },
-                        },
-                    ),
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Add,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 1,
-                                },
-                            },
-                        },
-                    ),
                     body: Compound(
                         [
                             Switch(
                                 Binary {
                                     op: Remainder,
-                                    lhs: Var {
-                                        name: "i",
-                                    },
-                                    rhs: Constant {
-                                        constant: 2,
-                                    },
+                                    lhs: Var("i"),
+                                    rhs: Constant(2),
                                 },
                                 Compound(
                                     [
-                                        Case(
-                                            Constant {
-                                                constant: 0,
-                                            },
-                                            Continue(
-                                                None,
-                                            ),
-                                            None,
-                                        ),
-                                        Default(
-                                            Expression(
+                                        Case {
+                                            expression: Constant(0),
+                                            statement: Continue,
+                                        },
+                                        Default {
+                                            statement: Expression(
                                                 Assignment {
-                                                    lhs: Var {
-                                                        name: "sum",
-                                                    },
+                                                    lhs: Var("sum"),
                                                     rhs: Binary {
                                                         op: Add,
-                                                        lhs: Var {
-                                                            name: "sum",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
+                                                        lhs: Var("sum"),
+                                                        rhs: Constant(1),
                                                     },
                                                 },
                                             ),
-                                            None,
-                                        ),
+                                        },
                                     ],
                                 ),
                                 None,
                             ),
                         ],
                     ),
-                    label: None,
                 },
                 Return(
-                    Var {
-                        name: "sum",
-                    },
+                    Var("sum"),
                 ),
             ],
         },

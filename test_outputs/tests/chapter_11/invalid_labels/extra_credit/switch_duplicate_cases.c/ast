@@ -17,41 +17,26 @@ Program {
             ret: Int,
             body: [
                 Switch(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 17179869184l,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            },
+                            Case {
+                                expression: Constant(17179869184l),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
@@ -65,13 +50,9 @@ Program {
             body: [
                 Return(
                     FunctionCall {
-                        function: Var {
-                            name: "switch_statement",
-                        },
+                        function: Var("switch_statement"),
                         params: [
-                            Constant {
-                                constant: 0,
-                            },
+                            Constant(0),
                         ],
                     },
                 ),

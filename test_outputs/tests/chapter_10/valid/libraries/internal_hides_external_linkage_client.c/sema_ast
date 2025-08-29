@@ -3,9 +3,7 @@ Program {
         VariableDeclaration {
             name: "x",
             ty: Int,
-            init: Constant {
-                constant: 1,
-            },
+            init: Constant(1),
             storage: Static,
         },
         FunctionDeclaration {
@@ -31,47 +29,30 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 1,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(1),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "x",
-                        },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        lhs: Var("x"),
+                        rhs: Constant(2),
                     },
                 ),
                 If(
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "read_internal_x",
-                            },
-                            params: [],
+                            function: Var("read_internal_x"),
                         },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        rhs: Constant(2),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
@@ -79,26 +60,17 @@ Program {
                     Binary {
                         op: NotEqual,
                         lhs: FunctionCall {
-                            function: Var {
-                                name: "read_x",
-                            },
-                            params: [],
+                            function: Var("read_x"),
                         },
-                        rhs: Constant {
-                            constant: 10,
-                        },
+                        rhs: Constant(10),
                     },
                     Return(
-                        Constant {
-                            constant: 1,
-                        },
+                        Constant(1),
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
@@ -113,9 +85,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var {
-                        name: "x",
-                    },
+                    Var("x"),
                 ),
             ],
         },

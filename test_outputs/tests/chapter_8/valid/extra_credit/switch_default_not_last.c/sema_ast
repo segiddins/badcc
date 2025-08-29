@@ -13,49 +13,31 @@ Program {
                     name: "b.2",
                     ty: Int,
                     init: Assignment {
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Constant {
-                            constant: 7,
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Constant(7),
                     },
                 },
                 Switch(
                     Binary {
                         op: Add,
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Var {
-                            name: "b.2",
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Var("b.2"),
                     },
                     Compound(
                         [
-                            Default(
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Default {
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                Some(
-                                    "switch.0",
+                                label: "switch.0",
+                            },
+                            Case {
+                                expression: Constant(2),
+                                statement: Return(
+                                    Constant(1),
                                 ),
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 2,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 1,
-                                    },
-                                ),
-                                Some(
-                                    "switch.0",
-                                ),
-                            ),
+                                label: "switch.0",
+                            },
                         ],
                     ),
                     Some(

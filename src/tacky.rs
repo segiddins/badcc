@@ -570,7 +570,7 @@ fn walk_statement<'i>(statement: &Statement, state: &mut State<'i>) {
         Statement::Switch {
             condition: expression,
             body: switch_cases,
-            span: label,
+            label,
         } => {
             let label = label.as_ref().unwrap();
             let start = format!("{label}.cases");

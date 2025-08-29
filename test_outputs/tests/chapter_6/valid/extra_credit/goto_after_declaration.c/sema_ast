@@ -8,35 +8,23 @@ Program {
                 VariableDeclaration {
                     name: "x.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
-                Goto(
-                    "post_declaration",
-                ),
+                Goto("post_declaration"),
                 VariableDeclaration {
                     name: "i.2",
                     ty: Int,
                     init: Assignment {
-                        lhs: Var {
-                            name: "x.1",
-                        },
-                        rhs: Constant {
-                            constant: 0,
-                        },
+                        lhs: Var("x.1"),
+                        rhs: Constant(0),
                     },
                 },
                 Labeled(
                     "post_declaration",
                     Expression(
                         Assignment {
-                            lhs: Var {
-                                name: "i.2",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("i.2"),
+                            rhs: Constant(5),
                         },
                     ),
                 ),
@@ -45,21 +33,13 @@ Program {
                         op: And,
                         lhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "x.1",
-                            },
-                            rhs: Constant {
-                                constant: 1,
-                            },
+                            lhs: Var("x.1"),
+                            rhs: Constant(1),
                         },
                         rhs: Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "i.2",
-                            },
-                            rhs: Constant {
-                                constant: 5,
-                            },
+                            lhs: Var("i.2"),
+                            rhs: Constant(5),
                         },
                     },
                 ),

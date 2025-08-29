@@ -9,57 +9,33 @@ Program {
                     name: "a.1",
                     ty: Int,
                     init: Ternary {
-                        cond: Constant {
-                            constant: 1,
-                        },
+                        cond: Constant(1),
                         if_true: Ternary {
-                            cond: Constant {
-                                constant: 2,
-                            },
-                            if_true: Constant {
-                                constant: 3,
-                            },
-                            if_false: Constant {
-                                constant: 4,
-                            },
+                            cond: Constant(2),
+                            if_true: Constant(3),
+                            if_false: Constant(4),
                         },
-                        if_false: Constant {
-                            constant: 5,
-                        },
+                        if_false: Constant(5),
                     },
                 },
                 VariableDeclaration {
                     name: "b.2",
                     ty: Int,
                     init: Ternary {
-                        cond: Constant {
-                            constant: 0,
-                        },
+                        cond: Constant(0),
                         if_true: Ternary {
-                            cond: Constant {
-                                constant: 2,
-                            },
-                            if_true: Constant {
-                                constant: 3,
-                            },
-                            if_false: Constant {
-                                constant: 4,
-                            },
+                            cond: Constant(2),
+                            if_true: Constant(3),
+                            if_false: Constant(4),
                         },
-                        if_false: Constant {
-                            constant: 5,
-                        },
+                        if_false: Constant(5),
                     },
                 },
                 Return(
                     Binary {
                         op: Multiply,
-                        lhs: Var {
-                            name: "a.1",
-                        },
-                        rhs: Var {
-                            name: "b.2",
-                        },
+                        lhs: Var("a.1"),
+                        rhs: Var("b.2"),
                     },
                 ),
             ],

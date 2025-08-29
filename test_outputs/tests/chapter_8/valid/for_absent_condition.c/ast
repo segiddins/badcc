@@ -9,45 +9,27 @@ Program {
                     init: VariableDeclaration {
                         name: "i",
                         ty: Int,
-                        init: Constant {
-                            constant: 400,
+                        init: Constant(400),
+                    },
+                    post: Assignment {
+                        lhs: Var("i"),
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var("i"),
+                            rhs: Constant(100),
                         },
                     },
-                    condition: None,
-                    post: Some(
-                        Assignment {
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Binary {
-                                op: Subtract,
-                                lhs: Var {
-                                    name: "i",
-                                },
-                                rhs: Constant {
-                                    constant: 100,
-                                },
-                            },
-                        },
-                    ),
                     body: If(
                         Binary {
                             op: Equals,
-                            lhs: Var {
-                                name: "i",
-                            },
-                            rhs: Constant {
-                                constant: 100,
-                            },
+                            lhs: Var("i"),
+                            rhs: Constant(100),
                         },
                         Return(
-                            Constant {
-                                constant: 0,
-                            },
+                            Constant(0),
                         ),
                         None,
                     ),
-                    label: None,
                 },
             ],
         },

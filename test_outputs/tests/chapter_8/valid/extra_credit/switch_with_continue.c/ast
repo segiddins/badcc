@@ -6,124 +6,79 @@ Program {
             ret: Int,
             body: [
                 Switch(
-                    Constant {
-                        constant: 4,
-                    },
+                    Constant(4),
                     Compound(
                         [
-                            Case(
-                                Constant {
-                                    constant: 0,
-                                },
-                                Return(
-                                    Constant {
-                                        constant: 0,
-                                    },
+                            Case {
+                                expression: Constant(0),
+                                statement: Return(
+                                    Constant(0),
                                 ),
-                                None,
-                            ),
-                            Case(
-                                Constant {
-                                    constant: 4,
-                                },
-                                Compound(
+                            },
+                            Case {
+                                expression: Constant(4),
+                                statement: Compound(
                                     [
                                         VariableDeclaration {
                                             name: "acc",
                                             ty: Int,
-                                            init: Constant {
-                                                constant: 0,
-                                            },
+                                            init: Constant(0),
                                         },
                                         For {
                                             init: VariableDeclaration {
                                                 name: "i",
                                                 ty: Int,
-                                                init: Constant {
-                                                    constant: 0,
+                                                init: Constant(0),
+                                            },
+                                            condition: Binary {
+                                                op: LessThan,
+                                                lhs: Var("i"),
+                                                rhs: Constant(10),
+                                            },
+                                            post: Assignment {
+                                                lhs: Var("i"),
+                                                rhs: Binary {
+                                                    op: Add,
+                                                    lhs: Var("i"),
+                                                    rhs: Constant(1),
                                                 },
                                             },
-                                            condition: Some(
-                                                Binary {
-                                                    op: LessThan,
-                                                    lhs: Var {
-                                                        name: "i",
-                                                    },
-                                                    rhs: Constant {
-                                                        constant: 10,
-                                                    },
-                                                },
-                                            ),
-                                            post: Some(
-                                                Assignment {
-                                                    lhs: Var {
-                                                        name: "i",
-                                                    },
-                                                    rhs: Binary {
-                                                        op: Add,
-                                                        lhs: Var {
-                                                            name: "i",
-                                                        },
-                                                        rhs: Constant {
-                                                            constant: 1,
-                                                        },
-                                                    },
-                                                },
-                                            ),
                                             body: Compound(
                                                 [
                                                     If(
                                                         Binary {
                                                             op: Remainder,
-                                                            lhs: Var {
-                                                                name: "i",
-                                                            },
-                                                            rhs: Constant {
-                                                                constant: 2,
-                                                            },
+                                                            lhs: Var("i"),
+                                                            rhs: Constant(2),
                                                         },
-                                                        Continue(
-                                                            None,
-                                                        ),
+                                                        Continue,
                                                         None,
                                                     ),
                                                     Expression(
                                                         Assignment {
-                                                            lhs: Var {
-                                                                name: "acc",
-                                                            },
+                                                            lhs: Var("acc"),
                                                             rhs: Binary {
                                                                 op: Add,
-                                                                lhs: Var {
-                                                                    name: "acc",
-                                                                },
-                                                                rhs: Constant {
-                                                                    constant: 1,
-                                                                },
+                                                                lhs: Var("acc"),
+                                                                rhs: Constant(1),
                                                             },
                                                         },
                                                     ),
                                                 ],
                                             ),
-                                            label: None,
                                         },
                                         Return(
-                                            Var {
-                                                name: "acc",
-                                            },
+                                            Var("acc"),
                                         ),
                                     ],
                                 ),
-                                None,
-                            ),
+                            },
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

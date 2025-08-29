@@ -17,9 +17,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var {
-                        name: "l",
-                    },
+                    Var("l"),
                 ),
             ],
         },
@@ -40,9 +38,7 @@ Program {
             ret: Long,
             body: [
                 Return(
-                    Var {
-                        name: "i",
-                    },
+                    Var("i"),
                 ),
             ],
         },
@@ -75,19 +71,13 @@ Program {
                 VariableDeclaration {
                     name: "result",
                     ty: Int,
-                    init: Var {
-                        name: "l",
-                    },
+                    init: Var("l"),
                 },
                 Return(
                     Binary {
                         op: Equals,
-                        lhs: Var {
-                            name: "result",
-                        },
-                        rhs: Var {
-                            name: "expected",
-                        },
+                        lhs: Var("result"),
+                        rhs: Var("expected"),
                     },
                 ),
             ],
@@ -101,32 +91,22 @@ Program {
                     name: "result",
                     ty: Long,
                     init: FunctionCall {
-                        function: Var {
-                            name: "return_truncated_long",
-                        },
+                        function: Var("return_truncated_long"),
                         params: [
-                            Constant {
-                                constant: 4294967298l,
-                            },
+                            Constant(4294967298l),
                         ],
                     },
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "result",
-                        },
-                        rhs: Constant {
-                            constant: 2l,
-                        },
+                        lhs: Var("result"),
+                        rhs: Constant(2l),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
@@ -134,19 +114,13 @@ Program {
                 ),
                 Expression(
                     Assignment {
-                        lhs: Var {
-                            name: "result",
-                        },
+                        lhs: Var("result"),
                         rhs: FunctionCall {
-                            function: Var {
-                                name: "return_extended_int",
-                            },
+                            function: Var("return_extended_int"),
                             params: [
                                 Unary {
                                     op: Minus,
-                                    expr: Constant {
-                                        constant: 10,
-                                    },
+                                    expr: Constant(10),
                                 },
                             ],
                         },
@@ -155,22 +129,16 @@ Program {
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "result",
-                        },
+                        lhs: Var("result"),
                         rhs: Unary {
                             op: Minus,
-                            expr: Constant {
-                                constant: 10,
-                            },
+                            expr: Constant(10),
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 2,
-                                },
+                                Constant(2),
                             ),
                         ],
                     ),
@@ -179,26 +147,18 @@ Program {
                 VariableDeclaration {
                     name: "i",
                     ty: Int,
-                    init: Constant {
-                        constant: 4294967298l,
-                    },
+                    init: Constant(4294967298l),
                 },
                 If(
                     Binary {
                         op: NotEqual,
-                        lhs: Var {
-                            name: "i",
-                        },
-                        rhs: Constant {
-                            constant: 2,
-                        },
+                        lhs: Var("i"),
+                        rhs: Constant(2),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 3,
-                                },
+                                Constant(3),
                             ),
                         ],
                     ),
@@ -208,34 +168,24 @@ Program {
                     Unary {
                         op: Not,
                         expr: FunctionCall {
-                            function: Var {
-                                name: "truncate_on_assignment",
-                            },
+                            function: Var("truncate_on_assignment"),
                             params: [
-                                Constant {
-                                    constant: 17179869184l,
-                                },
-                                Constant {
-                                    constant: 0,
-                                },
+                                Constant(17179869184l),
+                                Constant(0),
                             ],
                         },
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 4,
-                                },
+                                Constant(4),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

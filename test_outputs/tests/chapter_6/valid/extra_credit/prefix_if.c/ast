@@ -10,44 +10,32 @@ Program {
                     ty: Int,
                     init: Unary {
                         op: Minus,
-                        expr: Constant {
-                            constant: 1,
-                        },
+                        expr: Constant(1),
                     },
                 },
                 If(
                     Unary {
                         op: PrefixIncrement,
-                        expr: Var {
-                            name: "a",
-                        },
+                        expr: Var("a"),
                     },
                     Return(
-                        Constant {
-                            constant: 0,
-                        },
+                        Constant(0),
                     ),
                     Some(
                         If(
                             Unary {
                                 op: PrefixIncrement,
-                                expr: Var {
-                                    name: "a",
-                                },
+                                expr: Var("a"),
                             },
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                             None,
                         ),
                     ),
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

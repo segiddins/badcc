@@ -72,7 +72,7 @@ fn visit_statement(statement: &Statement, labels: &mut HashSet<String>, error: b
         Statement::Switch {
             condition: _,
             body: cases,
-            span: _,
+            label: _,
         } => visit_statement(cases, labels, error)?,
         Statement::Case {
             expression: _,

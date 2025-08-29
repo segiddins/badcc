@@ -117,10 +117,7 @@ impl Spanned for Expression {
 impl Debug for Expression {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Constant { constant, span: _ } => f
-                .debug_struct("Constant")
-                .field("constant", constant)
-                .finish(),
+            Self::Constant { constant, span: _ } => write!(f, "Constant({constant:?})"),
             Self::Unary { op, expr, span: _ } => f
                 .debug_struct("Unary")
                 .field("op", op)
@@ -137,7 +134,7 @@ impl Debug for Expression {
                 .field("lhs", lhs)
                 .field("rhs", rhs)
                 .finish(),
-            Self::Var { name, span: _ } => f.debug_struct("Var").field("name", name).finish(),
+            Self::Var { name, span: _ } => write!(f, "Var({name:?})"),
             Self::Assignment { lhs, rhs, span: _ } => f
                 .debug_struct("Assignment")
                 .field("lhs", lhs)
@@ -172,7 +169,7 @@ impl Debug for Expression {
             } => f
                 .debug_struct("FunctionCall")
                 .field("function", function)
-                .field("params", params)
+                .field_if("params", params, !params.is_empty())
                 .finish(),
             Self::Cast { to, expr, span: _ } => f
                 .debug_struct("Cast")
@@ -294,7 +291,7 @@ pub enum Statement {
     Switch {
         condition: Expression,
         body: Box<Statement>,
-        span: Option<String>,
+        label: Option<String>,
     },
     Case {
         expression: Expression,
@@ -329,19 +326,16 @@ impl Debug for Statement {
                 statement: arg1,
                 span: _,
             } => f.debug_tuple("Labeled").field(arg0).field(arg1).finish(),
-            Self::Goto {
-                label: arg0,
-                span: _,
-            } => f.debug_tuple("Goto").field(arg0).finish(),
+            Self::Goto { label, span: _ } => write!(f, "Goto({label:?})"),
             Self::Compound(arg0) => f.debug_tuple("Compound").field(arg0).finish(),
-            Self::Break {
-                label: arg0,
-                span: _,
-            } => f.debug_tuple("Break").field(arg0).finish(),
-            Self::Continue {
-                label: arg0,
-                span: _,
-            } => f.debug_tuple("Continue").field(arg0).finish(),
+            Self::Break { label, span: _ } => f
+                .debug_struct("Break")
+                .field_if_set("label", label)
+                .finish(),
+            Self::Continue { label, span: _ } => f
+                .debug_struct("Continue")
+                .field_if_set("label", label)
+                .finish(),
             Self::While {
                 expression: arg0,
                 statement: arg1,
@@ -371,15 +365,15 @@ impl Debug for Statement {
             } => f
                 .debug_struct("For")
                 .field("init", init)
-                .field("condition", condition)
-                .field("post", post)
+                .field_if_set("condition", condition)
+                .field_if_set("post", post)
                 .field("body", body)
-                .field("label", label)
+                .field_if_set("label", label)
                 .finish(),
             Self::Switch {
                 condition: arg0,
                 body: arg1,
-                span: arg2,
+                label: arg2,
             } => f
                 .debug_tuple("Switch")
                 .field(arg0)
@@ -387,20 +381,24 @@ impl Debug for Statement {
                 .field(arg2)
                 .finish(),
             Self::Case {
-                expression: arg0,
-                statement: arg1,
-                label: arg2,
+                expression,
+                statement,
+                label,
             } => f
-                .debug_tuple("Case")
-                .field(arg0)
-                .field(arg1)
-                .field(arg2)
+                .debug_struct("Case")
+                .field("expression", expression)
+                .field("statement", statement)
+                .field_if_set("label", label)
                 .finish(),
             Self::Default {
-                statement: arg0,
-                label: arg1,
+                statement,
+                label,
                 span: _,
-            } => f.debug_tuple("Default").field(arg0).field(arg1).finish(),
+            } => f
+                .debug_struct("Default")
+                .field("statement", statement)
+                .field_if_set("label", label)
+                .finish(),
             Self::Null => write!(f, "Null"),
         }
     }

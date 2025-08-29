@@ -3,9 +3,7 @@ Program {
         VariableDeclaration {
             name: "a",
             ty: Int,
-            init: Constant {
-                constant: 5,
-            },
+            init: Constant(5),
         },
         FunctionDeclaration {
             identifier: "return_a",
@@ -13,9 +11,7 @@ Program {
             ret: Int,
             body: [
                 Return(
-                    Var {
-                        name: "a",
-                    },
+                    Var("a"),
                 ),
             ],
         },
@@ -27,9 +23,7 @@ Program {
                 VariableDeclaration {
                     name: "a",
                     ty: Int,
-                    init: Constant {
-                        constant: 3,
-                    },
+                    init: Constant(3),
                 },
                 Compound(
                     [
@@ -41,28 +35,18 @@ Program {
                         If(
                             Binary {
                                 op: NotEqual,
-                                lhs: Var {
-                                    name: "a",
-                                },
-                                rhs: Constant {
-                                    constant: 5,
-                                },
+                                lhs: Var("a"),
+                                rhs: Constant(5),
                             },
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                             None,
                         ),
                         Expression(
                             Assignment {
-                                lhs: Var {
-                                    name: "a",
-                                },
-                                rhs: Constant {
-                                    constant: 4,
-                                },
+                                lhs: Var("a"),
+                                rhs: Constant(4),
                             },
                         ),
                     ],
@@ -70,14 +54,9 @@ Program {
                 Return(
                     Binary {
                         op: Add,
-                        lhs: Var {
-                            name: "a",
-                        },
+                        lhs: Var("a"),
                         rhs: FunctionCall {
-                            function: Var {
-                                name: "return_a",
-                            },
-                            params: [],
+                            function: Var("return_a"),
                         },
                     },
                 ),

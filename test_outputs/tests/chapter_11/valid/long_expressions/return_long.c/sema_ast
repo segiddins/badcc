@@ -31,15 +31,11 @@ Program {
                         op: Add,
                         lhs: Cast {
                             to: Long,
-                            expr: Var {
-                                name: "a.1",
-                            },
+                            expr: Var("a.1"),
                         },
                         rhs: Cast {
                             to: Long,
-                            expr: Var {
-                                name: "b.2",
-                            },
+                            expr: Var("b.2"),
                         },
                     },
                 ),
@@ -54,44 +50,30 @@ Program {
                     name: "a.4",
                     ty: Long,
                     init: FunctionCall {
-                        function: Var {
-                            name: "add",
-                        },
+                        function: Var("add"),
                         params: [
-                            Constant {
-                                constant: 2147483645,
-                            },
-                            Constant {
-                                constant: 2147483645,
-                            },
+                            Constant(2147483645),
+                            Constant(2147483645),
                         ],
                     },
                 },
                 If(
                     Binary {
                         op: Equals,
-                        lhs: Var {
-                            name: "a.4",
-                        },
-                        rhs: Constant {
-                            constant: 4294967290l,
-                        },
+                        lhs: Var("a.4"),
+                        rhs: Constant(4294967290l),
                     },
                     Compound(
                         [
                             Return(
-                                Constant {
-                                    constant: 1,
-                                },
+                                Constant(1),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },

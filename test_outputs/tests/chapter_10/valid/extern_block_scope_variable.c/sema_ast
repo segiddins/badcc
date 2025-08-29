@@ -8,21 +8,15 @@ Program {
                 VariableDeclaration {
                     name: "outer.1",
                     ty: Int,
-                    init: Constant {
-                        constant: 1,
-                    },
+                    init: Constant(1),
                 },
                 VariableDeclaration {
                     name: "foo.2",
                     ty: Int,
-                    init: Constant {
-                        constant: 0,
-                    },
+                    init: Constant(0),
                 },
                 If(
-                    Var {
-                        name: "outer.1",
-                    },
+                    Var("outer.1"),
                     Compound(
                         [
                             VariableDeclaration {
@@ -36,27 +30,21 @@ Program {
                                 storage: Extern,
                             },
                             Return(
-                                Var {
-                                    name: "foo",
-                                },
+                                Var("foo"),
                             ),
                         ],
                     ),
                     None,
                 ),
                 Return(
-                    Constant {
-                        constant: 0,
-                    },
+                    Constant(0),
                 ),
             ],
         },
         VariableDeclaration {
             name: "foo",
             ty: Int,
-            init: Constant {
-                constant: 3,
-            },
+            init: Constant(3),
         },
     ],
 }
