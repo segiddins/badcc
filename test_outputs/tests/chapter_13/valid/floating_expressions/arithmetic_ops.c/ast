@@ -1,0 +1,276 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "point_one",
+            ty: Double,
+            init: Constant(0.1),
+        },
+        VariableDeclaration {
+            name: "point_two",
+            ty: Double,
+            init: Constant(0.2),
+        },
+        VariableDeclaration {
+            name: "point_three",
+            ty: Double,
+            init: Constant(0.3),
+        },
+        VariableDeclaration {
+            name: "two",
+            ty: Double,
+            init: Constant(2.0),
+        },
+        VariableDeclaration {
+            name: "three",
+            ty: Double,
+            init: Constant(3.0),
+        },
+        VariableDeclaration {
+            name: "four",
+            ty: Double,
+            init: Constant(4.0),
+        },
+        VariableDeclaration {
+            name: "twelveE30",
+            ty: Double,
+            init: Constant(1.2e31),
+        },
+        FunctionDeclaration {
+            identifier: "addition",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var("point_one"),
+                            rhs: Var("point_two"),
+                        },
+                        rhs: Constant(0.30000000000000004),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "subtraction",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Subtract,
+                            lhs: Var("four"),
+                            rhs: Constant(1.0),
+                        },
+                        rhs: Constant(3.0),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "multiplication",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Constant(0.01),
+                            rhs: Var("point_three"),
+                        },
+                        rhs: Constant(0.003),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "division",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Constant(7.0),
+                            rhs: Var("two"),
+                        },
+                        rhs: Constant(3.5),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "negation",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "neg",
+                    ty: Double,
+                    init: Unary {
+                        op: Minus,
+                        expr: Var("twelveE30"),
+                    },
+                },
+                Return(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Add,
+                            lhs: Constant(1.2e31),
+                            rhs: Var("neg"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "complex_expression",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "complex_expression",
+                    ty: Double,
+                    init: Binary {
+                        op: Subtract,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var("two"),
+                            rhs: Var("three"),
+                        },
+                        rhs: Binary {
+                            op: Multiply,
+                            lhs: Constant(127.5),
+                            rhs: Var("four"),
+                        },
+                    },
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("complex_expression"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(505.0),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("addition"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("subtraction"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("multiplication"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("division"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("negation"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("complex_expression"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

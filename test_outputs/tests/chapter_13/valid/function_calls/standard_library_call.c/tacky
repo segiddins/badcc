@@ -1,0 +1,87 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "fma",
+                    [
+                        5.0,
+                        1e22,
+                        4000000.0,
+                    ],
+                    Var("main.tmp.0", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.0", Double),
+                    dst: Var("fma_result.8", Double),
+                },
+                Call(
+                    "ldexp",
+                    [
+                        9.2e74,
+                        5,
+                    ],
+                    Var("main.tmp.1", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.1", Double),
+                    dst: Var("ldexp_result.9", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("fma_result.8", Double),
+                    rhs: 5.0000000000000004e22,
+                    dst: Var("main.tmp.2", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", Double),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("ldexp_result.9", Double),
+                    rhs: 2.944e76,
+                    dst: Var("main.tmp.3", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,137 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "int_to_double",
+            params: [
+                (
+                    Int,
+                    "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            26,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Cast {
+                        to: Double,
+                        expr: Var("i"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "long_to_double",
+            params: [
+                (
+                    Long,
+                    "l",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            83,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Cast {
+                        to: Double,
+                        expr: Var("l"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("int_to_double"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(100000),
+                                },
+                            ],
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(100000.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("long_to_double"),
+                            params: [
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(9007199254751227l),
+                                },
+                            ],
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(9007199254751228.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "d",
+                    ty: Double,
+                    init: Cast {
+                        to: Double,
+                        expr: Constant(1152921504606846977l),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Constant(1.152921504606847e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

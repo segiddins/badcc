@@ -1,0 +1,129 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "fma",
+            params: [
+                (
+                    Double,
+                    "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            28,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "z",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            38,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+        },
+        FunctionDeclaration {
+            identifier: "ldexp",
+            params: [
+                (
+                    Double,
+                    "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            62,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Int,
+                    "exp",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            69,
+                        ),
+                        length: 3,
+                    },
+                ),
+            ],
+            ret: Double,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "fma_result",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("fma"),
+                        params: [
+                            Constant(5.0),
+                            Constant(1e22),
+                            Constant(4000000.0),
+                        ],
+                    },
+                },
+                VariableDeclaration {
+                    name: "ldexp_result",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("ldexp"),
+                        params: [
+                            Constant(9.2e74),
+                            Constant(5),
+                        ],
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("fma_result"),
+                        rhs: Constant(5.0000000000000004e22),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ldexp_result"),
+                        rhs: Constant(2.944e76),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

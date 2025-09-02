@@ -1,0 +1,420 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "four",
+            global: true,
+            init: 4.0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "point_one",
+            global: true,
+            init: 0.1,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "point_three",
+            global: true,
+            init: 0.3,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "point_two",
+            global: true,
+            init: 0.2,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "three",
+            global: true,
+            init: 3.0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "twelveE30",
+            global: true,
+            init: 1.2e31,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "two",
+            global: true,
+            init: 2.0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "addition",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var("point_one", Double),
+                    rhs: Var("point_two", Double),
+                    dst: Var("addition.tmp.0", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("addition.tmp.0", Double),
+                    rhs: 0.30000000000000004,
+                    dst: Var("addition.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("addition.tmp.1", Double),
+                    dst: Var("addition.tmp.2", Int),
+                },
+                Return(
+                    Var("addition.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "subtraction",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Subtract,
+                    lhs: Var("four", Double),
+                    rhs: 1.0,
+                    dst: Var("subtraction.tmp.0", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("subtraction.tmp.0", Double),
+                    rhs: 3.0,
+                    dst: Var("subtraction.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("subtraction.tmp.1", Double),
+                    dst: Var("subtraction.tmp.2", Int),
+                },
+                Return(
+                    Var("subtraction.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiplication",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: 0.01,
+                    rhs: Var("point_three", Double),
+                    dst: Var("multiplication.tmp.0", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("multiplication.tmp.0", Double),
+                    rhs: 0.003,
+                    dst: Var("multiplication.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("multiplication.tmp.1", Double),
+                    dst: Var("multiplication.tmp.2", Int),
+                },
+                Return(
+                    Var("multiplication.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "division",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Divide,
+                    lhs: 7.0,
+                    rhs: Var("two", Double),
+                    dst: Var("division.tmp.0", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("division.tmp.0", Double),
+                    rhs: 3.5,
+                    dst: Var("division.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("division.tmp.1", Double),
+                    dst: Var("division.tmp.2", Int),
+                },
+                Return(
+                    Var("division.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "negation",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: Var("twelveE30", Double),
+                    dst: Var("negation.tmp.0", Double),
+                },
+                Copy {
+                    src: Var("negation.tmp.0", Double),
+                    dst: Var("neg.12", Double),
+                },
+                Binary {
+                    op: Add,
+                    lhs: 1.2e31,
+                    rhs: Var("neg.12", Double),
+                    dst: Var("negation.tmp.1", Double),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("negation.tmp.1", Double),
+                    dst: Var("negation.tmp.2", Double),
+                },
+                DoubleToInt {
+                    src: Var("negation.tmp.2", Double),
+                    dst: Var("negation.tmp.3", Int),
+                },
+                Return(
+                    Var("negation.tmp.3", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "complex_expression",
+            global: true,
+            params: [],
+            instructions: [
+                Binary {
+                    op: Add,
+                    lhs: Var("two", Double),
+                    rhs: Var("three", Double),
+                    dst: Var("complex_expression.tmp.0", Double),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: 127.5,
+                    rhs: Var("four", Double),
+                    dst: Var("complex_expression.tmp.1", Double),
+                },
+                Binary {
+                    op: Subtract,
+                    lhs: Var("complex_expression.tmp.0", Double),
+                    rhs: Var("complex_expression.tmp.1", Double),
+                    dst: Var("complex_expression.tmp.2", Double),
+                },
+                Copy {
+                    src: Var("complex_expression.tmp.2", Double),
+                    dst: Var("complex_expression.14", Double),
+                },
+                Unary {
+                    op: Negate,
+                    src: 505.0,
+                    dst: Var("complex_expression.tmp.3", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("complex_expression.14", Double),
+                    rhs: Var("complex_expression.tmp.3", Double),
+                    dst: Var("complex_expression.tmp.4", Double),
+                },
+                DoubleToInt {
+                    src: Var("complex_expression.tmp.4", Double),
+                    dst: Var("complex_expression.tmp.5", Int),
+                },
+                Return(
+                    Var("complex_expression.tmp.5", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "addition",
+                    [],
+                    Var("main.tmp.0", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "subtraction",
+                    [],
+                    Var("main.tmp.2", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "multiplication",
+                    [],
+                    Var("main.tmp.4", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.4", Int),
+                    dst: Var("main.tmp.5", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "division",
+                    [],
+                    Var("main.tmp.6", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.6", Int),
+                    dst: Var("main.tmp.7", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", Int),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Call(
+                    "negation",
+                    [],
+                    Var("main.tmp.8", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.8", Int),
+                    dst: Var("main.tmp.9", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.9", Int),
+                    "main.4.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Call(
+                    "complex_expression",
+                    [],
+                    Var("main.tmp.10", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.10", Int),
+                    dst: Var("main.tmp.11", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.11", Int),
+                    "main.5.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

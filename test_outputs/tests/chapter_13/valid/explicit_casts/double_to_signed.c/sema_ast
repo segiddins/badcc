@@ -1,0 +1,118 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "double_to_int",
+            params: [
+                (
+                    Double,
+                    "d.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            25,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Var("d.1"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "double_to_long",
+            params: [
+                (
+                    Double,
+                    "d.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            79,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Long,
+            body: [
+                Return(
+                    Cast {
+                        to: Long,
+                        expr: Var("d.3"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "l.5",
+                    ty: Long,
+                    init: FunctionCall {
+                        function: Var("double_to_long"),
+                        params: [
+                            Constant(2148429099.3),
+                        ],
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l.5"),
+                        rhs: Constant(2148429099l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "i.6",
+                    ty: Int,
+                    init: FunctionCall {
+                        function: Var("double_to_int"),
+                        params: [
+                            Unary {
+                                op: Minus,
+                                expr: Constant(200000.9999),
+                            },
+                        ],
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i.6"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(200000),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

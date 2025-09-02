@@ -8,60 +8,74 @@ Program {
                     48,
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Register(DI, Eight),
                     destination: Stack(16, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Stack(16, Eight),
                     destination: Register(R10, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Register(R10, Eight),
                     destination: Stack(24, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Stack(24, Eight),
                     destination: Register(R11, Eight),
                 },
                 Binary(
+                    Quadword,
                     Mult,
                     Immediate(5, Eight),
                     Register(R11, Eight),
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Register(R11, Eight),
                     destination: Stack(24, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Stack(24, Eight),
                     destination: Register(R10, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Register(R10, Eight),
                     destination: Stack(32, Eight),
                 },
                 Binary(
+                    Quadword,
                     Sub,
                     Immediate(10, Eight),
                     Stack(32, Eight),
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Stack(32, Eight),
                     destination: Register(R10, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Register(R10, Eight),
                     destination: Stack(40, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Immediate(21474836440, Eight),
                     destination: Register(R10, Eight),
                 },
                 Cmp(
+                    Quadword,
                     Register(R10, Eight),
                     Stack(40, Eight),
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Immediate(0, Eight),
                     destination: Stack(48, Eight),
                 },
@@ -70,6 +84,7 @@ Program {
                     Stack(48, Eight),
                 ),
                 Cmp(
+                    Quadword,
                     Immediate(0, Four),
                     Stack(48, Eight),
                 ),
@@ -78,6 +93,7 @@ Program {
                     "target.0.true",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(1, Four),
                     destination: Register(AX, Four),
                 },
@@ -92,11 +108,13 @@ Program {
                     "target.0.end",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -111,6 +129,7 @@ Program {
                     16,
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Immediate(4294967290, Eight),
                     destination: Register(DI, Eight),
                 },
@@ -118,15 +137,18 @@ Program {
                     "target",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Register(AX, Four),
                     destination: Stack(12, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -135,4 +157,5 @@ Program {
         },
     ],
     static_variables: [],
+    static_constants: [],
 }

@@ -1,0 +1,233 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "d",
+                    ty: Double,
+                    init: Constant(0.75),
+                    storage: Static,
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Unary {
+                            op: PostfixIncrement,
+                            expr: Var("d"),
+                        },
+                        rhs: Constant(0.75),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Constant(1.75),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("d"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(100.2),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Unary {
+                            op: PrefixIncrement,
+                            expr: Var("d"),
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(99.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(99.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Unary {
+                            op: PostfixDecrement,
+                            expr: Var("d"),
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(99.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(100.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Unary {
+                            op: PrefixDecrement,
+                            expr: Var("d"),
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(101.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(101.2),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("d"),
+                        rhs: Constant(1e-21),
+                    },
+                ),
+                Expression(
+                    Unary {
+                        op: PostfixIncrement,
+                        expr: Var("d"),
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Constant(1.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(9),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("d"),
+                        rhs: Constant(1e21),
+                    },
+                ),
+                Expression(
+                    Unary {
+                        op: PostfixDecrement,
+                        expr: Var("d"),
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Constant(1e21),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(10),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

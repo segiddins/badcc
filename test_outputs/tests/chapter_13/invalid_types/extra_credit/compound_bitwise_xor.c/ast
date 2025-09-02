@@ -1,0 +1,29 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                Expression(
+                    CompoundAssignment {
+                        op: BitwiseOr,
+                        lhs: Var("i"),
+                        rhs: Constant(2.0),
+                    },
+                ),
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Var("i"),
+                    },
+                ),
+            ],
+        },
+    ],
+}

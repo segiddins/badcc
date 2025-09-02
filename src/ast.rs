@@ -180,12 +180,13 @@ impl Debug for Expression {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Clone, Copy, PartialEq)]
 pub enum Constant {
     Int(i32),
     Long(i64),
     UInt(u32),
     ULong(u64),
+    Double(f64),
 }
 
 impl Constant {
@@ -195,6 +196,7 @@ impl Constant {
             Constant::Long(v) => *v,
             Constant::UInt(v) => *v as i64,
             Constant::ULong(v) => *v as i64,
+            Constant::Double(v) => *v as i64,
         }
     }
 
@@ -204,6 +206,7 @@ impl Constant {
             Constant::Long(_) => Type::Long,
             Constant::UInt(_) => Type::UInt,
             Constant::ULong(_) => Type::ULong,
+            Constant::Double(_) => Type::Double,
         }
     }
 }
@@ -215,6 +218,7 @@ impl Debug for Constant {
             Self::Long(arg0) => write!(f, "{arg0}l"),
             Self::UInt(arg0) => write!(f, "{arg0}u"),
             Self::ULong(arg0) => write!(f, "{arg0}ul"),
+            Self::Double(d) => write!(f, "{d:?}"),
         }
     }
 }

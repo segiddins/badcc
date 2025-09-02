@@ -29,7 +29,7 @@ pub struct Function {
 pub struct StaticVariable {
     pub identifier: String,
     pub global: bool,
-    pub init: i64,
+    pub init: Constant,
     pub width: Width,
 }
 
@@ -68,9 +68,25 @@ pub enum Instruction {
         src: Val,
         dst: Val,
     },
+    DoubleToInt {
+        src: Val,
+        dst: Val,
+    },
+    DoubleToUInt {
+        src: Val,
+        dst: Val,
+    },
+    IntToDouble {
+        src: Val,
+        dst: Val,
+    },
+    UIntToDouble {
+        src: Val,
+        dst: Val,
+    },
 }
 
-#[derive(Clone, PartialEq, Eq, Hash)]
+#[derive(Clone, PartialEq)]
 pub enum Val {
     Constant(Constant),
     Var(String, Type),
@@ -173,6 +189,7 @@ fn constant(ty: Type, value: i64) -> Val {
         Type::Long => Val::Constant(Constant::Long(value)),
         Type::UInt => Val::Constant(Constant::UInt(value as u32)),
         Type::ULong => Val::Constant(Constant::ULong(value as u64)),
+        Type::Double => Val::Constant(Constant::Double(value as f64)),
     }
 }
 
@@ -190,7 +207,7 @@ fn lower_variable_declaration<'i>(decl: &VariableDeclaration, state: &mut State<
                 .or_insert_with(|| StaticVariable {
                     identifier: decl.name.clone(),
                     global,
-                    init: init.value(),
+                    init: init.constant(),
                     width: decl.ty.width(),
                 });
         }
@@ -461,6 +478,39 @@ fn walk<'i>(expr: &Expression, state: &mut State<'i>) -> Val {
                 (UInt, Long | ULong) => {
                     let dst = state.var(to.clone());
                     state.push(Instruction::ZeroExtend {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+
+                (UInt | ULong, Double) => {
+                    let dst = state.var(Type::Double);
+                    state.push(Instruction::UIntToDouble {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (Int | Long, Double) => {
+                    let dst = state.var(Type::Double);
+                    state.push(Instruction::IntToDouble {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (Double, Int | Long) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::DoubleToInt {
+                        src,
+                        dst: dst.clone(),
+                    });
+                    dst
+                }
+                (Double, UInt | ULong) => {
+                    let dst = state.var(to.clone());
+                    state.push(Instruction::DoubleToUInt {
                         src,
                         dst: dst.clone(),
                     });

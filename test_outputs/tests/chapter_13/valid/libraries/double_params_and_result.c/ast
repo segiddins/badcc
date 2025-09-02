@@ -1,0 +1,216 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "fmax",
+            params: [
+                (
+                    Double,
+                    "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            19,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            29,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+        },
+        FunctionDeclaration {
+            identifier: "get_max",
+            params: [
+                (
+                    Double,
+                    "a",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            55,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "b",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            65,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "c",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            75,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            85,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "e",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            110,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "f",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            120,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "g",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            130,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "h",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            140,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "i",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            165,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "j",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            175,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "k",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            185,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                VariableDeclaration {
+                    name: "max",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("fmax"),
+                        params: [
+                            FunctionCall {
+                                function: Var("fmax"),
+                                params: [
+                                    FunctionCall {
+                                        function: Var("fmax"),
+                                        params: [
+                                            FunctionCall {
+                                                function: Var("fmax"),
+                                                params: [
+                                                    Var("a"),
+                                                    Var("b"),
+                                                ],
+                                            },
+                                            FunctionCall {
+                                                function: Var("fmax"),
+                                                params: [
+                                                    Var("c"),
+                                                    Var("d"),
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                    FunctionCall {
+                                        function: Var("fmax"),
+                                        params: [
+                                            FunctionCall {
+                                                function: Var("fmax"),
+                                                params: [
+                                                    Var("e"),
+                                                    Var("f"),
+                                                ],
+                                            },
+                                            FunctionCall {
+                                                function: Var("fmax"),
+                                                params: [
+                                                    Var("g"),
+                                                    Var("h"),
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                            FunctionCall {
+                                function: Var("fmax"),
+                                params: [
+                                    Var("i"),
+                                    FunctionCall {
+                                        function: Var("fmax"),
+                                        params: [
+                                            Var("j"),
+                                            Var("k"),
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                },
+                Return(
+                    Var("max"),
+                ),
+            ],
+        },
+    ],
+}

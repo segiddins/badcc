@@ -1,0 +1,245 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "check_args",
+            global: true,
+            params: [
+                Var("l.1", Long),
+                Var("d.2", Double),
+            ],
+            instructions: [
+                Binary {
+                    op: Equals,
+                    lhs: Var("l.1", Long),
+                    rhs: 2l,
+                    dst: Var("check_args.tmp.1", Long),
+                },
+                IntToDouble {
+                    src: Var("check_args.tmp.1", Long),
+                    dst: Var("check_args.tmp.2", Double),
+                },
+                JumpIfZero(
+                    Var("check_args.tmp.2", Double),
+                    "check_args.0.false",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 6.0,
+                    dst: Var("check_args.tmp.3", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("d.2", Double),
+                    rhs: Var("check_args.tmp.3", Double),
+                    dst: Var("check_args.tmp.4", Double),
+                },
+                JumpIfZero(
+                    Var("check_args.tmp.4", Double),
+                    "check_args.0.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("check_args.tmp.0", Int),
+                },
+                Jump(
+                    "check_args.0.end",
+                ),
+                Label(
+                    "check_args.0.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("check_args.tmp.0", Int),
+                },
+                Label(
+                    "check_args.0.end",
+                ),
+                Return(
+                    Var("check_args.tmp.0", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "return_double",
+            global: true,
+            params: [],
+            instructions: [
+                Return(
+                    -30.0,
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "check_assignment",
+            global: true,
+            params: [
+                Var("arg.5", Double),
+            ],
+            instructions: [
+                Copy {
+                    src: 0,
+                    dst: Var("i.6", Int),
+                },
+                DoubleToInt {
+                    src: Var("arg.5", Double),
+                    dst: Var("check_assignment.tmp.0", Int),
+                },
+                Copy {
+                    src: Var("check_assignment.tmp.0", Int),
+                    dst: Var("i.6", Int),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("i.6", Int),
+                    rhs: 4,
+                    dst: Var("check_assignment.tmp.1", Int),
+                },
+                Return(
+                    Var("check_assignment.tmp.1", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 6,
+                    dst: Var("main.tmp.0", Int),
+                },
+                IntToDouble {
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("main.tmp.1", Double),
+                },
+                Call(
+                    "check_args",
+                    [
+                        2l,
+                        Var("main.tmp.1", Double),
+                    ],
+                    Var("main.tmp.2", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("main.tmp.3", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "return_double",
+                    [],
+                    Var("main.tmp.4", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.4", Double),
+                    rhs: 1.8446744073709552e19,
+                    dst: Var("main.tmp.5", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "check_assignment",
+                    [
+                        4.9,
+                    ],
+                    Var("main.tmp.6", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.6", Int),
+                    dst: Var("main.tmp.7", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Copy {
+                    src: -30.0,
+                    dst: Var("d.8", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("d.8", Double),
+                    rhs: 1.8446744073709552e19,
+                    dst: Var("main.tmp.8", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", Double),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

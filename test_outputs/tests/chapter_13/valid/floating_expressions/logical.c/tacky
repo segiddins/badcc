@@ -1,0 +1,620 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "non_zero",
+            global: true,
+            init: 1e-20,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "one",
+            global: true,
+            init: 1.0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "rounded_to_zero",
+            global: true,
+            init: 0.0,
+            width: Eight,
+        },
+        StaticVariable {
+            identifier: "zero",
+            global: true,
+            init: 0.0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                JumpIfZero(
+                    Var("zero", Double),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                JumpIfZero(
+                    Var("rounded_to_zero", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                JumpIfZero(
+                    Var("non_zero", Double),
+                    "main.2.true",
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                JumpIfZero(
+                    0.0,
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("non_zero", Double),
+                    dst: Var("main.tmp.0", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.0", Double),
+                    "main.4.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("zero", Double),
+                    dst: Var("main.tmp.1", Double),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.1", Double),
+                    dst: Var("main.tmp.2", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.2", Double),
+                    "main.5.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("rounded_to_zero", Double),
+                    dst: Var("main.tmp.3", Double),
+                },
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.3", Double),
+                    dst: Var("main.tmp.4", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Double),
+                    "main.6.true",
+                ),
+                Return(
+                    6,
+                ),
+                Jump(
+                    "main.6.end",
+                ),
+                Label(
+                    "main.6.true",
+                ),
+                Label(
+                    "main.6.end",
+                ),
+                JumpIfZero(
+                    Var("non_zero", Double),
+                    "main.8.false",
+                ),
+                JumpIfZero(
+                    1.0,
+                    "main.8.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.5", Int),
+                },
+                Jump(
+                    "main.8.end",
+                ),
+                Label(
+                    "main.8.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.5", Int),
+                },
+                Label(
+                    "main.8.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.5", Int),
+                    dst: Var("main.tmp.6", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", Int),
+                    "main.7.true",
+                ),
+                Return(
+                    8,
+                ),
+                Jump(
+                    "main.7.end",
+                ),
+                Label(
+                    "main.7.true",
+                ),
+                Label(
+                    "main.7.end",
+                ),
+                JumpIfZero(
+                    3.0,
+                    "main.10.false",
+                ),
+                JumpIfZero(
+                    Var("zero", Double),
+                    "main.10.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.7", Int),
+                },
+                Jump(
+                    "main.10.end",
+                ),
+                Label(
+                    "main.10.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.7", Int),
+                },
+                Label(
+                    "main.10.end",
+                ),
+                JumpIfZero(
+                    Var("main.tmp.7", Int),
+                    "main.9.true",
+                ),
+                Return(
+                    8,
+                ),
+                Jump(
+                    "main.9.end",
+                ),
+                Label(
+                    "main.9.true",
+                ),
+                Label(
+                    "main.9.end",
+                ),
+                JumpIfZero(
+                    Var("rounded_to_zero", Double),
+                    "main.12.false",
+                ),
+                JumpIfZero(
+                    10000000000000.0,
+                    "main.12.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.8", Int),
+                },
+                Jump(
+                    "main.12.end",
+                ),
+                Label(
+                    "main.12.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.8", Int),
+                },
+                Label(
+                    "main.12.end",
+                ),
+                JumpIfZero(
+                    Var("main.tmp.8", Int),
+                    "main.11.true",
+                ),
+                Return(
+                    9,
+                ),
+                Jump(
+                    "main.11.end",
+                ),
+                Label(
+                    "main.11.true",
+                ),
+                Label(
+                    "main.11.end",
+                ),
+                JumpIfZero(
+                    -1.0,
+                    "main.14.false",
+                ),
+                JumpIfZero(
+                    Var("zero", Double),
+                    "main.14.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.9", Int),
+                },
+                Jump(
+                    "main.14.end",
+                ),
+                Label(
+                    "main.14.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.9", Int),
+                },
+                Label(
+                    "main.14.end",
+                ),
+                JumpIfZero(
+                    Var("main.tmp.9", Int),
+                    "main.13.true",
+                ),
+                Return(
+                    10,
+                ),
+                Jump(
+                    "main.13.end",
+                ),
+                Label(
+                    "main.13.true",
+                ),
+                Label(
+                    "main.13.end",
+                ),
+                JumpIfZero(
+                    Var("non_zero", Double),
+                    "main.16.false",
+                ),
+                JumpIfZero(
+                    5.0,
+                    "main.16.false",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.10", Int),
+                },
+                Jump(
+                    "main.16.end",
+                ),
+                Label(
+                    "main.16.false",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.10", Int),
+                },
+                Label(
+                    "main.16.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.10", Int),
+                    dst: Var("main.tmp.11", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.11", Int),
+                    "main.15.true",
+                ),
+                Return(
+                    11,
+                ),
+                Jump(
+                    "main.15.end",
+                ),
+                Label(
+                    "main.15.true",
+                ),
+                Label(
+                    "main.15.end",
+                ),
+                JumpIfNotZero(
+                    5.0,
+                    "main.18.true",
+                ),
+                JumpIfNotZero(
+                    Var("zero", Double),
+                    "main.18.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.12", Int),
+                },
+                Jump(
+                    "main.18.end",
+                ),
+                Label(
+                    "main.18.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.12", Int),
+                },
+                Label(
+                    "main.18.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.12", Int),
+                    dst: Var("main.tmp.13", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.13", Int),
+                    "main.17.true",
+                ),
+                Return(
+                    12,
+                ),
+                Jump(
+                    "main.17.end",
+                ),
+                Label(
+                    "main.17.true",
+                ),
+                Label(
+                    "main.17.end",
+                ),
+                JumpIfNotZero(
+                    Var("zero", Double),
+                    "main.20.true",
+                ),
+                JumpIfNotZero(
+                    Var("rounded_to_zero", Double),
+                    "main.20.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.14", Int),
+                },
+                Jump(
+                    "main.20.end",
+                ),
+                Label(
+                    "main.20.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.14", Int),
+                },
+                Label(
+                    "main.20.end",
+                ),
+                JumpIfZero(
+                    Var("main.tmp.14", Int),
+                    "main.19.true",
+                ),
+                Return(
+                    13,
+                ),
+                Jump(
+                    "main.19.end",
+                ),
+                Label(
+                    "main.19.true",
+                ),
+                Label(
+                    "main.19.end",
+                ),
+                JumpIfNotZero(
+                    Var("rounded_to_zero", Double),
+                    "main.22.true",
+                ),
+                JumpIfNotZero(
+                    0.0001,
+                    "main.22.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.15", Int),
+                },
+                Jump(
+                    "main.22.end",
+                ),
+                Label(
+                    "main.22.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.15", Int),
+                },
+                Label(
+                    "main.22.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.15", Int),
+                    dst: Var("main.tmp.16", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.16", Int),
+                    "main.21.true",
+                ),
+                Return(
+                    14,
+                ),
+                Jump(
+                    "main.21.end",
+                ),
+                Label(
+                    "main.21.true",
+                ),
+                Label(
+                    "main.21.end",
+                ),
+                JumpIfNotZero(
+                    Var("non_zero", Double),
+                    "main.24.true",
+                ),
+                JumpIfNotZero(
+                    0.0,
+                    "main.24.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.17", Int),
+                },
+                Jump(
+                    "main.24.end",
+                ),
+                Label(
+                    "main.24.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.17", Int),
+                },
+                Label(
+                    "main.24.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.17", Int),
+                    dst: Var("main.tmp.18", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.18", Int),
+                    "main.23.true",
+                ),
+                Return(
+                    15,
+                ),
+                Jump(
+                    "main.23.end",
+                ),
+                Label(
+                    "main.23.true",
+                ),
+                Label(
+                    "main.23.end",
+                ),
+                JumpIfNotZero(
+                    0.0,
+                    "main.26.true",
+                ),
+                JumpIfNotZero(
+                    5e-7,
+                    "main.26.true",
+                ),
+                Copy {
+                    src: 0,
+                    dst: Var("main.tmp.19", Int),
+                },
+                Jump(
+                    "main.26.end",
+                ),
+                Label(
+                    "main.26.true",
+                ),
+                Copy {
+                    src: 1,
+                    dst: Var("main.tmp.19", Int),
+                },
+                Label(
+                    "main.26.end",
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.19", Int),
+                    dst: Var("main.tmp.20", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.20", Int),
+                    "main.25.true",
+                ),
+                Return(
+                    16,
+                ),
+                Jump(
+                    "main.25.end",
+                ),
+                Label(
+                    "main.25.true",
+                ),
+                Label(
+                    "main.25.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

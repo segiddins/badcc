@@ -1,0 +1,35 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "x",
+                    ty: Int,
+                    init: Constant(10),
+                },
+                Switch(
+                    Var("x"),
+                    Compound(
+                        [
+                            Case {
+                                expression: Constant(1.0),
+                                statement: Return(
+                                    Constant(0),
+                                ),
+                            },
+                            Default {
+                                statement: Return(
+                                    Constant(4),
+                                ),
+                            },
+                        ],
+                    ),
+                    None,
+                ),
+            ],
+        },
+    ],
+}

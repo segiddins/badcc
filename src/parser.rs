@@ -1,4 +1,7 @@
-use std::{borrow::Borrow, num::ParseIntError};
+use std::{
+    borrow::Borrow,
+    num::{ParseFloatError, ParseIntError},
+};
 
 use miette::{NamedSource, SourceSpan};
 
@@ -36,6 +39,14 @@ enum ParserError {
         error: ParseIntError,
 
         #[label("here")]
+        span: SourceSpan,
+    },
+    #[error("double constant is out of range")]
+    DoubleOutOfRange {
+        #[source]
+        error: ParseFloatError,
+
+        #[label]
         span: SourceSpan,
     },
     #[error("declaration cannot have more than one storage specifier")]
@@ -127,8 +138,9 @@ impl Lexer<'_> {
 
     fn peek_decl_specifier(&self) -> bool {
         use Token::*;
-        self.peek_token()
-            .is_some_and(|(t, _)| matches!(t, Int | Long | Signed | Unsigned | Static | Extern))
+        self.peek_token().is_some_and(|(t, _)| {
+            matches!(t, Int | Long | Signed | Unsigned | Double | Static | Extern)
+        })
     }
 
     fn str_at(&self, span: SourceSpan) -> &str {
@@ -192,10 +204,12 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
     let start = lexer.mark();
     let mut end = start;
     let mut type_tokens = vec![];
-    while let Some((token, span)) = lexer
-        .tokens
-        .pop_if(|(token, _)| matches!(token, Int | Long | Signed | Unsigned | Static | Extern))
-    {
+    while let Some((token, span)) = lexer.tokens.pop_if(|(token, _)| {
+        matches!(
+            token,
+            Int | Long | Double | Signed | Unsigned | Static | Extern
+        )
+    }) {
         end = span;
         type_tokens.push(token);
     }
@@ -213,17 +227,23 @@ fn parse_decl_specifiers(lexer: &mut Lexer) -> Result<(Option<StorageClass>, Typ
     let long = remove(Long);
     let signed = remove(Signed);
     let unsigned = remove(Unsigned);
+    let double = remove(Double);
 
     let r#static = remove(Static);
     let r#extern = remove(Extern);
 
-    if !type_tokens.is_empty() || (!int && !long && !signed && !unsigned) || (signed && unsigned) {
+    if !type_tokens.is_empty()
+        || (!int && !long && !signed && !unsigned && !double)
+        || (double && (long || int || signed || unsigned))
+        || (signed && unsigned)
+    {
         return Err(ParserError::DeclSingleType {
             span: spanning(start, end),
         });
     }
 
     let ty = match (!long, !unsigned) {
+        _ if double => Type::Double,
         (true, true) => Type::Int,
         (true, false) => Type::UInt,
         (false, true) => Type::Long,
@@ -543,6 +563,13 @@ fn parse_expression_bp(
             .map(|constant| Expression::Constant { constant, span })
             .map_err(|error| ParserError::ConstantOutOfRange { error, span })
         }
+        Token::FloatingConstant => {
+            let s = lexer.str_at(span);
+            s.parse()
+                .map(Constant::Double)
+                .map(|constant| Expression::Constant { constant, span })
+                .map_err(|error| ParserError::DoubleOutOfRange { error, span })
+        }
         Token::Identifier => Ok(Expression::Var {
             name: lexer.str_at(span).into(),
             span,
@@ -728,7 +755,7 @@ fn parse_expression_bp(
                 if !matches!(lhs, Expression::Var { .. }) {
                     return Err(ParserError::Expected {
                         options: vec![Token::Identifier],
-                        kind: Token::InvalidIdentifier,
+                        kind: Token::Identifier,
                         span: next_span,
                     });
                 }

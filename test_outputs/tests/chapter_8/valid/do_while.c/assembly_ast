@@ -8,6 +8,7 @@ Program {
                     32,
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(1, Four),
                     destination: Stack(12, Four),
                 },
@@ -15,31 +16,38 @@ Program {
                     "loop.0.head",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(16, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(16, Four),
                     destination: Register(R11, Four),
                 },
                 Binary(
+                    Longword,
                     Mult,
                     Immediate(2, Four),
                     Register(R11, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Register(R11, Four),
                     destination: Stack(16, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(16, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(12, Four),
                 },
@@ -47,10 +55,12 @@ Program {
                     "loop.0.start",
                 ),
                 Cmp(
+                    Longword,
                     Immediate(11, Four),
                     Stack(12, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Stack(20, Four),
                 },
@@ -59,6 +69,7 @@ Program {
                     Stack(20, Four),
                 ),
                 Cmp(
+                    Longword,
                     Immediate(0, Four),
                     Stack(20, Four),
                 ),
@@ -70,11 +81,13 @@ Program {
                     "loop.0",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -83,4 +96,5 @@ Program {
         },
     ],
     static_variables: [],
+    static_constants: [],
 }

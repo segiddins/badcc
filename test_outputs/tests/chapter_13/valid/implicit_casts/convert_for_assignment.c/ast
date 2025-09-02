@@ -1,0 +1,185 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "check_args",
+            params: [
+                (
+                    Long,
+                    "l",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            20,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            30,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Binary {
+                        op: And,
+                        lhs: Binary {
+                            op: Equals,
+                            lhs: Var("l"),
+                            rhs: Constant(2),
+                        },
+                        rhs: Binary {
+                            op: Equals,
+                            lhs: Var("d"),
+                            rhs: Unary {
+                                op: Minus,
+                                expr: Constant(6.0),
+                            },
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "return_double",
+            params: [],
+            ret: Double,
+            body: [
+                Return(
+                    Constant(18446744073709551586ul),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "check_assignment",
+            params: [
+                (
+                    Double,
+                    "arg",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            163,
+                        ),
+                        length: 3,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("i"),
+                        rhs: Var("arg"),
+                    },
+                ),
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("i"),
+                        rhs: Constant(4),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("check_args"),
+                            params: [
+                                Constant(2.4),
+                                Unary {
+                                    op: Minus,
+                                    expr: Constant(6),
+                                },
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("return_double"),
+                        },
+                        rhs: Constant(1.8446744073709552e19),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("check_assignment"),
+                            params: [
+                                Constant(4.9),
+                            ],
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "d",
+                    ty: Double,
+                    init: Constant(18446744073709551586ul),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d"),
+                        rhs: Constant(1.8446744073709552e19),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

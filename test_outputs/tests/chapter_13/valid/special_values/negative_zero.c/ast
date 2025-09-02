@@ -1,0 +1,212 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "copysign",
+            params: [
+                (
+                    Double,
+                    "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            23,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Double,
+                    "y",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            33,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+        },
+        VariableDeclaration {
+            name: "zero",
+            ty: Double,
+            init: Constant(0.0),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "negative_zero",
+                    ty: Double,
+                    init: Unary {
+                        op: Minus,
+                        expr: Var("zero"),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("negative_zero"),
+                        rhs: Constant(0),
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Constant(1),
+                            rhs: Var("negative_zero"),
+                        },
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(inf),
+                        },
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Unary {
+                                op: Minus,
+                                expr: Constant(10),
+                            },
+                            rhs: Var("negative_zero"),
+                        },
+                        rhs: Constant(inf),
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "fail",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                Expression(
+                    Binary {
+                        op: And,
+                        lhs: Var("negative_zero"),
+                        rhs: Assignment {
+                            lhs: Var("fail"),
+                            rhs: Constant(1),
+                        },
+                    },
+                ),
+                If(
+                    Var("fail"),
+                    Return(
+                        Constant(4),
+                    ),
+                    None,
+                ),
+                If(
+                    Var("negative_zero"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("zero"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(0.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "negated",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("copysign"),
+                        params: [
+                            Constant(4.0),
+                            Unary {
+                                op: Minus,
+                                expr: Constant(0.0),
+                            },
+                        ],
+                    },
+                },
+                VariableDeclaration {
+                    name: "positive",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("copysign"),
+                        params: [
+                            Unary {
+                                op: Minus,
+                                expr: Constant(5.0),
+                            },
+                            Constant(0.0),
+                        ],
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("negated"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(4.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("positive"),
+                        rhs: Constant(5.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

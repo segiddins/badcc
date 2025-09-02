@@ -1,0 +1,176 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "double_to_uint",
+            global: true,
+            params: [
+                Var("d.1", Double),
+            ],
+            instructions: [
+                DoubleToUInt {
+                    src: Var("d.1", Double),
+                    dst: Var("double_to_uint.tmp.0", UInt),
+                },
+                Return(
+                    Var("double_to_uint.tmp.0", UInt),
+                ),
+                Return(
+                    0u,
+                ),
+            ],
+        },
+        Function {
+            identifier: "double_to_ulong",
+            global: true,
+            params: [
+                Var("d.3", Double),
+            ],
+            instructions: [
+                DoubleToUInt {
+                    src: Var("d.3", Double),
+                    dst: Var("double_to_ulong.tmp.0", ULong),
+                },
+                Return(
+                    Var("double_to_ulong.tmp.0", ULong),
+                ),
+                Return(
+                    0ul,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "double_to_uint",
+                    [
+                        10.9,
+                    ],
+                    Var("main.tmp.0", UInt),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.0", UInt),
+                    rhs: 10u,
+                    dst: Var("main.tmp.1", UInt),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", UInt),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "double_to_uint",
+                    [
+                        2147483750.5,
+                    ],
+                    Var("main.tmp.2", UInt),
+                ),
+                ZeroExtend {
+                    src: Var("main.tmp.2", UInt),
+                    dst: Var("main.tmp.3", Long),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.3", Long),
+                    rhs: 2147483750l,
+                    dst: Var("main.tmp.4", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Long),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "double_to_ulong",
+                    [
+                        34359738368.5,
+                    ],
+                    Var("main.tmp.5", ULong),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.5", ULong),
+                    rhs: 34359738368ul,
+                    dst: Var("main.tmp.6", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", ULong),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "double_to_ulong",
+                    [
+                        3.4587645138215895e18,
+                    ],
+                    Var("main.tmp.7", ULong),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.7", ULong),
+                    rhs: 3458764513821589504ul,
+                    dst: Var("main.tmp.8", ULong),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", ULong),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

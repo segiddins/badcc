@@ -1,0 +1,65 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "fun",
+            global: true,
+            params: [
+                Var("x.1", Double),
+            ],
+            instructions: [
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("x.1", Double),
+                    rhs: 2.0,
+                    dst: Var("fun.tmp.0", Double),
+                },
+                JumpIfZero(
+                    Var("fun.tmp.0", Double),
+                    "fun.0.true",
+                ),
+                Return(
+                    Var("x.1", Double),
+                ),
+                Jump(
+                    "fun.0.end",
+                ),
+                Label(
+                    "fun.0.true",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var("x.1", Double),
+                    rhs: 2.0,
+                    dst: Var("fun.tmp.1", Double),
+                },
+                Call(
+                    "fun",
+                    [
+                        Var("fun.tmp.1", Double),
+                    ],
+                    Var("fun.tmp.2", Double),
+                ),
+                Copy {
+                    src: Var("fun.tmp.2", Double),
+                    dst: Var("ret.2", Double),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var("ret.2", Double),
+                    rhs: Var("x.1", Double),
+                    dst: Var("fun.tmp.3", Double),
+                },
+                Return(
+                    Var("fun.tmp.3", Double),
+                ),
+                Label(
+                    "fun.0.end",
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+    ],
+}

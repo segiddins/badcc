@@ -1,0 +1,111 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "return_static_variable",
+            params: [],
+            ret: Double,
+            body: [
+                VariableDeclaration {
+                    name: "d",
+                    ty: Double,
+                    init: Constant(0.5),
+                    storage: Static,
+                },
+                VariableDeclaration {
+                    name: "ret",
+                    ty: Double,
+                    init: Var("d"),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("d"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("d"),
+                            rhs: Constant(1.0),
+                        },
+                    },
+                ),
+                Return(
+                    Var("ret"),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "d1",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("return_static_variable"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "d2",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("return_static_variable"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "d3",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("return_static_variable"),
+                    },
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d1"),
+                        rhs: Constant(0.5),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d2"),
+                        rhs: Constant(1.5),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d3"),
+                        rhs: Constant(2.5),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

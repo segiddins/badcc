@@ -1,0 +1,53 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a",
+                    ty: Int,
+                    init: Constant(0),
+                },
+                For {
+                    init: VariableDeclaration {
+                        name: "d",
+                        ty: Double,
+                        init: Constant(100.0),
+                    },
+                    condition: Binary {
+                        op: GreaterThan,
+                        lhs: Var("d"),
+                        rhs: Constant(0.0),
+                    },
+                    post: Assignment {
+                        lhs: Var("d"),
+                        rhs: Binary {
+                            op: Subtract,
+                            lhs: Var("d"),
+                            rhs: Constant(1.0),
+                        },
+                    },
+                    body: Compound(
+                        [
+                            Expression(
+                                Assignment {
+                                    lhs: Var("a"),
+                                    rhs: Binary {
+                                        op: Add,
+                                        lhs: Var("a"),
+                                        rhs: Constant(1),
+                                    },
+                                },
+                            ),
+                        ],
+                    ),
+                },
+                Return(
+                    Var("a"),
+                ),
+            ],
+        },
+    ],
+}

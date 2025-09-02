@@ -1,0 +1,586 @@
+Program {
+    definitions: [
+        Function {
+            name: "check_args",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    64,
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Register(DI, Eight),
+                    destination: Stack(16, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Register(XMM0, Eight),
+                    destination: Stack(24, Eight),
+                },
+                Cmp(
+                    Quadword,
+                    Immediate(2, Eight),
+                    Stack(16, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Eight),
+                    destination: Stack(32, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(32, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Stack(32, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Cvtsi2sd {
+                    src_type: Quadword,
+                    src: Register(R10, Eight),
+                    dst: Register(XMM15, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(XMM15, Eight),
+                    destination: Stack(40, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(40, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "check_args.0.false",
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(4618441417868443648, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Stack(48, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(-9223372036854775808, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Binary(
+                    Quadword,
+                    Xor,
+                    Register(R10, Eight),
+                    Stack(48, Eight),
+                ),
+                Move {
+                    asm_type: Double,
+                    source: Stack(48, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(24, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Eight),
+                    destination: Stack(56, Eight),
+                },
+                SetCC(
+                    E,
+                    Stack(56, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(56, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "check_args.0.false",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(1, Four),
+                    destination: Stack(60, Four),
+                },
+                Jmp(
+                    "check_args.0.end",
+                ),
+                Label(
+                    "check_args.0.false",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Stack(60, Four),
+                },
+                Label(
+                    "check_args.0.end",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Stack(60, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "return_double",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    16,
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(-4594234569871327232, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM0, Eight),
+                },
+                Ret,
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM0, Eight),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "check_assignment",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    asm_type: Double,
+                    source: Register(XMM0, Eight),
+                    destination: Stack(16, Eight),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Stack(20, Four),
+                },
+                Cvttsd2si {
+                    dst_type: Longword,
+                    src: Stack(16, Eight),
+                    dst: Register(R11, Four),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Register(R11, Four),
+                    destination: Stack(24, Four),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Stack(24, Four),
+                    destination: Register(R10, Four),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Register(R10, Four),
+                    destination: Stack(20, Four),
+                },
+                Cmp(
+                    Longword,
+                    Immediate(4, Four),
+                    Stack(20, Four),
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Stack(28, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(28, Four),
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Stack(28, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    80,
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(6, Four),
+                    destination: Stack(12, Four),
+                },
+                Unary(
+                    Longword,
+                    Neg,
+                    Stack(12, Four),
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Stack(12, Four),
+                    destination: Register(R10, Four),
+                },
+                Cvtsi2sd {
+                    src_type: Longword,
+                    src: Register(R10, Four),
+                    dst: Register(XMM15, Eight),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Register(XMM15, Eight),
+                    destination: Stack(20, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(2, Eight),
+                    destination: Register(DI, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(20, Eight),
+                    destination: Register(XMM0, Eight),
+                },
+                Call(
+                    "check_args",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Register(AX, Four),
+                    destination: Stack(24, Four),
+                },
+                Cmp(
+                    Longword,
+                    Immediate(0, Four),
+                    Stack(24, Four),
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Stack(28, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(28, Four),
+                ),
+                Cmp(
+                    Longword,
+                    Immediate(0, Four),
+                    Stack(28, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.0.true",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(1, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "return_double",
+                ),
+                Move {
+                    asm_type: Double,
+                    source: Register(XMM0, Eight),
+                    destination: Stack(36, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(4895412794951729152, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(36, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Eight),
+                    destination: Stack(44, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(44, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(44, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.1.true",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(2, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(4617202927970916762, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM0, Eight),
+                },
+                Call(
+                    "check_assignment",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Register(AX, Four),
+                    destination: Stack(48, Four),
+                },
+                Cmp(
+                    Longword,
+                    Immediate(0, Four),
+                    Stack(48, Four),
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Stack(52, Four),
+                },
+                SetCC(
+                    E,
+                    Stack(52, Four),
+                ),
+                Cmp(
+                    Longword,
+                    Immediate(0, Four),
+                    Stack(52, Four),
+                ),
+                JmpCC(
+                    E,
+                    "main.2.true",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(3, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(-4594234569871327232, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Stack(60, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(4895412794951729152, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(60, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Eight),
+                    destination: Stack(68, Eight),
+                },
+                SetCC(
+                    NE,
+                    Stack(68, Eight),
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(0, Four),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM14, Eight),
+                },
+                Move {
+                    asm_type: Double,
+                    source: Stack(68, Eight),
+                    destination: Register(XMM15, Eight),
+                },
+                Cmp(
+                    Double,
+                    Register(XMM14, Eight),
+                    Register(XMM15, Eight),
+                ),
+                JmpCC(
+                    E,
+                    "main.3.true",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(4, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Jmp(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+    static_constants: [],
+}

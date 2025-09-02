@@ -1,0 +1,96 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "non_zero",
+            params: [
+                (
+                    Double,
+                    "d.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            20,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Unary {
+                            op: Not,
+                            expr: Var("d.1"),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "multiply_by_large_num",
+            params: [
+                (
+                    Double,
+                    "d.3",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            78,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Binary {
+                        op: Multiply,
+                        lhs: Var("d.3"),
+                        rhs: Constant(2e20),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "subnormal.5",
+                    ty: Double,
+                    init: Constant(2.5e-320),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("multiply_by_large_num"),
+                            params: [
+                                Var("subnormal.5"),
+                            ],
+                        },
+                        rhs: Constant(4.999944335913415e-300),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    FunctionCall {
+                        function: Var("non_zero"),
+                        params: [
+                            Var("subnormal.5"),
+                        ],
+                    },
+                ),
+            ],
+        },
+    ],
+}

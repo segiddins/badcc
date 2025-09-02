@@ -8,32 +8,39 @@ Program {
                     16,
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Data("x.1", Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(12, Four),
                 },
                 Binary(
+                    Longword,
                     Add,
                     Immediate(1, Four),
                     Stack(12, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Data("x.1", Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Data("x.1", Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -48,6 +55,7 @@ Program {
                     32,
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Stack(12, Four),
                 },
@@ -55,10 +63,12 @@ Program {
                     "loop.0.cond",
                 ),
                 Cmp(
+                    Longword,
                     Immediate(4, Four),
                     Stack(12, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Stack(16, Four),
                 },
@@ -67,6 +77,7 @@ Program {
                     Stack(16, Four),
                 ),
                 Cmp(
+                    Longword,
                     Immediate(0, Four),
                     Stack(16, Four),
                 ),
@@ -78,14 +89,17 @@ Program {
                     "foo",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Register(AX, Four),
                     destination: Stack(20, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(20, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(24, Four),
                 },
@@ -93,23 +107,28 @@ Program {
                     "loop.0.start",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(28, Four),
                 },
                 Binary(
+                    Longword,
                     Add,
                     Immediate(1, Four),
                     Stack(28, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(28, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(12, Four),
                 },
@@ -120,11 +139,13 @@ Program {
                     "loop.0",
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(24, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -140,4 +161,5 @@ Program {
             alignment: 4,
         },
     ],
+    static_constants: [],
 }

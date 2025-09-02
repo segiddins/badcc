@@ -1,0 +1,114 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "glob",
+            ty: Double,
+            init: Constant(3.0),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "l",
+                    ty: Long,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1l),
+                    },
+                },
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(1),
+                    },
+                },
+                VariableDeclaration {
+                    name: "j",
+                    ty: Int,
+                    init: Cast {
+                        to: Int,
+                        expr: Var("glob"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "k",
+                    ty: Int,
+                    init: Constant(20),
+                },
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(1l),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Constant(1),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("j"),
+                        rhs: Constant(3),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("k"),
+                        rhs: Constant(20),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,66 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 4.0,
+                    dst: Var("main.tmp.0", Double),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: 10000.0,
+                    rhs: 1100000.0,
+                    dst: Var("main.tmp.1", Double),
+                },
+                Call(
+                    "get_max",
+                    [
+                        100.3,
+                        200.1,
+                        0.01,
+                        100004.0,
+                        55.555,
+                        Var("main.tmp.0", Double),
+                        6543.2,
+                        9000000000.0,
+                        800000000.0,
+                        7.6,
+                        Var("main.tmp.1", Double),
+                    ],
+                    Var("main.tmp.2", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.2", Double),
+                    dst: Var("result.13", Double),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: 10000.0,
+                    rhs: 1100000.0,
+                    dst: Var("main.tmp.3", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("result.13", Double),
+                    rhs: Var("main.tmp.3", Double),
+                    dst: Var("main.tmp.4", Double),
+                },
+                DoubleToInt {
+                    src: Var("main.tmp.4", Double),
+                    dst: Var("main.tmp.5", Int),
+                },
+                Return(
+                    Var("main.tmp.5", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

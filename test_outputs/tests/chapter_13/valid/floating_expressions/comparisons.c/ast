@@ -1,0 +1,255 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "fifty_fiveE5",
+            ty: Double,
+            init: Constant(5500000.0),
+        },
+        VariableDeclaration {
+            name: "fifty_fourE4",
+            ty: Double,
+            init: Constant(540000.0),
+        },
+        VariableDeclaration {
+            name: "tiny",
+            ty: Double,
+            init: Constant(4e-5),
+        },
+        VariableDeclaration {
+            name: "four",
+            ty: Double,
+            init: Constant(4.0),
+        },
+        VariableDeclaration {
+            name: "point_one",
+            ty: Double,
+            init: Constant(0.1),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: LessThan,
+                        lhs: Var("fifty_fiveE5"),
+                        rhs: Var("fifty_fourE4"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var("four"),
+                        rhs: Constant(4.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("tiny"),
+                        rhs: Constant(0.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Var("fifty_fourE4"),
+                        rhs: Var("fifty_fiveE5"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("tiny"),
+                        rhs: Constant(0.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("point_one"),
+                        rhs: Var("point_one"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThan,
+                            lhs: Var("tiny"),
+                            rhs: Constant(5e-6),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Unary {
+                                op: Minus,
+                                expr: Constant(4e-5),
+                            },
+                            rhs: Var("four"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: LessThanOrEqual,
+                            lhs: Var("tiny"),
+                            rhs: Var("tiny"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(9),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: GreaterThanOrEqual,
+                            lhs: Var("fifty_fiveE5"),
+                            rhs: Var("fifty_fiveE5"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(10),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Equals,
+                            lhs: Constant(0.1),
+                            rhs: Var("point_one"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(11),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: NotEqual,
+                            lhs: Var("tiny"),
+                            rhs: Constant(3e-5),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(12),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThan,
+                        lhs: Constant(3e-5),
+                        rhs: Constant(3e-12),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(13),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

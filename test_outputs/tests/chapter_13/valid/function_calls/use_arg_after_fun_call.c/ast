@@ -1,0 +1,74 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "fun",
+            params: [
+                (
+                    Double,
+                    "x",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                If(
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var("x"),
+                        rhs: Constant(2),
+                    },
+                    Return(
+                        Var("x"),
+                    ),
+                    Some(
+                        Compound(
+                            [
+                                VariableDeclaration {
+                                    name: "ret",
+                                    ty: Double,
+                                    init: FunctionCall {
+                                        function: Var("fun"),
+                                        params: [
+                                            Binary {
+                                                op: Add,
+                                                lhs: Var("x"),
+                                                rhs: Constant(2),
+                                            },
+                                        ],
+                                    },
+                                },
+                                Return(
+                                    Binary {
+                                        op: Add,
+                                        lhs: Var("ret"),
+                                        rhs: Var("x"),
+                                    },
+                                ),
+                            ],
+                        ),
+                    ),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    FunctionCall {
+                        function: Var("fun"),
+                        params: [
+                            Constant(1.0),
+                        ],
+                    },
+                ),
+            ],
+        },
+    ],
+}

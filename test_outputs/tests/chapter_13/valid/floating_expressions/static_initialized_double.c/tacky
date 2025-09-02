@@ -1,0 +1,145 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "d.1",
+            global: false,
+            init: 0.5,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "return_static_variable",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: Var("d.1", Double),
+                    dst: Var("ret.2", Double),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var("d.1", Double),
+                    rhs: 1.0,
+                    dst: Var("return_static_variable.tmp.0", Double),
+                },
+                Copy {
+                    src: Var("return_static_variable.tmp.0", Double),
+                    dst: Var("d.1", Double),
+                },
+                Return(
+                    Var("ret.2", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "return_static_variable",
+                    [],
+                    Var("main.tmp.0", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.0", Double),
+                    dst: Var("d1.4", Double),
+                },
+                Call(
+                    "return_static_variable",
+                    [],
+                    Var("main.tmp.1", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.1", Double),
+                    dst: Var("d2.5", Double),
+                },
+                Call(
+                    "return_static_variable",
+                    [],
+                    Var("main.tmp.2", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.2", Double),
+                    dst: Var("d3.6", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("d1.4", Double),
+                    rhs: 0.5,
+                    dst: Var("main.tmp.3", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Double),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("d2.5", Double),
+                    rhs: 1.5,
+                    dst: Var("main.tmp.4", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("d3.6", Double),
+                    rhs: 2.5,
+                    dst: Var("main.tmp.5", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.5", Double),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

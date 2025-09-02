@@ -1,0 +1,52 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 1.0,
+                    dst: Var("main.tmp.0", Double),
+                },
+                Unary {
+                    op: Negate,
+                    src: 2.0,
+                    dst: Var("main.tmp.1", Double),
+                },
+                Unary {
+                    op: Negate,
+                    src: 3.0,
+                    dst: Var("main.tmp.2", Double),
+                },
+                Unary {
+                    op: Negate,
+                    src: 4.0,
+                    dst: Var("main.tmp.3", Double),
+                },
+                Call(
+                    "check_arguments",
+                    [
+                        1.0,
+                        2.0,
+                        3.0,
+                        4.0,
+                        Var("main.tmp.0", Double),
+                        Var("main.tmp.1", Double),
+                        Var("main.tmp.2", Double),
+                        Var("main.tmp.3", Double),
+                    ],
+                    Var("main.tmp.4", Int),
+                ),
+                Return(
+                    Var("main.tmp.4", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

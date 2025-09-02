@@ -1,0 +1,142 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "double_to_uint",
+            params: [
+                (
+                    Double,
+                    "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            35,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: UInt,
+            body: [
+                Return(
+                    Cast {
+                        to: UInt,
+                        expr: Var("d"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "double_to_ulong",
+            params: [
+                (
+                    Double,
+                    "d",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            108,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: ULong,
+            body: [
+                Return(
+                    Cast {
+                        to: ULong,
+                        expr: Var("d"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("double_to_uint"),
+                            params: [
+                                Constant(10.9),
+                            ],
+                        },
+                        rhs: Constant(10u),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("double_to_uint"),
+                            params: [
+                                Constant(2147483750.5),
+                            ],
+                        },
+                        rhs: Constant(2147483750l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("double_to_ulong"),
+                            params: [
+                                Constant(34359738368.5),
+                            ],
+                        },
+                        rhs: Constant(34359738368ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("double_to_ulong"),
+                            params: [
+                                Constant(3.4587645138215895e18),
+                            ],
+                        },
+                        rhs: Constant(3458764513821589504ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

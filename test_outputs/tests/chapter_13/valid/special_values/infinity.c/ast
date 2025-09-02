@@ -1,0 +1,150 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "inf",
+            ty: Double,
+            init: Constant(inf),
+        },
+        VariableDeclaration {
+            name: "very_large",
+            ty: Double,
+            init: Constant(1.79e308),
+        },
+        VariableDeclaration {
+            name: "zero",
+            ty: Double,
+            init: Constant(0.0),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("inf"),
+                        rhs: Constant(inf),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: LessThanOrEqual,
+                        lhs: Var("inf"),
+                        rhs: Var("very_large"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Multiply,
+                            lhs: Var("very_large"),
+                            rhs: Constant(10.0),
+                        },
+                        rhs: Var("inf"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Divide,
+                            lhs: Constant(1.0),
+                            rhs: Var("zero"),
+                        },
+                        rhs: Var("inf"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "negated_inf",
+                    ty: Double,
+                    init: Unary {
+                        op: Minus,
+                        expr: Var("inf"),
+                    },
+                },
+                VariableDeclaration {
+                    name: "negated_inf2",
+                    ty: Double,
+                    init: Binary {
+                        op: Divide,
+                        lhs: Unary {
+                            op: Minus,
+                            expr: Constant(1.0),
+                        },
+                        rhs: Var("zero"),
+                    },
+                },
+                If(
+                    Binary {
+                        op: GreaterThanOrEqual,
+                        lhs: Var("negated_inf"),
+                        rhs: Unary {
+                            op: Minus,
+                            expr: Var("very_large"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("negated_inf"),
+                        rhs: Var("negated_inf2"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

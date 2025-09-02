@@ -8,11 +8,13 @@ Program {
                     16,
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Data("l", Eight),
                     destination: Register(AX, Eight),
                 },
                 Ret,
                 Move {
+                    asm_type: Quadword,
                     source: Immediate(0, Eight),
                     destination: Register(AX, Eight),
                 },
@@ -27,19 +29,23 @@ Program {
                     16,
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Data("l", Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(12, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -51,8 +57,9 @@ Program {
         StaticVariable {
             global: true,
             name: "l",
-            value: 8589934592,
+            value: 8589934592l,
             alignment: 8,
         },
     ],
+    static_constants: [],
 }

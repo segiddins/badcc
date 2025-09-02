@@ -1,0 +1,160 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "a.1",
+                    ty: Double,
+                    init: Constant(1.0),
+                },
+                VariableDeclaration {
+                    name: "b.2",
+                    ty: Double,
+                    init: Constant(1.0),
+                },
+                VariableDeclaration {
+                    name: "c.3",
+                    ty: Double,
+                    init: Constant(1.0),
+                },
+                VariableDeclaration {
+                    name: "d.4",
+                    ty: Double,
+                    init: Constant(1.0),
+                },
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: And,
+                                lhs: Binary {
+                                    op: Equals,
+                                    lhs: Var("a.1"),
+                                    rhs: Var("b.2"),
+                                },
+                                rhs: Binary {
+                                    op: Equals,
+                                    lhs: Var("a.1"),
+                                    rhs: Var("c.3"),
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var("a.1"),
+                                rhs: Var("d.4"),
+                            },
+                        },
+                    },
+                    Return(
+                        Constant(1),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Binary {
+                                op: Add,
+                                lhs: Binary {
+                                    op: Add,
+                                    lhs: Var("a.1"),
+                                    rhs: Var("b.2"),
+                                },
+                                rhs: Var("c.3"),
+                            },
+                            rhs: Var("d.4"),
+                        },
+                        rhs: Constant(4.0),
+                    },
+                    Return(
+                        Constant(2),
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "e.5",
+                    ty: Double,
+                    init: Constant(0.125),
+                },
+                VariableDeclaration {
+                    name: "f.6",
+                    ty: Double,
+                    init: Constant(0.125),
+                },
+                VariableDeclaration {
+                    name: "g.7",
+                    ty: Double,
+                    init: Constant(0.125),
+                },
+                VariableDeclaration {
+                    name: "h.8",
+                    ty: Double,
+                    init: Constant(0.125),
+                },
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: And,
+                            lhs: Binary {
+                                op: And,
+                                lhs: Binary {
+                                    op: Equals,
+                                    lhs: Var("e.5"),
+                                    rhs: Var("f.6"),
+                                },
+                                rhs: Binary {
+                                    op: Equals,
+                                    lhs: Var("e.5"),
+                                    rhs: Var("g.7"),
+                                },
+                            },
+                            rhs: Binary {
+                                op: Equals,
+                                lhs: Var("e.5"),
+                                rhs: Var("h.8"),
+                            },
+                        },
+                    },
+                    Return(
+                        Constant(3),
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Binary {
+                                op: Add,
+                                lhs: Binary {
+                                    op: Add,
+                                    lhs: Var("e.5"),
+                                    rhs: Var("f.6"),
+                                },
+                                rhs: Var("g.7"),
+                            },
+                            rhs: Var("h.8"),
+                        },
+                        rhs: Constant(0.5),
+                    },
+                    Return(
+                        Constant(4),
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

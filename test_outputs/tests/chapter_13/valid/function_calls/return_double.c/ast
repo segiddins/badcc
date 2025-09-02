@@ -1,0 +1,35 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "d",
+            params: [],
+            ret: Double,
+            body: [
+                Return(
+                    Constant(1.234e78),
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "retval",
+                    ty: Double,
+                    init: FunctionCall {
+                        function: Var("d"),
+                    },
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("retval"),
+                        rhs: Constant(1.234e78),
+                    },
+                ),
+            ],
+        },
+    ],
+}

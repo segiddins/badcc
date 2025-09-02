@@ -1,0 +1,103 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "non_zero",
+            global: true,
+            params: [
+                Var("d.1", Double),
+            ],
+            instructions: [
+                Unary {
+                    op: Not,
+                    src: Var("d.1", Double),
+                    dst: Var("non_zero.tmp.0", Double),
+                },
+                DoubleToInt {
+                    src: Var("non_zero.tmp.0", Double),
+                    dst: Var("non_zero.tmp.1", Int),
+                },
+                Return(
+                    Var("non_zero.tmp.1", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiply_by_large_num",
+            global: true,
+            params: [
+                Var("d.3", Double),
+            ],
+            instructions: [
+                Binary {
+                    op: Multiply,
+                    lhs: Var("d.3", Double),
+                    rhs: 2e20,
+                    dst: Var("multiply_by_large_num.tmp.0", Double),
+                },
+                Return(
+                    Var("multiply_by_large_num.tmp.0", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: 2.5e-320,
+                    dst: Var("subnormal.5", Double),
+                },
+                Call(
+                    "multiply_by_large_num",
+                    [
+                        Var("subnormal.5", Double),
+                    ],
+                    Var("main.tmp.0", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.0", Double),
+                    rhs: 4.999944335913415e-300,
+                    dst: Var("main.tmp.1", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.1", Double),
+                    "main.0.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "non_zero",
+                    [
+                        Var("subnormal.5", Double),
+                    ],
+                    Var("main.tmp.2", Int),
+                ),
+                Return(
+                    Var("main.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

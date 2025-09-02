@@ -1,0 +1,44 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+            init: Constant(10000ul),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i",
+                    ty: Int,
+                    init: Unary {
+                        op: Minus,
+                        expr: Constant(50),
+                    },
+                },
+                VariableDeclaration {
+                    name: "d",
+                    ty: Double,
+                    init: Binary {
+                        op: Multiply,
+                        lhs: Binary {
+                            op: Add,
+                            lhs: Var("ul"),
+                            rhs: Var("i"),
+                        },
+                        rhs: Constant(3.125),
+                    },
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("d"),
+                        rhs: Constant(31093.75),
+                    },
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,298 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "zero",
+            ty: Double,
+            init: Constant(0.0),
+        },
+        VariableDeclaration {
+            name: "non_zero",
+            ty: Double,
+            init: Constant(1e-20),
+        },
+        VariableDeclaration {
+            name: "one",
+            ty: Double,
+            init: Constant(1.0),
+        },
+        VariableDeclaration {
+            name: "rounded_to_zero",
+            ty: Double,
+            init: Constant(0.0),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Var("zero"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Var("rounded_to_zero"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Var("non_zero"),
+                    Compound(
+                        [],
+                    ),
+                    Some(
+                        Compound(
+                            [
+                                Return(
+                                    Constant(3),
+                                ),
+                            ],
+                        ),
+                    ),
+                ),
+                If(
+                    Constant(0.0),
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Var("non_zero"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Unary {
+                            op: Not,
+                            expr: Var("zero"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Unary {
+                            op: Not,
+                            expr: Var("rounded_to_zero"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: And,
+                            lhs: Var("non_zero"),
+                            rhs: Constant(1.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: And,
+                        lhs: Constant(3.0),
+                        rhs: Var("zero"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: And,
+                        lhs: Var("rounded_to_zero"),
+                        rhs: Constant(10000000000000.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(9),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: And,
+                        lhs: Constant(-1.0),
+                        rhs: Var("zero"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(10),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: And,
+                            lhs: Var("non_zero"),
+                            rhs: Constant(5.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(11),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Constant(5.0),
+                            rhs: Var("zero"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(12),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: Or,
+                        lhs: Var("zero"),
+                        rhs: Var("rounded_to_zero"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(13),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Var("rounded_to_zero"),
+                            rhs: Constant(0.0001),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(14),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Var("non_zero"),
+                            rhs: Constant(0.0),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(15),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: Binary {
+                            op: Or,
+                            lhs: Constant(0.0),
+                            rhs: Constant(5e-7),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(16),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

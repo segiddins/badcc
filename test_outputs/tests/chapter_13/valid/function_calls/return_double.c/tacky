@@ -1,0 +1,50 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "d",
+            global: true,
+            params: [],
+            instructions: [
+                Return(
+                    1.234e78,
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Call(
+                    "d",
+                    [],
+                    Var("main.tmp.0", Double),
+                ),
+                Copy {
+                    src: Var("main.tmp.0", Double),
+                    dst: Var("retval.2", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("retval.2", Double),
+                    rhs: 1.234e78,
+                    dst: Var("main.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("main.tmp.1", Double),
+                    dst: Var("main.tmp.2", Int),
+                },
+                Return(
+                    Var("main.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

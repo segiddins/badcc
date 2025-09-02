@@ -1,0 +1,55 @@
+Program {
+    definitions: [
+        Function {
+            name: "main",
+            global: true,
+            instructions: [
+                AllocateStack(
+                    32,
+                ),
+                Move {
+                    asm_type: Quadword,
+                    source: Immediate(4607182418800017408, Eight),
+                    destination: Register(R10, Eight),
+                },
+                Move {
+                    asm_type: Quadword,
+                    source: Register(R10, Eight),
+                    destination: Register(XMM0, Eight),
+                },
+                Call(
+                    "fun",
+                ),
+                Move {
+                    asm_type: Double,
+                    source: Register(XMM0, Eight),
+                    destination: Stack(16, Eight),
+                },
+                Cvttsd2si {
+                    dst_type: Longword,
+                    src: Stack(16, Eight),
+                    dst: Register(R11, Four),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Register(R11, Four),
+                    destination: Stack(20, Four),
+                },
+                Move {
+                    asm_type: Longword,
+                    source: Stack(20, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+                Move {
+                    asm_type: Longword,
+                    source: Immediate(0, Four),
+                    destination: Register(AX, Four),
+                },
+                Ret,
+            ],
+        },
+    ],
+    static_variables: [],
+    static_constants: [],
+}

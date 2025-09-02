@@ -1,0 +1,222 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "uint_to_double",
+            params: [
+                (
+                    UInt,
+                    "ui",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            36,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Cast {
+                        to: Double,
+                        expr: Var("ui"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "ulong_to_double",
+            params: [
+                (
+                    ULong,
+                    "ul",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            105,
+                        ),
+                        length: 2,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Cast {
+                        to: Double,
+                        expr: Var("ul"),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("uint_to_double"),
+                            params: [
+                                Constant(1000u),
+                            ],
+                        },
+                        rhs: Constant(1000.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("uint_to_double"),
+                            params: [
+                                Constant(4294967200u),
+                            ],
+                        },
+                        rhs: Constant(4294967200.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(138512825844ul),
+                            ],
+                        },
+                        rhs: Constant(138512825844.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(10223372036854775816ul),
+                            ],
+                        },
+                        rhs: Constant(1.0223372036854776e19),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(9223372036854776832ul),
+                            ],
+                        },
+                        rhs: Constant(9.223372036854776e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(9223372036854776833ul),
+                            ],
+                        },
+                        rhs: Constant(9.223372036854778e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(9223372036854776831ul),
+                            ],
+                        },
+                        rhs: Constant(9.223372036854776e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("ulong_to_double"),
+                            params: [
+                                Constant(9223372036854776830ul),
+                            ],
+                        },
+                        rhs: Constant(9.223372036854776e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

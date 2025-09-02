@@ -36,6 +36,13 @@ pub enum TypeCheckError {
         span: SourceSpan,
         position: &'static str,
     },
+    #[error("expected integral expression in {position}")]
+    NonIntegral {
+        actual: Type,
+        #[label("is {actual:?}")]
+        span: SourceSpan,
+        position: &'static str,
+    },
     #[error("calling a non-function {name}")]
     NonFunctionCall {
         name: String,
@@ -303,7 +310,7 @@ pub enum SymbolAttributes {
     Local,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Initial {
     Tentative,
     Some(Constant),
@@ -311,14 +318,10 @@ pub enum Initial {
 }
 
 impl Initial {
-    pub fn value(&self) -> i64 {
+    pub fn constant(&self) -> Constant {
         match self {
-            Initial::Tentative => 0,
-            Initial::Some(Constant::Int(v)) => *v as i64,
-            Initial::Some(Constant::Long(v)) => *v,
-            Initial::Some(Constant::UInt(v)) => *v as i64,
-            Initial::Some(Constant::ULong(v)) => *v as i64,
-            Initial::None => 0,
+            Initial::Tentative | Initial::None => Constant::Int(0),
+            Initial::Some(c) => *c,
         }
     }
 
@@ -352,6 +355,8 @@ impl Constant {
             (_, T::UInt) => *self = UInt(self.as_long() as u32),
             (_, T::Long) => *self = Long(self.as_long()),
             (_, T::ULong) => *self = ULong(self.as_long() as u64),
+            (Double(_), T::Double) => {}
+            (_, T::Double) => *self = Double(self.as_long() as f64),
         }
         Ok(())
     }
@@ -577,7 +582,7 @@ impl Checker {
                 body: statement,
                 label,
             } => {
-                let ty = self.visit_numeric_expression(
+                let ty = self.visit_integral_expression(
                     expression,
                     "switch statement controlling condition",
                 )?;
@@ -589,6 +594,7 @@ impl Checker {
                 statement,
                 label,
             } => {
+                self.visit_integral_expression(expression, "case condition")?;
                 self.make_cast(
                     expression,
                     self.switches.get(label.as_ref().unwrap()).unwrap(),
@@ -632,6 +638,7 @@ impl Checker {
             (Type::Long, Type::Long) => Ok(Type::Long),
             (Type::ULong, Type::ULong) => Ok(Type::ULong),
             (Type::UInt, Type::UInt) => Ok(Type::UInt),
+            (Type::Double, Type::Double) => Ok(Type::Double),
 
             (Type::Int | Type::UInt, Type::Long) => self.make_cast(lhs, rt),
             (Type::Long, Type::Int | Type::UInt) => self.make_cast(rhs, lt),
@@ -641,6 +648,9 @@ impl Checker {
 
             (Type::Int | Type::UInt | Type::Long, Type::ULong) => self.make_cast(lhs, rt),
             (Type::ULong, Type::Int | Type::UInt | Type::Long) => self.make_cast(rhs, lt),
+
+            (_, Type::Double) => self.make_cast(lhs, rt),
+            (Type::Double, _) => self.make_cast(rhs, lt),
         }
     }
 
@@ -652,8 +662,8 @@ impl Checker {
     ) -> miette::Result<(), TypeCheckError> {
         match (from, to) {
             (
-                Type::Int | Type::Long | Type::UInt | Type::ULong,
-                Type::Int | Type::Long | Type::UInt | Type::ULong,
+                Type::Int | Type::Long | Type::UInt | Type::ULong | Type::Double,
+                Type::Int | Type::Long | Type::UInt | Type::ULong | Type::Double,
             ) => Ok(()),
             (actual, to) => Err(TypeCheckError::Error {
                 expected: to.clone(),
@@ -695,10 +705,10 @@ impl Checker {
     ) -> miette::Result<Type, TypeCheckError> {
         match expression {
             Expression::Unary {
-                op: UnaryOperator::Not,
+                op: UnaryOperator::Complement,
                 expr,
                 ..
-            } => self.visit_numeric_expression(expr, "unary not"),
+            } => self.visit_integral_expression(expr, "complement"),
             Expression::Unary { expr, .. } => {
                 self.visit_numeric_expression(expr, "unary expression")
             }
@@ -707,7 +717,31 @@ impl Checker {
                 lhs,
                 rhs,
                 ..
-            } => self.cast_to_lhs(lhs, rhs),
+            } => {
+                self.visit_integral_expression(lhs, "bitshift")?;
+                self.visit_integral_expression(rhs, "bitshift")?;
+                self.cast_to_lhs(lhs, rhs)
+            }
+            Expression::Binary {
+                op: BinaryOperator::Xor | BinaryOperator::BitwiseAnd | BinaryOperator::BitwiseOr,
+                lhs,
+                rhs,
+                ..
+            } => {
+                self.visit_integral_expression(lhs, "bitwise operation")?;
+                self.visit_integral_expression(rhs, "bitwise operation")?;
+                self.cast_to_common(lhs, rhs)
+            }
+            Expression::Binary {
+                op: BinaryOperator::Remainder,
+                lhs,
+                rhs,
+                ..
+            } => {
+                self.visit_integral_expression(lhs, "remainder dividend")?;
+                self.visit_integral_expression(rhs, "remainder divisor")?;
+                self.cast_to_common(lhs, rhs)
+            }
             Expression::Binary { lhs, rhs, .. } => self.cast_to_common(lhs, rhs),
             Expression::Var { name, .. } => self
                 .symbols
@@ -720,7 +754,11 @@ impl Checker {
                 op: BinaryOperator::LeftShift | BinaryOperator::RightShift,
                 rhs,
                 ..
-            } => self.cast_to_lhs(lhs, rhs),
+            } => {
+                self.visit_integral_expression(lhs, "compound assignment bit shift")?;
+                self.visit_integral_expression(rhs, "compound assignment bit shift")?;
+                self.cast_to_lhs(lhs, rhs)
+            }
             Expression::CompoundAssignment { lhs, op, rhs, span } => {
                 *expression = Expression::Assignment {
                     lhs: lhs.clone(),
@@ -809,6 +847,22 @@ impl Checker {
                 span: expression.span(),
                 position,
             }),
+            Type::Double | Type::Int | Type::Long | Type::UInt | Type::ULong => Ok(ty),
+        }
+    }
+
+    fn visit_integral_expression(
+        &self,
+        expression: &mut Expression,
+        position: &'static str,
+    ) -> Result<Type> {
+        let ty = self.visit_expression(expression)?;
+        match ty {
+            Type::Function { .. } | Type::Double => Err(TypeCheckError::NonIntegral {
+                actual: ty.clone(),
+                span: expression.span(),
+                position,
+            }),
             Type::Int | Type::Long | Type::UInt | Type::ULong => Ok(ty),
         }
     }
@@ -825,6 +879,7 @@ pub enum Type {
     Long,
     UInt,
     ULong,
+    Double,
 }
 
 impl Type {
@@ -832,13 +887,14 @@ impl Type {
         match self {
             Type::Function { .. } => Width::Eight,
             Type::Int | Type::UInt => Width::Four,
-            Type::Long | Type::ULong => Width::Eight,
+            Type::Long | Type::ULong | Type::Double => Width::Eight,
         }
     }
 
     pub fn signed(&self) -> bool {
         match self {
             Type::Function { .. } => false,
+            Type::Double => false,
             Type::Int | Type::Long => true,
             Type::UInt | Type::ULong => false,
         }

@@ -13,7 +13,7 @@ _main:
 	movq -16(%rbp), %r10
 	movq %r10, -36(%rbp)
 	movq -36(%rbp), %r11
-	movl -28(%rbp), %ecx
+	movq -28(%rbp), %rcx
 	sarq %cl, %r11
 	movq %r11, -36(%rbp)
 	movq $34359738368, %r10
@@ -35,7 +35,7 @@ _main:
 	movq -16(%rbp), %r10
 	movq %r10, -60(%rbp)
 	movq -60(%rbp), %r11
-	movl -52(%rbp), %ecx
+	movq -52(%rbp), %rcx
 	salq %cl, %r11
 	movq %r11, -60(%rbp)
 	movq $549755813888, %r10

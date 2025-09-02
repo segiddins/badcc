@@ -1,0 +1,69 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "d.1",
+                    ty: Double,
+                    init: Constant(10.0),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("d.1"),
+                        rhs: Binary {
+                            op: Divide,
+                            lhs: Var("d.1"),
+                            rhs: Constant(4.0),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.1"),
+                        rhs: Constant(2.5),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Expression(
+                    Assignment {
+                        lhs: Var("d.1"),
+                        rhs: Binary {
+                            op: Multiply,
+                            lhs: Var("d.1"),
+                            rhs: Constant(10000.0),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.1"),
+                        rhs: Constant(25000.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

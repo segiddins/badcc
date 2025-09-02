@@ -1,0 +1,59 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "fun",
+            params: [
+                (
+                    Double,
+                    "x.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                If(
+                    Binary {
+                        op: GreaterThan,
+                        lhs: Var("x.1"),
+                        rhs: Constant(2.0),
+                    },
+                    Return(
+                        Var("x.1"),
+                    ),
+                    Some(
+                        Compound(
+                            [
+                                VariableDeclaration {
+                                    name: "ret.2",
+                                    ty: Double,
+                                    init: FunctionCall {
+                                        function: Var("fun"),
+                                        params: [
+                                            Binary {
+                                                op: Add,
+                                                lhs: Var("x.1"),
+                                                rhs: Constant(2.0),
+                                            },
+                                        ],
+                                    },
+                                },
+                                Return(
+                                    Binary {
+                                        op: Add,
+                                        lhs: Var("ret.2"),
+                                        rhs: Var("x.1"),
+                                    },
+                                ),
+                            ],
+                        ),
+                    ),
+                ),
+            ],
+        },
+    ],
+}

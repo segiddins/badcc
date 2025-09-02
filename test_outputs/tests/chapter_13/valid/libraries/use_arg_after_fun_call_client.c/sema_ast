@@ -1,0 +1,38 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "fun",
+            params: [
+                (
+                    Double,
+                    "x.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            18,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Double,
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: FunctionCall {
+                            function: Var("fun"),
+                            params: [
+                                Constant(1.0),
+                            ],
+                        },
+                    },
+                ),
+            ],
+        },
+    ],
+}

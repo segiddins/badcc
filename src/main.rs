@@ -49,6 +49,9 @@ struct Driver {
     #[clap(short = 'c', help = "Only run preprocess, compile, and assemble steps")]
     skip_linking: bool,
 
+    #[clap(short = 'l', required = false)]
+    libraries: Vec<String>,
+
     #[clap(long, hide = true)]
     print_ast: bool,
 

@@ -9,6 +9,11 @@ pub enum LexingError {
         #[label("here")]
         span: SourceSpan,
     },
+    #[error("extra text after expected end of number")]
+    NumericSuffix {
+        #[label]
+        span: SourceSpan,
+    },
     #[default]
     #[error("Something went wrong")]
     Other,
@@ -20,10 +25,21 @@ impl LexingError {
             span: lex.span().into(),
         }
     }
+}
 
-    fn error<'src, T>(lex: &mut logos::Lexer<'src, Token>) -> Result<T, Self> {
-        Err(Self::from_lexer(lex))
+fn ensure_no_trailing_word_chars<'src>(
+    lex: &mut logos::Lexer<'src, Token>,
+) -> Result<(), LexingError> {
+    let trailing: String = lex
+        .remainder()
+        .chars()
+        .take_while(|c| c.is_alphanumeric() || matches!(*c, '.' | '_'))
+        .collect();
+    if !trailing.is_empty() {
+        let span = (lex.span().end, trailing.len()).into();
+        return Err(LexingError::NumericSuffix { span });
     }
+    Ok(())
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Logos, Copy)]
@@ -31,10 +47,18 @@ impl LexingError {
 pub enum Token {
     #[regex(r"[a-zA-Z_]\w*")]
     Identifier,
-    #[regex(r"\d+([uU][lL]|[lL][uU]|[uU]|[lL])?", priority = 5)]
+    #[regex(
+        r"\d+([uU][lL]|[lL][uU]|[uU]|[lL])?",
+        priority = 5,
+        callback = ensure_no_trailing_word_chars
+    )]
     Constant,
-    #[regex(r"\d+[a-zA-Z_]\w*", |lex| LexingError::error::<()>(lex))]
-    InvalidIdentifier,
+    #[regex(
+        r"([0-9]*\.[0-9]+|[0-9]+\.?)[Ee][+-]?[0-9]+|[0-9]*\.[0-9]+|[0-9]+\.",
+        priority = 6,
+        callback = ensure_no_trailing_word_chars
+    )]
+    FloatingConstant,
     #[token("(")]
     LParen,
     #[token(")")]
@@ -157,6 +181,8 @@ pub enum Token {
     Signed,
     #[token("unsigned")]
     Unsigned,
+    #[token("double")]
+    Double,
 }
 
 pub fn lex(source: impl AsRef<str>, filename: impl AsRef<str>) -> Result<Vec<(Token, SourceSpan)>> {

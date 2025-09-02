@@ -8,76 +8,94 @@ Program {
                     64,
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(1, Four),
                     destination: Stack(12, Four),
                 },
                 Unary(
+                    Longword,
                     Neg,
                     Stack(12, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(12, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(16, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(16, Four),
                     destination: Register(R11, Four),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Register(R11, Eight),
                     destination: Stack(24, Eight),
                 },
                 Move {
+                    asm_type: Quadword,
                     source: Immediate(10, Eight),
                     destination: Stack(32, Eight),
                 },
                 Unary(
+                    Quadword,
                     Neg,
                     Stack(32, Eight),
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Stack(24, Eight),
                     destination: Register(AX, Eight),
                 },
                 Cdq(
-                    Eight,
+                    Quadword,
                 ),
                 Idiv(
+                    Quadword,
                     Stack(32, Eight),
                 ),
                 Move {
+                    asm_type: Quadword,
                     source: Register(AX, Eight),
                     destination: Stack(40, Eight),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(40, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(44, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(44, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(16, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Immediate(3865470567, Four),
                     destination: Register(R10, Four),
                 },
                 Cmp(
+                    Longword,
                     Register(R10, Four),
                     Stack(16, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Stack(48, Four),
                 },
@@ -86,19 +104,23 @@ Program {
                     Stack(48, Four),
                 ),
                 Move {
+                    asm_type: Longword,
                     source: Stack(48, Four),
                     destination: Register(R10, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Register(R10, Four),
                     destination: Stack(52, Four),
                 },
                 Move {
+                    asm_type: Longword,
                     source: Stack(52, Four),
                     destination: Register(AX, Four),
                 },
                 Ret,
                 Move {
+                    asm_type: Longword,
                     source: Immediate(0, Four),
                     destination: Register(AX, Four),
                 },
@@ -107,4 +129,5 @@ Program {
         },
     ],
     static_variables: [],
+    static_constants: [],
 }

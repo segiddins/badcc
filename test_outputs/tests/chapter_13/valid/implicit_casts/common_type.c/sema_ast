@@ -1,0 +1,264 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "lt",
+            params: [
+                (
+                    Double,
+                    "d.1",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            14,
+                        ),
+                        length: 1,
+                    },
+                ),
+                (
+                    Long,
+                    "l.2",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            22,
+                        ),
+                        length: 1,
+                    },
+                ),
+            ],
+            ret: Int,
+            body: [
+                Return(
+                    Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: LessThan,
+                            lhs: Var("d.1"),
+                            rhs: Cast {
+                                to: Double,
+                                expr: Var("l.2"),
+                            },
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "tern_double_flag",
+            params: [
+                (
+                    Double,
+                    "flag.4",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            78,
+                        ),
+                        length: 4,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Cast {
+                        to: Double,
+                        expr: Ternary {
+                            cond: Var("flag.4"),
+                            if_true: Unary {
+                                op: Minus,
+                                expr: Constant(30),
+                            },
+                            if_false: Constant(10ul),
+                        },
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "tern_double_result",
+            params: [
+                (
+                    Int,
+                    "flag.6",
+                    SourceSpan {
+                        offset: SourceOffset(
+                            159,
+                        ),
+                        length: 4,
+                    },
+                ),
+            ],
+            ret: Double,
+            body: [
+                Return(
+                    Ternary {
+                        cond: Var("flag.6"),
+                        if_true: Constant(5.0),
+                        if_false: Constant(-9.223372036854774e18),
+                    },
+                ),
+            ],
+        },
+        VariableDeclaration {
+            name: "ten",
+            ty: Int,
+            init: Constant(10),
+        },
+        FunctionDeclaration {
+            identifier: "multiply",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "i.9",
+                    ty: Int,
+                    init: Cast {
+                        to: Int,
+                        expr: Binary {
+                            op: Multiply,
+                            lhs: Constant(10.75),
+                            rhs: Cast {
+                                to: Double,
+                                expr: Var("ten"),
+                            },
+                        },
+                    },
+                },
+                Return(
+                    Binary {
+                        op: Equals,
+                        lhs: Var("i.9"),
+                        rhs: Constant(107),
+                    },
+                ),
+            ],
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    FunctionCall {
+                        function: Var("lt"),
+                        params: [
+                            Unary {
+                                op: Minus,
+                                expr: Constant(9007199254751228.0),
+                            },
+                            Unary {
+                                op: Minus,
+                                expr: Constant(9007199254751227l),
+                            },
+                        ],
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("tern_double_flag"),
+                            params: [
+                                Constant(20.0),
+                            ],
+                        },
+                        rhs: Constant(1.8446744073709552e19),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("tern_double_flag"),
+                            params: [
+                                Constant(0.0),
+                            ],
+                        },
+                        rhs: Constant(10.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("tern_double_result"),
+                            params: [
+                                Constant(1),
+                            ],
+                        },
+                        rhs: Constant(5.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: FunctionCall {
+                            function: Var("tern_double_result"),
+                            params: [
+                                Constant(0),
+                            ],
+                        },
+                        rhs: Constant(9.223372036854778e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Unary {
+                        op: Not,
+                        expr: FunctionCall {
+                            function: Var("multiply"),
+                        },
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

@@ -1,0 +1,250 @@
+Program {
+    declarations: [
+        VariableDeclaration {
+            name: "d1",
+            ty: Double,
+            init: Constant(2147483647.0),
+        },
+        VariableDeclaration {
+            name: "d2",
+            ty: Double,
+            init: Constant(4294967295.0),
+        },
+        VariableDeclaration {
+            name: "d3",
+            ty: Double,
+            init: Constant(4.61168601842739e18),
+        },
+        VariableDeclaration {
+            name: "d4",
+            ty: Double,
+            init: Constant(4.61168601842739e18),
+        },
+        VariableDeclaration {
+            name: "d5",
+            ty: Double,
+            init: Constant(-9.223372036854776e18),
+        },
+        VariableDeclaration {
+            name: "d6",
+            ty: Double,
+            init: Constant(4.61168601842739e18),
+        },
+        VariableDeclaration {
+            name: "d7",
+            ty: Double,
+            init: Constant(-9.223372036854775e18),
+        },
+        VariableDeclaration {
+            name: "uninitialized",
+            ty: Double,
+        },
+        VariableDeclaration {
+            name: "i",
+            ty: Int,
+            init: Constant(4),
+            storage: Static,
+        },
+        VariableDeclaration {
+            name: "u",
+            ty: UInt,
+            init: Constant(4294967292u),
+        },
+        VariableDeclaration {
+            name: "l",
+            ty: Long,
+            init: Constant(4611686018427389952l),
+        },
+        VariableDeclaration {
+            name: "ul",
+            ty: ULong,
+            init: Constant(9223372036854775807ul),
+        },
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d1"),
+                        rhs: Constant(2147483647.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d2"),
+                        rhs: Constant(4294967295.0),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d3"),
+                        rhs: Constant(4.61168601842739e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d4"),
+                        rhs: Var("d3"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(4),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d5"),
+                        rhs: Constant(9.223372036854776e18),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(5),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d6"),
+                        rhs: Var("d3"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(6),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d7"),
+                        rhs: Var("d5"),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(7),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Var("uninitialized"),
+                    Compound(
+                        [
+                            Return(
+                                Constant(8),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i"),
+                        rhs: Constant(4),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(9),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("u"),
+                        rhs: Constant(4294967292u),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(10),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("l"),
+                        rhs: Constant(4611686018427389952l),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(11),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul"),
+                        rhs: Constant(18446744073709549568ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(12),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

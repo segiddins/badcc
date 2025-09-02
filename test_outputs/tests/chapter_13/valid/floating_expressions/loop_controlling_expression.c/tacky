@@ -1,0 +1,68 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Copy {
+                    src: 0,
+                    dst: Var("a.1", Int),
+                },
+                Copy {
+                    src: 100.0,
+                    dst: Var("d.2", Double),
+                },
+                Label(
+                    "loop.0.cond",
+                ),
+                Binary {
+                    op: GreaterThan,
+                    lhs: Var("d.2", Double),
+                    rhs: 0.0,
+                    dst: Var("main.tmp.0", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.0", Double),
+                    "loop.0",
+                ),
+                Binary {
+                    op: Add,
+                    lhs: Var("a.1", Int),
+                    rhs: 1,
+                    dst: Var("main.tmp.1", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("a.1", Int),
+                },
+                Label(
+                    "loop.0.start",
+                ),
+                Binary {
+                    op: Subtract,
+                    lhs: Var("d.2", Double),
+                    rhs: 1.0,
+                    dst: Var("main.tmp.2", Double),
+                },
+                Copy {
+                    src: Var("main.tmp.2", Double),
+                    dst: Var("d.2", Double),
+                },
+                Jump(
+                    "loop.0.cond",
+                ),
+                Label(
+                    "loop.0",
+                ),
+                Return(
+                    Var("a.1", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

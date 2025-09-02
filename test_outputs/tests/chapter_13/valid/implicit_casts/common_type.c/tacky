@@ -1,0 +1,349 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ten",
+            global: true,
+            init: 10,
+            width: Four,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "lt",
+            global: true,
+            params: [
+                Var("d.1", Double),
+                Var("l.2", Long),
+            ],
+            instructions: [
+                IntToDouble {
+                    src: Var("l.2", Long),
+                    dst: Var("lt.tmp.0", Double),
+                },
+                Binary {
+                    op: LessThan,
+                    lhs: Var("d.1", Double),
+                    rhs: Var("lt.tmp.0", Double),
+                    dst: Var("lt.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("lt.tmp.1", Double),
+                    dst: Var("lt.tmp.2", Int),
+                },
+                Return(
+                    Var("lt.tmp.2", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "tern_double_flag",
+            global: true,
+            params: [
+                Var("flag.4", Double),
+            ],
+            instructions: [
+                JumpIfZero(
+                    Var("flag.4", Double),
+                    "tern_double_flag.0.true",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 30,
+                    dst: Var("tern_double_flag.tmp.0", Int),
+                },
+                Copy {
+                    src: Var("tern_double_flag.tmp.0", Int),
+                    dst: Var("tern_double_flag.tmp.1", Int),
+                },
+                Jump(
+                    "tern_double_flag.0.end",
+                ),
+                Label(
+                    "tern_double_flag.0.true",
+                ),
+                Copy {
+                    src: 10ul,
+                    dst: Var("tern_double_flag.tmp.1", Int),
+                },
+                Label(
+                    "tern_double_flag.0.end",
+                ),
+                IntToDouble {
+                    src: Var("tern_double_flag.tmp.1", Int),
+                    dst: Var("tern_double_flag.tmp.2", Double),
+                },
+                Return(
+                    Var("tern_double_flag.tmp.2", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "tern_double_result",
+            global: true,
+            params: [
+                Var("flag.6", Int),
+            ],
+            instructions: [
+                JumpIfZero(
+                    Var("flag.6", Int),
+                    "tern_double_result.0.true",
+                ),
+                Copy {
+                    src: 5.0,
+                    dst: Var("tern_double_result.tmp.0", Double),
+                },
+                Jump(
+                    "tern_double_result.0.end",
+                ),
+                Label(
+                    "tern_double_result.0.true",
+                ),
+                Copy {
+                    src: -9.223372036854774e18,
+                    dst: Var("tern_double_result.tmp.0", Double),
+                },
+                Label(
+                    "tern_double_result.0.end",
+                ),
+                Return(
+                    Var("tern_double_result.tmp.0", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "multiply",
+            global: true,
+            params: [],
+            instructions: [
+                IntToDouble {
+                    src: Var("ten", Int),
+                    dst: Var("multiply.tmp.0", Double),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: 10.75,
+                    rhs: Var("multiply.tmp.0", Double),
+                    dst: Var("multiply.tmp.1", Double),
+                },
+                DoubleToInt {
+                    src: Var("multiply.tmp.1", Double),
+                    dst: Var("multiply.tmp.2", Int),
+                },
+                Copy {
+                    src: Var("multiply.tmp.2", Int),
+                    dst: Var("i.9", Int),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("i.9", Int),
+                    rhs: 107,
+                    dst: Var("multiply.tmp.3", Int),
+                },
+                Return(
+                    Var("multiply.tmp.3", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 9007199254751228.0,
+                    dst: Var("main.tmp.0", Double),
+                },
+                Unary {
+                    op: Negate,
+                    src: 9007199254751227l,
+                    dst: Var("main.tmp.1", Long),
+                },
+                Call(
+                    "lt",
+                    [
+                        Var("main.tmp.0", Double),
+                        Var("main.tmp.1", Long),
+                    ],
+                    Var("main.tmp.2", Int),
+                ),
+                JumpIfZero(
+                    Var("main.tmp.2", Int),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Call(
+                    "tern_double_flag",
+                    [
+                        20.0,
+                    ],
+                    Var("main.tmp.3", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.3", Double),
+                    rhs: 1.8446744073709552e19,
+                    dst: Var("main.tmp.4", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Call(
+                    "tern_double_flag",
+                    [
+                        0.0,
+                    ],
+                    Var("main.tmp.5", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.5", Double),
+                    rhs: 10.0,
+                    dst: Var("main.tmp.6", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", Double),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Call(
+                    "tern_double_result",
+                    [
+                        1,
+                    ],
+                    Var("main.tmp.7", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.7", Double),
+                    rhs: 5.0,
+                    dst: Var("main.tmp.8", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", Double),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Call(
+                    "tern_double_result",
+                    [
+                        0,
+                    ],
+                    Var("main.tmp.9", Double),
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.9", Double),
+                    rhs: 9.223372036854778e18,
+                    dst: Var("main.tmp.10", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.10", Double),
+                    "main.4.true",
+                ),
+                Return(
+                    5,
+                ),
+                Jump(
+                    "main.4.end",
+                ),
+                Label(
+                    "main.4.true",
+                ),
+                Label(
+                    "main.4.end",
+                ),
+                Call(
+                    "multiply",
+                    [],
+                    Var("main.tmp.11", Int),
+                ),
+                Unary {
+                    op: Not,
+                    src: Var("main.tmp.11", Int),
+                    dst: Var("main.tmp.12", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.12", Int),
+                    "main.5.true",
+                ),
+                Return(
+                    6,
+                ),
+                Jump(
+                    "main.5.end",
+                ),
+                Label(
+                    "main.5.true",
+                ),
+                Label(
+                    "main.5.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

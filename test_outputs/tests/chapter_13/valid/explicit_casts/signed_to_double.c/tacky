@@ -1,0 +1,164 @@
+Program {
+    static_variables: [],
+    functions: [
+        Function {
+            identifier: "int_to_double",
+            global: true,
+            params: [
+                Var("i.1", Int),
+            ],
+            instructions: [
+                IntToDouble {
+                    src: Var("i.1", Int),
+                    dst: Var("int_to_double.tmp.0", Double),
+                },
+                Return(
+                    Var("int_to_double.tmp.0", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "long_to_double",
+            global: true,
+            params: [
+                Var("l.3", Long),
+            ],
+            instructions: [
+                IntToDouble {
+                    src: Var("l.3", Long),
+                    dst: Var("long_to_double.tmp.0", Double),
+                },
+                Return(
+                    Var("long_to_double.tmp.0", Double),
+                ),
+                Return(
+                    0.0,
+                ),
+            ],
+        },
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 100000,
+                    dst: Var("main.tmp.0", Int),
+                },
+                Call(
+                    "int_to_double",
+                    [
+                        Var("main.tmp.0", Int),
+                    ],
+                    Var("main.tmp.1", Double),
+                ),
+                Unary {
+                    op: Negate,
+                    src: 100000.0,
+                    dst: Var("main.tmp.2", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.1", Double),
+                    rhs: Var("main.tmp.2", Double),
+                    dst: Var("main.tmp.3", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.3", Double),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 9007199254751227l,
+                    dst: Var("main.tmp.4", Long),
+                },
+                Call(
+                    "long_to_double",
+                    [
+                        Var("main.tmp.4", Long),
+                    ],
+                    Var("main.tmp.5", Double),
+                ),
+                Unary {
+                    op: Negate,
+                    src: 9007199254751228.0,
+                    dst: Var("main.tmp.6", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("main.tmp.5", Double),
+                    rhs: Var("main.tmp.6", Double),
+                    dst: Var("main.tmp.7", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", Double),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                IntToDouble {
+                    src: 1152921504606846977l,
+                    dst: Var("main.tmp.8", Double),
+                },
+                Copy {
+                    src: Var("main.tmp.8", Double),
+                    dst: Var("d.5", Double),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("d.5", Double),
+                    rhs: 1.152921504606847e18,
+                    dst: Var("main.tmp.9", Double),
+                },
+                JumpIfZero(
+                    Var("main.tmp.9", Double),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

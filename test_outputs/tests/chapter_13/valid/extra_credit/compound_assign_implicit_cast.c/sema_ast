@@ -1,0 +1,116 @@
+Program {
+    declarations: [
+        FunctionDeclaration {
+            identifier: "main",
+            params: [],
+            ret: Int,
+            body: [
+                VariableDeclaration {
+                    name: "d.1",
+                    ty: Double,
+                    init: Constant(1000.5),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("d.1"),
+                        rhs: Binary {
+                            op: Add,
+                            lhs: Var("d.1"),
+                            rhs: Constant(1000.0),
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("d.1"),
+                        rhs: Constant(2000.5),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(1),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "ul.2",
+                    ty: ULong,
+                    init: Constant(18446744073709551586ul),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("ul.2"),
+                        rhs: Cast {
+                            to: ULong,
+                            expr: Binary {
+                                op: Subtract,
+                                lhs: Cast {
+                                    to: Double,
+                                    expr: Var("ul.2"),
+                                },
+                                rhs: Constant(1.5e19),
+                            },
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("ul.2"),
+                        rhs: Constant(3446744073709551616ul),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(2),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                VariableDeclaration {
+                    name: "i.3",
+                    ty: Int,
+                    init: Constant(10),
+                },
+                Expression(
+                    Assignment {
+                        lhs: Var("i.3"),
+                        rhs: Cast {
+                            to: Int,
+                            expr: Binary {
+                                op: Add,
+                                lhs: Cast {
+                                    to: Double,
+                                    expr: Var("i.3"),
+                                },
+                                rhs: Constant(0.99999),
+                            },
+                        },
+                    },
+                ),
+                If(
+                    Binary {
+                        op: NotEqual,
+                        lhs: Var("i.3"),
+                        rhs: Constant(10),
+                    },
+                    Compound(
+                        [
+                            Return(
+                                Constant(3),
+                            ),
+                        ],
+                    ),
+                    None,
+                ),
+                Return(
+                    Constant(0),
+                ),
+            ],
+        },
+    ],
+}

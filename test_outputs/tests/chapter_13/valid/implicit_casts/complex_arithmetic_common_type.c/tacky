@@ -1,0 +1,68 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "ul",
+            global: true,
+            init: 10000ul,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 50,
+                    dst: Var("main.tmp.0", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.0", Int),
+                    dst: Var("i.2", Int),
+                },
+                SignExtend {
+                    src: Var("i.2", Int),
+                    dst: Var("main.tmp.1", ULong),
+                },
+                Binary {
+                    op: Add,
+                    lhs: Var("ul", ULong),
+                    rhs: Var("main.tmp.1", ULong),
+                    dst: Var("main.tmp.2", ULong),
+                },
+                UIntToDouble {
+                    src: Var("main.tmp.2", ULong),
+                    dst: Var("main.tmp.3", Double),
+                },
+                Binary {
+                    op: Multiply,
+                    lhs: Var("main.tmp.3", Double),
+                    rhs: 3.125,
+                    dst: Var("main.tmp.4", Double),
+                },
+                Copy {
+                    src: Var("main.tmp.4", Double),
+                    dst: Var("d.3", Double),
+                },
+                Binary {
+                    op: Equals,
+                    lhs: Var("d.3", Double),
+                    rhs: 31093.75,
+                    dst: Var("main.tmp.5", Double),
+                },
+                DoubleToInt {
+                    src: Var("main.tmp.5", Double),
+                    dst: Var("main.tmp.6", Int),
+                },
+                Return(
+                    Var("main.tmp.6", Int),
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}

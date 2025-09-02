@@ -1,0 +1,153 @@
+Program {
+    static_variables: [
+        StaticVariable {
+            identifier: "glob",
+            global: true,
+            init: 3.0,
+            width: Eight,
+        },
+    ],
+    functions: [
+        Function {
+            identifier: "main",
+            global: true,
+            params: [],
+            instructions: [
+                Unary {
+                    op: Negate,
+                    src: 1l,
+                    dst: Var("main.tmp.0", Long),
+                },
+                Copy {
+                    src: Var("main.tmp.0", Long),
+                    dst: Var("l.2", Long),
+                },
+                Unary {
+                    op: Negate,
+                    src: 1,
+                    dst: Var("main.tmp.1", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.1", Int),
+                    dst: Var("i.3", Int),
+                },
+                DoubleToInt {
+                    src: Var("glob", Double),
+                    dst: Var("main.tmp.2", Int),
+                },
+                Copy {
+                    src: Var("main.tmp.2", Int),
+                    dst: Var("j.4", Int),
+                },
+                Copy {
+                    src: 20,
+                    dst: Var("k.5", Int),
+                },
+                Unary {
+                    op: Negate,
+                    src: 1l,
+                    dst: Var("main.tmp.3", Long),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("l.2", Long),
+                    rhs: Var("main.tmp.3", Long),
+                    dst: Var("main.tmp.4", Long),
+                },
+                JumpIfZero(
+                    Var("main.tmp.4", Long),
+                    "main.0.true",
+                ),
+                Return(
+                    1,
+                ),
+                Jump(
+                    "main.0.end",
+                ),
+                Label(
+                    "main.0.true",
+                ),
+                Label(
+                    "main.0.end",
+                ),
+                Unary {
+                    op: Negate,
+                    src: 1,
+                    dst: Var("main.tmp.5", Int),
+                },
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("i.3", Int),
+                    rhs: Var("main.tmp.5", Int),
+                    dst: Var("main.tmp.6", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.6", Int),
+                    "main.1.true",
+                ),
+                Return(
+                    2,
+                ),
+                Jump(
+                    "main.1.end",
+                ),
+                Label(
+                    "main.1.true",
+                ),
+                Label(
+                    "main.1.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("j.4", Int),
+                    rhs: 3,
+                    dst: Var("main.tmp.7", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.7", Int),
+                    "main.2.true",
+                ),
+                Return(
+                    3,
+                ),
+                Jump(
+                    "main.2.end",
+                ),
+                Label(
+                    "main.2.true",
+                ),
+                Label(
+                    "main.2.end",
+                ),
+                Binary {
+                    op: NotEqual,
+                    lhs: Var("k.5", Int),
+                    rhs: 20,
+                    dst: Var("main.tmp.8", Int),
+                },
+                JumpIfZero(
+                    Var("main.tmp.8", Int),
+                    "main.3.true",
+                ),
+                Return(
+                    4,
+                ),
+                Jump(
+                    "main.3.end",
+                ),
+                Label(
+                    "main.3.true",
+                ),
+                Label(
+                    "main.3.end",
+                ),
+                Return(
+                    0,
+                ),
+                Return(
+                    0,
+                ),
+            ],
+        },
+    ],
+}
